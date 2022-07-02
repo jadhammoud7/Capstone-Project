@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>Newbie Gamers Home</title>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
@@ -8,35 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="home-page.css">
-    <title>Document</title>
-    <script>
-        let slideIndex = 1;
-        showSlides(slideIndex);
-
-        function plusSlides(n){
-            showSlides(slideIndex += n);
-        }
-
-        function currentSlide(n){
-            showSlides(slideIndex = n);
-        }
-
-        function showSlides(n){
-            let i;
-            let slides = document.getElementsByClassName("mySlides");
-            let dots = document.getElementsByClassName("dot");
-            if(n > slides.length)
-                slideIndex = 1;
-            if(n < 1)
-                slideIndex = slides.length;
-            for(i = 0; i < slides.length; i++)
-                slides[i].style.display = "none";
-            for(i = 0; i < dots.length; i++)
-                dots[i].className = dots[i].className.replace(" active", "");
-            slides[slideIndex - 1].style.display = "block";
-            dots[slideIndex - 1].className += " active";
-        }
-    </script>
+    <link rel="stylesheet" href="home-page.js">
+    <title>Newbies Gamers Home</title>
 </head>
 <body>
 
