@@ -233,3 +233,31 @@ form {
     from {transform: scale(0)}
     to {transform: scale(1)}
 }
+
+footer{
+   background-color: #000;
+   color: beige;
+   padding: 20px;
+}
+
+.footer-list li{
+    display: inline-flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+.footer-list-element li{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.footer-list-element li a{
+    color: beige;
+    text-decoration: none;
+}
+
+footer a:hover{
+    color: #04AA6D;
+}
