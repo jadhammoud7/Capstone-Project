@@ -247,6 +247,11 @@ footer{
     margin-right: 20px;
 }
 
+.footer-list li a{
+    text-decoration: none;
+    color: beige;
+}
+
 .footer-list-element li{
     display: flex;
     flex-direction: row;
