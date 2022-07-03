@@ -13,10 +13,12 @@
 <body>
 
     <div class="topnav">
-        <a href="#home" class="active"><i class="fa fa-home"></i>Home</a>
-        <a href="#shop"><i class="fa fa-shopping-cart"></i>Shop</a>
-        <a href="#contect"><i class="fa fa-inbox"></i>Contact Us</a>
-        <a href="#about">About Us</a>
+        <a href="#home" class="active" title="Home Page"><i class="fa fa-home"></i>Home</a>
+        <a href="#shop" title="Shop Page"><i class="fa fa-shopping-cart"></i>Shop</a>
+        <a href="#contect" title="Contact Us"><i class="fa fa-inbox"></i>Contact Us</a>
+        <a href="#about" title="About Us">About Us</a>
+        <img src="" alt="shop logo" style="float: left !important;">
+        <button onclick="document.getElementById('id01').style.display='block'" style="float: left !important;"><i class="fa fa-user"></i>Log In</a>
     </div>
 
     <div class="slideshow-container">
@@ -47,6 +49,33 @@
         <span class="dot" onclick="currentSlide(1)"></span>
         <span class="dot" onclick="currentSlide(2)"></span>
         <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+
+    <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <form class="modal-content animate" action="sign_in.php">
+            <div class="imgcontainer">
+                <img src="avatar.png" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="container">
+                <label for="user_name"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="user_name"required>
+
+                <label for="password">Password</label>
+                <input type="password" placeholder="Enter Password" name="password" required>
+
+                <button type="submit">Login</button>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember Me
+                </label>
+            </div>
+
+            <div class="container" style="background-color: #f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                <span class="psw">Forgot <a href="">password?</a></span>
+            </div>
+        </form>
     </div>
 
     
