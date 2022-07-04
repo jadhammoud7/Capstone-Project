@@ -129,7 +129,7 @@ body{
     background-color: #fefefe;
     margin: 5px auto;
     border: 1px solid #888;
-    width: 80%;
+    width: 50%;
 }
 
 form {
@@ -184,6 +184,8 @@ form {
   /* Add padding to containers */
   .container {
     padding: 16px;
+    width: 50%;
+    margin-left: 200px;
   }
   
   /* The "Forgot password" text */
@@ -266,3 +268,65 @@ footer{
 footer a:hover{
     color: #04AA6D;
 }
+/* .username_login{
+    width:100px;
+} */
+#canceling{
+    margin-bottom: 90px;
+}
+/*hay lanzabet el login aa kaza platform*/
+@media screen and (max-width: 1285px) {
+    .container{
+        margin-left: 180px;
+        width: 60%;
+    }
+  }
+  @media screen and (max-width: 1225px) {
+    .container{
+        margin-left: 160px;
+        width: 60%;
+    }
+  }
+  @media screen and (max-width: 1171px) {
+    .container{
+        margin-left: 140px;
+        width: 60%;
+    }
+  }
+  @media screen and (max-width: 1078px) {
+    .container{
+        margin-left: 120px;
+        width: 60%;
+    }
+  }
+  @media screen and (max-width: 992px) {
+    .container{
+        margin-left: 100px;
+        width: 60%;
+    }
+    .modal .join_our_family{
+        font-size: 25px;
+        margin-left: -40px;
+    }
+  }
+  @media screen and (max-width: 909px) {
+    .container{
+        margin-left: 80px;
+        width: 60%;
+    }
+  }
+  @media screen and (max-width: 774px) {
+    .container{
+        margin-left: 60px;
+        width: 60%;
+    }
+    .modal .join_our_family{
+        font-size: 20px;
+    }
+  }
+  @media screen and (max-width: 598px) {
+      .container{
+          margin-left:60px ;
+      }
+  }
+  
