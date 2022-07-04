@@ -66,17 +66,19 @@
 
                 <label for="password"><b>Password</b></label>
                 <input class="password_login" type="password" placeholder="Enter Password" name="password" required>
-                <label>
-                    <input type="checkbox" checked="checked" name="remember" style="margin-bottom:20px"> Remember Me
-                </label> <br>
+                <span >Dont have an <a href="">account?</a></span> <br> <br>
+                <!-- <label>
+                    <input type="checkbox" checked="checked" name="remember" style="margin-bottom:20px;"> Remember Me
+                </label> <br> -->
+                <span class="psw">Forgot <a href="">password?</a></span>
 
-                <button type="submit">Login</button>
+                <button  style="border-radius:20px; margin-bottom: -100px;" type="submit">Login</button>
 
             </div>
 
-            <div id="canceling" class="container" style="background-color: #f1f1f1">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                <span class="psw">Forgot <a href="">password?</a></span>
+            <div id="canceling" class="container" >
+                <button style="border-radius:20px;" type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Back</button>
+               
             </div>
         </form>
     </div>
