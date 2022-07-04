@@ -307,6 +307,7 @@ footer a:hover{
     .modal .join_our_family{
         font-size: 25px;
         margin-left: -40px;
+        color: #04AA6D;
     }
   }
   @media screen and (max-width: 909px) {
@@ -321,7 +322,7 @@ footer a:hover{
         width: 60%;
     }
     .modal .join_our_family{
-        font-size: 20px;
+        font-size: 18px;
     }
   }
   @media screen and (max-width: 598px) {
@@ -329,4 +330,7 @@ footer a:hover{
           margin-left:60px ;
       }
   }
-  
+  /* end of making login page responsive */
+  .username_login, .password_login{
+      border-radius: 30px;
+  }
