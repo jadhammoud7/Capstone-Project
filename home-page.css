@@ -27,7 +27,7 @@ body{
 
 .topnav a.active
 {
-    background-color: #04AA6D;
+    background-color: royalblue;
     color:white;
 }
 
@@ -148,7 +148,7 @@ form {
   
   /* Set a style for all buttons */
   button {
-    background-color: #04AA6D;
+    background-color: royalblue;
     color: white;
     padding: 12px 20px;
     margin-top: 6px;
