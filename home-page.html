@@ -18,7 +18,7 @@
         <a href="#shop" title="Shop Page"><i class="fa fa-shopping-cart"></i>Shop</a>
         <a href="#home" class="active" title="Home Page"><i class="fa fa-home"></i>Home</a>
         <img src="" alt="shop logo" style="float: left !important;">
-        <button  onclick="document.getElementById('id01').style.display='block'" style="float: left !important; border-radius: 30px;"><i class="fa fa-user" title="Log In"></i>Log In</a>
+        <button onclick="document.getElementById('id01').style.display='block'" style="float: left !important; border-radius: 30px;" id="login-button"><i class="fa fa-user" title="Log In"></i>Log In</a>
     </div>
 
     <div class="slideshow-container">
@@ -52,33 +52,32 @@
     </div>
 
     <div id="id01" class="modal">
-        <span  style="color: royalblue" onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
         <form class="modal-content animate" action="sign_in.php">
             <div class="imgcontainer">
                 <img src="avatar.png" alt="Avatar" class="avatar">
                 <br> <br>
-                <h1  style="color: royalblue;" class="join_our_family">Join Our Family</h1>
+                <h1 style="color: royalblue; text-align: center;" class="join_our_family">Join Our Family</h1>
             </div>
 
-            <div class="container">
+            <div class="container" style="border: royalblue solid 2px; border-radius: 4px;">
                 <label for="user_name" ><b>Username</b></label>
-                <input class="username_login" type="text" placeholder="Enter Username" name="user_name"required>
+                <input class="username_login" type="text" placeholder="Enter Username" name="user_name" required title="Enter your username">
 
                 <label for="password"><b>Password</b></label>
-                <input class="password_login" type="password" placeholder="Enter Password" name="password" required>
-                <span >Dont have an <a href="signup.html">account?</a></span> <br> <br>
+                <input class="password_login" type="password" placeholder="Enter Password" name="password" required title="Enter your password">
+                <span >Dont have an <a href="signup.html" title="Sign Up for a new account">account?</a></span> <br> <br>
                 <!-- <label>
                     <input type="checkbox" checked="checked" name="remember" style="margin-bottom:20px;"> Remember Me
                 </label> <br> -->
                 <span class="psw">Forgot <a href="">password?</a></span>
 
-                <button  style="border-radius:20px; margin-bottom: -100px;" type="submit">Login</button>
+                <button style="border-radius:20px; margin-bottom: -100px;" type="submit" title="Log In">Login</button>
 
             </div>
 
             <div id="canceling" class="container" >
                 <button style="border-radius:20px;" type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Back</button>
-               
             </div>
         </form>
     </div>
