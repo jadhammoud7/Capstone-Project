@@ -196,10 +196,10 @@ form {
     flex: content;
   }
 
-  .container input:hover{
+  /* .container input:hover{
     background-color: white;
     border: royalblue solid 2px;
-  }
+  } */
   
   /* The "Forgot password" text */
   span.psw {
@@ -352,4 +352,12 @@ footer a:hover{
   /* end of making login page responsive */
   .username_login, .password_login{
       border-radius: 30px;
+  }
+  input[type=text]:hover, input[type=password]:hover,input[type=date]:hover {
+    background-color: #ddd;
+    outline: none;
+  }
+  .modal-content{
+    background-image: url(wallpaper4.jpg);
+    border-radius: 20px;
   }
