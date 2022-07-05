@@ -39,6 +39,10 @@ body{
     max-width: 1000px;
     position: relative;
     margin: auto;
+    /* background-image: url(wallpaper3.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-origin: content-box; */
 }
 
 .mySlides{
@@ -81,6 +85,7 @@ body{
     bottom: 8px;
     width: 100%;
     text-align: center;
+    background-color: rgba(65, 105, 225, 0.6);
 }
 
 .numbertext{
@@ -212,6 +217,9 @@ form {
     color: royalblue;
   }
   
+  .shop-products #product{
+    display: inline-block;
+  }
   /* Change styles for span and cancel button on extra small screens */
   @media screen and (max-width: 300px) {
     span.psw {

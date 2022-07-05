@@ -1,9 +1,20 @@
-let slideIndex = 1;
-showSlides(slideIndex);
+let slideIndex = 0;
+showSlides();
 
+function showSlides(){
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    for(i = 0; i < slides.length; i++)
+        slides[i].style.display = "none";
+    slideIndex++;
+    if(slideIndex > slides.length)
+        slideIndex = 1;
+    slides[slideIndex - 1].style.display = "block";
+    setTimeout(showSlides, 2000);
+}
 function plusSlides(n){
     showSlides(slideIndex += n);
-    }
+}
 
 function currentSlide(n){
     showSlides(slideIndex = n);
@@ -23,6 +34,7 @@ function showSlides(n){
         dots[i].className = dots[i].className.replace(" active", "");
     slides[slideIndex - 1].style.display = "block";
     dots[slideIndex - 1].className += " active";
+    setTimeout(showSlides(n + 1), 4000);
 }
 
 var modal = document.getElementById('id01');
