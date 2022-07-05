@@ -361,3 +361,14 @@ footer a:hover{
     background-image: url(wallpaper4.jpg);
     border-radius: 20px;
   }
+  .product_1{
+    border-radius: 50%;
+    height: 170px;
+    width: 170px;
+    margin-bottom: 20px;
+  }
+.product1{
+    text-align: center;
+    width: 20%;
+    border: blue solid 10px;
+}
