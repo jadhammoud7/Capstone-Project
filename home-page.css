@@ -201,11 +201,7 @@ form {
     flex: content;
   }
 
-  /* .container input:hover{
-    background-color: white;
-    border: royalblue solid 2px;
-  } */
-  
+
   /* The "Forgot password" text */
   span.psw {
     float: right;
@@ -369,36 +365,7 @@ footer a:hover{
     background-image: url(wallpaper4.jpg);
     border-radius: 20px;
   }
-  /* .product_1{
-    border-radius: 50%;
-    margin-top: 5px;
-    height: 170px;
-    width: 170px;
-    margin-bottom: 20px;
-  }
-.product1{
-    text-align: center;
-    width: 20%;
-    border: blue solid 10px;
-}
-.product_name:hover{
-background-color:#e5e4e2 ;
-}
-.product_name{
-    padding: 5px;
-    border-radius: 20px;
-}
-.product_price:hover{
-    background-color:#e5e4e2 ;
-    }
-.product_price{
-    padding: 5px;
-    border-radius: 20px;
-}
-.product1{
-    border-radius: 30px;
-    margin-bottom: 10px;
-} */
+
 
 
 
@@ -475,4 +442,44 @@ background-color:#e5e4e2 ;
     margin-left: 30px;
 }
 
+table{
+  width: 93%;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  border-collapse: collapse ;
+  border-radius:20px;
+  overflow: hidden;
+  margin-right: 50px;
+  margin-left: 50px;
+
+}
+td{
+  border: #dddddd solid 1px;
+  padding: 6px;
+}
+tr:nth-child(even){
+  background-color: #bbb;
+}
+tr:nth-child(odd):hover{
+  background-color: #6593F5;
+}
+tr:nth-child(odd){
+  background-color: white;
+}
+
+.comments{
+  width: 70%;
+}
+
+.image img{
+  width: 20%;
+  height: 40px;
+  text-align: center;
+}
+/* .table_back{
+  background-color: #c7d9fe;
+  margin-left: 20px;
+  margin-right: 20px;
+padding: 20px;
+} */
 
