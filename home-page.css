@@ -575,23 +575,31 @@ height: 150px;
 /* end testimonials responsive */
 .test-back{
 background-color: rgb(120, 149, 236);
-padding-top: 60px;
+/* padding-top: 60px; */
+position: relative;
+top: 50px;
 padding-bottom: 30px;
 margin-bottom: 16px;
 margin-left: 16px;
 margin-right: 16px;
-margin-top: 50px;
+/* margin-top: 50px; */
 border-radius: 16px;
 }
 
 
 .test{
-  position: absolute;
+  /* position: absolute;
   top: 400px;
   left: 40px;
   height: 80px;
   width: 80px;
-  border-radius: 40%;
+  border-radius: 40%; */
+  width: 10%;
+  background-color: rgb(120, 149, 236);
+  position: relative;
+  /* top: 30px; */
+  top: -50px;
+  left: 30px;
 }
 #first_test{
   margin-top:15px;
@@ -601,42 +609,42 @@ border-radius: 16px;
   .test{
     height: 70px;
     width: 70px;
-    top: 420px;
+    top: -50px;
   }
 }  
 @media screen and (max-width: 721px) {
   .test{
     height: 60px;
     width: 60px;
-    top: 710px;
+    top: -50px;
   }
 }  
 @media screen and (max-width: 649px) {
   .test{
     height: 60px;
     width: 60px;
-    top: 750px;
+    top: -50px;
   }
 }  
 @media screen and (max-width: 435px) {
   .test{
     height: 60px;
     width: 60px;
-    top: 765px;
+    top: -50px;
   }
 }  
 @media screen and (max-width: 356px) {
   .test{
     height: 60px;
     width: 60px;
-    top: 800px;
+    top: -50px;
   }
 }  
 @media screen and (max-width: 312px) {
   .test{
     height: 60px;
     width: 60px;
-    top: 800px;
+    top: -50px;
   }
 }  
 /* end testimonail icon responsive */
