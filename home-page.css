@@ -579,11 +579,18 @@ background-color: rgb(120, 149, 236);
 position: relative;
 top: 50px;
 padding-bottom: 30px;
-margin-bottom: 16px;
+margin-bottom: 70px;
 margin-left: 16px;
 margin-right: 16px;
 /* margin-top: 50px; */
 border-radius: 16px;
+bottom: -50px;
+}
+
+.testimonials-title{
+  text-align: center;
+  color:rgba(65, 105, 225, 0.6);
+  font: 20px Arial, sans-serif;
 }
 
 
@@ -625,12 +632,18 @@ border-radius: 16px;
     width: 60px;
     top: -50px;
   }
+  .testimonials-title{
+    font-size: 15px;
+  }
 }  
 @media screen and (max-width: 435px) {
   .test{
     height: 60px;
     width: 60px;
     top: -50px;
+  }
+  .testimonials-title{
+    font-size: 12px;
   }
 }  
 @media screen and (max-width: 356px) {
@@ -645,6 +658,9 @@ border-radius: 16px;
     height: 60px;
     width: 60px;
     top: -50px;
+  }
+  .testimonials-title{
+    font-size: 10px;
   }
 }  
 /* end testimonail icon responsive */
