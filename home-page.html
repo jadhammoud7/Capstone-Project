@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    </meta>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -10,6 +12,7 @@
     <script src="home-page.js"></script>
     <title>Newbies Gamers Home</title>
 </head>
+
 <body>
 
     <div class="topnav">
@@ -18,7 +21,9 @@
         <a href="#shop" title="Shop Page"><i class="fa fa-shopping-cart"></i>Shop</a>
         <a href="#home" class="active" title="Home Page"><i class="fa fa-home"></i>Home</a>
         <img src="" alt="shop logo" style="float: left !important;">
-        <button onclick="document.getElementById('id01').style.display='block'" style="float: left !important; border-radius: 30px;" id="login-button"><i class="fa fa-user" title="Log In"></i>Log In</a>
+        <button onclick="document.getElementById('id01').style.display='block'"
+            style="float: left !important; border-radius: 30px;" id="login-button"><i class="fa fa-user"
+                title="Log In"></i>Log In</a>
     </div>
 
     <div class="slideshow-container">
@@ -43,19 +48,20 @@
             <div class="text">Enjoy playing your games by buying all online playing requirements such as PS Plus</div>
         </div>
 
-        <a class="prev" onclick="plusSlides(-1)">&#10094</a>
-        <a class="next" onclick="plusSlides(1)">&#10095</a>
+        <!-- <a class="prev" onclick="plusSlides(-1)">&#10094</a> -->
+        <!-- <a class="next" onclick="plusSlides(1)">&#10095</a> -->
     </div>
     <br>
 
     <div style="text-align: center">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
     </div>
 
     <div id="id01" class="modal">
-        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <span onclick="document.getElementById('id01').style.display='none'" class="close"
+            title="Close Modal">&times;</span>
         <form class="modal-content animate">
             <div class="imgcontainer">
                 <img src="avatar.png" alt="Avatar" class="avatar">
@@ -64,12 +70,15 @@
             </div>
 
             <div class="container" style="border-radius: 4px;">
-                <label for="user_name" ><b>Username</b></label>
-                <input class="username_login" type="text" placeholder="Enter Username" name="user_name" required title="Enter your username">
+                <label for="user_name"><b>Username</b></label>
+                <input class="username_login" type="text" placeholder="Enter Username" name="user_name" required
+                    title="Enter your username">
 
                 <label for="password"><b>Password</b></label>
-                <input class="password_login" type="password" placeholder="Enter Password" name="password" required title="Enter your password">
-                <span >Dont have an account?<a href="signup.html" title="Sign Up for a new account">Sign up</a></span> <br> <br>
+                <input class="password_login" type="password" placeholder="Enter Password" name="password" required
+                    title="Enter your password">
+                <span>Dont have an account?<a href="signup.html" title="Sign Up for a new account">Sign up</a></span>
+                <br> <br>
                 <!-- <label>
                     <input type="checkbox" checked="checked" name="remember" style="margin-bottom:20px;"> Remember Me
                 </label> <br> -->
@@ -79,55 +88,56 @@
 
             </div>
 
-            <div id="canceling" class="container" >
-                <button style="border-radius:20px;" type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Back</button>
+            <div id="canceling" class="container">
+                <button style="border-radius:20px;" type="button"
+                    onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Back</button>
             </div>
         </form>
     </div>
-<!-- starting products here -->
+    <!-- starting products here -->
     <div class="shop-products">
         <div class="product1" id="product">
             <div class="product_info">
-            <div class="img_section">
-                <img src="wallpaper4.jpg" alt="product 1" >
+                <div class="img_section">
+                    <img src="wallpaper4.jpg" alt="product 1">
+                </div>
+                <div class="attributes_section">
+                    <h1><i>Product 1</i></h1>
+                    <h2><i>50$</i></h2>
+                    <a href="">
+                        <img class="info" src="info.png" title="read more" alt="read more info">
+                    </a>
+                    <a href="">
+                        <img class="add_to_basket" src="shopping_cart.png" title="Add To Basket" alt="Add To Basket">
+                    </a>
+
+                    <a href="">
+                        <img class="add_to_fav" src="addfav.png" title="Add To Favorites" alt="Add To Favorites">
+                    </a>
+                </div>
             </div>
-            <div class="attributes_section">
-                <h1><i>Product 1</i></h1>
-                <h2><i>50$</i></h2>
-                <a href="">
-                    <img class="info" src="info.png" title="read more" alt="read more info">
-                </a>
-                <a href="">
-                    <img class="add_to_basket" src="shopping_cart.png" title="Add To Basket" alt="Add To Basket">
-                </a>
-        
-                <a href="">
-                    <img class="add_to_fav" src="addfav.png" title="Add To Favorites" alt="Add To Favorites">
-                </a> 
-            </div>
-            </div> 
         </div>
 
         <div class="product1" id="product">
             <div class="product_info">
-            <div class="img_section">
-                <img src="wallpaper4.jpg" alt="product 1" >
+                <div class="img_section">
+                    <img src="wallpaper4.jpg" alt="product 1">
+                </div>
+                <div class="attributes_section">
+                    <h1><i>Product 1</i></h1>
+                    <h2><i>50$</i></h2>
+                    <a href="">
+                        <img class="info" src="info.png" title="read more" alt="read more info">
+                    </a>
+                    <a href="">
+                        <img class="add_to_basket" src="shopping_cart.png" title="Add To Basket" alt="Add To Basket">
+                    </a>
+
+                    <a href="">
+                        <img class="add_to_fav" src="addfav.png" title="Add To Favorites" alt="Add To Favorites">
+                    </a>
+                </div>
             </div>
-            <div class="attributes_section">
-                <h1><i>Product 1</i></h1>
-                <h2><i>50$</i></h2>
-                <a href="">
-                    <img class="info" src="info.png" title="read more" alt="read more info">
-                </a>
-                <a href="">
-                    <img class="add_to_basket" src="shopping_cart.png" title="Add To Basket" alt="Add To Basket">
-                </a>
-        
-                <a href="">
-                    <img class="add_to_fav" src="addfav.png" title="Add To Favorites" alt="Add To Favorites">
-                </a> 
-            </div>
-            </div> 
         </div>
     </div>
     <!-- end of products -->
@@ -136,30 +146,33 @@
 
     <!-- start of testimonials -->
 
-<div class="test-back">
-    <img class="test" src="testimonials.jpg" alt="">
-    <div class="testimonial_cover"  id="first_test">
-        <img src="wallpaper3.jpg" alt="profile" style="width: 90px; border-radius:50%; height:80px">
-        <p class="name_test"><span><i> <strong>Name x</strong></i></span></p>
-        <p>products are offordable and hahah hahodihw jsa j ajja ajjd sjjd sja djja dhhajd ajadjd j sja dhsjajd wkdd hjs dhsjd s
-            hs hs shs shsd hdhs hs dh
-        </p>
+    <div class="test-back">
+        <img class="test" src="testimonials.jpg" alt="">
+        <div class="testimonial_cover" id="first_test">
+            <img src="wallpaper3.jpg" alt="profile" style="width: 90px; border-radius:50%; height:80px">
+            <p class="name_test"><span><i> <strong>Name x</strong></i></span></p>
+            <p>products are offordable and hahah hahodihw jsa j ajja ajjd sjjd sja djja dhhajd ajadjd j sja dhsjajd wkdd
+                hjs dhsjd s
+                hs hs shs shsd hdhs hs dh
+            </p>
+        </div>
+        <div class="testimonial_cover">
+            <img src="wallpaper3.jpg" alt="profile" style="width: 90px; border-radius:50%; height:80px">
+            <p class="name_test"><span><i> <strong>Name x</strong></i></span></p>
+            <p>products are offordable and hahah hahodihw jsa j ajja ajjd sjjd sja djja dhhajd ajadjd j sja dhsjajd wkdd
+                hjs dhsjd s
+                hs hs shs shsd hdhs hs dh
+            </p>
+        </div>
+        <div class="testimonial_cover">
+            <img src="wallpaper3.jpg" alt="profile" style="width: 90px; border-radius:50%; height:80px">
+            <p class="name_test"><span><i> <strong>Name x</strong></i></span></p>
+            <p>products are offordable and hahah hahodihw jsa j ajja ajjd sjjd sja djja dhhajd ajadjd j sja dhsjajd wkdd
+                hjs dhsjd s
+                hs hs shs shsd hdhs hs dh
+            </p>
+        </div>
     </div>
-    <div class="testimonial_cover">
-        <img src="wallpaper3.jpg" alt="profile" style="width: 90px; border-radius:50%; height:80px">
-        <p class="name_test"><span><i> <strong>Name x</strong></i></span></p>
-        <p>products are offordable and hahah hahodihw jsa j ajja ajjd sjjd sja djja dhhajd ajadjd j sja dhsjajd wkdd hjs dhsjd s
-            hs hs shs shsd hdhs hs dh
-        </p>
-    </div>
-    <div class="testimonial_cover">
-        <img src="wallpaper3.jpg" alt="profile" style="width: 90px; border-radius:50%; height:80px">
-        <p class="name_test"><span><i> <strong>Name x</strong></i></span></p>
-        <p>products are offordable and hahah hahodihw jsa j ajja ajjd sjjd sja djja dhhajd ajadjd j sja dhsjajd wkdd hjs dhsjd s
-            hs hs shs shsd hdhs hs dh
-        </p>
-    </div>
-</div>
 
 
 
@@ -198,10 +211,34 @@
                 </div>
             </li>
         </ol>
-        
 
-        
+
+
     </footer>
-    
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            setTimeout(showSlides, 2000); // Change image every 2 seconds
+        }
+    </script>
+
+
 </body>
+
 </html>
