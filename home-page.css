@@ -513,6 +513,7 @@ input[type="date"]:hover {
   background-color: #eee;
   margin: 0px 16px 16px 16px;
   padding: 16px;
+  border-radius: 30px;
 }
 .testimonial_cover:hover {
   background-color: #bbb;
@@ -523,7 +524,50 @@ input[type="date"]:hover {
 .testimonial_cover p {
   margin-left: 110px;
 }
-@media screen and (max-width: 305px) {
+.name_test{
+  color: grey;
+}
+.testimonial_cover {
+height: 150px;
+}
+@media screen and (max-width: 860px) {
   .testimonial_cover {
+    font-size: small;
   }
 }
+@media screen and (max-width: 731px) {
+  .testimonial_cover {
+    font-size: 12px;
+  }
+} 
+@media screen and (max-width: 365px) {
+  .testimonial_cover {
+    height: 160px;
+  }
+} 
+@media screen and (max-width: 324px) {
+  .testimonial_cover {
+    height: 180px;
+  }
+} 
+@media screen and (max-width: 293px) {
+  .testimonial_cover {
+    height: 200px;
+  }
+} 
+@media screen and (max-width: 283px) {
+  .testimonial_cover {
+    height: 220px;
+  }
+} 
+@media screen and (max-width: 273px) {
+  .testimonial_cover {
+    height: 290px;
+  }
+} 
+@media screen and (max-width: 252px) {
+  .testimonial_cover {
+    height: 310px;
+  }
+}   
+
