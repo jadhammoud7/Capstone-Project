@@ -596,6 +596,7 @@ border-radius: 16px;
 #first_test{
   margin-top:15px;
 }
+/* start testimonail icon responsive */
 @media screen and (max-width: 735px) {
   .test{
     height: 70px;
@@ -638,3 +639,4 @@ border-radius: 16px;
     top: 800px;
   }
 }  
+/* end testimonail icon responsive */
