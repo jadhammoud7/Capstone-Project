@@ -82,9 +82,9 @@ body {
 .text {
   color: #f2f2f2;
   font-size: 15px;
-  padding: 8px 12px;
+  padding: 20px 14px;
   position: absolute;
-  bottom: 8px;
+  bottom: 4px;
   width: 100%;
   text-align: center;
   background-color: rgba(65, 105, 225, 0.6);
@@ -601,14 +601,12 @@ bottom: -50px;
 
 
 .test{
-  /* position: absolute;
-  top: 400px;
-  left: 40px;
-  height: 80px;
-  width: 80px;
-  border-radius: 40%; */
+
+  height: 100px;
+  width: 0px;
+  border-radius: 40%;
   width: 10%;
-  background-color: rgb(120, 149, 236);
+  /* background-color: rgb(214, 224, 255); */
   position: relative;
   /* top: 30px; */
   top: -50px;
@@ -618,25 +616,25 @@ bottom: -50px;
   margin-top:15px;
 }
 /* start testimonail icon responsive */
-@media screen and (max-width: 735px) {
+@media screen and (max-width: 742px) {
   .test{
     height: 70px;
     width: 70px;
-    top: -50px;
+    top: -30px;
   }
 }  
 @media screen and (max-width: 721px) {
   .test{
     height: 60px;
     width: 60px;
-    top: -50px;
+    top: -30px;
   }
 }  
 @media screen and (max-width: 649px) {
   .test{
     height: 60px;
     width: 60px;
-    top: -50px;
+    top: -30px;
   }
   .testimonials-title{
     font-size: 15px;
@@ -646,7 +644,7 @@ bottom: -50px;
   .test{
     height: 60px;
     width: 60px;
-    top: -50px;
+    top: -30px;
   }
   .testimonials-title{
     font-size: 12px;
@@ -656,14 +654,14 @@ bottom: -50px;
   .test{
     height: 60px;
     width: 60px;
-    top: -50px;
+    top: -30px;
   }
 }  
 @media screen and (max-width: 312px) {
   .test{
     height: 60px;
     width: 60px;
-    top: -50px;
+    top: -30px;
   }
   .testimonials-title{
     font-size: 10px;
