@@ -627,6 +627,50 @@ bottom: -50px;
   font: 20px Arial, sans-serif;
 }
 
+.about-us-title{
+  text-align: center;
+  color: rgba(65, 105, 225, 0.6);
+  font: 20px Arial, sans-serif;
+}
+
+.about-us{
+  background-image: url(game-store.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 400px;
+}
+
+.about-us-paragraph{
+  background-color: rgba(65, 105, 225, 0.6);
+  color: #fefefe;
+  width: 50%;
+  display: block;
+  margin-right: auto;
+  padding: 20px;
+  margin-left: 20px;
+  margin-top: 100px;
+}
+
+.about-us-button{
+  text-decoration: none;
+  color: #fefefe;
+  background-color: royalblue;
+  border: 5px solid royalblue;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.about-us-button:hover{
+  color: royalblue;
+  background-color: #fefefe;
+  border: 5px solid #fefefe;
+}
+
+.about-par{
+  margin-bottom: 50px;
+}
+
 
 .test{
 
