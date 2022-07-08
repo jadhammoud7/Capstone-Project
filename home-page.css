@@ -311,6 +311,34 @@ footer a:hover {
 #canceling {
   margin-bottom: 90px;
 }
+
+.feature-icon{
+  width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  /* background-color: rgba(65, 105, 225, 0.6); */
+}
+
+.features{
+  display: inline-flex;
+}
+
+.feature-part{
+  width: 20%;
+  display: block;
+  justify-content: right;
+  background-color: rgba(65, 105, 225, 0.6);
+  color: #fefefe;
+  margin-left: 50px;
+  border-radius: 20px;
+}
+
+.feature-part:hover{
+  background-color: #fefefe;
+  color:rgba(65, 105, 225, 0.6);
+  border: 5px solid rgba(65, 105, 225, 0.6);
+}
 /*hay lanzabet el login aa kaza platform*/
 @media screen and (max-width: 1285px) {
   .container {
