@@ -408,7 +408,7 @@ input[type="date"]:hover {
   outline: none;
 }
 .modal-content {
-  background-image: url(wallpaper4.jpg);
+  background-image: url(images/wallpaper4.jpg);
   border-radius: 20px;
 }
 
@@ -634,7 +634,7 @@ bottom: -50px;
 }
 
 .about-us{
-  background-image: url(game-store.jpg);
+  background-image: url(images/game-store.jpg);
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
