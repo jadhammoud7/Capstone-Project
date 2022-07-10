@@ -633,6 +633,13 @@ bottom: -50px;
   font: 20px Arial, sans-serif;
 }
 
+.shop-products-title{
+  margin-top: 30px;
+  text-align: center;
+  color: rgba(65, 105, 225, 0.6);
+  font: 20px Arial, sans-serif;
+}
+
 .about-us{
   background-image: url(images/game-store.jpg);
   background-attachment: fixed;
@@ -675,6 +682,7 @@ bottom: -50px;
   display: flex;
   float: left;
   background-color: rgba(65, 105, 225, 0.6);
+  margin-bottom: 30px;
 }
 
 .contact-us-title{
