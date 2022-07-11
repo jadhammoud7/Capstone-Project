@@ -6,7 +6,9 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.topnav {
+
+
+/* .topnav {
   overflow: hidden;
   background-color: #333;
 }
@@ -28,7 +30,7 @@ body {
 .topnav a.active {
   background-color: royalblue;
   color: white;
-}
+} */
 
 * {
   box-sizing: border-box;
@@ -641,21 +643,22 @@ bottom: -50px;
 }
 
 .about-us{
-  background-image: url(images/game-store.jpg);
+  background-image: url(images/Gaming-Wallpaper.png);
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
   height: 400px;
+  
 }
 
 .about-us-paragraph{
   background-color: rgba(65, 105, 225, 0.6);
   color: #fefefe;
-  width: 50%;
+  width: 45%;
+  height:400px;
   display: block;
   margin-right: auto;
   padding: 20px;
-  margin-left: 20px;
   margin-top: 100px;
 }
 
