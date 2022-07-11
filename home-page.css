@@ -826,12 +826,43 @@ bottom: -50px;
 .contact-us-img{
   width: 40%;
 }
-@media screen and (max-width:804px){
+/* start resposive of contact us */
+@media screen and (max-width:753px){
   .contact-us-img{
-    width: 30%;
+    width: 40%;
   }
 }
-
+@media screen and (max-width:577px){
+  .contact-us-img{
+    width: 40%;
+  }
+  .contact_us_paragraphs p{
+font-size: 13px;  
+}
+.contact_us_paragraphs a{
+  font-size: 8px;  
+  }
+}
+@media screen and (max-width:523px){
+  .contact-us-img{
+    width: 50%;
+  }
+  .contact_us_paragraphs p{
+font-size: 10px;  
+}
+.contact_us_paragraphs a{
+  font-size: 7px;  
+  }
+}
+@media screen and (max-width:423px){
+  .contact-us-img{
+    width: 40%;
+  }
+  .contact_us_paragraphs p{
+    font-size: 8px;  
+    }
+}
+/* end resposive of contact us */
 .contact-us-button{
   text-decoration: none;
   color: #fefefe;
@@ -859,11 +890,11 @@ bottom: -50px;
   margin-left: 15px;
   margin-top: 20px;
 }
-@media screen and (max-width:654px){
-
+.test_profile_img{
+  width: 90px; 
+  border-radius:50%; 
+  height:80px
 }
-
-
 .test{
 
   height: 100px;
@@ -914,21 +945,22 @@ bottom: -50px;
     font-size: 12px;
   }
 }  
-@media screen and (max-width: 356px) {
-  .test{
-    height: 60px;
-    width: 60px;
-    top: -30px;
+ @media screen and (max-width: 351px) {
+
+  .test-back p{
+    font-size: 11px;
   }
-}  
-@media screen and (max-width: 312px) {
-  .test{
-    height: 60px;
-    width: 60px;
-    top: -30px;
-  }
-  .testimonials-title{
+} 
+@media screen and (max-width: 317px) {
+  .test-back p{
     font-size: 10px;
   }
+
+}
+@media screen and (max-width: 296px) {
+  .test-back p{
+    font-size: 9px;
+  }
+
 }  
 /* end testimonail icon responsive */
