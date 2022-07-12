@@ -929,8 +929,13 @@ font-size: 10px;
     width: 40%;
   }
   .contact_us_paragraphs p{
-    font-size: 8px;  
-    }
+    font-size: 13px;  
+  }
+
+  .contact_us_paragraphs a{
+    font-size: 13px;
+  }
+
 }
 /* end resposive of contact us */
 .contact-us-button{
