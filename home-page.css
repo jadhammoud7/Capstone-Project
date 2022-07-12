@@ -502,6 +502,28 @@ footer a:hover {
     width: 50%;
     margin-bottom: 30px;
   }
+  .about-us-title{
+    font-size: 15px !important;
+    padding-top: 40px;
+  }
+
+  .contact-us-title{
+    font-size: 15px !important;
+    padding-top: 40px;
+  }
+
+  .contact-us{
+    flex-direction: column;
+  }
+
+  .contact-us-img{
+    width: 100% !important;
+  }
+
+  .shop-products-title{
+    font-size: 15px !important;
+    padding-top: 40px;
+  }
 
 }
 
