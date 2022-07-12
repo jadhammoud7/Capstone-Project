@@ -495,8 +495,8 @@ footer a:hover {
     font: 15px Arial, sans-serif !important;
   }
   .features{
-    flex-flow: column;
-    align-items: center;
+    flex-flow: column !important;
+    align-items: center !important;
   }
   .feature-part{
     width: 50%;
@@ -668,6 +668,10 @@ input[type="date"]:hover {
   margin-left: 30px;
 }
 
+.location-logo{
+  width: 3%;
+}
+
 .testimonial_cover {
   border: 2px solid #ccc;
   background-color: #eee;
@@ -695,6 +699,16 @@ height: 150px;
   .testimonial_cover {
     font-size: small;
   }
+
+  .feature-part{
+    width: 40%;
+    margin: 10px;
+  }
+  .features{
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
 }
 @media screen and (max-width: 731px) {
   .testimonial_cover {
@@ -901,6 +915,14 @@ bottom: -50px;
   .contact-us-img{
     width: 40%;
   }
+  .feature-part{
+    width: 40%;
+    margin: 10px;
+  }
+  .features{
+    flex-flow: row wrap;
+    justify-content: center;
+  }
 }
 @media screen and (max-width:577px){
   .contact-us-img{
@@ -911,6 +933,9 @@ font-size: 13px;
 }
 .contact_us_paragraphs a{
   font-size: 8px;  
+  }
+  .location-logo{
+    width: 15%;
   }
 }
 @media screen and (max-width:523px){
@@ -934,6 +959,10 @@ font-size: 10px;
 
   .contact_us_paragraphs a{
     font-size: 13px;
+  }
+
+  .location-logo{
+    width: 20%;
   }
 
 }
