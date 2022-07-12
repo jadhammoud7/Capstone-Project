@@ -31,15 +31,15 @@ body {
   background-color: royalblue;
   color: white;
 } */
-header{
-  background-color: #333;
-}
 li{
   list-style: none;
 }
 a{
   color: royalblue;
   text-decoration: none;
+}
+header{
+  background-color: #333;
 }
 .nav-bar{
   min-height: 70px;
@@ -52,13 +52,14 @@ a{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap:60px
+  gap:60px;
 }
 .nav-branding{
   font-size: 2rem;
 }
 .nav-link{
   transition: 0.7s ease;
+  color: #eee;
 }
 .nav-link:hover{
   color: grey;
@@ -85,7 +86,7 @@ a{
     opacity: 0;
   }
   .hamburger.active .bar:nth-child(1){
-    transform:translateY(8px)rotate(45deg);
+    transform:translateY(8px) rotate(45deg);
   }
   .hamburger.active .bar:nth-child(3){
     transform:translateY(-8px) rotate(-45deg);
@@ -93,20 +94,21 @@ a{
   .nav-menu{
     position: fixed;
     left: -100%;
-    top:70px;
+    top: 52px;
     gap: 0;
     flex-direction: column;
+    float: initial;
     background-color: red;
     width: 100%;
     text-align: center;
     transition: 0.3s;
+    z-index: 100;
   }
   .nav-item{
-    margin: 16px 0px;
+    margin: 16px 0;
   }
   .nav-menu.active{
-    left: 0px;
-    
+    left: 0;
   }
 }
 
@@ -171,8 +173,8 @@ a{
   color: #f2f2f2;
   font-size: 12px;
   padding: 8px 12px;
-  position: absolute;
-  top: 0;
+  position: relative;
+  top: 50px;
 }
 
 .dot {
@@ -189,6 +191,7 @@ a{
 .active,
 .dot:hover {
   background-color: royalblue;
+  color: #eee;
 }
 
 .fade {
