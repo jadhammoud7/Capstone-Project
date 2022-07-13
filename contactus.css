@@ -79,10 +79,7 @@ margin-left: 250px;
 .right_part h2{
     text-align: center;
 }
-.comment-input:focus{
-    height: 100px;
-    text-align: left;
-}
+
 .submit{
     background-color: royalblue;
     border-radius:20%;
