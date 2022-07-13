@@ -40,7 +40,7 @@ margin-left: 250px;
         width: 300px;
     }
     .left_part h2{
-        margin-left: 250px;
+        margin-left: 30px;
         }
 }
 @media screen and (max-width:379px){
@@ -48,6 +48,9 @@ margin-left: 250px;
         margin-left: -70px;
         width: 280px;
     }
+    .left_part h2{
+        margin-left: 10px;
+        }
 }
 
 @media screen and (max-width:333px){
@@ -55,6 +58,10 @@ margin-left: 250px;
         height: 200px;
         width: 250px;
         margin-left: -85px;
+    }
+    .left_part h2{
+        font-size: 20px;
+        margin-left: -10px;
     }
 }
 
@@ -83,4 +90,17 @@ margin-left: 250px;
 }
 .hi{
     display: flex;
+}
+.shop_info{
+    text-align: center;
+    padding: 20px;
+    border-radius: 30px;
+    margin-top: 20px;
+}
+.shop_info h2{
+    margin-top: 40px;
+    
+}
+.shop_info:hover{
+    background-color:#f7f7f7;
 }
