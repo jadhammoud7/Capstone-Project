@@ -1,0 +1,86 @@
+.title{
+    text-align: center;
+    background-color: #f7f7f7;
+    padding: 10px;
+}
+.left_part{
+    margin-left: 100px;
+}
+.left_part h2{
+margin-left: 250px;
+}
+.googlemaps{
+    height: 500px;
+    width: 600px
+}
+
+/* started responsive of left part */
+@media screen and (max-width:719px){
+    .googlemaps{
+        height: 400px;
+        width: 500px;
+    }
+    .left_part h2{
+        margin-left: 190px;
+        }
+
+}
+@media screen and (max-width:623px){
+    .googlemaps{
+        height: 300px;
+        width: 400px;
+    }
+    .left_part h2{
+        margin-left: 140px;
+        }
+}
+@media screen and (max-width:523px){
+    .googlemaps{
+        margin-left: -50px;
+        width: 300px;
+    }
+    .left_part h2{
+        margin-left: 250px;
+        }
+}
+@media screen and (max-width:379px){
+    .googlemaps{
+        margin-left: -70px;
+        width: 280px;
+    }
+}
+
+@media screen and (max-width:333px){
+    .googlemaps{
+        height: 200px;
+        width: 250px;
+        margin-left: -85px;
+    }
+}
+
+/* ended responsive of left part */
+.footer{
+    margin-top: 100px;
+}
+.comment_section{
+    /* width: 45%; */
+}
+.right_section{
+    margin-left: 200px;
+}
+.right_part h2{
+    text-align: center;
+}
+.submit{
+    background-color: royalblue;
+    border-radius:20%;
+    padding: 10px;
+    border: 1px solid white;
+}
+.submit:hover{
+    background-color: rgba(65, 105, 225, 0.433);
+    box-shadow: 5px 5px 5px rgb(173, 216, 230);
+}
+.hi{
+    display: flex;
+}
