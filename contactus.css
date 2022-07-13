@@ -99,8 +99,24 @@ margin-left: 250px;
 }
 .shop_info h2{
     margin-top: 40px;
+    margin-left: 40px;
     
 }
 .shop_info:hover{
     background-color:#f7f7f7;
+}
+@media screen and (max-width:309px){
+    .shop_info{
+        font-size: small;
+    }
+}
+@media screen and (max-width:264px){
+    .shop_info h2{
+        font-size: 15px;
+    }
+    .shop_info{
+        font-size: 12px;
+        margin-left: -30px;
+        border-radius: 0px;
+    }
 }
