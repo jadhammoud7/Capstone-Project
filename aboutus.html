@@ -67,7 +67,7 @@
     </div>
     <div class="nb_history">
         <i class="fa fa-car" ></i>
-        <div class="counter" data-target="6">0</div>Years
+        <div class="counter" data-target="15">0</div>Years
     </div>
   </div>
 
@@ -204,7 +204,7 @@
                     const count=+counter.innerText;
                     const inc=target/speed;
                     if(count<target){
-                        counter.innerText=count+inc;
+                        counter.innerText=Math.ceil(count+inc);
                         setTimeout(updateCount,1);
                     }else{
                         count.innerText=target;                         
