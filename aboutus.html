@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="contactus.css">
 
     <link rel="stylesheet" href="aboutus.css">
-    <script src="home-page.js"></script>
     <title>Contact-Newbies Gamers</title>
 </head>
 
@@ -57,18 +56,21 @@
 <!-- ended with title page -->
 <!-- started with the counter -->
 
-<div class="nb_cutsomers_section">
-    <i class="fa fa-car" style="font-size:50px;"></i>
-    <div class="counter" data-target="6000">0</div>
-</div>
-<div class="nb_items_sold">
-    <i class="fa fa-car" style="font-size:50px;"></i>
-    <div class="counter" data-target="6000">0</div>
-</div>
-<div class="nb_history">
-    <i class="fa fa-car" style="font-size:50px;"></i>
-    <div class="counter" data-target="6000">0</div>
-</div>
+<div class="row">
+    <div class="nb_cutsomers_section">
+        <i class="fa fa-car"></i>
+        <div class="counter" data-target="6000">0</div> Happy Customers
+    </div>
+    <div class="nb_items_sold">
+        <i class="fa fa-car" ></i>
+        <div class="counter" data-target="12000">0</div>Items Sold
+    </div>
+    <div class="nb_history">
+        <i class="fa fa-car" ></i>
+        <div class="counter" data-target="6">0</div>Years
+    </div>
+  </div>
+
 
 <!-- ended with the counter -->
 
@@ -192,6 +194,24 @@
                 hamBurger.classList.remove("active");
                 nav_menu.classList.remove("active");
             }))
+
+
+            const counters=document.querySelectorAll(".counter");
+            const speed=200;
+            counters.forEach(counter=>{
+                const updateCount=()=>{
+                    const target=+counter.getAttribute('data-target');
+                    const count=+counter.innerText;
+                    const inc=target/speed;
+                    if(count<target){
+                        counter.innerText=count+inc;
+                        setTimeout(updateCount,1);
+                    }else{
+                        count.innerText=target;                         
+                    }
+                }
+                updateCount();
+            })
 
         </script>
 

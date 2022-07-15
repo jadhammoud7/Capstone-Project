@@ -1,20 +1,83 @@
-.nb_cutsomers_section{
-    text-align: center;
-    margin: 10px;
-    float: left;
-    padding: 10px;
+.row i{
+    font-size: 50px;
 }
-.nb_items_sold{
-    text-align: center;
+.nb_cutsomers_section {
     float: left;
-    margin: 10px;
-    padding: 10px;
-}
-.nb_history{
+    width: 31.33%;
+    padding: 15px;
     text-align: center;
-    margin: 10px;
-    padding: 10px;
+    margin-left: 25px;
+    margin-right: 5px;
+    background-color:rgba(65, 105, 225, 0.6);
+  }
+  .nb_items_sold {
     float: left;
-}
+    width: 31.33%;
+    padding: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-align: center;
+    background-color:rgba(65, 105, 225, 0.6);
+
+  }
+  .nb_history {
+    float: left;
+    width: 31.33%;
+    padding: 15px;
+    text-align: center;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color:rgba(65, 105, 225, 0.6);
+
+  }  
+  /* Clearfix (clear floats) */
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  @media screen and (max-width:853px){
+    .nb_cutsomers_section {
+        width: 27.33%;
+    }
+      .nb_items_sold {
+        width: 27.33%;
+      }
+      .nb_history {
+        width: 27.33%;
+      }  
+  }
+  @media screen and (max-width:301px){
+    .nb_cutsomers_section {
+        width: 22.33%;
+    }
+      .nb_items_sold {
+        width: 22.33%;
+      }
+      .nb_history {
+        width: 22.33%;
+      } 
+      .row i{
+        font-size: 30px;
+      } 
+  }
+  @media screen and (max-width:275px){
+    .nb_cutsomers_section {
+        width: 20.33%;
+        font-size: 20px;
+
+    }
+      .nb_items_sold {
+        width: 20.33%;
+        font-size: 20px;
+      }
+      .nb_history {
+        width: 20.33%;
+        font-size: 20px;
+      } 
+
+  }
+
 
 
