@@ -68,7 +68,8 @@ function revealX(){
 }
 
 window.addEventListener("scroll", revealX);
-window.addEventListener("scroll", revealY)
+window.addEventListener("scroll", revealY);
+window.addEventListener("pageshow", revealY);
 
 
 
