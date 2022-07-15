@@ -47,5 +47,5 @@ function revealX(){
     }
 }
 
-window.addEventListener("scroll", revealX);
-window.addEventListener("scroll", revealY)
+window.addEventListener("pageshow", revealX);
+window.addEventListener("pageshow", revealY);
