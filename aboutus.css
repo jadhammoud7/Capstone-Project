@@ -48,6 +48,50 @@
         width: 27.33%;
       }  
   }
+  @media screen and (max-width:639px){
+    .nb_cutsomers_section h4{
+        font-size: 15px;
+    }
+    .nb_cutsomers_section {
+      padding-bottom: 20px;
+  }
+
+  }
+  @media screen and (max-width:600px){
+    .nb_cutsomers_section h4{
+        font-size: 12px;
+    }
+
+    .nb_items_sold {
+      font-size: 12px;
+      padding-bottom: 23px;
+    }
+    .nb_history {
+      font-size: 12px;
+      padding-bottom: 23px;
+    } 
+
+  }
+  @media screen and (max-width:506px){
+
+    .nb_items_sold {
+      padding-bottom: 37px;
+    }
+    .nb_history {
+      padding-bottom: 37px;
+    } 
+
+  }
+  @media screen and (max-width:353px){
+    .nb_cutsomers_section h4{
+      padding-bottom: 13px;
+  }
+    .nb_history {
+      padding-bottom: 52px;
+    } 
+
+  }
+
   @media screen and (max-width:301px){
     .nb_cutsomers_section {
         width: 22.33%;
