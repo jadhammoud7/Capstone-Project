@@ -33,8 +33,8 @@ document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", 
     nav_menu.classList.remove("active");
 }))
 
-function reveal(){
-    var reveals = document.querySelectorAll(".reveal");
+function revealY(){
+    var reveals = document.querySelectorAll(".reveal-by-y");
 
     for(var i = 0; i <  reveals.length; i++){
         var windowHeight = window.innerHeight;
@@ -42,15 +42,33 @@ function reveal(){
         var elementVisible = 150;
 
         if(elementTop < windowHeight - elementVisible){
-            reveals[i].classList.add("active");
+            reveals[i].classList.add("on");
         }
         else{
-            reveals[i].classList.remove("active");
+            reveals[i].classList.remove("on");
         }
     }
 }
 
-window.addEventListener("scroll", reveal);
+function revealX(){
+    var reveals = document.querySelectorAll(".reveal-by-x");
+
+    for(var i = 0; i <  reveals.length; i++){
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 150;
+
+        if(elementTop < windowHeight - elementVisible){
+            reveals[i].classList.add("on");
+        }
+        else{
+            reveals[i].classList.remove("on");
+        }
+    }
+}
+
+window.addEventListener("scroll", revealX);
+window.addEventListener("scroll", revealY)
 
 
 
