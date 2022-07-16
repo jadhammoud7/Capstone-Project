@@ -1,185 +1,222 @@
-.title{
+.title {
     text-align: center;
     background-color: #f7f7f7;
     padding: 10px;
 }
-.left_part{
+
+.left_part {
     margin-left: 100px;
 }
-.left_part h2{
-margin-left: 250px;
+
+.left_part h2 {
+    margin-left: 250px;
 }
-.googlemaps{
+
+.googlemaps {
     height: 500px;
     width: 600px
 }
 
 /* started responsive of left part */
-@media screen and (max-width:719px){
-    .googlemaps{
+@media screen and (max-width:719px) {
+    .googlemaps {
         height: 400px;
         width: 500px;
     }
-    .left_part h2{
+
+    .left_part h2 {
         margin-left: 190px;
-        }
+    }
 
 }
-@media screen and (max-width:623px){
-    .googlemaps{
+
+@media screen and (max-width:623px) {
+    .googlemaps {
         height: 300px;
         width: 400px;
     }
-    .left_part h2{
+
+    .left_part h2 {
         margin-left: 140px;
-        }
+    }
 }
-@media screen and (max-width:523px){
-    .googlemaps{
+
+@media screen and (max-width:523px) {
+    .googlemaps {
         margin-left: -50px;
         width: 300px;
     }
-    .left_part h2{
+
+    .left_part h2 {
         margin-left: 30px;
-        }
+    }
 }
-@media screen and (max-width:379px){
-    .googlemaps{
+
+@media screen and (max-width:379px) {
+    .googlemaps {
         margin-left: -70px;
         width: 280px;
     }
-    .left_part h2{
+
+    .left_part h2 {
         margin-left: 10px;
-        }
+    }
 }
 
-@media screen and (max-width:333px){
-    .googlemaps{
+@media screen and (max-width:333px) {
+    .googlemaps {
         height: 200px;
         width: 250px;
         margin-left: -85px;
     }
-    .left_part h2{
+
+    .left_part h2 {
         font-size: 20px;
         margin-left: -10px;
     }
 }
 
 /* ended responsive of left part */
-.footer{
+.footer {
     margin-top: 100px;
 }
-.comment_section{
+
+.comment_section {
     width: 200%;
     border: none;
 }
-.right_section{
+
+.right_section {
     margin-left: 200px;
 }
-.right_part h2{
+
+.right_part h2 {
     text-align: center;
 }
 
-.submit{
+.submit {
     background-color: royalblue;
-    border-radius:20%;
+    border-radius: 20%;
     padding: 10px;
     border: 1px solid white;
 }
-.submit:hover{
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+
+.submit:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
-.contact-us-part{
+
+.contact-us-part {
     display: flex;
 }
-.shop_info{
+
+.shop_info {
     text-align: center;
     padding: 20px;
     border-radius: 30px;
     margin-top: 20px;
     background-color: rgba(65, 105, 225, 0.6);
 }
-.shop_info h2{
+
+.shop_info h2 {
     margin-top: 40px;
     margin-left: 40px;
-    
+
 }
-.shop_info:hover{
+
+.shop_info:hover {
     background-color: rgba(65, 105, 225, 0.433);
 }
-@media screen and (max-width: 1325px){
-    .contact-us-part{
+
+@media screen and (max-width: 1325px) {
+    .contact-us-part {
         display: flex;
         flex-direction: column;
     }
-    .right_section{
+
+    .right_section {
         margin-left: 10px !important;
     }
-    #comment{
+
+    #comment {
         margin-left: 0;
         width: fit-content;
     }
-    .left_part{
+
+    .left_part {
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-left: 0 !important;
     }
-    .left_part h2{
+
+    .left_part h2 {
         margin-left: 0 !important;
         text-align: center;
     }
 }
-@media screen and (max-width: 753px){
-    .contact-us-part{
+
+@media screen and (max-width: 753px) {
+    .contact-us-part {
         display: flex;
         flex-direction: column;
     }
-    .right_section{
+
+    .right_section {
         margin-left: 10px !important;
     }
-    #comment{
+
+    #comment {
         margin-left: 0;
         width: fit-content;
     }
 }
-@media screen and (max-width:309px){
-    .shop_info{
+
+@media screen and (max-width:309px) {
+    .shop_info {
         font-size: small;
     }
-    .contact-us-part{
+
+    .contact-us-part {
         display: flex;
         flex-direction: column;
     }
-    .right_section{
+
+    .right_section {
         margin-left: 10px !important;
     }
-    #comment{
+
+    #comment {
         margin-left: 0;
         width: fit-content;
     }
 }
-@media screen and (max-width: 598px){
-    .shop_info{
+
+@media screen and (max-width: 598px) {
+    .shop_info {
         font-size: small;
     }
-    .contact-us-part{
+
+    .contact-us-part {
         display: flex;
         flex-direction: column;
     }
-    .right_section{
+
+    .right_section {
         margin-left: 10px !important;
     }
-    #comment{
+
+    #comment {
         margin-left: 0;
         width: fit-content;
     }
 }
-@media screen and (max-width:264px){
-    .shop_info h2{
+
+@media screen and (max-width:264px) {
+    .shop_info h2 {
         font-size: 15px;
     }
-    .shop_info{
+
+    .shop_info {
         font-size: 12px;
         margin-left: -30px;
         border-radius: 0px;

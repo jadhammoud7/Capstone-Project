@@ -13,35 +13,35 @@ document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", 
     nav_menu.classList.remove("active");
 }))
 
-function revealY(){
+function revealY() {
     var reveals = document.querySelectorAll(".reveal-by-y");
 
-    for(var i = 0; i <  reveals.length; i++){
+    for (var i = 0; i < reveals.length; i++) {
         var windowHeight = window.innerHeight;
         var elementTop = reveals[i].getBoundingClientRect().top;
         var elementVisible = 150;
 
-        if(elementTop < windowHeight - elementVisible){
+        if (elementTop < windowHeight - elementVisible) {
             reveals[i].classList.add("on");
         }
-        else{
+        else {
             reveals[i].classList.remove("on");
         }
     }
 }
 
-function revealX(){
+function revealX() {
     var reveals = document.querySelectorAll(".reveal-by-x");
 
-    for(var i = 0; i <  reveals.length; i++){
+    for (var i = 0; i < reveals.length; i++) {
         var windowHeight = window.innerHeight;
         var elementTop = reveals[i].getBoundingClientRect().top;
         var elementVisible = 150;
 
-        if(elementTop < windowHeight - elementVisible){
+        if (elementTop < windowHeight - elementVisible) {
             reveals[i].classList.add("on");
         }
-        else{
+        else {
             reveals[i].classList.remove("on");
         }
     }
