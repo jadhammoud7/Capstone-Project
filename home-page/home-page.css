@@ -1,3 +1,6 @@
+html{
+  scroll-behavior: smooth;
+}
 i {
   padding-right: 5px;
 }
@@ -681,6 +684,7 @@ height: 150px;
   color: #fefefe;
   padding: 15px;
   border-radius: 4px;
+  align-items: center;
 }
 #TopBtn:hover{
   background-color: royalblue;
