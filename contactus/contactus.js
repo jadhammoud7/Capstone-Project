@@ -49,3 +49,4 @@ function revealX(){
 
 window.addEventListener("pageshow", revealX);
 window.addEventListener("pageshow", revealY);
+window.addEventListener("scroll", revealX);

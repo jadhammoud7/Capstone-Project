@@ -89,7 +89,7 @@ margin-left: 250px;
 .submit:hover{
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
-.hi{
+.contact-us-part{
     display: flex;
 }
 .shop_info{
@@ -107,9 +107,72 @@ margin-left: 250px;
 .shop_info:hover{
     background-color: rgba(65, 105, 225, 0.433);
 }
+@media screen and (max-width: 1325px){
+    .contact-us-part{
+        display: flex;
+        flex-direction: column;
+    }
+    .right_section{
+        margin-left: 10px !important;
+    }
+    #comment{
+        margin-left: 0;
+        width: fit-content;
+    }
+    .left_part{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-left: 0 !important;
+    }
+    .left_part h2{
+        margin-left: 0 !important;
+        text-align: center;
+    }
+}
+@media screen and (max-width: 753px){
+    .contact-us-part{
+        display: flex;
+        flex-direction: column;
+    }
+    .right_section{
+        margin-left: 10px !important;
+    }
+    #comment{
+        margin-left: 0;
+        width: fit-content;
+    }
+}
 @media screen and (max-width:309px){
     .shop_info{
         font-size: small;
+    }
+    .contact-us-part{
+        display: flex;
+        flex-direction: column;
+    }
+    .right_section{
+        margin-left: 10px !important;
+    }
+    #comment{
+        margin-left: 0;
+        width: fit-content;
+    }
+}
+@media screen and (max-width: 598px){
+    .shop_info{
+        font-size: small;
+    }
+    .contact-us-part{
+        display: flex;
+        flex-direction: column;
+    }
+    .right_section{
+        margin-left: 10px !important;
+    }
+    #comment{
+        margin-left: 0;
+        width: fit-content;
     }
 }
 @media screen and (max-width:264px){
