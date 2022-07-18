@@ -1,0 +1,8 @@
+button:hover {
+    background-color: grey;
+  }
+  .tabs {
+    overflow: hidden;
+    border: 1px solid #ccc;
+
+  }
