@@ -15,7 +15,7 @@ tabsArray.forEach((element) => {
             divs.style.display = "none";
         });
         document.querySelector(e.currentTarget.dataset.cont).style.display = "block";
-        revealY();
+        revealX();
     });
 });
 
@@ -34,11 +34,11 @@ document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", 
     nav_menu.classList.remove("active");
 }))
 
-function revealY() {
-    var reveals = document.querySelectorAll(".reveal-by-y");
+function revealX() {
+    var reveals = document.querySelectorAll(".reveal-by-x");
 
     for (var i = 0; i < reveals.length; i++) {
-        if (reveals[i].parentElement.style.display == "block") {
+        if (reveals[i].style.display == "block") {
             reveals[i].classList.add("on");
         }
         else {
@@ -46,3 +46,5 @@ function revealY() {
         }
     }
 }
+
+window.addEventListener("pageshow", revealX);

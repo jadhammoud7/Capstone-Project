@@ -17,7 +17,7 @@
 
 .shop-products {
   margin-bottom: 300px;
-  margin-top: -120px;
+  margin-top: 120px;
 }
 
 /* .shop-products h1{
@@ -30,12 +30,12 @@
   width: 150px;
 }
 
-.reveal-by-y {
+.reveal-by-x {
   position: relative;
-  transform: translateY(150px);
+  transform: translateX(150px);
   transition: 1s all ease;
 }
 
-.reveal-by-y.on {
-  transform: translateY(0);
+.reveal-by-x.on {
+  transform: translateX(0px);
 }
