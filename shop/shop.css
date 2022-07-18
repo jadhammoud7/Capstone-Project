@@ -11,3 +11,7 @@
 .content >div:not(:first-child){
     display: none;
 }
+.shop-products
+{
+margin-bottom: 300px;
+}
