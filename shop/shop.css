@@ -25,32 +25,40 @@
   background-color: rgb(200, 192, 192);
 }
 
-select{
+select {
   background-color: royalblue;
   border: none;
-  padding: 10px;
   color: #fefefe;
   font-size: 15px;
 }
 
-select:hover{
+select:hover {
   background-color: rgb(200, 192, 192);
   color: royalblue;
 }
-h2{
+
+option {
+  font-weight: bold;
+  padding: 15px 15px 15px;
+  min-height: 2em;
+  font-size: large;
+}
+
+h2 {
   color: royalblue;
 }
+
 .content>div:not(:first-child) {
   display: none;
 }
 
-.filters{
+.filters {
   display: flex !important;
   flex-direction: row;
   float: inline-start;
 }
 
-.filters div{
+.filters div {
   margin: 30px;
 }
 
