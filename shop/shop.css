@@ -68,9 +68,11 @@
   from {opacity: 0;}
   to {opacity: 1;}
 }
-.search-container button{
+/* .search-container button{
   float: right;
   position: absolute;
+  display: flex;
+  position: fixed;
   top: 284px;
   right:70px;
   border: 2px solid black;
@@ -82,4 +84,22 @@
   width: 20%;
   margin-left: 1150px;
   margin-top: 15px;
+} */
+/* .search-container button{
+  position: relative;
+  padding-right: 0px;
+} */
+.search-container{
+  display: flex;
+  width: 25%;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-left: 1100px;
+}
+.search-container button{
+  border-radius: 10px;
+  cursor: pointer;
+}
+.search-container input{
+  border-radius: 10px;
 }
