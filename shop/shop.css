@@ -53,13 +53,16 @@ h2 {
 }
 
 .filters {
-  display: flex !important;
-  flex-direction: row;
-  float: inline-start;
+  display: flex;
+  justify-content: center;
+  height: 200px;
 }
 
 .filters div {
-  margin: 30px;
+  position: relative;
+  margin: 50px;
+  float: left;
+  height: 100px;
 }
 
 .shop-products {
