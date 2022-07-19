@@ -25,8 +25,21 @@
   background-color: rgb(200, 192, 192);
 }
 
+h2{
+  color: royalblue;
+}
 .content>div:not(:first-child) {
   display: none;
+}
+
+.filters{
+  display: flex !important;
+  flex-direction: row;
+  float: inline-start;
+}
+
+.filters div{
+  margin: 30px;
 }
 
 .shop-products {
