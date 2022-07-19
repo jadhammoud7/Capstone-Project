@@ -47,7 +47,15 @@
   -webkit-animation: fadeEffect 3s;
   animation: fadeEffect 3s;
 }
-.offer{
+.offers{
+  -webkit-animation: fadeEffect 3s;
+  animation: fadeEffect 3s;
+}
+.others{
+  -webkit-animation: fadeEffect 3s;
+  animation: fadeEffect 3s;
+}
+.consoles{
   -webkit-animation: fadeEffect 3s;
   animation: fadeEffect 3s;
 }
