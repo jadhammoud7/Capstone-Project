@@ -39,3 +39,24 @@
 .reveal-by-x.on {
   transform: translateX(0px);
 }
+.cd{
+  -webkit-animation: fadeEffect 3s;
+  animation: fadeEffect 3s;
+}
+.cellphones{
+  -webkit-animation: fadeEffect 3s;
+  animation: fadeEffect 3s;
+}
+.offer{
+  -webkit-animation: fadeEffect 3s;
+  animation: fadeEffect 3s;
+}
+@-webkit-keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
