@@ -913,11 +913,21 @@ input[type="date"]:hover {
   transition: 1s all ease;
 }
 
+.reveal-by-x2{
+  position: relative;
+  transform: translateX(-150px);
+  transition: 1s all ease;
+}
+
 .reveal-by-y.on {
   transform: translateY(0);
 }
 
 .reveal-by-x.on {
+  transform: translateX(0);
+}
+
+.reveal-by-x2.on{
   transform: translateX(0);
 }
 
