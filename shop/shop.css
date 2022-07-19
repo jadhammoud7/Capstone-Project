@@ -56,6 +56,8 @@ h2 {
   display: flex;
   justify-content: center;
   height: 200px;
+  -webkit-animation: fadeEffect 3s;
+  animation: fadeEffect 3s;
 }
 
 .filters div {
@@ -169,13 +171,14 @@ h2 {
     float: right;
     width: 25%;
   }
-  .filters{
+
+  .filters {
     height: 400px;
   }
 }
 
-@media screen and (max-width:1500px){
-  .filters{
+@media screen and (max-width:1500px) {
+  .filters {
     height: 400px;
   }
 }
@@ -215,7 +218,8 @@ h2 {
     float: right;
     width: 40%;
   }
-  .filters{
+
+  .filters {
     height: 400px;
   }
 }
@@ -244,16 +248,18 @@ h2 {
     float: right;
     width: 50%;
   }
-  .filters{
+
+  .filters {
     height: 400px;
   }
 }
 
-@media screen and (max-width:845px){
-  .filters{
+@media screen and (max-width:845px) {
+  .filters {
     height: 400px;
   }
-  .filters div{
+
+  .filters div {
     margin: 20px;
   }
 }
@@ -270,10 +276,12 @@ h2 {
     float: right;
     width: 50%;
   }
-  .filters{
+
+  .filters {
     height: 300px;
   }
-  .filters div{
+
+  .filters div {
     width: 25%;
   }
 }
@@ -290,12 +298,14 @@ h2 {
     right: 10%;
     width: 75%;
   }
-  .filters{
+
+  .filters {
     margin: 0;
     height: 400px;
     text-align: center;
   }
-  .filters div{
+
+  .filters div {
     width: 30%;
   }
 }

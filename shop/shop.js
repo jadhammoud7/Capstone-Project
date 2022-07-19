@@ -47,10 +47,10 @@ function revealX() {
     }
 }
 
-function ShowFilters(){
+function ShowFilters() {
     var filter = document.querySelector(".filters");
 
-    if(filter.style.display == "block")
+    if (filter.style.display == "block")
         filter.style.display = "none";
     else
         filter.style.display = "block";
