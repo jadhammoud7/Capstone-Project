@@ -25,6 +25,18 @@
   background-color: rgb(200, 192, 192);
 }
 
+select{
+  background-color: royalblue;
+  border: none;
+  padding: 10px;
+  color: #fefefe;
+  font-size: 15px;
+}
+
+select:hover{
+  background-color: rgb(200, 192, 192);
+  color: royalblue;
+}
 h2{
   color: royalblue;
 }

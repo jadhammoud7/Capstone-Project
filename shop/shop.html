@@ -84,21 +84,25 @@
         <div class="filters" style="display: none;">
             <div>
                 <h2>Type</h2>
-                <button><i class="fa fa-arrow-alt-down">All</i></button>
-                <div class="dropdown">
-                    <div class="dropdown-content">
-                        <p>Hello</p>
-                    </div>
-                </div>
+
+                <label for="type">
+                    <button>
+                        <select name="type" id="type">
+                            <option value="All">All</option>
+                            <option value="cd">CDs</option>
+                            <option value="consoles">Consoles</option>
+                        </select>
+                    </button>
+                </label>
             </div>
             <div>
                 <h2>Category</h2>
-                <button><i class="fa fa-arrow-alt-down">All</i></button>
+                <button><i class="fa fa-arrow-alt-down"></i>All</button>
             </div>
         </div>
     </div>
 
-      <!-- end search button -->
+    <!-- end search button -->
     <div class="content">
         <!-- start first tab -->
         <div class="cd reveal-by-x" style="display: block;">
