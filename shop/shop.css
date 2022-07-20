@@ -166,7 +166,7 @@ h2 {
 .shop-title{
   font-weight: bolder;
   margin: 50px;
-  text-decoration: underline royalblue solid 5px;
+  text-decoration: underline 5px;
 }
 
 .search-container button {
