@@ -1,6 +1,7 @@
 .product_image{
     height: 470px;
-    width: 470px;
+    width: 430px;
+    margin-left: 100px;
 }
 .product_right_part{
     float: right;
