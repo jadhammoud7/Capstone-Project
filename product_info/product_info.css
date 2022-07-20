@@ -1,4 +1,4 @@
-.product_image{
+.product_image {
     /* height: 470px;
     width: 430px; */
     width: 40%;
@@ -6,70 +6,104 @@
     margin-left: 100px;
     margin-bottom: 10px;
 }
-.product_info_page{
+
+.product_info_page {
     /* float: right; */
     display: flex;
     flex-direction: row;
     margin-bottom: 50px;
 }
-.product_right_part{
+
+.product_right_part {
     margin-left: 100px;
 }
-.product_description{
+
+.product_description {
     color: gray;
 }
-input[type=number]{
+
+input[type=number] {
     padding: 5px;
     border-radius: 10px;
 }
-.product_info_addtobasket{
-    border-radius:20px;
+
+.product_info_addtobasket {
+    border-radius: 20px;
 }
-.product_info_addtofavorites{
-    border-radius:20px;
+
+.product_info_addtofavorites {
+    border-radius: 20px;
 }
-.product-info-part{
+
+.product-info-part {
     display: flex;
     flex-direction: row;
 }
-#points{
+
+#points {
     font-size: medium;
 }
-#points:hover{
+
+#points:hover {
     border: 3px solid royalblue;
 }
-#points:focus{
+
+#points:focus {
     border: 3px solid royalblue;
     background-color: rgba(65, 105, 225, 0.6);
     color: #fefefe;
 }
-@media screen and(max-width:1260px){
+
+.reveal-by-x {
+    position: relative;
+    transform: translateX(150px);
+    transition: 1s all ease;
+}
+
+.reveal-by-x.on {
+    transform: translateX(0);
+}
+
+.reveal-by-y {
+    position: relative;
+    transform: translateY(150px);
+    transition: 1s all ease;
+}
+
+.reveal-by-y.on {
+    transform: translateY(0);
+}
+
+@media screen and(max-width:1260px) {
     /* .product_info_page{
         float: none;
         flex-direction:column !important;
     } */
 }
 
-@media screen and (max-width: 970px){
-    .product_info_page{
-        flex-direction:column !important;
+@media screen and (max-width: 970px) {
+    .product_info_page {
+        flex-direction: column !important;
     }
-    .product_image{
+
+    .product_image {
         width: 95%;
         margin-left: 20px;
         margin-right: 20px;
     }
-    .product-info-part{
+
+    .product-info-part {
         margin: 20px;
     }
 }
 
-@media screen and (max-width: 500px){
-    .product_image{
+@media screen and (max-width: 500px) {
+    .product_image {
         width: 100%;
         margin: 0;
     }
-    .product_right_part{
+
+    .product_right_part {
         margin: 20px;
     }
 }
