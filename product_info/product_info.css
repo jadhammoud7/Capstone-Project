@@ -25,9 +25,49 @@ input[type=number]{
 .product_info_addtobasket{
     border-radius:20px;
 }
+.product_info_addtofavorites{
+    border-radius:20px;
+}
+.product-info-part{
+    display: flex;
+    flex-direction: row;
+}
+#points{
+    font-size: medium;
+}
+#points:hover{
+    border: 3px solid royalblue;
+}
+#points:focus{
+    border: 3px solid royalblue;
+    background-color: rgba(65, 105, 225, 0.6);
+    color: #fefefe;
+}
 @media screen and(max-width:1260px){
-    .product_info_page{
+    /* .product_info_page{
         float: none;
         flex-direction:column !important;
+    } */
+}
+
+@media screen and (max-width: 970px){
+    .product_info_page{
+        flex-direction:column !important;
+    }
+    .product_image{
+        width: 80%;
+    }
+    .product-info-part{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .product_image{
+        width: 100%;
+        margin: 0;
+    }
+    .product_right_part{
+        margin: 20px;
     }
 }
