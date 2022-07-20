@@ -5,5 +5,8 @@
 }
 .product_right_part{
     float: right;
-    margin-right: 600px;
+    margin-right: 400px;
+}
+.product_description{
+    color: gray;
 }
