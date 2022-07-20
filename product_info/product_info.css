@@ -2,11 +2,29 @@
     height: 470px;
     width: 430px;
     margin-left: 100px;
+    margin-bottom: 10px;
+}
+.product_info_page{
+    /* float: right; */
+    display: flex;
+    flex-direction: row;
 }
 .product_right_part{
-    float: right;
-    margin-right: 400px;
+    margin-left: 150px;
 }
 .product_description{
     color: gray;
+}
+input[type=number]{
+    padding: 5px;
+    border-radius: 10px;
+}
+.product_info_addtobasket{
+    border-radius:20px;
+}
+@media screen and(max-width:1260px){
+    .product_info_page{
+        float: none;
+        flex-direction:column !important;
+    }
 }
