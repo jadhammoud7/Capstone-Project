@@ -1,6 +1,8 @@
 .product_image{
-    height: 470px;
-    width: 430px;
+    /* height: 470px;
+    width: 430px; */
+    width: 40%;
+    float: left;
     margin-left: 100px;
     margin-bottom: 10px;
 }
@@ -8,9 +10,10 @@
     /* float: right; */
     display: flex;
     flex-direction: row;
+    margin-bottom: 50px;
 }
 .product_right_part{
-    margin-left: 150px;
+    margin-left: 100px;
 }
 .product_description{
     color: gray;
