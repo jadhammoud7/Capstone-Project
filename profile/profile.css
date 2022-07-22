@@ -3,3 +3,27 @@
     background-color: #f7f7f7;
     padding: 10px;
 }
+.profile-sidebar{
+    display: flex;
+    flex-direction: column;
+}
+.profile-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-sidebar-list li a{
+    color: rgb(12, 14, 17);
+    font-size: large;
+    font-weight: 500;
+}
+
+.profile-sidebar-list li{
+    margin-bottom: 30px;
+}
+
+.profile-sidebar-list li a:hover{
+    font-size: x-large;
+    font-weight: 600;
+    cursor: pointer;
+}
