@@ -66,16 +66,30 @@
                 <li id="customer"><span>Customer</span></li>
             </ol>
             <ol class="profile-sidebar-list">
-                <li><a>Profile</a></li>
-                <li><a>Shopping Basket</a></li>
-                <li><a>Favorites List</a></li>
-                <li><a>Edit Profile</a></li>
+                <li><a onclick="ShowProfile()">Profile</a></li>
+                <li><a onclick="ShowBasket()">Shopping Basket</a></li>
+                <li><a onclick="ShowFavorites()">Favorites List</a></li>
+                <li><a onclick="ShowEdit()">Edit Profile</a></li>
             </ol>
         </div>
-        <div>
-
+        <!-- started profile -->
+        <div class="profile">
+            <div class="profile-part">
+                <h3 id="attribute">First Name: </h3>
+                <h3>Mohamad</h3>
+            </div>
+            <div class="profile-part">
+                <h3 id="attribute">Last Name: </h3>
+                <h3>Nabaa</h3>
+            </div>
+            <div class="profile-part">
+                <h3 id="attribute">Email Address: </h3>
+                <h3>mnabaa53@gmail.com</h3>
+            </div>
         </div>
     </div>
+
+
 
     <footer>
         <ol class="footer-list">
@@ -193,4 +207,5 @@
 </body>
 
 <script src="../profile/profile.js"></script>
+
 </html>

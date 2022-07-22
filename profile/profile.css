@@ -45,3 +45,25 @@
     font-size: medium;
     font-weight: 400;
 }
+
+.profile{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    box-shadow: 10px 10px 15px 1px royalblue;
+    margin-left: 100px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 30px;
+}
+
+.profile-part{
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-part #attribute{
+    color: royalblue;
+    font-family: 'Times New Roman', Times, serif;
+    margin-right: 30px;
+}
