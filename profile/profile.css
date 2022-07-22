@@ -10,12 +10,15 @@
 .profile-container{
     display: flex;
     flex-direction: row;
+    width: 35%;
+    height: auto;
 }
 
 .profile-sidebar-list li a{
     color: rgb(12, 14, 17);
     font-size: large;
     font-weight: 500;
+    opacity: 0.6;
 }
 
 .profile-sidebar-list li{
@@ -26,4 +29,19 @@
     font-size: x-large;
     font-weight: 600;
     cursor: pointer;
+}
+
+.profile-sidebar-list li a:visited{
+    font-size: xx-large;
+    opacity: 0;
+}
+
+#customer-name span{
+    font-size: xx-large;
+    font-weight: 700;
+}
+
+#customer span{
+    font-size: medium;
+    font-weight: 400;
 }
