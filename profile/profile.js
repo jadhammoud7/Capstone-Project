@@ -38,10 +38,11 @@ function ShowFavorites(){
 }
 
 //edit profile button down
-const btn = document.getElementById('edit_profile_btn');
+const btn = document.querySelector(".edit_profile_btn");
 
 btn.addEventListener('click', () => {
   const form = document.getElementById('editprofile_form');
+  console.log("edit profile btn clicked");
 
   if (form.style.display === 'none') {
     // 👇️ this SHOWS the form
