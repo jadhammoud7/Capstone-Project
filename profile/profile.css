@@ -184,6 +184,7 @@
 .first_name_editprofile, .last_name_editprofile, .email_editprofile, .phone_number_editprofile, .address_editprofile{
     border-radius: 15px;
 }
+/* start of making profile container responsive */
 @media screen and (max-width:912px){
     .profile-container{
         margin-left: -60px;
@@ -194,3 +195,10 @@
         margin-left: -70px;
     }
 }
+
+@media screen and (max-width:639px){
+    .profile-container{
+        margin-left: -150px;
+    }
+}
+/* end of making profile container responsive */
