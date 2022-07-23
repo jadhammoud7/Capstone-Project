@@ -239,3 +239,29 @@
   .close_form:hover{
     background-color: lightgray;
   }
+
+  /* start of making close btn responsive */
+  @media screen and (max-width:1300px){
+    .close_form{
+        position: absolute;
+        right: 240px;
+    }    
+  }
+  @media screen and (max-width:1244px){
+    .close_form{
+        right: 220px;
+    }    
+  }
+  @media screen and (max-width:1205px){
+    .close_form{
+        right: 200px;
+    }    
+  }
+  @media screen and (max-width:1172px){
+    .close_form{
+        right: 180px;
+    }    
+  }
+
+
+  /* end of making close btn responsive */

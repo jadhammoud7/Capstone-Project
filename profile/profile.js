@@ -71,6 +71,10 @@ btn.addEventListener('click', () => {
   }
 });
 
+var closebtn = document.querySelector(".close_form");
+var closeprofile = document.querySelector(".profile");
 
-
-// && lastname.style.display === 'none' && email.style.display === 'none' && phonenumber.style.display === 'none' && address.style.display === 'none'
+closebtn.addEventListener("click", () => {
+    console.log("btn closed clicked");
+    closeprofile.style.display="none";
+})
