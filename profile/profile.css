@@ -185,26 +185,45 @@
     border-radius: 15px;
 }
 /* start of making profile container responsive */
-@media screen and (max-width:912px){
-    .profile{
-        margin-left: 60px;
-    }
-}
- @media screen and (max-width:883px){
-    .profile{
-        margin-left: 30px;
+@media screen and (max-width:904px){
+    .profile-part{
+        flex-direction: column;
     }
 }
 
-@media screen and (max-width:717px){
-    .profile{
-        margin-left: -30px;
-        
+@media screen and (max-width:892px){
+    .profile-container{
+        flex-direction: column;
     }
-} 
-@media screen and (max-width:599px){
-    .profile{
-        margin-left: -70px;
+    .profile-sidebar img{
+        height: 150px;
+        width: 150px;
     }
-} 
+}
+@media screen and (max-width:420px){
+    .profile{
+        margin-left: 70px;
+        width: 250px;
+    }
+}
+@media screen and (max-width:367px){
+    .profile{
+        margin-left: 50px;
+        width: 260px;
+    }
+}
+@media screen and (max-width:360px){
+    .profile{
+        margin-left: 40px;
+        width: 260px;
+    }
+}
+@media screen and (max-width:336px){
+    .profile{
+        margin-left: 20px;
+        width: 250px;
+    }
+}
+
+
 /* end of making profile container responsive */
