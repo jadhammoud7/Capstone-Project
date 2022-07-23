@@ -10,7 +10,7 @@
 .profile-container{
     display: flex;
     flex-direction: row;
-    width: 35%;
+    width: 100%;
     height: auto;
 }
 
@@ -60,6 +60,7 @@
 .profile-part{
     display: flex;
     flex-direction: row;
+    /* width: 900px; */
 }
 
 .profile-part #attribute{
