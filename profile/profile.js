@@ -36,3 +36,18 @@ function ShowFavorites(){
     favorites_part.style.display = "block";
     edit_part.style.display = "none";
 }
+
+//edit profile button down
+const btn = document.getElementById('edit_profile_btn');
+
+btn.addEventListener('click', () => {
+  const form = document.getElementById('editprofile_form');
+
+  if (form.style.display === 'none') {
+    // 👇️ this SHOWS the form
+    form.style.display = 'block';
+  } else {
+    // 👇️ this HIDES the form
+    form.style.display = 'none';
+  }
+});

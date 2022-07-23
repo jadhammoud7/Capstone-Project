@@ -167,3 +167,16 @@
 .btn{
     border-radius: 5px;
 }
+.edit_profile_btn{
+    border-radius: 20px;
+    float: left;
+    margin-right: 50px;
+    color: black;
+}
+.save_profile_btn{
+    border-radius: 20px;
+    color: black;
+}
+.edit_save_btn{
+    margin-top: 20px;
+}
