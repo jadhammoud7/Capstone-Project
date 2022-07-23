@@ -186,19 +186,25 @@
 }
 /* start of making profile container responsive */
 @media screen and (max-width:912px){
-    .profile-container{
-        margin-left: -60px;
+    .profile{
+        margin-left: 60px;
     }
 }
-@media screen and (max-width:876px){
-    .profile-container{
-        margin-left: -70px;
+ @media screen and (max-width:883px){
+    .profile{
+        margin-left: 30px;
     }
 }
 
-@media screen and (max-width:639px){
-    .profile-container{
-        margin-left: -150px;
+@media screen and (max-width:717px){
+    .profile{
+        margin-left: -30px;
+        
     }
-}
+} 
+@media screen and (max-width:599px){
+    .profile{
+        margin-left: -70px;
+    }
+} 
 /* end of making profile container responsive */

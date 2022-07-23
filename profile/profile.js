@@ -60,7 +60,7 @@ btn.addEventListener('click', () => {
     phonenumber.style.display = 'block';
     address.style.display = 'block';
   } else {
-    btn.innerHTML="Edit Profile";
+    btn.innerHTML="<strong>Edit Profile</strong>";
     btn.style.color="black";
     // 👇️ this HIDES the form
     firstname.style.display = 'none';
