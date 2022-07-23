@@ -10,3 +10,14 @@ document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", 
     hamBurger.classList.remove("active");
     nav_menu.classList.remove("active");
 }))
+
+var profile_part = document.querySelector(".profile");
+var basket_part = document.querySelector(".basket");
+var favorites_part = document.querySelector(".favorites");
+var edit_part = document.querySelector(".edit");
+function ShowProfile(){
+    profile_part.style.display = "block";
+    basket_part.style.display = "none";
+    favorites_part.style.display = "none";
+    edit_part.style.display = "none";
+}

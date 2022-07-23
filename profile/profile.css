@@ -26,13 +26,13 @@
 }
 
 .profile-sidebar-list li a:hover{
-    font-size: x-large;
+    font-size: large;
     font-weight: 600;
     cursor: pointer;
 }
 
 .profile-sidebar-list li a:visited{
-    font-size: xx-large;
+    font-weight: 700;
     opacity: 0;
 }
 
