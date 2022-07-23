@@ -180,22 +180,4 @@
 .edit_save_btn{
     margin-top: 20px;
 }
-/* .first_name_editprofile{
-    size: 2;
-    border-radius: 10px;
-} */
-.first_name_editprofile{
-    display: none;
-}
-.last_name_editprofile{
-    display: none;
-}
-.email_editprofile{
-    display: none;
-}
-.phone_number_editprofile{
-    display: none;
-}
-.address_editprofile{
-    display: none;
-}
+
