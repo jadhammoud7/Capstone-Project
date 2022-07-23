@@ -262,6 +262,145 @@
         right: 180px;
     }    
   }
+  @media screen and (max-width:1099px){
+    .close_form{
+        right: 160px;
+    }    
+  }
+  @media screen and (max-width:1047px){
+    .close_form{
+        right: 140px;
+    }    
+  }
+  @media screen and (max-width:1015px){
+    .close_form{
+        right: 120px;
+    }    
+  }
+  @media screen and (max-width:976px){
+    .close_form{
+        right: 100px;
+    }    
+  }
+  @media screen and (max-width:926px){
+    .close_form{
+        right: 80px;
+    }    
+  }
+  @media screen and (max-width:892px){
+    .close_form{
+        position: absolute;
+        right: 280px;
+        top: 725px;
+    }    
+  }
+  @media screen and (max-width:843px){
+    .close_form{
+        position: absolute;
+        right: 260px;
+        top: 725px;
+    }    
+  }
+  @media screen and (max-width:806px){
+    .close_form{
+        position: absolute;
+        right: 240px;
+        top: 725px;
+    }    
+  }
+  @media screen and (max-width:751px){
+    .close_form{
+        position: absolute;
+        right: 220px;
+        top: 725px;
+    }    
+  }
+  @media screen and (max-width:712px){
+    .close_form{
+        position: absolute;
+        right: 200px;
+        top: 725px;
+    }    
+  }
+  @media screen and (max-width:651px){
+    .close_form{
+        position: absolute;
+        right: 180px;
+        top: 725px;
+    }    
+  }
+  @media screen and (max-width:613px){
+    .close_form{
+        position: absolute;
+        right: 160px;
+        top: 725px;
+    }    
+  }
+  @media screen and (max-width:571px){
+    .close_form{
+        position: absolute;
+        right: 140px;
+        top: 725px;
+    }    
+  }
+  @media screen and (max-width:533px){
+    .close_form{
+        position: absolute;
+        right: 120px;
+        top: 725px;
+    }    
+  }
+  @media screen and (max-width:515px){
+    .close_form{
+        position: absolute;
+        right: 120px;
+        top: 725px;
+    }    
+  }
+  @media screen and (max-width:477px){
+    .close_form{
+        position: absolute;
+        right: 100px;
+        top: 725px;
+    }    
+  }
+
+  @media screen and (max-width:451px){
+    .close_form{
+        position: absolute;
+        right: 90px;
+        top: 725px;
+    }    
+  }
+  @media screen and (max-width:423px){
+    .close_form{
+        position: absolute;
+        right: 100px;
+        top: 725px;
+    }    
+  }
+  @media screen and (max-width:400px){
+    .close_form{
+        position: absolute;
+        right: 80px;
+        top: 725px;
+    }    
+  }
+  @media screen and (max-width:384px){
+    .close_form{
+        position: absolute;
+        right: 60px;
+        top: 725px;
+    }    
+  }
+
+  @media screen and (max-width:305px){
+    .close_form{
+        position: absolute;
+        right: 30px;
+        top: 725px;
+    }    
+  }
 
 
   /* end of making close btn responsive */
