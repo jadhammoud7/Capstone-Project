@@ -187,15 +187,15 @@
 .first_name_editprofile{
     display: none;
 }
- .last_name_editprofile{
-     display: none;
+.last_name_editprofile{
+    display: none;
 }
-/* .email_editprofile{
+.email_editprofile{
     display: none;
-} */
-/* .phone_number_editprofile{
+}
+.phone_number_editprofile{
     display: none;
-} */
-/* .address_editprofile{
+}
+.address_editprofile{
     display: none;
-} */
+}

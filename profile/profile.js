@@ -43,7 +43,7 @@ const btn = document.querySelector(".edit_profile_btn");
 btn.addEventListener('click', () => {
     const firstname = document.querySelector(".first_name_editprofile");
     const lastname = document.querySelector(".last_name_editprofile");
-    const email = document.querySelector(".email_profile_btn");
+    const email = document.querySelector(".email_editprofile");
     const phonenumber = document.querySelector(".phone_number_editprofile");
     const address = document.querySelector(".address_editprofile");
 
@@ -56,18 +56,18 @@ btn.addEventListener('click', () => {
     // 👇️ this SHOWS the form
     firstname.style.display = 'block';
     lastname.style.display = 'block';
-    // email.style.display = 'block';
-    // phonenumber.style.display = 'block';
-    // address.style.display = 'block';
+    email.style.display = 'block';
+    phonenumber.style.display = 'block';
+    address.style.display = 'block';
   } else {
     btn.innerHTML="Edit Profile";
     btn.style.color="black";
     // 👇️ this HIDES the form
     firstname.style.display = 'none';
     lastname.style.display = 'none';
-    // email.style.display = 'none';
-    // phonenumber.style.display = 'none';
-    // address.style.display = 'none';
+    email.style.display = 'none';
+    phonenumber.style.display = 'none';
+    address.style.display = 'none';
   }
 });
 
