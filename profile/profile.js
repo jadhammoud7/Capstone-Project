@@ -51,16 +51,20 @@ btn.addEventListener('click', () => {
     console.log("edit profile btn clicked");
 
   if (firstname.style.display === 'none' ) {
+    btn.innerHTML="Back";
+    btn.style.color="red";
     // 👇️ this SHOWS the form
     firstname.style.display = 'block';
-    // lastname.style.display = 'block';
+    lastname.style.display = 'block';
     // email.style.display = 'block';
     // phonenumber.style.display = 'block';
     // address.style.display = 'block';
   } else {
+    btn.innerHTML="Edit Profile";
+    btn.style.color="black";
     // 👇️ this HIDES the form
     firstname.style.display = 'none';
-    // lastname.style.display = 'none';
+    lastname.style.display = 'none';
     // email.style.display = 'none';
     // phonenumber.style.display = 'none';
     // address.style.display = 'none';
