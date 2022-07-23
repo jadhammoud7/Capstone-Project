@@ -41,14 +41,32 @@ function ShowFavorites(){
 const btn = document.querySelector(".edit_profile_btn");
 
 btn.addEventListener('click', () => {
-  const form = document.getElementById('editprofile_form');
-  console.log("edit profile btn clicked");
+    const firstname = document.querySelector(".first_name_editprofile");
+    const lastname = document.querySelector(".last_name_editprofile");
+    const email = document.querySelector(".email_profile_btn");
+    const phonenumber = document.querySelector(".phone_number_editprofile");
+    const address = document.querySelector(".address_editprofile");
 
-  if (form.style.display === 'none') {
+
+    console.log("edit profile btn clicked");
+
+  if (firstname.style.display === 'none' ) {
     // 👇️ this SHOWS the form
-    form.style.display = 'block';
+    firstname.style.display = 'block';
+    // lastname.style.display = 'block';
+    // email.style.display = 'block';
+    // phonenumber.style.display = 'block';
+    // address.style.display = 'block';
   } else {
     // 👇️ this HIDES the form
-    form.style.display = 'none';
+    firstname.style.display = 'none';
+    // lastname.style.display = 'none';
+    // email.style.display = 'none';
+    // phonenumber.style.display = 'none';
+    // address.style.display = 'none';
   }
 });
+
+
+
+// && lastname.style.display === 'none' && email.style.display === 'none' && phonenumber.style.display === 'none' && address.style.display === 'none'
