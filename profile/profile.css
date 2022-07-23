@@ -241,6 +241,24 @@
   }
 
   /* start of making close btn responsive */
+  @media screen and (max-width:1500px){
+    .close_form{
+        position: absolute;
+        right: 300px;
+    }    
+  }
+  @media screen and (max-width:1400px){
+    .close_form{
+        position: absolute;
+        right: 280px;
+    }    
+  }
+  @media screen and (max-width:1350px){
+    .close_form{
+        position: absolute;
+        right: 240px;
+    }    
+  }
   @media screen and (max-width:1300px){
     .close_form{
         position: absolute;
