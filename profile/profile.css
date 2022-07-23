@@ -227,3 +227,15 @@
 
 
 /* end of making profile container responsive */
+.close_form {
+    position: absolute;
+    right: 325px;
+    top: 240px;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .close_form:hover{
+    background-color: lightgray;
+  }
