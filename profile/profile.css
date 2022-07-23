@@ -236,9 +236,6 @@
     font-weight: bold;
     cursor: pointer;
   }
-  .close_form:hover{
-    background-color: lightgray;
-  }
 
   /* start of making close btn responsive */
   @media screen and (max-width:1500px){
