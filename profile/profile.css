@@ -184,3 +184,13 @@
 .first_name_editprofile, .last_name_editprofile, .email_editprofile, .phone_number_editprofile, .address_editprofile{
     border-radius: 15px;
 }
+@media screen and (max-width:912px){
+    .profile-container{
+        margin-left: -60px;
+    }
+}
+@media screen and (max-width:876px){
+    .profile-container{
+        margin-left: -70px;
+    }
+}
