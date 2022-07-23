@@ -123,16 +123,21 @@
 .favorites-products{
     display: flex;
     flex-direction: column;
-}
-
-.favorites-product{
-    display: flex;
-    flex-direction: row;
     box-shadow: 10px 10px 15px 1px rgba(21, 100, 219, 0.486);
     margin: 10px;
     margin-left: 20px;
     border: 5px solid rgba(21, 100, 219, 0.486);
     border-radius: 15px;
+}
+
+.favorites-product-info{
+    display: flex;
+    flex-direction: row;
+}
+
+.favorites-product-button{
+    display: flex;
+    flex-direction: row;
 }
 
 .favorites-product-img{
@@ -147,10 +152,18 @@
     margin-left: 30px;
 }
 
-.favorites-product h3{
-    color: royalblue;
+.favorites-product-buttons{
+    display: flex;
+    flex-direction: row;
 }
 
-.basket-product h3{
+.favorites-product-buttons div{
+    margin: 20px;
+}
+
+.favorites-product-part h3{
     color: royalblue;
+}
+.btn{
+    border-radius: 5px;
 }

@@ -29,3 +29,10 @@ function ShowBasket(){
     favorites_part.style.display = "none";
     edit_part.style.display = "none";
 }
+
+function ShowFavorites(){
+    profile_part.style.display = "none";
+    basket_part.style.display = "none";
+    favorites_part.style.display = "block";
+    edit_part.style.display = "none";
+}
