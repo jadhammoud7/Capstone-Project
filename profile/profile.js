@@ -15,9 +15,17 @@ var profile_part = document.querySelector(".profile");
 var basket_part = document.querySelector(".basket");
 var favorites_part = document.querySelector(".favorites");
 var edit_part = document.querySelector(".edit");
+
 function ShowProfile(){
     profile_part.style.display = "block";
     basket_part.style.display = "none";
+    favorites_part.style.display = "none";
+    edit_part.style.display = "none";
+}
+
+function ShowBasket(){
+    profile_part.style.display = "none";
+    basket_part.style.display = "block";
     favorites_part.style.display = "none";
     edit_part.style.display = "none";
 }

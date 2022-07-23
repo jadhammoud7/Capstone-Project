@@ -3,50 +3,52 @@
     background-color: #f7f7f7;
     padding: 10px;
 }
-.profile-sidebar{
+
+.profile-sidebar {
     display: flex;
     flex-direction: column;
 }
-.profile-container{
+
+.profile-container {
     display: flex;
     flex-direction: row;
     width: 100%;
     height: auto;
 }
 
-.profile-sidebar-list li a{
+.profile-sidebar-list li a {
     color: rgb(12, 14, 17);
     font-size: large;
     font-weight: 500;
     opacity: 0.6;
 }
 
-.profile-sidebar-list li{
+.profile-sidebar-list li {
     margin-bottom: 30px;
 }
 
-.profile-sidebar-list li a:hover{
+.profile-sidebar-list li a:hover {
     font-size: large;
     font-weight: 600;
     cursor: pointer;
 }
 
-.profile-sidebar-list li a:visited{
+.profile-sidebar-list li a:visited {
     font-weight: 700;
     opacity: 0;
 }
 
-#customer-name span{
+#customer-name span {
     font-size: xx-large;
     font-weight: 700;
 }
 
-#customer span{
+#customer span {
     font-size: medium;
     font-weight: 400;
 }
 
-.profile{
+.profile {
     display: flex;
     flex-direction: column;
     width: 60%;
@@ -57,14 +59,55 @@
     padding: 30px;
 }
 
-.profile-part{
+.basket {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    box-shadow: 10px 10px 15px 1px royalblue;
+    margin-left: 100px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 30px;
+}
+
+.profile-part {
     display: flex;
     flex-direction: row;
     /* width: 900px; */
 }
 
-.profile-part #attribute{
+.profile-part #attribute {
     color: royalblue;
     font-family: 'Times New Roman', Times, serif;
     margin-right: 30px;
+}
+
+.basket-products{
+    display: flex;
+    flex-direction: column;
+}
+
+.basket-product{
+    display: flex;
+    flex-direction: row;
+    box-shadow: 10px 10px 15px 1px rgba(21, 100, 219, 0.486);
+    margin: 10px;
+    margin-left: 20px;
+    border: 5px solid rgba(21, 100, 219, 0.486);
+    border-radius: 15px;
+}
+
+.basket-product-img{
+    width: 20%;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 15px;
+}
+.basket-product-part{
+    text-align: center;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+.basket-product h3{
+    color: royalblue;
 }
