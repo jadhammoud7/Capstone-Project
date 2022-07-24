@@ -148,3 +148,4 @@ window.addEventListener("pageshow", revealX);
 window.addEventListener("pageshow", revealY);
 window.addEventListener("animationstart", revealY);
 window.addEventListener("animationstart", revealX);
+window.addEventListener("pageshow", ShowProfile);
