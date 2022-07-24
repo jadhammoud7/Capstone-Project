@@ -169,6 +169,7 @@
 
 .btn {
     border-radius: 15px;
+    color: black;
 }
 
 .edit_profile_btn {
@@ -498,4 +499,5 @@
 /* end of making close btn responsive */
 .gotoshoppage_profile button{
     border-radius: 15px;
+    color: black;
 }
