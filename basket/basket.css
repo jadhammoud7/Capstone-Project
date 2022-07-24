@@ -9,9 +9,7 @@
     margin-bottom: 30px;
     padding: 30px;
 }
-#product123{
-    display: inline-block;
-}
+
 .small-container table{
     width: 100%;
     border-collapse: collapse;
@@ -35,14 +33,22 @@ td input{
     width: 40px;
     height: 30px;
     padding: 5px;
-    margin-left: -50px;
+    margin-left: -100px;
 }
 td a{
     color:red;
     font-weight: 12px;
+
+}
+td a:hover{
+    background-color: lightgray;
 }
 td img{
-    width: 80px;
-    height: 80px;
+    width: 110px;
+    height: 110px;
     margin-right: 10px;
+}
+.info_of_product a{
+    padding: 5px;
+    margin-top: 100px;
 }
