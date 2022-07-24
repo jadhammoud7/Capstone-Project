@@ -178,6 +178,13 @@
     color: black;
 }
 
+.back_btn {
+    border-radius: 20px;
+    float: left;
+    margin-right: 50px;
+    color: black;
+}
+
 .save_profile_btn {
     border-radius: 20px;
     color: black;

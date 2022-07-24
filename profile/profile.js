@@ -48,11 +48,10 @@ function ShowFavorites() {
     favorites_button.style.fontWeight = 800;
 }
 
-//edit profile button down
 const btn = document.querySelector(".edit_profile_btn");
 const btn_div = document.querySelector(".edit_save_btn");
 
-btn.addEventListener('click', () => {
+function ChangeProfile() {
     const firstname = document.querySelector(".first_name_editprofile");
     const lastname = document.querySelector(".last_name_editprofile");
     const email = document.querySelector(".email_editprofile");
@@ -63,10 +62,7 @@ btn.addEventListener('click', () => {
     console.log("edit profile btn clicked");
 
     if (firstname.style.display === 'none') {
-        btn.innerHTML = "<i class=\"fa fa-backward\"></i>Back";
-        btn.style.color = "red";
-        btn_div.innerHTML += "<button class=\"save_profile_btn\" title=\"Save all your changes\"> <i class=\"fa fa-save\"></i><strong>Save</strong></button>"
-
+        btn_div.innerHTML = " <button onclick=\"ChangeProfile()\" class=\"edit_profile_btn\" title=\"Back to your profile\" style=\"color: red; \"><i class=\"fa fa-backward\"></i>Back</button><button class=\"save_profile_btn\" title = \"Save all your changes\" > <i class=\"fa fa-save\"></i><strong>Save</strong></button > ";
         // 👇️ this SHOWS the form
         firstname.style.display = 'block';
         lastname.style.display = 'block';
@@ -74,8 +70,7 @@ btn.addEventListener('click', () => {
         phonenumber.style.display = 'block';
         address.style.display = 'block';
     } else {
-        btn.innerHTML = "<strong><i class=\"fa fa-edit\"></i>Edit Profile</strong>";
-        btn.style.color = "black";
+        btn_div.innerHTML = " <button onclick=\"ChangeProfile()\" class=\"edit_profile_btn\" title=\"Edit your profile\" style=\"color: black; \"><i class=\"fa fa-edit\"></i>Edit Profile</button>";
         // 👇️ this HIDES the form
         firstname.style.display = 'none';
         lastname.style.display = 'none';
@@ -83,15 +78,15 @@ btn.addEventListener('click', () => {
         phonenumber.style.display = 'none';
         address.style.display = 'none';
     }
-});
+}
 
-var closebtn = document.querySelector(".close_form");
-var closeprofile = document.querySelector(".profile");
+// var closebtn = document.querySelector(".close_form");
+// var closeprofile = document.querySelector(".profile");
 
-closebtn.addEventListener("click", () => {
-    console.log("btn closed clicked");
-    closeprofile.style.display = "none";
-})
+// closebtn.addEventListener("click", () => {
+//     console.log("btn closed clicked");
+//     closeprofile.style.display = "none";
+// })
 
 
 var topButton = document.getElementById("TopBtn");
@@ -152,3 +147,4 @@ window.addEventListener("scroll", revealY);
 window.addEventListener("pageshow", revealX);
 window.addEventListener("pageshow", revealY);
 window.addEventListener("animationstart", revealY);
+window.addEventListener("animationstart", revealX);
