@@ -20,6 +20,7 @@ var favorites_button = document.getElementById("favorites-button");
 
 function ShowProfile() {
     profile_part.style.display = "block";
+    profile_part.classList.add("reveal-by-y");
     basket_part.style.display = "none";
     favorites_part.style.display = "none";
     profile_button.style.fontWeight = 800;
@@ -30,6 +31,7 @@ function ShowProfile() {
 function ShowBasket() {
     profile_part.style.display = "none";
     basket_part.style.display = "block";
+    basket_part.classList.add("reveal-by-y");
     favorites_part.style.display = "none";
     profile_button.style.fontWeight = 500;
     basket_button.style.fontWeight = 800;
@@ -40,6 +42,7 @@ function ShowFavorites() {
     profile_part.style.display = "none";
     basket_part.style.display = "none";
     favorites_part.style.display = "block";
+    favorites_part.classList.add("reveal-by-y");
     profile_button.style.fontWeight = 500;
     basket_button.style.fontWeight = 500;
     favorites_button.style.fontWeight = 800;
@@ -148,3 +151,4 @@ window.addEventListener("scroll", revealX);
 window.addEventListener("scroll", revealY);
 window.addEventListener("pageshow", revealX);
 window.addEventListener("pageshow", revealY);
+window.addEventListener("animationstart", revealY);
