@@ -70,7 +70,7 @@
     padding: 30px;
 }
 
-.favorites{
+.favorites {
     display: flex;
     flex-direction: column;
     width: 60%;
@@ -93,12 +93,12 @@
     margin-right: 30px;
 }
 
-.basket-products{
+.basket-products {
     display: flex;
     flex-direction: column;
 }
 
-.basket-product{
+.basket-product {
     display: flex;
     flex-direction: row;
     box-shadow: 10px 10px 15px 1px rgba(21, 100, 219, 0.486);
@@ -108,19 +108,20 @@
     border-radius: 15px;
 }
 
-.basket-product-img{
+.basket-product-img {
     width: 20%;
     margin-left: 30px;
     margin-right: 30px;
     margin-top: 15px;
 }
-.basket-product-part{
+
+.basket-product-part {
     text-align: center;
     margin-right: 30px;
     margin-left: 30px;
 }
 
-.favorites-products{
+.favorites-products {
     display: flex;
     flex-direction: column;
     box-shadow: 10px 10px 15px 1px rgba(21, 100, 219, 0.486);
@@ -130,96 +131,111 @@
     border-radius: 15px;
 }
 
-.favorites-product-info{
+.favorites-product-info {
     display: flex;
     flex-direction: row;
 }
 
-.favorites-product-button{
+.favorites-product-button {
     display: flex;
     flex-direction: row;
 }
 
-.favorites-product-img{
+.favorites-product-img {
     width: 20%;
     margin-left: 30px;
     margin-right: 30px;
     margin-top: 15px;
 }
-.favorites-product-part{
+
+.favorites-product-part {
     text-align: center;
     margin-right: 30px;
     margin-left: 30px;
 }
 
-.favorites-product-buttons{
+.favorites-product-buttons {
     display: flex;
     flex-direction: row;
 }
 
-.favorites-product-buttons div{
+.favorites-product-buttons div {
     margin: 20px;
 }
 
-.favorites-product-part h3{
+.favorites-product-part h3 {
     color: royalblue;
 }
-.btn{
+
+.btn {
     border-radius: 5px;
 }
-.edit_profile_btn{
+
+.edit_profile_btn {
     border-radius: 20px;
     float: left;
     margin-right: 50px;
     color: black;
 }
-.save_profile_btn{
+
+.save_profile_btn {
     border-radius: 20px;
     color: black;
 }
-.edit_save_btn{
+
+.edit_save_btn {
     margin-top: 20px;
 }
 
-.first_name_editprofile, .last_name_editprofile, .email_editprofile, .phone_number_editprofile, .address_editprofile{
+.first_name_editprofile,
+.last_name_editprofile,
+.email_editprofile,
+.phone_number_editprofile,
+.address_editprofile {
     border-radius: 15px;
 }
+
 /* start of making profile container responsive */
-@media screen and (max-width:904px){
-    .profile-part{
+@media screen and (max-width:904px) {
+    .profile-part {
         flex-direction: column;
     }
 }
 
-@media screen and (max-width:892px){
-    .profile-container{
+@media screen and (max-width:892px) {
+    .profile-container {
         flex-direction: column;
     }
-    .profile-sidebar img{
+
+    .profile-sidebar img {
         height: 150px;
         width: 150px;
     }
 }
-@media screen and (max-width:420px){
-    .profile{
+
+@media screen and (max-width:420px) {
+    .profile {
         margin-left: 70px;
         width: 250px;
     }
 }
-@media screen and (max-width:367px){
-    .profile{
+
+@media screen and (max-width:367px) {
+    .profile {
         margin-left: 50px;
         width: 260px;
     }
 }
-@media screen and (max-width:360px){
-    .profile{
+
+@media screen and (max-width:360px) {
+    .profile {
         margin-left: 40px;
         width: 260px;
     }
 }
-@media screen and (max-width:336px){
-    .profile{
+
+@media screen and (max-width:336px) {
+    .profile {
         margin-left: 20px;
         width: 250px;
     }
@@ -235,187 +251,212 @@
     font-size: 35px;
     font-weight: bold;
     cursor: pointer;
-  }
+}
 
-  /* start of making close btn responsive */
-  @media screen and (max-width:1500px){
-    .close_form{
+/* start of making close btn responsive */
+@media screen and (max-width:1500px) {
+    .close_form {
         position: absolute;
         right: 300px;
-    }    
-  }
-  @media screen and (max-width:1400px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:1400px) {
+    .close_form {
         position: absolute;
         right: 280px;
-    }    
-  }
-  @media screen and (max-width:1350px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:1350px) {
+    .close_form {
         position: absolute;
         right: 240px;
-    }    
-  }
-  @media screen and (max-width:1300px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:1300px) {
+    .close_form {
         position: absolute;
         right: 240px;
-    }    
-  }
-  @media screen and (max-width:1244px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:1244px) {
+    .close_form {
         right: 220px;
-    }    
-  }
-  @media screen and (max-width:1205px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:1205px) {
+    .close_form {
         right: 200px;
-    }    
-  }
-  @media screen and (max-width:1172px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:1172px) {
+    .close_form {
         right: 180px;
-    }    
-  }
-  @media screen and (max-width:1099px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:1099px) {
+    .close_form {
         right: 160px;
-    }    
-  }
-  @media screen and (max-width:1047px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:1047px) {
+    .close_form {
         right: 140px;
-    }    
-  }
-  @media screen and (max-width:1015px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:1015px) {
+    .close_form {
         right: 120px;
-    }    
-  }
-  @media screen and (max-width:976px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:976px) {
+    .close_form {
         right: 100px;
-    }    
-  }
-  @media screen and (max-width:926px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:926px) {
+    .close_form {
         right: 80px;
-    }    
-  }
-  @media screen and (max-width:892px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:892px) {
+    .close_form {
         position: absolute;
         right: 280px;
         top: 725px;
-    }    
-  }
-  @media screen and (max-width:843px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:843px) {
+    .close_form {
         position: absolute;
         right: 260px;
         top: 725px;
-    }    
-  }
-  @media screen and (max-width:806px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:806px) {
+    .close_form {
         position: absolute;
         right: 240px;
         top: 725px;
-    }    
-  }
-  @media screen and (max-width:751px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:751px) {
+    .close_form {
         position: absolute;
         right: 220px;
         top: 725px;
-    }    
-  }
-  @media screen and (max-width:712px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:712px) {
+    .close_form {
         position: absolute;
         right: 200px;
         top: 725px;
-    }    
-  }
-  @media screen and (max-width:651px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:651px) {
+    .close_form {
         position: absolute;
         right: 180px;
         top: 725px;
-    }    
-  }
-  @media screen and (max-width:613px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:613px) {
+    .close_form {
         position: absolute;
         right: 160px;
         top: 725px;
-    }    
-  }
-  @media screen and (max-width:571px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:571px) {
+    .close_form {
         position: absolute;
         right: 140px;
         top: 725px;
-    }    
-  }
-  @media screen and (max-width:533px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:533px) {
+    .close_form {
         position: absolute;
         right: 120px;
         top: 725px;
-    }    
-  }
-  @media screen and (max-width:515px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:515px) {
+    .close_form {
         position: absolute;
         right: 120px;
         top: 725px;
-    }    
-  }
-  @media screen and (max-width:477px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:477px) {
+    .close_form {
         position: absolute;
         right: 100px;
         top: 725px;
-    }    
-  }
+    }
+}
 
-  @media screen and (max-width:451px){
-    .close_form{
+@media screen and (max-width:451px) {
+    .close_form {
         position: absolute;
         right: 90px;
         top: 725px;
-    }    
-  }
-  @media screen and (max-width:423px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:423px) {
+    .close_form {
         position: absolute;
         right: 100px;
         top: 725px;
-    }    
-  }
-  @media screen and (max-width:400px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:400px) {
+    .close_form {
         position: absolute;
         right: 80px;
         top: 725px;
-    }    
-  }
-  @media screen and (max-width:384px){
-    .close_form{
+    }
+}
+
+@media screen and (max-width:384px) {
+    .close_form {
         position: absolute;
         right: 60px;
         top: 725px;
-    }    
-  }
+    }
+}
 
-  @media screen and (max-width:305px){
-    .close_form{
+@media screen and (max-width:305px) {
+    .close_form {
         position: absolute;
         right: 30px;
         top: 725px;
-    }    
-  }
+    }
+}
 
 
-  /* end of making close btn responsive */
+/* end of making close btn responsive */

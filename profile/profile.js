@@ -59,7 +59,7 @@ btn.addEventListener('click', () => {
     console.log("edit profile btn clicked");
 
   if (firstname.style.display === 'none' ) {
-    btn.innerHTML="Back";
+    btn.innerHTML="<i class=\"fa fa-backward\"></i>Back";
     btn.style.color="red";
     // 👇️ this SHOWS the form
     firstname.style.display = 'block';
