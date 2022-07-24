@@ -353,6 +353,17 @@
     .basket-product-part h3{
         color: royalblue;
     }
+    .favorites-product-info{
+        flex-direction: column;
+    }
+    .favorites-product-buttons{
+        flex-direction: column;
+        text-align: center;
+    }
+    .favorites-product-img{
+        width: 80%;
+        text-align: center;
+    }
 }
 
 @media screen and (max-width:843px) {
@@ -450,6 +461,10 @@
         top: 725px;
     }
     .basket{
+        margin-left: 20px;
+        width: 90%;
+    }
+    .favorites{
         margin-left: 20px;
         width: 90%;
     }
