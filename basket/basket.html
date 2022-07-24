@@ -59,12 +59,34 @@
     <!-- ended with title page -->
 
 <!--started basket items selected-->
-<div class="card">
+<!-- <div class="card" id="product123">
     <img src="../images/Gaming-Wallpaper.png" alt="Denim Jeans">
     <h1>Tailored Jeans</h1>
-    <p class="price_basket">$19.99</p>
-    <p><button>Add to Cart</button></p>
-  </div>
+    <p class="price_basket"><strong>Subtotal: </strong>$19.99</p>
+</div> -->
+<div class="card small-container" id="product123">
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Name</th>
+            <th>Subtotal</th>
+        </tr>
+        <tr>
+            <td>
+                <div class="cart-info">
+                    <img src="../images/Gaming-Wallpaper.png" alt="">
+                    <div>
+                        <p>Product Name</p>
+                        <small>price: $55.00</small>
+                        <a href="">Remove</a>
+                    </div>
+                </div>
+            </td>
+            <td><input type="number" name="" id="" value="1"></td>
+            <td>$55.00</td>
+        </tr>
+    </table>
+</div>
 <!--ended basket items selected-->
     <!-- started return to top button -->
     <button onclick="ReturnToTop()" id="TopBtn" title="Return to Top"><i class="fa fa-arrow-up"></i></button>
