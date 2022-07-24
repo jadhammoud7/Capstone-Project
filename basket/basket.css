@@ -1,8 +1,16 @@
 .card img{
     height: 200px;
     width: 200px;
+    
 }
 .card{
+    text-align: center;
     margin-left: 50px;
     margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    box-shadow: 10px 10px 15px 1px royalblue;
+    margin-bottom: 30px;
+    padding: 30px;
 }
