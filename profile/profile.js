@@ -18,7 +18,7 @@ var profile_button = document.getElementById("profile-button");
 var basket_button = document.getElementById("basket-button");
 var favorites_button = document.getElementById("favorites-button");
 
-function ShowProfile(){
+function ShowProfile() {
     profile_part.style.display = "block";
     basket_part.style.display = "none";
     favorites_part.style.display = "none";
@@ -27,7 +27,7 @@ function ShowProfile(){
     favorites_button.style.fontWeight = 500;
 }
 
-function ShowBasket(){
+function ShowBasket() {
     profile_part.style.display = "none";
     basket_part.style.display = "block";
     favorites_part.style.display = "none";
@@ -36,7 +36,7 @@ function ShowBasket(){
     favorites_button.style.fontWeight = 500;
 }
 
-function ShowFavorites(){
+function ShowFavorites() {
     profile_part.style.display = "none";
     basket_part.style.display = "none";
     favorites_part.style.display = "block";
@@ -47,6 +47,7 @@ function ShowFavorites(){
 
 //edit profile button down
 const btn = document.querySelector(".edit_profile_btn");
+const btn_div = document.querySelector(".edit_save_btn");
 
 btn.addEventListener('click', () => {
     const firstname = document.querySelector(".first_name_editprofile");
@@ -58,25 +59,27 @@ btn.addEventListener('click', () => {
 
     console.log("edit profile btn clicked");
 
-  if (firstname.style.display === 'none' ) {
-    btn.innerHTML="<i class=\"fa fa-backward\"></i>Back";
-    btn.style.color="red";
-    // 👇️ this SHOWS the form
-    firstname.style.display = 'block';
-    lastname.style.display = 'block';
-    email.style.display = 'block';
-    phonenumber.style.display = 'block';
-    address.style.display = 'block';
-  } else {
-    btn.innerHTML="<strong>Edit Profile</strong>";
-    btn.style.color="black";
-    // 👇️ this HIDES the form
-    firstname.style.display = 'none';
-    lastname.style.display = 'none';
-    email.style.display = 'none';
-    phonenumber.style.display = 'none';
-    address.style.display = 'none';
-  }
+    if (firstname.style.display === 'none') {
+        btn.innerHTML = "<i class=\"fa fa-backward\"></i>Back";
+        btn.style.color = "red";
+        btn_div.innerHTML += "<button class=\"save_profile_btn\" title=\"Save all your changes\"> <i class=\"fa fa-save\"></i><strong>Save</strong></button>"
+
+        // 👇️ this SHOWS the form
+        firstname.style.display = 'block';
+        lastname.style.display = 'block';
+        email.style.display = 'block';
+        phonenumber.style.display = 'block';
+        address.style.display = 'block';
+    } else {
+        btn.innerHTML = "<strong><i class=\"fa fa-edit\"></i>Edit Profile</strong>";
+        btn.style.color = "black";
+        // 👇️ this HIDES the form
+        firstname.style.display = 'none';
+        lastname.style.display = 'none';
+        email.style.display = 'none';
+        phonenumber.style.display = 'none';
+        address.style.display = 'none';
+    }
 });
 
 var closebtn = document.querySelector(".close_form");
@@ -84,5 +87,5 @@ var closeprofile = document.querySelector(".profile");
 
 closebtn.addEventListener("click", () => {
     console.log("btn closed clicked");
-    closeprofile.style.display="none";
+    closeprofile.style.display = "none";
 })
