@@ -126,4 +126,20 @@ td img{
     }
 }
 /* end of making table responsive */
-
+.total-price{
+    display: flex;
+    justify-content: flex-end;
+}
+.total-price table{
+    text-align: left;
+    /* border-top: 3px solid royalblue; */
+    border-top: 3px solid royalblue;
+    width: 100%;
+    max-width: 400px;
+}
+td:last-child{
+    text-align: right;
+}
+th:last-child{ 
+    text-align: right;
+}
