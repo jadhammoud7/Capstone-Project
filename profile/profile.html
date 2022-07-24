@@ -65,14 +65,14 @@
                 <li id="customer-name"><span>Mr.X</span></li>
                 <li id="customer"><span>Customer</span></li>
             </ol>
-            <ol class="profile-sidebar-list">
+            <ol class="profile-sidebar-list reveal-by-x">
                 <li><a onclick="ShowProfile()" id="profile-button">Profile</a></li>
                 <li><a onclick="ShowBasket()" id="basket-button">Shopping Basket</a></li>
                 <li><a onclick="ShowFavorites()" id="favorites-button">Favorites List</a></li>
             </ol>
         </div>
         <!-- started profile -->
-        <div class="profile" style="display: none;">
+        <div class="profile fade reveal-by-y" style="display: none;">
             <span onclick="document.getElementById('id01').style.display='none'" class="close_form"
                 title="Close Modal">&times;</span>
             <div class="profile-part">
@@ -114,7 +114,7 @@
             </div>
         </div>
         <!-- started shopping basket -->
-        <div class="basket" style="display: none;">
+        <div class="basket fade reveal-by-y" style="display: none;">
             <div>
                 <h2>Shopping Basket</h2>
                 <h3>You have total of 4 items in your basket</h3>
@@ -199,7 +199,7 @@
         </div>
 
         <!-- started favorites -->
-        <div class="favorites" style="display: none;">
+        <div class="favorites fade reveal-by-y" style="display: none;">
             <div>
                 <h2>Favorites List</h2>
                 <h3>You have a total of 4 items in favorites list</h3>
