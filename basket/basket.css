@@ -79,6 +79,14 @@ input {
     color: #fefefe;
 }
 
+.checkout-button{
+    text-align: center;
+    color: #fefefe;
+    background-color: royalblue;
+    width: 100%;
+    font-size: medium ;
+}
+
 /* start of making table responsive */
 @media screen and (max-width:1178px) {
     td input {
