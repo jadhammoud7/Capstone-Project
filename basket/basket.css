@@ -79,12 +79,12 @@ input {
     color: #fefefe;
 }
 
-.checkout-button{
+.checkout-button {
     text-align: center;
     color: #fefefe;
     background-color: royalblue;
     width: 100%;
-    font-size: medium ;
+    font-size: medium;
 }
 
 /* start of making table responsive */
@@ -150,6 +150,14 @@ input {
 @media screen and (max-width:415px) {
     .card {
         margin-left: 55px;
+        padding: 10px;
+        text-align: start;
+    }
+    .info_of_product{
+        margin-right: 10px;
+    }
+    td input{
+        margin-left: 15px;
     }
 }
 
