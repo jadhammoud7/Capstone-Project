@@ -44,9 +44,6 @@ function revealY() {
         if (elementTop < windowHeight - elementVisible) {
             reveals[i].classList.add("on");
         }
-        else {
-            reveals[i].classList.remove("on");
-        }
     }
 }
 

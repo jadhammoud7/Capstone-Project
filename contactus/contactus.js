@@ -17,15 +17,15 @@ function revealY() {
     var reveals = document.querySelectorAll(".reveal-by-y");
 
     for (var i = 0; i < reveals.length; i++) {
+
+        if (reveals[i].style.display == "none")
+            reveals[i].style.display = "block";
         var windowHeight = window.innerHeight;
         var elementTop = reveals[i].getBoundingClientRect().top;
         var elementVisible = 150;
 
         if (elementTop < windowHeight - elementVisible) {
             reveals[i].classList.add("on");
-        }
-        else {
-            reveals[i].classList.remove("on");
         }
     }
 }
@@ -34,7 +34,6 @@ function revealX() {
     var reveals = document.querySelectorAll(".reveal-by-x");
 
     for (var i = 0; i < reveals.length; i++) {
-        reveals[i].style.display = "block";
         var windowHeight = window.innerHeight;
         var elementTop = reveals[i].getBoundingClientRect().top;
         var elementVisible = 150;
