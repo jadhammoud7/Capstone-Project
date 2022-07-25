@@ -66,15 +66,15 @@ td img {
     font-weight: 500;
 }
 
-.info_of_product small{
+.info_of_product small {
     font-size: 15px;
 }
 
-input{
+input {
     border-radius: 5px;
 }
 
-.info_of_product a:hover{
+.info_of_product a:hover {
     background-color: red;
     color: #fefefe;
 }
