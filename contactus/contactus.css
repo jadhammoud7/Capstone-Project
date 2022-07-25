@@ -127,25 +127,6 @@
     background-color: rgba(65, 105, 225, 0.433);
 }
 
-#TopBtn {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 30px;
-    z-index: 99;
-    border: none;
-    outline: none;
-    background-color: rgba(65, 105, 225, 0.6);
-    color: #fefefe;
-    padding: 15px;
-    border-radius: 4px;
-    align-items: center;
-}
-
-#TopBtn:hover {
-    background-color: royalblue;
-}
-
 @media screen and (max-width: 1325px) {
     .contact-us-part {
         display: flex;
