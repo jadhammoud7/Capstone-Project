@@ -241,3 +241,15 @@
         border-radius: 0px;
     }
 }
+
+
+/* editing pixels 360 putting location a bit to the right */
+@media screen and (max-width:361px){
+    .left_part{
+        margin-left: 80px !important;
+    }
+    .shop_info{
+        margin-left: 20px;
+        width: 340px;
+    }
+}
