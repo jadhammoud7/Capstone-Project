@@ -66,7 +66,7 @@ function revealX2() {
     var reveals = document.querySelectorAll(".reveal-by-x2");
 
     for (var i = 0; i < reveals.length; i++) {
-        reveals[i].style.display = "block";
+        reveals[i].style.display = "flex";
         var windowHeight = window.innerHeight;
         var elementTop = reveals[i].getBoundingClientRect().top;
         var elementVisible = 150;

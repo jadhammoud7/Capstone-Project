@@ -530,7 +530,7 @@ footer a:hover {
   }
 
   .contact-us {
-    flex-direction: column;
+    flex-direction: column !important;
   }
 
   .contact-us-img {
@@ -1033,7 +1033,7 @@ input[type="date"]:hover {
 
 .contact-us {
   display: flex;
-  float: left;
+  flex-direction: row;
   background-color: rgba(65, 105, 225, 0.6);
   margin-bottom: 30px;
 }
