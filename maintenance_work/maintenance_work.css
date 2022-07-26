@@ -11,36 +11,37 @@
     padding: 30px;
 }
 
-.appointment-item{
+.appointment-item {
     display: flex;
     flex-direction: column;
 }
 
-.appointment-item h2{
+.appointment-item h2 {
     color: royalblue;
 }
 
-.appointment-item-info{
+.appointment-item-info {
     display: flex;
     flex-direction: row;
     font-weight: 600;
 }
 
-.appointment-item-info img{
+.appointment-item-info img {
     width: 25%;
     margin: 20px;
 }
 
-.appointment-item-info-part{
+.appointment-item-info-part {
     display: flex;
     flex-direction: column;
 }
 
-@media screen and (max-width: 838px){
-    .appointment-item-info{
+@media screen and (max-width: 838px) {
+    .appointment-item-info {
         flex-direction: column;
     }
-    .appointment-item-info img{
+
+    .appointment-item-info img {
         margin: 5px;
         width: 50%;
     }
