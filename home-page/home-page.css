@@ -460,6 +460,9 @@ footer a:hover {
     margin-left: 140px;
     width: 60%;
   }
+  .nav-item{
+    margin: 10px 0;
+  }
 }
 
 @media screen and (max-width: 1078px) {

@@ -8,3 +8,28 @@
     margin-bottom: 30px;
     padding: 30px;
 }
+
+.appointment-item{
+    display: flex;
+    flex-direction: column;
+}
+
+.appointment-item h2{
+    color: royalblue;
+}
+
+.appointment-item-info{
+    display: flex;
+    flex-direction: row;
+    font-weight: 600;
+}
+
+.appointment-item-info img{
+    width: 25%;
+    margin: 20px;
+}
+
+.appointment-item-info-part{
+    display: flex;
+    flex-direction: column;
+}
