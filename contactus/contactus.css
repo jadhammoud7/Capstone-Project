@@ -82,7 +82,7 @@
 }
 
 .comment_section {
-    width: 200%;
+    width: 100%;
     border: none;
 }
 
@@ -125,6 +125,25 @@
 
 .shop_info:hover {
     background-color: rgba(65, 105, 225, 0.433);
+}
+
+#TopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: rgba(65, 105, 225, 0.6);
+    color: #fefefe;
+    padding: 15px;
+    border-radius: 4px;
+    align-items: center;
+}
+
+#TopBtn:hover {
+    background-color: royalblue;
 }
 
 @media screen and (max-width: 1325px) {
@@ -220,5 +239,17 @@
         font-size: 12px;
         margin-left: -30px;
         border-radius: 0px;
+    }
+}
+
+
+/* editing pixels 360 putting location a bit to the right */
+@media screen and (max-width:361px){
+    .left_part{
+        margin-left: 80px !important;
+    }
+    .shop_info{
+        margin-left: 10px;
+        width: 340px;
     }
 }
