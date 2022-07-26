@@ -1,11 +1,13 @@
-.profile {
+.appointments {
     display: flex;
     flex-direction: column;
     width: 60%;
     box-shadow: 10px 10px 15px 1px royalblue;
-    margin-left: 300px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    position: relative;
+    left: 20%;
+    right: 20%;
+    margin-top: 20px;
+    margin-bottom: 20px;
     padding: 30px;
 }
 
@@ -32,4 +34,14 @@
 .appointment-item-info-part{
     display: flex;
     flex-direction: column;
+}
+
+@media screen and (max-width: 838px){
+    .appointment-item-info{
+        flex-direction: column;
+    }
+    .appointment-item-info img{
+        margin: 5px;
+        width: 50%;
+    }
 }
