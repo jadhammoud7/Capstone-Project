@@ -9,7 +9,6 @@
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 30px;
-    z-index: 100;
 }
 
 .appointment-item {
@@ -90,15 +89,4 @@
     100% {background: white; left: 0px; top: 0px;}
   }
 
-  /* .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    padding-top: 60px;
-  } */
+
