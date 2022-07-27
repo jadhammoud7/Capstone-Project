@@ -1245,3 +1245,7 @@ input[type="date"]:hover {
 }
 
 /* end testimonail icon responsive */
+
+.nav-item:hover i::after {
+  content:"Home";
+}
