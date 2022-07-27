@@ -91,12 +91,14 @@
 }
 
 .present {
-  width: 50%;
+  width: 20%;
   margin: 0 auto;
   position: fixed;
   left: 0;
   bottom: 10px;
   z-index: 1;
+  animation: myfirst 2s infinite;
+  animation-timing-function: linear;
 }
 
 .box,
@@ -191,32 +193,23 @@
 
 @keyframes myfirst {
   0% {
-    background: white;
-    left: 0px;
-    top: 0px;
+    transform: translateY(-150px);
   }
 
   25% {
-    background: white;
-    left: 1470px;
-    top: 0px;
+    transform: translateY(50px);
+    transform: rotateZ(-10deg);
   }
 
   50% {
-    background: white;
-    left: 1470px;
-    top: 400px;
+    transform: rotateZ(10deg);
   }
 
   75% {
-    background: white;
-    left: 0px;
-    top: 400px;
+    transform: rotateZ(10deg);
   }
 
   100% {
-    background: white;
-    left: 0px;
-    top: 0px;
+    transform: rotateZ(-10deg);
   }
 }
