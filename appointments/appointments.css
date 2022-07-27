@@ -81,6 +81,12 @@
     animation: myfirst 50s infinite;
     animation-timing-function: linear;
   }
+
+  .gift-gif{
+    position: fixed;
+    bottom: 20px;
+    left: 30px;
+  }
   @keyframes myfirst {
     0%   {background: white; left: 0px; top: 0px;}
     25%  {background: white; left: 1470px; top: 0px;}
