@@ -30,4 +30,18 @@ document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", 
     nav_menu.classList.remove("active");
 }))
 
+function OpenGift(){
+    const gift_div = document.getElementById("id01");
+    const gift = document.querySelector(".present");
+    gift_div.style.display = "block";
+    gift.style.display = "none";
+}
+
+function CloseGift(){
+    const gift_div = document.getElementById("id01");
+    const gift = document.querySelector(".present");
+    gift_div.style.display = "none";
+    gift.style.display = "block";
+}
+
 
