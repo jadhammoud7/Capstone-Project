@@ -253,3 +253,33 @@
         width: 340px;
     }
 }
+/* start of adding text when hover on icon */
+.nav-item .home_menu:hover i::after {
+    content:"Home";
+    margin-left: 5px;
+  }
+  .nav-item .shop_menu:hover i::after {
+    content:"Shop";
+    margin-left: 5px;
+  }
+  .nav-item .appointments_menu:hover i::after {
+    content:"Appointments";
+    margin-left: 5px;
+  }
+  .nav-item .contact_menu:hover i::after {
+    content:"Contact";
+    margin-left: 5px;
+  }
+  .nav-item .about_menu:hover i::after {
+    content:"About us";
+    margin-left: 5px;
+  }
+  .nav-item .basket_menu:hover i::after {
+    content:"Basket";
+    margin-left: 5px;
+  }
+  .nav-item .myaccount_menu:hover i::after {
+    content:"My Account";
+    margin-left: 5px;
+  }
+  /* end of adding text when hover on icon */
