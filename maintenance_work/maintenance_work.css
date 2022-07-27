@@ -76,3 +76,24 @@
     margin-left: 5px;
   }
   /* end of adding text when hover on icon */
+  .gift i{
+    position: relative;
+    animation: myfirst 50s infinite;
+    animation-timing-function: linear;
+  }
+  @keyframes myfirst {
+    0%   {background: white; left: 0px; top: 0px;}
+    25%  {background: white; left: 1470px; top: 0px;}
+    50%  {background: white; left: 1470px; top: 400px;}
+    75%  {background: white; left: 0px; top: 400px;}
+    100% {background: white; left: 0px; top: 0px;}
+  }
+
+
+  /* svg {
+    fill: currentColor;
+    height: auto;
+    max-width: 10vmin;
+    transform-origin: center;
+    width: 10%;
+  } */
