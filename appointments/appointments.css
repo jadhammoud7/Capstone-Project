@@ -1,98 +1,222 @@
 .appointments {
-    display: flex;
-    flex-direction: column;
-    width: 60%;
-    box-shadow: 10px 10px 15px 1px royalblue;
-    position: relative;
-    left: 20%;
-    right: 20%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  box-shadow: 10px 10px 15px 1px royalblue;
+  position: relative;
+  left: 20%;
+  right: 20%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 30px;
 }
 
 .appointment-item {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .appointment-item h2 {
-    color: royalblue;
+  color: royalblue;
 }
 
 .appointment-item-info {
-    display: flex;
-    flex-direction: row;
-    font-weight: 600;
+  display: flex;
+  flex-direction: row;
+  font-weight: 600;
 }
 
 .appointment-item-info img {
-    width: 25%;
-    margin: 20px;
+  width: 25%;
+  margin: 20px;
 }
 
 .appointment-item-info-part {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 @media screen and (max-width: 838px) {
-    .appointment-item-info {
-        flex-direction: column;
-    }
+  .appointment-item-info {
+    flex-direction: column;
+  }
 
-    .appointment-item-info img {
-        margin: 5px;
-        width: 50%;
-    }
+  .appointment-item-info img {
+    margin: 5px;
+    width: 50%;
+  }
 }
+
 /* start of adding text when hover on icon */
 .nav-item .home_menu:hover i::after {
-    content:"Home";
-    margin-left: 5px;
-  }
-  .nav-item .shop_menu:hover i::after {
-    content:"Shop";
-    margin-left: 5px;
-  }
-  .nav-item .appointments_menu:hover i::after {
-    content:"Appointments";
-    margin-left: 5px;
-  }
-  .nav-item .contact_menu:hover i::after {
-    content:"Contact";
-    margin-left: 5px;
-  }
-  .nav-item .about_menu:hover i::after {
-    content:"About us";
-    margin-left: 5px;
-  }
-  .nav-item .basket_menu:hover i::after {
-    content:"Basket";
-    margin-left: 5px;
-  }
-  .nav-item .myaccount_menu:hover i::after {
-    content:"My Account";
-    margin-left: 5px;
-  }
-  /* end of adding text when hover on icon */
-  .gift i{
-    position: relative;
-    animation: myfirst 50s infinite;
-    animation-timing-function: linear;
+  content: "Home";
+  margin-left: 5px;
+}
+
+.nav-item .shop_menu:hover i::after {
+  content: "Shop";
+  margin-left: 5px;
+}
+
+.nav-item .appointments_menu:hover i::after {
+  content: "Appointments";
+  margin-left: 5px;
+}
+
+.nav-item .contact_menu:hover i::after {
+  content: "Contact";
+  margin-left: 5px;
+}
+
+.nav-item .about_menu:hover i::after {
+  content: "About us";
+  margin-left: 5px;
+}
+
+.nav-item .basket_menu:hover i::after {
+  content: "Basket";
+  margin-left: 5px;
+}
+
+.nav-item .myaccount_menu:hover i::after {
+  content: "My Account";
+  margin-left: 5px;
+}
+
+/* end of adding text when hover on icon */
+.gift i {
+  position: relative;
+  animation: myfirst 50s infinite;
+  animation-timing-function: linear;
+}
+
+.present {
+  width: 50%;
+  margin: 0 auto;
+  position: fixed;
+  left: 0;
+  bottom: 10px;
+  z-index: 1;
+}
+
+.box,
+.lid {
+  background:
+    -webkit-radial-gradient(white 15%, transparent 15.1%),
+    -webkit-radial-gradient(white 15%, transparent 15.1%),
+    rgb(240, 58, 58);
+  background-position: 0 0, 25px 25px;
+  background-size: 50px 50px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.box {
+  width: 200px;
+  height: 130px;
+}
+
+.lid {
+  width: 200px;
+  height: 70px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  padding: 0 2px;
+  background-color: rgb(216, 52, 52);
+  top: 0;
+  left: 0;
+  transition:
+    top ease-out 0.5s,
+    left ease-out 0.5s,
+    transform ease-out 0.5s;
+}
+
+.box span,
+.lid span {
+  position: absolute;
+  display: block;
+  background: rgba(235, 199, 0, 0.8);
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.box span:first-child {
+  width: 100%;
+  height: 40px;
+  top: 50px;
+}
+
+.box span:last-child,
+.lid span {
+  width: 40px;
+  height: 100%;
+  left: 85px;
+}
+
+.lid span {
+  left: 85px;
+}
+
+.promo {
+  font-size: 30px;
+  color: black;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+  position: relative;
+  height: 0;
+  top: 10px;
+  transition: all ease-out 0.7s;
+  background-color: royalblue !important;
+}
+
+.promo p {
+  font-size: 15px;
+  margin: 0;
+}
+
+.promo h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+/* hover effects */
+.present:hover .lid {
+  top: -100px;
+  transform: rotateZ(10deg);
+  left: 10px;
+}
+
+.present:hover .promo {
+  top: -80px;
+}
+
+@keyframes myfirst {
+  0% {
+    background: white;
+    left: 0px;
+    top: 0px;
   }
 
-  .gift-gif{
-    position: fixed;
-    bottom: 20px;
-    left: 30px;
-  }
-  @keyframes myfirst {
-    0%   {background: white; left: 0px; top: 0px;}
-    25%  {background: white; left: 1470px; top: 0px;}
-    50%  {background: white; left: 1470px; top: 400px;}
-    75%  {background: white; left: 0px; top: 400px;}
-    100% {background: white; left: 0px; top: 0px;}
+  25% {
+    background: white;
+    left: 1470px;
+    top: 0px;
   }
 
+  50% {
+    background: white;
+    left: 1470px;
+    top: 400px;
+  }
 
+  75% {
+    background: white;
+    left: 0px;
+    top: 400px;
+  }
+
+  100% {
+    background: white;
+    left: 0px;
+    top: 0px;
+  }
+}
