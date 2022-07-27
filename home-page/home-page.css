@@ -1245,7 +1245,26 @@ input[type="date"]:hover {
 }
 
 /* end testimonail icon responsive */
-
+/* start of adding text when hover on icon */
 .nav-item .home_menu:hover i::after {
   content:"Home";
 }
+.nav-item .shop_menu:hover i::after {
+  content:"Shop";
+}
+.nav-item .appointments_menu:hover i::after {
+  content:"Appointments";
+}
+.nav-item .contact_menu:hover i::after {
+  content:"Contact";
+}
+.nav-item .about_menu:hover i::after {
+  content:"About us";
+}
+.nav-item .basket_menu:hover i::after {
+  content:"Basket";
+}
+.nav-item .myaccount_menu:hover i::after {
+  content:"My Account";
+}
+/* end of adding text when hover on icon */
