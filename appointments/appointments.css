@@ -223,6 +223,92 @@
     height: 50px;
   }
 }
+@media screen and (max-width:929px){
+  .box{
+    width: 140px;
+    height: 100px;
+  }
+  .lid{
+    width: 140px;
+    height: 50px;
+  }
+  .promo p{
+    font-size: 13px;
+  }
+  .promo h2{
+    font-size: 13px;
+  }
+  .present{
+    left: -10px;
+  }
+}
+@media screen and (max-width:904px){
+  .box{
+    width: 80px;
+    height: 100px;
+
+  }
+  .lid{
+    width: 80px;
+    height: 40px;
+  }
+  .promo p{
+    font-size: 8px;
+  }
+  .promo h2{
+    font-size: 8px;
+  }
+  .present{
+    left: 10px;
+  }
+}
+
+@media screen and (max-width:737px){
+.appointments{
+  margin-top: 329px;
+}
+.present{
+  top: 350px;
+  left: 250px;
+}
+.box{
+  width: 180px;
+  height: 110px;
+
+}
+.lid{
+  width: 180px;
+  height: 50px;
+}
+.promo p{
+  font-size: 15px;
+}
+.promo h2{
+  font-size: 15px;
+}
+}
+
+
+
+
+
+/* @media screen and (max-width:865px){
+  .box{
+    width: 140px;
+    height: 100px;
+  }
+  .lid{
+    width: 140px;
+    height: 50px;
+  }
+  .promo p{
+    font-size: 10px;
+  }
+  .promo h2{
+    font-size: 10px;
+  }
+
+} */
 
 /* @media screen and (max-width:1189px){
   .box{
