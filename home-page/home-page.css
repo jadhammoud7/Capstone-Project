@@ -460,7 +460,8 @@ footer a:hover {
     margin-left: 140px;
     width: 60%;
   }
-  .nav-item{
+
+  .nav-item {
     margin: 10px 0;
   }
 }
@@ -876,6 +877,11 @@ input[type="date"]:hover {
   font: 20px Arial, sans-serif;
 }
 
+.appointments-title {
+  text-align: center;
+  color: rgba(65, 105, 225, 0.6);
+  font: 20px Arial, sans-serif;
+}
 
 .shop-products-title {
   margin-top: 30px;
@@ -890,10 +896,28 @@ input[type="date"]:hover {
   background-repeat: no-repeat;
   background-size: cover;
   height: 400px;
+}
 
+.appointments {
+  background-image: url(../images/maintenance.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 400px;
 }
 
 .about-us-paragraph {
+  background-color: rgba(65, 105, 225, 0.6);
+  color: #fefefe;
+  width: 45%;
+  height: 400px;
+  display: block;
+  margin-right: auto;
+  padding: 20px;
+  margin-top: 100px;
+}
+
+.appointments-paragraph {
   background-color: rgba(65, 105, 225, 0.6);
   color: #fefefe;
   width: 45%;
@@ -916,7 +940,7 @@ input[type="date"]:hover {
   transition: 1s all ease;
 }
 
-.reveal-by-x2{
+.reveal-by-x2 {
   position: relative;
   transform: translateX(-150px);
   transition: 1s all ease;
@@ -930,7 +954,7 @@ input[type="date"]:hover {
   transform: translateX(0);
 }
 
-.reveal-by-x2.on{
+.reveal-by-x2.on {
   transform: translateX(0);
 }
 
@@ -1024,13 +1048,32 @@ input[type="date"]:hover {
   border-radius: 5px;
 }
 
+.appointments-button {
+  text-decoration: none;
+  color: #fefefe;
+  background-color: royalblue;
+  border: 5px solid royalblue;
+  padding: 10px;
+  border-radius: 5px;
+}
+
 .about-us-button:hover {
   color: royalblue;
   background-color: #fefefe;
   border: 5px solid #fefefe;
 }
 
+.appointments-button:hover {
+  color: royalblue;
+  background-color: #fefefe;
+  border: 5px solid #fefefe;
+}
+
 .about-par {
+  margin-bottom: 50px;
+}
+
+.appointments-par {
   margin-bottom: 50px;
 }
 
@@ -1247,31 +1290,38 @@ input[type="date"]:hover {
 /* end testimonail icon responsive */
 /* start of adding text when hover on icon */
 .nav-item .home_menu:hover i::after {
-  content:"Home";
+  content: "Home";
   margin-left: 5px;
 }
+
 .nav-item .shop_menu:hover i::after {
-  content:"Shop";
+  content: "Shop";
   margin-left: 5px;
 }
+
 .nav-item .appointments_menu:hover i::after {
-  content:"Appointments";
+  content: "Appointments";
   margin-left: 5px;
 }
+
 .nav-item .contact_menu:hover i::after {
-  content:"Contact";
+  content: "Contact";
   margin-left: 5px;
 }
+
 .nav-item .about_menu:hover i::after {
-  content:"About us";
+  content: "About us";
   margin-left: 5px;
 }
+
 .nav-item .basket_menu:hover i::after {
-  content:"Basket";
+  content: "Basket";
   margin-left: 5px;
 }
+
 .nav-item .myaccount_menu:hover i::after {
-  content:"My Account";
+  content: "My Account";
   margin-left: 5px;
 }
+
 /* end of adding text when hover on icon */
