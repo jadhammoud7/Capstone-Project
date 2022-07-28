@@ -918,7 +918,7 @@ input[type="date"]:hover {
 }
 
 .appointments-paragraph {
-  background-color: rgba(65, 105, 225, 0.6);
+  background-color: rgba(65, 105, 225, 0.8);
   color: #fefefe;
   width: 45%;
   height: 400px;
@@ -926,6 +926,7 @@ input[type="date"]:hover {
   margin-right: auto;
   padding: 20px;
   margin-top: 100px;
+  transform: matrix(1, 0, -0.2, 1, 50, 0);
 }
 
 .reveal-by-y {
