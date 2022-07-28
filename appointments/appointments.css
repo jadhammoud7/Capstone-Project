@@ -213,3 +213,19 @@
     transform: rotateZ(-10deg);
   }
 }
+@media screen and (max-width:1189px){
+  .box{
+    width: 150px;
+    height: 100px;
+  }
+  .lid{
+    width: 150px;
+    height: 100px;
+  }
+  .promo p{
+    font-size: 12px;
+  }
+  .promo h2{
+    font-size: 12px;
+  }
+}
