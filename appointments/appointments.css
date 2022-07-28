@@ -215,11 +215,12 @@
 }
 @media screen and (max-width:1189px){
   .box{
-    width: 150px;
+    width: 170px;
     height: 100px;
+
   }
   .lid{
-    width: 150px;
+    width: 170px;
     height: 100px;
   }
   .promo p{
@@ -228,4 +229,5 @@
   .promo h2{
     font-size: 12px;
   }
+
 }
