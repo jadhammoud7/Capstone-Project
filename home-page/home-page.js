@@ -20,7 +20,6 @@ function showSlides() {
 
 const hamBurger = document.querySelector(".hamburger");
 const nav_menu = document.querySelector(".nav-menu");
-
 const slideshow = document.querySelector(".slideshow-container");
 const feature = document.querySelector(".feature-part");
 
@@ -29,6 +28,7 @@ hamBurger.addEventListener("click", () => {
     nav_menu.classList.toggle("active");
 })
 document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
+
     hamBurger.classList.remove("active");
     nav_menu.classList.remove("active");
 }))
@@ -47,11 +47,20 @@ function revealY() {
     }
 }
 
+const about_us = document.querySelector(".about-us");
+const contact_us = document.querySelector(".contact-us");
+const testimonials = document.querySelector(".test-back");
+
+function AddRevealX(){
+    var windowHeight = window.innerHeight;
+    var elementTopAbout = about_us.getBoundingClientRect().top;
+    var elementTopContact = contact_us.getBoundingClientRect().top; 
+}
+
 function revealX() {
     var reveals = document.querySelectorAll(".reveal-by-x");
 
     for (var i = 0; i < reveals.length; i++) {
-        reveals[i].style.display = "block";
         var windowHeight = window.innerHeight;
         var elementTop = reveals[i].getBoundingClientRect().top;
         var elementVisible = 150;
@@ -66,7 +75,6 @@ function revealX2() {
     var reveals = document.querySelectorAll(".reveal-by-x2");
 
     for (var i = 0; i < reveals.length; i++) {
-        reveals[i].style.display = "flex";
         var windowHeight = window.innerHeight;
         var elementTop = reveals[i].getBoundingClientRect().top;
         var elementVisible = 150;
@@ -99,6 +107,5 @@ function ReturnToTop() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
-
 
 
