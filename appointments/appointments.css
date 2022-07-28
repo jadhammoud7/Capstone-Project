@@ -242,27 +242,6 @@
     left: -10px;
   }
 }
-/* @media screen and (max-width:904px){
-  .box{
-    width: 80px;
-    height: 100px;
-
-  }
-  .lid{
-    width: 80px;
-    height: 40px;
-  }
-  .promo p{
-    font-size: 8px;
-  }
-  .promo h2{
-    font-size: 8px;
-  }
-  .present{
-    left: 10px;
-  }
-} */
-
 @media screen and (max-width:897px){
 .appointments{
   margin-top: 329px;
