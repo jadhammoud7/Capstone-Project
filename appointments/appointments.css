@@ -26,6 +26,14 @@
   font-weight: 600;
 }
 
+.appointment-free-game{
+  background-color: #fefefe;
+  margin: 30px;
+  margin-top: 150px;
+  padding: 20px;
+  box-shadow: 10px 10px 15px 1px royalblue;
+}
+
 .appointment-item-info img {
   width: 25%;
   margin: 20px;
