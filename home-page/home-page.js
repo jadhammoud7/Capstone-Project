@@ -54,7 +54,18 @@ const testimonials = document.querySelector(".test-back");
 function AddRevealX(){
     var windowHeight = window.innerHeight;
     var elementTopAbout = about_us.getBoundingClientRect().top;
-    var elementTopContact = contact_us.getBoundingClientRect().top; 
+    var elementTopContact = contact_us.getBoundingClientRect().top;
+    var elementTopTestimonials = testimonials.getBoundingClientRect().top;
+    var elementVisible = -200;
+    if(elementTopAbout < windowHeight - elementVisible){
+        about_us.classList.add("reveal-by-x");
+    }
+    if(elementTopContact < windowHeight - elementVisible){
+        contact_us.classList.add("reveal-by-x2");
+    }
+    if(elementTopTestimonials < windowHeight - elementVisible){
+        testimonials.classList.add("reveal-by-x");
+    }
 }
 
 function revealX() {
@@ -89,6 +100,8 @@ window.addEventListener("scroll", revealX);
 window.addEventListener("scroll", revealX2);
 window.addEventListener("scroll", revealY);
 window.addEventListener("pageshow", revealY);
+window.addEventListener("scroll", AddRevealX);
+window.addEventListener("pageshow", AddRevealX);
 
 var topButton = document.getElementById("TopBtn");
 
