@@ -223,7 +223,7 @@
     height: 50px;
   }
 }
-@media screen and (max-width:929px){
+@media screen and (max-width:1060px){
   .box{
     width: 140px;
     height: 100px;
