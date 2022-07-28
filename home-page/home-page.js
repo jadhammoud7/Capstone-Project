@@ -59,12 +59,15 @@ function AddRevealX(){
     var elementVisible = -200;
     if(elementTopAbout < windowHeight - elementVisible){
         about_us.classList.add("reveal-by-x");
+        about_us.classList.add("fade");
     }
     if(elementTopContact < windowHeight - elementVisible){
         contact_us.classList.add("reveal-by-x2");
+        contact_us.classList.add("fade");
     }
     if(elementTopTestimonials < windowHeight - elementVisible){
         testimonials.classList.add("reveal-by-x");
+        testimonials.classList.add("fade");
     }
 }
 
