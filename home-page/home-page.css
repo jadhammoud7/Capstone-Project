@@ -533,6 +533,11 @@ footer a:hover {
     padding-top: 40px;
   }
 
+  .appointments-title {
+    font-size: 15px !important;
+    padding-top: 40px;
+  }
+
   .contact-us {
     flex-direction: column !important;
   }
@@ -601,6 +606,15 @@ input[type="date"]:hover {
   .product1 {
     margin-left: 140px;
   }
+
+  .appointments-paragraph {
+    width: 75% !important;
+  }
+
+  .appointments {
+    background-position: center;
+    background-color: royalblue;
+  }
 }
 
 @media screen and (max-width: 567px) {
@@ -630,6 +644,15 @@ input[type="date"]:hover {
 
   .product1 {
     margin-left: 40px;
+  }
+
+  .appointments-paragraph {
+    width: 75% !important;
+  }
+
+  .appointments {
+    background-position: center;
+    background-color: royalblue;
   }
 }
 
@@ -1076,6 +1099,7 @@ input[type="date"]:hover {
 
 .appointments-par {
   margin-bottom: 50px;
+  font-weight: 500;
 }
 
 .contact-us {
