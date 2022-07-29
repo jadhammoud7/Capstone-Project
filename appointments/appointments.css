@@ -1,4 +1,4 @@
-.appointments {
+.appointments-div {
   display: flex;
   flex-direction: column;
   width: 60%;
@@ -66,7 +66,7 @@
   margin-left: 5px;
 }
 
-.nav-item .appointments_menu:hover i::after {
+.nav-item .appointments-div-div_menu:hover i::after {
   content: "Appointments";
   margin-left: 5px;
 }
@@ -259,7 +259,7 @@
 }
 
 @media screen and (max-width:897px) {
-  .appointments {
+  .appointments-div {
     margin-top: 329px;
   }
 
@@ -290,7 +290,7 @@
 }
 
 @media screen and (max-width:800px) {
-  .appointments {
+  .appointments-div {
     margin-top: 329px;
   }
 
@@ -301,7 +301,7 @@
 }
 
 @media screen and (max-width:732px) {
-  .appointments {
+  .appointments-div {
     margin-top: 329px;
   }
 
@@ -312,7 +312,7 @@
 }
 
 @media screen and (max-width:680px) {
-  .appointments {
+  .appointments-div {
     margin-top: 329px;
   }
 
@@ -324,7 +324,7 @@
 }
 
 @media screen and (max-width:579px) {
-  .appointments {
+  .appointments-div {
     margin-top: 329px;
   }
 
@@ -335,7 +335,7 @@
 }
 
 @media screen and (max-width:490px) {
-  .appointments {
+  .appointments-div {
     margin-top: 329px;
   }
 
@@ -365,7 +365,7 @@
 }
 
 @media screen and (max-width:435px) {
-  .appointments {
+  .appointments-div {
     margin-top: 329px;
   }
 
@@ -396,7 +396,7 @@
 
 
 @media screen and (max-width:390px) {
-  .appointments {
+  .appointments-div {
     margin-top: 329px;
   }
 
@@ -427,7 +427,7 @@
 
 
 @media screen and (max-width:339px) {
-  .appointments {
+  .appointments-div {
     margin-top: 329px;
   }
 
@@ -457,7 +457,7 @@
 }
 
 @media screen and (max-width:264px) {
-  .appointments {
+  .appointments-div {
     margin-top: 329px;
   }
 
@@ -487,7 +487,7 @@
 }
 
 @media screen and (max-width:225px) {
-  .appointments {
+  .appointments-div {
     margin-top: 329px;
   }
 
