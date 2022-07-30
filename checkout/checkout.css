@@ -1,0 +1,25 @@
+.login-part {
+    display: flex;
+    flex-direction: row;
+    margin: 30px;
+    background-color: #63A7E4;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.login-part-par {
+    color: #fefefe;
+    margin-right: 30px;
+    font-size: large;
+}
+
+.login-button {
+    font-size: large;
+    font-weight: 500;
+    border-radius: 20px;
+}
+
+.login-button:hover {
+    color: royalblue;
+    background-color: #fefefe;
+}
