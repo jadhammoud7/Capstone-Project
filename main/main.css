@@ -1,0 +1,335 @@
+html {
+    scroll-behavior: smooth;
+}
+
+i {
+    padding-right: 5px;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    color: royalblue;
+    text-decoration: none;
+}
+
+header {
+    background-color: #333;
+}
+
+.nav-bar {
+    min-height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+}
+
+.nav-branding {
+    font-size: 2rem;
+}
+
+.nav-link {
+    transition: 0.7s ease;
+}
+
+.nav-link:hover {
+    color: grey;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    /* -webkit-transition:all .3s ease-in-out; */
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all .3s ease-in-out;
+    background-color: white;
+}
+
+@media (max-width:770px) {
+    .hamburger {
+        display: block;
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 52px;
+        gap: 0;
+        flex-direction: column;
+        float: initial;
+        background-color: royalblue;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        z-index: 100;
+    }
+
+    .nav-link {
+        color: #eee;
+    }
+
+    .nav-item {
+        margin: 16px 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active,
+.dot:hover {
+    background-color: royalblue;
+    color: #eee;
+}
+
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0.4;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: royalblue;
+    color: white;
+    padding: 12px 20px;
+    margin-top: 6px;
+    border: none;
+    cursor: pointer;
+    align-items: flex-start;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+    opacity: 0.8;
+}
+
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animateZoom 0.6s;
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0);
+    }
+
+    to {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+footer {
+    background-color: #000;
+    color: beige;
+    padding: 20px;
+}
+
+.footer-list li {
+    display: inline-flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+.footer-list li a {
+    text-decoration: none;
+    color: beige;
+}
+
+.footer-list-element li {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.footer-list-element li a {
+    color: beige;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: royalblue;
+}
+
+@media screen and (max-width: 1171px) {
+    .nav-item {
+        margin: 10px 0;
+    }
+}
+
+@media screen and (max-width: 423px) {
+    .nav-link {
+        color: #eee;
+    }
+
+    .nav-item {
+        margin: 16px 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+}
+
+#TopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: rgba(65, 105, 225, 0.6);
+    color: #fefefe;
+    padding: 15px;
+    border-radius: 4px;
+    align-items: center;
+}
+
+#TopBtn:hover {
+    background-color: royalblue;
+}
+
+.reveal-by-y {
+    position: relative;
+    transform: translateY(150px);
+    transition: 1s all ease;
+}
+
+.reveal-by-x {
+    position: relative;
+    transform: translateX(150px);
+    transition: 1s all ease;
+}
+
+.reveal-by-x2 {
+    position: relative;
+    transform: translateX(-150px);
+    transition: 1s all ease;
+}
+
+.reveal-by-y.on {
+    transform: translateY(0);
+}
+
+.reveal-by-x.on {
+    transform: translateX(0);
+}
+
+.reveal-by-x2.on {
+    transform: translateX(0);
+}
+
+@media screen and (max-width:423px) {
+    .nav-item {
+        margin: 5px 0;
+    }
+
+}
+
+.nav-item .home_menu:hover i::after {
+    content: "Home";
+    margin-left: 5px;
+}
+
+.nav-item .shop_menu:hover i::after {
+    content: "Shop";
+    margin-left: 5px;
+}
+
+.nav-item .appointments_menu:hover i::after {
+    content: "Appointments";
+    margin-left: 5px;
+}
+
+.nav-item .contact_menu:hover i::after {
+    content: "Contact";
+    margin-left: 5px;
+}
+
+.nav-item .about_menu:hover i::after {
+    content: "About us";
+    margin-left: 5px;
+}
+
+.nav-item .basket_menu:hover i::after {
+    content: "Basket";
+    margin-left: 5px;
+}
+
+.nav-item .myaccount_menu:hover i::after {
+    content: "My Account";
+    margin-left: 5px;
+}
+
+/* end of adding text when hover on icon */
