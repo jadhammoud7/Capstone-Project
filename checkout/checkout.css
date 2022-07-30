@@ -1,3 +1,62 @@
+.nav-bar {
+    min-height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+}
+
+.nav-item .home_menu:hover i::after {
+    content: "Home";
+    margin-left: 5px;
+}
+
+.nav-item .shop_menu:hover i::after {
+    content: "Shop";
+    margin-left: 5px;
+}
+
+.nav-item .appointments_menu:hover i::after {
+    content: "Appointments";
+    margin-left: 5px;
+}
+
+.nav-item .contact_menu:hover i::after {
+    content: "Contact";
+    margin-left: 5px;
+}
+
+.nav-item .about_menu:hover i::after {
+    content: "About us";
+    margin-left: 5px;
+}
+
+.nav-item .basket_menu:hover i::after {
+    content: "Basket";
+    margin-left: 5px;
+}
+
+.nav-item .myaccount_menu:hover i::after {
+    content: "My Account";
+    margin-left: 5px;
+}
+
+
+.nav-link {
+    transition: 0.7s ease;
+}
+
+.nav-link:hover {
+    color: grey;
+}   
+
 .login-part {
     display: flex;
     flex-direction: row;
@@ -22,4 +81,89 @@
 .login-button:hover {
     color: royalblue;
     background-color: #fefefe;
+}
+
+.billing-details {
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+}
+
+.form-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fafafa;
+}
+
+form {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 95%;
+    max-width: 300px;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%), 0 0 15px 0 rgb(0 0 0 / 2%), 0 0 20px 4px rgb(0 0 0 / 6%);
+}
+
+.input-container {
+    background-color: #f5f5f5;
+    position: relative;
+    border-radius: 4px 4px 0 0;
+    height: 56px;
+    transition: background-color 500ms;
+}
+
+.input-container:hover {
+    background-color: #ececec;
+}
+
+.input-container:focus-within {
+    background-color: #dcdcdc;
+}
+
+label {
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 16px;
+    color: rgba(0, 0, 0, 0.5);
+    transform-origin: left top;
+    user-select: none;
+    transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1), color 150ms cubic-bezier(0.4, 0, 0.2, 1), top 500ms;
+}
+
+input {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background: transparent;
+    caret-color: #6200ee;
+    border: 1px solid transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.42);
+    color: rgba(0, 0, 0, 0.87);
+    transition: border 500ms;
+    padding: 20px 16px 6px;
+    font-size: 1rem;
+}
+
+input:focus {
+    outline: none;
+    border-bottom-width: 2px;
+    border-bottom-color: #6200ee;
+}
+
+input:focus+label {
+    color: #6200ee;
+}
+
+input:focus+label,
+input.is-valid+label {
+    transform: translateY(-100%) scale(0.75);
 }
