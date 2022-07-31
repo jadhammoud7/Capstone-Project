@@ -33,7 +33,10 @@
 
 .order-summary{
     display: flex;
+    flex-direction: column;
+    margin: 30px;
 }
+
 
 .form-container {
     width: 100%;
