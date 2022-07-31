@@ -129,3 +129,30 @@ input.is-valid+label {
     display: flex;
     flex-direction: row;
 }
+
+#order-products{
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#order-products td, #order-products th{
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#order-products tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+#order-products tr:hover {
+    background-color: #ddd;
+}
+
+#order-products th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+}
