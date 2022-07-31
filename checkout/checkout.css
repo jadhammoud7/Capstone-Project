@@ -31,6 +31,10 @@
     margin: 30px;
 }
 
+.order-summary{
+    display: flex;
+}
+
 .form-container {
     width: 100%;
     display: flex;
