@@ -1,4 +1,3 @@
-
 .login-part {
     display: flex;
     flex-direction: row;
@@ -31,10 +30,50 @@
     margin: 30px;
 }
 
-.order-summary{
+.order-summary {
     display: flex;
     flex-direction: column;
     margin: 30px;
+}
+
+.payment {
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+}
+
+.payment-container {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 95%;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%), 0 0 15px 0 rgb(0 0 0 / 2%), 0 0 20px 4px rgb(0 0 0 / 6%);
+    color: royalblue;
+}
+
+.payment-container h3{
+    margin-left: 50px;
+    font-size: larger;
+    font-weight: 700;
+}
+
+.cash-delivery{
+    color: #fefefe;
+    font-weight: 600;
+    text-align: center;
+    background-color:  gray;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%), 0 0 15px 0 rgb(0 0 0 / 2%), 0 0 20px 4px rgb(0 0 0 / 6%);
+    padding: 10px;
 }
 
 
@@ -115,33 +154,34 @@ input.is-valid+label {
     transform: translateY(-100%) scale(0.75);
 }
 
-.form-container-part{
+.form-container-part {
     display: flex;
     flex-direction: column;
 }
 
-.form-container-part-title{
+.form-container-part-title {
     margin-left: 20px;
     color: royalblue;
 }
 
-.form-container-part-inputs{
+.form-container-part-inputs {
     display: flex;
     flex-direction: row;
 }
 
-#order-products{
+#order-products {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-#order-products td, #order-products th{
+#order-products td,
+#order-products th {
     border: 1px solid #ddd;
     padding: 15px;
 }
 
-#order-products tr:nth-child(even){
+#order-products tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
@@ -149,7 +189,7 @@ input.is-valid+label {
     background-color: #ddd;
 }
 
-#order-products th{
+#order-products th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -157,20 +197,21 @@ input.is-valid+label {
     color: white;
 }
 
-#order-totals{
+#order-totals {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-#order-totals td, #order-totals th{
+#order-totals td,
+#order-totals th {
     border: 1px solid #ddd;
     padding: 15px;
     width: 50%;
     font-weight: 700;
 }
 
-#order-totals tr:nth-child(even){
+#order-totals tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
@@ -178,7 +219,7 @@ input.is-valid+label {
     background-color: #ddd;
 }
 
-#order-totals th{
+#order-totals th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
