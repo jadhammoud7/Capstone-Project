@@ -84,7 +84,7 @@ input {
     height: 100%;
     box-sizing: border-box;
     background: transparent;
-    caret-color: #6200ee;
+    caret-color: royalblue;
     border: 1px solid transparent;
     border-bottom-color: rgba(0, 0, 0, 0.42);
     color: rgba(0, 0, 0, 0.87);
@@ -96,11 +96,11 @@ input {
 input:focus {
     outline: none;
     border-bottom-width: 2px;
-    border-bottom-color: #6200ee;
+    border-bottom-color: royalblue;
 }
 
 input:focus+label {
-    color: #6200ee;
+    color: royalblue;
 }
 
 input:focus+label,
@@ -108,7 +108,17 @@ input.is-valid+label {
     transform: translateY(-100%) scale(0.75);
 }
 
-.name-container{
+.form-container-part{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container-part-title{
+    margin-left: 20px;
+    color: royalblue;
+}
+
+.form-container-part-inputs{
     display: flex;
     flex-direction: row;
 }

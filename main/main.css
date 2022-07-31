@@ -331,5 +331,8 @@ footer a:hover {
     content: "My Account";
     margin-left: 5px;
 }
+.title{
+    text-align: center;
+}
 
 /* end of adding text when hover on icon */
