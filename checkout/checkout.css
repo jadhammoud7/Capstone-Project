@@ -6,8 +6,9 @@
     padding: 20px;
     border-radius: 10px;
 }
-@media screen and (max-width:379px){
-    .login-part{
+
+@media screen and (max-width:379px) {
+    .login-part {
         flex-direction: column;
     }
 }
@@ -60,17 +61,17 @@
     color: royalblue;
 }
 
-.payment-container h3{
+.payment-container h3 {
     margin-left: 50px;
     font-size: larger;
     font-weight: 700;
 }
 
-.cash-delivery{
+.cash-delivery {
     color: #fefefe;
     font-weight: 600;
     text-align: center;
-    background-color:  gray;
+    background-color: gray;
     margin-left: 50px;
     margin-right: 50px;
     margin-top: 10px;
@@ -208,12 +209,13 @@ input.is-valid+label {
     width: 100%;
 }
 
-#order-totals td{
+#order-totals td {
     border: 1px solid #ddd;
     padding: 15px;
     font-weight: 700;
 }
-#order-totals th{
+
+#order-totals th {
     border: 1px solid #ddd;
     padding: 15px;
     font-weight: 700;
@@ -236,7 +238,7 @@ input.is-valid+label {
     color: white;
 }
 
-.checkout-buttons{
+.checkout-buttons {
     display: block;
     text-align: center;
     text-align: center;
@@ -244,13 +246,10 @@ input.is-valid+label {
     width: 100%;
 }
 
-.checkout-buttons button{
+.checkout-buttons button {
     margin: 30px;
     font-size: large;
     font-weight: 700;
     border-radius: 10px;
     padding: 15px;
 }
-
-
-
