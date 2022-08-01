@@ -49,4 +49,12 @@ window.addEventListener("pageshow", AddRevealX);
 
 // trying calendar here
 const date=new Date();
-console.log(date);
+const month=["January","February","March","April","May","June","July","August","September","October","November","December"];
+console.log(month);
+document.querySelector('.date h1').innerHTML=month[date.getMonth()];
+
+
+document.querySelector('.date p').innerHTML=date.toDateString();
+
+
+let days="";
