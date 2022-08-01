@@ -251,22 +251,49 @@ input.is-valid+label {
     border-radius: 10px;
     padding: 15px;
 }
-#app-calendar{
 
+
+
+.container{
+    font-size: 62.5%;
+    width: 100%;
+    background-color: #12121f;
+    color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.day{
-    border-bottom: 1px solid var(--light-gray);
-    border-radius: 1px solid var(--light-gray);
+.calendar{
+    width: 45rem;
+    height: 52rem;
+    background-color: #222227;
+    box-shadow: 0.5rem 3rem rgba(0,0,0,0.4);
+}
+.month{
+    width: 100%;
+    height: 12rem;
+    background-color: #167e56;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
     text-align: center;
-    padding-top: 5px;
-    font-size: 12px;
+    text-shadow: 0.3rem 0.5rem rgba(0,0,0,0.5);
+}
+.month i{
+    font-size: 2.5rem;
     cursor: pointer;
-    transition: background-color 200ms, color 200ms;
 }
-.weekend{
-    color: var(--light-blue);
+.month h1{
+    font-size: 3rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    margin-bottom: 1rem;
 }
-.selected-date{
-    background-color:var(--light-blue);
-    color: white;
+.month p{
+    font-size: 1.6rem;
+}
+.weekdays{
+    
 }
