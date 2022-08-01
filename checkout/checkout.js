@@ -71,7 +71,7 @@ const renderCalender = () => {
     }
     for (let i = 1; i <= lastDay; i++) {
         if (i === new Date().getDate() && date.getMonth() === new Date().getMonth()) {
-            days += `<div class="today"> ${i} </div>`;
+            days += `<div class="today" onclick="SetToCurrentDay(this)"> ${i} </div>`;
         } else {
             days += `<div class="otherdays" onclick="SetToCurrentDay(this)"> ${i} </div>`;
         }
@@ -81,7 +81,6 @@ const renderCalender = () => {
         days += `<div class="next-date">${j}</div>`;
         monthDays.innerHTML = days;
     }
-
 }
 
 // document.querySelectorAll(".days").forEach(day => {
@@ -90,15 +89,20 @@ const renderCalender = () => {
 //     })
 // });
 
-function SetToCurrentDay(element){
+function SetToCurrentDay(element) {
     const currentDay = document.querySelector('.today');
     const thisDay = element;
-    currentDay.classList.remove('today');
-    currentDay.classList.add('otherdays');
-    thisDay.classList.remove('today');
+    if (currentDay != null) {
+        currentDay.classList.remove('today');
+        currentDay.classList.add('otherdays');
+    }
+    thisDay.classList.remove('otherdays');
     thisDay.classList.add('today');
-    date
-    renderCalender();
+    var newDate = new Date();
+    newDate.setMonth(date.getMonth());
+    newDate.setDate(thisDay.innerHTML);
+    console.log(newDate.toDateString());
+    document.querySelector('.date p').innerHTML = newDate.toDateString();
 }
 
 document.querySelector('.prev').addEventListener('click', () => {
