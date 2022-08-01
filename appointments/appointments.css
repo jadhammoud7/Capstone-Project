@@ -16,6 +16,20 @@
   flex-direction: column;
 }
 
+.appointment-item-schedule {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: medium;
+  width: 30%;
+}
+
+.appointment-item-info-schedule {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .appointment-item h2 {
   color: royalblue;
 }
@@ -23,6 +37,12 @@
 .appointment-item-info {
   display: flex;
   flex-direction: row;
+  font-weight: 600;
+}
+
+.appointment-item-info-schedule {
+  display: flex;
+  flex-direction: column;
   font-weight: 600;
 }
 
@@ -39,9 +59,20 @@
   margin: 20px;
 }
 
+.appointment-item-info-schedule img {
+  width: 25%;
+  margin: 20px;
+}
+
 .appointment-item-info-part {
   display: flex;
   flex-direction: column;
+}
+
+.appointment-item-info-schedule-part {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
 @media screen and (max-width: 838px) {
@@ -263,7 +294,7 @@
 }
 
 .calendar {
-  width: 45rem;
+  width: 60%;
   height: 52rem;
   background-color: #222227;
   box-shadow: 0.5rem 3rem rgba(0, 0, 0, 0.4);
