@@ -94,8 +94,12 @@ const renderCalender=()=>{
 
 document.querySelector('.prev').addEventListener('click',()=>{
     date.setMonth(date.getMonth()-1);
+    renderCalender();
+
 })
 document.querySelector('.next').addEventListener('click',()=>{
     date.setMonth(date.getMonth()+1);
+    renderCalender();
 })
+renderCalender();
 
