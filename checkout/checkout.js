@@ -73,7 +73,7 @@ const renderCalender = () => {
         if (i === new Date().getDate() && date.getMonth() === new Date().getMonth()) {
             days += `<div class="today"> ${i} </div>`;
         } else {
-            days += `<div class="otherdays" onclick="GetDay()"> ${i} </div>`;
+            days += `<div class="otherdays" onclick="SetToCurrentDay(this)"> ${i} </div>`;
         }
 
     }
@@ -90,8 +90,15 @@ const renderCalender = () => {
 //     })
 // });
 
-function GetDay(){
-    console.log(document.querySelector('.date p').innerHTML);
+function SetToCurrentDay(element){
+    const currentDay = document.querySelector('.today');
+    const thisDay = element;
+    currentDay.classList.remove('today');
+    currentDay.classList.add('otherdays');
+    thisDay.classList.remove('today');
+    thisDay.classList.add('today');
+    date
+    renderCalender();
 }
 
 document.querySelector('.prev').addEventListener('click', () => {
