@@ -53,13 +53,11 @@ const date=new Date();
 const renderCalender=()=>{
     const monthDays=document.querySelector('.days');
     const lastDay=new Date(date.getFullYear(),date.getMonth()+1,0).getDate();
-    console.log(lastDay);
     const prevLastDay=new Date(date.getFullYear(),date.getMonth(),0).getDate();
     const firstDayIndex=date.getDay();
     const lastDayIndex=new Date(date.getFullYear(),date.getMonth()+1,0).getDay();
     const nextDays=7-lastDayIndex-1;
     const month=["January","February","March","April","May","June","July","August","September","October","November","December"];
-    console.log(month);
     document.querySelector('.date h1').innerHTML=month[date.getMonth()];
     
     
@@ -69,12 +67,10 @@ const renderCalender=()=>{
     let days="";
     
     for(let x=firstDayIndex; x>0;x--){
-        days+=`<div class="prev-date"> ${prevLastDay -x+1}</div>`;
+        days+=`<div class="prev-date">${prevLastDay -x+1}</div>`;
     }
     for(let i=1;i<=lastDay;i++){
         if(i===new Date().getDate() && date.getMonth()===new Date().getMonth()){
-            // var string="Month: "+date.getMonth();
-            // string+=" Day: "+date.getDay();
             days+=`<div class="today"> ${i} </div>`; 
         }else{
             days+=`<div> ${i} </div>`;
@@ -82,17 +78,17 @@ const renderCalender=()=>{
     
     }
     for(let j=1;j<=nextDays;j++){
-        days+=`<div class="next-date"> ${j}</div>`;
+        days+=`<div class="next-date">${j}</div>`;
         monthDays.innerHTML=days;
     }
     
 }
 
-
-// document.querySelector('.days').addEventListener('click',()=>{
-//     console.log("Month",date.getMonth()+1,"Day: ");
-
-// })  
+document.querySelectorAll(".days").forEach(day=>{
+    day.addEventListener("click",event=>{
+        console.log(event.currentTarget);
+    })
+});
 
 
 
