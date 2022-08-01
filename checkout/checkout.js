@@ -49,12 +49,21 @@ window.addEventListener("pageshow", AddRevealX);
 
 // trying calendar here
 const date=new Date();
-const month=["January","February","March","April","May","June","July","August","September","October","November","December"];
-console.log(month);
-document.querySelector('.date h1').innerHTML=month[date.getMonth()];
+
+const renderCalender=()=>{
+
+}
 
 
-document.querySelector('.date p').innerHTML=date.toDateString();
 
 
-let days="";
+
+
+
+document.querySelector('.prev').addEventListener('click',()=>{
+    date.setMonth(date.getMonth()-1);
+})
+document.querySelector('.next').addEventListener('click',()=>{
+    date.setMonth(date.getMonth()+1);
+})
+
