@@ -73,7 +73,9 @@ const renderCalender=()=>{
     }
     for(let i=1;i<=lastDay;i++){
         if(i===new Date().getDate() && date.getMonth()===new Date().getMonth()){
-            days+=`<div class="today"> ${i} </div>`;        
+            // var string="Month: "+date.getMonth();
+            // string+=" Day: "+date.getDay();
+            days+=`<div class="today"> ${i} </div>`; 
         }else{
             days+=`<div> ${i} </div>`;
         }
@@ -85,6 +87,12 @@ const renderCalender=()=>{
     }
     
 }
+
+
+// document.querySelector('.days').addEventListener('click',()=>{
+//     console.log("Month",date.getMonth()+1,"Day: ");
+
+// })  
 
 
 
