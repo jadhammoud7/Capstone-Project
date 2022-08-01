@@ -6,6 +6,11 @@
     padding: 20px;
     border-radius: 10px;
 }
+@media screen and (max-width:379px){
+    .login-part{
+        flex-direction: column;
+    }
+}
 
 .login-part-par {
     color: #fefefe;
