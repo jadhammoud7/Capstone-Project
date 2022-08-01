@@ -100,6 +100,16 @@ function CloseGift() {
     gift.style.display = "block";
 }
 
+function OpenAppointmentBooking(button) {
+    const appointment_book_div = document.getElementById("appointment-schedule");
+    const book_button = button;
+    appointment_book_div.style.display = "block";
+}
+
+function CloseAppointmentBooking() {
+    const appointment_book_div = document.getElementById("appointment-schedule");
+    appointment_book_div.style.display = "none";
+}
 
 
 

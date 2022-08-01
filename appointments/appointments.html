@@ -105,10 +105,42 @@
                 </div>
             </div>
             <div>
-                <button style="border-radius: 15px;">Book Now</button>
+                <button onclick="OpenAppointmentBooking(this)" style="border-radius: 15px;">Book Now</button>
             </div>
         </div>
     </div>
+
+    <!-- started calendar part -->
+    <!-- starting calendar -->
+    <div id="appointment-schedule" class="modal">
+        <span onclick="CloseAppointmentBooking()" class="close" title="Close Modal">&times;</span>
+        <div class="container">
+            <div class="calendar">
+                <div class="month">
+                    <i class="fas fa-angle-left prev"></i>
+                    <div class="date">
+                        <h1></h1>
+                        <p></p>
+                    </div>
+                    <i class="fas fa-angle-right next"></i>
+                </div>
+                <div class="weekdays">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thurs</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                </div>
+                <div class="days">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end calendar -->
+
+
 
     <div class="appointments-div fade">
         <div class="appointment-item">
@@ -123,7 +155,7 @@
                 </div>
             </div>
             <div>
-                <button style="border-radius: 15px;">Book Now</button>
+                <button onclick="OpenAppointmentBooking(this)" style="border-radius: 15px;">Book Now</button>
             </div>
         </div>
         <hr size="8" width="100%" color="royalblue">
@@ -139,7 +171,7 @@
                 </div>
             </div>
             <div>
-                <button style="border-radius: 15px;">Book Now</button>
+                <button onclick="OpenAppointmentBooking(this)" style="border-radius: 15px;">Book Now</button>
             </div>
         </div>
         <hr size="8" width="100%" color="royalblue">
@@ -157,7 +189,7 @@
                 </div>
             </div>
             <div>
-                <button style="border-radius: 15px;">Book Now</button>
+                <button onclick="OpenAppointmentBooking(this)" style="border-radius: 15px;">Book Now</button>
             </div>
         </div>
         <hr size="8" width="100%" color="royalblue">
@@ -175,7 +207,7 @@
                 </div>
             </div>
             <div>
-                <button style="border-radius: 15px;">Book Now</button>
+                <button onclick="OpenAppointmentBooking(this)" style="border-radius: 15px;">Book Now</button>
             </div>
         </div>
         <hr size="8" width="100%" color="royalblue">
@@ -192,7 +224,7 @@
                 </div>
             </div>
             <div>
-                <button style="border-radius: 15px;">Book Now</button>
+                <button onclick="OpenAppointmentBooking(this)" style="border-radius: 15px;">Book Now</button>
             </div>
         </div>
         <div class="appointment-item">
@@ -208,7 +240,7 @@
                 </div>
             </div>
             <div>
-                <button style="border-radius: 15px;">Book Now</button>
+                <button onclick="OpenAppointmentBooking(this)" style="border-radius: 15px;">Book Now</button>
             </div>
         </div>
         <hr size="8" width="100%" color="royalblue">
@@ -226,39 +258,12 @@
                 </div>
             </div>
             <div>
-                <button style="border-radius: 15px;">Book Now</button>
+                <button onclick="OpenAppointmentBooking(this)" style="border-radius: 15px;">Book Now</button>
             </div>
         </div>
         <hr size="8" width="100%" color="royalblue">
     </div>
     <!-- ended with contents -->
-
-    <!-- starting calendar -->
-
-    <div class="container">
-        <div class="calendar">
-            <div class="month">
-                <i class="fas fa-angle-left prev"></i>
-                <div class="date">
-                    <h1></h1>
-                    <p></p>
-                </div>
-                <i class="fas fa-angle-right next"></i>
-            </div>
-            <div class="weekdays">
-                <div>Sun</div>
-                <div>Mon</div>
-                <div>Tue</div>
-                <div>Wed</div>
-                <div>Thurs</div>
-                <div>Fri</div>
-                <div>Sat</div>
-            </div>
-            <div class="days">
-            </div>
-        </div>
-    </div>
-    <!-- end calendar -->
 
 
     <!-- started return to top button -->
