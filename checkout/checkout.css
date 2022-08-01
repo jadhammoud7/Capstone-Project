@@ -203,12 +203,16 @@ input.is-valid+label {
     width: 100%;
 }
 
-#order-totals td,
-#order-totals th {
+#order-totals td{
     border: 1px solid #ddd;
     padding: 15px;
-    width: 50%;
     font-weight: 700;
+}
+#order-totals th{
+    border: 1px solid #ddd;
+    padding: 15px;
+    font-weight: 700;
+    width: 20%;
 }
 
 #order-totals tr:nth-child(even) {
