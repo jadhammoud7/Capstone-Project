@@ -48,3 +48,5 @@ window.addEventListener("pageshow", AddRevealX);
 
 
 // trying calendar here
+const date=new Date();
+console.log(date);
