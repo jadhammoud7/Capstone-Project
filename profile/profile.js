@@ -138,13 +138,6 @@ function ChangeProfile() {
     }
 }
 
-// var closebtn = document.querySelector(".close_form");
-// var closeprofile = document.querySelector(".profile");
-
-// closebtn.addEventListener("click", () => {
-//     console.log("btn closed clicked");
-//     closeprofile.style.display = "none";
-// })
 
 
 var topButton = document.getElementById("TopBtn");
