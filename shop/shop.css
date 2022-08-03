@@ -72,9 +72,6 @@ h2 {
   margin-top: 70px;
 }
 
-/* .shop-products h1{
-    color: #4165E1;
-} */
 .tabs button {
   background-color: royalblue;
   border-radius: 30px;
@@ -197,36 +194,6 @@ h2 {
   }
 }
 
-/* @media screen and (max-width:1270px){
-  .search-container{
-    margin-left: 900px;
-    width: 25%;
-  }
-} */
-/* @media screen and (max-width:1240px){
-  .search-container{
-    margin-left: 870px;
-    width: 25%;
-  }
-} */
-/* @media screen and (max-width:1215px){
-  .search-container{
-    margin-left: 830px;
-    width: 25%;
-  }
-}
-@media screen and (max-width:1166px){
-  .search-container{
-    margin-left: 800px;
-    width: 25%;
-  }
-}
-@media screen and (max-width:1130px){
-  .search-container{
-    margin-left: 770px;
-    width: 25%;
-  }
-}*/
 @media screen and (max-width:1090px) {
   .search-container {
     float: right;
@@ -237,26 +204,6 @@ h2 {
     height: 400px;
   }
 }
-
-/* @media screen and (max-width:1050px){
-  .search-container{
-    margin-left: 700px;
-    width: 25%;
-  }
-}
-@media screen and (max-width:996px){
-  .search-container{
-    margin-left: 670px;
-    width: 25%;
-  }
-}
-@media screen and (max-width:960px){
-  .search-container{
-    margin-left: 630px;
-    width: 25%;
-  }
-} */
-
 @media screen and (max-width:890px) {
   .search-container {
     float: right;
