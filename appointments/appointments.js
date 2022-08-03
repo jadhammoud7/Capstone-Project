@@ -149,13 +149,6 @@ const renderCalender = () => {
         monthDays.innerHTML = days;
     }
 }
-
-// document.querySelectorAll(".days").forEach(day => {
-//     day.addEventListener("click", event => {
-//         console.log(event.currentTarget);
-//     })
-// });
-
 function SetToCurrentDay(element) {
     const currentDay = document.querySelector('.today');
     const thisDay = element;
