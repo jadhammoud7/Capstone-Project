@@ -25,7 +25,6 @@ a {
   width: 25px;
   height: 3px;
   margin: 5px auto;
-  /* -webkit-transition:all .3s ease-in-out; */
   -webkit-transition: all 0.3s ease-in-out;
   transition: all .3s ease-in-out;
   background-color: white;
@@ -240,9 +239,6 @@ span.psw {
   }
 }
 
-/* .username_login{
-    width:100px;
-} */
 #canceling {
   margin-bottom: 90px;
 }
@@ -252,14 +248,10 @@ span.psw {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  /* background-color: rgba(65, 105, 225, 0.6); */
 }
 
 .features {
   display: inline-flex;
-  /* justify-content:flex-end ; */
-
-
 }
 
 .feature-part {
@@ -504,21 +496,6 @@ input[type="date"]:hover {
   }
 }
 
-@media screen and (max-width: 390px) {
-  /* .nav-menu{
-    position: fixed;
-    left: -100%;
-    top: 52px;
-    gap: 0;
-    flex-direction: column;
-    float: initial;
-    background-color: royalblue;
-    width: 390px;
-    text-align: center;
-    transition: 0.3s;
-    z-index: 100;
-  } */
-}
 
 @media screen and (max-width: 239px) {
   .product1 {
@@ -685,14 +662,12 @@ input[type="date"]:hover {
 /* end testimonials responsive */
 .test-back {
   background-color: rgb(120, 149, 236);
-  /* padding-top: 60px; */
   position: relative;
   top: 50px;
   padding-bottom: 30px;
   margin-bottom: 70px;
   margin-left: 16px;
   margin-right: 16px;
-  /* margin-top: 50px; */
   border-radius: 16px;
   bottom: -50px;
 }
@@ -1019,9 +994,7 @@ input[type="date"]:hover {
   width: 0px;
   border-radius: 40%;
   width: 10%;
-  /* background-color: rgb(214, 224, 255); */
   position: relative;
-  /* top: 30px; */
   top: -50px;
   left: 30px;
 }
@@ -1093,6 +1066,3 @@ input[type="date"]:hover {
 }
 
 /* end testimonail icon responsive */
-/* start of adding text when hover on icon */
-
-/* end of adding text when hover on icon */
