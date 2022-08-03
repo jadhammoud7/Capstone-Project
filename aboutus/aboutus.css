@@ -78,6 +78,7 @@
 #TopBtn:hover {
   background-color: royalblue;
 }
+/* start of counter responsive */
 
 @media screen and (max-width:853px) {
   .nb_cutsomers_section {
@@ -180,6 +181,9 @@
   }
 
 }
+/* end of counter responsive */
+
+
 /* start of adding text when hover on icon */
 .nav-item .home_menu:hover i::after {
   content:"Home";
