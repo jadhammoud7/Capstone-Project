@@ -300,11 +300,13 @@ footer a:hover {
 .nav-item .home_menu:hover i::after {
     content: "Home";
     margin-left: 5px;
+    transition: 1s;
 }
 
 .nav-item .shop_menu:hover i::after {
     content: "Shop";
     margin-left: 5px;
+    transition: 1s;
 }
 
 .nav-item .appointments_menu:hover i::after {
@@ -315,21 +317,25 @@ footer a:hover {
 .nav-item .contact_menu:hover i::after {
     content: "Contact";
     margin-left: 5px;
+    transition: 1s;
 }
 
 .nav-item .about_menu:hover i::after {
     content: "About us";
     margin-left: 5px;
+    transition: 1s;
 }
 
 .nav-item .basket_menu:hover i::after {
     content: "Basket";
     margin-left: 5px;
+    transition: 1s;
 }
 
 .nav-item .myaccount_menu:hover i::after {
     content: "My Account";
     margin-left: 5px;
+    transition: 1s;
 }
 .title{
     text-align: center;
