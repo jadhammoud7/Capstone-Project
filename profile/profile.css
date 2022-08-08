@@ -228,6 +228,114 @@
     border-radius: 20px;
 }
 
+
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animateZoom 0.6s;
+}
+
+/* Extra style for the cancel button (red) */
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: royalblue;
+    border-radius: 20px;
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0);
+    }
+
+    to {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+/* Avatar image */
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+/* Add padding to containers */
+.container {
+    padding: 16px;
+    width: 100%;
+    display: inline-flexbox;
+    justify-content: center;
+    flex: content;
+    border-radius: 4px;
+}
+
+/* The "Forgot password" text */
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+.submit-button {
+    border-radius: 20px;
+    margin-bottom: -100px;
+}
+
+#login-button:hover {
+    background-color: white;
+    color: royalblue;
+}
+
+
+/* end of making login page responsive */
+.username_login,
+.password_login {
+    border-radius: 30px;
+}
+
+input[type="text"]:hover,
+input[type="password"]:hover,
+input[type="date"]:hover {
+    background-color: #ddd;
+    outline: none;
+}
+
+.imgcontainer h1 {
+    color: royalblue;
+    text-align: center;
+}
+
+
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+    background-color: royalblue;
+}
+
+.close:hover,
+.close:focus {
+    color: royalblue;
+    cursor: pointer;
+}
+
 /* start of making profile container responsive */
 @media screen and (max-width:904px) {
     .profile-part {

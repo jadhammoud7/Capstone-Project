@@ -77,26 +77,26 @@
             <div class="imgcontainer">
                 <img src="../images/console.png" alt="Avatar" class="avatar">
                 <br> <br>
-                <h1 style="color: royalblue; text-align: center;" class="join_our_family">Join Our Family</h1>
+                <h1 class="join_our_family">Join Our Family</h1>
             </div>
 
-            <div class="container" style="border-radius: 4px;">
+            <div class="container">
                 <label for="user_name"><b>Username</b></label>
-                <input class="username_login" type="text" placeholder="Enter Username" name="user_name" required
+                <input class="username_login" id="username" type="text" placeholder="Enter Username" name="user_name" required
                     title="Enter your username">
 
                 <label for="password"><b>Password</b></label>
-                <input class="password_login" type="password" placeholder="Enter Password" name="password" required
+                <input class="password_login" id="password" type="password" placeholder="Enter Password" name="password" required
                     title="Enter your password">
                 <span>Dont have an account?<a href="../signup/signup.html" title="Sign Up for a new account">Sign
                         up</a></span>
                 <br> <br>
                 <span class="psw"><b>Forgot</b> <a href=""><b>password?</b></a></span>
-                <button style="border-radius:20px; margin-bottom: -100px;" type="submit" title="Log In">Login</button>
+                <button class="submit-button" type="submit" title="Log In">Login</button>
             </div>
             <div id="canceling" class="container">
-                <button style="border-radius:20px;" type="button"
-                    onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Back</button>
+                <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                    class="cancelbtn">Back</button>
             </div>
         </form>
     </div>

@@ -131,41 +131,7 @@ input[type="password"] {
   background-color: royalblue;
 }
 
-.cancelbtn
-
-/* Center the avatar image inside this container */
-.imgcontainer {
-  text-align: center;
-  margin: 24px 0 12px 0;
-}
-
-/* Avatar image */
-img.avatar {
-  width: 40%;
-  border-radius: 50%;
-}
-
-/* Add padding to containers */
-.container {
-  padding: 16px;
-  width: 100%;
-  display: inline-flexbox;
-  justify-content: center;
-  flex: content;
-}
-
-/* The "Forgot password" text */
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-#login-button:hover {
-  background-color: white;
-  color: royalblue;
-}
-
-.shop-products #product {
+.cancelbtn .shop-products #product {
   display: inline-block;
 }
 
@@ -181,21 +147,7 @@ span.psw {
   }
 }
 
-.close {
-  position: absolute;
-  right: 25px;
-  top: 0;
-  color: #000;
-  font-size: 35px;
-  font-weight: bold;
-  background-color: royalblue;
-}
 
-.close:hover,
-.close:focus {
-  color: royalblue;
-  cursor: pointer;
-}
 
 .animate {
   -webkit-animation: animatezoom 0.6s;
@@ -381,19 +333,6 @@ span.psw {
     padding-top: 40px;
   }
 
-}
-
-/* end of making login page responsive */
-.username_login,
-.password_login {
-  border-radius: 30px;
-}
-
-input[type="text"]:hover,
-input[type="password"]:hover,
-input[type="date"]:hover {
-  background-color: #ddd;
-  outline: none;
 }
 
 
