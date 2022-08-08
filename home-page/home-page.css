@@ -58,6 +58,7 @@ a {
   font-size: 18px;
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -281,6 +282,22 @@ span.psw {
   margin-right: 15px;
 }
 
+.profile-nav {
+  border-bottom: 30px;
+}
+
+.dot-div {
+  text-align: center;
+}
+
+.feature-part div {
+  text-align: center;
+}
+
+.about-us-location{
+  margin-top: 50px;
+}
+
 
 
 /*hay lanzabet el login aa kaza platform*/
@@ -322,6 +339,7 @@ span.psw {
     font-size: 25px;
     margin-left: -40px;
     color: #04aa6d;
+
   }
 }
 
@@ -598,6 +616,10 @@ input[type="date"]:hover {
 
 .testimonial_cover {
   height: 150px;
+}
+
+.home-img {
+  width: 100%;
 }
 
 /* start testimonials responsive */
