@@ -195,6 +195,26 @@
     margin-top: 20px;
 }
 
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5px auto;
+    border: 1px solid #888;
+    width: 50%;
+}
+
 .first_name_editprofile,
 .last_name_editprofile,
 .email_editprofile,
@@ -203,10 +223,22 @@
     border-radius: 15px;
 }
 
+.modal-content {
+    background-image: url(../images/wallpaper4.jpg);
+    border-radius: 20px;
+}
+
 /* start of making profile container responsive */
 @media screen and (max-width:904px) {
     .profile-part {
         flex-direction: column;
+    }
+
+    .modal .join_our_family {
+        font-size: 25px;
+        margin-left: -40px;
+        color: #04aa6d;
+
     }
 }
 
@@ -218,6 +250,10 @@
     .profile-sidebar img {
         height: 150px;
         width: 150px;
+    }
+
+    .modal .join_our_family {
+        font-size: 18px;
     }
 }
 
@@ -344,24 +380,30 @@
         right: 280px;
         top: 725px;
     }
-    .basket-product{
+
+    .basket-product {
         flex-direction: column;
     }
-    .basket-product-img{
+
+    .basket-product-img {
         width: 80%;
         text-align: center;
     }
-    .basket-product-part h3{
+
+    .basket-product-part h3 {
         color: royalblue;
     }
-    .favorites-product-info{
+
+    .favorites-product-info {
         flex-direction: column;
     }
-    .favorites-product-buttons{
+
+    .favorites-product-buttons {
         flex-direction: column;
         text-align: center;
     }
-    .favorites-product-img{
+
+    .favorites-product-img {
         width: 80%;
         text-align: center;
     }
@@ -461,11 +503,13 @@
         right: 100px;
         top: 725px;
     }
-    .basket{
+
+    .basket {
         margin-left: 20px;
         width: 90%;
     }
-    .favorites{
+
+    .favorites {
         margin-left: 20px;
         width: 90%;
     }
@@ -497,37 +541,45 @@
 
 
 /* end of making close btn responsive */
-.gotoshoppage_profile button{
+.gotoshoppage_profile button {
     border-radius: 15px;
     color: black;
 }
+
 /* start of adding text when hover on icon */
 .nav-item .home_menu:hover i::after {
-    content:"Home";
+    content: "Home";
     margin-left: 5px;
-  }
-  .nav-item .shop_menu:hover i::after {
-    content:"Shop";
+}
+
+.nav-item .shop_menu:hover i::after {
+    content: "Shop";
     margin-left: 5px;
-  }
-  .nav-item .appointments_menu:hover i::after {
-    content:"Appointments";
+}
+
+.nav-item .appointments_menu:hover i::after {
+    content: "Appointments";
     margin-left: 5px;
-  }
-  .nav-item .contact_menu:hover i::after {
-    content:"Contact";
+}
+
+.nav-item .contact_menu:hover i::after {
+    content: "Contact";
     margin-left: 5px;
-  }
-  .nav-item .about_menu:hover i::after {
-    content:"About us";
+}
+
+.nav-item .about_menu:hover i::after {
+    content: "About us";
     margin-left: 5px;
-  }
-  .nav-item .basket_menu:hover i::after {
-    content:"Basket";
+}
+
+.nav-item .basket_menu:hover i::after {
+    content: "Basket";
     margin-left: 5px;
-  }
-  .nav-item .myaccount_menu:hover i::after {
-    content:"My Account";
+}
+
+.nav-item .myaccount_menu:hover i::after {
+    content: "My Account";
     margin-left: 5px;
-  }
-  /* end of adding text when hover on icon */
+}
+
+/* end of adding text when hover on icon */
