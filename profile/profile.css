@@ -363,12 +363,12 @@ input[type="date"]:hover {
     color: #000;
     font-size: 35px;
     font-weight: bold;
-    background-color: royalblue;
+    color: red;
 }
 
 .close:hover,
 .close:focus {
-    color: royalblue;
+    color: red;
     cursor: pointer;
 }
 
