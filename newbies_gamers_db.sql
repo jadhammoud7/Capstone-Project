@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2022 at 09:44 PM
+-- Generation Time: Aug 09, 2022 at 07:38 PM
 -- Server version: 8.0.23
 -- PHP Version: 8.0.2
 
@@ -29,9 +29,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `customers` (
   `customer_id` int NOT NULL,
-  `name` varchar(225) NOT NULL,
-  `email_address` varchar(225) NOT NULL,
-  `home_address` varchar(225) NOT NULL,
+  `first_name` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `last_name` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `email` text NOT NULL,
+  `date_of_birth` date NOT NULL,
+  `phone_number` varchar(50) NOT NULL,
+  `address` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `username` varchar(225) NOT NULL,
   `password` varchar(225) NOT NULL,
   `nb_of_sales` int NOT NULL,
