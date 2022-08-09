@@ -108,7 +108,7 @@ a {
 }
 
 
-.cancelbtn .shop-products #product {
+.cancelbtn, .shop-products, #product {
   display: inline-block;
 }
 
