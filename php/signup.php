@@ -1,12 +1,6 @@
 <?php
 
 include("connection.php");
-if(isset($_POST["user_id"]) && $_POST["user_id"] != ""){
-    $user_id = $_POST["user_id"];
-}
-else{
-    die("ALERT user_id");
-}
 
 if(isset($_POST["first_name"]) && $_POST["first_name"] != ""){
     $first_name = $_POST["first_name"];
@@ -64,12 +58,8 @@ else{
     die("ALERT password");
 }
 
-$mysql = $connection->prepare("INSERT INTO customers(customer_id, first_name, last_name, email, date_of_birth, phone_number, address, username, password");
-$mysql->bind_param("isssdssss", $user_id, $first_name, $last_name, $email, $date_of_birth, $phone_number, $address, $username, $password);
+$mysql = $connection->prepare("INSERT INTO customers(first_name, last_name, email, date_of_birth, phone_number, address, username, password) VALUES (?,?,?,?,?,?,?,?)");
+$mysql->bind_param("ssssssss", $first_name, $last_name, $email, $date_of_birth, $phone_number, $address, $username, $password);
 $mysql->execute();
 $mysql->close();
-
-$connection->close();
-
-
 ?>
