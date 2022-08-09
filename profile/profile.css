@@ -226,6 +226,8 @@
 .modal-content {
     background-image: url(../images/wallpaper4.jpg);
     border-radius: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 
@@ -280,7 +282,7 @@ img.avatar {
     width: 100%;
     /* text-align: center; */
     border-radius: 4px;
-    background-color: rgba(21, 100, 219, 0.486);
+    /* background-color: rgba(21, 100, 219, 0.486); */
 }
 
 form {
@@ -347,6 +349,10 @@ input[type="date"]:hover {
 .imgcontainer h1 {
     color: royalblue;
     text-align: center;
+}
+.imgcontainer img {
+    height: 200px;
+    width: 200px;
 }
 
 
