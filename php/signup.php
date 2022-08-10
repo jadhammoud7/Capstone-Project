@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 
 include("connection.php");
 
@@ -60,5 +62,19 @@ $mysql = $connection->prepare("INSERT INTO customers(first_name, last_name, emai
 $mysql->bind_param("ssssssss", $first_name, $last_name, $email, $date_of_birth, $phone_number, $address, $username, $password);
 $mysql->execute();
 $mysql->close();
-header("Location:../home-page/home-page.php");
+// header("Location:../home-page/home-page.php");
+
+
+
+//getting the id of this user to that when he/she has signed up there id will be saved
+$statement1 = $connection->prepare("SELECT customer_id FROM customers WHERE username = '".$username."' ");
+$statement1->execute();
+$statement_result1 = $statement1->get_result();
+$data1 = $statement_result1->fetch_assoc();
+
+
+$logged_id1 = $data1['customer_id'];
+$_SESSION['logged_user'] = $logged_id1;
+echo "the id of the logged user is :",$_SESSION['logged_user'];
+//saving which user is logged in
 ?>
