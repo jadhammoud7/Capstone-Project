@@ -70,7 +70,7 @@ session_reset();
         <h5 style="color:#b4c3da;">My Account</h5>
     </div>
     <!-- ended with title page -->
-
+    <?php if(session_status() == 0) { echo "<script>document.getElementById('id01').style.display = 'block';</script>";}?>
     <!-- start login -->
     <div id="id01" class="modal">
         <span onclick="document.getElementById('id01').style.display='none'" class="close"

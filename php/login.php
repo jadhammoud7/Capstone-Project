@@ -35,6 +35,7 @@ if($stmt_data['password'] == $password){
     echo "the id of the logged user is :",$_SESSION['logged_user'];
     // $_SESSION['logged_bool'] = true;
     // header("Location:../home-page/home-page.php");
+    echo "<script>document.getElementById('id01').style.display = 'none';</script>";
 }
 else{
     echo "<script>alert('Either username or password is invalid')</script>";

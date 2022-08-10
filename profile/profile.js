@@ -192,11 +192,6 @@ function revealX() {
     }
 }
 
-if(sessionStorage.getItem('logged_id') == null){
-    document.getElementsByClassName("modal")[0].style.display = 'block';
-}
-
-
 window.addEventListener("scroll", revealX);
 window.addEventListener("scroll", revealY);
 window.addEventListener("pageshow", revealX);
