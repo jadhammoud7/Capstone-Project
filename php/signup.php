@@ -59,7 +59,7 @@ else{
 }
 
 $mysql = $connection->prepare("INSERT INTO customers(first_name, last_name, email, date_of_birth, phone_number, address, username, password) VALUES (?,?,?,?,?,?,?,?)");
-$mysql->bind_param("ssssssss", $first_name, $last_name, $email, $date_of_birth, $phone_number, $address, $username, $password);
+$mysql->bind_param("ssssisss", $first_name, $last_name, $email, $date_of_birth, $phone_number, $address, $username, $password);
 $mysql->execute();
 $mysql->close();
 ?>
