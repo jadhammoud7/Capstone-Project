@@ -4,7 +4,7 @@
 include("connection.php");
 
 if(isset($_POST["user_name"]) && $_POST["user_name"] != ""){
-    $username = $_POST["user_name"];
+    $username = $_POST["username"];
 }
 else{
     die("Alert username");
