@@ -46,7 +46,7 @@
                             class="fa fa-shopping-basket fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../profile/profile.html" class="myaccount_menu nav-link" title="View my account"><i
+                    <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account"><i
                             class="fa fa-user fa-lg profile-nav"></i></a>
                 </li>
             </ul>

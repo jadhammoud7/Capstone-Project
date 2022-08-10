@@ -3,7 +3,7 @@
 // session_start();
 include("connection.php");
 
-if(isset($_POST["user_name"]) && $_POST["user_name"] != ""){
+if(isset($_POST["username"]) && $_POST["username"] != ""){
     $username = $_POST["username"];
 }
 else{
