@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include("connection.php");
 
 $customer_id = $_SESSION['logged_user'];
@@ -15,7 +15,5 @@ $mysql = $connection->prepare("INSERT INTO comments(customer_id, comment) VALUES
 $mysql->bind_param("is", $customer_id, $comment);
 $mysql->execute();
 
-header("Location: ../contatus/contactus.php");
-echo "<script>alert('Your comment was well received! Thank you.')</script>";
-
-?>
+echo '<script>alert("Your commen was well received! Thank you."); window.location = "../contactus/contactus.php"</script>';
+// header("Location: ../contactus/contactus.php");

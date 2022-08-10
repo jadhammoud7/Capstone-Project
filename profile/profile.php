@@ -36,7 +36,7 @@ session_reset();
                         title="Appointments"><i class="fa fa-wrench fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../contactus/contactus.html" class="contact_menu nav-link" title="Contact Us Page"><i
+                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page"><i
                             class="fa fa-phone fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
@@ -90,7 +90,7 @@ session_reset();
                 <label for="password"><b>Password</b></label>
                 <input class="password_login" id="password" type="password" placeholder="Enter Password" name="password" required
                     title="Enter your password">
-                <span>Dont have an account?<a href="../signup/signup.html" title="Sign Up for a new account">Sign
+                <span>Dont have an account?<a href="../signup/signup.php" title="Sign Up for a new account">Sign
                         up</a></span>
                 <br> <br>
                 <span class="psw"><b>Forgot</b> <a href=""><b>password?</b></a></span>

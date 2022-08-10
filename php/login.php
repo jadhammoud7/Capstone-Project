@@ -24,17 +24,19 @@ $data = $statement_result->fetch_assoc();
 
 
 $logged_id = $data['customer_id'];
+
 //saving which user is logged in
 
 $stmt = $connection->prepare("SELECT password FROM customers WHERE username='".$username."' ");
 $stmt->execute();
 $stmt_result = $stmt->get_result();
 $stmt_data = $stmt_result->fetch_assoc();
-if($stmt_data['password'] == $password){
+if($stmt_data['password'] == hash("sha256", $password)){
     $_SESSION['logged_user'] = $logged_id;
-    echo "the id of the logged user is :",$_SESSION['logged_user'];
-    // $_SESSION['logged_bool'] = true;
-    // header("Location:../home-page/home-page.php");
+    // echo "the id of the logged user is :",$_SESSION['logged_user'];
+    $_SESSION['logged_bool'] = true;
+    // header("Location:../profile/profile.php");
+    echo "<script>alert('Login successful');</script>";
     echo "<script>document.getElementById('id01').style.display = 'none';</script>";
 }
 else{
