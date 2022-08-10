@@ -1,6 +1,6 @@
 <?php
 
-// session_start();
+session_start();
 include("connection.php");
 
 if(isset($_POST["username"]) && $_POST["username"] != ""){
@@ -20,7 +20,9 @@ $statement = $connection->prepare("SELECT customer_id FROM customers WHERE usern
 $statement->execute();
 $statement_result = $statement->get_result();
 $data = $statement_result->fetch_assoc();
-// $logged_id = $data['customer_id'];
+
+
+$logged_id = $data['customer_id'];
 //saving which user is logged in
 
 $stmt = $connection->prepare("SELECT password FROM customers WHERE username='".$username."' ");
@@ -28,9 +30,13 @@ $stmt->execute();
 $stmt_result = $stmt->get_result();
 $stmt_data = $stmt_result->fetch_assoc();
 if($stmt_data['password'] == $password){
-    // $_SESSION['logged_id'] = $logged_id;
+    $_SESSION['logged_user'] = $logged_id;
+    echo "the id of the logged user is :",$_SESSION['logged_user'];
+    
+
+
     // $_SESSION['logged_bool'] = true;
-    header("Location:../home-page/home-page.php");
+    // header("Location:../home-page/home-page.php");
 }
 else{
     header("Location:../profile/profile.php");
