@@ -36,7 +36,7 @@
         <input type="date" placeholder="Enter your date of birth" name="date_of_birth" id="date_of_birth" required> <br> <br>
 
         <label for="phone_number"><b>Phone Number</b></label>
-        <input type="tel" placeholder="Enter your phone number" name="phone_number" id="phone_number" required>
+        <input type="tel" placeholder="Enter your phone number" name="phone_number" id="phone_number" required> <br> <br>
 
         <label for="address"><b>Address</b></label>
         <input type="text" placeholder="Enter address" name="address"  id="address" required>
