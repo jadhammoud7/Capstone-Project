@@ -16,6 +16,6 @@ $mysql->bind_param("is", $customer_id, $comment);
 $mysql->execute();
 
 header("Location: ../contatus/contactus.php");
-echo "<script>Your comment was well received! Thank you.</script>";
+echo "<script>alert('Your comment was well received! Thank you.')</script>";
 
 ?>

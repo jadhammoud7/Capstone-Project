@@ -37,7 +37,7 @@ if($stmt_data['password'] == $password){
     // header("Location:../home-page/home-page.php");
 }
 else{
-    echo "<script>Either username or password is invalid</script>";
+    echo "<script>alert('Either username or password is invalid')</script>";
     header("Location:../profile/profile.php");
 }
 
