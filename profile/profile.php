@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
-    if(session_status() != 0){
-        include_once("../php/login.php");
-    }
-?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -68,7 +64,7 @@
 
     <!-- started with title page -->
     <div class="title">
-        <h1 style="color: #333;">Hello <?php if(session_status() != 0){ echo $first_name + " " + $last_name; }?></h1>
+        <h1 style="color: #333;">Hello Mr.X></h1>
         <h5 style="color:#b4c3da;">My Account</h5>
     </div>
     <!-- ended with title page -->
