@@ -33,13 +33,11 @@ $stmt_data = $stmt_result->fetch_assoc();
 if($stmt_data['password'] == $password){
     $_SESSION['logged_user'] = $logged_id;
     echo "the id of the logged user is :",$_SESSION['logged_user'];
-    
-
-
     // $_SESSION['logged_bool'] = true;
     // header("Location:../home-page/home-page.php");
 }
 else{
+    echo "Either username or password is invalid";
     header("Location:../profile/profile.php");
 }
 

@@ -81,7 +81,7 @@
             <h2>Leave us a Comment</h2>
             <h4>Have any thoughts, concerns, or questions you would like to share to us, please write your comment, and
                 we will take your comment in consideration!</h3>
-                <form action="" class="comment_section">
+                <form action="../php/comment.php" method="post" class="comment_section">
                     <textarea name="comment" id="comment" cols="50" rows="10" class="comment-input"
                         placeholder="Write your thoughts or comment here. Please be considerate. We care about your comments :)"></textarea>
                     <br>
