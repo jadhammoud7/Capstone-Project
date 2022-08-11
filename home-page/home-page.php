@@ -460,7 +460,7 @@
                 session_start();
                 
                 unset($_SESSION["logged_user"]);
-                echo "<script>alert('<?php echo $_SESSION["logged_user"]?>');</script>";
+                echo ($_SESSION["logged_user"]);
                     ?>
             }
         </script>
