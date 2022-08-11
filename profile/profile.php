@@ -63,11 +63,11 @@
     <!-- ended with title page -->
 
     <!-- start login -->
-    <div id="id01" class="modal">
+    <!-- <div id="id01" class="modal">
         <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
         <form class="modal-content animate" action="../php/login.php" method="post">
             <div class="imgcontainer">
-                <!-- <img src="../images/console.png" alt="Avatar" class="avatar"> -->
+                <img src="../images/console.png" alt="Avatar" class="avatar">
                 <br> <br>
                 <h1 class="join_our_family"><i>Join Our Family</i></h1>
             </div>
@@ -88,7 +88,7 @@
                 <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn" style="color: black; background-color: #F44336;">Back</button>
             </div>
         </form>
-    </div>
+    </div> -->
     <!-- end login -->
 
     <!-- started with profile body -->
@@ -487,7 +487,7 @@
 <!-- ended footer -->
 
 <script src="../profile/profile.js"></script>
-<script>
+<!-- <script>
 
     if (<?php echo session_status(); ?> == 1) {
         document.getElementById('id01').style.display = 'block';
@@ -495,6 +495,6 @@
     if (<?php echo session_status(); ?> > 1) {
         document.getElementById('id01').style.display = 'none';
     }
-</script>
+</script> -->
 
 </php>

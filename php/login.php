@@ -36,7 +36,7 @@ if($stmt_data['password'] == $password){
     // echo "the id of the logged user is :",$_SESSION['logged_user'];
     $_SESSION['logged_bool'] = true;
     //header("Location:../profile/profile.php");
-    echo "<script>alert('Login successful'); window.location = '../profile/profile.php';</script>";
+    echo "<script>alert('Login successful'); window.location = '../home-page/home-page.php';</script>";
 }
 else{
     echo "<script>alert('Either username or password is invalid'); window.location = '../profile/profile.php';</script>";
