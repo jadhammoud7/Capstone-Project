@@ -73,7 +73,7 @@ $data1 = $statement_result1->fetch_assoc();
 
 
 $logged_id1 = $data1['customer_id'];
-$_SESSION['logged_user'] = $logged_id1;
+$_SESSION['logged_id'] = $logged_id1;
 echo "the id of the logged user is :",$_SESSION['logged_user'];
 //saving which user is logged in
 ?>

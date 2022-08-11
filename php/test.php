@@ -1,5 +1,5 @@
 <?php
 session_start();
 include("connection.php");
-echo $_SESSION['logged_user'];
+echo $_SESSION['logged_id'];
 ?>

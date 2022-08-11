@@ -4,7 +4,7 @@ session_start();
 
 include("../php/connection.php");
 
-$customerid = $_SESSION['logged_user'];
+$customerid = $_SESSION['logged_id'];
 
 $query = "SELECT first_name, last_name, email, phone_number, address from customers WHERE customer_id = $customerid";
 $stmt = $connection->prepare($query);
