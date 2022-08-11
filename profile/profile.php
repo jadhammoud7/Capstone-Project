@@ -1,3 +1,20 @@
+<?php
+
+session_start();
+
+include("../php/connection.php");
+
+$customerid = $_SESSION['logged_user'];
+
+$query = "SELECT first_name, last_name, email, phone_number, address from customers WHERE customer_id = $customerid";
+$stmt = $connection->prepare($query);
+$stmt->execute();
+$results = $stmt->get_result();
+$row = $results->fetch_assoc();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -111,28 +128,28 @@
         <div class="profile fade" style="display: none;">
             <div class="profile-part">
                 <h3 id="attribute">First Name: </h3>
-                <h3>Mohamad</h3>
+                <h3><?php echo $row["first_name"] ?></h3>
             </div>
             <input type="text" name="firstname_editprofile" id="" placeholder="new first name.." class="first_name_editprofile" style="display: none;">
             <div class="profile-part">
                 <h3 id="attribute">Last Name: </h3>
-                <h3>Nabaa</h3>
+                <h3><?php echo $row["last_name"] ?></h3>
             </div>
             <input type="text" name="lastname_editprofile" id="" placeholder="new last name.." class="last_name_editprofile" style="display: none;">
 
             <div class="profile-part">
                 <h3 id="attribute">Email Address: </h3>
-                <h3>mnabaa53@gmail.com</h3>
+                <h3><?php echo $row["email"] ?></h3>
             </div>
             <input type="text" name="email_editprofile" id="" placeholder="new email.." class="email_editprofile" style="display: none;">
             <div class="profile-part">
                 <h3 id="attribute">Phone Number: </h3>
-                <h3>961 71 123 805</h3>
+                <h3><?php echo $row["phone_number"] ?></h3>
             </div>
             <input type="text" name="phonenumber_editprofile" id="" placeholder="new phone number.." class="phone_number_editprofile" style="display: none;">
             <div class="profile-part">
                 <h3 id="attribute">Home Address: </h3>
-                <h3>Aramoun, Lebanon</h3>
+                <h3><?php echo $row["address"] ?></h3>
             </div>
             <input type="text" name="address_editprofile" id="" placeholder="new address.." class="address_editprofile" style="display: none;">
 
@@ -142,6 +159,7 @@
                         Profile</strong></button>
             </div>
         </div>
+
         <!-- ended profile -->
 
 
