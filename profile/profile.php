@@ -487,14 +487,5 @@
 <!-- ended footer -->
 
 <script src="../profile/profile.js"></script>
-<!-- <script>
-
-    if (<?php echo session_status(); ?> == 1) {
-        document.getElementById('id01').style.display = 'block';
-    }
-    if (<?php echo session_status(); ?> > 1) {
-        document.getElementById('id01').style.display = 'none';
-    }
-</script> -->
 
 </php>
