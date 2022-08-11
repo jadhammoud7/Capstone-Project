@@ -30,7 +30,7 @@
             </a>
         </form>
 
-        <div class="" style="margin:20px 20px 20px 60px;"> Don't have an account? <a href="signup_user.php">Signup</a> </div>
+        <div class="" style="margin:20px 20px 20px 60px;"> Don't have an account? <a href="../signup/signup.php">Signup</a> </div>
 
     </div>
 </body>
