@@ -34,9 +34,9 @@ $stmt_data = $stmt_result->fetch_assoc();
 if($stmt_data['password'] == $password){
     $_SESSION['logged_user'] = $logged_id;
     // echo "the id of the logged user is :",$_SESSION['logged_user'];
-    $_SESSION['logged_bool'] = true;
-    // header("Location:../profile/profile.php");
-    echo "<script>alert('Login successful'); window.location = '../profile/profile.php';</script>";
+    // $_SESSION['logged_bool'] = true;
+    header("Location:../profile/profile.php");
+    // echo "<script>alert('Login successful'); window.location = '../profile/profile.php';</script>";
 }
 else{
     echo "<script>alert('Either username or password is invalid'); window.location = '../profile/profile.php';</script>";

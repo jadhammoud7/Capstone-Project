@@ -13,7 +13,7 @@
     <title>Home - Newbies Gamers</title>
 </head>
 
-<body>
+<body onunload="myFunction()">
 
 
     <!-- started with the menu bar -->
@@ -452,6 +452,18 @@
         <!-- ended with footer -->
         <script src="../home-page/home-page.js"></script>
         <script src="../main/main.js"></script>
+
+        <script>
+            window.onunload=myFunction;
+            function myFunction() {
+                <?php
+                session_start();
+                
+                unset($_SESSION["logged_user"]);
+                echo "<script>alert('<?php echo $_SESSION["logged_user"]?>');</script>";
+                    ?>
+            }
+        </script>
 </body>
 
 </html>

@@ -522,7 +522,14 @@
 
 <script src="../profile/profile.js"></script>
 <script>
-    if(<?php echo session_status(); ?> == 2){
+window.onunload=myFunction;
+function myFunction() {
+    <?php
+    session_start();
+session_destroy();
+    ?>
+}
+    if(<?php echo session_status(); ?> > 1){
         document.getElementById('id01').style.display = 'none';
     }
     if(<?php echo session_status(); ?> == 1){
