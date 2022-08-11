@@ -22,27 +22,27 @@
             <a href="" class="nav-branding">Newbie Gamers.</a>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="../home-page/home-page.html" class="home_menu nav-link" title="Home Page"> <i
+                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page"> <i
                             class="fa fa-home fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../shop/shop.html" class="shop_menu nav-link" title="Shop Page"><i
+                    <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page"><i
                             class="fa fa-shopping-cart fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../appointments/appointments.html" class="appointments_menu nav-link"
+                    <a href="../appointments/appointments.php" class="appointments_menu nav-link"
                         title="Appointments"><i class="fa fa-wrench fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../contactus/contactus.html" class="contact_menu nav-link" title="Contact Us Page"><i
+                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page"><i
                             class="fa fa-phone fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../aboutus/aboutus.html" class="about_menu nav-link" title="About us Page"><i
+                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page"><i
                             class="fa fa-book fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../basket/basket.html" class="basket_menu nav-link" title="View my Shopping Basket"><i
+                    <a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket"><i
                             class="fa fa-shopping-basket fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
@@ -127,22 +127,22 @@
                             <h3>Newbies Gamers Home</h3>
                         </li>
                         <li>
-                            <a href="../home-page/home-page.html#features" title="View Our specialists and features">Our
+                            <a href="../home-page/home-page.php#features" title="View Our specialists and features">Our
                                 Specialists & Features</a>
                         </li>
                         <li>
-                            <a href="../home-page/home-page.html#about-us" title="Know more about us">About Us</a>
+                            <a href="../home-page/home-page.php#about-us" title="Know more about us">About Us</a>
                         </li>
                         <li>
-                            <a href="../home-page/home-page.html#contact-us"
+                            <a href="../home-page/home-page.php#contact-us"
                                 title="Contact us for any enquiries or thoughts">Contact Us</a>
                         </li>
                         <li>
-                            <a href="../home-page/home-page.html#shop-products" title="Take a look at our products">Our
+                            <a href="../home-page/home-page.php#shop-products" title="Take a look at our products">Our
                                 Products</a>
                         </li>
                         <li>
-                            <a href="../home-page/home-page.html#testimonials"
+                            <a href="../home-page/home-page.php#testimonials"
                                 title="See what our customers said about our service">Our Customers' opinions</a>
                         </li>
                     </ol>
@@ -155,10 +155,10 @@
                             <h3>Newbies Gamers Shop</h3>
                         </li>
                         <li>
-                            <a href="../shop/shop.html" title="View all available products in Newbies Gamers and fill your basket to buy">Shop Now</a>
+                            <a href="../shop/shop.php" title="View all available products in Newbies Gamers and fill your basket to buy">Shop Now</a>
                         </li>
                         <li>
-                            <a href="../basket/basket.html" title="View your shopping basket"><i class="fa fa-shopping-basket"></i>View your shopping basket</a>
+                            <a href="../basket/basket.php" title="View your shopping basket"><i class="fa fa-shopping-basket"></i>View your shopping basket</a>
                         </li>
                     </ol>
                 </div>
@@ -170,14 +170,14 @@
                             <h3>About Newbies Gamers</h3>
                         </li>
                         <li>
-                            <a href="../aboutus/aboutus.html#history" title="Know about our history">Our History</a>
+                            <a href="../aboutus/aboutus.php#history" title="Know about our history">Our History</a>
                         </li>
                         <li>
-                            <a href="../aboutus/aboutus.html#establishment" title="Know about our establishment">Our
+                            <a href="../aboutus/aboutus.php#establishment" title="Know about our establishment">Our
                                 Establishment</a>
                         </li>
                         <li>
-                            <a href="../aboutus/aboutus.html#specials" title="See what makes us special">Our
+                            <a href="../aboutus/aboutus.php#specials" title="See what makes us special">Our
                                 Specials</a>
                         </li>
                         <li>
@@ -193,25 +193,25 @@
                             <h3>Book an Appointment</h3>
                         </li>
                         <li>
-                            <a href="../appointments/appointments.html#laptop-repair">Laptop Repair</a>
+                            <a href="../appointments/appointments.php#laptop-repair">Laptop Repair</a>
                         </li>
                         <li>
-                            <a href="../appointments/appointments.html#laptop-cleaning">Laptop Cleaning</a>
+                            <a href="../appointments/appointments.php#laptop-cleaning">Laptop Cleaning</a>
                         </li>
                         <li>
-                            <a href="../appointments/appointments.html#cpu-repair">CPU Repair</a>
+                            <a href="../appointments/appointments.php#cpu-repair">CPU Repair</a>
                         </li>
                         <li>
-                            <a href="../appointments/appointments.html#cpu-cleaning">CPU Cleaning</a>
+                            <a href="../appointments/appointments.php#cpu-cleaning">CPU Cleaning</a>
                         </li>
                         <li>
-                            <a href="../appointments/appointments.html#phone-repair">Phone Repair</a>
+                            <a href="../appointments/appointments.php#phone-repair">Phone Repair</a>
                         </li>
                         <li>
-                            <a href="../appointments/appointments.html#ps-repair">PS Repair</a>
+                            <a href="../appointments/appointments.php#ps-repair">PS Repair</a>
                         </li>
                         <li>
-                            <a href="../appointments/appointments.html#controller-repair">Controller Repair</a>
+                            <a href="../appointments/appointments.php#controller-repair">Controller Repair</a>
                         </li>
                     </ol>
                 </div>
@@ -223,7 +223,7 @@
                             <h3>Contact Us</h3>
                         </li>
                         <li>
-                            <a href="../contactus/contactus.html" title="Share your thoughts and concerns to us">Share
+                            <a href="../contactus/contactus.php" title="Share your thoughts and concerns to us">Share
                                 your thoughts</a>
                         </li>
                         <li>
@@ -264,4 +264,4 @@
     <script src="../contactus/contactus.js"></script>
 </body>
 
-</html>
+</php>

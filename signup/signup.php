@@ -12,7 +12,7 @@
 
 <body>
   <div id="id01" class="modal">
-    <a href="../home-page/home-page.html">
+    <a href="../home-page/home-page.php">
       <span class="close" title="Close Modal">&times;</span>
     </a>
     <form class="modal-content" action="../php/signup.php" method="post">
@@ -47,7 +47,7 @@
 
 
         <div class="clearfix">
-          <a href="../home-page/home-page.html">
+          <a href="../home-page/home-page.php">
             <button type="button" class="cancelbtn" title="Return to Home Page">Back to
               Home</button>
           </a>
@@ -59,4 +59,4 @@
 
 </body>
 
-</html>
+</php>
