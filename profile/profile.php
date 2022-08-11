@@ -22,32 +22,25 @@
             <a href="" class="nav-branding">Newbie Gamers.</a>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="../home-page/home-page.html" class="home_menu nav-link" title="Home Page"> <i
-                            class="fa fa-home fa-lg"></i></a>
+                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page"> <i class="fa fa-home fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../shop/shop.html" class="shop_menu nav-link" title="Shop Page"><i
-                            class="fa fa-shopping-cart fa-lg"></i></a>
+                    <a href="../shop/shop.html" class="shop_menu nav-link" title="Shop Page"><i class="fa fa-shopping-cart fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../appointments/appointments.html" class="appointments_menu nav-link"
-                        title="Appointments"><i class="fa fa-wrench fa-lg"></i></a>
+                    <a href="../appointments/appointments.html" class="appointments_menu nav-link" title="Appointments"><i class="fa fa-wrench fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page"><i
-                            class="fa fa-phone fa-lg"></i></a>
+                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page"><i class="fa fa-phone fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../aboutus/aboutus.html" class="about_menu nav-link" title="About us Page"><i
-                            class="fa fa-book fa-lg"></i></a>
+                    <a href="../aboutus/aboutus.html" class="about_menu nav-link" title="About us Page"><i class="fa fa-book fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../basket/basket.html" class="basket_menu nav-link" title="View my Shopping Basket"><i
-                            class="fa fa-shopping-basket fa-lg"></i></a>
+                    <a href="../basket/basket.html" class="basket_menu nav-link" title="View my Shopping Basket"><i class="fa fa-shopping-basket fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../profile/profile.html" class="myaccount_menu nav-link" title="View my account"><i
-                            class="fa fa-user fa-lg" style="margin-bottom: 30px;"></i></a>
+                    <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account"><i class="fa fa-user fa-lg" style="margin-bottom: 30px;"></i></a>
                 </li>
             </ul>
             <div class="hamburger">
@@ -68,11 +61,10 @@
         <h5 style="color:#b4c3da;">My Account</h5>
     </div>
     <!-- ended with title page -->
-    
+
     <!-- start login -->
     <div id="id01" class="modal">
-        <span onclick="document.getElementById('id01').style.display='none'" class="close"
-            title="Close Modal">&times;</span>
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
         <form class="modal-content animate" action="../php/login.php" method="post">
             <div class="imgcontainer">
                 <!-- <img src="../images/console.png" alt="Avatar" class="avatar"> -->
@@ -82,12 +74,10 @@
 
             <div class="container">
                 <label for="user_name"><b>Username</b></label>
-                <input class="username_login" id="username" type="text" placeholder="Enter Username" name="username" required
-                    title="Enter your username">
+                <input class="username_login" id="username" type="text" placeholder="Enter Username" name="username" required title="Enter your username">
 
                 <label for="password"><b>Password</b></label>
-                <input class="password_login" id="password" type="password" placeholder="Enter Password" name="password" required
-                    title="Enter your password">
+                <input class="password_login" id="password" type="password" placeholder="Enter Password" name="password" required title="Enter your password">
                 <span>Dont have an account?<a href="../signup/signup.php" title="Sign Up for a new account">Sign
                         up</a></span>
                 <br> <br>
@@ -95,8 +85,7 @@
                 <button class="submit-button" type="submit" title="Log In" style="color: black;"><strong>Login</strong></button>
             </div>
             <div id="canceling" class="container">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                    class="cancelbtn" style="color: black; background-color: #F44336;">Back</button>
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn" style="color: black; background-color: #F44336;">Back</button>
             </div>
         </form>
     </div>
@@ -112,10 +101,8 @@
             </ol>
             <ol class="profile-sidebar-list reveal-by-x">
                 <li><a onclick="ShowProfile()" id="profile-button" title="View your own personal info">Profile</a></li>
-                <li><a onclick="ShowBasket()" id="basket-button"
-                        title="View your current list of products added by you to basket">Shopping Basket</a></li>
-                <li><a onclick="ShowFavorites()" id="favorites-button"
-                        title="View list of products added by you to your favorites">Favorites List</a></li>
+                <li><a onclick="ShowBasket()" id="basket-button" title="View your current list of products added by you to basket">Shopping Basket</a></li>
+                <li><a onclick="ShowFavorites()" id="favorites-button" title="View list of products added by you to your favorites">Favorites List</a></li>
             </ol>
         </div>
 
@@ -126,38 +113,32 @@
                 <h3 id="attribute">First Name: </h3>
                 <h3>Mohamad</h3>
             </div>
-            <input type="text" name="firstname_editprofile" id="" placeholder="new first name.."
-                class="first_name_editprofile" style="display: none;">
+            <input type="text" name="firstname_editprofile" id="" placeholder="new first name.." class="first_name_editprofile" style="display: none;">
             <div class="profile-part">
                 <h3 id="attribute">Last Name: </h3>
                 <h3>Nabaa</h3>
             </div>
-            <input type="text" name="lastname_editprofile" id="" placeholder="new last name.."
-                class="last_name_editprofile" style="display: none;">
+            <input type="text" name="lastname_editprofile" id="" placeholder="new last name.." class="last_name_editprofile" style="display: none;">
 
             <div class="profile-part">
                 <h3 id="attribute">Email Address: </h3>
                 <h3>mnabaa53@gmail.com</h3>
             </div>
-            <input type="text" name="email_editprofile" id="" placeholder="new email.." class="email_editprofile"
-                style="display: none;">
+            <input type="text" name="email_editprofile" id="" placeholder="new email.." class="email_editprofile" style="display: none;">
             <div class="profile-part">
                 <h3 id="attribute">Phone Number: </h3>
                 <h3>961 71 123 805</h3>
             </div>
-            <input type="text" name="phonenumber_editprofile" id="" placeholder="new phone number.."
-                class="phone_number_editprofile" style="display: none;">
+            <input type="text" name="phonenumber_editprofile" id="" placeholder="new phone number.." class="phone_number_editprofile" style="display: none;">
             <div class="profile-part">
                 <h3 id="attribute">Home Address: </h3>
                 <h3>Aramoun, Lebanon</h3>
             </div>
-            <input type="text" name="address_editprofile" id="" placeholder="new address.." class="address_editprofile"
-                style="display: none;">
+            <input type="text" name="address_editprofile" id="" placeholder="new address.." class="address_editprofile" style="display: none;">
 
 
             <div class="edit_save_btn">
-                <button onclick="ChangeProfile()" class="edit_profile_btn" title="Edit your profile"> <i
-                        class="fa fa-edit"></i><strong>Edit
+                <button onclick="ChangeProfile()" class="edit_profile_btn" title="Edit your profile"> <i class="fa fa-edit"></i><strong>Edit
                         Profile</strong></button>
             </div>
         </div>
@@ -274,12 +255,10 @@
                 </div>
                 <div class="favorites-product-buttons">
                     <div>
-                        <button class="btn" title="Check more information about this product"><i
-                                class="fa fa-info-circle"></i><strong>Check Info</strong></button>
+                        <button class="btn" title="Check more information about this product"><i class="fa fa-info-circle"></i><strong>Check Info</strong></button>
                     </div>
                     <div>
-                        <button class="btn" title="Remove this product from your favorites list"><i
-                                class="fa fa-trash"></i><strong>Remove From Favorites</strong></button>
+                        <button class="btn" title="Remove this product from your favorites list"><i class="fa fa-trash"></i><strong>Remove From Favorites</strong></button>
                     </div>
                 </div>
             </div>
@@ -299,12 +278,10 @@
                 </div>
                 <div class="favorites-product-buttons">
                     <div>
-                        <button class="btn" title="Check more information about this product"><i
-                                class="fa fa-info-circle"></i><strong>Check Info</strong></button>
+                        <button class="btn" title="Check more information about this product"><i class="fa fa-info-circle"></i><strong>Check Info</strong></button>
                     </div>
                     <div>
-                        <button class="btn" title="Remove this product from your favorites list"><i
-                                class="fa fa-trash"></i><strong>Remove From Favorites</strong></button>
+                        <button class="btn" title="Remove this product from your favorites list"><i class="fa fa-trash"></i><strong>Remove From Favorites</strong></button>
                     </div>
                 </div>
             </div>
@@ -324,12 +301,10 @@
                 </div>
                 <div class="favorites-product-buttons">
                     <div>
-                        <button class="btn" title="Check more information about this product"><i
-                                class="fa fa-info-circle"></i><strong>Check Info</strong></button>
+                        <button class="btn" title="Check more information about this product"><i class="fa fa-info-circle"></i><strong>Check Info</strong></button>
                     </div>
                     <div>
-                        <button class="btn" title="Remove this product from your favorites list"><i
-                                class="fa fa-trash"></i><strong>Remove From Favorites</strong></button>
+                        <button class="btn" title="Remove this product from your favorites list"><i class="fa fa-trash"></i><strong>Remove From Favorites</strong></button>
                     </div>
                 </div>
             </div>
@@ -349,12 +324,10 @@
                 </div>
                 <div class="favorites-product-buttons">
                     <div>
-                        <button class="btn" title="Check more information about this product"><i
-                                class="fa fa-info-circle"></i><strong> Check Info</strong></button>
+                        <button class="btn" title="Check more information about this product"><i class="fa fa-info-circle"></i><strong> Check Info</strong></button>
                     </div>
                     <div>
-                        <button class="btn" title="Remove this product from your favorites list"><i
-                                class="fa fa-trash"></i><strong>Remove From Favorites</strong></button>
+                        <button class="btn" title="Remove this product from your favorites list"><i class="fa fa-trash"></i><strong>Remove From Favorites</strong></button>
                     </div>
                 </div>
             </div>
@@ -390,16 +363,14 @@
                             <a href="../home-page/home-page.html#about-us" title="Know more about us">About Us</a>
                         </li>
                         <li>
-                            <a href="../home-page/home-page.html#contact-us"
-                                title="Contact us for any enquiries or thoughts">Contact Us</a>
+                            <a href="../home-page/home-page.html#contact-us" title="Contact us for any enquiries or thoughts">Contact Us</a>
                         </li>
                         <li>
                             <a href="../home-page/home-page.html#shop-products" title="Take a look at our products">Our
                                 Products</a>
                         </li>
                         <li>
-                            <a href="../home-page/home-page.html#testimonials"
-                                title="See what our customers said about our service">Our Customers' opinions</a>
+                            <a href="../home-page/home-page.html#testimonials" title="See what our customers said about our service">Our Customers' opinions</a>
                         </li>
                     </ol>
                 </div>
@@ -411,13 +382,11 @@
                             <h3>Newbies Gamers Shop</h3>
                         </li>
                         <li>
-                            <a href="../shop/shop.html"
-                                title="View all available products in Newbies Gamers and fill your basket to buy">Shop
+                            <a href="../shop/shop.html" title="View all available products in Newbies Gamers and fill your basket to buy">Shop
                                 Now</a>
                         </li>
                         <li>
-                            <a href="../basket/basket.html" title="View your shopping basket"><i
-                                    class="fa fa-shopping-basket"></i>View your shopping basket</a>
+                            <a href="../basket/basket.html" title="View your shopping basket"><i class="fa fa-shopping-basket"></i>View your shopping basket</a>
                         </li>
                     </ol>
                 </div>
@@ -501,16 +470,13 @@
                             <h3>Follow Us on Our Socials</h3>
                         </li>
                         <li>
-                            <a href="https://www.facebook.com" title="Newbies Gamers facebook account link"><i
-                                    class="fa fa-facebook"></i>Facebook</a>
+                            <a href="https://www.facebook.com" title="Newbies Gamers facebook account link"><i class="fa fa-facebook"></i>Facebook</a>
                         </li>
                         <li>
-                            <a href="https://www.instagram.com" title="Newbies Gamers instagram account link"><i
-                                    class="fa fa-instagram"></i>Instagram</a>
+                            <a href="https://www.instagram.com" title="Newbies Gamers instagram account link"><i class="fa fa-instagram"></i>Instagram</a>
                         </li>
                         <li>
-                            <a href="https://www.twitter.com" title="Newbies Gamers twitter account link"><i
-                                    class="fa fa-twitter"></i>Twitter</a>
+                            <a href="https://www.twitter.com" title="Newbies Gamers twitter account link"><i class="fa fa-twitter"></i>Twitter</a>
                         </li>
                     </ol>
                 </div>
@@ -522,18 +488,12 @@
 
 <script src="../profile/profile.js"></script>
 <script>
-window.onunload=myFunction;
-function myFunction() {
-    <?php
-    session_start();
-session_destroy();
-    ?>
-}
-    if(<?php echo session_status(); ?> > 1){
-        document.getElementById('id01').style.display = 'none';
-    }
-    if(<?php echo session_status(); ?> == 1){
+
+    if (<?php echo session_status(); ?> == 1) {
         document.getElementById('id01').style.display = 'block';
+    }
+    if (<?php echo session_status(); ?> > 1) {
+        document.getElementById('id01').style.display = 'none';
     }
 </script>
 
