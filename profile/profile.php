@@ -522,8 +522,11 @@
 
 <script src="../profile/profile.js"></script>
 <script>
-    if(<?php echo session_status(); ?> != 0){
+    if(<?php echo session_status(); ?> == 2){
         document.getElementById('id01').style.display = 'none';
+    }
+    if(<?php echo session_status(); ?> == 1){
+        document.getElementById('id01').style.display = 'block';
     }
 </script>
 

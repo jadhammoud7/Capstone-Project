@@ -11,8 +11,6 @@
 </head>
 
 <body>
-
-
   <div id="id01" class="modal">
     <a href="../home-page/home-page.html">
       <span class="close" title="Close Modal">&times;</span>
