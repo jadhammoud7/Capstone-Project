@@ -6,7 +6,7 @@ include("../php/connection.php");
 
 $customerid = $_SESSION['logged_id'];
 
-$query = "SELECT first_name, last_name, email, phone_number, address from customers WHERE customer_id = $customerid";
+$query = "SELECT first_name, last_name, email, phone_number, username, address from customers WHERE customer_id = $customerid";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
@@ -74,7 +74,7 @@ $row = $results->fetch_assoc();
 
     <!-- started with title page -->
     <div class="title">
-        <h1 style="color: #333;">Hello Mr.X></h1>
+        <h1 style="color: #333;">Hello <?php echo $row["username"]; ?></h1>
         <h5 style="color:#b4c3da;">My Account</h5>
     </div>
     <!-- ended with title page -->
@@ -113,7 +113,7 @@ $row = $results->fetch_assoc();
         <div class="profile-sidebar">
             <img src="../images/info.png" alt="">
             <ol class="profile-sidebar-user">
-                <li id="customer-name" title="My Username"><span>Mr.X</span></li>
+                <li id="customer-name" title="My Username"><span><?php echo $row["username"]; ?></span></li>
                 <li id="customer" title="My Status"><span>Customer</span></li>
             </ol>
             <ol class="profile-sidebar-list reveal-by-x">
