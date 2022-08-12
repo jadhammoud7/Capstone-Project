@@ -1,8 +1,21 @@
 <?php
 
     session_start();
+    include("../php/connection.php");
+
     if(!isset($_SESSION['logged_bool'])){
         header("Location: ../login/login.php");
+    }
+    $query = "SELECT username,comment FROM comments LIMIT 3";
+    $stmt =$connection->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    // $data = $result->fetch_assoc();
+
+
+    while($data = $result->fetch_assoc()){
+        $username=$data['username'];
+        $comment=$data['comment'];
     }
 ?>
 
@@ -280,30 +293,18 @@
             <img class="test" src="../images/right-quotation-mark.png" alt="Testimonial Logo">
             <div class="testimonial_cover" id="first_test">
                 <img src="../images/wallpaper3.jpg" alt="profile" class="test_profile_img">
-                <p class="name_test"><span><i> <strong>Name x</strong></i></span></p>
-                <p>products are offordable and hahah hahodihw jsa j ajja ajjd sjjd sja djja dhhajd ajadjd j sja dhsjajd
-                    wkdd
-                    hjs dhsjd s
-                    hs hs shs shsd hdhs hs dh
-                </p>
+                <p class="name_test"><span><i> <strong><?php echo $username?></strong></i></span></p>
+                <p><?php echo $comment ?></p>
             </div>
             <div class="testimonial_cover">
                 <img src="../images/wallpaper3.jpg" alt="profile" class="test_profile_img">
-                <p class="name_test"><span><i> <strong>Name x</strong></i></span></p>
-                <p>products are offordable and hahah hahodihw jsa j ajja ajjd sjjd sja djja dhhajd ajadjd j sja dhsjajd
-                    wkdd
-                    hjs dhsjd s
-                    hs hs shs shsd hdhs hs dh
-                </p>
+                <p class="name_test"><span><i> <strong><?php echo $username ?></strong></i></span></p>
+                <p><?php echo $comment ?></p>
             </div>
             <div class="testimonial_cover">
                 <img src="../images/wallpaper3.jpg" alt="profile" class="test_profile_img">
-                <p class="name_test"><span><i> <strong>Name x</strong></i></span></p>
-                <p>products are offordable and hahah hahodihw jsa j ajja ajjd sjjd sja djja dhhajd ajadjd j sja dhsjajd
-                    wkdd
-                    hjs dhsjd s
-                    hs hs shs shsd hdhs hs dh
-                </p>
+                <p class="name_test"><span><i> <strong><?php echo $username?></strong></i></span></p>
+                <p><?php echo $comment ?></p>
             </div>
         </div>
         <!-- end of testimonials -->
