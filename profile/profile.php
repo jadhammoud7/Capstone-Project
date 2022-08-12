@@ -79,34 +79,7 @@ $row = $results->fetch_assoc();
     </div>
     <!-- ended with title page -->
 
-    <!-- start login -->
-    <!-- <div id="id01" class="modal">
-        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-        <form class="modal-content animate" action="../php/login.php" method="post">
-            <div class="imgcontainer">
-                <img src="../images/console.png" alt="Avatar" class="avatar">
-                <br> <br>
-                <h1 class="join_our_family"><i>Join Our Family</i></h1>
-            </div>
 
-            <div class="container">
-                <label for="user_name"><b>Username</b></label>
-                <input class="username_login" id="username" type="text" placeholder="Enter Username" name="username" required title="Enter your username">
-
-                <label for="password"><b>Password</b></label>
-                <input class="password_login" id="password" type="password" placeholder="Enter Password" name="password" required title="Enter your password">
-                <span>Dont have an account?<a href="../signup/signup.php" title="Sign Up for a new account">Sign
-                        up</a></span>
-                <br> <br>
-                <span class="psw"><b>Forgot</b> <a href=""><b>password?</b></a></span>
-                <button class="submit-button" type="submit" title="Log In" style="color: black;"><strong>Login</strong></button>
-            </div>
-            <div id="canceling" class="container">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn" style="color: black; background-color: #F44336;">Back</button>
-            </div>
-        </form>
-    </div> -->
-    <!-- end login -->
 
     <!-- started with profile body -->
     <div class="profile-container">
