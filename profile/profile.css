@@ -189,10 +189,12 @@
 .save_profile_btn {
     border-radius: 20px;
     color: black;
+    
 }
 
 .edit_save_btn {
     margin-top: 20px;
+    background-color: red;
 }
 
 .modal {
