@@ -6,17 +6,15 @@
     if(!isset($_SESSION['logged_bool'])){
         header("Location: ../login/login.php");
     }
-    $query = "SELECT username,comment FROM comments LIMIT 3";
+
+    require_once('../php/comment_connection.php');
+
+
+    $query = "SELECT username, comment FROM comments ORDER BY RAND() LIMIT 3;";
     $stmt =$connection->prepare($query);
     $stmt->execute();
-    $result = $stmt->get_result();
-    // $data = $result->fetch_assoc();
+    $results = $stmt->get_result();
 
-
-    while($data = $result->fetch_assoc()){
-        $username=$data['username'];
-        $comment=$data['comment'];
-    }
 ?>
 
 
@@ -289,26 +287,31 @@
         <div class="testimonials-title" id="testimonials">
             <h1>Our Customers' Opinions</h3>
         </div>
+
         <div class="test-back">
             <img class="test" src="../images/right-quotation-mark.png" alt="Testimonial Logo">
-            <div class="testimonial_cover" id="first_test">
-                <img src="../images/wallpaper3.jpg" alt="profile" class="test_profile_img">
-                <p class="name_test"><span><i> <strong><?php echo $username?></strong></i></span></p>
-                <p><?php echo $comment ?></p>
-            </div>
-            <div class="testimonial_cover">
-                <img src="../images/wallpaper3.jpg" alt="profile" class="test_profile_img">
-                <p class="name_test"><span><i> <strong><?php echo $username ?></strong></i></span></p>
-                <p><?php echo $comment ?></p>
-            </div>
-            <div class="testimonial_cover">
-                <img src="../images/wallpaper3.jpg" alt="profile" class="test_profile_img">
-                <p class="name_test"><span><i> <strong><?php echo $username?></strong></i></span></p>
-                <p><?php echo $comment ?></p>
-            </div>
+            <?php
+                while($row = $results->fetch_assoc() ){
+                    comment_connection($row["username"], $row["comment"]); 
+                }
+            ?>
         </div>
         <!-- end of testimonials -->
-
+        <!-- <div class="testimonial_cover" id="first_test">
+                <img src="../images/wallpaper3.jpg" alt="profile" class="test_profile_img">
+                <p class="name_test"><span><i> <strong></strong></i></span></p>
+                <p></p>
+            </div>
+            <div class="testimonial_cover">
+                <img src="../images/wallpaper3.jpg" alt="profile" class="test_profile_img">
+                <p class="name_test"><span><i> <strong></strong></i></span></p>
+                <p></p>
+            </div>
+            <div class="testimonial_cover">
+                <img src="../images/wallpaper3.jpg" alt="profile" class="test_profile_img">
+                <p class="name_test"><span><i> <strong></strong></i></span></p>
+                <p></p>
+            </div> -->
 
         <!-- started return to top button -->
         <button onclick="ReturnToTop()" id="TopBtn" title="Return to Top"><i class="fa fa-arrow-up"></i></button>
