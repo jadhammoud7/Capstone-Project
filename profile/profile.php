@@ -108,7 +108,17 @@ if(!isset($_SESSION['logged_bool'])){
                 <h3 id="attribute">First Name: </h3>
                 <h3><?php echo $row["first_name"] ?></h3>
             </div>
-            <input type="text" name="firstname_editprofile" id="" placeholder="new first name.." class="first_name_editprofile" style="display: none;">
+            <input  <?php include("../php/connection.php");
+            $customer_id = $_SESSION['logged_id'];
+            if(isset($_POST["first_name"])  && $_POST["first_name"] != ""){
+                $first_name = $_POST["first_name"];
+            
+                $query =$mysqli->prepare("UPDATE customers SET first_name=? WHERE customer_id=$customer_id");
+                $query->bind_param("s",$first_name);
+                $query->execute();
+            }
+              
+            ?> type="text" name="firstname_editprofile" id="" placeholder="new first name.." class="first_name_editprofile" style="display: none;">
             <div class="profile-part">
                 <h3 id="attribute">Last Name: </h3>
                 <h3><?php echo $row["last_name"] ?></h3>

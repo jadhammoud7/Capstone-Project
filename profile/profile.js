@@ -120,7 +120,7 @@ function ChangeProfile() {
     console.log("edit profile btn clicked");
 
     if (firstname.style.display === 'none') {
-        btn_div.innerHTML = " <button onclick=\"ChangeProfile()\" class=\"edit_profile_btn\" title=\"Back to your profile\" style=\"color: red \"><i class=\"fa fa-backward\"></i>Back</button><button class=\"save_profile_btn\" title = \"Save all your changes\" > <i class=\"fa fa-save\"></i><strong>Save</strong></button > ";
+        btn_div.innerHTML = " <button type=\"submit\" onclick=\"ChangeProfile()\" class=\"edit_profile_btn\" title=\"Back to your profile\" style=\"color: red \"><i class=\"fa fa-backward\"></i>Back</button><button class=\"save_profile_btn\" title = \"Save all your changes\" > <i class=\"fa fa-save\"></i><strong>Save</strong></button > ";
         // 👇️ this SHOWS the form
         firstname.style.display = 'block';
         lastname.style.display = 'block';
