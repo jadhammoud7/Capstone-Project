@@ -297,22 +297,9 @@
             ?>
         </div>
         <!-- end of testimonials -->
-        <!-- <div class="testimonial_cover" id="first_test">
-                <img src="../images/wallpaper3.jpg" alt="profile" class="test_profile_img">
-                <p class="name_test"><span><i> <strong></strong></i></span></p>
-                <p></p>
-            </div>
-            <div class="testimonial_cover">
-                <img src="../images/wallpaper3.jpg" alt="profile" class="test_profile_img">
-                <p class="name_test"><span><i> <strong></strong></i></span></p>
-                <p></p>
-            </div>
-            <div class="testimonial_cover">
-                <img src="../images/wallpaper3.jpg" alt="profile" class="test_profile_img">
-                <p class="name_test"><span><i> <strong></strong></i></span></p>
-                <p></p>
-            </div> -->
 
+
+        
         <!-- started return to top button -->
         <button onclick="ReturnToTop()" id="TopBtn" title="Return to Top"><i class="fa fa-arrow-up"></i></button>
         <!-- ended return to top button -->
