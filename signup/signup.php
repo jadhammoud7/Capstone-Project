@@ -13,7 +13,7 @@
 <body>
   <div id="id01" class="modal">
     <a href="../home-page/home-page.php">
-      <span class="close" title="Close Modal">&times;</span>
+      <span class="close" title="Return to log in">&times;</span>
     </a>
     <form class="modal-content" action="../php/signup.php" method="post">
       <div class="container">
