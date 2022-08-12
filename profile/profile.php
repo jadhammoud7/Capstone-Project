@@ -1,12 +1,5 @@
 <?php
 
-    session_start();
-    if(!isset($_SESSION['logged_bool'])){
-        header("Location: ../login/login.php");
-    }
-?>
-<?php
-
 session_start();
 
 include("../php/connection.php");
@@ -19,6 +12,10 @@ $stmt->execute();
 $results = $stmt->get_result();
 $row = $results->fetch_assoc();
 
+
+if(!isset($_SESSION['logged_bool'])){
+    header("Location: ../login/login.php");
+}
 ?>
 
 
