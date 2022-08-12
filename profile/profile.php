@@ -108,38 +108,38 @@ if(!isset($_SESSION['logged_bool'])){
                 <h3 id="attribute">First Name: </h3>
                 <h3><?php echo $row["first_name"] ?></h3>
             </div>
-            <input  <?php include("../php/connection.php");
-            $customer_id = $_SESSION['logged_id'];
-            if(isset($_POST["first_name"])  && $_POST["first_name"] != ""){
-                $first_name = $_POST["first_name"];
-            
-                $query =$mysqli->prepare("UPDATE customers SET first_name=? WHERE customer_id=$customer_id");
-                $query->bind_param("s",$first_name);
-                $query->execute();
-            }
-              
-            ?> type="text" name="firstname_editprofile" id="" placeholder="new first name.." class="first_name_editprofile" style="display: none;">
+            <form action="">
+            <input type="text" name="firstname_editprofile" id="" placeholder="new first name.." class="first_name_editprofile" style="display: none;">
+            </form>
             <div class="profile-part">
                 <h3 id="attribute">Last Name: </h3>
                 <h3><?php echo $row["last_name"] ?></h3>
             </div>
+            <form action="">
             <input type="text" name="lastname_editprofile" id="" placeholder="new last name.." class="last_name_editprofile" style="display: none;">
+            </form>
 
             <div class="profile-part">
                 <h3 id="attribute">Email Address: </h3>
                 <h3><?php echo $row["email"] ?></h3>
             </div>
+            <form action="">
             <input type="text" name="email_editprofile" id="" placeholder="new email.." class="email_editprofile" style="display: none;">
+            </form>
             <div class="profile-part">
                 <h3 id="attribute">Phone Number: </h3>
                 <h3><?php echo $row["phone_number"] ?></h3>
             </div>
+            <form action="">
             <input type="text" name="phonenumber_editprofile" id="" placeholder="new phone number.." class="phone_number_editprofile" style="display: none;">
+            </form>
             <div class="profile-part">
                 <h3 id="attribute">Home Address: </h3>
                 <h3><?php echo $row["address"] ?></h3>
             </div>
+            <form action="">
             <input type="text" name="address_editprofile" id="" placeholder="new address.." class="address_editprofile" style="display: none;">
+            </form>
 
 
             <div class="edit_save_btn">
