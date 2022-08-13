@@ -13,7 +13,7 @@ $results = $stmt->get_result();
 $row = $results->fetch_assoc();
 
 
-if(!isset($_SESSION['logged_bool'])){
+if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
 ?>
@@ -109,30 +109,29 @@ if(!isset($_SESSION['logged_bool'])){
                 <h3><?php echo $row["first_name"] ?></h3>
             </div>
             <form action="../php/editprofile.php" method="post">
-            <input type="text" name="firstname_editprofile" id="" placeholder="new first name.." class="first_name_editprofile" style="display: none;">                
+                <input type="text" name="firstname_editprofile" id="" placeholder="new first name.." class="first_name_editprofile" style="display: none;">
+                <div class="profile-part">
+                    <h3 id="attribute">Last Name: </h3>
+                    <h3><?php echo $row["last_name"] ?></h3>
+                </div>
+                <input type="text" name="lastname_editprofile" id="" placeholder="new last name.." class="last_name_editprofile" style="display: none;">
+
+                <div class="profile-part">
+                    <h3 id="attribute">Email Address: </h3>
+                    <h3><?php echo $row["email"] ?></h3>
+                </div>
+                <input type="text" name="email_editprofile" id="" placeholder="new email.." class="email_editprofile" style="display: none;">
+                <div class="profile-part">
+                    <h3 id="attribute">Phone Number: </h3>
+                    <h3><?php echo $row["phone_number"] ?></h3>
+                </div>
+                <input type="text" name="phonenumber_editprofile" id="" placeholder="new phone number.." class="phone_number_editprofile" style="display: none;">
+                <div class="profile-part">
+                    <h3 id="attribute">Home Address: </h3>
+                    <h3><?php echo $row["address"] ?></h3>
+                </div>
+                <input type="text" name="address_editprofile" id="" placeholder="new address.." class="address_editprofile" style="display: none;">
             </form>
-            <div class="profile-part">
-                <h3 id="attribute">Last Name: </h3>
-                <h3><?php echo $row["last_name"] ?></h3>
-            </div>
-            <input type="text" name="lastname_editprofile" id="" placeholder="new last name.." class="last_name_editprofile" style="display: none;">
-
-            <div class="profile-part">
-                <h3 id="attribute">Email Address: </h3>
-                <h3><?php echo $row["email"] ?></h3>
-            </div>
-            <input type="text" name="email_editprofile" id="" placeholder="new email.." class="email_editprofile" style="display: none;">
-            <div class="profile-part">
-                <h3 id="attribute">Phone Number: </h3>
-                <h3><?php echo $row["phone_number"] ?></h3>
-            </div>
-            <input type="text" name="phonenumber_editprofile" id="" placeholder="new phone number.." class="phone_number_editprofile" style="display: none;">
-            <div class="profile-part">
-                <h3 id="attribute">Home Address: </h3>
-                <h3><?php echo $row["address"] ?></h3>
-            </div>
-            <input type="text" name="address_editprofile" id="" placeholder="new address.." class="address_editprofile" style="display: none;">
-
 
             <div class="edit_save_btn">
                 <button onclick="ChangeProfile()" class="edit_profile_btn" title="Edit your profile"> <i class="fa fa-edit"></i><strong>Edit
