@@ -60,3 +60,5 @@ if ($address != "") {
     $query1->bind_param("s", $address);
     $query1->execute();
 }
+
+echo "<script>alert('Your changes are saved'); window.location='../profile/profile.php';</script>";
