@@ -5,6 +5,11 @@ session_start();
 include("connection.php");
 
 $customer_id = $_SESSION['logged_id'];
+$first_name = "";
+$last_name = "";
+$email = "";
+$phone_number = "";
+$address = "";
 
 if (isset($_POST["firstname_editprofile"])  && $_POST["firstname_editprofile"] != "") {
     $first_name = $_POST["firstname_editprofile"];
