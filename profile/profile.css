@@ -189,7 +189,7 @@
 .save_profile_btn {
     border-radius: 20px;
     color: black;
-    
+
 }
 
 .edit_save_btn {
@@ -347,6 +347,7 @@ input[type="date"]:hover {
     color: royalblue;
     text-align: center;
 }
+
 .imgcontainer img {
     height: 200px;
     width: 200px;
@@ -436,6 +437,13 @@ input[type="date"]:hover {
     font-size: 35px;
     font-weight: bold;
     cursor: pointer;
+}
+
+.logout-btn {
+    background-color: red;
+    color: black;
+    border-radius: 15px;
+    width: 100%;
 }
 
 /* start of making close btn responsive */

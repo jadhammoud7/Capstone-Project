@@ -97,7 +97,9 @@ if (!isset($_SESSION['logged_bool'])) {
                 <li><a onclick="ShowProfile()" id="profile-button" title="View your own personal info">Profile</a></li>
                 <li><a onclick="ShowBasket()" id="basket-button" title="View your current list of products added by you to basket">Shopping Basket</a></li>
                 <li><a onclick="ShowFavorites()" id="favorites-button" title="View list of products added by you to your favorites">Favorites List</a></li>
-                <button type="submit" style="background-color: red;color:black; border-radius:15px; width:100%;"><a href="../php/logout.php" style="color: black;"><strong>Log out</strong></a></button>
+                <form action="../php/logout.php" method="post">
+                    <button type="submit" class="logout-btn"><strong>Log out</strong></button>
+                </form>
             </ol>
         </div>
 
