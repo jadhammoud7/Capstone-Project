@@ -6,7 +6,7 @@
     if(!isset($_SESSION['logged_bool'])){
         header("Location: ../login/login.php");
     }
-    
+
 ?>
 <head>
     <meta charset="UTF-8">
@@ -80,8 +80,8 @@
 
 
     <!-- started with product info -->
-    <div class="product_info_page">
-        <img src="../images/Gaming-Wallpaper.png" alt="product Name" class="product_image reveal-by-x">
+    <!-- <div class="product_info_page">
+        <img src="../images/Gaming-Wallpaper.png" alt="Product Name" class="product_image reveal-by-x">
         <div class="product_right_part reveal-by-y">
             <h1><i> Product Name x</i>
             </h1>
@@ -115,7 +115,7 @@
                     class="fa fa-heart"></i>Add to Favorites</button>
 
         </div>
-    </div>
+    </div> -->
     <!-- ended with product info -->
 
 
