@@ -8,32 +8,32 @@
     }
     require_once('../php/shop_product_connection.php');
     //for cd's
-    $query = "SELECT name, price FROM products WHERE category='XBOX_cd' or category='PS3_cd' or category='PS4_cd' or category='PS5_cd' ";
+    $query = "SELECT product_id,name, price FROM products WHERE category='XBOX_cd' or category='PS3_cd' or category='PS4_cd' or category='PS5_cd' ";
     $stmt =$connection->prepare($query);
     $stmt->execute();
     $results = $stmt->get_result();
 
     //for cellphones
-    $query_cellphone = "SELECT name, price FROM products WHERE category='Cellphone'";
+    $query_cellphone = "SELECT product_id,name, price FROM products WHERE category='Cellphone'";
     $stmt_cellphone =$connection->prepare($query_cellphone);
     $stmt_cellphone->execute();
     $results_cellphone = $stmt_cellphone->get_result();
 
     //for consoles
-    $query_console = "SELECT name, price FROM products WHERE category='PS3' or category='PS4' or category='PS5'";
+    $query_console = "SELECT product_id,name, price FROM products WHERE category='PS3' or category='PS4' or category='PS5'";
     $stmt_console =$connection->prepare($query_console);
     $stmt_console->execute();
     $results_console = $stmt_console->get_result();
 
     //for offers
-    $query_offers = "SELECT name, price FROM products WHERE category='offers'";
+    $query_offers = "SELECT product_id,name, price FROM products WHERE category='offers'";
     $stmt_offers =$connection->prepare($query_offers);
     $stmt_offers->execute();
     $results_offers = $stmt_offers->get_result();
 
 
     //for others
-    $query_others = "SELECT name, price FROM products WHERE category='others'";
+    $query_others = "SELECT product_id,name, price FROM products WHERE category='others'";
     $stmt_others =$connection->prepare($query_others);
     $stmt_others->execute();
     $results_others = $stmt_others->get_result();
@@ -228,7 +228,7 @@
                 </div>
                 <?php
                 while($row = $results->fetch_assoc() ){
-                    shop_cd_connection($row["name"], $row["price"]); 
+                    shop_cd_connection($row["product_id"],$row["name"], $row["price"]); 
                 }
             ?>
             </div>
@@ -243,7 +243,7 @@
                 </div>
                 <?php
                 while($row_console = $results_console->fetch_assoc() ){
-                    shop_console_connection($row_console["name"], $row_console["price"]); 
+                    shop_console_connection($row_console["product_id"],$row_console["name"], $row_console["price"]); 
                 }
             ?>     
             </div>
@@ -258,7 +258,7 @@
                 </div>
                 <?php
                 while($row_cellphone = $results_cellphone->fetch_assoc() ){
-                    shop_cellphone_connection($row_cellphone["name"], $row_cellphone["price"]); 
+                    shop_cellphone_connection($row_cellphone["product_id"],$row_cellphone["name"], $row_cellphone["price"]); 
                 }
             ?>
             </div>
@@ -273,7 +273,7 @@
                 </div>
                 <?php
                 while($row_offers = $results_offers->fetch_assoc() ){
-                    shop_cd_connection($row_offers["name"], $row_offers["price"]); 
+                    shop_cd_connection($row_offers["product_id"],$row_offers["name"], $row_offers["price"]); 
                 }
             ?>
             </div>
@@ -288,7 +288,7 @@
                 </div>
                 <?php
                 while($row_others = $results_others->fetch_assoc() ){
-                    shop_cd_connection($row_others["name"], $row_others["price"]); 
+                    shop_cd_connection($row_others["product_id"],$row_others["name"], $row_others["price"]); 
                 }
             ?>
             </div>

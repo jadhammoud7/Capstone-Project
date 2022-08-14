@@ -1,6 +1,6 @@
 <?php
 include("connection.php");
- 
+
 
  
 function product_info_connection($name,$price,$category,$description){
@@ -10,17 +10,15 @@ function product_info_connection($name,$price,$category,$description){
     <div class=\"product_info_page\">
         <img src=\"../images/Gaming-Wallpaper.png\" alt=\"Product Name\" class=\"product_image reveal-by-x\">
         <div class=\"product_right_part reveal-by-y\">
-            <h1><i> Product Name x</i>
+            <h1><i>$name</i>
             </h1>
             <p class=\"product_description\">
             <h3 style=\"color: royalblue;\"><i>Description:</i></h3>
-            <i>Lorem ipsum dolor sit amet consectetur, adipisicing elit.<br> Eligendi architecto neque voluptatum
-                molestiae
-                odio nostrum provident<br> id inventore, incidunt et temporibus re</i></p>
+            <i>$description</i></p>
 
             <div class=\"product-info-part\">
                 <h3 style=\"color: royalblue;\"><i>Price:</i></h3>
-                <h3>65$</h3>
+                <h3>$price$</h3>
             </div>
             <div class=\"product-info-part\">
                 <h3 style=\"color: royalblue;\"><i>Type: </i></h3>
@@ -28,7 +26,7 @@ function product_info_connection($name,$price,$category,$description){
             </div>
             <div class=\"product-info-part\">
                 <h3 style=\"color: royalblue;\"><i>Category: </i></h3>
-                <h3>PS4</h3>
+                <h3>$category</h3>
             </div>
             <div class=\"product-info-part\">
                 <h3 style=\"color: royalblue;\"><i>Age Group:</i></h3>

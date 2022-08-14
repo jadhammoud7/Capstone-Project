@@ -3,8 +3,8 @@ include("connection.php");
  
 function shop_allproducts_connection($product_id,$name,$price){
     
-    session_start();
-    $_SESSION['chosen_product'] = $product_id;
+
+
 
     $element = "
     <div class=\"product1\" id=\"product\">
@@ -15,7 +15,7 @@ function shop_allproducts_connection($product_id,$name,$price){
         <div class=\"attributes_section\">
             <h1><i>$name</i></h1>
             <h3><i>$price$</i></h3>
-            <a href=\"../product_info/product_info.php\">
+            <a href=\"../product_info/product_info.php?productID=$product_id\">
                 <img class=\"info\" src=\"../images/info.png\" title=\"read more\" alt=\"read more info\">
             </a>
             <a href=\"\">
@@ -39,8 +39,8 @@ function shop_allproducts_connection($product_id,$name,$price){
 
 
 function shop_cd_connection($product_id,$name,$price){
-    session_start();
-    $_SESSION['chosen_product'] = $product_id;
+
+
 
     $element = "
     <div class=\"product1\" id=\"product\">
@@ -51,7 +51,7 @@ function shop_cd_connection($product_id,$name,$price){
         <div class=\"attributes_section\">
             <h1><i>$name</i></h1>
             <h3><i>$price$</i></h3>
-            <a href=\"../product_info/product_info.php\">
+            <a href=\"../product_info/product_info.php?productID=$product_id\">
                 <img class=\"info\" src=\"../images/info.png\" title=\"read more\" alt=\"read more info\">
             </a>
             <a href=\"\">
@@ -72,8 +72,7 @@ function shop_cd_connection($product_id,$name,$price){
 
 
 function shop_cellphone_connection($product_id,$name,$price){
-    session_start();
-    $_SESSION['chosen_product'] = $product_id;
+
 
     $element = "
     <div class=\"product1\" id=\"product\">
@@ -84,7 +83,7 @@ function shop_cellphone_connection($product_id,$name,$price){
         <div class=\"attributes_section\">
             <h1><i>$name</i></h1>
             <h3><i>$price$</i></h3>
-            <a href=\"../product_info/product_info.php\">
+            <a href=\"../product_info/product_info.php?productID=$product_id\">
                 <img class=\"info\" src=\"../images/info.png\" title=\"read more\" alt=\"read more info\">
             </a>
             <a href=\"\">
@@ -105,8 +104,8 @@ function shop_cellphone_connection($product_id,$name,$price){
 
 
 function shop_console_connection($product_id,$name,$price){
-    session_start();
-    $_SESSION['chosen_product'] = $product_id;
+
+
 
     $element = "
     <div class=\"product1\" id=\"product\">
@@ -117,7 +116,7 @@ function shop_console_connection($product_id,$name,$price){
         <div class=\"attributes_section\">
             <h1><i>$name</i></h1>
             <h3><i>$price$</i></h3>
-            <a href=\"../product_info/product_info.php\">
+            <a href=\"../product_info/product_info.php?productID=$product_id\">
                 <img class=\"info\" src=\"../images/info.png\" title=\"read more\" alt=\"read more info\">
             </a>
             <a href=\"\">
@@ -137,8 +136,8 @@ function shop_console_connection($product_id,$name,$price){
 }
 
 function shop_offers_connection($product_id,$name,$price){
-    session_start();
-    $_SESSION['chosen_product'] = $product_id;
+
+
 
     $element = "
     <div class=\"product1\" id=\"product\">
@@ -149,7 +148,7 @@ function shop_offers_connection($product_id,$name,$price){
         <div class=\"attributes_section\">
             <h1><i>$name</i></h1>
             <h3><i>$price$</i></h3>
-            <a href=\"../product_info/product_info.php\">
+            <a href=\"../product_info/product_info.php?productID=$product_id\">
                 <img class=\"info\" src=\"../images/info.png\" title=\"read more\" alt=\"read more info\">
             </a>
             <a href=\"\">
@@ -170,8 +169,6 @@ function shop_offers_connection($product_id,$name,$price){
 
 
 function shop_others_connection($product_id,$name,$price){
-    session_start();
-    $_SESSION['chosen_product'] = $product_id;
 
     $element = "
     <div class=\"product1\" id=\"product\">
@@ -182,7 +179,7 @@ function shop_others_connection($product_id,$name,$price){
         <div class=\"attributes_section\">
             <h1><i>$name</i></h1>
             <h3><i>$price$</i></h3>
-            <a href=\"../product_info/product_info.php\">
+            <a href=\"../product_info/product_info.php?productID=$product_id\">
                 <img class=\"info\" src=\"../images/info.png\" title=\"read more\" alt=\"read more info\">
             </a>
             <a href=\"\">

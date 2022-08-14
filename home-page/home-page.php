@@ -17,7 +17,7 @@
 
     //get all products(some of them )
     require_once("../php/shop_product_connection.php");
-    $query_allproducts = "SELECT name, price FROM products ORDER BY RAND() LIMIT 6;";
+    $query_allproducts = "SELECT product_id,name, price FROM products ORDER BY RAND() LIMIT 6;";
     $stmt_allproducts =$connection->prepare($query_allproducts);
     $stmt_allproducts->execute();
     $results_allproducts = $stmt_allproducts->get_result();
@@ -240,7 +240,7 @@
         <div class="shop-products reveal-by-y">
         <?php
         while($row_allproducts = $results_allproducts->fetch_assoc() ){
-            shop_allproducts_connection($row_allproducts["name"], $row_allproducts["price"]); 
+            shop_allproducts_connection($row_allproducts["product_id"],$row_allproducts["name"], $row_allproducts["price"]); 
         }
             ?>
         </div>
