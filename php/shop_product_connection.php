@@ -1,8 +1,10 @@
 <?php
 include("connection.php");
  
-function shop_allproducts_connection($name,$price){
+function shop_allproducts_connection($product_id,$name,$price){
     
+    session_start();
+    $_SESSION['chosen_product'] = $product_id;
 
     $element = "
     <div class=\"product1\" id=\"product\">
@@ -36,8 +38,9 @@ function shop_allproducts_connection($name,$price){
 
 
 
-function shop_cd_connection($name,$price){
-    
+function shop_cd_connection($product_id,$name,$price){
+    session_start();
+    $_SESSION['chosen_product'] = $product_id;
 
     $element = "
     <div class=\"product1\" id=\"product\">
@@ -68,8 +71,9 @@ function shop_cd_connection($name,$price){
 }
 
 
-function shop_cellphone_connection($name,$price){
-    
+function shop_cellphone_connection($product_id,$name,$price){
+    session_start();
+    $_SESSION['chosen_product'] = $product_id;
 
     $element = "
     <div class=\"product1\" id=\"product\">
@@ -100,8 +104,9 @@ function shop_cellphone_connection($name,$price){
 }
 
 
-function shop_console_connection($name,$price){
-    
+function shop_console_connection($product_id,$name,$price){
+    session_start();
+    $_SESSION['chosen_product'] = $product_id;
 
     $element = "
     <div class=\"product1\" id=\"product\">
@@ -131,8 +136,9 @@ function shop_console_connection($name,$price){
     echo $element;
 }
 
-function shop_offers_connection($name,$price){
-    
+function shop_offers_connection($product_id,$name,$price){
+    session_start();
+    $_SESSION['chosen_product'] = $product_id;
 
     $element = "
     <div class=\"product1\" id=\"product\">
@@ -163,8 +169,9 @@ function shop_offers_connection($name,$price){
 }
 
 
-function shop_others_connection($name,$price){
-    
+function shop_others_connection($product_id,$name,$price){
+    session_start();
+    $_SESSION['chosen_product'] = $product_id;
 
     $element = "
     <div class=\"product1\" id=\"product\">

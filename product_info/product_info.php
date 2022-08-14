@@ -80,7 +80,7 @@
 
 
     <!-- started with product info -->
-    <!-- <div class="product_info_page">
+    <div class="product_info_page">
         <img src="../images/Gaming-Wallpaper.png" alt="Product Name" class="product_image reveal-by-x">
         <div class="product_right_part reveal-by-y">
             <h1><i> Product Name x</i>
@@ -107,7 +107,7 @@
                 <h3 style="color: royalblue;"><i>Age Group:</i></h3>
                 <h3>age 12+</h3>
             </div>
-            <!-- <label for="points">Quantity:</label> -->
+            <label for="points">Quantity:</label>
             <input type="number" id="points" name="points" title="Quantity to add to basket"> <br> <br>
             <button class="product_info_addtobasket" title="Add this product to your shopping basket"><i
                     class="fa fa-shopping-basket"></i>Add to Basket</button>
@@ -115,7 +115,7 @@
                     class="fa fa-heart"></i>Add to Favorites</button>
 
         </div>
-    </div> -->
+    </div>
     <!-- ended with product info -->
 
 
