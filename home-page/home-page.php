@@ -231,6 +231,7 @@
             <h1>Our Products</h1>
         </div>
         <div class="shop-products reveal-by-y">
+            
             <div class="product1" id="product">
                 <div class="product_info">
                     <div class="img_section">
