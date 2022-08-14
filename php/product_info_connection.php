@@ -28,10 +28,6 @@ function product_info_connection($name,$price,$category,$description,$age){
                 <h3>$price$</h3>
             </div>
             <div class=\"product-info-part\">
-                <h3 style=\"color: royalblue;\"><i>Type: </i></h3>
-                <h3>Console</h3>
-            </div>
-            <div class=\"product-info-part\">
                 <h3 style=\"color: royalblue;\"><i>Category: </i></h3>
                 <h3>$category</h3>
             </div>
