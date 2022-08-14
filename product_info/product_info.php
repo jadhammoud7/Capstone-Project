@@ -6,6 +6,7 @@
     if(!isset($_SESSION['logged_bool'])){
         header("Location: ../login/login.php");
     }
+    
 ?>
 <head>
     <meta charset="UTF-8">
