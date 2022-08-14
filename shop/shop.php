@@ -6,7 +6,7 @@
     if(!isset($_SESSION['logged_bool'])){
         header("Location: ../login/login.php");
     }
-    require_once('../php/shop_cd.php');
+    require_once('../php/shop_product_connection.php');
     //for cd's
     $query = "SELECT name, price FROM products WHERE category='XBOX_cd' or category='PS3_cd' or category='PS4_cd' or category='PS5_cd' ";
     $stmt =$connection->prepare($query);

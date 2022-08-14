@@ -15,6 +15,13 @@
     $stmt->execute();
     $results = $stmt->get_result();
 
+    //get all products(some of them )
+    require_once("../php/shop_product_connection.php");
+    $query_allproducts = "SELECT name, price FROM products ORDER BY RAND() LIMIT 6;";
+    $stmt_allproducts =$connection->prepare($query_allproducts);
+    $stmt_allproducts->execute();
+    $results_allproducts = $stmt_allproducts->get_result();
+
 ?>
 
 
@@ -231,54 +238,11 @@
             <h1>Our Products</h1>
         </div>
         <div class="shop-products reveal-by-y">
-            
-            <div class="product1" id="product">
-                <div class="product_info">
-                    <div class="img_section">
-                        <img src="../images/console.png" alt="product 1">
-                    </div>
-                    <div class="attributes_section">
-                        <h1><i>Product 1</i></h1>
-                        <h2><i>50$</i></h2>
-                        <a href="">
-                            <img class="info" src="../images/info.png" title="Read More Info" alt="read more info">
-                        </a>
-                        <a href="">
-                            <img class="add_to_basket" src="../images/shopping_cart.png" title="Add To Basket"
-                                alt="Add To Basket">
-                        </a>
-
-                        <a href="">
-                            <img class="add_to_fav" src="../images/addfav.png" title="Add To Favorites"
-                                alt="Add To Favorites">
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product1" id="product">
-                <div class="product_info">
-                    <div class="img_section">
-                        <img src="../images/console.png" alt="product 1">
-                    </div>
-                    <div class="attributes_section">
-                        <h1><i>Product 1</i></h1>
-                        <h2><i>50$</i></h2>
-                        <a href="">
-                            <img class="info" src="../images/info.png" title="Read More Info" alt="read more info">
-                        </a>
-                        <a href="">
-                            <img class="add_to_basket" src="../images/shopping_cart.png" title="Add To Basket"
-                                alt="Add To Basket">
-                        </a>
-
-                        <a href="">
-                            <img class="add_to_fav" src="../images/addfav.png" title="Add To Favorites"
-                                alt="Add To Favorites">
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <?php
+        while($row_allproducts = $results_allproducts->fetch_assoc() ){
+            shop_allproducts_connection($row_allproducts["name"], $row_allproducts["price"]); 
+        }
+            ?>
         </div>
         <!-- end of products -->
 
