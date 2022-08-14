@@ -7,7 +7,7 @@
         header("Location: ../login/login.php");
     }
     require_once('../php/shop_cd.php');
-    $query = "SELECT name, price FROM products WHERE category='XBOX' or category='PS3' ";
+    $query = "SELECT name, price FROM products WHERE category='XBOX' or category='PS3' or category='PS4' or category='PS5' ";
     $stmt =$connection->prepare($query);
     $stmt->execute();
     $results = $stmt->get_result();
