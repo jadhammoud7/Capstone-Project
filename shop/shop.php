@@ -6,6 +6,8 @@
     if(!isset($_SESSION['logged_bool'])){
         header("Location: ../login/login.php");
     }
+
+    
 ?>
 <head>
     <meta charset="UTF-8">
@@ -193,99 +195,11 @@
                 <div class="shop-products-title" id="shop-products">
                     <h1>CD's</h1>
                 </div>
-                <div class="product1" id="product">
-                    <div class="product_info">
-                        <div class="img_section">
-                            <img src="../images/console.png" alt="product 1">
-                        </div>
-                        <div class="attributes_section">
-                            <h1><i>Product 1</i></h1>
-                            <h2><i>50$</i></h2>
-                            <a href="../product_info/product_info.php">
-                                <img class="info" src="../images/info.png" title="read more" alt="read more info">
-                            </a>
-                            <a href="">
-                                <img class="add_to_basket" src="../images/shopping_cart.png" title="Add To Basket"
-                                    alt="Add To Basket">
-                            </a>
-
-                            <a href="">
-                                <img class="add_to_fav" src="../images/addfav.png" title="Add To Favorites"
-                                    alt="Add To Favorites">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product1" id="product">
-                    <div class="product_info">
-                        <div class="img_section">
-                            <img src="../images/console.png" alt="product 1">
-                        </div>
-                        <div class="attributes_section">
-                            <h1><i>Product 1</i></h1>
-                            <h2><i>50$</i></h2>
-                            <a href="../product_info/product_info.php">
-                                <img class="info" src="../images/info.png" title="read more" alt="read more info">
-                            </a>
-                            <a href="">
-                                <img class="add_to_basket" src="../images/shopping_cart.png" title="Add To Basket"
-                                    alt="Add To Basket">
-                            </a>
-
-                            <a href="">
-                                <img class="add_to_fav" src="../images/addfav.png" title="Add To Favorites"
-                                    alt="Add To Favorites">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product1" id="product">
-                    <div class="product_info">
-                        <div class="img_section">
-                            <img src="../images/console.png" alt="product 1">
-                        </div>
-                        <div class="attributes_section">
-                            <h1><i>Product 1</i></h1>
-                            <h2><i>50$</i></h2>
-                            <a href="../product_info/product_info.php">
-                                <img class="info" src="../images/info.png" title="read more" alt="read more info">
-                            </a>
-                            <a href="">
-                                <img class="add_to_basket" src="../images/shopping_cart.png" title="Add To Basket"
-                                    alt="Add To Basket">
-                            </a>
-
-                            <a href="">
-                                <img class="add_to_fav" src="../images/addfav.png" title="Add To Favorites"
-                                    alt="Add To Favorites">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product1" id="product">
-                    <div class="product_info">
-                        <div class="img_section">
-                            <img src="../images/console.png" alt="product 1">
-                        </div>
-                        <div class="attributes_section">
-                            <h1><i>Product 1</i></h1>
-                            <h2><i>50$</i></h2>
-                            <a href="../product_info/product_info.php">
-                                <img class="info" src="../images/info.png" title="read more" alt="read more info">
-                            </a>
-                            <a href="">
-                                <img class="add_to_basket" src="../images/shopping_cart.png" title="Add To Basket"
-                                    alt="Add To Basket">
-                            </a>
-
-                            <a href="">
-                                <img class="add_to_fav" src="../images/addfav.png" title="Add To Favorites"
-                                    alt="Add To Favorites">
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                while($row = $results->fetch_assoc() ){
+                    comment_connection($row["username"], $row["comment"]); 
+                }
+            ?>
             </div>
         </div>
         <!-- end first tab -->
