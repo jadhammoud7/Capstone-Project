@@ -7,10 +7,23 @@
         header("Location: ../login/login.php");
     }
     require_once('../php/shop_cd.php');
-    $query = "SELECT name, price FROM products WHERE category='XBOX' or category='PS3' or category='PS4' or category='PS5' ";
+    //for cd's
+    $query = "SELECT name, price FROM products WHERE category='XBOX_cd' or category='PS3_cd' or category='PS4_cd' or category='PS5_cd' ";
     $stmt =$connection->prepare($query);
     $stmt->execute();
     $results = $stmt->get_result();
+
+    //for cellphones
+    $query_cellphone = "SELECT name, price FROM products WHERE category='Cellphone'";
+    $stmt_cellphone =$connection->prepare($query_cellphone);
+    $stmt_cellphone->execute();
+    $results_cellphone = $stmt_cellphone->get_result();
+
+    //for consoles
+    $query_console = "SELECT name, price FROM products WHERE category='PS3' or category='PS4' or category='PS5'";
+    $stmt_console =$connection->prepare($query_console);
+    $stmt_console->execute();
+    $results_console = $stmt_console->get_result();
 
 ?>
 <head>
@@ -214,122 +227,11 @@
                 <div class="shop-products-title" id="shop-products">
                     <h1>Consoles</h1>
                 </div>
-                <div class="product1" id="product">
-                    <div class="product_info">
-                        <div class="img_section">
-                            <img src="../images/console.png" alt="product 1">
-                        </div>
-                        <div class="attributes_section">
-                            <h1><i>Product 1</i></h1>
-                            <h2><i>50$</i></h2>
-                            <a href="../product_info/product_info.php">
-                                <img class="info" src="../images/info.png" title="read more" alt="read more info">
-                            </a>
-                            <a href="">
-                                <img class="add_to_basket" src="../images/shopping_cart.png" title="Add To Basket"
-                                    alt="Add To Basket">
-                            </a>
-
-                            <a href="">
-                                <img class="add_to_fav" src="../images/addfav.png" title="Add To Favorites"
-                                    alt="Add To Favorites">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product1" id="product">
-                    <div class="product_info">
-                        <div class="img_section">
-                            <img src="../images/console.png" alt="product 1">
-                        </div>
-                        <div class="attributes_section">
-                            <h1><i>Product 1</i></h1>
-                            <h2><i>50$</i></h2>
-                            <a href="../product_info/product_info.php">
-                                <img class="info" src="../images/info.png" title="read more" alt="read more info">
-                            </a>
-                            <a href="">
-                                <img class="add_to_basket" src="../images/shopping_cart.png" title="Add To Basket"
-                                    alt="Add To Basket">
-                            </a>
-
-                            <a href="">
-                                <img class="add_to_fav" src="../images/addfav.png" title="Add To Favorites"
-                                    alt="Add To Favorites">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product1" id="product">
-                    <div class="product_info">
-                        <div class="img_section">
-                            <img src="../images/console.png" alt="product 1">
-                        </div>
-                        <div class="attributes_section">
-                            <h1><i>Product 1</i></h1>
-                            <h2><i>50$</i></h2>
-                            <a href="../product_info/product_info.php">
-                                <img class="info" src="../images/info.png" title="read more" alt="read more info">
-                            </a>
-                            <a href="">
-                                <img class="add_to_basket" src="../images/shopping_cart.png" title="Add To Basket"
-                                    alt="Add To Basket">
-                            </a>
-
-                            <a href="">
-                                <img class="add_to_fav" src="../images/addfav.png" title="Add To Favorites"
-                                    alt="Add To Favorites">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product1" id="product">
-                    <div class="product_info">
-                        <div class="img_section">
-                            <img src="../images/console.png" alt="product 1">
-                        </div>
-                        <div class="attributes_section">
-                            <h1><i>Product 1</i></h1>
-                            <h2><i>50$</i></h2>
-                            <a href="../product_info/product_info.php">
-                                <img class="info" src="../images/info.png" title="read more" alt="read more info">
-                            </a>
-                            <a href="">
-                                <img class="add_to_basket" src="../images/shopping_cart.png" title="Add To Basket"
-                                    alt="Add To Basket">
-                            </a>
-
-                            <a href="">
-                                <img class="add_to_fav" src="../images/addfav.png" title="Add To Favorites"
-                                    alt="Add To Favorites">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product1" id="product">
-                    <div class="product_info">
-                        <div class="img_section">
-                            <img src="../images/console.png" alt="product 1">
-                        </div>
-                        <div class="attributes_section">
-                            <h1><i>Product 1</i></h1>
-                            <h2><i>50$</i></h2>
-                            <a href="../product_info/product_info.php">
-                                <img class="info" src="../images/info.png" title="read more" alt="read more info">
-                            </a>
-                            <a href="">
-                                <img class="add_to_basket" src="../images/shopping_cart.png" title="Add To Basket"
-                                    alt="Add To Basket">
-                            </a>
-
-                            <a href="">
-                                <img class="add_to_fav" src="../images/addfav.png" title="Add To Favorites"
-                                    alt="Add To Favorites">
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                while($row_console = $results_console->fetch_assoc() ){
+                    shop_console_connection($row_console["name"], $row_console["price"]); 
+                }
+            ?>     
             </div>
         </div>
         <!-- end of second tab -->
@@ -340,144 +242,11 @@
                 <div class="shop-products-title" id="shop-products">
                     <h1>CellPhones</h1>
                 </div>
-                <div class="product1" id="product">
-                    <div class="product_info">
-                        <div class="img_section">
-                            <img src="../images/console.png" alt="product 1">
-                        </div>
-                        <div class="attributes_section">
-                            <h1><i>Product 1</i></h1>
-                            <h2><i>50$</i></h2>
-                            <a href="../product_info/product_info.php">
-                                <img class="info" src="../images/info.png" title="read more" alt="read more info">
-                            </a>
-                            <a href="">
-                                <img class="add_to_basket" src="../images/shopping_cart.png" title="Add To Basket"
-                                    alt="Add To Basket">
-                            </a>
-
-                            <a href="">
-                                <img class="add_to_fav" src="../images/addfav.png" title="Add To Favorites"
-                                    alt="Add To Favorites">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product1" id="product">
-                    <div class="product_info">
-                        <div class="img_section">
-                            <img src="../images/console.png" alt="product 1">
-                        </div>
-                        <div class="attributes_section">
-                            <h1><i>Product 1</i></h1>
-                            <h2><i>50$</i></h2>
-                            <a href="../product_info/product_info.php">
-                                <img class="info" src="../images/info.png" title="read more" alt="read more info">
-                            </a>
-                            <a href="">
-                                <img class="add_to_basket" src="../images/shopping_cart.png" title="Add To Basket"
-                                    alt="Add To Basket">
-                            </a>
-
-                            <a href="">
-                                <img class="add_to_fav" src="../images/addfav.png" title="Add To Favorites"
-                                    alt="Add To Favorites">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product1" id="product">
-                    <div class="product_info">
-                        <div class="img_section">
-                            <img src="../images/console.png" alt="product 1">
-                        </div>
-                        <div class="attributes_section">
-                            <h1><i>Product 1</i></h1>
-                            <h2><i>50$</i></h2>
-                            <a href="../product_info/product_info.php">
-                                <img class="info" src="../images/info.png" title="read more" alt="read more info">
-                            </a>
-                            <a href="">
-                                <img class="add_to_basket" src="../images/shopping_cart.png" title="Add To Basket"
-                                    alt="Add To Basket">
-                            </a>
-
-                            <a href="">
-                                <img class="add_to_fav" src="../images/addfav.png" title="Add To Favorites"
-                                    alt="Add To Favorites">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product1" id="product">
-                    <div class="product_info">
-                        <div class="img_section">
-                            <img src="../images/console.png" alt="product 1">
-                        </div>
-                        <div class="attributes_section">
-                            <h1><i>Product 1</i></h1>
-                            <h2><i>50$</i></h2>
-                            <a href="../product_info/product_info.php">
-                                <img class="info" src="../images/info.png" title="read more" alt="read more info">
-                            </a>
-                            <a href="">
-                                <img class="add_to_basket" src="../images/shopping_cart.png" title="Add To Basket"
-                                    alt="Add To Basket">
-                            </a>
-
-                            <a href="">
-                                <img class="add_to_fav" src="../images/addfav.png" title="Add To Favorites"
-                                    alt="Add To Favorites">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product1" id="product">
-                    <div class="product_info">
-                        <div class="img_section">
-                            <img src="../images/console.png" alt="product 1">
-                        </div>
-                        <div class="attributes_section">
-                            <h1><i>Product 1</i></h1>
-                            <h2><i>50$</i></h2>
-                            <a href="../product_info/product_info.php">
-                                <img class="info" src="../images/info.png" title="read more" alt="read more info">
-                            </a>
-                            <a href="">
-                                <img class="add_to_basket" src="../images/shopping_cart.png" title="Add To Basket"
-                                    alt="Add To Basket">
-                            </a>
-
-                            <a href="">
-                                <img class="add_to_fav" src="../images/addfav.png" title="Add To Favorites"
-                                    alt="Add To Favorites">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="product1" id="product">
-                    <div class="product_info">
-                        <div class="img_section">
-                            <img src="../images/console.png" alt="product 1">
-                        </div>
-                        <div class="attributes_section">
-                            <h1><i>Product 1</i></h1>
-                            <h2><i>50$</i></h2>
-                            <a href="../product_info/product_info.php">
-                                <img class="info" src="../images/info.png" title="read more" alt="read more info">
-                            </a>
-                            <a href="">
-                                <img class="add_to_basket" src="../images/shopping_cart.png" title="Add To Basket"
-                                    alt="Add To Basket">
-                            </a>
-
-                            <a href="">
-                                <img class="add_to_fav" src="../images/addfav.png" title="Add To Favorites"
-                                    alt="Add To Favorites">
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                while($row_cellphone = $results_cellphone->fetch_assoc() ){
+                    shop_cellphone_connection($row_cellphone["name"], $row_cellphone["price"]); 
+                }
+            ?>
             </div>
         </div>
         <!-- end of third tab -->
@@ -659,29 +428,7 @@
                 <div class="shop-products-title" id="shop-products">
                     <h1>Others</h1>
                 </div>
-                <div class="product1" id="product">
-                    <div class="product_info">
-                        <div class="img_section">
-                            <img src="../images/console.png" alt="product 1">
-                        </div>
-                        <div class="attributes_section">
-                            <h1><i>Product 1</i></h1>
-                            <h2><i>50$</i></h2>
-                            <a href="../product_info/product_info.php">
-                                <img class="info" src="../images/info.png" title="read more" alt="read more info">
-                            </a>
-                            <a href="">
-                                <img class="add_to_basket" src="../images/shopping_cart.png" title="Add To Basket"
-                                    alt="Add To Basket">
-                            </a>
 
-                            <a href="">
-                                <img class="add_to_fav" src="../images/addfav.png" title="Add To Favorites"
-                                    alt="Add To Favorites">
-                            </a>
-                        </div>
-                    </div>
-                </div>
                 <div class="product1" id="product">
                     <div class="product_info">
                         <div class="img_section">
