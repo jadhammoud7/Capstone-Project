@@ -25,6 +25,20 @@
     $stmt_console->execute();
     $results_console = $stmt_console->get_result();
 
+    //for offers
+    $query_offers = "SELECT name, price FROM products WHERE category='offers'";
+    $stmt_offers =$connection->prepare($query_offers);
+    $stmt_offers->execute();
+    $results_offers = $stmt_offers->get_result();
+
+
+    //for others
+    $query_others = "SELECT name, price FROM products WHERE category='others'";
+    $stmt_others =$connection->prepare($query_others);
+    $stmt_others->execute();
+    $results_others = $stmt_others->get_result();
+
+
 ?>
 <head>
     <meta charset="UTF-8">
@@ -257,7 +271,11 @@
                 <div class="shop-products-title" id="shop-products">
                     <h1>Offers</h1>
                 </div>
-
+                <?php
+                while($row_offers = $results_offers->fetch_assoc() ){
+                    shop_cd_connection($row_offers["name"], $row_offers["price"]); 
+                }
+            ?>
             </div>
         </div>
         <!-- end of fourth tab -->
@@ -268,7 +286,11 @@
                 <div class="shop-products-title" id="shop-products">
                     <h1>Others</h1>
                 </div>
-
+                <?php
+                while($row_others = $results_others->fetch_assoc() ){
+                    shop_cd_connection($row_others["name"], $row_others["price"]); 
+                }
+            ?>
             </div>
         </div>
         <!-- end of fifth tab -->
