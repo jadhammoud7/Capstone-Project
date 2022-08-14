@@ -14,7 +14,7 @@ function shop_cd_connection($name,$price){
         </div>
         <div class=\"attributes_section\">
             <h1><i>$name</i></h1>
-            <h2><i>$price$</i></h2>
+            <h2><i>$price</i></h2>
             <a href=\"../product_info/product_info.php\">
                 <img class=\"info\" src=\"../images/info.png\" title=\"read more\" alt=\"read more info\">
             </a>

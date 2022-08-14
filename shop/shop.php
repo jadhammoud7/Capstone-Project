@@ -6,8 +6,12 @@
     if(!isset($_SESSION['logged_bool'])){
         header("Location: ../login/login.php");
     }
+    require_once('../php/shop_cd.php');
+    $query = "SELECT name, price FROM products WHERE category='XBOX' or category='PS3' ";
+    $stmt =$connection->prepare($query);
+    $stmt->execute();
+    $results = $stmt->get_result();
 
-    
 ?>
 <head>
     <meta charset="UTF-8">
@@ -197,7 +201,7 @@
                 </div>
                 <?php
                 while($row = $results->fetch_assoc() ){
-                    comment_connection($row["username"], $row["comment"]); 
+                    shop_cd_connection($row["name"], $row["price"]); 
                 }
             ?>
             </div>
