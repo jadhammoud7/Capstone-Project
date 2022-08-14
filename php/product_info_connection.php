@@ -7,6 +7,13 @@ function product_info_connection($name,$price,$category,$description){
     
 
     $element = "
+    <title>$name - Newbies Gamers</title>
+    <!-- started with title page -->
+    <div class=\"title\">
+        <h1 style=\"color: #333;\">$name</h1>
+        <h5 style=\"color:#b4c3da;\">Shop / Product Info</h5>
+    </div>
+    <!-- ended with title page -->
     <div class=\"product_info_page\">
         <img src=\"../images/Gaming-Wallpaper.png\" alt=\"Product Name\" class=\"product_image reveal-by-x\">
         <div class=\"product_right_part reveal-by-y\">

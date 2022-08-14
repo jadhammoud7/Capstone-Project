@@ -30,7 +30,6 @@
     <link rel="stylesheet" href="../contactus/contactus.css">
     <link rel="stylesheet" href="../shop/shop.css">
     <link rel="stylesheet" href="../product_info/product_info.css">
-    <title>Product Name x - Newbies Gamers</title>
 </head>
 
 <body>
@@ -82,10 +81,10 @@
 
 
     <!-- started with title page -->
-    <div class="title">
+    <!-- <div class="title">
         <h1 style="color: #333;">Product x name</h1>
         <h5 style="color:#b4c3da;">Shop / Product Info</h5>
-    </div>
+    </div> -->
     <!-- ended with title page -->
 
 

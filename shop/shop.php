@@ -8,7 +8,7 @@
     }
     require_once('../php/shop_product_connection.php');
     //for cd's
-    $query = "SELECT product_id,name, price FROM products WHERE category='XBOX_cd' or category='PS3_cd' or category='PS4_cd' or category='PS5_cd' ";
+    $query = "SELECT product_id,name, price FROM products WHERE category='XBOX Cd' or category='PS3 Cd' or category='PS4 Cd' or category='PS5 Cd' ";
     $stmt =$connection->prepare($query);
     $stmt->execute();
     $results = $stmt->get_result();
