@@ -3,7 +3,7 @@ include("connection.php");
 
 
  
-function product_info_connection($name,$price,$category,$description){
+function product_info_connection($name,$price,$category,$description,$age){
     
 
     $element = "
@@ -37,7 +37,7 @@ function product_info_connection($name,$price,$category,$description){
             </div>
             <div class=\"product-info-part\">
                 <h3 style=\"color: royalblue;\"><i>Age Group:</i></h3>
-                <h3>age 12+</h3>
+                <h3>$age</h3>
             </div>
             <!-- <label for=\"points\">Quantity:</label> -->
             <input type=\"number\" id=\"points\" name=\"points\" title=\"Quantity to add to basket\"> <br> <br>

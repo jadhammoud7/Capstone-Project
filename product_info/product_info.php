@@ -11,7 +11,7 @@
     //for product info
     include ("../php/shop_product_connection.php");
     $id=$_GET['productID'];
-    $query_info = "SELECT name, price,category,description FROM products WHERE product_id=$id ";
+    $query_info = "SELECT name, price,category,description,age FROM products WHERE product_id=$id ";
     $stmt_info =$connection->prepare($query_info);
     $stmt_info->execute();
     $results_info = $stmt_info->get_result();
@@ -93,7 +93,7 @@
     <?php
     require_once("../php/product_info_connection.php");
         while($row_info = $results_info->fetch_assoc() ){
-            product_info_connection($row_info["name"], $row_info["price"],$row_info["category"],$row_info["description"]); 
+            product_info_connection($row_info["name"], $row_info["price"],$row_info["category"],$row_info["description"],$row_info["age"]); 
         }
         ?>
     <!-- ended with product info -->
