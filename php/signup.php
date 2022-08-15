@@ -6,55 +6,65 @@ include("connection.php");
 if (isset($_POST["first_name"]) && $_POST["first_name"] != "") {
     $first_name = $_POST["first_name"];
     for ($i = 0; $i < strlen($first_name); $i++) {
-        if (is_numeric($first_name[$i])) {
-            header("Location: ../signup/signup.php?first_name_error=First Name should not contain a number");
-            die("WRONG first name");
-        }
+        $_SESSION['first_name_error'] = "First Name should not contain numbers";
+        die("WRONG first name");
     }
-} else {
-    die("ALERT first_name");
 }
 
 if (isset($_POST["last_name"]) && $_POST["last_name"] != "") {
     $last_name = $_POST["last_name"];
-} else {
-    die("ALERT last_name");
 }
 
 if (isset($_POST["email"]) && $_POST["email"] != "") {
     $email = $_POST["email"];
-} else {
-    die("ALERT email");
+    if (!str_contains($email, ".com") && !str_contains($email, "@")) {
+        header("Location: ../signup/signup.php?email_error=Email is invalid");
+        die("WRONG email");
+    }
 }
-
 if (isset($_POST["date_of_birth"]) && $_POST["date_of_birth"] != "") {
     $date_of_birth = $_POST["date_of_birth"];
-} else {
-    die("ALERT date_of_birth");
 }
 
 if (isset($_POST["phone_number"]) && $_POST["phone_number"] != "") {
     $phone_number = $_POST["phone_number"];
-} else {
-    die("ALERT phone_number");
 }
 
 if (isset($_POST["address"]) && $_POST["address"] != "") {
     $address = $_POST["address"];
-} else {
-    die("ALERT address");
+    if (is_numeric($address)) {
+        header("Location: ../signup/signup.php?address_error=Address should not be numeric");
+        die("WRONG address");
+    }
+    if (strlen($address) < 10) {
+        header("Location: ../signup/signup.php?address_error=Address should be of length 10 minimum");
+        die("WRONG address");
+    }
 }
 
 if (isset($_POST["username"]) && $_POST["username"] != "") {
     $username = $_POST["username"];
-} else {
-    die("ALERT username");
+    if (is_numeric($username)) {
+        header("Location: ../signup/signup.php?username_error=Username should not be numeric");
+        die("WRONG username");
+    }
+    if (strlen($username) < 5) {
+        header("Location: ../signup/signup.php?email_error=Username should be of length 5 minimum");
+        die("WRONG username");
+    }
 }
 
 if (isset($_POST["password"]) && $_POST["password"] != "") {
-    $password = hash("sha256", $_POST["password"]);
-} else {
-    die("ALERT password");
+    $password_text = $_POST["password"];
+    if (strlen($password_text) < 8) {
+        header("Location: ../signup/signup.php?password_error=Password should be of length 8 minimum");
+        die("WRONG password");
+    }
+    if (is_numeric($password_text)) {
+        header("Location: ../signup/signup.php?password_error=Password should not be numeric, should contain characters.");
+        die("WRONG password");
+    }
+    $password = hash("sha256", $password_text);
 }
 
 $mysql = $connection->prepare("INSERT INTO customers(first_name, last_name, email, date_of_birth, phone_number, address, username, password) VALUES (?,?,?,?,?,?,?,?)");

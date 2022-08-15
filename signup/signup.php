@@ -21,21 +21,13 @@
         <p class="title">Please fill in this form to create an account.</p>
         <hr>
 
-        <?php if (isset($_GET['first_name_error'])) { ?>
-          <p class="error"><?php echo $_GET['first_name_error']; ?></p>
-        <?php } ?>
+        <p class="error" id="first_name_error"></p>
         <label for="first_name"><b>First Name</b></label>
         <input type="text" placeholder="Enter your first name" name="first_name" id="first_name" required>
 
-        <?php if (isset($_GET['last_name_error'])) { ?>
-          <p class="error"><?php echo $_GET['last_name_error']; ?></p>
-        <?php } ?>
         <label for="last_name"><b>Last Name</b></label>
         <input type="text" placeholder="Enter your last name" name="last_name" id="last_name" required>
 
-        <?php if (isset($_GET['email_error'])) { ?>
-          <p class="error"><?php echo $_GET['email_error']; ?></p>
-        <?php } ?>
         <label for="email"><b>Email</b></label>
         <input type="text" placeholder="Enter Email" name="email" id="email" required>
 
@@ -45,21 +37,12 @@
         <label for="phone_number"><b>Phone Number</b></label>
         <input type="text" placeholder="Enter your phone number" name="phone_number" id="phone_number" required> <br> <br>
 
-        <?php if (isset($_GET['address_error'])) { ?>
-          <p class="error"><?php echo $_GET['address_error']; ?></p>
-        <?php } ?>
         <label for="address"><b>Address</b></label>
         <input type="text" placeholder="Enter address" name="address" id="address" required>
 
-        <?php if (isset($_GET['username_error'])) { ?>
-          <p class="error"><?php echo $_GET['username_error']; ?></p>
-        <?php } ?>
         <label for="username"><b>Username</b></label>
         <input type="text" placeholder="Enter username of your own" name="username" id="username" required>
 
-        <?php if (isset($_GET['password_error'])) { ?>
-          <p class="error"><?php echo $_GET['password_error']; ?></p>
-        <?php } ?>
         <label for="password"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="password" id="password" required>
 
@@ -77,4 +60,5 @@
 
 </body>
 
-</php>
+
+</html>
