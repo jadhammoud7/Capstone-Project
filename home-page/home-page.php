@@ -17,7 +17,7 @@
 
     //get all products(some of them )
     require_once("../php/shop_product_connection.php");
-    $query_allproducts = "SELECT product_id,name, price FROM products ORDER BY RAND() LIMIT 6;";
+    $query_allproducts = "SELECT product_id,name, price FROM products ORDER BY RAND() LIMIT 8;";
     $stmt_allproducts =$connection->prepare($query_allproducts);
     $stmt_allproducts->execute();
     $results_allproducts = $stmt_allproducts->get_result();

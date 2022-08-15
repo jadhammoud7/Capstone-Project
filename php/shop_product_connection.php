@@ -86,7 +86,7 @@ function shop_cellphone_connection($product_id,$name,$price){
             <a href=\"../product_info/product_info.php?productID=$product_id\">
                 <img class=\"info\" src=\"../images/info.png\" title=\"read more\" alt=\"read more info\">
             </a>
-            <a href=\"\">
+            <a href=\"../basket/basket.php\">
                 <img class=\"add_to_basket\" src=\"../images/shopping_cart.png\" title=\"Add To Basket\"
                     alt=\"Add To Basket\">
             </a>
