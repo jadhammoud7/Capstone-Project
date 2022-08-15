@@ -106,7 +106,9 @@ $statement_result1 = $statement1->get_result();
 $data1 = $statement_result1->fetch_assoc();
 
 
-// $logged_id1 = $data1['customer_id'];
-// $_SESSION['logged_id'] = $logged_id1;
+$logged_id1 = $data1['customer_id'];
+$_SESSION['logged_id'] = $logged_id1;
+echo "<script>alert('Your account was create successfully. Welcome to Newbies Gamers.'); window.location='../home-page/home-page.php';</script>";
+
 // echo "the id of the logged user is :", $_SESSION['logged_id'];
 //saving which user is logged in

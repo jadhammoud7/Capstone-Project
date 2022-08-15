@@ -49,7 +49,6 @@
 
         <p class="error" id="email_error">
           <?php
-          session_start();
           if (isset($_SESSION['email_error'])) {
             echo "<script>document.getElementById('email_error').style.display='block';</script>";
             echo $_SESSION['email_error'];
@@ -73,7 +72,6 @@
 
         <p class="error" id="address_error">
           <?php
-          session_start();
           if (isset($_SESSION['address_error'])) {
             echo "<script>document.getElementById('address_error').style.display='block';</script>";
             echo $_SESSION['address_error'];
@@ -88,7 +86,6 @@
 
         <p class="error" id="username_error">
           <?php
-          session_start();
           if (isset($_SESSION['username_error'])) {
             echo "<script>document.getElementById('username_error').style.display='block';</script>";
             echo $_SESSION['username_error'];
@@ -102,7 +99,6 @@
 
         <p class="error" id="password_error">
           <?php
-          session_start();
           if (isset($_SESSION['password_error'])) {
             echo "<script>document.getElementById('password_error').style.display='block';</script>";
             echo $_SESSION['password_error'];
