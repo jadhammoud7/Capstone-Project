@@ -6,6 +6,14 @@
     if(!isset($_SESSION['logged_bool'])){
         header("Location: ../login/login.php");
     }
+
+
+    include ("../php/shop_product_connection.php");
+    $id=$_GET['productID'];
+    $query_add_to_basket = "SELECT name, price FROM products WHERE product_id=$id ";
+    $stmt_add_to_basket =$connection->prepare($query_add_to_basket);
+    $stmt_add_to_basket->execute();
+    $results_add_to_basket = $stmt_add_to_basket->get_result();
 ?>
 <head>
     <meta charset="UTF-8">
@@ -86,76 +94,11 @@
                 <th>Quantity</th>
                 <th>Subtotal</th>
             </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="../images/Gaming-Wallpaper.png" alt="">
-                        <div class="info_of_product">
-                            <p>Grand theft auto 5</p>
-                            <small>price: $55.00</small>
-                            <br> <br>
-                            <a href="" title="Remove this product from your shopping basket">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" name="" id="" value="1"></td>
-                <td>$55.00</td>
-            </tr>
-
-
-
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="../images/Gaming-Wallpaper.png" alt="">
-                        <div class="info_of_product">
-                            <p>Product X</p>
-                            <small>price: $55.00</small>
-                            <br> <br>
-                            <a href="" title="Remove this product from your shopping basket">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" name="" id="" value="1"></td>
-                <td class="subtotal">$55.00</td>
-            </tr>
-
-
-
-
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="../images/Gaming-Wallpaper.png" alt="">
-                        <div class="info_of_product">
-                            <p>Product Y</p>
-                            <small>price: $55.00</small>
-                            <br> <br>
-                            <a href="" title="Remove this product from your shopping basket">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" name="" id="" value="1"></td>
-                <td class="subtotal">$55.00</td>
-            </tr>
-
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="../images/Gaming-Wallpaper.png" alt="">
-                        <div class="info_of_product">
-                            <p>Product Z</p>
-                            <small>price: $55.00</small>
-                            <br> <br>
-                            <a href="" title="Remove this product from your shopping basket">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <input type="number" name="" id="" value="1">
-                </td>
-                <td class="subtotal">$55.00</td>
-            </tr>
+            <?php
+                while($row_add_to_basket = $results_add_to_basket->fetch_assoc() ){
+                    add_to_basket_connection($row_add_to_basket["name"], $row_add_to_basket["price"]); 
+                }
+            ?>
         </table>
 
 

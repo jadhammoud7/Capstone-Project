@@ -6,7 +6,6 @@
     if(!isset($_SESSION['logged_bool'])){
         header("Location: ../login/login.php");
     }
-    $get_chosen_product=$_SESSION['chosen_product'];
     
     //for product info
     include ("../php/shop_product_connection.php");
