@@ -7,18 +7,22 @@ if (isset($_POST["first_name"]) && $_POST["first_name"] != "") {
     $first_name = $_POST["first_name"];
     $_SESSION['first_name'] = $first_name;
     for ($i = 0; $i < strlen($first_name); $i++) {
-        $_SESSION['first_name_error'] = "First Name should not contain numbers";
-        header("Location: ../signup/signup.php");
-        die("WRONG first name");
+        if (is_numeric($first_name[$i])) {
+            $_SESSION['first_name_error'] = "First Name should not contain numbers";
+            header("Location: ../signup/signup.php");
+            die("WRONG first name");
+        }
     }
 }
 if (isset($_POST["last_name"]) && $_POST["last_name"] != "") {
     $last_name = $_POST["last_name"];
     $_SESSION['last_name'] = $last_name;
     for ($i = 0; $i < strlen($last_name); $i++) {
-        $_SESSION['last_name_error'] = "Last Name should not contain numbers";
-        header("Location: ../signup/signup.php");
-        die("WRONG last name");
+        if (is_numeric($last_name[$i])) {
+            $_SESSION['last_name_error'] = "Last Name should not contain numbers";
+            header("Location: ../signup/signup.php");
+            die("WRONG last name");
+        }
     }
 }
 

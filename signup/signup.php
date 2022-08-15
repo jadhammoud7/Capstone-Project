@@ -32,11 +32,10 @@
         <label for="first_name"><b>First Name</b></label>
         <input type="text" placeholder="Enter your first name" name="first_name" id="first_name" value="<?php if (isset($_SESSION['first_name'])) {
                                                                                                           echo $_SESSION['first_name'];
-                                                                                                        } ?>" required>
+                                                                                                        } ?>" required />
 
         <p class="error" id="last_name_error">
           <?php
-          session_start();
           if (isset($_SESSION['last_name_error'])) {
             echo "<script>document.getElementById('last_name_error').style.display='block';</script>";
             echo $_SESSION['last_name_error'];
