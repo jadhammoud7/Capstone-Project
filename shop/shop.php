@@ -2,44 +2,45 @@
 <html lang="en">
 <?php
 
-    session_start();
-    if(!isset($_SESSION['logged_bool'])){
-        header("Location: ../login/login.php");
-    }
-    require_once('../php/shop_product_connection.php');
-    //for cd's
-    $query = "SELECT product_id,name, price FROM products WHERE category='XBOX Cd' or category='PS3 Cd' or category='PS4 Cd' or category='PS5 Cd' ";
-    $stmt =$connection->prepare($query);
-    $stmt->execute();
-    $results = $stmt->get_result();
+session_start();
+if (!isset($_SESSION['logged_bool'])) {
+    header("Location: ../login/login.php");
+}
+require_once('../php/shop_product_connection.php');
+//for cd's
+$query = "SELECT product_id,name, price FROM products WHERE category='XBOX Cd' or category='PS3 Cd' or category='PS4 Cd' or category='PS5 Cd' ";
+$stmt = $connection->prepare($query);
+$stmt->execute();
+$results = $stmt->get_result();
 
-    //for cellphones
-    $query_cellphone = "SELECT product_id,name, price FROM products WHERE category='Cellphone'";
-    $stmt_cellphone =$connection->prepare($query_cellphone);
-    $stmt_cellphone->execute();
-    $results_cellphone = $stmt_cellphone->get_result();
+//for cellphones
+$query_cellphone = "SELECT product_id,name, price FROM products WHERE category='Cellphone'";
+$stmt_cellphone = $connection->prepare($query_cellphone);
+$stmt_cellphone->execute();
+$results_cellphone = $stmt_cellphone->get_result();
 
-    //for consoles
-    $query_console = "SELECT product_id,name, price FROM products WHERE category='PS3' or category='PS4' or category='PS5'";
-    $stmt_console =$connection->prepare($query_console);
-    $stmt_console->execute();
-    $results_console = $stmt_console->get_result();
+//for consoles
+$query_console = "SELECT product_id,name, price FROM products WHERE category='PS3' or category='PS4' or category='PS5'";
+$stmt_console = $connection->prepare($query_console);
+$stmt_console->execute();
+$results_console = $stmt_console->get_result();
 
-    //for offers
-    $query_offers = "SELECT product_id,name, price FROM products WHERE category='offers'";
-    $stmt_offers =$connection->prepare($query_offers);
-    $stmt_offers->execute();
-    $results_offers = $stmt_offers->get_result();
+//for offers
+$query_offers = "SELECT product_id,name, price FROM products WHERE category='offers'";
+$stmt_offers = $connection->prepare($query_offers);
+$stmt_offers->execute();
+$results_offers = $stmt_offers->get_result();
 
 
-    //for others
-    $query_others = "SELECT product_id,name, price FROM products WHERE category='others'";
-    $stmt_others =$connection->prepare($query_others);
-    $stmt_others->execute();
-    $results_others = $stmt_others->get_result();
+//for others
+$query_others = "SELECT product_id,name, price FROM products WHERE category='others'";
+$stmt_others = $connection->prepare($query_others);
+$stmt_others->execute();
+$results_others = $stmt_others->get_result();
 
 
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,32 +64,25 @@
             <a href="" class="nav-branding">Newbie Gamers.</a>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page"> <i
-                            class="fa fa-home fa-lg"></i></a>
+                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page"> <i class="fa fa-home fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page"><i
-                            class="fa fa-shopping-cart fa-lg"></i></a>
+                    <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page"><i class="fa fa-shopping-cart fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../appointments/appointments.php" class="appointments_menu nav-link"
-                        title="Appointments"><i class="fa fa-wrench fa-lg"></i></a>
+                    <a href="../appointments/appointments.php" class="appointments_menu nav-link" title="Appointments"><i class="fa fa-wrench fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page"><i
-                            class="fa fa-phone fa-lg"></i></a>
+                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page"><i class="fa fa-phone fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page"><i
-                            class="fa fa-book fa-lg"></i></a>
+                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page"><i class="fa fa-book fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket"><i
-                            class="fa fa-shopping-basket fa-lg"></i></a>
+                    <a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket"><i class="fa fa-shopping-basket fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account"><i
-                            class="fa fa-user fa-lg" style="margin-bottom: 30px;"></i></a>
+                    <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account"><i class="fa fa-user fa-lg" style="margin-bottom: 30px;"></i></a>
                 </li>
             </ul>
             <div class="hamburger">
@@ -211,7 +205,7 @@
             </div>
         </div>
     </div>
-     <!-- ended filters -->
+    <!-- ended filters -->
 
 
     <div>
@@ -227,10 +221,10 @@
                     <h1>CD's</h1>
                 </div>
                 <?php
-                while($row = $results->fetch_assoc() ){
-                    shop_cd_connection($row["product_id"],$row["name"], $row["price"]); 
+                while ($row = $results->fetch_assoc()) {
+                    shop_cd_connection($row["product_id"], $row["name"], $row["price"]);
                 }
-            ?>
+                ?>
             </div>
         </div>
         <!-- end first tab -->
@@ -242,10 +236,10 @@
                     <h1>Consoles</h1>
                 </div>
                 <?php
-                while($row_console = $results_console->fetch_assoc() ){
-                    shop_console_connection($row_console["product_id"],$row_console["name"], $row_console["price"]); 
+                while ($row_console = $results_console->fetch_assoc()) {
+                    shop_console_connection($row_console["product_id"], $row_console["name"], $row_console["price"]);
                 }
-            ?>     
+                ?>
             </div>
         </div>
         <!-- end of second tab -->
@@ -257,10 +251,10 @@
                     <h1>CellPhones</h1>
                 </div>
                 <?php
-                while($row_cellphone = $results_cellphone->fetch_assoc() ){
-                    shop_cellphone_connection($row_cellphone["product_id"],$row_cellphone["name"], $row_cellphone["price"]); 
+                while ($row_cellphone = $results_cellphone->fetch_assoc()) {
+                    shop_cellphone_connection($row_cellphone["product_id"], $row_cellphone["name"], $row_cellphone["price"]);
                 }
-            ?>
+                ?>
             </div>
         </div>
         <!-- end of third tab -->
@@ -272,10 +266,10 @@
                     <h1>Offers</h1>
                 </div>
                 <?php
-                while($row_offers = $results_offers->fetch_assoc() ){
-                    shop_cd_connection($row_offers["product_id"],$row_offers["name"], $row_offers["price"]); 
+                while ($row_offers = $results_offers->fetch_assoc()) {
+                    shop_cd_connection($row_offers["product_id"], $row_offers["name"], $row_offers["price"]);
                 }
-            ?>
+                ?>
             </div>
         </div>
         <!-- end of fourth tab -->
@@ -287,10 +281,10 @@
                     <h1>Others</h1>
                 </div>
                 <?php
-                while($row_others = $results_others->fetch_assoc() ){
-                    shop_cd_connection($row_others["product_id"],$row_others["name"], $row_others["price"]); 
+                while ($row_others = $results_others->fetch_assoc()) {
+                    shop_cd_connection($row_others["product_id"], $row_others["name"], $row_others["price"]);
                 }
-            ?>
+                ?>
             </div>
         </div>
         <!-- end of fifth tab -->
@@ -320,16 +314,14 @@
                             <a href="../home-page/home-page.php#about-us" title="Know more about us">About Us</a>
                         </li>
                         <li>
-                            <a href="../home-page/home-page.php#contact-us"
-                                title="Contact us for any enquiries or thoughts">Contact Us</a>
+                            <a href="../home-page/home-page.php#contact-us" title="Contact us for any enquiries or thoughts">Contact Us</a>
                         </li>
                         <li>
                             <a href="../home-page/home-page.php#shop-products" title="Take a look at our products">Our
                                 Products</a>
                         </li>
                         <li>
-                            <a href="../home-page/home-page.php#testimonials"
-                                title="See what our customers said about our service">Our Customers' opinions</a>
+                            <a href="../home-page/home-page.php#testimonials" title="See what our customers said about our service">Our Customers' opinions</a>
                         </li>
                     </ol>
                 </div>
@@ -428,16 +420,13 @@
                             <h3>Follow Us on Our Socials</h3>
                         </li>
                         <li>
-                            <a href="https://www.facebook.com" title="Newbies Gamers facebook account link"><i
-                                    class="fa fa-facebook"></i>Facebook</a>
+                            <a href="https://www.facebook.com" title="Newbies Gamers facebook account link"><i class="fa fa-facebook"></i>Facebook</a>
                         </li>
                         <li>
-                            <a href="https://www.instagram.com" title="Newbies Gamers instagram account link"><i
-                                    class="fa fa-instagram"></i>Instagram</a>
+                            <a href="https://www.instagram.com" title="Newbies Gamers instagram account link"><i class="fa fa-instagram"></i>Instagram</a>
                         </li>
                         <li>
-                            <a href="https://www.twitter.com" title="Newbies Gamers twitter account link"><i
-                                    class="fa fa-twitter"></i>Twitter</a>
+                            <a href="https://www.twitter.com" title="Newbies Gamers twitter account link"><i class="fa fa-twitter"></i>Twitter</a>
                         </li>
                     </ol>
                 </div>
@@ -446,7 +435,7 @@
     </footer>
     <!-- ended with footer -->
 
-    
+
     <script src="../shop/shop.js"></script>
 </body>
 
