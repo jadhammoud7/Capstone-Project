@@ -20,10 +20,15 @@
         <h1 class="title">Sign Up</h1>
         <p class="title">Please fill in this form to create an account.</p>
         <hr>
-
-        <p class="error" id="first_name_error"></p>
+        <p class="error" id="first_name_error"><?php
+                                                session_start();
+                                                if (isset($_SESSION['first_name_error'])) {
+                                                  echo "<script>document.getElementById('first_name_error').style.display='block';</script>";
+                                                  echo $_SESSION['first_name_error'];
+                                                  unset($_SESSION['first_name_error']);
+                                                } ?></p>
         <label for="first_name"><b>First Name</b></label>
-        <input type="text" placeholder="Enter your first name" name="first_name" id="first_name" required>
+        <input type="text" placeholder="Enter your first name" name="first_name" id="first_name" value="<?php if(isset($_SESSION['first_name'])){ echo $_SESSION['first_name']; } ?>" required>
 
         <label for="last_name"><b>Last Name</b></label>
         <input type="text" placeholder="Enter your last name" name="last_name" id="last_name" required>
@@ -56,6 +61,7 @@
         </div>
       </div>
     </form>
+
   </div>
 
 </body>
