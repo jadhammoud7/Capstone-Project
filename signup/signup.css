@@ -147,16 +147,36 @@ hr {
   display: table;
 }
 
-.error{
+.error {
   background: #f2dede;
   color: #a94442 !important;
   padding: 10px;
   width: 95%;
   border-radius: 5px;
-  margin: 20px auto;  
+  margin: 20px auto;
 }
 
-#first_name_error{
+#first_name_error {
+  display: none;
+}
+
+#last_name_error {
+  display: none;
+}
+
+#email_error {
+  display: none;
+}
+
+#address_error {
+  display: none;
+}
+
+#username_error {
+  display: none;
+}
+
+#password_error {
   display: none;
 }
 
