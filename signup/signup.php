@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
 
-    session_start();
-    if(!isset($_SESSION['logged_bool'])){
-        header("Location: ../login/login.php");
-    }
-?>
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,8 +21,11 @@
         <p class="title">Please fill in this form to create an account.</p>
         <hr>
 
+        <?php if (isset($_GET['first_name_error'])) { ?>
+          <p class="error"><?php echo $_GET['first_name_error']; ?></p>
+        <?php } ?>
         <label for="first_name"><b>First Name</b></label>
-        <input type="text" placeholder="Enter your first name" name="first_name"  id="first_name" required>
+        <input type="text" placeholder="Enter your first name" name="first_name" id="first_name" required>
 
         <label for="last_name"><b>Last Name</b></label>
         <input type="text" placeholder="Enter your last name" name="last_name" id="last_name" required>
@@ -43,7 +40,7 @@
         <input type="text" placeholder="Enter your phone number" name="phone_number" id="phone_number" required> <br> <br>
 
         <label for="address"><b>Address</b></label>
-        <input type="text" placeholder="Enter address" name="address"  id="address" required>
+        <input type="text" placeholder="Enter address" name="address" id="address" required>
 
         <label for="username"><b>Username</b></label>
         <input type="text" placeholder="Enter username of your own" name="username" id="username" required>

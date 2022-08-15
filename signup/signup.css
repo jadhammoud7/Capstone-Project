@@ -147,6 +147,15 @@ hr {
   display: table;
 }
 
+.error{
+  background: #f2dede;
+  color: #a94442 !important;
+  padding: 10px;
+  width: 95%;
+  border-radius: 5px;
+  margin: 20px auto;  
+}
+
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
 

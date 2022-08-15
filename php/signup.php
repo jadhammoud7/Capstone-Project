@@ -3,57 +3,57 @@ session_start();
 
 include("connection.php");
 
-if(isset($_POST["first_name"]) && $_POST["first_name"] != ""){
-    $first_name = $_POST["first_name"];}
-else{
+if (isset($_POST["first_name"]) && $_POST["first_name"] != "") {
+    $first_name = $_POST["first_name"];
+    for ($i = 0; $i < strlen($first_name); $i++) {
+        if (is_numeric($first_name[$i])) {
+            header("Location: ../signup/signup.php?first_name_error=First Name should not contain a number");
+            die("WRONG first name");
+        }
+    }
+} else {
     die("ALERT first_name");
 }
 
-if(isset($_POST["last_name"]) && $_POST["last_name"] != ""){
+if (isset($_POST["last_name"]) && $_POST["last_name"] != "") {
     $last_name = $_POST["last_name"];
-}
-else{
+} else {
     die("ALERT last_name");
 }
 
-if(isset($_POST["email"]) && $_POST["email"] != ""){
-    $email = $_POST["email"];}
-else{
+if (isset($_POST["email"]) && $_POST["email"] != "") {
+    $email = $_POST["email"];
+} else {
     die("ALERT email");
 }
 
-if(isset($_POST["date_of_birth"]) && $_POST["date_of_birth"] != ""){
+if (isset($_POST["date_of_birth"]) && $_POST["date_of_birth"] != "") {
     $date_of_birth = $_POST["date_of_birth"];
-}
-else{
+} else {
     die("ALERT date_of_birth");
 }
 
-if(isset($_POST["phone_number"]) && $_POST["phone_number"] != ""){
+if (isset($_POST["phone_number"]) && $_POST["phone_number"] != "") {
     $phone_number = $_POST["phone_number"];
-}
-else{
+} else {
     die("ALERT phone_number");
 }
 
-if(isset($_POST["address"]) && $_POST["address"] != ""){
+if (isset($_POST["address"]) && $_POST["address"] != "") {
     $address = $_POST["address"];
-}
-else{
+} else {
     die("ALERT address");
 }
 
-if(isset($_POST["username"]) && $_POST["username"] != ""){
+if (isset($_POST["username"]) && $_POST["username"] != "") {
     $username = $_POST["username"];
-}
-else{
+} else {
     die("ALERT username");
 }
 
-if(isset($_POST["password"]) && $_POST["password"] != ""){
+if (isset($_POST["password"]) && $_POST["password"] != "") {
     $password = hash("sha256", $_POST["password"]);
-}
-else{
+} else {
     die("ALERT password");
 }
 
@@ -66,7 +66,7 @@ $mysql->close();
 
 
 //getting the id of this user to that when he/she has signed up there id will be saved
-$statement1 = $connection->prepare("SELECT customer_id FROM customers WHERE username = '".$username."' ");
+$statement1 = $connection->prepare("SELECT customer_id FROM customers WHERE username = '" . $username . "' ");
 $statement1->execute();
 $statement_result1 = $statement1->get_result();
 $data1 = $statement_result1->fetch_assoc();
@@ -74,6 +74,5 @@ $data1 = $statement_result1->fetch_assoc();
 
 $logged_id1 = $data1['customer_id'];
 $_SESSION['logged_id'] = $logged_id1;
-echo "the id of the logged user is :",$_SESSION['logged_id'];
+echo "the id of the logged user is :", $_SESSION['logged_id'];
 //saving which user is logged in
-?>
