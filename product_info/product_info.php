@@ -2,22 +2,21 @@
 <html lang="en">
 <?php
 
-    session_start();
-    if(!isset($_SESSION['logged_bool'])){
-        header("Location: ../login/login.php");
-    }
-    
-    //for product info
-    include ("../php/shop_product_connection.php");
-    $id=$_GET['productID'];
-    $query_info = "SELECT name, price,category,description,age FROM products WHERE product_id=$id ";
-    $stmt_info =$connection->prepare($query_info);
-    $stmt_info->execute();
-    $results_info = $stmt_info->get_result();
+session_start();
+if (!isset($_SESSION['logged_bool'])) {
+    header("Location: ../login/login.php");
+}
 
-    
+//for product info
+include("../php/shop_product_connection.php");
+$id = $_GET['productID'];
+$query_info = "SELECT product_id, name, price,category,description,age FROM products WHERE product_id=$id ";
+$stmt_info = $connection->prepare($query_info);
+$stmt_info->execute();
+$results_info = $stmt_info->get_result();
 
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,32 +39,25 @@
             <a href="" class="nav-branding">Newbie Gamers.</a>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page"> <i
-                            class="fa fa-home fa-lg"></i></a>
+                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page"> <i class="fa fa-home fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page"><i
-                            class="fa fa-shopping-cart fa-lg"></i></a>
+                    <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page"><i class="fa fa-shopping-cart fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../appointments/appointments.php" class="appointments_menu nav-link"
-                        title="Appointments"><i class="fa fa-wrench fa-lg"></i></a>
+                    <a href="../appointments/appointments.php" class="appointments_menu nav-link" title="Appointments"><i class="fa fa-wrench fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page"><i
-                            class="fa fa-phone fa-lg"></i></a>
+                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page"><i class="fa fa-phone fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page"><i
-                            class="fa fa-book fa-lg"></i></a>
+                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page"><i class="fa fa-book fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket"><i
-                            class="fa fa-shopping-basket fa-lg"></i></a>
+                    <a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket"><i class="fa fa-shopping-basket fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account"><i
-                            class="fa fa-user fa-lg" style="margin-bottom: 30px;"></i></a>
+                    <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account"><i class="fa fa-user fa-lg" style="margin-bottom: 30px;"></i></a>
                 </li>
             </ul>
             <div class="hamburger">
@@ -91,10 +83,10 @@
     <!-- started with product info -->
     <?php
     require_once("../php/product_info_connection.php");
-        while($row_info = $results_info->fetch_assoc() ){
-            product_info_connection($row_info["name"], $row_info["price"],$row_info["category"],$row_info["description"],$row_info["age"]); 
-        }
-        ?>
+    while ($row_info = $results_info->fetch_assoc()) {
+        product_info_connection($row_info["product_id"], $row_info["name"], $row_info["price"], $row_info["category"], $row_info["description"], $row_info["age"]);
+    }
+    ?>
     <!-- ended with product info -->
 
 
@@ -123,16 +115,14 @@
                             <a href="../home-page/home-page.php#about-us" title="Know more about us">About Us</a>
                         </li>
                         <li>
-                            <a href="../home-page/home-page.php#contact-us"
-                                title="Contact us for any enquiries or thoughts">Contact Us</a>
+                            <a href="../home-page/home-page.php#contact-us" title="Contact us for any enquiries or thoughts">Contact Us</a>
                         </li>
                         <li>
                             <a href="../home-page/home-page.php#shop-products" title="Take a look at our products">Our
                                 Products</a>
                         </li>
                         <li>
-                            <a href="../home-page/home-page.php#testimonials"
-                                title="See what our customers said about our service">Our Customers' opinions</a>
+                            <a href="../home-page/home-page.php#testimonials" title="See what our customers said about our service">Our Customers' opinions</a>
                         </li>
                     </ol>
                 </div>
@@ -231,16 +221,13 @@
                             <h3>Follow Us on Our Socials</h3>
                         </li>
                         <li>
-                            <a href="https://www.facebook.com" title="Newbies Gamers facebook account link"><i
-                                    class="fa fa-facebook"></i>Facebook</a>
+                            <a href="https://www.facebook.com" title="Newbies Gamers facebook account link"><i class="fa fa-facebook"></i>Facebook</a>
                         </li>
                         <li>
-                            <a href="https://www.instagram.com" title="Newbies Gamers instagram account link"><i
-                                    class="fa fa-instagram"></i>Instagram</a>
+                            <a href="https://www.instagram.com" title="Newbies Gamers instagram account link"><i class="fa fa-instagram"></i>Instagram</a>
                         </li>
                         <li>
-                            <a href="https://www.twitter.com" title="Newbies Gamers twitter account link"><i
-                                    class="fa fa-twitter"></i>Twitter</a>
+                            <a href="https://www.twitter.com" title="Newbies Gamers twitter account link"><i class="fa fa-twitter"></i>Twitter</a>
                         </li>
                     </ol>
                 </div>
@@ -249,7 +236,7 @@
     </footer>
     <!-- ended with footer -->
 
-    
+
     <script src="../shop/shop.js"></script>
     <script src="../product_info/product_info.js"></script>
 </body>

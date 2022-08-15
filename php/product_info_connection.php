@@ -1,11 +1,7 @@
 <?php
-include("connection.php");
 
-
- 
-function product_info_connection($name,$price,$category,$description,$age){
-    
-
+function product_info_connection($product_id, $name, $price, $category, $description, $age)
+{
     $element = "
     <title>$name - Newbies Gamers</title>
     <!-- started with title page -->
@@ -37,7 +33,7 @@ function product_info_connection($name,$price,$category,$description,$age){
             </div>
             <!-- <label for=\"points\">Quantity:</label> -->
             <input type=\"number\" id=\"points\" name=\"points\" title=\"Quantity to add to basket\"> <br> <br>
-            <button class=\"product_info_addtobasket\" title=\"Add this product to your shopping basket\"><i
+            <button class=\"product_info_addtobasket\" title=\"Add this product to your shopping basket\"  onclick=\"window.location.href = '../php/basket.php?productID=$product_id'\"><i
                     class=\"fa fa-shopping-basket\"></i>Add to Basket</button>
             <button class=\"product_info_addtofavorites\" title=\"Add this product to your favorites list\"><i
                     class=\"fa fa-heart\"></i>Add to Favorites</button>
@@ -47,5 +43,3 @@ function product_info_connection($name,$price,$category,$description,$age){
     ";
     echo $element;
 }
-
-?>
