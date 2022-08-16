@@ -35,6 +35,14 @@ CREATE TABLE `baskets_customer_product` (
 
 -- --------------------------------------------------------
 
+-- Table structure for table `favorites_customer_product`
+--
+
+CREATE TABLE `favorites_customer_product` (
+  `customer_id` int NOT NULL,
+  `product_id` int NOT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 --
 -- Table structure for table `comments`
 --
