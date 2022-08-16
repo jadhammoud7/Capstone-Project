@@ -221,7 +221,11 @@ function add_to_basket_connection($name, $price, $quantity)
             </div>
         </div>
     </td>
-    <td><input type=\"number\" name=\"\" value=\"$quantity\" id=\"quantity_of_each_product\"></td>
+    <form action = "../php/basket.php?productID=$product_id&customerID=$_SESSION['logged_id']" method = "GET">
+        <td>
+            <input type=\"number\" name=\"quantity\" value=\"$quantity\" id=\"quantity_of_each_product\">
+        </td>
+    </form>
     <td id=\"get_price\">$price$</td>
     </tr>
     ";
