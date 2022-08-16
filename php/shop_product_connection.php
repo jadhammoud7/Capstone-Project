@@ -205,7 +205,7 @@ function shop_others_connection($product_id, $name, $price)
 
 
 //for basket
-function add_to_basket_connection($name, $price, $quantity)
+function add_to_basket_connection($product_id, $name, $price, $quantity)
 {
 
     $element = "
