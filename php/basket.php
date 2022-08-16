@@ -10,6 +10,12 @@ if (isset($_SESSION['logged_id'])) {
     $customer_id = $_SESSION['logged_id'];
 }
 
+if(isset($_GET['productID']) && isset($_GET['customer_id']) && isset($_GET['quantity'])){
+    $stmt_update_quantity = $connection->prepare("UPDATE baskets_customer_product SET quantity = ? WHERE product_id = '" . $product_id . "' and customer_id = '" . $customer_id ."'");
+    $stmt_update_quantity->bind_param("i", $_GET['quantity']);
+    $stmt_update_quantity->execute();
+}
+
 $select_stmt = $connection->prepare("SELECT product_id FROM baskets_customer_product WHERE product_id = '". $product_id . "' and customer_id = '" . $customer_id . "' ");
 $select_stmt->execute();
 $select_results = $select_stmt->get_result();
