@@ -205,7 +205,7 @@ function shop_others_connection($product_id, $name, $price)
 
 
 //for basket
-function add_to_basket_connection($name, $price)
+function add_to_basket_connection($name, $price, $quantity)
 {
 
     $element = "
@@ -221,7 +221,7 @@ function add_to_basket_connection($name, $price)
             </div>
         </div>
     </td>
-    <td><input type=\"number\" name=\"\" id=\"\" value=\"1\"></td>
+    <td><input type=\"number\" name=\"\" id=\"\" value=\"$quantity\"></td>
     <td>$55.00</td>
 </tr>
     ";
