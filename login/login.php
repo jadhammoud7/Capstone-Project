@@ -17,12 +17,36 @@
     <div class="center">
         <h1>Login</h1>
         <form action="../php/login.php" method="post">
+            <p class="error" id="username_error">
+            <?php
+               session_start();
+               if(isset($_SESSION['username_error'])){
+                   echo "<script>document.getElementById('username_error').style.display='block';</script>";
+                   echo $_SESSION['username_error'];
+                   unset($_SESSION['username_error']);
+               }
+             ?>
+            </p>
             <div class="txt_field">
-                <input name="username" type="text" required>
+                <input name="username" type="text" value="<?php if (isset($_SESSION['username'])) {
+                                                                   echo $_SESSION['username'];
+                                                                } ?>"required>
                 <label>Username</label>
             </div>
+            <p class="error" id="password_error">
+                <?php
+                 session_start();
+                 if(isset($_SESSION['password_error'])){
+                   echo "<script>document.getElementById('password_error').style.display='block';</script>";
+                   echo $_SESSION['password_error'];
+                   unset($_SESSION['password_error']);
+                 }
+                ?>
+            </p>
             <div class="txt_field">
-                <input name="password" type="password" required>
+                <input name="password" type="password" value="<?php if (isset($_SESSION['password'])) {
+                                                                   echo $_SESSION['password'];
+                                                                } ?>"required>
                 <label>Password</label>
             </div>
             <a>
