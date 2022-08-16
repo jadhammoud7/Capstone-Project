@@ -12,6 +12,13 @@ $stmt->execute();
 $results = $stmt->get_result();
 $row = $results->fetch_assoc();
 
+include('../php/shop_product_connection.php');
+
+$customer_id = $_SESSION['customer_id'];
+$query_add_to_favorites = "SELECT product_id FROM favorites_customer_product WHERE customer_id = '" . $customer_id . "' ";
+$stmt_add_to_favorites =$connection->prepare($query_add_to_favorites);
+$stmt_add_to_favorites->execute();
+$results_add_to_favorites = $stmt_add_to_favorites->get_result();
 
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
@@ -236,100 +243,17 @@ if (!isset($_SESSION['logged_bool'])) {
         <div class="favorites fade" style="display: none;">
             <div>
                 <h2>Favorites List</h2>
-                <h3>You have a total of 4 items in favorites list</h3>
+                <h3>You have a total of <?php echo mysql_num_rows($stmt_add_to_favorites); ?> items in favorites list</h3>
             </div>
-            <div class="favorites-products">
-                <div class="favorites-product-info">
-                    <div class="favorites-product-img">
-                        <img src="../images/console.png" alt="favorites product" style="width: 50%;">
-                    </div>
-                    <div class="favorites-product-part">
-                        <h3>Product Name X</h3>
-                        <h4>Console PS3</h4>
-                    </div>
-                    <div class="favorites-product-part">
-                        <h3>Price</h3>
-                        <h4>200$</h4>
-                    </div>
-                </div>
-                <div class="favorites-product-buttons">
-                    <div>
-                        <button class="btn" title="Check more information about this product"><i class="fa fa-info-circle"></i><strong>Check Info</strong></button>
-                    </div>
-                    <div>
-                        <button class="btn" title="Remove this product from your favorites list"><i class="fa fa-trash"></i><strong>Remove From Favorites</strong></button>
-                    </div>
-                </div>
-            </div>
-            <div class="favorites-products">
-                <div class="favorites-product-info">
-                    <div class="favorites-product-img">
-                        <img src="../images/console.png" alt="favorites product" style="width: 50%;">
-                    </div>
-                    <div class="favorites-product-part">
-                        <h3>Product Name X</h3>
-                        <h4>Console PS3</h4>
-                    </div>
-                    <div class="favorites-product-part">
-                        <h3>Price</h3>
-                        <h4>200$</h4>
-                    </div>
-                </div>
-                <div class="favorites-product-buttons">
-                    <div>
-                        <button class="btn" title="Check more information about this product"><i class="fa fa-info-circle"></i><strong>Check Info</strong></button>
-                    </div>
-                    <div>
-                        <button class="btn" title="Remove this product from your favorites list"><i class="fa fa-trash"></i><strong>Remove From Favorites</strong></button>
-                    </div>
-                </div>
-            </div>
-            <div class="favorites-products">
-                <div class="favorites-product-info">
-                    <div class="favorites-product-img">
-                        <img src="../images/console.png" alt="favorites product" style="width: 50%;">
-                    </div>
-                    <div class="favorites-product-part">
-                        <h3>Product Name X</h3>
-                        <h4>Console PS3</h4>
-                    </div>
-                    <div class="favorites-product-part">
-                        <h3>Price</h3>
-                        <h4>200$</h4>
-                    </div>
-                </div>
-                <div class="favorites-product-buttons">
-                    <div>
-                        <button class="btn" title="Check more information about this product"><i class="fa fa-info-circle"></i><strong>Check Info</strong></button>
-                    </div>
-                    <div>
-                        <button class="btn" title="Remove this product from your favorites list"><i class="fa fa-trash"></i><strong>Remove From Favorites</strong></button>
-                    </div>
-                </div>
-            </div>
-            <div class="favorites-products">
-                <div class="favorites-product-info">
-                    <div class="favorites-product-img">
-                        <img src="../images/console.png" alt="favorites product" style="width: 50%;">
-                    </div>
-                    <div class="favorites-product-part">
-                        <h3>Product Name X</h3>
-                        <h4>Console PS3</h4>
-                    </div>
-                    <div class="favorites-product-part">
-                        <h3>Price</h3>
-                        <h4>200$</h4>
-                    </div>
-                </div>
-                <div class="favorites-product-buttons">
-                    <div>
-                        <button class="btn" title="Check more information about this product"><i class="fa fa-info-circle"></i><strong> Check Info</strong></button>
-                    </div>
-                    <div>
-                        <button class="btn" title="Remove this product from your favorites list"><i class="fa fa-trash"></i><strong>Remove From Favorites</strong></button>
-                    </div>
-                </div>
-            </div>
+            <?php
+             while($row_add_to_favorites = $results_add_to_favorites->fetch_assoc() ){
+                    $stmt_get_product = $connection->prepare("SELECT name, price FROM products WHERE product_id = '" . $row_add_to_favorites["product_id"] . "' ");
+                    $stmt_get_product->execute();
+                    $results_get_product = $stmt_get_product->get_result():
+                    $row_get_product = $results_get_product->fetch_assoc();
+                    add_to_basket_connection($row_get_product["name"], $row_get_product["price"]); 
+             }      
+            ?>
             <div class="gotoshoppage_profile">
                 <button title="Go to Shop Page"><strong>Go To Shop Page</strong></button>
             </div>
