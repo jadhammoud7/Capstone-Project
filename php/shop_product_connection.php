@@ -227,3 +227,33 @@ function add_to_basket_connection($name, $price, $quantity)
     ";
     echo $element;
 }
+
+//for favorites
+function add_to_favorites_connection($name, $price){
+
+    $element = "<div class="favorites-products">
+                <div class="favorites-product-info">
+                    <div class="favorites-product-img">
+                        <img src="../images/console.png" alt="favorites product" style="width: 50%;">
+                    </div>
+                    <div class="favorites-product-part">
+                        <h3>Product Name X</h3>
+                        <h4>Console PS3</h4>
+                    </div>
+                    <div class="favorites-product-part">
+                        <h3>Price</h3>
+                        <h4>200$</h4>
+                    </div>
+                </div>
+                <div class="favorites-product-buttons">
+                    <div>
+                        <button class="btn" title="Check more information about this product"><i class="fa fa-info-circle"></i><strong>Check Info</strong></button>
+                    </div>
+                    <div>
+                        <button class="btn" title="Remove this product from your favorites list"><i class="fa fa-trash"></i><strong>Remove From Favorites</strong></button>
+                    </div>
+                </div>
+            </div>";
+    
+    echo $element;
+}
