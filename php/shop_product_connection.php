@@ -209,21 +209,21 @@ function add_to_basket_connection($name, $price, $quantity)
 {
 
     $element = "
-    <tr>
+    <tr class=\"product-container\">
     <td>
         <div class=\"cart-info\">
             <img src=\"../images/Gaming-Wallpaper.png\" alt=\"\">
             <div class=\"info_of_product\">
                 <p>$name</p>
-                <small>price: $price$</small>
+                <small >price: $price$</small>
                 <br> <br>
                 <a href=\"\" title=\"Remove this product from your shopping basket\">Remove</a>
             </div>
         </div>
     </td>
     <td><input type=\"number\" name=\"\" value=\"$quantity\" id=\"quantity_of_each_product\"></td>
-    <td>$55.00</td>
-</tr>
+    <td id=\"get_price\">$price$</td>
+    </tr>
     ";
     echo $element;
 }
