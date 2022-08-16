@@ -232,6 +232,31 @@ function add_to_basket_connection($product_id, $name, $price, $quantity)
     echo $element;
 }
 
+//for basket profile
+
+function basket_connection($product_id, $name, $category, $price, $quantity){ 
+
+   $element =  "<div class="basket-product">
+                    <div class="basket-product-img">
+                        <img src="../images/console.png" alt="basket product" style="width: 50%;">
+                    </div>
+                    <div class="basket-product-part">
+                        <h3>$name</h3>
+                        <h4>$category</h4>
+                    </div>
+                    <div class="basket-product-part">
+                        <h3>Quantity</h3>
+                        <h4>$quantity</h4>
+                    </div>
+                    <div class="basket-product-part">
+                        <h3>Price</h3>
+                        <h4>$price$</h4>
+                    </div>
+                </div>";
+    
+    echo $element;
+}
+
 //for favorites
 function add_to_favorites_connection($name, $price){
 
