@@ -10,7 +10,7 @@ if (isset($_SESSION['logged_id'])) {
     $customer_id = $_SESSION['logged_id'];
 }
 
-$select_stmt = $connection->prepare("SELECT product_id FROM baskets_customer_product WHERE product_id = '". $product_id . "' ");
+$select_stmt = $connection->prepare("SELECT product_id FROM baskets_customer_product WHERE product_id = '". $product_id . "' and customer_id = '" . $customer_id . "' ");
 $select_stmt->execute();
 $select_results = $select_stmt->get_result();
 $row_select = $select_results->fetch_assoc();
