@@ -108,3 +108,7 @@ function revealY() {
 
 window.addEventListener("scroll", revealY);
 window.addEventListener("pageshow", revealY);
+
+
+//start with the calculations of every product(quantity)
+const quantity_calc=document.getElementById("quantity_of_each_product");

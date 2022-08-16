@@ -249,9 +249,9 @@ if (!isset($_SESSION['logged_bool'])) {
              while($row_add_to_favorites = $results_add_to_favorites->fetch_assoc() ){
                     $stmt_get_product = $connection->prepare("SELECT name, price FROM products WHERE product_id = '" . $row_add_to_favorites["product_id"] . "' ");
                     $stmt_get_product->execute();
-                    $results_get_product = $stmt_get_product->get_result():
+                    $results_get_product = $stmt_get_product->get_result();
                     $row_get_product = $results_get_product->fetch_assoc();
-                    add_to_basket_connection($row_get_product["name"], $row_get_product["price"]); 
+                    add_to_basket_connection($row_get_product['name'], $row_get_product['price']); 
              }      
             ?>
             <div class="gotoshoppage_profile">
