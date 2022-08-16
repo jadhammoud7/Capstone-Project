@@ -20,6 +20,11 @@ $stmt_add_to_favorites =$connection->prepare($query_add_to_favorites);
 $stmt_add_to_favorites->execute();
 $results_add_to_favorites = $stmt_add_to_favorites->get_result();
 
+$query_basket = "SELECT product_id, quantity FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ";
+$stmt_basket =$connection->prepare($query_basket);
+$stmt_basket->execute();
+$results_basket = $stmt_basket->get_result();
+
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
@@ -157,84 +162,26 @@ if (!isset($_SESSION['logged_bool'])) {
                 <h2>Shopping Basket</h2>
                 <h3>You have total of 4 items in your basket</h3>
             </div>
-            <div class="basket-products">
-                <div class="basket-product">
-                    <div class="basket-product-img">
-                        <img src="../images/console.png" alt="basket product" style="width: 50%;">
-                    </div>
-                    <div class="basket-product-part">
-                        <h3>Product Name X</h3>
-                        <h4>Console PS3</h4>
-                    </div>
-                    <div class="basket-product-part">
-                        <h3>Quantity</h3>
-                        <h4>2</h4>
-                    </div>
-                    <div class="basket-product-part">
-                        <h3>Price</h3>
-                        <h4>200$</h4>
-                    </div>
-                </div>
-                <div class="basket-product">
-                    <div class="basket-product-img">
-                        <img src="../images/console.png" alt="basket product" style="width: 50%;">
-                    </div>
-                    <div class="basket-product-part">
-                        <h3>Product Name X</h3>
-                        <h4>Console PS3</h4>
-                    </div>
-                    <div class="basket-product-part">
-                        <h3>Quantity</h3>
-                        <h4>2</h4>
-                    </div>
-                    <div class="basket-product-part">
-                        <h3>Price</h3>
-                        <h4>200$</h4>
-                    </div>
-                </div>
-                <div class="basket-product">
-                    <div class="basket-product-img">
-                        <img src="../images/console.png" alt="basket product" style="width: 50%;">
-                    </div>
-                    <div class="basket-product-part">
-                        <h3>Product Name X</h3>
-                        <h4>Console PS3</h4>
-                    </div>
-                    <div class="basket-product-part">
-                        <h3>Quantity</h3>
-                        <h4>2</h4>
-                    </div>
-                    <div class="basket-product-part">
-                        <h3>Price</h3>
-                        <h4>200$</h4>
-                    </div>
-                </div>
-                <div class="basket-product">
-                    <div class="basket-product-img">
-                        <img src="../images/console.png" alt="basket product" style="width: 50%;">
-                    </div>
-                    <div class="basket-product-part">
-                        <h3>Product Name X</h3>
-                        <h4>Console PS3</h4>
-                    </div>
-                    <div class="basket-product-part">
-                        <h3>Quantity</h3>
-                        <h4>2</h4>
-                    </div>
-                    <div class="basket-product-part">
-                        <h3>Price</h3>
-                        <h4>200$</h4>
-                    </div>
-                </div>
-                <div>
-                    <h3>Total Price: 800$</h3>
-                </div>
-                <div class="gotoshoppage_profile">
-                    <button title="Go to shopping basket to modify or submit your order"><strong>Go To Shopping
-                            Basket</strong></button>
-                </div>
-            </div>
-        </div>
+            <?php
+            while($row_basket = $results_basket->fetch_assoc() ){
+                    $stmt_get_product = $connection->prepare("SELECT product_id, category, name, price FROM products WHERE product_id = '" . $row_basket["product_id"] . "' ");
+                    $stmt_get_product->execute();
+                    $results_get_product = $stmt_get_product->get_result();
+                    $row_get_product = $results_get_product->fetch_assoc();
+                    basket_connection($row_get_product["product_id"], $row_get_product["name"], $row_get_product["category"], $row_get_product["price"], $row_add_to_basket["quantity"]); 
+                }
+                    
+             ?>
+        
+        
+             <div>
+                 <h3>Total Price: 800$</h3>
+             </div>
+             <div class="gotoshoppage_profile">
+                <button title="Go to shopping basket to modify or submit your order"><strong>Go To Shopping
+                         Basket</strong></button>
+             </div>
+         </div>
         <!-- ended shopping basket -->
 
 
