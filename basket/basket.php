@@ -98,11 +98,11 @@
             </tr>
             <?php
                 while($row_add_to_basket = $results_add_to_basket->fetch_assoc() ){
-                    $stmt_get_product = $connection->prepare("SELECT name, price FROM products WHERE product_id = '" . $row_add_to_basket["product_id"] . "' ");
+                    $stmt_get_product = $connection->prepare("SELECT product_id, name, price FROM products WHERE product_id = '" . $row_add_to_basket["product_id"] . "' ");
                     $stmt_get_product->execute();
                     $results_get_product = $stmt_get_product->get_result();
                     $row_get_product = $results_get_product->fetch_assoc();
-                    add_to_basket_connection($row_get_product["name"], $row_get_product["price"], $row_add_to_basket["quantity"]); 
+                    add_to_basket_connection($row_get_product["product_id"], $row_get_product["name"], $row_get_product["price"], $row_add_to_basket["quantity"]); 
                 }
             ?>
         </table>
