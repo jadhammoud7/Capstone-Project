@@ -96,13 +96,13 @@ if (!isset($_SESSION['logged_bool'])) {
                         </div>
                         <div class="form-container-part-inputs">
                             <div class="input-container">
-                                <input type="text" id="first_name" value="<?php if (isset($_SESSION['first_name'])) {
+                                <input type="text" name="first_name" id="first_name" value="<?php if (isset($_SESSION['first_name'])) {
                                                                                 echo $_SESSION['first_name'];
                                                                             } ?>" required>
                                 <label for="first_name">First Name</label>
                             </div>
                             <div class="input-container">
-                                <input type="text" id="last_name" value="<?php if (isset($_SESSION['last_name'])) {
+                                <input type="text" name="last_name" id="last_name" value="<?php if (isset($_SESSION['last_name'])) {
                                                                                 echo $_SESSION['last_name'];
                                                                             } ?>" required>
                                 <label for="last_name">Last Name</label>
@@ -110,13 +110,13 @@ if (!isset($_SESSION['logged_bool'])) {
                         </div>
                         <div class="form-container-part-inputs">
                             <div class="input-container">
-                                <input type="email" id="email" value="<?php if (isset($_SESSION['email'])) {
+                                <input type="email" name="email" id="email" value="<?php if (isset($_SESSION['email'])) {
                                                                             echo $_SESSION['email'];
                                                                         } ?>" required>
                                 <label for="email">Email</label>
                             </div>
                             <div class="input-container">
-                                <input type="tel" id="phone_number" value="<?php if (isset($_SESSION['phone_number'])) {
+                                <input type="tel" name="phone_number" id="phone_number" value="<?php if (isset($_SESSION['phone_number'])) {
                                                                                 echo $_SESSION['phone_number'];
                                                                             } ?>" required>
                                 <label for="phone_number">Phone Number</label>
@@ -129,29 +129,29 @@ if (!isset($_SESSION['logged_bool'])) {
                         </div>
                         <div class="form-container-part-inputs">
                             <div class="input-container">
-                                <input type="text" id="shipping_country" required>
+                                <input type="text" name="shipping_country" id="shipping_country" required>
                                 <label for="shipping_country">Country</label>
                             </div>
                         </div>
                         <div class="form-container-part-inputs">
                             <div class="input-container" style="width: 100%;">
-                                <input type="text" id="shipping_location" required>
+                                <input type="text" name="shipping_location" id="shipping_location" required>
                                 <label for="shipping_location">Location (Town / City, Street, Home Address)</label>
                             </div>
                         </div>
                         <div class="form-container-part-inputs">
                             <div class="input-container">
-                                <input type="text" id="shipping_company">
+                                <input type="text" name="shipping_company" id="shipping_company">
                                 <label for="shipping_company">Company Name (if any)</label>
                             </div>
                             <div class="input-container">
-                                <input type="number" id="postcode" required>
+                                <input type="number" name="postcode" id="postcode" required>
                                 <label for="postcode">Postcode / ZIP</label>
                             </div>
                         </div>
                         <div class="form-container-part-inputs">
                             <div class="input-container" style="width: 100%;">
-                                <input type="text" id="order-notes">
+                                <input type="text" name="order_notes" id="order-notes">
                                 <label for="order_notes">Order Notes (Special notes related to the delivery,
                                     optional)</label>
                             </div>
