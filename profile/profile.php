@@ -190,15 +190,15 @@ if (!isset($_SESSION['logged_bool'])) {
         <div class="favorites fade" style="display: none;">
             <div>
                 <h2>Favorites List</h2>
-                <h3>You have a total of <?php echo mysqli_num_rows(mysqli_query($connection, "SELECT * FROM favorites_customer_product WHERE customer_id = '" . $customer_id ."' ")); ?> items in favorites list</h3>
+                <h3>You have a total of <?php echo mysqli_num_rows(mysqli_query($connection, "SELECT * FROM favorites_customer_product WHERE customer_id = '" . $customer_id . "' ")); ?> items in favorites list</h3>
             </div>
             <?php
             while ($row_add_to_favorites = $results_add_to_favorites->fetch_assoc()) {
-                $stmt_get_product = $connection->prepare("SELECT product_id, name, price FROM products WHERE product_id = '" . $row_add_to_favorites["product_id"] . "' ");
+                $stmt_get_product = $connection->prepare("SELECT product_id, name, category, price FROM products WHERE product_id = '" . $row_add_to_favorites["product_id"] . "' ");
                 $stmt_get_product->execute();
                 $results_get_product = $stmt_get_product->get_result();
                 $row_get_product = $results_get_product->fetch_assoc();
-                add_to_basket_connection($row_get_product['product_id'], $row_get_product['name'], $row_get_product['price'], $row_add_to_favorites['quantity']);
+                add_to_favorites_connection($row_get_product['product_id'], $row_get_product['name'], $row_get_product['category'], $row_get_product['price']);
             }
             ?>
             <div class="gotoshoppage_profile">

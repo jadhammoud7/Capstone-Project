@@ -437,6 +437,7 @@ $results_others = $stmt_others->get_result();
 
 
     <script src="../shop/shop.js"></script>
+    <script src="../main/main.js"></script>
 </body>
 
 </php>
