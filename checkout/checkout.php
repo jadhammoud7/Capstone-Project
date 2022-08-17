@@ -6,6 +6,9 @@
     if(!isset($_SESSION['logged_bool'])){
         header("Location: ../login/login.php");
     }
+    else{
+        $customer_id = $_SESSION['logged_id'];
+    }
 ?>
 <head>
     <meta charset="UTF-8">
@@ -79,133 +82,133 @@
     <!-- started with checkout form -->
     <div>
         <div class="login-part">
-            <p class="login-part-par">Have you created an account before? </p>
+            <p class="login-part-par">Want to proceed with the checkout faster with your personal information? </p>
             <button class="login-button"
-                title="Click to login in order to proceed with the checkout with your account personal info" style="color: black;"><strong>Click Here
-                to Login</strong></button>
+                 title="Click in order to proceed with the checkout with your account personal info" style="color: black;" 
+                 onclick="window.location.href='../php/checkout.php?customerID=$customer_id';"><strong>Use your personal information</strong></button>
         </div>
-        <div class="login-part">
+<!--         <div class="login-part">
             <p class="login-part-par">Want to proceed to your checkout faster and you don't have an account? </p>
             <button class="login-button"
                 title="Click to create and account to proceed with the checkout with your account personal info" style="color: black;"><strong>Create
                 an account now </strong></button>
-        </div>
-        <div class="billing-details">
-            <h2>Billing Details</h2>
-            <div class="form-container">
-                <form action="">
-                    <div class="form-container-part">
-                        <div>
-                            <h3 class="form-container-part-title">Personal Information</h3>
-                        </div>
-                        <div class="form-container-part-inputs">
-                            <div class="input-container">
-                                <input type="text" id="first-name" required>
-                                <label for="first-name">First Name</label>
+        </div> -->
+            <div class="billing-details">
+                <h2>Billing Details</h2>
+                <div class="form-container">
+                    <form action="../php/checkout.php" method="POST">
+                        <div class="form-container-part">
+                            <div>
+                                <h3 class="form-container-part-title">Personal Information</h3>
                             </div>
-                            <div class="input-container">
-                                <input type="text" id="last-name" required>
-                                <label for="last-name">Last Name</label>
+                            <div class="form-container-part-inputs">
+                                <div class="input-container">
+                                    <input type="text" id="first_name" required>
+                                    <label for="first_name">First Name</label>
+                                </div>
+                                <div class="input-container">
+                                    <input type="text" id="last_name" required>
+                                    <label for="last_name">Last Name</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-container-part-inputs">
-                            <div class="input-container">
-                                <input type="email" id="email" required>
-                                <label for="email">Email</label>
-                            </div>
-                            <div class="input-container">
-                                <input type="tel" id="phone-number" required>
-                                <label for="phone-number">Phone Number</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-container-part">
-                        <div>
-                            <h3 class="form-container-part-title">Shipping Details</h3>
-                        </div>
-                        <div class="form-container-part-inputs">
-                            <div class="input-container">
-                                <input type="text" id="shipping-country" required>
-                                <label for="shipping-country">Country</label>
+                            <div class="form-container-part-inputs">
+                                <div class="input-container">
+                                    <input type="email" id="email" required>
+                                    <label for="email">Email</label>
+                                </div>
+                                <div class="input-container">
+                                    <input type="tel" id="phone_number" required>
+                                    <label for="phone_number">Phone Number</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-container-part-inputs">
-                            <div class="input-container" style="width: 100%;">
-                                <input type="text" id="shipping-location" required>
-                                <label for="shipping-location">Location (Town / City, Street, Home Address)</label>
+                        <div class="form-container-part">
+                            <div>
+                                <h3 class="form-container-part-title">Shipping Details</h3>
+                            </div>
+                            <div class="form-container-part-inputs">
+                                <div class="input-container">
+                                    <input type="text" id="shipping_country" required>
+                                    <label for="shipping_country">Country</label>
+                                </div>
+                            </div>
+                            <div class="form-container-part-inputs">
+                                <div class="input-container" style="width: 100%;">
+                                    <input type="text" id="shipping_location" required>
+                                    <label for="shipping_location">Location (Town / City, Street, Home Address)</label>
+                                </div>
+                            </div>
+                            <div class="form-container-part-inputs">
+                                <div class="input-container">
+                                    <input type="text" id="shipping_company">
+                                    <label for="shipping_company">Company Name (if any)</label>
+                                </div>
+                                <div class="input-container">
+                                    <input type="number" id="postcode" required>
+                                    <label for="postcode">Postcode / ZIP</label>
+                                </div>
+                            </div>
+                            <div class="form-container-part-inputs">
+                                <div class="input-container" style="width: 100%;">
+                                    <input type="text" id="order-notes">
+                                    <label for="order_notes">Order Notes (Special notes related to the delivery,
+                                        optional)</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-container-part-inputs">
-                            <div class="input-container">
-                                <input type="text" id="shipping-company">
-                                <label for="shipping-company">Company Name (if any)</label>
-                            </div>
-                            <div class="input-container">
-                                <input type="number" id="postcode" required>
-                                <label for="postcode">Postcode / ZIP</label>
-                            </div>
-                        </div>
-                        <div class="form-container-part-inputs">
-                            <div class="input-container" style="width: 100%;">
-                                <input type="text" id="order-notes">
-                                <label for="order-notes">Order Notes (Special notes related to the delivery,
-                                    optional)</label>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="order-summary">
-            <h2>Order Summary</h2>
-            <table id="order-products">
-                <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Total Price</th>
-                </tr>
-                <tr>
-                    <td>PS3 Console</td>
-                    <td>2</td>
-                    <td>200$</td>
-                </tr>
-                <tr>
-                    <td>PS4 CD game</td>
-                    <td>5</td>
-                    <td>500$</td>
-                </tr>
-            </table>
-            <table id="order-totals">
-                <tr>
-                    <th>Subtotal</th>
-                    <td>700$</td>
-                </tr>
-                <tr>
-                    <th>Taxes</th>
-                    <td>50$</td>
-                </tr>
-                <tr>
-                    <th>Total</th>
-                    <td>750$</td>
-                </tr>
-            </table>
-        </div>
-        <div class="payment">
-            <h2>Payment Details</h2>
-            <div class="payment-container">
-                <h3>Pay cash on delivery</h3>
-                <div class="cash-delivery">
-                    <p>Pay your order bill by cash right after receiving your goods</p>
                 </div>
             </div>
+            <div class="order-summary">
+                <h2>Order Summary</h2>
+                <table id="order-products">
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                    </tr>
+                    <tr>
+                        <td>PS3 Console</td>
+                        <td>2</td>
+                        <td>200$</td>
+                    </tr>
+                    <tr>
+                        <td>PS4 CD game</td>
+                        <td>5</td>
+                        <td>500$</td>
+                    </tr>
+                </table>
+                <table id="order-totals">
+                    <tr>
+                        <th>Subtotal</th>
+                        <td>700$</td>
+                    </tr>
+                    <tr>
+                        <th>Taxes</th>
+                        <td>50$</td>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <td>750$</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="payment">
+                <h2>Payment Details</h2>
+                <div class="payment-container">
+                    <h3>Pay cash on delivery</h3>
+                    <div class="cash-delivery">
+                        <p>Pay your order bill by cash right after receiving your goods</p>
+                    </div>
+                </div>
+            </div>
+            <div class="checkout-buttons">
+                <button class="back_to_shoppingbasket" onclick="window.location.href='../basket/basket.php';"
+                    title="Return to your shopping basket to update your order"><i class="fa fa-arrow-left"></i>Return to
+                    Your Shopping Basket</button>
+                <button title="Submit your order to the shop" type="submit"><i class="fa fa-paper-plane"></i>Submit your order</button>
+            </div>
         </div>
-        <div class="checkout-buttons">
-            <button class="back_to_shoppingbasket" onclick="window.location.href='../basket/basket.php';"
-                title="Return to your shopping basket to update your order"><i class="fa fa-arrow-left"></i>Return to
-                Your Shopping Basket</button>
-            <button title="Submit your order to the shop"><i class="fa fa-paper-plane"></i>Submit your order</button>
-        </div>
-    </div>
+        </form>
         <!-- ended with checkout form -->
 
 
