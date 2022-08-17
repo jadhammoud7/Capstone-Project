@@ -16,12 +16,12 @@ function shop_allproducts_connection($product_id, $name, $price)
                 <a href=\"../product_info/product_info.php?productID=$product_id\">
                     <img class=\"info\" src=\"../images/info.png\" title=\"read more\" alt=\"read more info\">
                 </a>
-                <a href=\"../php/../php/basket.php?productID=$product_id\">
+                <a href=\"../php/basket.php?productID=$product_id\">
                     <img class=\"add_to_basket\" src=\"../images/shopping_cart.png\" title=\"Add To Basket\"
                         alt=\"Add To Basket\">
                 </a>
 
-                <a href=\"\">
+                <a href=\"../php/favorites.php?productID=$product_id\">
                     <img class=\"add_to_fav\" src=\"../images/addfav.png\" title=\"Add To Favorites\"
                         alt=\"Add To Favorites\">
                 </a>
@@ -58,7 +58,7 @@ function shop_cd_connection($product_id, $name, $price)
                     alt=\"Add To Basket\">
             </a>
 
-            <a href=\"\">
+            <a href=\"../php/favorites.php?productID=$product_id\">
                 <img class=\"add_to_fav\" src=\"../images/addfav.png\" title=\"Add To Favorites\"
                     alt=\"Add To Favorites\">
             </a>
@@ -91,7 +91,7 @@ function shop_cellphone_connection($product_id, $name, $price)
                     alt=\"Add To Basket\">
             </a>
 
-            <a href=\"\">
+            <a href=\"../php/favorites.php?productID=$product_id\">
                 <img class=\"add_to_fav\" src=\"../images/addfav.png\" title=\"Add To Favorites\"
                     alt=\"Add To Favorites\">
             </a>
@@ -125,7 +125,7 @@ function shop_console_connection($product_id, $name, $price)
                     alt=\"Add To Basket\">
             </a>
 
-            <a href=\"\">
+            <a href=\"../php/favorites.php?productID=$product_id\">
                 <img class=\"add_to_fav\" src=\"../images/addfav.png\" title=\"Add To Favorites\"
                     alt=\"Add To Favorites\">
             </a>
@@ -158,7 +158,7 @@ function shop_offers_connection($product_id, $name, $price)
                     alt=\"Add To Basket\">
             </a>
 
-            <a href=\"\">
+            <a href=\"../php/favorites.php?productID=$product_id\">
                 <img class=\"add_to_fav\" src=\"../images/addfav.png\" title=\"Add To Favorites\"
                     alt=\"Add To Favorites\">
             </a>
@@ -190,7 +190,7 @@ function shop_others_connection($product_id, $name, $price)
                     alt=\"Add To Basket\">
             </a>
 
-            <a href=\"\">
+            <a href=\"../php/favorites.php?productID=$product_id\">
                 <img class=\"add_to_fav\" src=\"../images/addfav.png\" title=\"Add To Favorites\"
                     alt=\"Add To Favorites\">
             </a>
