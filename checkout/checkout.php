@@ -3,11 +3,19 @@
 <?php
 
 session_start();
+
+include("../php/connection.php");
+
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 } else {
     $customer_id = $_SESSION['logged_id'];
 }
+
+require_once("../php/checkout.php");
+$stmt_get_basket_products = $connection->prepare("SELECT product_id, quantity FROM baskets_customer_product WHERE customer_id = $customer_id");
+$stmt_get_basket_products->execute();
+$results_get_basket_products = $stmt_get_basket_products->get_result();
 ?>
 
 <head>
@@ -169,16 +177,15 @@ if (!isset($_SESSION['logged_bool'])) {
                     <th>Quantity</th>
                     <th>Total Price</th>
                 </tr>
-                <tr>
-                    <td>PS3 Console</td>
-                    <td>2</td>
-                    <td>200$</td>
-                </tr>
-                <tr>
-                    <td>PS4 CD game</td>
-                    <td>5</td>
-                    <td>500$</td>
-                </tr>
+                <?php
+                    while($row_get_basket_products = $results_get_basket_products->fetch_assoc()){
+                        $stmt_get_product = $connection->prepare("SELECT name, price FROM products WHERE product_id = '". $row_get_basket_products["product_id"] ."' ");
+                        $stmt_get_product->execute();
+                        $results_get_product = $stmt_get_product->get_result();
+                        $row_get_product = $results_get_product->fetch_assoc();
+                        checkout_products_connection($row_get_product['name'], $row_get_basket_products['quantity'], $row_get_product['price']);
+                    }
+                ?>
             </table>
             <table id="order-totals">
                 <tr>
