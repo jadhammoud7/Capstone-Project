@@ -125,6 +125,36 @@ INSERT INTO `products` (`product_id`, `name`, `price`, `category`, `description`
 (9, 'PlayStation 3', 300, 'PS3', 'The PlayStation 3 (PS3) is a home video game console developed by Sony Computer Entertainment. The successor to the PlayStation 2, it is part of the PlayStation brand of consoles. It was first released on November 11, 2006, in Japan, November 17, 2006, in North America, and March 23, 2007, in Europe and Australia. The PlayStation 3 competed primarily against Microsoft\'s Xbox 360 and Nintendo\'s Wii as part of the seventh generation of video game consoles.', 'Any', ''),
 (10, 'PlayStation 4', 550, 'PS4', 'The PlayStation 4 (PS4) is a home video game console developed by Sony Computer Entertainment. Announced as the successor to the PlayStation 3 in February 2013, it was launched on November 15, 2013, in North America, November 29, 2013 in Europe, South America and Australia, and on February 22, 2014 in Japan. A console of the eighth generation, it competes with Microsoft\'s Xbox One and Nintendo\'s Wii U and Switch.', 'Any', '');
 
+
+--
+-- Table structure for table `checkouts`
+--
+
+CREATE TABLE `checkouts` (
+  `checkout_id` int NOT NULL,
+  `first_name` varchar(225) NOT NULL,
+  `last_name` varchar(225) NOT NULL,
+  `email` varchar(225) NOT NULL,
+  `phone_number` varchar(50) NOT NULL,
+  `shipping_country` varchar(50) NOT NULL,
+  `shipping_location` varchar(225) NOT NULL,
+  `shipping_company` varchar(50) NOT NULL,
+  `postcode` varchar(10) NOT NULL,
+  `order_notes` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+--
+-- Table structure for table `checkouts_customers_products`
+--
+
+CREATE TABLE `checkouts_customers_products` (
+  `checkout_id` int NOT NULL,
+  `customer_id` int NOT NULL,
+  `product_id` int NOT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 --
 -- Indexes for dumped tables
 --
