@@ -16,6 +16,7 @@ if(isset($_GET['productBasketID']) && isset($_GET['customerBasketID']) && isset(
     $stmt_update_quantity = $connection->prepare("UPDATE baskets_customer_product SET quantity = ? WHERE product_id = '" . $product_basket_id . "' and customer_id = '" . $customer_basket_id ."'");
     $stmt_update_quantity->bind_param("i", $_GET['quantity']);
     $stmt_update_quantity->execute();
+    header("Location: '../basket/basket.php'");
 }
 
 $select_stmt = $connection->prepare("SELECT product_id FROM baskets_customer_product WHERE product_id = '". $product_id . "' and customer_id = '" . $customer_id . "' ");
@@ -29,6 +30,7 @@ if(empty($row_select['product_id'])){
     $stmt->bind_param("iii", $customer_id, $product_id, $quantity);
     $stmt->execute();
     $stmt->close();
+    echo "<script>alert('Product added to basket'); window.location = '../shop/shop.php';</script>";
 }
 else{
     $stmt_select_quantity = $connection->prepare("SELECT quantity FROM baskets_customer_product WHERE product_id = '". $product_id . "' ");
@@ -39,7 +41,8 @@ else{
     $stmt_update_quantity = $connection->prepare("UPDATE baskets_customer_product SET quantity = ? WHERE product_id = '" . $product_id . "'");
     $stmt_update_quantity->bind_param("i", $quantity);
     $stmt_update_quantity->execute();
+    echo "<script>alert('Product already in basket. Quantity added by 1.'); window.location = '../shop/shop.php';</script>";
+
 }
-echo "<script>alert('Product added to basket'); window.location = '../shop/shop.php';</script>";
 
 ?>
