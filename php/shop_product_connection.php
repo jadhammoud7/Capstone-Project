@@ -221,7 +221,7 @@ function add_to_basket_connection($product_id, $name, $price, $quantity)
             </div>
         </div>
     </td>
-    <form action = "../php/basket.php?productBasketID=$product_id&customerBasketID=$_SESSION['logged_id']" method = "GET">
+    <form action = \"../php/basket.php?productBasketID=$product_id&customerBasketID=$_SESSION[logged_id]\" method = \"GET\">
         <td>
             <input type=\"number\" name=\"quantity\" value=\"$quantity\" id=\"quantity_of_each_product\">
         </td>
@@ -239,19 +239,19 @@ function add_to_basket_connection($product_id, $name, $price, $quantity)
 
 function basket_connection($product_id, $name, $category, $price, $quantity){ 
 
-   $element =  "<div class="basket-product">
-                    <div class="basket-product-img">
-                        <img src="../images/console.png" alt="basket product" style="width: 50%;">
+   $element =  "<div class=\"basket-product\">
+                    <div class=\"basket-product-img\">
+                        <img src=\"../images/console.png\" alt=\"basket product\" style=\"width: 50%;\">
                     </div>
-                    <div class="basket-product-part">
+                    <div class=\"basket-product-part\">
                         <h3>$name</h3>
                         <h4>$category</h4>
                     </div>
-                    <div class="basket-product-part">
+                    <div class=\"basket-product-part\">
                         <h3>Quantity</h3>
                         <h4>$quantity</h4>
                     </div>
-                    <div class="basket-product-part">
+                    <div class=\"basket-product-part\">
                         <h3>Price</h3>
                         <h4>$price$</h4>
                     </div>

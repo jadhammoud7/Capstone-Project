@@ -109,7 +109,15 @@ $mysql->bind_param("sssssssss", $first_name, $last_name, $email, $phone_number, 
 $mysql->execute();
 $mysql->close();
 
+function checkout_products_connection($name, $quantity, $price){
+    $element = "
+    <tr>
+        <td>$name</td>
+        <td>$quantity</td>
+        <td>$price$</td>
+    </tr>";
 
-
+    echo $element;
+}
 
 ?>
