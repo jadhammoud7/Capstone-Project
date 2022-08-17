@@ -109,6 +109,26 @@ $mysql->bind_param("sssssssss", $first_name, $last_name, $email, $phone_number, 
 $mysql->execute();
 $mysql->close();
 
+//get last checkout id
+$stmt_get_checkout_id = $connection->prepare("SELECT checkout_id FROM checkouts ORDER BY checkout_id DESC LIMIT 1");
+$stmt_get_checkout_id->execute();
+$results_get_checkout_id = $stmt_get_checkout_id->get_result();
+$row_get_checkout_id = $results_get_checkout_id->fetch_assoc();
+$checkout_id = $row_get_checkout_id['checkout_id'];
+
+//get products in basket for current user
+$query_basket = $connection->prepare("SELECT product_id FROM baskets_customer_product WHERE customer_id = '" . $_SESSION['customer_id'] . "' ");
+$query_basket->execute();
+$query_basket_result = $query_basket->get_result();
+
+while($row_basket = $query_basket_result->fetch_assoc()){   
+    $query_checkout = $connection->prepare("INSERT INTO checkouts_customers_products(checkout_id, customer_id, product_id) VALUES (?,?,?)");
+    $query_checkout->bind_param("iii", $checkout_id, $_SESSION['logged_id'], $row_basket['product_id']);
+    $query_checkout->execute();
+    $query_checkout->close();
+} 
+
+//for product summary in checkout
 function checkout_products_connection($name, $quantity, $price){
     $element = "
     <tr>
