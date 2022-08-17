@@ -128,6 +128,13 @@ while($row_basket = $query_basket_result->fetch_assoc()){
     $query_checkout->close();
 } 
 
+echo "<script>alert('Your checkout was submitted. An email will be sent to you.'); window.location = '../home-page/home-page.php';</script>";
+
+//delete all products from basket
+
+$delete_basket = $connection->prepare("DELETE FROM baskets_customer_product WHERE customer_id = '" . $customer_id ."'");
+$delete_basket->execute();
+
 //for product summary in checkout
 function checkout_products_connection($name, $quantity, $price){
     $element = "
@@ -139,5 +146,4 @@ function checkout_products_connection($name, $quantity, $price){
 
     echo $element;
 }
-
 ?>
