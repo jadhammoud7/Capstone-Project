@@ -5,7 +5,7 @@ session_start();
 include("connection.php");
 
 $username = "";
-$password_text = "":
+$password_text = "";
 
 if(isset($_POST["username"]) && $_POST["username"] != ""){
     $username = $_POST["username"];
@@ -30,7 +30,7 @@ $statement_result = $statement->get_result();
 $data = $statement_result->fetch_assoc();
 
 if(empty($data)){
-     $_SESSION['username_error'] = "Username is not found. Please try another username.";
+    $_SESSION['username_error'] = "Username is not found. Please try another username.";
     header("Location: ../login/login.php");
     die("WRONG username");
 }
@@ -51,7 +51,7 @@ else{
     else{
         $_SESSION['password_error'] = "Password is wrong. Try another password.";
         header("Location: ../login/login.php");
-        dies("WRONG password");
+        die("WRONG password");
     }
 }
 

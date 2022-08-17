@@ -36,8 +36,7 @@ function product_info_connection($product_id, $name, $price, $category, $descrip
             <button class=\"product_info_addtobasket\" title=\"Add this product to your shopping basket\"  onclick=\"window.location.href = '../php/basket.php?productID=$product_id'\"><i
                     class=\"fa fa-shopping-basket\"></i>Add to Basket</button>
             <button class=\"product_info_addtofavorites\" title=\"Add this product to your favorites list\"><i
-                    class=\"fa fa-heart\"></i>Add to Favorites</button>
-
+                    class=\"fa fa-heart\" onclick=\"window.location.href = '../php/product_info_connection.php?productID=$product_id';\"></i>Add to Favorites</button>
         </div>
     </div>
     ";
