@@ -96,21 +96,29 @@ if (!isset($_SESSION['logged_bool'])) {
                         </div>
                         <div class="form-container-part-inputs">
                             <div class="input-container">
-                                <input type="text" id="first_name" required>
+                                <input type="text" id="first_name" value="<?php if (isset($_SESSION['first_name'])) {
+                                                                                echo $_SESSION['first_name'];
+                                                                            } ?>" required>
                                 <label for="first_name">First Name</label>
                             </div>
                             <div class="input-container">
-                                <input type="text" id="last_name" required>
+                                <input type="text" id="last_name" value="<?php if (isset($_SESSION['last_name'])) {
+                                                                                echo $_SESSION['last_name'];
+                                                                            } ?>" required>
                                 <label for="last_name">Last Name</label>
                             </div>
                         </div>
                         <div class="form-container-part-inputs">
                             <div class="input-container">
-                                <input type="email" id="email" required>
+                                <input type="email" id="email" value="<?php if (isset($_SESSION['email'])) {
+                                                                            echo $_SESSION['email'];
+                                                                        } ?>" required>
                                 <label for="email">Email</label>
                             </div>
                             <div class="input-container">
-                                <input type="tel" id="phone_number" required>
+                                <input type="tel" id="phone_number" value="<?php if (isset($_SESSION['phone_number'])) {
+                                                                                echo $_SESSION['phone_number'];
+                                                                            } ?>" required>
                                 <label for="phone_number">Phone Number</label>
                             </div>
                         </div>
