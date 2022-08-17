@@ -225,6 +225,9 @@ function add_to_basket_connection($product_id, $name, $price, $quantity)
         <td>
             <input type=\"number\" name=\"quantity\" value=\"$quantity\" id=\"quantity_of_each_product\">
         </td>
+        <td>
+            <input type=\"submit\" value=\"Update Quantity\">
+        </td>
     </form>
     <td id=\"get_price\">$price$</td>
     </tr>
