@@ -2,14 +2,14 @@
 <html lang="en">
 <?php
 
-    session_start();
-    if(!isset($_SESSION['logged_bool'])){
-        header("Location: ../login/login.php");
-    }
-    else{
-        $customer_id = $_SESSION['logged_id'];
-    }
+session_start();
+if (!isset($_SESSION['logged_bool'])) {
+    header("Location: ../login/login.php");
+} else {
+    $customer_id = $_SESSION['logged_id'];
+}
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,32 +31,25 @@
             <a href="" class="nav-branding">Newbie Gamers.</a>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page"> <i
-                            class="fa fa-home fa-lg"></i></a>
+                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page"> <i class="fa fa-home fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page"><i
-                            class="fa fa-shopping-cart fa-lg"></i></a>
+                    <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page"><i class="fa fa-shopping-cart fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../appointments/appointments.php" class="appointments_menu nav-link"
-                        title="Appointments"><i class="fa fa-wrench fa-lg"></i></a>
+                    <a href="../appointments/appointments.php" class="appointments_menu nav-link" title="Appointments"><i class="fa fa-wrench fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page"><i
-                            class="fa fa-phone fa-lg"></i></a>
+                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page"><i class="fa fa-phone fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page"><i
-                            class="fa fa-book fa-lg"></i></a>
+                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page"><i class="fa fa-book fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket"><i
-                            class="fa fa-shopping-basket fa-lg"></i></a>
+                    <a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket"><i class="fa fa-shopping-basket fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account"><i
-                            class="fa fa-user fa-lg" style="margin-bottom: 30px;"></i></a>
+                    <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account"><i class="fa fa-user fa-lg" style="margin-bottom: 30px;"></i></a>
                 </li>
             </ul>
             <div class="hamburger">
@@ -83,133 +76,132 @@
     <div>
         <div class="login-part">
             <p class="login-part-par">Want to proceed with the checkout faster with your personal information? </p>
-            <button class="login-button"
-                 title="Click in order to proceed with the checkout with your account personal info" style="color: black;" 
-                 onclick="window.location.href='../php/checkout.php?customerID=$customer_id';"><strong>Use your personal information</strong></button>
+            <button class="login-button" title="Click in order to proceed with the checkout with your account personal info" style="color: black;" onclick="window.location.href='../php/checkout.php?customerID=$customer_id';"><strong>Use your personal information</strong></button>
         </div>
-<!--         <div class="login-part">
+        <!--         <div class="login-part">
             <p class="login-part-par">Want to proceed to your checkout faster and you don't have an account? </p>
             <button class="login-button"
                 title="Click to create and account to proceed with the checkout with your account personal info" style="color: black;"><strong>Create
                 an account now </strong></button>
         </div> -->
-            <div class="billing-details">
-                <h2>Billing Details</h2>
-                <div class="form-container">
-                    <form action="../php/checkout.php" method="POST">
-                        <div class="form-container-part">
-                            <div>
-                                <h3 class="form-container-part-title">Personal Information</h3>
+        <div class="billing-details">
+            <h2>Billing Details</h2>
+            <div class="form-container">
+                <form action="../php/checkout.php" method="POST">
+
+                    <div class="form-container-part">
+
+                        <div>
+                            <h3 class="form-container-part-title">Personal Information</h3>
+                        </div>
+                        <div class="form-container-part-inputs">
+                            <div class="input-container">
+                                <input type="text" id="first_name" required>
+                                <label for="first_name">First Name</label>
                             </div>
-                            <div class="form-container-part-inputs">
-                                <div class="input-container">
-                                    <input type="text" id="first_name" required>
-                                    <label for="first_name">First Name</label>
-                                </div>
-                                <div class="input-container">
-                                    <input type="text" id="last_name" required>
-                                    <label for="last_name">Last Name</label>
-                                </div>
-                            </div>
-                            <div class="form-container-part-inputs">
-                                <div class="input-container">
-                                    <input type="email" id="email" required>
-                                    <label for="email">Email</label>
-                                </div>
-                                <div class="input-container">
-                                    <input type="tel" id="phone_number" required>
-                                    <label for="phone_number">Phone Number</label>
-                                </div>
+                            <div class="input-container">
+                                <input type="text" id="last_name" required>
+                                <label for="last_name">Last Name</label>
                             </div>
                         </div>
-                        <div class="form-container-part">
-                            <div>
-                                <h3 class="form-container-part-title">Shipping Details</h3>
+                        <div class="form-container-part-inputs">
+                            <div class="input-container">
+                                <input type="email" id="email" required>
+                                <label for="email">Email</label>
                             </div>
-                            <div class="form-container-part-inputs">
-                                <div class="input-container">
-                                    <input type="text" id="shipping_country" required>
-                                    <label for="shipping_country">Country</label>
-                                </div>
-                            </div>
-                            <div class="form-container-part-inputs">
-                                <div class="input-container" style="width: 100%;">
-                                    <input type="text" id="shipping_location" required>
-                                    <label for="shipping_location">Location (Town / City, Street, Home Address)</label>
-                                </div>
-                            </div>
-                            <div class="form-container-part-inputs">
-                                <div class="input-container">
-                                    <input type="text" id="shipping_company">
-                                    <label for="shipping_company">Company Name (if any)</label>
-                                </div>
-                                <div class="input-container">
-                                    <input type="number" id="postcode" required>
-                                    <label for="postcode">Postcode / ZIP</label>
-                                </div>
-                            </div>
-                            <div class="form-container-part-inputs">
-                                <div class="input-container" style="width: 100%;">
-                                    <input type="text" id="order-notes">
-                                    <label for="order_notes">Order Notes (Special notes related to the delivery,
-                                        optional)</label>
-                                </div>
+                            <div class="input-container">
+                                <input type="tel" id="phone_number" required>
+                                <label for="phone_number">Phone Number</label>
                             </div>
                         </div>
-                </div>
-            </div>
-            <div class="order-summary">
-                <h2>Order Summary</h2>
-                <table id="order-products">
-                    <tr>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Total Price</th>
-                    </tr>
-                    <tr>
-                        <td>PS3 Console</td>
-                        <td>2</td>
-                        <td>200$</td>
-                    </tr>
-                    <tr>
-                        <td>PS4 CD game</td>
-                        <td>5</td>
-                        <td>500$</td>
-                    </tr>
-                </table>
-                <table id="order-totals">
-                    <tr>
-                        <th>Subtotal</th>
-                        <td>700$</td>
-                    </tr>
-                    <tr>
-                        <th>Taxes</th>
-                        <td>50$</td>
-                    </tr>
-                    <tr>
-                        <th>Total</th>
-                        <td>750$</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="payment">
-                <h2>Payment Details</h2>
-                <div class="payment-container">
-                    <h3>Pay cash on delivery</h3>
-                    <div class="cash-delivery">
-                        <p>Pay your order bill by cash right after receiving your goods</p>
                     </div>
-                </div>
-            </div>
-            <div class="checkout-buttons">
-                <button class="back_to_shoppingbasket" onclick="window.location.href='../basket/basket.php';"
-                    title="Return to your shopping basket to update your order"><i class="fa fa-arrow-left"></i>Return to
-                    Your Shopping Basket</button>
-                <button title="Submit your order to the shop" type="submit"><i class="fa fa-paper-plane"></i>Submit your order</button>
+                    <div class="form-container-part">
+                        <div>
+                            <h3 class="form-container-part-title">Shipping Details</h3>
+                        </div>
+                        <div class="form-container-part-inputs">
+                            <div class="input-container">
+                                <input type="text" id="shipping_country" required>
+                                <label for="shipping_country">Country</label>
+                            </div>
+                        </div>
+                        <div class="form-container-part-inputs">
+                            <div class="input-container" style="width: 100%;">
+                                <input type="text" id="shipping_location" required>
+                                <label for="shipping_location">Location (Town / City, Street, Home Address)</label>
+                            </div>
+                        </div>
+                        <div class="form-container-part-inputs">
+                            <div class="input-container">
+                                <input type="text" id="shipping_company">
+                                <label for="shipping_company">Company Name (if any)</label>
+                            </div>
+                            <div class="input-container">
+                                <input type="number" id="postcode" required>
+                                <label for="postcode">Postcode / ZIP</label>
+                            </div>
+                        </div>
+                        <div class="form-container-part-inputs">
+                            <div class="input-container" style="width: 100%;">
+                                <input type="text" id="order-notes">
+                                <label for="order_notes">Order Notes (Special notes related to the delivery,
+                                    optional)</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button title="Submit your order to the shop" type="submit"><i class="fa fa-paper-plane"></i>Submit your order</button>
+                </form>
             </div>
         </div>
-        </form>
-        <!-- ended with checkout form -->
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <table id="order-products">
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                </tr>
+                <tr>
+                    <td>PS3 Console</td>
+                    <td>2</td>
+                    <td>200$</td>
+                </tr>
+                <tr>
+                    <td>PS4 CD game</td>
+                    <td>5</td>
+                    <td>500$</td>
+                </tr>
+            </table>
+            <table id="order-totals">
+                <tr>
+                    <th>Subtotal</th>
+                    <td>700$</td>
+                </tr>
+                <tr>
+                    <th>Taxes</th>
+                    <td>50$</td>
+                </tr>
+                <tr>
+                    <th>Total</th>
+                    <td>750$</td>
+                </tr>
+            </table>
+        </div>
+        <div class="payment">
+            <h2>Payment Details</h2>
+            <div class="payment-container">
+                <h3>Pay cash on delivery</h3>
+                <div class="cash-delivery">
+                    <p>Pay your order bill by cash right after receiving your goods</p>
+                </div>
+            </div>
+        </div>
+        <div class="checkout-buttons">
+            <button class="back_to_shoppingbasket" onclick="window.location.href='../basket/basket.php';" title="Return to your shopping basket to update your order"><i class="fa fa-arrow-left"></i>Return to
+                Your Shopping Basket</button>
+        </div>
+    </div>
+    <!-- ended with checkout form -->
 
 
     <!-- started return to top button -->
@@ -235,16 +227,14 @@
                             <a href="../home-page/home-page.php#about-us" title="Know more about us">About Us</a>
                         </li>
                         <li>
-                            <a href="../home-page/home-page.php#contact-us"
-                                title="Contact us for any enquiries or thoughts">Contact Us</a>
+                            <a href="../home-page/home-page.php#contact-us" title="Contact us for any enquiries or thoughts">Contact Us</a>
                         </li>
                         <li>
                             <a href="../home-page/home-page.php#shop-products" title="Take a look at our products">Our
                                 Products</a>
                         </li>
                         <li>
-                            <a href="../home-page/home-page.php#testimonials"
-                                title="See what our customers said about our service">Our Customers' opinions</a>
+                            <a href="../home-page/home-page.php#testimonials" title="See what our customers said about our service">Our Customers' opinions</a>
                         </li>
                     </ol>
                 </div>
@@ -343,16 +333,13 @@
                             <h3>Follow Us on Our Socials</h3>
                         </li>
                         <li>
-                            <a href="https://www.facebook.com" title="Newbies Gamers facebook account link"><i
-                                    class="fa fa-facebook"></i>Facebook</a>
+                            <a href="https://www.facebook.com" title="Newbies Gamers facebook account link"><i class="fa fa-facebook"></i>Facebook</a>
                         </li>
                         <li>
-                            <a href="https://www.instagram.com" title="Newbies Gamers instagram account link"><i
-                                    class="fa fa-instagram"></i>Instagram</a>
+                            <a href="https://www.instagram.com" title="Newbies Gamers instagram account link"><i class="fa fa-instagram"></i>Instagram</a>
                         </li>
                         <li>
-                            <a href="https://www.twitter.com" title="Newbies Gamers twitter account link"><i
-                                    class="fa fa-twitter"></i>Twitter</a>
+                            <a href="https://www.twitter.com" title="Newbies Gamers twitter account link"><i class="fa fa-twitter"></i>Twitter</a>
                         </li>
                     </ol>
                 </div>
@@ -361,7 +348,7 @@
     </footer>
     <!-- ended with footer -->
 
-    
+
     <script src="../main/main.js"></script>
     <script src="../checkout/checkout.js"></script>
 </body>
