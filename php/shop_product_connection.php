@@ -221,7 +221,7 @@ function add_to_basket_connection($product_id, $name, $price, $quantity)
             </div>
         </div>
     </td>
-    <form action = "../php/basket.php?productID=$product_id&customerID=$_SESSION['logged_id']" method = "GET">
+    <form action = "../php/basket.php?productBasketID=$product_id&customerBasketID=$_SESSION['logged_id']" method = "GET">
         <td>
             <input type=\"number\" name=\"quantity\" value=\"$quantity\" id=\"quantity_of_each_product\">
         </td>
