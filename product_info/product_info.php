@@ -238,7 +238,6 @@ $results_info = $stmt_info->get_result();
 
 
     <script src="../shop/shop.js"></script>
-    <script src="../product_info/product_info.js"></script>
 </body>
 
 </php>

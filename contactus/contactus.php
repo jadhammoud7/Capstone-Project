@@ -266,8 +266,7 @@
     </footer>
     <!-- ended with footer -->
 
-    
-    <script src="../contactus/contactus.js"></script>
+    <script src="../main/main.js"></script>
 </body>
 
 </php>

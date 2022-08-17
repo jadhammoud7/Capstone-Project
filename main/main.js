@@ -116,6 +116,7 @@ window.addEventListener("scroll", revealX);
 window.addEventListener("scroll", revealX2);
 window.addEventListener("scroll", revealY);
 window.addEventListener("pageshow", revealY);
+window.addEventListener("pageshow", revealX);
 
 var topButton = document.getElementById("TopBtn");
 

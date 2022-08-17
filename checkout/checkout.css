@@ -245,7 +245,8 @@ input.is-valid+label {
     margin-bottom: 50px;
     width: 100%;
 }
-.back_to_shoppingbasket{
+
+.back_to_shoppingbasket {
     background-color: #F44336;
     color: black;
 }
@@ -270,6 +271,11 @@ input.is-valid+label {
     margin: 20px auto;
 }
 
-#first_name_error, #last_name_error, #email_error, #shipping_country_error, #shipping_location_error, #postcode_error{
+#first_name_error,
+#last_name_error,
+#email_error,
+#shipping_country_error,
+#shipping_location_error,
+#postcode_error {
     display: none;
 }

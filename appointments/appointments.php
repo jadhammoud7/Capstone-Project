@@ -435,6 +435,7 @@
 
     
     <script src="../appointments/appointments.js"></script>
+    <script src="../main/main.js"></script>
 </body>
 
 </php>

@@ -16,12 +16,12 @@ include('../php/shop_product_connection.php');
 
 $customer_id = $_SESSION['logged_id'];
 $query_add_to_favorites = "SELECT product_id FROM favorites_customer_product WHERE customer_id = '" . $customer_id . "' ";
-$stmt_add_to_favorites =$connection->prepare($query_add_to_favorites);
+$stmt_add_to_favorites = $connection->prepare($query_add_to_favorites);
 $stmt_add_to_favorites->execute();
 $results_add_to_favorites = $stmt_add_to_favorites->get_result();
 
 $query_basket = "SELECT product_id, quantity FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ";
-$stmt_basket =$connection->prepare($query_basket);
+$stmt_basket = $connection->prepare($query_basket);
 $stmt_basket->execute();
 $results_basket = $stmt_basket->get_result();
 
@@ -163,25 +163,25 @@ if (!isset($_SESSION['logged_bool'])) {
                 <h3>You have total of 4 items in your basket</h3>
             </div>
             <?php
-            while($row_basket = $results_basket->fetch_assoc() ){
-                    $stmt_get_product = $connection->prepare("SELECT product_id, category, name, price FROM products WHERE product_id = '" . $row_basket["product_id"] . "' ");
-                    $stmt_get_product->execute();
-                    $results_get_product = $stmt_get_product->get_result();
-                    $row_get_product = $results_get_product->fetch_assoc();
-                    basket_connection($row_get_product["product_id"], $row_get_product["name"], $row_get_product["category"], $row_get_product["price"], $row_add_to_basket["quantity"]); 
-                }
-                    
-             ?>
-        
-        
-             <div>
-                 <h3>Total Price: 800$</h3>
-             </div>
-             <div class="gotoshoppage_profile">
+            while ($row_basket = $results_basket->fetch_assoc()) {
+                $stmt_get_product = $connection->prepare("SELECT product_id, category, name, price FROM products WHERE product_id = '" . $row_basket["product_id"] . "' ");
+                $stmt_get_product->execute();
+                $results_get_product = $stmt_get_product->get_result();
+                $row_get_product = $results_get_product->fetch_assoc();
+                basket_connection($row_get_product["product_id"], $row_get_product["name"], $row_get_product["category"], $row_get_product["price"], $row_basket["quantity"]);
+            }
+
+            ?>
+
+
+            <div>
+                <h3>Total Price: 800$</h3>
+            </div>
+            <div class="gotoshoppage_profile">
                 <button title="Go to shopping basket to modify or submit your order"><strong>Go To Shopping
-                         Basket</strong></button>
-             </div>
-         </div>
+                        Basket</strong></button>
+            </div>
+        </div>
         <!-- ended shopping basket -->
 
 
@@ -190,16 +190,16 @@ if (!isset($_SESSION['logged_bool'])) {
         <div class="favorites fade" style="display: none;">
             <div>
                 <h2>Favorites List</h2>
-                <h3>You have a total of <?php echo mysql_num_rows($stmt_add_to_favorites); ?> items in favorites list</h3>
+                <h3>You have a total of <?php echo mysqli_num_rows(mysqli_query($connection, "SELECT * FROM favorites_customer_product WHERE customer_id = '" . $customer_id ."' ")); ?> items in favorites list</h3>
             </div>
             <?php
-             while($row_add_to_favorites = $results_add_to_favorites->fetch_assoc() ){
-                    $stmt_get_product = $connection->prepare("SELECT name, price FROM products WHERE product_id = '" . $row_add_to_favorites["product_id"] . "' ");
-                    $stmt_get_product->execute();
-                    $results_get_product = $stmt_get_product->get_result();
-                    $row_get_product = $results_get_product->fetch_assoc();
-                    add_to_basket_connection($row_get_product['name'], $row_get_product['price']); 
-             }      
+            while ($row_add_to_favorites = $results_add_to_favorites->fetch_assoc()) {
+                $stmt_get_product = $connection->prepare("SELECT product_id, name, price FROM products WHERE product_id = '" . $row_add_to_favorites["product_id"] . "' ");
+                $stmt_get_product->execute();
+                $results_get_product = $stmt_get_product->get_result();
+                $row_get_product = $results_get_product->fetch_assoc();
+                add_to_basket_connection($row_get_product['product_id'], $row_get_product['name'], $row_get_product['price'], $row_add_to_favorites['quantity']);
+            }
             ?>
             <div class="gotoshoppage_profile">
                 <button title="Go to Shop Page"><strong>Go To Shop Page</strong></button>
@@ -357,5 +357,6 @@ if (!isset($_SESSION['logged_bool'])) {
 <!-- ended footer -->
 
 <script src="../profile/profile.js"></script>
+<script src="../main/main.js"></script>
 
 </php>

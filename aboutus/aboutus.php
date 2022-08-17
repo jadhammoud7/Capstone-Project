@@ -280,6 +280,7 @@
 
     
     <script src="../aboutus/aboutus.js"></script>
+    <script src="../main/main.js"></script>
 </body>
 
 </html>
