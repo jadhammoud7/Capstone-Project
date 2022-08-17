@@ -259,3 +259,17 @@ input.is-valid+label {
     color: black;
 
 }
+
+
+.error {
+    background: #f2dede;
+    color: #a94442 !important;
+    padding: 10px;
+    width: 95%;
+    border-radius: 5px;
+    margin: 20px auto;
+}
+
+#first_name_error, #last_name_error, #email_error, #shipping_country_error, #shipping_location_error, #postcode_error{
+    display: none;
+}
