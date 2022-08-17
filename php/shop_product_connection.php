@@ -32,15 +32,8 @@ function shop_allproducts_connection($product_id, $name, $price)
     echo $element;
 }
 
-
-
-
-
 function shop_cd_connection($product_id, $name, $price)
 {
-
-
-
     $element = "
     <div class=\"product1\" id=\"product\">
     <div class=\"product_info\">
@@ -72,8 +65,6 @@ function shop_cd_connection($product_id, $name, $price)
 
 function shop_cellphone_connection($product_id, $name, $price)
 {
-
-
     $element = "
     <div class=\"product1\" id=\"product\">
     <div class=\"product_info\">
@@ -105,9 +96,6 @@ function shop_cellphone_connection($product_id, $name, $price)
 
 function shop_console_connection($product_id, $name, $price)
 {
-
-
-
     $element = "
     <div class=\"product1\" id=\"product\">
     <div class=\"product_info\">
@@ -138,9 +126,6 @@ function shop_console_connection($product_id, $name, $price)
 
 function shop_offers_connection($product_id, $name, $price)
 {
-
-
-
     $element = "
     <div class=\"product1\" id=\"product\">
     <div class=\"product_info\">
@@ -217,7 +202,7 @@ function add_to_basket_connection($product_id, $name, $price, $quantity)
                 <p>$name</p>
                 <small >price: $price$</small>
                 <br> <br>
-                <a href=\"\" title=\"Remove this product from your shopping basket\">Remove</a>
+                <a href=\"../php/basket.php?productRemoveID=$product_id\" title=\"Remove this product from your shopping basket\">Remove</a>
             </div>
         </div>
     </td>
@@ -291,5 +276,3 @@ function add_to_favorites_connection($product_id, $name, $category, $price)
 
     echo $element;
 }
-
-?>
