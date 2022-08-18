@@ -114,15 +114,15 @@ $results_add_to_basket = $stmt_add_to_basket->get_result();
                 <table>
                     <tr>
                         <td title="This is the total invoice of your shopping basket excluding tax value">Subtotal</td>
-                        <td>$200.00</td>
+                        <td>$<?php echo $_SESSION['total_price']; ?></td>
                     </tr>
                     <tr>
                         <td title="This is the tax value to be added to the checkout">Tax</td>
-                        <td>$23.00</td>
+                        <td>$<?php echo $_SESSION['tax_price']; ?></td>
                     </tr>
                     <tr>
                         <td title="This is the total checkout price of your shopping basket including tax value">Total</td>
-                        <td>$223.00</td>
+                        <td>$<?php echo $_SESSION['total_price_including_tax']; ?></td>
                     </tr>
                     <tr>
                         <!-- started with bay button -->
