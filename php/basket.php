@@ -3,6 +3,10 @@ session_start();
 
 include("connection.php");
 
+$total_price = 0;
+$tax_price = 0;
+$total_inc_tax = 0;
+
 if (isset($_GET['productID']) && $_GET['productID'] != "") {
     $product_id = $_GET['productID'];
 }
