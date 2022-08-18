@@ -92,6 +92,11 @@ input {
     border-radius: 15px;
 }
 
+.empty-par{
+    display: flex;
+    flex-direction: column;
+}
+
 /* start of making table responsive */
 @media screen and (max-width:1178px) {
     td input {
