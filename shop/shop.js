@@ -27,6 +27,3 @@ function ShowFilters() {
     else
         filter.style.display = "block";
 }
-
-window.addEventListener("pageshow", revealX);
-

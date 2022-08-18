@@ -10,7 +10,7 @@ if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
 
-require_once("../php/shop_product_connection.php");
+require_once("../php/basket_product_connection.php");
 $customer_id = $_SESSION['logged_id'];
 
 $stmt_add_to_basket = $connection->prepare("SELECT product_id, quantity, price FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "'");
