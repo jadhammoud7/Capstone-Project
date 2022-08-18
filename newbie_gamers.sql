@@ -41,7 +41,7 @@ CREATE TABLE `baskets_customer_product` (
 
 CREATE TABLE `favorites_customer_product` (
   `customer_id` int NOT NULL,
-  `product_id` int NOT NULL,
+  `product_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -153,7 +153,7 @@ CREATE TABLE `checkouts` (
 CREATE TABLE `checkouts_customers_products` (
   `checkout_id` int NOT NULL,
   `customer_id` int NOT NULL,
-  `product_id` int NOT NULL,
+  `product_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --

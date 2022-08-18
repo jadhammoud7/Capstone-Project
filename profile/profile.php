@@ -178,7 +178,7 @@ if (!isset($_SESSION['logged_bool'])) {
                 <h3>Total Price: 800$</h3>
             </div>
             <div class="gotoshoppage_profile">
-                <button title="Go to shopping basket to modify or submit your order"><strong>Go To Shopping
+                <button title="Go to shopping basket to modify or submit your order" onclick="window.location.href='../basket/basket.php';"><strong>Go To Shopping
                         Basket</strong></button>
             </div>
         </div>

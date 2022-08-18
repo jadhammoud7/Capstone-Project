@@ -16,7 +16,7 @@ function shop_allproducts_connection($product_id, $name, $price)
                 <a href=\"../product_info/product_info.php?productID=$product_id\">
                     <img class=\"info\" src=\"../images/info.png\" title=\"read more\" alt=\"read more info\">
                 </a>
-                <a href=\"../php/basket.php?productID=$product_id\">
+                <a href=\"../php/add_to_basket.php?productID=$product_id\">
                     <img class=\"add_to_basket\" src=\"../images/shopping_cart.png\" title=\"Add To Basket\"
                         alt=\"Add To Basket\">
                 </a>
@@ -46,7 +46,7 @@ function shop_cd_connection($product_id, $name, $price)
             <a href=\"../product_info/product_info.php?productID=$product_id\">
                 <img class=\"info\" src=\"../images/info.png\" title=\"read more\" alt=\"read more info\">
             </a>
-            <a href=\"../php/basket.php?productID=$product_id\">
+            <a href=\"../php/add_to_basket.php?productID=$product_id\">
                 <img class=\"add_to_basket\" src=\"../images/shopping_cart.png\" title=\"Add To Basket\"
                     alt=\"Add To Basket\">
             </a>
@@ -77,7 +77,7 @@ function shop_cellphone_connection($product_id, $name, $price)
             <a href=\"../product_info/product_info.php?productID=$product_id\">
                 <img class=\"info\" src=\"../images/info.png\" title=\"read more\" alt=\"read more info\">
             </a>
-            <a href=\"../php/basket.php?productID=$product_id\">
+            <a href=\"../php/add_to_basket.php?productID=$product_id\">
                 <img class=\"add_to_basket\" src=\"../images/shopping_cart.png\" title=\"Add To Basket\"
                     alt=\"Add To Basket\">
             </a>
@@ -108,7 +108,7 @@ function shop_console_connection($product_id, $name, $price)
             <a href=\"../product_info/product_info.php?productID=$product_id\">
                 <img class=\"info\" src=\"../images/info.png\" title=\"read more\" alt=\"read more info\">
             </a>
-            <a href=\"../php/basket.php?productID=$product_id\">
+            <a href=\"../php/add_to_basket.php?productID=$product_id\">
                 <img class=\"add_to_basket\" src=\"../images/shopping_cart.png\" title=\"Add To Basket\"
                     alt=\"Add To Basket\">
             </a>
@@ -138,7 +138,7 @@ function shop_offers_connection($product_id, $name, $price)
             <a href=\"../product_info/product_info.php?productID=$product_id\">
                 <img class=\"info\" src=\"../images/info.png\" title=\"read more\" alt=\"read more info\">
             </a>
-            <a href=\"../php/basket.php?productID=$product_id\">
+            <a href=\"../php/add_to_basket.php?productID=$product_id\">
                 <img class=\"add_to_basket\" src=\"../images/shopping_cart.png\" title=\"Add To Basket\"
                     alt=\"Add To Basket\">
             </a>
@@ -170,7 +170,7 @@ function shop_others_connection($product_id, $name, $price)
             <a href=\"../product_info/product_info.php?productID=$product_id\">
                 <img class=\"info\" src=\"../images/info.png\" title=\"read more\" alt=\"read more info\">
             </a>
-            <a href=\"../php/basket.php?productID=$product_id\">
+            <a href=\"../php/add_to_basket.php?productID=$product_id\">
                 <img class=\"add_to_basket\" src=\"../images/shopping_cart.png\" title=\"Add To Basket\"
                     alt=\"Add To Basket\">
             </a>
@@ -208,20 +208,22 @@ function add_to_basket_connection($product_id, $name, $price, $quantity)
     </td>
     <form action = \"../php/basket.php?productBasketID=$product_id&customerBasketID=$_SESSION[logged_id]\" method = \"GET\">
         <td>
-            <input type=\"number\" name=\"quantity\" value=\"$quantity\" id=\"quantity_of_each_product\">
+            <input type=\"number\" name=\"quantity\" min=\"0\" value=\"$quantity\" id=\"quantity_of_each_product\">
         </td>
-        <td>
-            <input type=\"submit\" value=\"Update Quantity\">
-        </td>
+ 
     </form>
     <td id=\"get_price\">$price$</td>
     </tr>
     ";
     echo $element;
+    //     <td>
+    //     <input type=\"submit\" value=\"Update Quantity\">
+    // </td>
 }
 
 //for basket empty
-function basket_empty(){
+function basket_empty()
+{
     $element = "
     <div class=\"empty-par\">
         <h2>Your shopping basket is empty</h2>

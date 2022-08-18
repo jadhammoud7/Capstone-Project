@@ -12,8 +12,8 @@ if (!isset($_SESSION['logged_bool'])) {
 
 require_once("../php/shop_product_connection.php");
 $customer_id = $_SESSION['logged_id'];
-$query_add_to_basket = "SELECT product_id, quantity, price FROM baskets_customer_product WHERE customer_id = $customer_id ";
-$stmt_add_to_basket = $connection->prepare($query_add_to_basket);
+
+$stmt_add_to_basket = $connection->prepare("SELECT product_id, quantity, price FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "'");
 $stmt_add_to_basket->execute();
 $results_add_to_basket = $stmt_add_to_basket->get_result();
 ?>
@@ -82,7 +82,7 @@ $results_add_to_basket = $stmt_add_to_basket->get_result();
 
     <?php
     //if basket is empty
-    if (empty($row_add_to_basket = $results_add_to_basket->fetch_assoc())) {
+    if (($row_add_to_basket = $results_add_to_basket->fetch_assoc()) == null) {
         basket_empty();
     } else {
     ?>
@@ -285,7 +285,6 @@ $results_add_to_basket = $stmt_add_to_basket->get_result();
 <!-- started footer -->
 
 
-<script src="../basket/basket.js"></script>
 <script src="../main/main.js"></script>
 
 </php>

@@ -35,7 +35,6 @@
             </div>
             <p class="error" id="password_error">
                 <?php
-                 session_start();
                  if(isset($_SESSION['password_error'])){
                    echo "<script>document.getElementById('password_error').style.display='block';</script>";
                    echo $_SESSION['password_error'];

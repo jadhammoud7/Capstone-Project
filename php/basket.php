@@ -50,7 +50,7 @@ if(empty($row_select['product_id'])){
     $result_select_product_price = $stmt_select_product_price->get_result();
     $row_select_product_price = $result_select_product_price->fetch_assoc();
     $stmt = $connection->prepare("INSERT INTO baskets_customer_product(customer_id, product_id, quantity, price) VALUES (?,?,?,?)");
-    $stmt->bind_param("iii", $customer_id, $product_id, $quantity, $row_select_product_price['price']);
+    $stmt->bind_param("iiii", $customer_id, $product_id, $quantity, $row_select_product_price['price']);
     $stmt->execute();
     $stmt->close();
     echo "<script>alert('Product added to basket'); window.location = '../shop/shop.php';</script>";
