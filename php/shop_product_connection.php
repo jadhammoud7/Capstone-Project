@@ -220,6 +220,16 @@ function add_to_basket_connection($product_id, $name, $price, $quantity)
     echo $element;
 }
 
+//for basket empty
+function basket_empty(){
+    $element = "
+    <div class=\"empty-par\">
+        <h2>Your shopping basket is empty</h2>
+        <button onclick=\"window.location='../shop/shop.php';\" value=\"Return To Shop Page\"></button>
+    </div>
+    ";
+}
+
 //for basket profile
 
 function basket_connection($product_id, $name, $category, $price, $quantity)
