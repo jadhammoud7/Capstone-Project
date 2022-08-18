@@ -1,4 +1,6 @@
 <?php
+
+session_start();
 include("connection.php");
 
 $total_price = 0;

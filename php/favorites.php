@@ -23,6 +23,7 @@ if(isset($_GET['productID']) && $_GET['productID'] != ""){
   $select_results = $select_stmt->get_result();
   $row_select = $select_results->fetch_assoc();
 
+  //check if product added to favorites list before
   if(empty($row_select['product_id'])){
       $stmt = $connection->prepare("INSERT INTO favorites_customer_product(customer_id, product_id) VALUES (?,?)");
       $stmt->bind_param("ii", $customer_id, $product_id);

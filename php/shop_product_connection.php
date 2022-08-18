@@ -1,4 +1,5 @@
 <?php
+
 include("connection.php");
 
 function shop_allproducts_connection($product_id, $name, $price)

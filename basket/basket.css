@@ -95,6 +95,11 @@ input {
 .empty-par{
     display: flex;
     flex-direction: column;
+    margin: 30px;
+}
+
+.empty-par button{
+    width: 20%;
 }
 
 /* start of making table responsive */

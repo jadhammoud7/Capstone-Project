@@ -2,38 +2,32 @@
 
 include("connection.php");
 
-
-
 //for basket
-function add_to_basket_connection($product_id, $name, $price, $quantity)
+function basket_product_connection($product_id, $name, $price, $quantity)
 {
 
     $element = "
     <tr class=\"product-container\">
-    <td>
-        <div class=\"cart-info\">
-            <img src=\"../images/Gaming-Wallpaper.png\" alt=\"\">
-            <div class=\"info_of_product\">
-                <p>$name</p>
-                <small >price: $price$</small>
-                <br> <br>
-                <a href=\"../php/remove_from_basket.php?productID=$product_id\" title=\"Remove this product from your shopping basket\">Remove</a>
-            </div>
-        </div>
-    </td>
-    <form action = \"../php/basket.php?productBasketID=$product_id&customerBasketID=$_SESSION[logged_id]\" method = \"GET\">
         <td>
-            <input type=\"number\" name=\"quantity\" min=\"0\" value=\"$quantity\" id=\"quantity_of_each_product\">
+            <div class=\"cart-info\">
+                <img src=\"../images/Gaming-Wallpaper.png\" alt=\"\">
+                <div class=\"info_of_product\">
+                    <p>$name</p>
+                    <small >price: $price$</small>
+                    <br> <br>
+                    <a href=\"../php/remove_from_basket.php?productID=$product_id\" title=\"Remove this product from your shopping basket\">Remove</a>
+                </div>
+            </div>
         </td>
- 
-    </form>
-    <td id=\"get_price\">$price$</td>
+        <form action = \"../php/basket.php?productBasketID=$product_id&customerBasketID=$_SESSION[logged_id]\" method = \"GET\">
+            <td>
+                <input type=\"number\" name=\"quantity\" min=\"0\" value=\"$quantity\" id=\"quantity_of_each_product\">
+            </td>
+        </form>
+        <td id=\"get_price\">$price$</td>
     </tr>
     ";
     echo $element;
-    //     <td>
-    //     <input type=\"submit\" value=\"Update Quantity\">
-    // </td>
 }
 
 //for basket empty
@@ -45,6 +39,8 @@ function basket_empty()
         <button onclick=\"window.location='../shop/shop.php';\" value=\"Return To Shop Page\"></button>
     </div>
     ";
+
+    echo $element;
 }
 
 
@@ -74,6 +70,3 @@ function basket_connection($product_id, $name, $category, $price, $quantity)
 
     echo $element;
 }
-
-
-?>
