@@ -14,13 +14,6 @@ if (isset($_SESSION['logged_id'])) {
     $customer_id = $_SESSION['logged_id'];
 }
 
-if(isset($_GET['productRemoveID'])){
-    $product_id = $_GET['productRemoveID'];
-    $delete_stmt = $connection->prepare("DELETE FROM baskets_customer_product WHERE product_id = '" . $product_id . "' AND customer_id = '" . $customer_id . "'");
-    $delete_stmt->execute();
-    echo "<script>alert('The product was removed from your shopping basket'); window.location = '../basket/basket.php';</script>";
-}
-
 if(isset($_GET['productBasketID']) && isset($_GET['customerBasketID']) && isset($_GET['quantity'])){
     $product_basket_id = $_GET['productBasketID'];
     $customer_basket_id = $_GET['customerBasketID'];

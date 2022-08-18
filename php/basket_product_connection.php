@@ -1,4 +1,5 @@
 <?php
+
 include("connection.php");
 
 
@@ -16,7 +17,7 @@ function add_to_basket_connection($product_id, $name, $price, $quantity)
                 <p>$name</p>
                 <small >price: $price$</small>
                 <br> <br>
-                <a href=\"../php/basket.php?productRemoveID=$product_id\" title=\"Remove this product from your shopping basket\">Remove</a>
+                <a href=\"../php/remove_from_basket.php?productID=$product_id\" title=\"Remove this product from your shopping basket\">Remove</a>
             </div>
         </div>
     </td>

@@ -13,6 +13,7 @@ $results = $stmt->get_result();
 $row = $results->fetch_assoc();
 
 include('../php/shop_product_connection.php');
+include('../php/basket_product_connection.php');
 
 $customer_id = $_SESSION['logged_id'];
 $query_add_to_favorites = "SELECT product_id FROM favorites_customer_product WHERE customer_id = '" . $customer_id . "' ";
