@@ -12,7 +12,7 @@ if (!isset($_SESSION['logged_bool'])) {
 
 require_once("../php/shop_product_connection.php");
 $customer_id = $_SESSION['logged_id'];
-$query_add_to_basket = "SELECT product_id, quantity FROM baskets_customer_product WHERE customer_id = $customer_id ";
+$query_add_to_basket = "SELECT product_id, quantity, price FROM baskets_customer_product WHERE customer_id = $customer_id ";
 $stmt_add_to_basket = $connection->prepare($query_add_to_basket);
 $stmt_add_to_basket->execute();
 $results_add_to_basket = $stmt_add_to_basket->get_result();
@@ -97,11 +97,11 @@ $results_add_to_basket = $stmt_add_to_basket->get_result();
                 <?php
 
                 while ($row_add_to_basket = $results_add_to_basket->fetch_assoc()) {
-                    $stmt_get_product = $connection->prepare("SELECT product_id, name, price FROM products WHERE product_id = '" . $row_add_to_basket["product_id"] . "' ");
+                    $stmt_get_product = $connection->prepare("SELECT product_id, name FROM products WHERE product_id = '" . $row_add_to_basket["product_id"] . "' ");
                     $stmt_get_product->execute();
                     $results_get_product = $stmt_get_product->get_result();
                     $row_get_product = $results_get_product->fetch_assoc();
-                    add_to_basket_connection($row_get_product["product_id"], $row_get_product["name"], $row_get_product["price"], $row_add_to_basket["quantity"]);
+                    add_to_basket_connection($row_get_product["product_id"], $row_get_product["name"], $row_add_to_basket["price"], $row_add_to_basket["quantity"]);
                 }
 
                 ?>

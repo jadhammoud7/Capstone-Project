@@ -20,7 +20,7 @@ $stmt_add_to_favorites = $connection->prepare($query_add_to_favorites);
 $stmt_add_to_favorites->execute();
 $results_add_to_favorites = $stmt_add_to_favorites->get_result();
 
-$query_basket = "SELECT product_id, quantity FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ";
+$query_basket = "SELECT product_id, quantity, price FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ";
 $stmt_basket = $connection->prepare($query_basket);
 $stmt_basket->execute();
 $results_basket = $stmt_basket->get_result();
@@ -168,7 +168,7 @@ if (!isset($_SESSION['logged_bool'])) {
                 $stmt_get_product->execute();
                 $results_get_product = $stmt_get_product->get_result();
                 $row_get_product = $results_get_product->fetch_assoc();
-                basket_connection($row_get_product["product_id"], $row_get_product["name"], $row_get_product["category"], $row_get_product["price"], $row_basket["quantity"]);
+                basket_connection($row_get_product["product_id"], $row_get_product["name"], $row_get_product["category"], $row_basket["price"], $row_basket["quantity"]);
             }
 
             ?>
