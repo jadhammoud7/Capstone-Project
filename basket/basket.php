@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 
 session_start();
@@ -11,12 +9,17 @@ if (!isset($_SESSION['logged_bool'])) {
 }
 
 include("../php/basket_product_connection.php");
+include("../php/shop_product_connection.php");
+
 $customer_id = $_SESSION['logged_id'];
 
-$stmt_add_to_basket = $connection->prepare("SELECT product_id, quantity, price FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "'");
-$stmt_add_to_basket->execute();
-$results_add_to_basket = $stmt_add_to_basket->get_result();
+$query_basket = "SELECT product_id, quantity, price FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ";
+$stmt_basket = $connection->prepare($query_basket);
+$stmt_basket->execute();
+$results_basket = $stmt_basket->get_result();
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -82,7 +85,7 @@ $results_add_to_basket = $stmt_add_to_basket->get_result();
 
     <?php
     //if basket is empty
-    if (($row_add_to_basket = $results_add_to_basket->fetch_assoc()) == null) {
+    if (empty($results_basket) == null) {
         basket_empty();
         exit();
     }
@@ -96,8 +99,7 @@ $results_add_to_basket = $stmt_add_to_basket->get_result();
                 <th>Subtotal</th>
             </tr>
             <?php
-
-            while ($row_add_to_basket = $results_add_to_basket->fetch_assoc()) {
+            while ($row_add_to_basket = $results_basket->fetch_assoc()) {
                 $stmt_get_product = $connection->prepare("SELECT product_id, name FROM products WHERE product_id = '" . $row_add_to_basket["product_id"] . "' ");
                 $stmt_get_product->execute();
                 $results_get_product = $stmt_get_product->get_result();

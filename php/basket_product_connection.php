@@ -6,26 +6,25 @@ include("connection.php");
 function basket_product_connection($product_id, $name, $price, $quantity)
 {
 
-    $element = "
-    <tr class=\"product-container\">
-        <td>
-            <div class=\"cart-info\">
-                <img src=\"../images/Gaming-Wallpaper.png\" alt=\"\">
-                <div class=\"info_of_product\">
-                    <p>$name</p>
-                    <small >price: $price$</small>
-                    <br> <br>
-                    <a href=\"../php/remove_from_basket.php?productID=$product_id\" title=\"Remove this product from your shopping basket\">Remove</a>
-                </div>
-            </div>
-        </td>
-        <form action = \"../php/basket.php?productBasketID=$product_id&customerBasketID=$_SESSION[logged_id]\" method = \"GET\">
-            <td>
-                <input type=\"number\" name=\"quantity\" min=\"0\" value=\"$quantity\" id=\"quantity_of_each_product\">
-            </td>
-        </form>
-        <td id=\"get_price\">$price$</td>
-    </tr>
+    $element = "<tr class=\"product-container\">
+                    <td>
+                        <div class=\"cart-info\">
+                            <img src=\"../images/Gaming-Wallpaper.png\" alt=\"\">
+                            <div class=\"info_of_product\">
+                                <p>$name</p>
+                                <small >price: $price$</small>
+                                <br> <br>
+                                <a href=\"../php/remove_from_basket.php?productID=$product_id\" title=\"Remove this product from your shopping basket\">Remove</a>
+                            </div>
+                        </div>
+                    </td>
+                    <form action = \"../php/basket.php?productBasketID=$product_id&customerBasketID=$_SESSION[logged_id]\" method = \"GET\">
+                        <td>
+                            <input type=\"number\" name=\"quantity\" min=\"0\" value=\"$quantity\" id=\"quantity_of_each_product\">
+                        </td>
+                    </form>
+                    <td id=\"get_price\">$price$</td>
+                </tr>
     ";
     echo $element;
 }
