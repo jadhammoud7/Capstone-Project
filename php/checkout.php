@@ -49,10 +49,17 @@ if(isset($_POST['email']) && $_POST['email'] != ""){
         die("WRONG email");
     }
 }
-
 if (isset($_POST["phone_number"]) && $_POST["phone_number"] != "") {
     $phone_number = $_POST["phone_number"];
     $_SESSION['phone_number'] = $phone_number;
+    for ($j = 0; $j < strlen($phone_number); $j++) {
+        if (!is_numeric($phone_number[$j])) {
+            $_SESSION['phone_number_error'] = "Phone number should not contain any characters other than numbers";
+            header("Location: ../signup/signup.php");
+            die("WRONG Phone Number");
+        }
+    }
+
 }
 
 if(isset($_POST['shipping_country']) && $_POST['shipping_country'] != ""){

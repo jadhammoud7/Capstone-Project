@@ -272,6 +272,7 @@ input.is-valid+label {
 }
 
 #first_name_error,
+#phone_number_error,
 #last_name_error,
 #email_error,
 #shipping_country_error,

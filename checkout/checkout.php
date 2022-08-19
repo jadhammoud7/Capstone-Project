@@ -154,6 +154,14 @@ $results_get_basket_products = $stmt_get_basket_products->get_result();
                                 <label for="email">Email</label>
                             </div>
                             <div class="input-container">
+                                <p class="error" id="phone_number_error">
+                                    <?php
+                                    if (isset($_SESSION['phone_number_error'])) {
+                                        echo "<script>document.getElementById('phone_number_error').style.display='block';</script>";
+                                        echo $_SESSION['phone_number_error'];
+                                        unset($_SESSION['phone_number_error']);
+                                    } ?>
+                                </p>
                                 <input type="tel" name="phone_number" id="phone_number" value="<?php if (isset($_SESSION['phone_number'])) {
                                                                                                     echo $_SESSION['phone_number'];
                                                                                                 } ?>" required>
