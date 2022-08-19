@@ -63,11 +63,6 @@ if (isset($_POST["address"]) && $_POST["address"] != "") {
 if (isset($_POST["username"]) && $_POST["username"] != "") {
     $username = $_POST["username"];
     $_SESSION['username'] = $username;
-    if (is_numeric($username)) {
-        $_SESSION['username_error'] = "Username should not be numeric";
-        header("Location: ../signup/signup.php");
-        die("WRONG username");
-    }
     if (strlen($username) < 5) {
         $_SESSION['username_error'] = "Username should be of length 5 minimum";
         header("Location: ../signup/signup.php");
