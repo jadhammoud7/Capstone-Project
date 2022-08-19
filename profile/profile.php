@@ -161,7 +161,7 @@ if (!isset($_SESSION['logged_bool'])) {
         <div class="basket fade" style="display: none;">
             <div>
                 <h2>Shopping Basket</h2>
-                <h3>You have total of 4 items in your basket</h3>
+                <h3>You have total of <?php echo $results_basket->num_rows; ?> items in your basket</h3>
             </div>
             <?php
             while ($row_basket = $results_basket->fetch_assoc()) {
@@ -176,7 +176,9 @@ if (!isset($_SESSION['logged_bool'])) {
 
 
             <div>
-                <h3>Total Price: 800$</h3>
+                <h3>Total Price: <?php if (isset($_SESSION['total_price'])) {
+                                        echo $_SESSION['total_price'];
+                                    } ?>$</h3>
             </div>
             <div class="gotoshoppage_profile">
                 <button title="Go to shopping basket to modify or submit your order" onclick="window.location.href='../basket/basket.php';"><strong>Go To Shopping
