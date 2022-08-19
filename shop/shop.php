@@ -39,6 +39,16 @@ $stmt_others->execute();
 $results_others = $stmt_others->get_result();
 
 
+//for the search btn
+if (isset($GET['search'])) {
+    $searchq = $_GET['search'];
+    $stmt_search = $connection->prepare("SELECT * FROM products WHERE name='$searchq'");
+    $stmt_search->execute();
+    $results_search = $stmt_search->get_result();
+
+}
+
+
 ?>
 
 <head>
@@ -117,10 +127,13 @@ $results_others = $stmt_others->get_result();
     </div>
 
     <!-- start search button -->
-    <div class="search-container">
-        <input type="text" placeholder="Search for a product.." name="search">
-        <button type="submit"><i class="fa fa-search"></i></button>
-    </div>
+    <form action="../shop/shop.php" method="GET">
+        <div class="search-container">
+            <input type="text" placeholder="Search for a product.." name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+
+        </div>
+    </form>
     <!-- end search button -->
 
 
