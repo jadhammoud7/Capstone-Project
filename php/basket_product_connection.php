@@ -35,7 +35,7 @@ function basket_empty()
     $element = "
     <div class=\"empty-par\">
         <h2>Your shopping basket is empty</h2>
-        <button onclick=\"window.location='../shop/shop.php';\" value=\"Return To Shop Page\"></button>
+        <button onclick=\"window.location='../shop/shop.php';\" value=\"Return To Shop Page\">Return To Shop Page</button>
     </div>
     ";
 
@@ -54,8 +54,8 @@ function basket_connection($product_id, $name, $category, $price, $quantity)
                         <img src=\"../images/console.png\" alt=\"basket product\" style=\"width: 50%;\">
                     </div>
                     <div class=\"basket-product-part\">
-                        <h3>$name</h3>
-                        <h4>$category</h4>
+                        <h3>Product Name</h3>
+                        <h4>$name</h4>
                     </div>
                     <div class=\"basket-product-part\">
                         <h3>Quantity</h3>

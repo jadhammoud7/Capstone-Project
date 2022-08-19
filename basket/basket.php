@@ -17,6 +17,7 @@ $query_basket = "SELECT product_id, quantity, price FROM baskets_customer_produc
 $stmt_basket = $connection->prepare($query_basket);
 $stmt_basket->execute();
 $results_basket = $stmt_basket->get_result();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,6 +86,7 @@ $results_basket = $stmt_basket->get_result();
 
     <?php
     //if basket is empty
+
     if (empty($results_basket) == null) {
         basket_empty();
         exit();
