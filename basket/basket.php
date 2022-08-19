@@ -9,7 +9,6 @@ if (!isset($_SESSION['logged_bool'])) {
 }
 
 include("../php/basket_product_connection.php");
-include("../php/shop_product_connection.php");
 
 $customer_id = $_SESSION['logged_id'];
 
@@ -86,57 +85,57 @@ $results_basket = $stmt_basket->get_result();
 
     <?php
     //if basket is empty
-
-    if ($results_basket == false) {
+    
+    if ($results_basket->num_rows == 0) {
         basket_empty();
-    } else {
+        exit();
+    }
     ?>
-        <!--started basket items selected-->
-        <div class="card small-container fade reveal-by-y" id="product123">
+    <!--started basket items selected-->
+    <div class="card small-container fade reveal-by-y" id="product123">
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+            <?php
+            while ($row_add_to_basket = $results_basket->fetch_assoc()) {
+                $stmt_get_product = $connection->prepare("SELECT product_id, name FROM products WHERE product_id = '" . $row_add_to_basket["product_id"] . "' ");
+                $stmt_get_product->execute();
+                $results_get_product = $stmt_get_product->get_result();
+                $row_get_product = $results_get_product->fetch_assoc();
+                basket_product_connection($row_get_product["product_id"], $row_get_product["name"], $row_add_to_basket["price"], $row_add_to_basket["quantity"]);
+            }
+
+            ?>
+        </table>
+
+        <!--start total price-->
+        <div class="total-price">
             <table>
                 <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
+                    <td title="This is the total invoice of your shopping basket excluding tax value">Subtotal</td>
+                    <td>$<?php echo $_SESSION['total_price']; ?></td>
                 </tr>
-                <?php
-                while ($row_add_to_basket = $results_basket->fetch_assoc()) {
-                    $stmt_get_product = $connection->prepare("SELECT product_id, name FROM products WHERE product_id = '" . $row_add_to_basket["product_id"] . "' ");
-                    $stmt_get_product->execute();
-                    $results_get_product = $stmt_get_product->get_result();
-                    $row_get_product = $results_get_product->fetch_assoc();
-                    basket_product_connection($row_get_product["product_id"], $row_get_product["name"], $row_add_to_basket["price"], $row_add_to_basket["quantity"]);
-                }
-
-                ?>
+                <tr>
+                    <td title="This is the tax value to be added to the checkout">Tax</td>
+                    <td>$<?php echo $_SESSION['tax_price']; ?></td>
+                </tr>
+                <tr>
+                    <td title="This is the total checkout price of your shopping basket including tax value">Total</td>
+                    <td>$<?php echo $_SESSION['total_price_including_tax']; ?></td>
+                </tr>
+                <tr>
+                    <!-- started with bay button -->
+                    <td>
+                        <button onclick="window.location.href='../checkout/checkout.php';" class="checkout-button" title="Submit your shopping basket"><i class="fa fa-money"></i>Proceed To Checkout</button>
+                    </td>
+                </tr>
             </table>
-
-            <!--start total price-->
-            <div class="total-price">
-                <table>
-                    <tr>
-                        <td title="This is the total invoice of your shopping basket excluding tax value">Subtotal</td>
-                        <td>$<?php echo $_SESSION['total_price']; ?></td>
-                    </tr>
-                    <tr>
-                        <td title="This is the tax value to be added to the checkout">Tax</td>
-                        <td>$<?php echo $_SESSION['tax_price']; ?></td>
-                    </tr>
-                    <tr>
-                        <td title="This is the total checkout price of your shopping basket including tax value">Total</td>
-                        <td>$<?php echo $_SESSION['total_price_including_tax']; ?></td>
-                    </tr>
-                    <tr>
-                        <!-- started with bay button -->
-                        <td>
-                            <button onclick="window.location.href='../checkout/checkout.php';" class="checkout-button" title="Submit your shopping basket"><i class="fa fa-money"></i>Proceed To Checkout</button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <!--end of total price-->
         </div>
-    <?php } ?>
+        <!--end of total price-->
+    </div>
 
     <!--ended basket items selected-->
 
