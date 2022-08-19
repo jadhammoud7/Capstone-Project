@@ -64,7 +64,16 @@
         <input type="date" placeholder="Enter your date of birth" name="date_of_birth" id="date_of_birth" value="<?php if (isset($_SESSION['date_of_birth'])) {
                                                                                                                     echo $_SESSION['date_of_birth'];
                                                                                                                   } ?>" required> <br> <br>
-
+                                                                                                                  
+                                                                                                                  
+        <p class="error" id="phone_number_error">
+          <?php
+          if (isset($_SESSION['phone_number_error'])) {
+            echo "<script>document.getElementById('phone_number_error').style.display='block';</script>";
+            echo $_SESSION['phone_number_error'];
+            unset($_SESSION['phone_number_error']);
+          } ?>
+        </p>
         <label for="phone_number"><b>Phone Number</b></label>
         <input type="text" placeholder="Enter your phone number" name="phone_number" id="phone_number" value="<?php if (isset($_SESSION['phone_number'])) {
                                                                                                                 echo $_SESSION['phone_number'];

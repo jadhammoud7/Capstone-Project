@@ -167,7 +167,9 @@ hr {
 #email_error {
   display: none;
 }
-
+#phone_number_error {
+  display: none;
+}
 #address_error {
   display: none;
 }
