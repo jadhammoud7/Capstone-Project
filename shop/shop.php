@@ -7,37 +7,12 @@ if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
 require_once('../php/shop_product_connection.php');
+require_once('../php/shop.php');
 //for cd's
 $query = "SELECT product_id,name, price FROM products WHERE category='XBOX Cd' or category='PS3 Cd' or category='PS4 Cd' or category='PS5 Cd' ";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
-
-//for cellphones
-$query_cellphone = "SELECT product_id,name, price FROM products WHERE category='Cellphone'";
-$stmt_cellphone = $connection->prepare($query_cellphone);
-$stmt_cellphone->execute();
-$results_cellphone = $stmt_cellphone->get_result();
-
-//for consoles
-$query_console = "SELECT product_id,name, price FROM products WHERE category='PS3' or category='PS4' or category='PS5'";
-$stmt_console = $connection->prepare($query_console);
-$stmt_console->execute();
-$results_console = $stmt_console->get_result();
-
-//for offers
-$query_offers = "SELECT product_id,name, price FROM products WHERE category='offers'";
-$stmt_offers = $connection->prepare($query_offers);
-$stmt_offers->execute();
-$results_offers = $stmt_offers->get_result();
-
-
-//for others
-$query_others = "SELECT product_id,name, price FROM products WHERE category='others'";
-$stmt_others = $connection->prepare($query_others);
-$stmt_others->execute();
-$results_others = $stmt_others->get_result();
-
 
 //for the search btn
 // if (isset($GET['search'])) {
@@ -130,7 +105,7 @@ $results_console_filter = $stmt_console_filter->get_result();
 
     <!-- started with products options -->
     <div class="tabs">
-        <button class="active" data-cont=".cd">CD's</button>
+        <button class="active" data-cont=".cd" onclick="window.location.href = '../php/shop.php?type=cds'">CD's</button>
         <button data-cont=".consoles">consoles</button>
         <button data-cont=".cellphones">CellPhones</button>
         <button data-cont=".offers">Offers</button>
@@ -229,19 +204,10 @@ $results_console_filter = $stmt_console_filter->get_result();
     </div>
     <!-- ended filters -->
 
-
     <div>
         <h2 class="shop-title">Shop</h2>
         <h4 class="results-title">Showing 1-4 of 4 results</h4>
     </div>
-
-
-
-
-
-
-
-    
 
     <div class="content">
         <!-- start first tab -->
@@ -251,6 +217,7 @@ $results_console_filter = $stmt_console_filter->get_result();
                     <h1>CD's</h1>
                 </div>
                 <?php
+                $results = GetContent();
                 while ($row = $results->fetch_assoc()) {
                     shop_cd_connection($row["product_id"], $row["name"], $row["price"]);
                 }
@@ -258,69 +225,7 @@ $results_console_filter = $stmt_console_filter->get_result();
             </div>
         </div>
         <!-- end first tab -->
-
-        <!-- start of second tab -->
-        <div class="consoles reveal-by-x">
-            <div class="shop-products">
-                <div class="shop-products-title" id="shop-products">
-                    <h1>Consoles</h1>
-                </div>
-                <?php
-                while ($row_console = $results_console->fetch_assoc()) {
-                    shop_console_connection($row_console["product_id"], $row_console["name"], $row_console["price"]);
-                }
-                ?>
-            </div>
-        </div>
-        <!-- end of second tab -->
-
-        <!-- start of third tab -->
-        <div class="cellphones reveal-by-x">
-            <div class="shop-products">
-                <div class="shop-products-title" id="shop-products">
-                    <h1>CellPhones</h1>
-                </div>
-                <?php
-                while ($row_cellphone = $results_cellphone->fetch_assoc()) {
-                    shop_cellphone_connection($row_cellphone["product_id"], $row_cellphone["name"], $row_cellphone["price"]);
-                }
-                ?>
-            </div>
-        </div>
-        <!-- end of third tab -->
-
-        <!-- start of fourth tab -->
-        <div class="offers reveal-by-x">
-            <div class="shop-products">
-                <div class="shop-products-title" id="shop-products">
-                    <h1>Offers</h1>
-                </div>
-                <?php
-                while ($row_offers = $results_offers->fetch_assoc()) {
-                    shop_cd_connection($row_offers["product_id"], $row_offers["name"], $row_offers["price"]);
-                }
-                ?>
-            </div>
-        </div>
-        <!-- end of fourth tab -->
-
-        <!-- start of fifth tab -->
-        <div class="others reveal-by-x">
-            <div class="shop-products">
-                <div class="shop-products-title" id="shop-products">
-                    <h1>Others</h1>
-                </div>
-                <?php
-                while ($row_others = $results_others->fetch_assoc()) {
-                    shop_cd_connection($row_others["product_id"], $row_others["name"], $row_others["price"]);
-                }
-                ?>
-            </div>
-        </div>
-        <!-- end of fifth tab -->
     </div>
-
-
     <!-- ended with products -->
 
     <!-- started return to top button -->

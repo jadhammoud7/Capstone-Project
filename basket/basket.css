@@ -111,6 +111,7 @@ input {
     border-radius: 5px;
     margin: 20px;
     padding: 20px;
+    float: left;
 }
 
 /* start of making table responsive */
