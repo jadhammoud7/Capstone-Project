@@ -371,7 +371,11 @@ $results_console_filter = $stmt_console_filter->get_result();
 
     <div>
         <h2 class="shop-title">Shop</h2>
-        <h4 class="results-title">Showing 1-4 of 4 results</h4>
+        <h4 class="results-title">Showing results of products of type "<?php if (isset($_GET['type'])) {
+                                                                            echo $_GET['type'];
+                                                                        } ?>" and category "<?php if (isset($_GET['category'])) {
+                                                                                                echo $_GET['category'];
+                                                                                            } ?>"</h4>
     </div>
 
     <div class="content">
