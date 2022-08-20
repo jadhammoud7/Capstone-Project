@@ -31,13 +31,25 @@ if (isset($_GET['type'])) {
     $results_shop = $stmt->get_result();
 }
 
-function UpdateCheck($type_current) //this function is called to keep the current filter selected in the dropdown select
+function UpdateTypeSelect($type_current) //this function is called to keep the current filter selected in the dropdown select of type
 {
     if (isset($_GET['type'])) {
         if ($_GET['type'] == $type_current) { //if the option in select is the same as the name of type sent, meaning this option was selected by user, then it should stay selected to be shown first in list
             $_SESSION[$_GET['type'] . '_selected'] = "selected";
         } else { //is this current option is not the option selected by the user
             unset($_SESSION[$type_current . '_selected']);
+        }
+    }
+}
+
+
+function UpdateCategorySelect($category_current) //this function is called to keep the current filter selected in the dropdown select of category
+{
+    if (isset($_GET['category'])) {
+        if ($_GET['category'] == $category_current) { //if the option in select is the same as the name of type sent, meaning this option was selected by user, then it should stay selected to be shown first in list
+            $_SESSION[$_GET['category'] . '_selected'] = "selected";
+        } else { //is this current option is not the option selected by the user
+            unset($_SESSION[$category_current . '_selected']);
         }
     }
 }
@@ -49,7 +61,7 @@ function UpdateCheck($type_current) //this function is called to keep the curren
 //     $stmt_search->execute();
 //     $results_search = $stmt_search->get_result();
 
-// }
+// }`
 
 //for filters cd
 $query_filter_cd = "SELECT product_id,name, price FROM products WHERE category='XBOX Cd' or category='PS3 Cd' or category='PS4 Cd' or category='PS5 Cd' ";
@@ -160,45 +172,60 @@ $results_console_filter = $stmt_console_filter->get_result();
                             var select = document.getElementById('type');
                             var option = select.options[select.selectedIndex];
 
-                            window.location = '?type=' + option.value;                        
+                            var current_url = window.location.href;
+                            
+                            window.location = '?type=' + option.value;
+
+                            var select_category = document.getElementById('category');
+                            var option_category = select_category.options[select_category.selectedIndex];
+
+                            var current_url = window.location.href;
+
+                            if(!current_url.includes('category')){
+                                window.location = '?type=' + option.value;
+                            }
+                            else{
+                                window.location = '?type=' + option.value + '&category=' + option_category.value;
+                            }
+                                                 
                         ">
                             <option value="all" <?php
-                                                UpdateCheck('all');
+                                                UpdateTypeSelect('all');
                                                 if (isset($_SESSION['all_selected'])) {
                                                     echo $_SESSION['all_selected'];
                                                 } ?>>All</option>
                             <option value="cds" <?php
-                                                UpdateCheck('cds');
+                                                UpdateTypeSelect('cds');
 
                                                 if (isset($_SESSION['cds_selected'])) {
                                                     echo $_SESSION['cds_selected'];
                                                 } ?>>CDs</option>
                             <option value="consoles" <?php
-                                                        UpdateCheck('consoles');
+                                                        UpdateTypeSelect('consoles');
 
                                                         if (isset($_SESSION['consoles_selected'])) {
                                                             echo $_SESSION['consoles_selected'];
                                                         } ?>>Consoles</option>
                             <option value="accessories" <?php
-                                                        UpdateCheck('accessories');
+                                                        UpdateTypeSelect('accessories');
 
                                                         if (isset($_SESSION['accessories_selected'])) {
                                                             echo $_SESSION['accessories_selected'];
                                                         } ?>>Accessories</option>
                             <option value="phones" <?php
-                                                    UpdateCheck('phones');
+                                                    UpdateTypeSelect('phones');
 
                                                     if (isset($_SESSION['phones_selected'])) {
                                                         echo $_SESSION['phones_selected'];
                                                     } ?>>Phones</option>
                             <option value="cards" <?php
-                                                    UpdateCheck('cards');
+                                                    UpdateTypeSelect('cards');
 
                                                     if (isset($_SESSION['cards_selected'])) {
                                                         echo $_SESSION['cards_selected'];
                                                     } ?>>Online cards</option>
                             <option value="electronics" <?php
-                                                        UpdateCheck('electronics');
+                                                        UpdateTypeSelect('electronics');
 
                                                         if (isset($_SESSION['electronics_selected'])) {
                                                             echo $_SESSION['electronics_selected'];
@@ -215,20 +242,74 @@ $results_console_filter = $stmt_console_filter->get_result();
                             var select = document.getElementById('category');
                             var option = select.options[select.selectedIndex];
 
-                            window.location = window.location.href + '&category=' + option.value;
+                            var select_type = document.getElementById('type');
+                            var option_type = select_type.options[select_type.selectedIndex];
+
+                            var current_url = window.location.href;
+                            
+                            if(!current_url.includes('?type')){
+                                window.location = '?category=' + option.value;
+                            }
+                            else{
+                                window.location = '?type=' + option_type.value + '&category=' + option.value;
+                            }
                         
                         ">
-                            <option value="action">Action</option>
-                            <option value="gaming">Gaming</option>
-                            <option value="strategy">Strategy</option>
-                            <option value="PS2">PS2</option>
-                            <option value="PS3">PS3</option>
-                            <option value="PS4">PS4</option>
-                            <option value="PS5">PS5</option>
-                            <option value="XBox">XBox</option>
-                            <option value="iphone">IPhone</option>
-                            <option value="Samsung">Samsung</option>
-                            <option value="PsPlus">PS Plus</option>
+                            <option value="action" <?php
+                                                    UpdateCategorySelect('action');
+                                                    if (isset($_SESSION['action_selected'])) {
+                                                        echo $_SESSION['action_selected'];
+                                                    } ?>>Action</option>
+                            <option value="gaming" <?php
+                                                    UpdateCategorySelect('gaming');
+                                                    if (isset($_SESSION['gaming_selected'])) {
+                                                        echo $_SESSION['gaming_selected'];
+                                                    } ?>>Gaming</option>
+                            <option value="strategy" <?php
+                                                        UpdateCategorySelect('strategy');
+                                                        if (isset($_SESSION['strategy_selected'])) {
+                                                            echo $_SESSION['strategy_selected'];
+                                                        } ?>>Strategy</option>
+                            <option value="PS2" <?php
+                                                UpdateCategorySelect('PS2');
+                                                if (isset($_SESSION['PS2_selected'])) {
+                                                    echo $_SESSION['PS2_selected'];
+                                                } ?>>PS2</option>
+                            <option value="PS3" <?php
+                                                UpdateCategorySelect('PS3');
+                                                if (isset($_SESSION['PS3_selected'])) {
+                                                    echo $_SESSION['PS3_selected'];
+                                                } ?>>PS3</option>
+                            <option value="PS4" <?php
+                                                UpdateCategorySelect('PS4');
+                                                if (isset($_SESSION['PS4_selected'])) {
+                                                    echo $_SESSION['PS4_selected'];
+                                                } ?>>PS4</option>
+                            <option value="PS5" <?php
+                                                UpdateCategorySelect('PS5');
+                                                if (isset($_SESSION['PS5_selected'])) {
+                                                    echo $_SESSION['PS5_selected'];
+                                                } ?>>PS5</option>
+                            <option value="XBox" <?php
+                                                    UpdateCategorySelect('XBox');
+                                                    if (isset($_SESSION['XBox_selected'])) {
+                                                        echo $_SESSION['XBox_selected'];
+                                                    } ?>>XBox</option>
+                            <option value="iphone" <?php
+                                                    UpdateCategorySelect('iphone');
+                                                    if (isset($_SESSION['iphone_selected'])) {
+                                                        echo $_SESSION['iphone_selected'];
+                                                    } ?>>IPhone</option>
+                            <option value="Samsung" <?php
+                                                    UpdateCategorySelect('Samsung');
+                                                    if (isset($_SESSION['Samsung_selected'])) {
+                                                        echo $_SESSION['Samsung_selected'];
+                                                    } ?>>Samsung</option>
+                            <option value="PsPlus" <?php
+                                                    UpdateCategorySelect('PsPlus');
+                                                    if (isset($_SESSION['PsPlus_selected'])) {
+                                                        echo $_SESSION['PsPlus_selected'];
+                                                    } ?>>PS Plus</option>
                         </select>
                     </button>
                 </label>
