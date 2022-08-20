@@ -18,15 +18,9 @@ function basket_product_connection($product_id, $name, $price, $quantity)
                             </div>
                         </div>
                     </td>
-                    <form action = \"../php/update_basket_quantity.php?productID=$product_id\" method = \"POST\">  
-                        <td>
-                            <input type=\"number\" name=\"quantity\" min=\"0\" value=\"$quantity\" id=\"quantity_of_each_product\" onChange=\"<?php 
-                                
-                            
-                            
-                            ?>\" \">
-                        </td>
-                    </form>
+                    <td>
+                        <input type=\"number\" name=\"$product_id-quantity\" min=\"0\" value=\"$quantity\" id=\"quantity_of_each_product\"\">
+                    </td>
                     <td id=\"get_price\">$price$</td>
                 </tr>
     ";

@@ -85,7 +85,7 @@ $results_basket = $stmt_basket->get_result();
 
     <?php
     //if basket is empty
-    
+
     if ($results_basket->num_rows == 0) {
         basket_empty();
         exit();
@@ -93,23 +93,27 @@ $results_basket = $stmt_basket->get_result();
     ?>
     <!--started basket items selected-->
     <div class="card small-container fade reveal-by-y" id="product123">
-        <table>
-            <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-            </tr>
-            <?php
-            while ($row_add_to_basket = $results_basket->fetch_assoc()) {
-                $stmt_get_product = $connection->prepare("SELECT product_id, name FROM products WHERE product_id = '" . $row_add_to_basket["product_id"] . "' ");
-                $stmt_get_product->execute();
-                $results_get_product = $stmt_get_product->get_result();
-                $row_get_product = $results_get_product->fetch_assoc();
-                basket_product_connection($row_get_product["product_id"], $row_get_product["name"], $row_add_to_basket["price"], $row_add_to_basket["quantity"]);
-            }
+        <form action="../php/basket.php" method="POST">
+            <table>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+                <?php
+                while ($row_add_to_basket = $results_basket->fetch_assoc()) {
+                    $stmt_get_product = $connection->prepare("SELECT product_id, name FROM products WHERE product_id = '" . $row_add_to_basket["product_id"] . "' ");
+                    $stmt_get_product->execute();
+                    $results_get_product = $stmt_get_product->get_result();
+                    $row_get_product = $results_get_product->fetch_assoc();
+                    basket_product_connection($row_get_product["product_id"], $row_get_product["name"], $row_add_to_basket["price"], $row_add_to_basket["quantity"]);
+                }
 
-            ?>
-        </table>
+                ?>
+
+            </table>
+            <input type="submit" value="Update Cart" class="update-cart-btn">
+        </form>
 
         <!--start total price-->
         <div class="total-price">

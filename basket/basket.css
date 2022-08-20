@@ -92,17 +92,25 @@ input {
     border-radius: 15px;
 }
 
-.empty-par{
+.empty-par {
     display: flex;
     flex-direction: column;
     margin: 30px;
 }
 
-.empty-par button{
+.empty-par button {
     width: 20%;
     color: #fefefe;
     margin: 20px;
     border-radius: 5px;
+}
+
+.update-cart-btn {
+    color: #fefefe;
+    background-color: royalblue;
+    border-radius: 5px;
+    margin: 20px;
+    padding: 20px;
 }
 
 /* start of making table responsive */
