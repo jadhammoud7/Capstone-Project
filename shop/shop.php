@@ -7,7 +7,6 @@ if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
 require_once('../php/shop_product_connection.php');
-include('../php/shop.php');
 
 if (!isset($_GET['type'])) {
     $type = 'cds';
