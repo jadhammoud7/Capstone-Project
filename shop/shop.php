@@ -8,22 +8,22 @@ if (!isset($_SESSION['logged_bool'])) {
 }
 require_once('../php/shop_product_connection.php');
 
+//if no get request of type was sent meaning starter
 if (!isset($_GET['type'])) {
-    $type = 'cds';
-    $_SESSION['title'] = $type;
-    $_SESSION[$type . "_selected"] = "selected";
-    $query = "SELECT product_id,name, price FROM products WHERE type='" . $type . "' ";
+    $type = 'cds'; //display cds as a starter
+    $_SESSION['title'] = $type; //for the title of the div 
+    $query = "SELECT product_id,name, price FROM products WHERE type='" . $type . "' "; //check all products to type equals to cds
     $stmt = $connection->prepare($query);
     $stmt->execute();
     $results_shop = $stmt->get_result();
 }
+//if a get request of type was sent
 if (isset($_GET['type'])) {
     $type = $_GET['type'];
     $_SESSION['title'] = $type;
-    $_SESSION[$type . "_selected"] = "selected";
-    if ($type == "all") {
+    if ($type == "all") { //if type chosen is all then choose all products without conditions on products
         $query = "SELECT product_id,name, price FROM products";
-    } else {
+    } else { //chose products of type type
         $query = "SELECT product_id,name, price FROM products WHERE type='" . $type . "' ";
     }
     $stmt = $connection->prepare($query);
@@ -31,12 +31,12 @@ if (isset($_GET['type'])) {
     $results_shop = $stmt->get_result();
 }
 
-function UpdateCheck($type_current)
+function UpdateCheck($type_current) //this function is called to keep the current filter selected in the dropdown select
 {
     if (isset($_GET['type'])) {
-        if ($_GET['type'] == $type_current) {
+        if ($_GET['type'] == $type_current) { //if the option in select is the same as the name of type sent, meaning this option was selected by user, then it should stay selected to be shown first in list
             $_SESSION[$_GET['type'] . '_selected'] = "selected";
-        } else {
+        } else { //is this current option is not the option selected by the user
             unset($_SESSION[$type_current . '_selected']);
         }
     }
