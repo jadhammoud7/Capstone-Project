@@ -140,9 +140,15 @@ $results_console_filter = $stmt_console_filter->get_result();
                 <h2>Type</h2>
                 <button>
                     <label for="type">
-                        <select name="type" id="type">
-                            <option value="All">All</option>
-                            <option value="cd">CDs</option>
+                        <select name="type" id="type" onchange="
+                            var select = document.getElementById('type');
+                            var option = select.options[select.selectedIndex];
+
+                            window.location = '?type=' + option.value;
+                        
+                        ">
+                            <option value="">All</option>
+                            <option value="cds">CDs</option>
                             <option value="consoles">Consoles</option>
                             <option value="accessories">Accessories</option>
                             <option value="phones">Phones</option>
