@@ -238,7 +238,7 @@ $results_console_filter = $stmt_console_filter->get_result();
                 </div>
                 <?php
                 while ($row = $results_shop->fetch_assoc()) {
-                    shop_cd_connection($row["product_id"], $row["name"], $row["price"]);
+                    shop_connection($row["product_id"], $row["name"], $row["price"]);
                 }
                 ?>
             </div>
