@@ -12,7 +12,12 @@ require_once('../php/shop_product_connection.php');
 if (!isset($_GET['type'])) {
     $type = 'cds'; //display cds as a starter
     $_SESSION['title'] = $type; //for the title of the div 
-    $query = "SELECT product_id,name, price FROM products WHERE type='" . $type . "' "; //check all products to type equals to cds
+    if (!isset($_GET['category'])) {
+        $query = "SELECT product_id,name, price FROM products WHERE type='" . $type . "' "; //check all products to type equals to cds
+    } else {
+        $category = $_GET['category'];
+        $query = "SELECT product_id,name, price FROM products WHERE type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
+    }
     $stmt = $connection->prepare($query);
     $stmt->execute();
     $results_shop = $stmt->get_result();
@@ -22,9 +27,19 @@ if (isset($_GET['type'])) {
     $type = $_GET['type'];
     $_SESSION['title'] = $type;
     if ($type == "all") { //if type chosen is all then choose all products without conditions on products
-        $query = "SELECT product_id,name, price FROM products";
+        if (!isset($_GET['category'])) {
+            $query = "SELECT product_id,name, price FROM products"; //check all products to type equals to cds
+        } else {
+            $category = $_GET['category'];
+            $query = "SELECT product_id,name, price FROM products WHERE category = '" . $category . "'"; //check all products to type equals to cds and category category
+        }
     } else { //chose products of type type
-        $query = "SELECT product_id,name, price FROM products WHERE type='" . $type . "' ";
+        if (!isset($_GET['category'])) {
+            $query = "SELECT product_id,name, price FROM products WHERE type='" . $type . "' "; //check all products to type equals to cds
+        } else {
+            $category = $_GET['category'];
+            $query = "SELECT product_id,name, price FROM products WHERE type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
+        }
     }
     $stmt = $connection->prepare($query);
     $stmt->execute();
