@@ -31,6 +31,17 @@ if (isset($_GET['type'])) {
     $results_shop = $stmt->get_result();
 }
 
+function UpdateCheck($type_current)
+{
+    if (isset($_GET['type'])) {
+        if ($_GET['type'] == $type_current) {
+            $_SESSION[$_GET['type'] . '_selected'] = "selected";
+        } else {
+            unset($_SESSION[$type_current . '_selected']);
+        }
+    }
+}
+
 //for the search btn
 // if (isset($GET['search'])) {
 //     $searchq = $_GET['search'];
@@ -151,25 +162,45 @@ $results_console_filter = $stmt_console_filter->get_result();
 
                             window.location = '?type=' + option.value;                        
                         ">
-                            <option value="all" <?php if (isset($_SESSION['all_selected'])) {
+                            <option value="all" <?php
+                                                UpdateCheck('all');
+                                                if (isset($_SESSION['all_selected'])) {
                                                     echo $_SESSION['all_selected'];
                                                 } ?>>All</option>
-                            <option value="cds" <?php if (isset($_SESSION['cds_selected'])) {
+                            <option value="cds" <?php
+                                                UpdateCheck('cds');
+
+                                                if (isset($_SESSION['cds_selected'])) {
                                                     echo $_SESSION['cds_selected'];
                                                 } ?>>CDs</option>
-                            <option value="consoles" <?php if (isset($_SESSION['consoles_selected'])) {
+                            <option value="consoles" <?php
+                                                        UpdateCheck('consoles');
+
+                                                        if (isset($_SESSION['consoles_selected'])) {
                                                             echo $_SESSION['consoles_selected'];
                                                         } ?>>Consoles</option>
-                            <option value="accessories" <?php if (isset($_SESSION['accessories_selected'])) {
+                            <option value="accessories" <?php
+                                                        UpdateCheck('accessories');
+
+                                                        if (isset($_SESSION['accessories_selected'])) {
                                                             echo $_SESSION['accessories_selected'];
                                                         } ?>>Accessories</option>
-                            <option value="phones" <?php if (isset($_SESSION['phones_selected'])) {
+                            <option value="phones" <?php
+                                                    UpdateCheck('phones');
+
+                                                    if (isset($_SESSION['phones_selected'])) {
                                                         echo $_SESSION['phones_selected'];
                                                     } ?>>Phones</option>
-                            <option value="cards" <?php if (isset($_SESSION['cards_selected'])) {
+                            <option value="cards" <?php
+                                                    UpdateCheck('cards');
+
+                                                    if (isset($_SESSION['cards_selected'])) {
                                                         echo $_SESSION['cards_selected'];
                                                     } ?>>Online cards</option>
-                            <option value="electronics" <?php if (isset($_SESSION['electronics_selected'])) {
+                            <option value="electronics" <?php
+                                                        UpdateCheck('electronics');
+
+                                                        if (isset($_SESSION['electronics_selected'])) {
                                                             echo $_SESSION['electronics_selected'];
                                                         } ?>>Electronics</option>
                         </select>
