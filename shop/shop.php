@@ -7,12 +7,24 @@ if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
 require_once('../php/shop_product_connection.php');
-require_once('../php/shop.php');
-//for cd's
-$query = "SELECT product_id,name, price FROM products WHERE category='XBOX Cd' or category='PS3 Cd' or category='PS4 Cd' or category='PS5 Cd' ";
-$stmt = $connection->prepare($query);
-$stmt->execute();
-$results = $stmt->get_result();
+include('../php/shop.php');
+
+if (!isset($_GET['type'])) {
+    $type = 'cds';
+    $_SESSION['title'] = $type;
+    $query = "SELECT product_id,name, price FROM products WHERE type='" . $type . "' ";
+    $stmt = $connection->prepare($query);
+    $stmt->execute();
+    $results_shop = $stmt->get_result();
+}
+if (isset($_GET['type'])) {
+    $type = $_GET['type'];
+    $_SESSION['title'] = $type;
+    $query = "SELECT product_id,name, price FROM products WHERE type='" . $type . "' ";
+    $stmt = $connection->prepare($query);
+    $stmt->execute();
+    $results_shop = $stmt->get_result();
+}
 
 //for the search btn
 // if (isset($GET['search'])) {
@@ -99,17 +111,13 @@ $results_console_filter = $stmt_console_filter->get_result();
     </div>
     <!-- ended with title page -->
 
-
-
-
-
     <!-- started with products options -->
     <div class="tabs">
-        <button class="active" data-cont=".cd" onclick="window.location.href = '../php/shop.php?type=cds'">CD's</button>
-        <button data-cont=".consoles">consoles</button>
-        <button data-cont=".cellphones">CellPhones</button>
-        <button data-cont=".offers">Offers</button>
-        <button data-cont=".others">Others</button>
+        <button class="active" data-cont=".cd" onclick="window.location = '?type=cds'">CD's</button>
+        <button data-cont=".consoles" onclick="window.location = '?type=consoles';">consoles</button>
+        <button data-cont=".cellphones" onclick="window.location = '?type=phones';">CellPhones</button>
+        <button data-cont=".offers" onclick="window.location ='?type=offers';">Offers</button>
+        <button data-cont=".others" onclick="window.location='?type=others';">Others</button>
     </div>
 
     <!-- start search button -->
@@ -214,11 +222,10 @@ $results_console_filter = $stmt_console_filter->get_result();
         <div class="cd reveal-by-x" style="display: block;">
             <div class="shop-products">
                 <div class="shop-products-title" id="shop-products">
-                    <h1>CD's</h1>
+                    <h1><?php echo $_SESSION['title']; ?></h1>
                 </div>
                 <?php
-                $results = GetContent();
-                while ($row = $results->fetch_assoc()) {
+                while ($row = $results_shop->fetch_assoc()) {
                     shop_cd_connection($row["product_id"], $row["name"], $row["price"]);
                 }
                 ?>
