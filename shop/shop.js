@@ -5,6 +5,8 @@ let tabsArray = Array.from(tabs);
 let divs = document.querySelectorAll(".content> div ");
 let divArray = Array.from(divs);
 
+
+
 tabsArray.forEach((element) => {
     element.addEventListener("click", function (e) {
         tabsArray.forEach((element) => {
@@ -27,3 +29,4 @@ function ShowFilters() {
     else
         filter.style.display = "block";
 }
+

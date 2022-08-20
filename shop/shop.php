@@ -40,13 +40,24 @@ $results_others = $stmt_others->get_result();
 
 
 //for the search btn
-if (isset($GET['search'])) {
-    $searchq = $_GET['search'];
-    $stmt_search = $connection->prepare("SELECT * FROM products WHERE name='$searchq'");
-    $stmt_search->execute();
-    $results_search = $stmt_search->get_result();
+// if (isset($GET['search'])) {
+//     $searchq = $_GET['search'];
+//     $stmt_search = $connection->prepare("SELECT * FROM products WHERE name='$searchq'");
+//     $stmt_search->execute();
+//     $results_search = $stmt_search->get_result();
 
-}
+// }
+
+//for filters cd
+$query_filter_cd = "SELECT product_id,name, price FROM products WHERE category='XBOX Cd' or category='PS3 Cd' or category='PS4 Cd' or category='PS5 Cd' ";
+$stmt_filter_cd = $connection->prepare($query_filter_cd);
+$stmt_filter_cd->execute();
+$results_filter_cd = $stmt_filter_cd->get_result();
+//for consoles filter
+$query_console_filter = "SELECT product_id,name, price FROM products WHERE category='PS3' or category='PS4' or category='PS5'";
+$stmt_console_filter = $connection->prepare($query_console_filter);
+$stmt_console_filter->execute();
+$results_console_filter = $stmt_console_filter->get_result();
 
 
 ?>
@@ -163,7 +174,6 @@ if (isset($GET['search'])) {
                 <label for="category">
                     <button>
                         <select name="category" id="category">
-                            <option value="All">All</option>
                             <option value="action">Action</option>
                             <option value="gaming">Gaming</option>
                             <option value="strategy">Strategy</option>
@@ -171,7 +181,6 @@ if (isset($GET['search'])) {
                             <option value="PS3">PS3</option>
                             <option value="PS4">PS4</option>
                             <option value="PS5">PS5</option>
-                            <option value="Nintendo">Nintendo</option>
                             <option value="XBox">XBox</option>
                             <option value="iphone">IPhone</option>
                             <option value="Samsung">Samsung</option>
@@ -226,23 +235,7 @@ if (isset($GET['search'])) {
         <h4 class="results-title">Showing 1-4 of 4 results</h4>
     </div>
 
-    <!-- starting filters -->
-    <div class="content">
-        <!-- start first tab -->
-        <div class="all_cd reveal-by-x" style="display: block;">
-            <div class="shop-products">
-                <div class="shop-products-title" id="shop-products">
-                    <h1> All CD's</h1>
-                </div>
-                <?php
-                while ($row = $results->fetch_assoc()) {
-                    shop_cd_connection($row["product_id"], $row["name"], $row["price"]);
-                }
-                ?>
-            </div>
-        </div>
-        <!-- end first tab -->
-    </div>
+
 
 
 
