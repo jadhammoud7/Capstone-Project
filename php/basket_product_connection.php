@@ -18,9 +18,13 @@ function basket_product_connection($product_id, $name, $price, $quantity)
                             </div>
                         </div>
                     </td>
-                    <form action = \"../php/basket.php?productBasketID=$product_id&customerBasketID=$_SESSION[logged_id]\" method = \"GET\">
+                    <form action = \"../php/update_basket_quantity.php?productID=$product_id\" method = \"POST\">  
                         <td>
-                            <input type=\"number\" name=\"quantity\" min=\"0\" value=\"$quantity\" id=\"quantity_of_each_product\">
+                            <input type=\"number\" name=\"quantity\" min=\"0\" value=\"$quantity\" id=\"quantity_of_each_product\" onChange=\"<?php 
+                                
+                            
+                            
+                            ?>\" \">
                         </td>
                     </form>
                     <td id=\"get_price\">$price$</td>
@@ -35,7 +39,7 @@ function basket_empty()
     $element = "
     <div class=\"empty-par\">
         <h2>Your shopping basket is empty</h2>
-        <button onclick=\"window.location='../shop/shop.php';\" value=\"Return To Shop Page\">Return To Shop Page</button>
+        <button onclick=\"window.location='../shop/shop.php';\" title=\"Return to Shop to fill your shopping basket\" value=\"Return To Shop Page\">Return To Shop Page</button>
     </div>
     ";
 
