@@ -156,7 +156,13 @@ $results_console_filter = $stmt_console_filter->get_result();
                 <h2>Category</h2>
                 <label for="category">
                     <button>
-                        <select name="category" id="category">
+                        <select name="category" id="category" onchange="
+                            var select = document.getElementById('category');
+                            var option = select.options[select.selectedIndex];
+
+                            window.location = window.location.href + '&category=' + option.value;
+                        
+                        ">
                             <option value="action">Action</option>
                             <option value="gaming">Gaming</option>
                             <option value="strategy">Strategy</option>
