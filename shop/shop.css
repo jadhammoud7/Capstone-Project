@@ -120,6 +120,10 @@ h2 {
   -webkit-animation: fadeEffect 3s;
   animation: fadeEffect 3s;
 }
+.all_cd{
+  -webkit-animation: fadeEffect 3s;
+  animation: fadeEffect 3s;
+}
 
 @-webkit-keyframes fadeEffect {
   from {

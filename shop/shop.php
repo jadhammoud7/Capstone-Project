@@ -226,6 +226,30 @@ if (isset($GET['search'])) {
         <h4 class="results-title">Showing 1-4 of 4 results</h4>
     </div>
 
+    <!-- starting filters -->
+    <div class="content">
+        <!-- start first tab -->
+        <div class="all_cd reveal-by-x" style="display: block;">
+            <div class="shop-products">
+                <div class="shop-products-title" id="shop-products">
+                    <h1> All CD's</h1>
+                </div>
+                <?php
+                while ($row = $results->fetch_assoc()) {
+                    shop_cd_connection($row["product_id"], $row["name"], $row["price"]);
+                }
+                ?>
+            </div>
+        </div>
+        <!-- end first tab -->
+    </div>
+
+
+
+
+
+    
+
     <div class="content">
         <!-- start first tab -->
         <div class="cd reveal-by-x" style="display: block;">
