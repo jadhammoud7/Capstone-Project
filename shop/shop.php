@@ -180,7 +180,7 @@ $results_console_filter = $stmt_console_filter->get_result();
                     $row_search=mysqli_fetch_assoc($results_search);
                     echo $row_search['category'];
                 }else{
-                    echo "not such product found";
+                    echo "<div style=\"color:red\">NO such product found</div>";
                 }
             }
             ?>
