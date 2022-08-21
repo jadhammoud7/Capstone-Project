@@ -10,13 +10,14 @@ require_once('../php/shop_product_connection.php');
 
 //if no get request of type was sent meaning starter
 if (!isset($_GET['type'])) {
+    $query = "SELECT product_id, name, price FROM products";
     $type = 'cds'; //display cds as a starter
     $_SESSION['title'] = $type; //for the title of the div 
-    if (!isset($_GET['category'])) {
-        $query = "SELECT product_id,name, price FROM products WHERE type='" . $type . "' "; //check all products to type equals to cds
-    } else {
+    if (!isset($_GET['category'])) { //if no category filter was set
+        $query = $query . " WHERE type='" . $type . "' "; //check all products to type equals to cds
+    } else { //if a category filter was sent while no filter for type was sent
         $category = $_GET['category'];
-        $query = "SELECT product_id,name, price FROM products WHERE type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
+        $query = $query . " WHERE type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
     }
     $stmt = $connection->prepare($query);
     $stmt->execute();
@@ -24,21 +25,20 @@ if (!isset($_GET['type'])) {
 }
 //if a get request of type was sent
 if (isset($_GET['type'])) {
+    $query = "SELECT product_id, name, price FROM products";
     $type = $_GET['type'];
     $_SESSION['title'] = $type;
     if ($type == "all") { //if type chosen is all then choose all products without conditions on products
-        if (!isset($_GET['category'])) {
-            $query = "SELECT product_id,name, price FROM products"; //check all products to type equals to cds
-        } else {
+        if (isset($_GET['category'])) {
             $category = $_GET['category'];
-            $query = "SELECT product_id,name, price FROM products WHERE category = '" . $category . "'"; //check all products to type equals to cds and category category
+            $query = $query . " WHERE category = '" . $category . "'"; //check all products to type equals to cds and category category
         }
     } else { //chose products of type type
         if (!isset($_GET['category'])) {
-            $query = "SELECT product_id,name, price FROM products WHERE type='" . $type . "' "; //check all products to type equals to cds
+            $query = $query . " WHERE type='" . $type . "' "; //check all products to type equals to cds
         } else {
             $category = $_GET['category'];
-            $query = "SELECT product_id,name, price FROM products WHERE type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
+            $query = $query . " WHERE type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
         }
     }
     $stmt = $connection->prepare($query);
@@ -185,28 +185,28 @@ $results_console_filter = $stmt_console_filter->get_result();
                     <label for="type">
                         <select name="type" id="type" onchange="
                             var select = document.getElementById('type');
-                            var option = select.options[select.selectedIndex];
+                            var option = select.options[select.selectedIndex];//get the index of the selected option in dropdown type
 
-                            var current_url = window.location.href;
+                            var current_url = window.location.href;//get current url
                             
-                            window.location = '?type=' + option.value;
+                            window.location = '?type=' + option.value; //add to url type and option selected value
 
                             var select_category = document.getElementById('category');
-                            var option_category = select_category.options[select_category.selectedIndex];
+                            var option_category = select_category.options[select_category.selectedIndex]; //get the index of the selected option in dropdon category
 
-                            var current_url = window.location.href;
+                            var current_url = window.location.href; //get current url
 
-                            if(!current_url.includes('category')){
+                            if(!current_url.includes('category')){//if the url does not contain category, then add type
                                 window.location = '?type=' + option.value;
                             }
-                            else{
+                            else{//if the url contains category, then if type was selected, enter the current type before category selected before
                                 window.location = '?type=' + option.value + '&category=' + option_category.value;
                             }
                                                  
                         ">
                             <option value="all" <?php
                                                 UpdateTypeSelect('all');
-                                                if (isset($_SESSION['all_selected'])) {
+                                                if (isset($_SESSION['all_selected'])) { //check for session all selected, if isset then value is selected, so that the option value for that remains first in the dropdown list so user can know the last filter used
                                                     echo $_SESSION['all_selected'];
                                                 } ?>>All</option>
                             <option value="cds" <?php
@@ -255,24 +255,24 @@ $results_console_filter = $stmt_console_filter->get_result();
                     <button>
                         <select name="category" id="category" onchange="
                             var select = document.getElementById('category');
-                            var option = select.options[select.selectedIndex];
+                            var option = select.options[select.selectedIndex];//get option selected from dropdown category
 
                             var select_type = document.getElementById('type');
-                            var option_type = select_type.options[select_type.selectedIndex];
+                            var option_type = select_type.options[select_type.selectedIndex];//get option selected from dropdown type
 
-                            var current_url = window.location.href;
+                            var current_url = window.location.href;//get current url
                             
-                            if(!current_url.includes('?type')){
+                            if(!current_url.includes('?type')){//if url does not contain type, meaning that filter category is set without type, then category is the first get filter
                                 window.location = '?category=' + option.value;
                             }
-                            else{
+                            else{//else if there is type filter, then category is added after it
                                 window.location = '?type=' + option_type.value + '&category=' + option.value;
                             }
                         
                         ">
                             <option value="action" <?php
-                                                    UpdateCategorySelect('action');
-                                                    if (isset($_SESSION['action_selected'])) {
+                                                    UpdateCategorySelect('action'); //set the session to check which filter was set last
+                                                    if (isset($_SESSION['action_selected'])) { //if there is session, then its value will be selected so that the last selected filter is shown in the dropdown list first
                                                         echo $_SESSION['action_selected'];
                                                     } ?>>Action</option>
                             <option value="gaming" <?php

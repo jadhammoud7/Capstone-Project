@@ -1,26 +1,26 @@
 <?php
 
-    session_start();
-    include("../php/connection.php");
+session_start();
+include("../php/connection.php");
 
-    if(!isset($_SESSION['logged_bool'])){
-        header("Location: ../login/login.php");
-    }
+if (!isset($_SESSION['logged_bool'])) {
+    header("Location: ../login/login.php");
+}
 
-    require_once('../php/comment_connection.php');
+require_once('../php/comment_connection.php');
 
 
-    $query = "SELECT username, comment FROM comments ORDER BY RAND() LIMIT 3;";
-    $stmt =$connection->prepare($query);
-    $stmt->execute();
-    $results = $stmt->get_result();
+$query = "SELECT username, comment FROM comments ORDER BY RAND() LIMIT 3;";
+$stmt = $connection->prepare($query);
+$stmt->execute();
+$results = $stmt->get_result();
 
-    //get all products(some of them )
-    require_once("../php/shop_product_connection.php");
-    $query_allproducts = "SELECT product_id,name, price FROM products ORDER BY RAND() LIMIT 8;";
-    $stmt_allproducts =$connection->prepare($query_allproducts);
-    $stmt_allproducts->execute();
-    $results_allproducts = $stmt_allproducts->get_result();
+//get all products(some of them )
+require_once("../php/shop_product_connection.php");
+$query_allproducts = "SELECT product_id,name, price FROM products ORDER BY RAND() LIMIT 8;";
+$stmt_allproducts = $connection->prepare($query_allproducts);
+$stmt_allproducts->execute();
+$results_allproducts = $stmt_allproducts->get_result();
 
 ?>
 
@@ -49,32 +49,25 @@
             <a href="" class="nav-branding">Newbie Gamers.</a>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page"> <i
-                            class="fa fa-home fa-lg"></i></a>
+                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page"> <i class="fa fa-home fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page"><i
-                            class="fa fa-shopping-cart fa-lg"></i></a>
+                    <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page"><i class="fa fa-shopping-cart fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../appointments/appointments.php" class="appointments_menu nav-link"
-                        title="Appointments"><i class="fa fa-wrench fa-lg"></i></a>
+                    <a href="../appointments/appointments.php" class="appointments_menu nav-link" title="Appointments"><i class="fa fa-wrench fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page"><i
-                            class="fa fa-phone fa-lg"></i></a>
+                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page"><i class="fa fa-phone fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page"><i
-                            class="fa fa-book fa-lg"></i></a>
+                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page"><i class="fa fa-book fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket"><i
-                            class="fa fa-shopping-basket fa-lg"></i></a>
+                    <a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket"><i class="fa fa-shopping-basket fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account"><i
-                            class="fa fa-user fa-lg profile-nav"></i></a>
+                    <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account"><i class="fa fa-user fa-lg profile-nav"></i></a>
                 </li>
             </ul>
             <div class="hamburger">
@@ -89,8 +82,7 @@
 
     <!-- start slideshow -->
     <div class="slideshow-container reveal-by-y">
-        <div class="mySlides fade"
-            title="Welcome to Newbies Gamers. We sell manu consoles and electronics for your games and more">
+        <div class="mySlides fade" title="Welcome to Newbies Gamers. We sell manu consoles and electronics for your games and more">
             <div class="numbertext">1 / 3</div>
             <img src="../images/game-store.jpg" class="home-img" title="Game Store Image">
             <div class="text">
@@ -99,15 +91,13 @@
             </div>
         </div>
 
-        <div class="mySlides fade"
-            title="We offer phones and many accessories related to them such as charges and more.">
+        <div class="mySlides fade" title="We offer phones and many accessories related to them such as charges and more.">
             <div class="numbertext">2 / 3</div>
             <img src="../images/image2.jpg" class="home-img" title="Phone Accessories Image">
             <div class="text">We offer phones and many accessories related to them such as chargers and more</div>
         </div>
 
-        <div class="mySlides fade"
-            title="Enjoy playing your games by buying all online playing requirements such as PS Plus">
+        <div class="mySlides fade" title="Enjoy playing your games by buying all online playing requirements such as PS Plus">
             <div class="numbertext">3 / 3</div>
             <img src="../images/image3.jpg" class="home-img" title="Online playing cards image">
             <div class="text">Enjoy playing your games by buying all online playing requirements such as PS Plus</div>
@@ -123,7 +113,7 @@
     <!-- end slideshow -->
 
 
-    
+
     <!-- starting features here -->
     <div class="features-title" id="features">
         <h1>Our Specialists & Features</h1>
@@ -138,15 +128,13 @@
             </div>
         </div>
         <div class="feature-part reveal-by-y">
-            <img src="../images/smartphone.png" class="feature-icon" id="feature_2"
-                title="We sell good quality and prices of the newest phones including iphone, samsung and more">
+            <img src="../images/smartphone.png" class="feature-icon" id="feature_2" title="We sell good quality and prices of the newest phones including iphone, samsung and more">
             <div>
                 <p>We sell good quality and prices of the newest phones including iphone, samsung and more</p>
             </div>
         </div>
         <div class="feature-part reveal-by-y" id="feature_3">
-            <img src="../images/phone-charger.png" class="feature-icon"
-                title="All accessories and materials needed for your phone, such as chargers and cards are found in here">
+            <img src="../images/phone-charger.png" class="feature-icon" title="All accessories and materials needed for your phone, such as chargers and cards are found in here">
             <div>
                 <p>All accessories and materials needed for your phone, such as chargers and cards are found in here</p>
             </div>
@@ -174,8 +162,7 @@
             <h3>Know More About Us</h3>
             <p class="about-par">We are a gaming store that sell all gaming essentials, from Playstations, to gaming
                 computers and much more. We are one of the top gaming shops in Lebanon</p>
-            <a href="../aboutus/about-us.php" class="about-us-button"
-                title="Go To About Us Page to see more info about our shop">Go To About Us</a>
+            <a href="../aboutus/about-us.php" class="about-us-button" title="Go To About Us Page to see more info about our shop">Go To About Us</a>
             <p class="about-us-location">Our Location:</p>
             <img src="../images/placeholder.png" alt="Location logo" class="location-logo">Beirut, Lebanon
         </div>
@@ -196,8 +183,7 @@
                     we also offer many kinds of works and appointments that enhances our customers' trust with us, such
                     as maintenance and repair works for your laptops, consoles and more. All our works are done by
                     experts and specialists in their domain, that makes you feel well trusted and comforted.</p>
-                <a href="../appointments/appointments.php" class="appointments-button"
-                    title="Go To Appointments to book for a service work with us">Book for appointments</a>
+                <a href="../appointments/appointments.php" class="appointments-button" title="Go To Appointments to book for a service work with us">Book for appointments</a>
             </div>
         </div>
         <!-- ended appointments here -->
@@ -213,18 +199,15 @@
                 <p>If you have any concerns, thoughts or opinions you want to share, don't hesitate to contact us and
                     share your thoughts</p>
                 <p>Visit our contact us page to write your comments:</p>
-                <a href="../contactus/contactus.php" class="contact-us-button"
-                    title="Go To Our contact us page to share your thoughts. We will see your opinions and will take it into consideration">Go
+                <a href="../contactus/contactus.php" class="contact-us-button" title="Go To Our contact us page to share your thoughts. We will see your opinions and will take it into consideration">Go
                     To Contact Us</a>
                 <p>You can also contact us on other platforms:</p>
                 <div class="align-contact">
-                    <img src="../images/email.png" alt="Email Logo" title="Contact us by this email"
-                        class="contact-us-images">
+                    <img src="../images/email.png" alt="Email Logo" title="Contact us by this email" class="contact-us-images">
                     <p>Email: newbies_gamers@gmail.com</p>
                 </div>
                 <div class="align-contact">
-                    <img src="../images/telephone.png" alt="Phone Logo"
-                        title="You can call us or chat from whatsapp by this number" class="contact-us-images">
+                    <img src="../images/telephone.png" alt="Phone Logo" title="You can call us or chat from whatsapp by this number" class="contact-us-images">
                     <p>Phone Number: +961 01 111 111</p>
                 </div>
             </div>
@@ -238,10 +221,10 @@
             <h1>Our Products</h1>
         </div>
         <div class="shop-products reveal-by-y">
-        <?php
-        while($row_allproducts = $results_allproducts->fetch_assoc() ){
-            shop_allproducts_connection($row_allproducts["product_id"],$row_allproducts["name"], $row_allproducts["price"]); 
-        }
+            <?php
+            while ($row_allproducts = $results_allproducts->fetch_assoc()) {
+                shop_connection($row_allproducts["product_id"], $row_allproducts["name"], $row_allproducts["price"]);
+            }
             ?>
         </div>
         <!-- end of products -->
@@ -256,15 +239,15 @@
         <div class="test-back">
             <img class="test" src="../images/right-quotation-mark.png" alt="Testimonial Logo">
             <?php
-                while($row = $results->fetch_assoc() ){
-                    comment_connection($row["username"], $row["comment"]); 
-                }
+            while ($row = $results->fetch_assoc()) {
+                comment_connection($row["username"], $row["comment"]);
+            }
             ?>
         </div>
         <!-- end of testimonials -->
 
 
-        
+
         <!-- started return to top button -->
         <button onclick="ReturnToTop()" id="TopBtn" title="Return to Top"><i class="fa fa-arrow-up"></i></button>
         <!-- ended return to top button -->
@@ -280,23 +263,19 @@
                                 <h3>Newbies Gamers Home</h3>
                             </li>
                             <li>
-                                <a href="../home-page/home-page.php#features"
-                                    title="View Our specialists and features">Our Specialists & Features</a>
+                                <a href="../home-page/home-page.php#features" title="View Our specialists and features">Our Specialists & Features</a>
                             </li>
                             <li>
                                 <a href="../home-page/home-page.php#about-us" title="Know more about us">About Us</a>
                             </li>
                             <li>
-                                <a href="../home-page/home-page.php#contact-us"
-                                    title="Contact us for any enquiries or thoughts">Contact Us</a>
+                                <a href="../home-page/home-page.php#contact-us" title="Contact us for any enquiries or thoughts">Contact Us</a>
                             </li>
                             <li>
-                                <a href="../home-page/home-page.php#shop-products"
-                                    title="Take a look at our products">Our Products</a>
+                                <a href="../home-page/home-page.php#shop-products" title="Take a look at our products">Our Products</a>
                             </li>
                             <li>
-                                <a href="../home-page/home-page.php#testimonials"
-                                    title="See what our customers said about our service">Our Customers' opinions</a>
+                                <a href="../home-page/home-page.php#testimonials" title="See what our customers said about our service">Our Customers' opinions</a>
                             </li>
                         </ol>
                     </div>
@@ -308,13 +287,11 @@
                                 <h3>Newbies Gamers Shop</h3>
                             </li>
                             <li>
-                                <a href="../shop/shop.php"
-                                    title="View all available products in Newbies Gamers and fill your basket to buy">Shop
+                                <a href="../shop/shop.php" title="View all available products in Newbies Gamers and fill your basket to buy">Shop
                                     Now</a>
                             </li>
                             <li>
-                                <a href="../basket/basket.php" title="View your shopping basket"><i
-                                        class="fa fa-shopping-basket"></i>View your shopping basket</a>
+                                <a href="../basket/basket.php" title="View your shopping basket"><i class="fa fa-shopping-basket"></i>View your shopping basket</a>
                             </li>
                         </ol>
                     </div>
@@ -379,8 +356,7 @@
                                 <h3>Contact Us</h3>
                             </li>
                             <li>
-                                <a href="../contactus/contactus.php"
-                                    title="Share your thoughts and concerns to us">Share your thoughts</a>
+                                <a href="../contactus/contactus.php" title="Share your thoughts and concerns to us">Share your thoughts</a>
                             </li>
                             <li>
                                 <i class="fa fa-envelope" title="Our email to contact us"></i>newbies_gamers@gmail.com
@@ -398,16 +374,13 @@
                                 <h3>Follow Us on Our Socials</h3>
                             </li>
                             <li>
-                                <a href="https://www.facebook.com" title="Newbies Gamers facebook account link"><i
-                                        class="fa fa-facebook"></i>Facebook</a>
+                                <a href="https://www.facebook.com" title="Newbies Gamers facebook account link"><i class="fa fa-facebook"></i>Facebook</a>
                             </li>
                             <li>
-                                <a href="https://www.instagram.com" title="Newbies Gamers instagram account link"><i
-                                        class="fa fa-instagram"></i>Instagram</a>
+                                <a href="https://www.instagram.com" title="Newbies Gamers instagram account link"><i class="fa fa-instagram"></i>Instagram</a>
                             </li>
                             <li>
-                                <a href="https://www.twitter.com" title="Newbies Gamers twitter account link"><i
-                                        class="fa fa-twitter"></i>Twitter</a>
+                                <a href="https://www.twitter.com" title="Newbies Gamers twitter account link"><i class="fa fa-twitter"></i>Twitter</a>
                             </li>
                         </ol>
                     </div>
@@ -419,14 +392,15 @@
         <script src="../main/main.js"></script>
 
         <script>
-            window.onunload=myFunction;
+            window.onunload = myFunction;
+
             function myFunction() {
                 <?php
                 session_start();
-                
+
                 unset($_SESSION["logged_user"]);
                 echo ($_SESSION["logged_user"]);
-                    ?>
+                ?>
             }
         </script>
 </body>
