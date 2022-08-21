@@ -14,7 +14,13 @@ if (!isset($_GET['type'])) {
     $type = 'cds'; //display cds as a starter
     $_SESSION['title'] = $type; //for the title of the div 
     if (!isset($_GET['category'])) { //if no category filter was set
-        $query = $query . " WHERE type='" . $type . "' "; //check all products to type equals to cds
+        if(!isset($_GET['newness'])){
+            $query = $query . " WHERE type='" . $type . "' "; //check all products to type equals to cds
+        }else{
+            $newness = $_GET['newness'];
+            $query = $query . " WHERE type='" . $type . "' AND category = '" . $newness . "'"; //check all products to type equals to cds and category category
+       
+        }
     } else { //if a category filter was sent while no filter for type was sent
         $category = $_GET['category'];
         $query = $query . " WHERE type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
