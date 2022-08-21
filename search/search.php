@@ -14,6 +14,16 @@ require_once('../php/shop_product_connection.php');
 // $stmt_search->execute();
 // $results_search = $stmt_search->get_result();
 
+
+//for the search btn
+if (isset($_POST['search'])) {
+    $searchq = $_POST['search'];
+    $stmt_search = $connection->prepare("SELECT * FROM products WHERE name LIKE '%$searchq%'");
+    $stmt_search->execute();
+    $results_search = $stmt_search->get_result();
+}
+
+
 ?>
 
 <head>
@@ -78,21 +88,21 @@ require_once('../php/shop_product_connection.php');
     </div>
     <!-- ended with title page -->
     <div class="shop-products reveal-by-y">
-            <?php
-            require_once("../php/shop_product_connection.php");
-            if(isset($results_search)){
-                while($row_search = $results_search->fetch_assoc()){
-                    shop_connection($row_search['product_id'],$row_search['name'],$row_search['price']);
-                }
+        <?php
+        require_once("../php/shop_product_connection.php");
+        if (isset($results_search)) {
+            while ($row_search = $results_search->fetch_assoc()) {
+                shop_connection($row_search['product_id'], $row_search['name'], $row_search['price']);
             }
+        }
 
-            if($results_search==false){
-                $not_found="<div style=\"color:red;\" >Data Not found</div>";
-                echo "<div style=\"color:red\">Data Not found</div>";
-            }
+        if ($results_search == false) {
+            $not_found = "<div style=\"color:red;\" >Data Not found</div>";
+            echo "<div style=\"color:red\">Data Not found</div>";
+        }
         ?>
-        </div>
-    
+    </div>
+
 
     <!-- started return to top button -->
     <button onclick="ReturnToTop()" id="TopBtn" title="Return to Top"><i class="fa fa-arrow-up"></i></button>

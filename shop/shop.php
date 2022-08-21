@@ -75,19 +75,6 @@ function UpdateCategorySelect($category_current) //this function is called to ke
     }
 }
 
-//for the search btn
-if (isset($_POST['search'])) {
-    $searchq = $_POST['search'];
-    $stmt_search = $connection->prepare("SELECT * FROM products WHERE name LIKE '%$searchq%'");
-    $stmt_search->execute();
-    $results_search = $stmt_search->get_result();
-
-}
-
-
-
-
-
 //for filters cd
 $query_filter_cd = "SELECT product_id,name, price FROM products WHERE category='XBOX Cd' or category='PS3 Cd' or category='PS4 Cd' or category='PS5 Cd' ";
 $stmt_filter_cd = $connection->prepare($query_filter_cd);
