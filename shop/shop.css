@@ -54,16 +54,14 @@ h2 {
 
 .filters {
   text-align: center;
-  height: 200px;
+  flex-direction: row;
   -webkit-animation: fadeEffect 3s;
   animation: fadeEffect 3s;
 }
 
 .filters div {
-  position: relative;
   margin: 50px;
-  float: left;
-  height: 100px;
+  width: 33%;
 }
 
 .shop-products {
@@ -182,26 +180,12 @@ h2 {
     float: right;
     width: 25%;
   }
-
-  .filters {
-    height: 400px;
-  }
-}
-
-@media screen and (max-width:1500px) {
-  .filters {
-    height: 400px;
-  }
 }
 
 @media screen and (max-width:1090px) {
   .search-container {
     float: right;
     width: 40%;
-  }
-
-  .filters {
-    height: 400px;
   }
 }
 
@@ -210,17 +194,9 @@ h2 {
     float: right;
     width: 50%;
   }
-
-  .filters {
-    height: 400px;
-  }
 }
 
 @media screen and (max-width:845px) {
-  .filters {
-    height: 400px;
-  }
-
   .filters div {
     margin: 20px;
   }
@@ -239,10 +215,6 @@ h2 {
     width: 50%;
   }
 
-  .filters {
-    height: 300px;
-  }
-
   .filters div {
     width: 25%;
   }
@@ -253,6 +225,14 @@ h2 {
     right: 10%;
     width: 75%;
   }
+
+  .filters {
+    flex-direction: column !important;
+  }
+
+  .filters div {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 420px) {
@@ -261,14 +241,8 @@ h2 {
     width: 75%;
   }
 
-  .filters {
-    margin: 0;
-    height: 400px;
-    text-align: center;
-  }
-
   .filters div {
-    width: 30%;
+    width: 100%;
   }
 }
 
@@ -276,6 +250,10 @@ h2 {
   .search-container {
     right: 10%;
     width: 75%;
+  }
+
+  .filters div {
+    width: 100%;
   }
 }
 
