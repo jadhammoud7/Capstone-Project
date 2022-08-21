@@ -240,7 +240,7 @@
         <div class="shop-products reveal-by-y">
         <?php
         while($row_allproducts = $results_allproducts->fetch_assoc() ){
-            shop_allproducts_connection($row_allproducts["product_id"],$row_allproducts["name"], $row_allproducts["price"]); 
+            shop_connection($row_allproducts["product_id"],$row_allproducts["name"], $row_allproducts["price"]); 
         }
             ?>
         </div>
