@@ -326,7 +326,7 @@ $results_console_filter = $stmt_console_filter->get_result();
                 </label>
             </div>
             <div>
-                <h2>Sort By Newness</h2>
+                <h2>Sort By</h2>
                 <label for="newness">
                     <button>
                         <select name="newness" id="newness">
@@ -339,36 +339,22 @@ $results_console_filter = $stmt_console_filter->get_result();
                                                     UpdateCategorySelect('newest');
                                                     if (isset($_SESSION['newest_selected'])) {
                                                         echo $_SESSION['newest_selected'];
-                                                    } ?>>By newest</option>
-                            <option value="oldest" <?php
-                                                    UpdateCategorySelect('oldest');
-                                                    if (isset($_SESSION['oldest_selected'])) {
-                                                        echo $_SESSION['oldest_selected'];
-                                                    } ?>>By oldest</option>
-                        </select>
-                    </button>
-                </label>
-            </div>
-            <div>
-                <h2>Sort By Popularity</h2>
-                <label for="popularity">
-                    <button>
-                        <select name="popularity" id="popularity">
-                            <option value="none">None</option>
-                            <option value="highest">By Highest</option>
-                            <option value="lowest">By Lowest</option>
-                        </select>
-                    </button>
-                </label>
-            </div>
-            <div>
-                <h2>Sort By Price</h2>
-                <label for="price">
-                    <button>
-                        <select name="price" id="price">
-                            <option value="none">None</option>
-                            <option value="highest">By Highest</option>
-                            <option value="lowest">By Lowest</option>
+                                                    } ?>>Newness</option>
+                            <option value="highest-price" <?php
+                                                            UpdateCategorySelect('oldest');
+                                                            if (isset($_SESSION['oldest_selected'])) {
+                                                                echo $_SESSION['oldest_selected'];
+                                                            } ?>>Price - highest</option>
+                            <option value="lowest-price" <?php
+                                                            UpdateCategorySelect('oldest');
+                                                            if (isset($_SESSION['oldest_selected'])) {
+                                                                echo $_SESSION['oldest_selected'];
+                                                            } ?>>Price - lowest</option>
+                            <option value="popularity" <?php
+                                                        UpdateCategorySelect('oldest');
+                                                        if (isset($_SESSION['oldest_selected'])) {
+                                                            echo $_SESSION['oldest_selected'];
+                                                        } ?>>Popularity</option>
                         </select>
                     </button>
                 </label>

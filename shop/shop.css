@@ -53,8 +53,7 @@ h2 {
 }
 
 .filters {
-  display: flex;
-  justify-content: center;
+  text-align: center;
   height: 200px;
   -webkit-animation: fadeEffect 3s;
   animation: fadeEffect 3s;
@@ -153,7 +152,7 @@ h2 {
   float: right;
 }
 
-.results-title{
+.results-title {
   font-weight: bold;
   margin-left: 50px;
   margin-top: 40px;
@@ -161,7 +160,7 @@ h2 {
   color: royalblue;
 }
 
-.shop-title{
+.shop-title {
   font-weight: bolder;
   margin: 50px;
   text-decoration: underline 5px;
@@ -205,6 +204,7 @@ h2 {
     height: 400px;
   }
 }
+
 @media screen and (max-width:890px) {
   .search-container {
     float: right;
@@ -278,33 +278,41 @@ h2 {
     width: 75%;
   }
 }
+
 /* start of adding text when hover on icon */
 .nav-item .home_menu:hover i::after {
-  content:"Home";
+  content: "Home";
   margin-left: 5px;
 }
+
 .nav-item .shop_menu:hover i::after {
-  content:"Shop";
+  content: "Shop";
   margin-left: 5px;
 }
+
 .nav-item .appointments_menu:hover i::after {
-  content:"Appointments";
+  content: "Appointments";
   margin-left: 5px;
 }
+
 .nav-item .contact_menu:hover i::after {
-  content:"Contact";
+  content: "Contact";
   margin-left: 5px;
 }
+
 .nav-item .about_menu:hover i::after {
-  content:"About us";
+  content: "About us";
   margin-left: 5px;
 }
+
 .nav-item .basket_menu:hover i::after {
-  content:"Basket";
+  content: "Basket";
   margin-left: 5px;
 }
+
 .nav-item .myaccount_menu:hover i::after {
-  content:"My Account";
+  content: "My Account";
   margin-left: 5px;
 }
+
 /* end of adding text when hover on icon */
