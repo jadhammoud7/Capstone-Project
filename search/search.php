@@ -6,7 +6,13 @@ session_start();
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
+require_once('../php/shop_product_connection.php');
 
+$result_id_search=$_SESSION['getID'];
+$query_search = "SELECT product_id, name, price FROM products WHERE product_id= '" . $result_id_search . "'";
+$stmt_search = $connection->prepare($query_search);
+$stmt_search->execute();
+$results_search = $stmt_search->get_result();
 
 ?>
 
@@ -73,8 +79,8 @@ if (!isset($_SESSION['logged_bool'])) {
     <!-- ended with title page -->
     <div class="shop-products reveal-by-y">
             <?php
-            while ($row_allproducts = $results_allproducts->fetch_assoc()) {
-                shop_connection($row_allproducts["product_id"], $row_allproducts["name"], $row_allproducts["price"]);
+            while ($row_search = $results_search->fetch_assoc()) {
+                shop_connection($row_search["product_id"], $row_search["name"], $row_search["price"]);
             }
         ?>
         </div>

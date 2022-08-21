@@ -183,6 +183,7 @@ $results_console_filter = $stmt_console_filter->get_result();
                     require_once("../php/shop_product_connection.php");
                     while($row_search=mysqli_fetch_assoc($results_search)){
                         $_SESSION['getID']=$row_search['product_id'];
+                        header("Location: ../search/search.php");
                     }
                 }else{
                     $not_found="<div style=\"color:red;\" >Data Not found</div>";
