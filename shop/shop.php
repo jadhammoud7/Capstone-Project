@@ -78,7 +78,7 @@ function UpdateCategorySelect($category_current) //this function is called to ke
 //for the search btn
 if (isset($_GET['search'])) {
     $searchq = $_GET['search'];
-    $stmt_search = $connection->prepare("SELECT * FROM products WHERE name='$searchq'");
+    $stmt_search = $connection->prepare("SELECT * FROM products WHERE name LIKE '%$searchq%'");
     $stmt_search->execute();
     $results_search = $stmt_search->get_result();
 
@@ -174,17 +174,19 @@ $results_console_filter = $stmt_console_filter->get_result();
         <div class="search-container">
             <input type="text" placeholder="Search for a product.." name="search">
             <button type="submit" name="submit_search"><i class="fa fa-search"></i></button>
-            <?php
+        </div>
+        <?php
             if ($results_search) {
                 if(mysqli_num_rows($results_search)>0){
-                    $row_search=mysqli_fetch_assoc($results_search);
-                    echo $row_search['category'];
+                    while($row_search=mysqli_fetch_assoc($results_search)){
+                        // echo $row_search['name'], " ";
+                    }
                 }else{
-                    echo "<div style=\"color:red\">NO such product found</div>";
+                    $not_found="<div style=\"color:red;\" >Data Not found</div>";
+                    echo "<div style=\"color:red\">Data Not found</div>";
                 }
             }
-            ?>
-        </div>
+            ?>  
     </form>
     <!-- end search button -->
 
