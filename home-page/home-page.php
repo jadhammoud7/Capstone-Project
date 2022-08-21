@@ -221,18 +221,16 @@ $results_allproducts = $stmt_allproducts->get_result();
             <h1>Our Products</h1>
         </div>
         <div class="shop-products reveal-by-y">
-<<<<<<< HEAD
             <?php
             while ($row_allproducts = $results_allproducts->fetch_assoc()) {
                 shop_connection($row_allproducts["product_id"], $row_allproducts["name"], $row_allproducts["price"]);
             }
-=======
-        <?php
+
+
         while($row_allproducts = $results_allproducts->fetch_assoc() ){
             shop_connection($row_allproducts["product_id"],$row_allproducts["name"], $row_allproducts["price"]); 
         }
->>>>>>> 3792fee59511d153646bbe6219d441cd702fb6b8
-            ?>
+        ?>
         </div>
         <!-- end of products -->
 
