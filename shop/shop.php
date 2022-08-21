@@ -76,13 +76,17 @@ function UpdateCategorySelect($category_current) //this function is called to ke
 }
 
 //for the search btn
-if (isset($_GET['search'])) {
-    $searchq = $_GET['search'];
+if (isset($_POST['search'])) {
+    $searchq = $_POST['search'];
     $stmt_search = $connection->prepare("SELECT * FROM products WHERE name LIKE '%$searchq%'");
     $stmt_search->execute();
     $results_search = $stmt_search->get_result();
 
 }
+
+
+
+
 
 //for filters cd
 $query_filter_cd = "SELECT product_id,name, price FROM products WHERE category='XBOX Cd' or category='PS3 Cd' or category='PS4 Cd' or category='PS5 Cd' ";
@@ -170,27 +174,11 @@ $results_console_filter = $stmt_console_filter->get_result();
     </div>
 
     <!-- start search button -->
-    <form action="../shop/shop.php" method="GET">
+    <form action="../search/search.php" method="POST">
         <div class="search-container">
             <input type="text" placeholder="Search for a product.." name="search">
-            <a href="../search/search.php">
             <button type="submit" name="submit_search"><i class="fa fa-search"></i></button>
-            </a>
         </div>
-        <?php
-            if ($results_search) {
-                if(mysqli_num_rows($results_search)>0){
-                    require_once("../php/shop_product_connection.php");
-                    while($row_search=mysqli_fetch_assoc($results_search)){
-                        $_SESSION['getID']=$row_search['product_id'];
-                        header("Location: ../search/search.php");
-                    }
-                }else{
-                    $not_found="<div style=\"color:red;\" >Data Not found</div>";
-                    echo "<div style=\"color:red\">Data Not found</div>";
-                }
-            }
-            ?>  
     </form>
     <!-- end search button -->
 

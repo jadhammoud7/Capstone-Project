@@ -8,11 +8,11 @@ if (!isset($_SESSION['logged_bool'])) {
 }
 require_once('../php/shop_product_connection.php');
 
-$result_id_search=$_SESSION['getID'];
-$query_search = "SELECT product_id, name, price FROM products WHERE product_id= '" . $result_id_search . "'";
-$stmt_search = $connection->prepare($query_search);
-$stmt_search->execute();
-$results_search = $stmt_search->get_result();
+// $result_id_search=$_SESSION['getID'];
+// $query_search = "SELECT product_id, name, price FROM products WHERE product_id= '" . $result_id_search . "'";
+// $stmt_search = $connection->prepare($query_search);
+// $stmt_search->execute();
+// $results_search = $stmt_search->get_result();
 
 ?>
 
@@ -79,8 +79,16 @@ $results_search = $stmt_search->get_result();
     <!-- ended with title page -->
     <div class="shop-products reveal-by-y">
             <?php
-            while ($row_search = $results_search->fetch_assoc()) {
-                shop_connection($row_search["product_id"], $row_search["name"], $row_search["price"]);
+            require_once("../php/shop_product_connection.php");
+            if(isset($results_search)){
+                while($row_search = $results_search->fetch_assoc()){
+                    shop_connection($row_search['product_id'],$row_search['name'],$row_search['price']);
+                }
+            }
+
+            if($results_search==false){
+                $not_found="<div style=\"color:red;\" >Data Not found</div>";
+                echo "<div style=\"color:red\">Data Not found</div>";
             }
         ?>
         </div>
