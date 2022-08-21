@@ -14,12 +14,12 @@ if (!isset($_GET['type'])) {
     $type = 'cds'; //display cds as a starter
     $_SESSION['title'] = $type; //for the title of the div 
     if (!isset($_GET['category'])) { //if no category filter was set
-        if(!isset($_GET['newness'])){
+        if (!isset($_GET['newness'])) {
             $query = $query . " WHERE type='" . $type . "' "; //check all products to type equals to cds
-        }else{
+        } else {
             $newness = $_GET['newness'];
             $query = $query . " WHERE type='" . $type . "' AND category = '" . $newness . "'"; //check all products to type equals to cds and category category
-       
+
         }
     } else { //if a category filter was sent while no filter for type was sent
         $category = $_GET['category'];
@@ -76,13 +76,13 @@ function UpdateCategorySelect($category_current) //this function is called to ke
 }
 
 //for the search btn
-// if (isset($GET['search'])) {
-//     $searchq = $_GET['search'];
-//     $stmt_search = $connection->prepare("SELECT * FROM products WHERE name='$searchq'");
-//     $stmt_search->execute();
-//     $results_search = $stmt_search->get_result();
+if (isset($_GET['search'])) {
+    $searchq = $_GET['search'];
+    $stmt_search = $connection->prepare("SELECT * FROM products WHERE name='$searchq'");
+    $stmt_search->execute();
+    $results_search = $stmt_search->get_result();
 
-// }`
+}
 
 //for filters cd
 $query_filter_cd = "SELECT product_id,name, price FROM products WHERE category='XBOX Cd' or category='PS3 Cd' or category='PS4 Cd' or category='PS5 Cd' ";
@@ -173,8 +173,17 @@ $results_console_filter = $stmt_console_filter->get_result();
     <form action="../shop/shop.php" method="GET">
         <div class="search-container">
             <input type="text" placeholder="Search for a product.." name="search">
-            <button type="submit"><i class="fa fa-search"></i></button>
-
+            <button type="submit" name="submit_search"><i class="fa fa-search"></i></button>
+            <?php
+            if ($results_search) {
+                if(mysqli_num_rows($results_search)>0){
+                    $row_search=mysqli_fetch_assoc($results_search);
+                    echo $row_search['category'];
+                }else{
+                    echo "not such product found";
+                }
+            }
+            ?>
         </div>
     </form>
     <!-- end search button -->
@@ -340,17 +349,17 @@ $results_console_filter = $stmt_console_filter->get_result();
                 <label for="newness">
                     <button>
                         <select name="newness" id="newness">
-                            <option value="none"  <?php
+                            <option value="none" <?php
                                                     UpdateCategorySelect('none');
                                                     if (isset($_SESSION['none_selected'])) {
                                                         echo $_SESSION['none_selected'];
-                                                    } ?> >None</option>
-                            <option value="newest"  <?php
+                                                    } ?>>None</option>
+                            <option value="newest" <?php
                                                     UpdateCategorySelect('newest');
                                                     if (isset($_SESSION['newest_selected'])) {
                                                         echo $_SESSION['newest_selected'];
                                                     } ?>>By newest</option>
-                            <option value="oldest"  <?php
+                            <option value="oldest" <?php
                                                     UpdateCategorySelect('oldest');
                                                     if (isset($_SESSION['oldest_selected'])) {
                                                         echo $_SESSION['oldest_selected'];
