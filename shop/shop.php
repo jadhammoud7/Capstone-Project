@@ -334,7 +334,11 @@ $results_console_filter = $stmt_console_filter->get_result();
                 <label for="newness">
                     <button>
                         <select name="newness" id="newness">
-                            <option value="none" >None</option>
+                            <option value="none"  <?php
+                                                    UpdateCategorySelect('none');
+                                                    if (isset($_SESSION['none_selected'])) {
+                                                        echo $_SESSION['none_selected'];
+                                                    } ?> >None</option>
                             <option value="newest"  <?php
                                                     UpdateCategorySelect('newest');
                                                     if (isset($_SESSION['newest_selected'])) {
