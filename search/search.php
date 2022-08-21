@@ -71,29 +71,13 @@ if (!isset($_SESSION['logged_bool'])) {
         <h5 style="color:#b4c3da;">Home / Search Results</h5>
     </div>
     <!-- ended with title page -->
-    <div class="product1" id="product">
-        <div class="product_info">
-            <div class="img_section">
-                <img src="../images/console.png" alt="product 1">
-            </div>
-            <div class="attributes_section">
-                <h1><i>hello</i></h1>
-                <h3><i>100$</i></h3>
-                <a href="../product_info/product_info.php">
-                    <img class="info" src="../images/info.png" title="read more" alt="read more info">
-                </a>
-                <a href="../php/add_to_basket.php">
-                    <img class="add_to_basket" src="../images/shopping_cart.png" title="Add To Basket"
-                        alt="Add To Basket">
-                </a>
-
-                <a href="../php/favorites.php">
-                    <img class="add_to_fav" src="../images/addfav.png" title="Add To Favorites"
-                        alt="Add To Favorites">
-                </a>
-            </div>
+    <div class="shop-products reveal-by-y">
+            <?php
+            while ($row_allproducts = $results_allproducts->fetch_assoc()) {
+                shop_connection($row_allproducts["product_id"], $row_allproducts["name"], $row_allproducts["price"]);
+            }
+        ?>
         </div>
-    </div>
     
 
     <!-- started return to top button -->

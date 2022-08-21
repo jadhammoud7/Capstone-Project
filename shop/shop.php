@@ -173,13 +173,16 @@ $results_console_filter = $stmt_console_filter->get_result();
     <form action="../shop/shop.php" method="GET">
         <div class="search-container">
             <input type="text" placeholder="Search for a product.." name="search">
+            <a href="../search/search.php">
             <button type="submit" name="submit_search"><i class="fa fa-search"></i></button>
+            </a>
         </div>
         <?php
             if ($results_search) {
                 if(mysqli_num_rows($results_search)>0){
+                    require_once("../php/shop_product_connection.php");
                     while($row_search=mysqli_fetch_assoc($results_search)){
-                        // echo $row_search['name'], " ";
+                        $_SESSION['getID']=$row_search['product_id'];
                     }
                 }else{
                     $not_found="<div style=\"color:red;\" >Data Not found</div>";
