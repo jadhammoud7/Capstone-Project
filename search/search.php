@@ -37,6 +37,7 @@ if (isset($_POST['search'])) {
     <link rel="stylesheet" href="../home-page/home-page.css">
     <link rel="stylesheet" href="../contactus/contactus.css">
     <link rel="stylesheet" href="../shop/shop.css">
+    <link rel="stylesheet" href="../search/search.css">
     <title>Shop - Newbies Gamers</title>
 </head>
 
@@ -86,6 +87,19 @@ if (isset($_POST['search'])) {
         <h1 style="color: #333;">Search Results</h1>
         <h5 style="color:#b4c3da;">Home / Search Results</h5>
     </div>
+
+    <div class="return-shop">
+        <button onclick="window.location.href='../shop/shop.php';"><i class="fa fa-arrow-left"></i>Return To Shop Page</button>
+    </div>
+
+
+    <div>
+        <h2 class="shop-title">Search Result</h2>
+        <h4 class="results-title">Showing results of products of name containing "<?php if (isset($_POST['search'])) {
+                                                                                        echo $_POST['search'];
+                                                                                    } ?>"</h4>
+    </div>
+
     <!-- ended with title page -->
     <div class="shop-products reveal-by-y">
         <?php

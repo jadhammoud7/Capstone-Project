@@ -365,11 +365,18 @@ $results_console_filter = $stmt_console_filter->get_result();
 
     <div>
         <h2 class="shop-title">Shop</h2>
-        <h4 class="results-title">Showing results of products of type "<?php if (isset($_GET['type'])) {
-                                                                            echo $_GET['type'];
-                                                                        } ?>" and category "<?php if (isset($_GET['category'])) {
-                                                                                                echo $_GET['category'];
-                                                                                            } ?>"</h4>
+        <h4 class="results-title" id="filter-result">Showing results of products of type "<?php if (isset($_GET['type'])) {
+                                                                                                echo $_GET['type'];
+                                                                                            }
+                                                                                            ?>" and category "<?php if (isset($_GET['category'])) {
+                                                                                                                    echo $_GET['category'];
+                                                                                                                }
+                                                                                                                ?>"</h4>
+
+        <?php if (!isset($_GET['type']) && !isset($_GET['category'])) {
+            echo "<script>document.getElementById('filter-result').style.display = 'none';</script>";
+        } ?>
+
     </div>
 
     <div class="content">

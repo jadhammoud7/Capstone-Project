@@ -1,0 +1,14 @@
+.return-shop {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.return-shop button {
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.return-shop button.active,
+.return-shop button:hover {
+    background-color: rgb(200, 192, 192);
+}
