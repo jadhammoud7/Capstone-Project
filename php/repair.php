@@ -3,7 +3,7 @@
 include("connection.php");
 
 //for basket
-function repair_products($repair_type, $price_per_hour, $description)
+function repair_products_connection($repair_type, $price_per_hour, $description)
 {
 
     $element = "

@@ -6,9 +6,8 @@ session_start();
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
-
-require_once("../php/repair.php");
-$query = "SELECT repair_type, price_per_hour FROM repair;";
+require_once('../php/repair.php');
+$query = "SELECT * FROM repair;";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
@@ -162,7 +161,12 @@ $results = $stmt->get_result();
 
     <!-- started with  appointment contents -->
     <div class="appointments-div fade">
-
+        <?php
+        require_once("../php/repair.php");
+        while ($row = $results->fetch_assoc()) {
+            repair_products_connection($row["repair_type"], $row["price_per_hour"], $row["description"]);
+        }
+        ?>
     </div>
     <!-- ended with  appointment contents -->
 
