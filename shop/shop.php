@@ -37,7 +37,9 @@ if (isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) 
     $sortby = $_GET['sortby'];
     $_SESSION['title'] = $type;
     if ($type == "all") { //if type chosen is all then choose all products without conditions on products
-        $query = $query . " WHERE category = '" . $category . "'"; //check all products to type equals to cds and category category
+        if ($category != 'any') {
+            $query = $query . " WHERE category = '" . $category . "'"; //check all products to type equals to cds and category category
+        } //check all products to type equals to cds and category category
     } else { //chose products of type type
         if ($category == 'any') {
             $query = $query . " WHERE type='" . $type . "' "; //check all products to type equals to cds
@@ -45,7 +47,17 @@ if (isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) 
             $query = $query . " WHERE type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
         }
     }
-    if ($sortby == 'newness') {
+    if ($sortby == 'newest') {
+        $query = $query . " ORDER BY date_added DESC";
+    }
+    if ($sortby == 'highest-price') {
+        $query = $query . " ORDER BY price DESC";
+    }
+    if ($sortby == 'lowest-price') {
+        $query = $query . " ORDER BY price ASC";
+    }
+    if ($sortby == 'popularity') {
+        $query = $query . " ORDER BY sales DESC";
     }
     $stmt = $connection->prepare($query);
     $stmt->execute();
@@ -324,14 +336,14 @@ $results_console_filter = $stmt_console_filter->get_result();
                                                         echo $_SESSION['newest_selected'];
                                                     } ?>>Newness</option>
                             <option value="highest-price" <?php
-                                                            UpdateSortSelect('highest_price');
-                                                            if (isset($_SESSION['highest_price_selected'])) {
-                                                                echo $_SESSION['highest_price_selected'];
+                                                            UpdateSortSelect('highest-price');
+                                                            if (isset($_SESSION['highest-price_selected'])) {
+                                                                echo $_SESSION['highest-price_selected'];
                                                             } ?>>Price - highest</option>
                             <option value="lowest-price" <?php
-                                                            UpdateSortSelect('lowest_price');
-                                                            if (isset($_SESSION['lowest_price_selected'])) {
-                                                                echo $_SESSION['lowest_price_selected'];
+                                                            UpdateSortSelect('lowest-price');
+                                                            if (isset($_SESSION['lowest-price_selected'])) {
+                                                                echo $_SESSION['lowest-price_selected'];
                                                             } ?>>Price - lowest</option>
                             <option value="popularity" <?php
                                                         UpdateSortSelect('popular');
