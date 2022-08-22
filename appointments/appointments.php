@@ -101,9 +101,17 @@ $results_gift = $stmt_gift->get_result();
         <div class="appointment-item appointment-free-game">
             <h2>Try Free Game</h2>
             <?php
-            while ($row_gift = $results_gift->fetch_assoc()) {
-                free_gift_connection($row_gift["name"]);
+            if(!isset($_SESSION['free_games'])){
+                while ($row_gift = $results_gift->fetch_assoc()) {
+                    $_SESSION['free_games']=$row_gift["name"];
+                    free_gift_connection($row_gift["name"]);
+                }
+            }else{
+                free_gift_connection($_SESSION['free_games']);
+
+
             }
+
             ?>
         </div>
     </div>

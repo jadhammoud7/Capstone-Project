@@ -111,7 +111,7 @@ if (!isset($_SESSION['logged_bool'])) {
                 <li><a onclick="ShowBasket()" id="basket-button" title="View your current list of products added by you to basket">Shopping Basket</a></li>
                 <li><a onclick="ShowFavorites()" id="favorites-button" title="View list of products added by you to your favorites">Favorites List</a></li>
                 <form action="../php/logout.php" method="post">
-                    <button type="submit" class="logout-btn" onclick="return confirm('Are you sure you want to log out?');"><strong>Log out</strong></button>
+                    <button type="submit" class="logout-btn" onclick="return confirm('Are you sure you want to log out?');<?php unset($_SESSION['free_games']);?>"><strong>Log out</strong></button>
                 </form>
             </ol>
         </div>
