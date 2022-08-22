@@ -23,10 +23,28 @@ tabsArray.forEach((element) => {
 
 function ShowFilters() {
     var filter = document.querySelector(".filters");
+    var filter_btn = document.getElementById("filter-btn");
 
-    if (filter.style.display == "flex")
+    if (filter.style.display == "flex") {
         filter.style.display = "none";
-    else
+        filter_btn.style.display = "none";
+    }
+    else {
         filter.style.display = "flex";
+        filter_btn.style.display = "block";
+    }
+}
+
+function SendFilters() {
+    var select = document.getElementById('sortby');
+    var option = select.options[select.selectedIndex];
+
+    var select_type = document.getElementById('type');
+    var option_type = select_type.options[select_type.selectedIndex];
+
+    var select_category = document.getElementById('category');
+    var option_category = select_category.options[select_category.selectedIndex];
+
+    window.location = '?type=' + option_type.value + '&category=' + option_category.value + '&sortby=' + option.value;
 }
 

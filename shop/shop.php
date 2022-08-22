@@ -179,27 +179,7 @@ $results_console_filter = $stmt_console_filter->get_result();
                 <h2>Type</h2>
                 <button>
                     <label for="type">
-                        <select name="type" id="type" onchange="
-                            var select = document.getElementById('type');
-                            var option = select.options[select.selectedIndex];//get the index of the selected option in dropdown type
-
-                            var current_url = window.location.href;//get current url
-                            
-                            window.location = '?type=' + option.value; //add to url type and option selected value
-
-                            var select_category = document.getElementById('category');
-                            var option_category = select_category.options[select_category.selectedIndex]; //get the index of the selected option in dropdon category
-
-                            var current_url = window.location.href; //get current url
-
-                            if(!current_url.includes('category')){//if the url does not contain category, then add type
-                                window.location = '?type=' + option.value;
-                            }
-                            else{//if the url contains category, then if type was selected, enter the current type before category selected before
-                                window.location = '?type=' + option.value + '&category=' + option_category.value;
-                            }
-                                                 
-                        ">
+                        <select name="type" id="type">
                             <option value="all" <?php
                                                 UpdateTypeSelect('all');
                                                 if (isset($_SESSION['all_selected'])) { //check for session all selected, if isset then value is selected, so that the option value for that remains first in the dropdown list so user can know the last filter used
@@ -249,23 +229,7 @@ $results_console_filter = $stmt_console_filter->get_result();
                 <h2>Category</h2>
                 <label for="category">
                     <button>
-                        <select name="category" id="category" onchange="
-                            var select = document.getElementById('category');
-                            var option = select.options[select.selectedIndex];//get option selected from dropdown category
-
-                            var select_type = document.getElementById('type');
-                            var option_type = select_type.options[select_type.selectedIndex];//get option selected from dropdown type
-
-                            var current_url = window.location.href;//get current url
-                            
-                            if(!current_url.includes('?type')){//if url does not contain type, meaning that filter category is set without type, then category is the first get filter
-                                window.location = '?category=' + option.value;
-                            }
-                            else{//else if there is type filter, then category is added after it
-                                window.location = '?type=' + option_type.value + '&category=' + option.value;
-                            }
-                        
-                        ">
+                        <select name="category" id="category">
                             <option value="action" <?php
                                                     UpdateCategorySelect('action'); //set the session to check which filter was set last
                                                     if (isset($_SESSION['action_selected'])) { //if there is session, then its value will be selected so that the last selected filter is shown in the dropdown list first
@@ -329,7 +293,7 @@ $results_console_filter = $stmt_console_filter->get_result();
                 <h2>Sort By</h2>
                 <label for="newness">
                     <button>
-                        <select name="newness" id="newness">
+                        <select name="sortby" id="sortby">
                             <option value="none" <?php
                                                     UpdateCategorySelect('none');
                                                     if (isset($_SESSION['none_selected'])) {
@@ -359,6 +323,9 @@ $results_console_filter = $stmt_console_filter->get_result();
                     </button>
                 </label>
             </div>
+        </div>
+        <div id="filter-btn" style="display: none;">
+            <button onclick="SendFilters()"><i class="fa fa-check"></i>Apply Filters</button>
         </div>
     </div>
     <!-- ended filters -->
