@@ -6,6 +6,9 @@
     if(!isset($_SESSION['logged_bool'])){
         header("Location: ../login/login.php");
     }
+
+    require_once("../php/repair.php");
+    
 ?>
 <head>
     <meta charset="UTF-8">
@@ -162,125 +165,7 @@
 
     <!-- started with  appointment contents -->
     <div class="appointments-div fade">
-        <div class="appointment-item" id="laptop-repair">
-            <h2>Laptop Repair</h2>
-            <div class="appointment-item-info">
-                <img src="../images/laptop_repair.png" alt="">
-                <div class="appointment-item-info-part">
-                    <h3>Laptop Repair</h3>
-                    <p>1 hour | 10$</p>
-                    <p>Schedule now and bring your laptop for repair or maintanence. We require a total of 10$ for a one
-                        hour work. Don't hesitate to contact us for any concerns or information.</p>
-                </div>
-            </div>
-            <div>
-                <button onclick="OpenAppointmentBooking(this)" style="border-radius: 15px;color:black ;"><strong>Book Now</strong></button>
-            </div>
-        </div>
-        <hr size="8" width="100%" color="royalblue">
-        <div class="appointment-item" id="laptop-cleaning">
-            <h2>Laptop Cleaning</h2>
-            <div class="appointment-item-info">
-                <img src="../images/laptop_cleaning.gif" alt="">
-                <div class="appointment-item-info-part">
-                    <h3>Laptop Cleaning</h3>
-                    <p>1 hour | 10$</p>
-                    <p>Schedule now and bring your laptop for a special spa day. We require a total of 10$ for a one
-                        hour work. Don't hesitate to contact us for any concerns or information.</p>
-                </div>
-            </div>
-            <div>
-                <button onclick="OpenAppointmentBooking(this)" style="border-radius: 15px;color:black ;"><strong>Book Now</strong></button>
-            </div>
-        </div>
-        <hr size="8" width="100%" color="royalblue">
 
-        <div class="appointment-item" id="cpu-repair">
-            <h2>CPU Repair</h2>
-            <div class="appointment-item-info">
-                <img src="../images/cpu_repair.jpg" alt="">
-                <div class="appointment-item-info-part">
-                    <h3>CPU Repair including gaming and normal ones</h3>
-                    <p>1 hour | 10$</p>
-                    <p>Schedule now and bring your CPU for repair or maintanence for your CPU.This offer includes gaming
-                        CPU and normal ones. We require a total of 10$ for a one
-                        hour work. Don't hesitate to contact us for any concerns or information.</p>
-                </div>
-            </div>
-            <div>
-                <button onclick="OpenAppointmentBooking(this)" style="border-radius: 15px;color:black ;"><strong>Book Now</strong></button>
-            </div>
-        </div>
-        <hr size="8" width="100%" color="royalblue">
-
-        <div class="appointment-item" id="cpu-cleaning">
-            <h2>CPU Cleaning</h2>
-            <div class="appointment-item-info">
-                <img src="../images/cpu_cleaning.jpg" alt="">
-                <div class="appointment-item-info-part">
-                    <h3>CPU Cleaning including gaming and normal ones</h3>
-                    <p>1 hour | 10$</p>
-                    <p>Schedule now and bring your CPU for a special spa day for your CPU.This offer includes gaming CPU
-                        and normal ones. We require a total of 10$ for a one
-                        hour work. Don't hesitate to contact us for any concerns or information.</p>
-                </div>
-            </div>
-            <div>
-                <button onclick="OpenAppointmentBooking(this)" style="border-radius: 15px;color:black ;"><strong>Book Now</strong></button>
-            </div>
-        </div>
-        <hr size="8" width="100%" color="royalblue">
-
-        <div class="appointment-item" id="phone-repair">
-            <h2>Phone Repair</h2>
-            <div class="appointment-item-info">
-                <img src="../images/phone_repair.jpg" alt="">
-                <div class="appointment-item-info-part">
-                    <h3>Phone Repair</h3>
-                    <p>1 hour | 10$</p>
-                    <p>Schedule now and bring your Phones for repair or maintanence. We require a total of 10$ for a one
-                        hour work. Don't hesitate to contact us for any concerns or information.</p>
-                </div>
-            </div>
-            <div>
-                <button onclick="OpenAppointmentBooking(this)" style="border-radius: 15px;color:black ;"><strong>Book Now</strong></button>
-            </div>
-        </div>
-        <div class="appointment-item" id="ps-repair">
-            <h2>Ps Repair</h2>
-            <div class="appointment-item-info">
-                <img src="../images/ps_repair.jpg" alt="">
-                <div class="appointment-item-info-part">
-                    <h3>Ps consoles Repair including all types</h3>
-                    <p>1 hour | 10$</p>
-                    <p>Schedule now and bring your ps consoles for repair or maintanence. We require a total of 10$ for
-                        a one
-                        hour work. Don't hesitate to contact us for any concerns or information.</p>
-                </div>
-            </div>
-            <div>
-                <button onclick="OpenAppointmentBooking(this)" style="border-radius: 15px;color:black ;"><strong>Book Now</strong></button>
-            </div>
-        </div>
-        <hr size="8" width="100%" color="royalblue">
-        <div class="appointment-item" id="controller-repair">
-            <h2>Controller Repair</h2>
-            <div class="appointment-item-info">
-                <img src="../images/controller_repair.jpg" alt="">
-                <div class="appointment-item-info-part">
-                    <h3>Controller Repair including all type of consoles</h3>
-                    <p>1 hour | 10$</p>
-                    <p>Schedule now and bring your constrolers for repair or maintanence.Thos offer includes controllers
-                        for all type
-                        of consoles (ps2, ps3, ps4, ps5..). We require a total of 10$ for a one
-                        hour work. Don't hesitate to contact us for any concerns or information.</p>
-                </div>
-            </div>
-            <div>
-                <button onclick="OpenAppointmentBooking(this)" style="border-radius: 15px;color:black ;"><strong>Book Now</strong></button>
-            </div>
-        </div>
-        <hr size="8" width="100%" color="royalblue">
     </div>
     <!-- ended with  appointment contents -->
 
