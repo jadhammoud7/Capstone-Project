@@ -1,30 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 
 session_start();
+include("../php/connection.php");
+
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
+
 require_once('../php/shop_product_connection.php');
-
-// $result_id_search=$_SESSION['getID'];
-// $query_search = "SELECT product_id, name, price FROM products WHERE product_id= '" . $result_id_search . "'";
-// $stmt_search = $connection->prepare($query_search);
-// $stmt_search->execute();
-// $results_search = $stmt_search->get_result();
-
 
 //for the search btn
 if (isset($_POST['search'])) {
     $searchq = $_POST['search'];
-    $stmt_search = $connection->prepare("SELECT * FROM products WHERE name LIKE '%$searchq%'");
-    $stmt_search->execute();
-    $results_search = $stmt_search->get_result();
+    $search_stmt = $connection->prepare("SELECT * FROM products WHERE name LIKE '%$searchq%'");
+    $search_stmt->execute();
+    $results_search = $search_stmt->get_result();
 }
 
 
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -89,30 +86,28 @@ if (isset($_POST['search'])) {
     </div>
 
     <div class="return-shop">
-        <button onclick="window.location.href='../shop/shop.php';"><i class="fa fa-arrow-left"></i>Return To Shop Page</button>
+        <button onclick="window.location.href='../shop/shop.php';" title="Return to shop page"><i class="fa fa-arrow-left"></i>Return To Shop Page</button>
     </div>
 
 
     <div>
         <h2 class="shop-title">Search Result</h2>
-        <h4 class="results-title">Showing results of products of name containing "<?php if (isset($_POST['search'])) {
-                                                                                        echo $_POST['search'];
-                                                                                    } ?>"</h4>
+        <h4 class="results-title">Showing <?php echo $results_search->num_rows; ?> results of products of name containing "<?php if (isset($_POST['search'])) {
+                                                                                                                                echo $_POST['search'];
+                                                                                                                            } ?>"</h4>
     </div>
 
     <!-- ended with title page -->
     <div class="shop-products reveal-by-y">
         <?php
-        require_once("../php/shop_product_connection.php");
         if (isset($results_search)) {
             while ($row_search = $results_search->fetch_assoc()) {
                 shop_connection($row_search['product_id'], $row_search['name'], $row_search['price']);
             }
         }
-
-        if ($results_search == false) {
-            $not_found = "<div style=\"color:red;\" >Data Not found</div>";
-            echo "<div style=\"color:red\">Data Not found</div>";
+        if ($results_search->num_rows == 0) {
+            $not_found = "<div class=\"error-div\" >Data Not found</div>";
+            echo $not_found;
         }
         ?>
     </div>
