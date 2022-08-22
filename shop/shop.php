@@ -30,22 +30,22 @@ if (!isset($_GET['type'])) {
     $results_shop = $stmt->get_result();
 }
 //if a get request of type was sent
-if (isset($_GET['type'])) {
+if (isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) {
     $query = "SELECT product_id, name, price FROM products";
     $type = $_GET['type'];
+    $category = $_GET['category'];
+    $sortby = $_GET['sortby'];
     $_SESSION['title'] = $type;
     if ($type == "all") { //if type chosen is all then choose all products without conditions on products
-        if (isset($_GET['category'])) {
-            $category = $_GET['category'];
-            $query = $query . " WHERE category = '" . $category . "'"; //check all products to type equals to cds and category category
-        }
+        $query = $query . " WHERE category = '" . $category . "'"; //check all products to type equals to cds and category category
     } else { //chose products of type type
-        if (!isset($_GET['category'])) {
+        if ($category == 'any') {
             $query = $query . " WHERE type='" . $type . "' "; //check all products to type equals to cds
         } else {
-            $category = $_GET['category'];
             $query = $query . " WHERE type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
         }
+    }
+    if ($sortby == 'newness') {
     }
     $stmt = $connection->prepare($query);
     $stmt->execute();
@@ -55,8 +55,9 @@ if (isset($_GET['type'])) {
 function UpdateTypeSelect($type_current) //this function is called to keep the current filter selected in the dropdown select of type
 {
     if (isset($_GET['type'])) {
-        if ($_GET['type'] == $type_current) { //if the option in select is the same as the name of type sent, meaning this option was selected by user, then it should stay selected to be shown first in list
-            $_SESSION[$_GET['type'] . '_selected'] = "selected";
+        $type = $_GET['type'];
+        if ($type == $type_current) { //if the option in select is the same as the name of type sent, meaning this option was selected by user, then it should stay selected to be shown first in list
+            $_SESSION[$type . '_selected'] = "selected";
         } else { //is this current option is not the option selected by the user
             unset($_SESSION[$type_current . '_selected']);
         }
@@ -67,10 +68,23 @@ function UpdateTypeSelect($type_current) //this function is called to keep the c
 function UpdateCategorySelect($category_current) //this function is called to keep the current filter selected in the dropdown select of category
 {
     if (isset($_GET['category'])) {
-        if ($_GET['category'] == $category_current) { //if the option in select is the same as the name of type sent, meaning this option was selected by user, then it should stay selected to be shown first in list
-            $_SESSION[$_GET['category'] . '_selected'] = "selected";
+        $category = $_GET['category'];
+        if ($category == $category_current) { //if the option in select is the same as the name of type sent, meaning this option was selected by user, then it should stay selected to be shown first in list
+            $_SESSION[$category . '_selected'] = "selected";
         } else { //is this current option is not the option selected by the user
             unset($_SESSION[$category_current . '_selected']);
+        }
+    }
+}
+
+function UpdateSortSelect($sort_current)
+{
+    if (isset($_GET['sortby'])) {
+        $sortby = $_GET['sortby'];
+        if ($sortby == $sort_current) {
+            $_SESSION[$sortby . '_selected'] = "selected";
+        } else {
+            unset($_SESSION[$sort_current . '_selected']);
         }
     }
 }
@@ -230,6 +244,11 @@ $results_console_filter = $stmt_console_filter->get_result();
                 <label for="category">
                     <button>
                         <select name="category" id="category">
+                            <option value="any" <?php
+                                                UpdateCategorySelect('any');
+                                                if (isset($_SESSION['any_selected'])) { //check for session all selected, if isset then value is selected, so that the option value for that remains first in the dropdown list so user can know the last filter used
+                                                    echo $_SESSION['any_selected'];
+                                                } ?>>All</option>
                             <option value="action" <?php
                                                     UpdateCategorySelect('action'); //set the session to check which filter was set last
                                                     if (isset($_SESSION['action_selected'])) { //if there is session, then its value will be selected so that the last selected filter is shown in the dropdown list first
@@ -295,29 +314,29 @@ $results_console_filter = $stmt_console_filter->get_result();
                     <button>
                         <select name="sortby" id="sortby">
                             <option value="none" <?php
-                                                    UpdateCategorySelect('none');
+                                                    UpdateSortSelect('none');
                                                     if (isset($_SESSION['none_selected'])) {
                                                         echo $_SESSION['none_selected'];
                                                     } ?>>None</option>
                             <option value="newest" <?php
-                                                    UpdateCategorySelect('newest');
+                                                    UpdateSortSelect('newest');
                                                     if (isset($_SESSION['newest_selected'])) {
                                                         echo $_SESSION['newest_selected'];
                                                     } ?>>Newness</option>
                             <option value="highest-price" <?php
-                                                            UpdateCategorySelect('oldest');
-                                                            if (isset($_SESSION['oldest_selected'])) {
-                                                                echo $_SESSION['oldest_selected'];
+                                                            UpdateSortSelect('highest_price');
+                                                            if (isset($_SESSION['highest_price_selected'])) {
+                                                                echo $_SESSION['highest_price_selected'];
                                                             } ?>>Price - highest</option>
                             <option value="lowest-price" <?php
-                                                            UpdateCategorySelect('oldest');
-                                                            if (isset($_SESSION['oldest_selected'])) {
-                                                                echo $_SESSION['oldest_selected'];
+                                                            UpdateSortSelect('lowest_price');
+                                                            if (isset($_SESSION['lowest_price_selected'])) {
+                                                                echo $_SESSION['lowest_price_selected'];
                                                             } ?>>Price - lowest</option>
                             <option value="popularity" <?php
-                                                        UpdateCategorySelect('oldest');
-                                                        if (isset($_SESSION['oldest_selected'])) {
-                                                            echo $_SESSION['oldest_selected'];
+                                                        UpdateSortSelect('popular');
+                                                        if (isset($_SESSION['popular_selected'])) {
+                                                            echo $_SESSION['popular_selected'];
                                                         } ?>>Popularity</option>
                         </select>
                     </button>
