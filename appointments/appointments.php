@@ -102,7 +102,7 @@ $results_gift = $stmt_gift->get_result();
             <h2>Try Free Game</h2>
             <?php
             while ($row_gift = $results_gift->fetch_assoc()) {
-                free_gift_connection($row_gift["name"], $row_gift["description"]);
+                free_gift_connection($row_gift["name"]);
             }
             ?>
         </div>
