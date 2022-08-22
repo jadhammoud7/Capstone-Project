@@ -11,6 +11,12 @@ $query = "SELECT * FROM repair;";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
+
+
+$query_gift = "SELECT name,description FROM products WHERE type='cds' ORDER BY RAND() LIMIT 1;";
+$stmt_gift = $connection->prepare($query_gift);
+$stmt_gift->execute();
+$results_gift = $stmt_gift->get_result();
 ?>
 
 <head>
@@ -94,19 +100,11 @@ $results = $stmt->get_result();
         <span onclick="CloseGift()" class="close" title="Close Modal">&times;</span>
         <div class="appointment-item appointment-free-game">
             <h2>Try Free Game</h2>
-            <div class="appointment-item-info">
-                <img src="../images/free-game.gif" alt="">
-                <div class="appointment-item-info-part">
-                    <h3>Try Free Game</h3>
-                    <p>1 hour | free</p>
-                    <p>You are invited to play a new game for free in our store. You can try any game of your own for up
-                        to 1 hour. We care to our customers to be mostly convenient and satisfied with our services.
-                        Don't hesitate to contact us for any enquiries and book your appointment now!</p>
-                </div>
-            </div>
-            <div>
-                <button onclick="OpenAppointmentBooking(this)" style="border-radius: 15px;color:black ;"><strong>Book Now</strong></button>
-            </div>
+            <?php
+            while ($row_gift = $results_gift->fetch_assoc()) {
+                free_gift_connection($row_gift["name"], $row_gift["description"]);
+            }
+            ?>
         </div>
     </div>
     <!-- ended with gift -->
@@ -162,7 +160,6 @@ $results = $stmt->get_result();
     <!-- started with  appointment contents -->
     <div class="appointments-div fade">
         <?php
-        require_once("../php/repair.php");
         while ($row = $results->fetch_assoc()) {
             repair_products_connection($row["repair_type"], $row["price_per_hour"], $row["description"]);
         }

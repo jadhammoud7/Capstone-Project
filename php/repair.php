@@ -25,4 +25,25 @@ function repair_products_connection($repair_type, $price_per_hour, $description)
     ";
     echo $element;
 }
+// free gift
+function free_gift_connection($name,$description)
+{
+
+    $element = "
+    <div class=\"appointment-item-info\">
+    <img src=\"../images/free-game.gif\" alt=\"\">
+    <div class=\"appointment-item-info-part\">
+        <h3>Try Free Game</h3>
+        <p>1 hour | free</p>
+        <p>You are invited to play a new game for free in our store. You can try any game of your own for up
+            to 1 hour. We care to our customers to be mostly convenient and satisfied with our services.
+            Don't hesitate to contact us for any enquiries and book your appointment now!</p>
+    </div>
+</div>
+<div>
+    <button onclick=\"OpenAppointmentBooking(this)\" style=\"border-radius: 15px;color:black ;\"><strong>Book Now</strong></button>
+</div>
+    ";
+    echo $element;
+}
 ?>
