@@ -52,21 +52,7 @@ if (isset($product_id)) {
 
         echo "<script>alert('Product already in basket. Quantity added by 1.'); window.location = '../shop/shop.php';</script>";
     }
-    $stmt_select_all_prices = $connection->prepare("SELECT price FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ");
-    $stmt_select_all_prices->execute();
-    $select_prices_results = $stmt_select_all_prices->get_result();
-    //sum all prices in basket
-    while ($row_select_prices = $select_prices_results->fetch_assoc()) {
-        $total_price = $total_price + $row_select_prices['price'];
-    }
-    //tax is 10% total price
-    $tax_price = $total_price * 0.1;
 
-    $total_inc_tax = $total_price + $tax_price;
-
-    $_SESSION['total_price'] = $total_price;
-    $_SESSION['tax_price'] = $tax_price;
-    $_SESSION['total_price_including_tax'] = $total_inc_tax;
 }
 
 ?>
