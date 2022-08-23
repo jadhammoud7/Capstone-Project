@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 
 session_start();
@@ -12,11 +10,184 @@ if (!isset($_SESSION['logged_bool'])) {
     $customer_id = $_SESSION['logged_id'];
 }
 
-require_once("../php/checkout.php");
-$stmt_get_basket_products = $connection->prepare("SELECT product_id, quantity FROM baskets_customer_product WHERE customer_id = $customer_id");
+$first_name = "";
+$last_name = "";
+$email = "";
+$phone_number = "";
+$shipping_country = "";
+$shipping_location = "";
+$shipping_company = "";
+$postcode = "";
+$order_notes = "";
+
+
+if (isset($_GET['customerID']) && $_GET['customerID'] != "") {
+    $customer_id = $_GET['customerID'];
+    $select_customer = $connection->prepare("SELECT first_name, last_name, email, phone_number FROM customers WHERE customer_id = '" . $customer_id . "'");
+    $select_customer->execute();
+    $select_customer_results = $select_customer->get_result();
+    $row_customer = $select_customer_results->fetch_assoc();
+    $_SESSION['first_name'] = $row_customer['first_name'];
+    $_SESSION['last_name'] = $row_customer['last_name'];
+    $_SESSION['email'] = $row_customer['email'];
+    $_SESSION['phone_number'] = $row_customer['phone_number'];
+}
+
+if (isset($_POST['first_name']) && $_POST['first_name'] != "") {
+    $first_name = $_POST['first_name'];
+    $_SESSION['first_name'] = $first_name;
+    for ($i = 0; $i < strlen($first_name); $i++) {
+        if (is_numeric($first_name[$i])) {
+            $_SESSION['first_name_error'] = "First Name should not contain numbers";
+            header("Location: ../checkout/checkout.php");
+            die("WRONG first name");
+        }
+    }
+}
+
+if (isset($_POST['last_name']) && $_POST['last_name'] != "") {
+    $last_name = $_POST['last_name'];
+    $_SESSION['last_name'] = $last_name;
+    for ($i = 0; $i < strlen($last_name); $i++) {
+        if (is_numeric($last_name[$i])) {
+            $_SESSION['last_name_error'] = "Last Name should not contain numbers";
+            header("Location: ../checkout/checkout.php");
+            die("WRONG last name");
+        }
+    }
+}
+
+if (isset($_POST['email']) && $_POST['email'] != "") {
+    $email = $_POST['email'];
+    $_SESSION['email'] = $email;
+    if (!str_contains($email, ".com") && !str_contains($email, "@")) {
+        $_SESSION['email_error'] = "Email is invalid";
+        header("Location: ../checkout/checkout.php");
+        die("WRONG email");
+    }
+}
+if (isset($_POST["phone_number"]) && $_POST["phone_number"] != "") {
+    $phone_number = $_POST["phone_number"];
+    $_SESSION['phone_number'] = $phone_number;
+    for ($j = 0; $j < strlen($phone_number); $j++) {
+        if (!is_numeric($phone_number[$j])) {
+            $_SESSION['phone_number_error'] = "Phone number should not contain any characters other than numbers";
+            header("Location: ../checkout/checkout.php");
+            die("WRONG Phone Number");
+        }
+    }
+}
+
+if (isset($_POST['shipping_country']) && $_POST['shipping_country'] != "") {
+    $shipping_country = $_POST['shipping_country'];
+    $_SESSION['shipping_country'] = $shipping_country;
+    if (strlen($shipping_country) < 3 || strlen($shipping_country) > 30 || str_contains($shipping_country, ",")) {
+        $_SESSION['shipping_country_error'] = "Country invalid";
+        header("Location: ../checkout/checkout.php");
+        die("WRONG shipping country");
+    }
+}
+
+if (isset($_POST['shipping_location']) && $_POST['shipping_location'] != "") {
+    $shipping_location = $_POST['shipping_location'];
+    $_SESSION['shipping_location'] = $shipping_location;
+    if (strlen($shipping_location) < 10 && !str_contains($shipping_location, ",")) {
+        $_SESSION['shipping_location_error'] = "Shipping Location should be brief, should be of size 10 minimum and contain \",\" ";
+        header("Location: ../checkout/checkout.php");
+        die("WRONG shipping location");
+    }
+}
+
+if (isset($_POST['shipping_company'])) {
+    if ($_POST['shipping_company'] == '') {
+        $shipping_company = "none";
+    } else {
+        $shipping_company = $_POST['shipping_company'];
+        $_SESSION['shipping_company'] = $shipping_company;
+    }
+}
+
+if (isset($_POST['postcode']) && $_POST['postcode'] != "") {
+    $postcode = $_POST['postcode'];
+    $_SESSION['postcode'] = $postcode;
+    if (strlen($postcode) < 5 && strlen($postcode) > 7) {
+        $_SESSION['postcode_error'] = "Postcode is invalid. Should be of lenght between 5 and 7.";
+        header("Location: ../checkout/checkout.php");
+        die("WRONG postcode");
+    }
+}
+
+if (isset($_POST['order_notes'])) {
+    $order_notes = "";
+    if ($_POST['order_notes'] == '') {
+        $order_notes = "none";
+    } else {
+        $order_notes = $_POST['order_notes'];
+        $_SESSION['order_notes'] = $order_notes;
+    }
+}
+
+$_SESSION['success'] = 'true';
+
+// if (!isset($_SESSION['first_name_error']) && !isset($_SESSION['last_name_error']) && !isset($_SESSION['email_error']) && !isset($_SESSION['phone_number_error']) && !isset($_SESSION['shipping_country_error']) && !isset($_SESSION['shipping_location_error']) && !isset($_SESSION['postcode_error'])) {
+//     echo "<script>alert('Your form was submitted successfully. An email will be sent to you soon.'); window.location.href='../shop/shop.php';</script>";
+// }
+
+if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['email']) && isset($_POST['phone_number']) && isset($_POST['shipping_country']) && isset($_POST['shipping_location']) && isset($_POST['postcode'])) {
+    $mysql = $connection->prepare("INSERT INTO checkouts(first_name, last_name, email, phone_number, shipping_country, shipping_location, shipping_company, postcode, order_notes) VALUES (?,?,?,?,?,?,?,?,?)");
+    $mysql->bind_param("sssssssss", $first_name, $last_name, $email, $phone_number, $shipping_country, $shipping_location, $shipping_company, $postcode, $order_notes);
+    $mysql->execute();
+    $mysql->close();
+
+    //get last checkout id
+    $stmt_get_checkout_id = $connection->prepare("SELECT checkout_id FROM checkouts ORDER BY checkout_id DESC LIMIT 1");
+    $stmt_get_checkout_id->execute();
+    $results_get_checkout_id = $stmt_get_checkout_id->get_result();
+
+    if ($row_get_checkout_id = $results_get_checkout_id->fetch_assoc()) {
+        $checkout_id = $row_get_checkout_id['checkout_id'];
+
+        //get products in basket for current user
+        $query_basket = $connection->prepare("SELECT product_id FROM baskets_customer_product WHERE customer_id = '" . $_SESSION['logged_id'] . "' ");
+        $query_basket->execute();
+        $query_basket_result = $query_basket->get_result();
+
+        while ($row_basket = $query_basket_result->fetch_assoc()) {
+            $query_checkout = $connection->prepare("INSERT INTO checkouts_customers_products(checkout_id, customer_id, product_id) VALUES (?,?,?)");
+            $query_checkout->bind_param("iii", $checkout_id, $_SESSION['logged_id'], $row_basket['product_id']);
+            $query_checkout->execute();
+            $query_checkout->close();
+        }
+
+        echo "<script>alert('Your checkout form was submitted. You will receive and email soon.'); window.location='../shop/shop.php';</script>";
+        //delete all products from basket
+
+        $delete_basket = $connection->prepare("DELETE FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "'");
+        $delete_basket->execute();
+    }
+}
+
+//for product summary in checkout
+function checkout_products_connection($name, $quantity, $price)
+{
+    $element = "
+    <tr>
+        <td>$name</td>
+        <td>$quantity</td>
+        <td>$price$</td>
+    </tr>";
+
+    echo $element;
+}
+
+$stmt_get_basket_products = $connection->prepare("SELECT product_id, quantity FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ");
 $stmt_get_basket_products->execute();
 $results_get_basket_products = $stmt_get_basket_products->get_result();
 ?>
+
+
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -84,7 +255,7 @@ $results_get_basket_products = $stmt_get_basket_products->get_result();
     <div>
         <div class="login-part">
             <p class="login-part-par">Want to proceed with the checkout faster with your personal information? </p>
-            <button class="login-button" title="Click in order to proceed with the checkout with your account personal info" style="color: black;" onclick="window.location.href='../php/checkout.php?customerID=$customer_id';"><strong>Use your personal information</strong></button>
+            <button class="login-button" title="Click in order to proceed with the checkout with your account personal info" style="color: black;" onclick="window.location='../checkout/checkout.php?customerID=<?php echo $customer_id ?>';"><strong>Use your personal information</strong></button>
         </div>
         <!--         <div class="login-part">
             <p class="login-part-par">Want to proceed to your checkout faster and you don't have an account? </p>
@@ -95,73 +266,74 @@ $results_get_basket_products = $stmt_get_basket_products->get_result();
         <div class="billing-details">
             <h2>Billing Details</h2>
             <div class="form-container">
-                <form action="../php/checkout.php" method="POST">
+                <form action="../checkout/checkout.php" method="POST">
 
                     <div class="form-container-part">
 
                         <div>
                             <h3 class="form-container-part-title">Personal Information</h3>
                         </div>
+                        <p class="error" id="first_name_error">
+                            <?php
+                            if (isset($_SESSION['first_name_error'])) {
+                                echo "<script>document.getElementById('first_name_error').style.display='block';</script>";
+                                echo $_SESSION['first_name_error'];
+                                unset($_SESSION['first_name_error']);
+                            }
+                            ?>
+                        </p>
+                        <p class="error" id="last_name_error">
+                            <?php
+                            if (isset($_SESSION['last_name_error'])) {
+                                echo "<script>document.getElementById('last_name_error').style.display='block';</script>";
+                                echo $_SESSION['last_name_error'];
+                                unset($_SESSION['last_name_error']);
+                            }
+                            ?>
+                        </p>
+
                         <div class="form-container-part-inputs">
                             <div class="input-container">
-                                <p class="error" id="first_name_error">
-                                    <?php
-                                    session_start();
-                                    if (isset($_SESSION['first_name_error'])) {
-                                        echo "<script>document.getElementById('first_name_error').style.display='block';</script>";
-                                        echo $_SESSION['first_name_error'];
-                                        unset($_SESSION['first_name_error']);
-                                    }
-                                    ?>
-                                </p>
                                 <input type="text" name="first_name" id="first_name" value="<?php if (isset($_SESSION['first_name'])) {
                                                                                                 echo $_SESSION['first_name'];
                                                                                             } ?>" required>
                                 <label for="first_name">First Name</label>
                             </div>
+
                             <div class="input-container">
-                                <p class="error" id="last_name_error">
-                                    <?php
-                                    session_start();
-                                    if (isset($_SESSION['last_name_error'])) {
-                                        echo "<script>document.getElementById('last_name_error').style.display='block';</script>";
-                                        echo $_SESSION['last_name_error'];
-                                        unset($_SESSION['last_name_error']);
-                                    }
-                                    ?>
-                                </p>
+
                                 <input type="text" name="last_name" id="last_name" value="<?php if (isset($_SESSION['last_name'])) {
                                                                                                 echo $_SESSION['last_name'];
                                                                                             } ?>" required>
                                 <label for="last_name">Last Name</label>
                             </div>
                         </div>
+                        <p class="error" id="email_error">
+                            <?php
+                            if (isset($_SESSION['email_error'])) {
+                                echo "<script>document.getElementById('email_error').style.display='block';</script>";
+                                echo $_SESSION['email_error'];
+                                unset($_SESSION['email_error']);
+                            }
+                            ?>
+                        </p>
+                        <p class="error" id="phone_number_error">
+                            <?php
+                            if (isset($_SESSION['phone_number_error'])) {
+                                echo "<script>document.getElementById('phone_number_error').style.display='block';</script>";
+                                echo $_SESSION['phone_number_error'];
+                                unset($_SESSION['phone_number_error']);
+                            } ?>
+                        </p>
                         <div class="form-container-part-inputs">
                             <div class="input-container">
-                                <p class="error" id="email_error">
-                                    <?php
-                                    session_start();
-                                    if (isset($_SESSION['email_error'])) {
-                                        echo "<script>document.getElementById('email_error').style.display='block';</script>";
-                                        echo $_SESSION['email_error'];
-                                        unset($_SESSION['email_error']);
-                                    }
-                                    ?>
-                                </p>
                                 <input type="email" name="email" id="email" value="<?php if (isset($_SESSION['email'])) {
                                                                                         echo $_SESSION['email'];
                                                                                     } ?>" required>
                                 <label for="email">Email</label>
                             </div>
                             <div class="input-container">
-                                <p class="error" id="phone_number_error">
-                                    <?php
-                                    if (isset($_SESSION['phone_number_error'])) {
-                                        echo "<script>document.getElementById('phone_number_error').style.display='block';</script>";
-                                        echo $_SESSION['phone_number_error'];
-                                        unset($_SESSION['phone_number_error']);
-                                    } ?>
-                                </p>
+
                                 <input type="tel" name="phone_number" id="phone_number" value="<?php if (isset($_SESSION['phone_number'])) {
                                                                                                     echo $_SESSION['phone_number'];
                                                                                                 } ?>" required>
@@ -173,63 +345,81 @@ $results_get_basket_products = $stmt_get_basket_products->get_result();
                         <div>
                             <h3 class="form-container-part-title">Shipping Details</h3>
                         </div>
+                        <p class="error" id="shipping_country_error">
+                            <?php
+                            if (isset($_SESSION['shipping_country_error'])) {
+                                echo "<script>document.getElementById('shipping_country_error').style.display='block';</script>";
+                                echo $_SESSION['shipping_country_error'];
+                                unset($_SESSION['shipping_country_error']);
+                            }
+                            ?>
+                        </p>
                         <div class="form-container-part-inputs">
                             <div class="input-container">
-                                <?php
-                                session_start();
-                                if (isset($_SESSION['shipping_country_error'])) {
-                                    echo "<script>document.getElementById('shipping_country_error').style.display='block';</script>";
-                                    echo $_SESSION['shipping_country_error'];
-                                    unset($_SESSION['shipping_country_error']);
-                                }
-                                ?>
-                                <input type="text" name="shipping_country" id="shipping_country" required>
+
+                                <input type="text" name="shipping_country" id="shipping_country" value="<?php if (isset($_SESSION['shipping_country'])) {
+                                                                                                            echo $_SESSION['shipping_country'];
+                                                                                                        } ?>" required>
                                 <label for="shipping_country">Country</label>
                             </div>
                         </div>
+                        <p class="error" id="shipping_location_error">
+                            <?php
+                            if (isset($_SESSION['shipping_location_error'])) {
+                                echo "<script>document.getElementById('shipping_location_error').style.display='block';</script>";
+                                echo $_SESSION['shipping_location_error'];
+                                unset($_SESSION['shipping_location_error']);
+                            }
+                            ?>
+                        </p>
                         <div class="form-container-part-inputs">
                             <div class="input-container" style="width: 100%;">
-                                <?php
-                                session_start();
-                                if (isset($_SESSION['shipping_location_error'])) {
-                                    echo "<script>document.getElementById('shipping_location_error').style.display='block';</script>";
-                                    echo $_SESSION['shipping_location_error'];
-                                    unset($_SESSION['shipping_location_error']);
-                                }
-                                ?>
-                                <input type="text" name="shipping_location" id="shipping_location" required>
+
+                                <input type="text" name="shipping_location" id="shipping_location" value="<?php if (isset($_SESSION['shipping_location'])) {
+                                                                                                                echo $_SESSION['shipping_location'];
+                                                                                                            } ?>" required>
                                 <label for="shipping_location">Location (Town / City, Street, Home Address)</label>
                             </div>
                         </div>
+                        <p class="error" id="shipping_company_error">
+                            <?php
+                            if (isset($_SESSION['shipping_company_error'])) {
+                                echo "<script>document.getElementById('shipping_company_error').style.display='block';</script>";
+                                echo $_SESSION['shipping_company_error'];
+                                unset($_SESSION['shipping_company_error']);
+                            }
+                            ?>
+                        </p>
+                        <p class="error" id="postcode_error">
+                            <?php
+                            if (isset($_SESSION['postcode_error'])) {
+                                echo "<script>document.getElementById('postcode_error').style.display='block';</script>";
+                                echo $_SESSION['postcode_error'];
+                                unset($_SESSION['postcode_error']);
+                            }
+                            ?>
+                        </p>
                         <div class="form-container-part-inputs">
                             <div class="input-container">
-                                <?php
-                                session_start();
-                                if (isset($_SESSION['shipping_company_error'])) {
-                                    echo "<script>document.getElementById('shipping_company_error').style.display='block';</script>";
-                                    echo $_SESSION['shipping_company_error'];
-                                    unset($_SESSION['shipping_company_error']);
-                                }
-                                ?>
-                                <input type="text" name="shipping_company" id="shipping_company">
+
+                                <input type="text" name="shipping_company" id="shipping_company" value="<?php if (isset($_SESSION['shipping_company'])) {
+                                                                                                            echo $_SESSION['shipping_company'];
+                                                                                                        } ?>">
                                 <label for="shipping_company">Company Name (if any)</label>
                             </div>
                             <div class="input-container">
-                                <?php
-                                session_start();
-                                if (isset($_SESSION['postcode_error'])) {
-                                    echo "<script>document.getElementById('postcode_error').style.display='block';</script>";
-                                    echo $_SESSION['postcode_error'];
-                                    unset($_SESSION['postcode_error']);
-                                }
-                                ?>
-                                <input type="number" name="postcode" id="postcode" required>
+
+                                <input type="number" name="postcode" id="postcode" value="<?php if (isset($_SESSION['postcode'])) {
+                                                                                                echo $_SESSION['postcode'];
+                                                                                            } ?>" required>
                                 <label for="postcode">Postcode / ZIP</label>
                             </div>
                         </div>
                         <div class="form-container-part-inputs">
                             <div class="input-container" style="width: 100%;">
-                                <input type="text" name="order_notes" id="order-notes">
+                                <input type="text" name="order_notes" id="order-notes" value="<?php if (isset($_SESSION['order_notes'])) {
+                                                                                                    echo $_SESSION['order_notes'];
+                                                                                                } ?>">
                                 <label for="order_notes">Order Notes (Special notes related to the delivery,
                                     optional)</label>
                             </div>
@@ -260,15 +450,15 @@ $results_get_basket_products = $stmt_get_basket_products->get_result();
             <table id="order-totals">
                 <tr>
                     <th>Subtotal</th>
-                    <td>700$</td>
+                    <td><?php echo $_SESSION['total_price']; ?>$</td>
                 </tr>
                 <tr>
                     <th>Taxes</th>
-                    <td>50$</td>
+                    <td><?php echo $_SESSION['tax_price']; ?>$</td>
                 </tr>
                 <tr>
                     <th>Total</th>
-                    <td>750$</td>
+                    <td><?php echo $_SESSION['total_price_including_tax']; ?>$</td>
                 </tr>
             </table>
         </div>
