@@ -395,7 +395,8 @@
     width: 170px;
     height: 50px;
   }
-  .container{
+
+  .container {
     display: flex;
     flex-direction: column;
     margin-bottom: 40px;
@@ -425,7 +426,8 @@
   .present {
     left: -10px;
   }
-  .days div{
+
+  .days div {
     font-size: 1.2rem;
   }
 }
@@ -687,4 +689,5 @@
     font-size: 10px;
   }
 }
+
 /* end of making presend responsive */
