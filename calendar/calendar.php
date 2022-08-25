@@ -9,7 +9,7 @@ if (!isset($_SESSION['logged_bool'])) {
 require_once('../php/repair.php');
 if (isset($_GET['repair_type'])) {
     $type = $_GET['repair_type'];
-    $query = "SELECT * FROM repair WHERE repair_type=$type;";
+    $query = "SELECT * FROM repair WHERE repair_type= '" . $type . "'";
     $stmt = $connection->prepare($query);
     $stmt->execute();
     $results = $stmt->get_result();
@@ -105,8 +105,10 @@ if (isset($_GET['repair_type'])) {
         </div>
         <div class="appointment-item-schedule">
             <?php
-            while ($row = $results->fetch_assoc()) {
-                book_now_for_each_repair_connection($row["repair_type"], $row["price_per_hour"], $row["description"]);
+            if(isset($_GET['repair_type'])){
+                while ($row = $results->fetch_assoc()) {
+                    book_now_for_each_repair_connection($row["repair_type"], $row["price_per_hour"], $row["description"]);
+                }
             }
             ?>
         </div>
