@@ -29,7 +29,8 @@ function CloseAppointmentBooking() {
 
 // trying calendar here
 const date = new Date();
-
+var newDate = new Date();
+var currentDate;
 const renderCalender = () => {
     date.setDate(1);
     const monthDays = document.querySelector('.days');
@@ -53,6 +54,9 @@ const renderCalender = () => {
     for (let i = 1; i <= lastDay; i++) {
         if (i == new Date().getDate() && date.getMonth() == new Date().getMonth()) {
             days += `<div class="today" onclick="SetToCurrentDay(this)"> ${i} </div>`;
+            newDate.setMonth(new Date().getMonth());
+            newDate.setDate(new Date().getDate());
+            currentDate = currentDate = newDate.getDate() + "/" + newDate.getMonth() + "/" + newDate.getFullYear();;
         }
         if ((i < new Date().getDate() && date.getMonth() == new Date().getMonth()) || date.getMonth() < new Date().getMonth()) {
             days += `<div class="prev-date">${i}</div>`;
@@ -76,20 +80,27 @@ function SetToCurrentDay(element) {
     }
     thisDay.classList.remove('otherdays');
     thisDay.classList.add('today');
-    var newDate = new Date();
     newDate.setMonth(date.getMonth());
     newDate.setDate(thisDay.innerHTML);
-    console.log(newDate.toDateString());
-
-    const array=newDate.toDateString().split(" ");
-    const day=array[2];
-    const month=array[1];
-    const year=array[3];
+    // const array = newDate.toDateString().split(" ");
+    // const day = array[2];
+    // const month = array[1];
+    // const year = array[3];
+    currentDate = newDate.getDate() + "/" + newDate.getMonth() + "/" + newDate.getFullYear();
     // console.log(day);
     // console.log(month);
     // console.log(year);
-    window.location.href="../calendar/calendar.php?getday=day&getmonth=month&getyear=year";
+    // window.location="../calendar/calendar.php?getday=day&getmonth=month&getyear=year";
     document.querySelector('.date p').innerHTML = newDate.toDateString();
+}
+
+function SubmitAppointment() {
+    var hours = document.getElementsByName('appointments_time');
+    for (let hour of hours) {
+        if (hour.checked) {
+            window.location = window.location.href + "&appointments_time=" + hour.value + "&date=" + currentDate;
+        }
+    }
 }
 
 document.querySelector('.prev').addEventListener('click', () => {
