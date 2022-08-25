@@ -385,7 +385,7 @@ $results_console_filter = $stmt_console_filter->get_result();
                     <h1><?php echo $_SESSION['title']; ?></h1>
                 </div>
                 <?php
-                if (isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) {
+                if ((isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) || !isset($_GET['type'])) {
                     while ($row = $results_shop->fetch_assoc()) {
                         shop_connection($row["product_id"], $row["name"], $row["price"]);
                     }
