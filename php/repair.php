@@ -21,7 +21,7 @@ function repair_products_connection($repair_type, $price_per_hour, $description)
         </div>
     </div>
     <div>
-        <button onclick=\"window.location='?name=$repair_type'; OpenAppointmentBooking(this);\" style=\"border-radius: 15px;color:black ;\"><strong>Book Now</strong></button>
+        <button onclick=\"window.location='../php/repair.php?name=$repair_type'; OpenAppointmentBooking(this);\" style=\"border-radius: 15px;color:black ;\"><strong>Book Now</strong></button>
     </div>
 </div>
 <hr size=\"8\" width=\"100%\" color=\"royalblue\">
