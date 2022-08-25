@@ -21,8 +21,13 @@ if (isset($_GET['repair_type'])) {
 if (isset($_POST["appoinments_time"]) && $_POST["appoinments_time"] != "") {
     $value_date = $_POST["appoinments_time"];
     echo $value_date;
-    if(isset($_GET['repairTYPE'])){
+    if (isset($_GET['repairTYPE'])) {
         echo $_GET['repairTYPE'];
+        //inserting
+        $mysql = $connection->prepare("INSERT INTO appointments(customer_id,repair_type, day, month, year, status) VALUES (?,?,?,?,?,?)");
+        $mysql->bind_param("", );
+        $mysql->execute();
+        $mysql->close();
     }
 }
 ?>
@@ -116,7 +121,7 @@ if (isset($_POST["appoinments_time"]) && $_POST["appoinments_time"] != "") {
         </div>
         <div class="appointment-item-schedule">
             <?php
-            if(isset($_GET['repair_type'])){
+            if (isset($_GET['repair_type'])) {
                 while ($row = $results->fetch_assoc()) {
                     book_now_for_each_repair_connection($row["repair_type"]);
                 }
