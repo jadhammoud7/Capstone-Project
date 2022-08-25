@@ -88,7 +88,7 @@ function SetToCurrentDay(element) {
     // console.log(day);
     // console.log(month);
     // console.log(year);
-    
+    window.location.href="../calendar/calendar.php?getday=day&getmonth=month&getyear=year";
     document.querySelector('.date p').innerHTML = newDate.toDateString();
 }
 

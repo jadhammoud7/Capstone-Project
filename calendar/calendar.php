@@ -24,11 +24,14 @@ if (isset($_POST["appoinments_time"]) && $_POST["appoinments_time"] != "") {
     if (isset($_GET['repairTYPE'])) {
         echo $_GET['repairTYPE'];
         //inserting
-        $mysql = $connection->prepare("INSERT INTO appointments(customer_id,repair_type, day, month, year, status) VALUES (?,?,?,?,?,?)");
-        $mysql->bind_param("", );
-        $mysql->execute();
-        $mysql->close();
+        // $mysql = $connection->prepare("INSERT INTO appointments(customer_id,repair_type, day, month, year, status) VALUES (?,?,?,?,?,?)");
+        // $mysql->bind_param("", );
+        // $mysql->execute();
+        // $mysql->close();
     }
+    echo $_GET['getday'];
+    echo $_GET['getmonth'];
+    echo $_GET['getyear'];
 }
 ?>
 
