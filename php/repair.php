@@ -57,9 +57,12 @@ function book_now_for_each_repair_connection($repair_type,$price_per_hour,$descr
     <div class=\"appointment-item-info-schedule\">
         <img src=\"../images/ps_repair.jpg\" alt=\"\">
         <div class=\"appointment-item-info-schedule-part\">
-            <h3>Ps consoles Repair including all types</h3>
-            <p>1 hour | $price_per_hour$</p>
-            <p>$description</p>
+        <input type=\"radio\" id=\"html\" name=\"fav_language\" value=\"8:00-9:30 AM\">
+        <label for=\"html\">8:00-9:30 AM</label><br>
+        <input type=\"radio\" id=\"css\" name=\"fav_language\" value=\"10:00-11:30 AM\">
+        <label for=\"css\">10:00-11:30 AM</label><br>
+        <input type=\"radio\" id=\"javascript\" name=\"fav_language\" value=\"JavaScript\">
+        <label for=\"javascript\">JavaScript</label>
         </div>
         <button>Schedule your Appointment</button>
     </div>
