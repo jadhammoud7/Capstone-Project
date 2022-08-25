@@ -14,6 +14,14 @@ if (isset($_GET['repair_type'])) {
     $stmt->execute();
     $results = $stmt->get_result();
 }
+
+
+
+
+if (isset($_POST["appoinments_time"]) && $_POST["appoinments_time"] != "") {
+    $value_date = $_POST["appoinments_time"];
+    // echo $value_date;
+}
 ?>
 
 <head>
