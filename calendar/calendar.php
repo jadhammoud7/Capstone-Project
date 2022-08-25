@@ -83,46 +83,10 @@ $results_gift = $stmt_gift->get_result();
     <!-- ended with title page -->
 
 
-    <!-- started with present -->
-    <div class="present" onclick="OpenGift()">
-        <div class="lid">
-            <span></span>
-        </div>
-        <div class="promo">
-            <p>Try a new game for free</p>
-            <h2>Congratulations</h2>
-        </div>
-        <div class="box">
-            <span></span>
-            <span></span>
-        </div>
-    </div>
-
-    <div id="id01" class="modal">
-        <span onclick="CloseGift()" class="close" title="Close Modal">&times;</span>
-        <div class="appointment-item appointment-free-game">
-            <h2>Try Free Game</h2>
-            <?php
-            if (!isset($_SESSION['free_games'])) {
-                while ($row_gift = $results_gift->fetch_assoc()) {
-                    $_SESSION['free_games'] = $row_gift["name"];
-                    free_gift_connection($row_gift["name"]);
-                }
-            } else {
-                free_gift_connection($_SESSION['free_games']);
-            }
-
-            ?>
-        </div>
-    </div>
-    <!-- ended with gift -->
-
 
 
     <!-- starting calendar -->
-    <div id="appointment-schedule" class="modal">
-        <span onclick="CloseAppointmentBooking()" class="close" title="Close Modal">&times;</span>
-        <div class="container">
+    <div class="container">
             <div class="calendar">
                 <div class="month">
                     <i class="fas fa-angle-left prev"></i>
@@ -160,20 +124,9 @@ $results_gift = $stmt_gift->get_result();
                 </div>
             </div>
         </div>
-
-    </div>
     <!-- end calendar -->
 
 
-    <!-- started with  appointment contents -->
-    <div class="appointments-div fade">
-        <?php
-        while ($row = $results->fetch_assoc()) {
-            repair_products_connection($row["repair_type"], $row["price_per_hour"], $row["description"]);
-        }
-        ?>
-    </div>
-    <!-- ended with  appointment contents -->
 
 
     <!-- started return to top button -->

@@ -19,8 +19,9 @@ function repair_products_connection($repair_type, $price_per_hour, $description)
         </div>
     </div>
     <div>
-        <input type=\"hidden\" name=\"repair_type\" value=\"$repair_type\">
-        <button type=\"submit\" onclick=\"OpenAppointmentBooking(this)\" style=\"border-radius: 15px;color:black ;\"><strong>Book Now</strong></button>
+    <a>
+    <button type=\"submit\" onclick=\"OpenAppointmentBooking(this)\" style=\"border-radius: 15px;color:black ;\"><strong>Book Now</strong></button>
+    </a>
     </div>
 </div>
 <hr size=\"8\" width=\"100%\" color=\"royalblue\">
