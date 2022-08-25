@@ -2,6 +2,9 @@
 
 include("connection.php");
 
+if(isset($_GET['name'])){
+    header("Location: ../appointments/appointments.php");   
+}
 //for basket
 function repair_products_connection($repair_type, $price_per_hour, $description)
 {
