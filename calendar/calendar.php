@@ -6,19 +6,14 @@ session_start();
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
-    
-
 require_once('../php/repair.php');
-$query = "SELECT * FROM repair;";
-$stmt = $connection->prepare($query);
-$stmt->execute();
-$results = $stmt->get_result();
-
-
-$query_gift = "SELECT name,description FROM products WHERE type='cds' ORDER BY RAND() LIMIT 1;";
-$stmt_gift = $connection->prepare($query_gift);
-$stmt_gift->execute();
-$results_gift = $stmt_gift->get_result();
+if (isset($_GET['repair_type'])) {
+    $type = $_GET['repair_type'];
+    $query = "SELECT * FROM repair WHERE repair_type=$type;";
+    $stmt = $connection->prepare($query);
+    $stmt->execute();
+    $results = $stmt->get_result();
+}
 ?>
 
 <head>
@@ -87,43 +82,35 @@ $results_gift = $stmt_gift->get_result();
 
     <!-- starting calendar -->
     <div class="container">
-            <div class="calendar">
-                <div class="month">
-                    <i class="fas fa-angle-left prev"></i>
-                    <div class="date">
-                        <h1></h1>
-                        <p></p>
-                    </div>
-                    <i class="fas fa-angle-right next"></i>
+        <div class="calendar">
+            <div class="month">
+                <i class="fas fa-angle-left prev"></i>
+                <div class="date">
+                    <h1></h1>
+                    <p></p>
                 </div>
-                <div class="weekdays">
-                    <div>Sun</div>
-                    <div>Mon</div>
-                    <div>Tue</div>
-                    <div>Wed</div>
-                    <div>Thurs</div>
-                    <div>Fri</div>
-                    <div>Sat</div>
-                </div>
-                <div class="days">
-                </div>
+                <i class="fas fa-angle-right next"></i>
             </div>
-            <div class="appointment-item-schedule">
-                <h2>hh</h2>
-                <div class="appointment-item-info-schedule">
-                    <img src="../images/ps_repair.jpg" alt="">
-                    <div class="appointment-item-info-schedule-part">
-                        <h3>Ps consoles Repair including all types</h3>
-                        <p>1 hour | 10$</p>
-                        <p>Schedule now and bring your ps consoles for repair or maintanence. We require a total of 10$
-                            for
-                            a one
-                            hour work. Don't hesitate to contact us for any concerns or information.</p>
-                    </div>
-                    <button>Schedule your Appointment</button>
-                </div>
+            <div class="weekdays">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thurs</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            <div class="days">
             </div>
         </div>
+        <div class="appointment-item-schedule">
+            <?php
+            while ($row = $results->fetch_assoc()) {
+                book_now_for_each_repair_connection($row["repair_type"], $row["price_per_hour"], $row["description"]);
+            }
+            ?>
+        </div>
+    </div>
     <!-- end calendar -->
 
 

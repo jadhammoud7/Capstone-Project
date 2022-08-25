@@ -19,7 +19,7 @@ function repair_products_connection($repair_type, $price_per_hour, $description)
         </div>
     </div>
     <div>
-    <a>
+    <a href=\"../calendar/calendar.php?repair_type=$repair_type\">
     <button type=\"submit\" onclick=\"OpenAppointmentBooking(this)\" style=\"border-radius: 15px;color:black ;\"><strong>Book Now</strong></button>
     </a>
     </div>
@@ -56,7 +56,16 @@ function book_now_for_each_repair_connection($repair_type,$price_per_hour,$descr
 {
 
     $element = "
-    
+    <h2>$repair_type</h2>
+    <div class=\"appointment-item-info-schedule\">
+        <img src=\"../images/ps_repair.jpg\" alt=\"\">
+        <div class=\"appointment-item-info-schedule-part\">
+            <h3>Ps consoles Repair including all types</h3>
+            <p>1 hour | $price_per_hour$</p>
+            <p>$description</p>
+        </div>
+        <button>Schedule your Appointment</button>
+    </div>
     ";
     echo $element;
 }
