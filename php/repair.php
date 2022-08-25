@@ -49,7 +49,7 @@ function free_gift_connection($name)
 
 
 // book now for each one
-function book_now_for_each_repair_connection($repair_type,$price_per_hour,$description)
+function book_now_for_each_repair_connection($repair_type)
 {
 
     $element = "

@@ -107,7 +107,7 @@ if (isset($_GET['repair_type'])) {
             <?php
             if(isset($_GET['repair_type'])){
                 while ($row = $results->fetch_assoc()) {
-                    book_now_for_each_repair_connection($row["repair_type"], $row["price_per_hour"], $row["description"]);
+                    book_now_for_each_repair_connection($row["repair_type"]);
                 }
             }
             ?>
