@@ -80,6 +80,15 @@ function SetToCurrentDay(element) {
     newDate.setMonth(date.getMonth());
     newDate.setDate(thisDay.innerHTML);
     console.log(newDate.toDateString());
+
+    const array=newDate.toDateString().split(" ");
+    const day=array[2];
+    const month=array[1];
+    const year=array[3];
+    // console.log(day);
+    // console.log(month);
+    // console.log(year);
+    
     document.querySelector('.date p').innerHTML = newDate.toDateString();
 }
 
