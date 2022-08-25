@@ -3,7 +3,7 @@
 include("connection.php");
 
 if(isset($_GET['name'])){
-    header("Location: ../appointments/appointments.php");   
+    header("Location: ../appointments/appointments.php?name= '" . $_GET['name'] . "'");   
 }
 //for basket
 function repair_products_connection($repair_type, $price_per_hour, $description)
