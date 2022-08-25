@@ -5,8 +5,12 @@
 session_start();
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
+} else {
+    $customer_id = $_SESSION['logged_id'];
 }
 require_once('../php/repair.php');
+
+$type = "";
 if (isset($_GET['repair_type'])) {
     $type = $_GET['repair_type'];
     $query = "SELECT * FROM repair WHERE repair_type= '" . $type . "'";
@@ -15,23 +19,17 @@ if (isset($_GET['repair_type'])) {
     $results = $stmt->get_result();
 }
 
+if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
+    $appointment_time = $_GET["appointments_time"];
+    $date = $_GET['date'];
+    $status = "Pending";
+    //inserting
+    $appointments_insert = $connection->prepare("INSERT INTO appointments(customer_id, appointment_name, date, hour, status) VALUES (?,?,?,?,?)");
+    $appointments_insert->bind_param("issss", $customer_id, $type, $date, $appointment_time, $status);
+    $appointments_insert->execute();
+    $appointments_insert->close();
 
-
-
-if (isset($_POST["appoinments_time"]) && $_POST["appoinments_time"] != "") {
-    $value_date = $_POST["appoinments_time"];
-    echo $value_date;
-    if (isset($_GET['repairTYPE'])) {
-        echo $_GET['repairTYPE'];
-        //inserting
-        // $mysql = $connection->prepare("INSERT INTO appointments(customer_id,repair_type, day, month, year, status) VALUES (?,?,?,?,?,?)");
-        // $mysql->bind_param("", );
-        // $mysql->execute();
-        // $mysql->close();
-    }
-    echo $_GET['getday'];
-    echo $_GET['getmonth'];
-    echo $_GET['getyear'];
+    echo "<script>alert('Your appointment is submitted!');</script>";
 }
 ?>
 

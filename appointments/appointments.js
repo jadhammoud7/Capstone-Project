@@ -31,6 +31,9 @@ function CloseAppointmentBooking() {
 const date = new Date();
 var newDate = new Date();
 var currentDate;
+var Month;
+var Day;
+
 const renderCalender = () => {
     date.setDate(1);
     const monthDays = document.querySelector('.days');
@@ -56,7 +59,20 @@ const renderCalender = () => {
             days += `<div class="today" onclick="SetToCurrentDay(this)"> ${i} </div>`;
             newDate.setMonth(new Date().getMonth());
             newDate.setDate(new Date().getDate());
-            currentDate = currentDate = newDate.getDate() + "/" + newDate.getMonth() + "/" + newDate.getFullYear();;
+
+            if (newDate.getMonth() < 10) {
+                Month = "0" + newDate.getMonth();
+            }
+            else {
+                Month = newDate.getMonth();
+            }
+            if (newDate.getDate() < 10) {
+                Day = "0" + newDate.getDate();
+            }
+            else {
+                Day = newDate.getDate();
+            }
+            currentDate = newDate.getFullYear() + "-" + Month + "-" + Day;
         }
         if ((i < new Date().getDate() && date.getMonth() == new Date().getMonth()) || date.getMonth() < new Date().getMonth()) {
             days += `<div class="prev-date">${i}</div>`;
@@ -86,7 +102,19 @@ function SetToCurrentDay(element) {
     // const day = array[2];
     // const month = array[1];
     // const year = array[3];
-    currentDate = newDate.getDate() + "/" + newDate.getMonth() + "/" + newDate.getFullYear();
+    if (newDate.getMonth() < 10) {
+        Month = "0" + newDate.getMonth();
+    }
+    else {
+        Month = newDate.getMonth();
+    }
+    if (newDate.getDate() < 10) {
+        Day = "0" + newDate.getDate();
+    }
+    else {
+        Day = newDate.getDate();
+    }
+    currentDate = newDate.getFullYear() + "-" + Month + "-" + Day;
     // console.log(day);
     // console.log(month);
     // console.log(year);
