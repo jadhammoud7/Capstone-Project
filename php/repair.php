@@ -53,7 +53,7 @@ function book_now_for_each_repair_connection($repair_type)
 {
 
     $element = "
-    <form action=\"../calendar/calendar.php\" method=\"POST\">
+    <form action=\"../calendar/calendar.php?repairTYPE=$repair_type\" method=\"POST\">
     <h2>$repair_type</h2>
     <div class=\"appointment-item-info-schedule\">
         <img src=\"../images/ps_repair.jpg\" alt=\"\">

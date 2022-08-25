@@ -20,7 +20,10 @@ if (isset($_GET['repair_type'])) {
 
 if (isset($_POST["appoinments_time"]) && $_POST["appoinments_time"] != "") {
     $value_date = $_POST["appoinments_time"];
-    // echo $value_date;
+    echo $value_date;
+    if(isset($_GET['repairTYPE'])){
+        echo $_GET['repairTYPE'];
+    }
 }
 ?>
 
