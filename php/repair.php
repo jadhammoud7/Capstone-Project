@@ -18,7 +18,7 @@ function repair_products_connection($repair_type, $price_per_hour, $description)
         </div>
     </div>
     <div>
-        <button onclick=\"OpenAppointmentBooking(this)\" style=\"border-radius: 15px;color:black ;\"><strong>Book Now</strong></button>
+        <button onclick=\"OpenAppointmentBooking(this)\";window.location.href=\"?name=$repair_type\" \"; style=\"border-radius: 15px;color:black ;\"><strong>Book Now</strong></button>
     </div>
 </div>
 <hr size=\"8\" width=\"100%\" color=\"royalblue\">
@@ -43,6 +43,17 @@ function free_gift_connection($name)
 <div>
     <button onclick=\"OpenAppointmentBooking(this)\" style=\"border-radius: 15px;color:black ;\"><strong>Book Now</strong></button>
 </div>
+    ";
+    echo $element;
+}
+
+
+// book now for each one
+function book_now_for_each_repair_connection($repair_type,$price_per_hour,$description)
+{
+
+    $element = "
+    
     ";
     echo $element;
 }

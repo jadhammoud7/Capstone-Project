@@ -143,7 +143,11 @@ $results_gift = $stmt_gift->get_result();
                 </div>
             </div>
             <div class="appointment-item-schedule">
-                <h2>Ps Repair</h2>
+                <h2><?php
+                if(isset($_GET['name'])){
+                    echo $_GET['name'];
+                }
+                ?></h2>
                 <div class="appointment-item-info-schedule">
                     <img src="../images/ps_repair.jpg" alt="">
                     <div class="appointment-item-info-schedule-part">
