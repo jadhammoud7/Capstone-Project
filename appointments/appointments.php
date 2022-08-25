@@ -8,6 +8,7 @@ if (!isset($_SESSION['logged_bool'])) {
 }
     
 if(isset($_POST['repair_type'])){
+    $_SESSION['repair_type'] = $_POST['repair_type'];
     header("Location: ../appointments/appointments.php");
 }
 require_once('../php/repair.php');
@@ -148,8 +149,8 @@ $results_gift = $stmt_gift->get_result();
             </div>
             <div class="appointment-item-schedule">
                 <h2><?php
-                if(isset($_POST['repair_type'])){
-                    echo $_POST['repair_type'];
+                if(isset($_SESSION['repair_type'])){
+                    echo $_SESSION['repair_type'];
                 }
                 ?></h2>
                 <div class="appointment-item-info-schedule">
