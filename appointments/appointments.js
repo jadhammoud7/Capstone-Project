@@ -73,6 +73,15 @@ const renderCalender = () => {
                 Day = newDate.getDate();
             }
             currentDate = newDate.getFullYear() + "-" + Month + "-" + Day;
+            var hours = document.getElementsByName('appointments_time');
+            for (let hour of hours) {
+                if (localStorage.getItem(currentDate + " " + hour.value) != null) {
+                    hour.disabled = localStorage.getItem(currentDate + " " + hour.value);
+                }
+                else {
+                    hour.disabled = false;
+                }
+            }
         }
         if ((i < new Date().getDate() && date.getMonth() == new Date().getMonth()) || date.getMonth() < new Date().getMonth()) {
             days += `<div class="prev-date">${i}</div>`;
@@ -115,6 +124,15 @@ function SetToCurrentDay(element) {
         Day = newDate.getDate();
     }
     currentDate = newDate.getFullYear() + "-" + Month + "-" + Day;
+    var hours = document.getElementsByName('appointments_time');
+    for (let hour of hours) {
+        if (localStorage.getItem(currentDate + " " + hour.value) != null) {
+            hour.disabled = localStorage.getItem(currentDate + " " + hour.value);
+        }
+        else {
+            hour.disabled = false;
+        }
+    }
     // console.log(day);
     // console.log(month);
     // console.log(year);
@@ -126,6 +144,7 @@ function SubmitAppointment() {
     var hours = document.getElementsByName('appointments_time');
     for (let hour of hours) {
         if (hour.checked) {
+            localStorage.setItem(currentDate + " " + hour.value, "true");
             window.location = window.location.href + "&appointments_time=" + hour.value + "&date=" + currentDate;
         }
     }

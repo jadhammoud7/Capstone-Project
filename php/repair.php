@@ -75,3 +75,11 @@ function book_now_for_each_repair_connection($repair_type)
     ";
     echo $element;
 }
+
+function SelectHour($date, $hour){
+    include("connection.php");
+    $select_hour_stmt = $connection->prepare("SELECT * FROM appointments WHERE date = '" . $date . "' AND hour = '" . $hour . "'");
+    $select_hour_stmt->execute();
+    $select_hour_results = $select_hour_stmt->get_result();
+    return $select_hour_results;
+}
