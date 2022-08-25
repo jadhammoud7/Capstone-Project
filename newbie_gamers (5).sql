@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Aug 25, 2022 at 06:42 PM
--- Server version: 8.0.27
--- PHP Version: 8.0.13
+-- Host: 127.0.0.1
+-- Generation Time: Aug 25, 2022 at 11:49 PM
+-- Server version: 8.0.23
+-- PHP Version: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,11 +29,25 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `appointments` (
   `customer_id` int NOT NULL,
-  `day` int NOT NULL,
-  `month` int NOT NULL,
-  `year` int NOT NULL,
+  `appointment_name` varchar(50) NOT NULL,
+  `date` date NOT NULL,
+  `hour` varchar(50) NOT NULL,
   `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `appointments`
+--
+
+INSERT INTO `appointments` (`customer_id`, `appointment_name`, `date`, `hour`, `status`) VALUES
+(4, 'Repair Laptop', '2022-07-25', '8:00-9:30 AM', 'Pending'),
+(4, 'Repair Laptop', '2022-07-25', '8:00-9:30 AM', 'Pending'),
+(4, 'Repair Laptop', '2022-07-25', '8:00-9:30 AM', 'Pending'),
+(4, 'Repair Laptop', '2022-07-25', '8:00-9:30 AM', 'Pending'),
+(4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Pending'),
+(4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Pending'),
+(4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Pending'),
+(4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Pending');
 
 -- --------------------------------------------------------
 
