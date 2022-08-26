@@ -19,6 +19,7 @@ function ShowProfile() {
     profile_button.style.fontWeight = 800;
     basket_button.style.fontWeight = 500;
     favorites_button.style.fontWeight = 500;
+    appointments_button.style.fontWeight = 500;
 }
 
 function ShowBasket() {
@@ -31,6 +32,7 @@ function ShowBasket() {
     profile_button.style.fontWeight = 500;
     basket_button.style.fontWeight = 800;
     favorites_button.style.fontWeight = 500;
+    appointments_button.style.fontWeight = 500;
 }
 
 function ShowFavorites() {
@@ -43,6 +45,7 @@ function ShowFavorites() {
     profile_button.style.fontWeight = 500;
     basket_button.style.fontWeight = 500;
     favorites_button.style.fontWeight = 800;
+    appointments_button.style.fontWeight = 500;
 }
 
 function ShowAppointments() {
@@ -53,7 +56,8 @@ function ShowAppointments() {
     appointments_part.classList.add("reveal-by-y");
     profile_button.style.fontWeight = 500;
     basket_button.style.fontWeight = 500;
-    favorites_button.style.fontWeight = 800;
+    favorites_button.style.fontWeight = 500;
+    appointments_button.style.fontWeight = 800;
 }
 
 const btn = document.querySelector(".edit_profile_btn");
