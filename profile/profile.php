@@ -35,6 +35,12 @@ $query_app = "SELECT appointment_name,date,hour FROM appointments WHERE customer
 $stmt_app = $connection->prepare($query_app);
 $stmt_app->execute();
 $results_app = $stmt_app->get_result();
+
+//deleting app
+$query_app_delete = " appointment_name,date,hour FROM appointments WHERE customer_id = '" . $customer_id . "' ";
+$stmt_app_delete = $connection->prepare($query_app_delete);
+$stmt_app_delete->execute();
+$results_app_delete = $stmt_app_delete->get_result();
 ?>
 
 
@@ -233,7 +239,7 @@ $results_app = $stmt_app->get_result();
                     // $stmt_app_image->execute();
                     // $results_app_image = $stmt_app_image->get_result();
                     // $row_app_image = $results_app_image->fetch_assoc();
-                    appointments_list_connection($row_app["appointment_name"], $row_app["date"], $row_app["hour"]);
+                    appointments_list_connection($row_app["appointment_id"],$row_app["appointment_name"], $row_app["date"], $row_app["hour"]);
                 }
                 ?>
 

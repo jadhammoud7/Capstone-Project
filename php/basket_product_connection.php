@@ -71,7 +71,7 @@ function basket_connection($product_id, $name, $category, $price, $quantity)
 
 
 
-function appointments_list_connection($appointment_name,$date,$hour)
+function appointments_list_connection($appointment_id,$appointment_name,$date,$hour)
 {
     //dont forget to add thr image
 
@@ -82,7 +82,7 @@ function appointments_list_connection($appointment_name,$date,$hour)
         <h4><b>$appointment_name </b></h4>
         <p>Date: $date</p>
         <p>Hours: $hour</p>
-        <button onclick=\"window.location=\"\../profile/profile.php?deleteAPP=$appointment_name\"\"; class=\"remove_app\"><strong>Remove Appointment</strong></button>
+        <button onclick=\"window.location=\"\../profile/profile.php?deleteAPPid=$appointment_id\"\"; class=\"remove_app\"><strong>Remove Appointment</strong></button>
     </div>
 </div>
                 ";
