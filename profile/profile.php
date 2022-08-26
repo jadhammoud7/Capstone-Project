@@ -228,12 +228,12 @@ $results_app = $stmt_app->get_result();
                 </p>
                 <?php
                 while ($row_app = $results_app->fetch_assoc()) {
-                    $query_app_image = "SELECT image FROM repair WHERE  repair_type='".$row_app['appointment_name']."';";
-                    $stmt_app_image = $connection->prepare($query_app_image);
-                    $stmt_app_image->execute();
-                    $results_app_image = $stmt_app_image->get_result();
-                    $row_app_image = $results_app_image->fetch_assoc();
-                    appointments_list_connection($row_app_image['image'],$row_app["appointment_name"], $row_app["date"], $row_app["hour"]);
+                    // $query_app_image = "SELECT image FROM repair WHERE  repair_type='".$row_app['appointment_name']."';";
+                    // $stmt_app_image = $connection->prepare($query_app_image);
+                    // $stmt_app_image->execute();
+                    // $results_app_image = $stmt_app_image->get_result();
+                    // $row_app_image = $results_app_image->fetch_assoc();
+                    appointments_list_connection($row_app["appointment_name"], $row_app["date"], $row_app["hour"]);
                 }
                 ?>
 
