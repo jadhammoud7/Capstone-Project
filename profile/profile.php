@@ -31,7 +31,10 @@ if (!isset($_SESSION['logged_bool'])) {
 }
 
 //for appointment list
-
+$query_app = "SELECT appointment_name,date,hour FROM appointments WHERE customer_id = '" . $customer_id . "' ";
+$stmt_app = $connection->prepare($query_app);
+$stmt_app->execute();
+$results_app = $stmt_app->get_result();
 ?>
 
 
@@ -223,7 +226,11 @@ if (!isset($_SESSION['logged_bool'])) {
                 <h2>Appointments List</h2>
                 <p>there are the list of appointments that you booked for some repairs
                 </p>
-
+                <?php
+                    while ($row_app = $results_app->fetch_assoc()) {
+                        shop_connection($row_app["appointment_name"], $row_app["date"], $row_app["hour"]);
+                    }
+            ?>
 
             <div class="gotoshoppage_profile">
                 <button title="Go to Shop Page"><strong>Go To Shop Page</strong></button>
