@@ -848,3 +848,9 @@ input[type="date"]:hover {
     /* padding: 2px 16px; */
     text-align: center;
   }
+  .remove_app{
+    margin-bottom: 10px;
+    border-radius: 15px;
+    color: black;
+    background-color: red;
+  }

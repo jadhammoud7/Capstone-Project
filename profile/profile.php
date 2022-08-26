@@ -225,36 +225,37 @@ if (!isset($_SESSION['logged_bool'])) {
                     <div class="app_info">
                         <h4><b>Ps Repair </b></h4>
                         <p>Date: 24-2-2023</p>
-                        <p>Hours Chosen: 8:00-9:30 AM</p>
+                        <p>Hours: 8:00-9:30 AM</p>
+                        <button class="remove_app"><strong>Remove Appointment</strong></button>
                     </div>
-                    <button class="remove_app">Remove Appointment</button>
                 </div>
                 <div class="appointmentsss">
                     <img src="../images/console.png" alt="" style="width:50%">
                     <div class="app_info">
                         <h4><b>Ps Repair </b></h4>
                         <p>Date: 24-2-2023</p>
-                        <p>Hours Chosen: 8:00-9:30 AM</p>
+                        <p>Hours: 8:00-9:30 AM</p>
+                        <button class="remove_app"><strong>Remove Appointment</strong></button>
+
                     </div>
-                    <button class="remove_app">Remove Appointment</button>
                 </div>
                 <div class="appointmentsss">
                     <img src="../images/console.png" alt="" style="width:50%">
                     <div class="app_info">
                         <h4><b>Ps Repair </b></h4>
                         <p>Date: 24-2-2023</p>
-                        <p>Hours Chosen: 8:00-9:30 AM</p>
+                        <p>Hours: 8:00-9:30 AM</p>
+                        <button class="remove_app"><strong>Remove Appointment</strong></button>
                     </div>
-                    <button class="remove_app">Remove Appointment</button>
                 </div>
                 <div class="appointmentsss">
                     <img src="../images/console.png" alt="" style="width:50%">
                     <div class="app_info">
                         <h4><b>Ps Repair </b></h4>
                         <p>Date: 24-2-2023</p>
-                        <p>Hours Chosen: 8:00-9:30 AM</p>
+                        <p>Hours: 8:00-9:30 AM</p>
+                        <button class="remove_app"><strong>Remove Appointment</strong></button>
                     </div>
-                    <button class="remove_app">Remove Appointment</button>
                 </div>
             </div>
 
