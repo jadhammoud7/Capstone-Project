@@ -220,8 +220,42 @@ if (!isset($_SESSION['logged_bool'])) {
                 <h2>Appointments List</h2>
                 <p>there are the list of appointments that you booked for some repairs
                 </p>
-                <h1>Date:12/5/2023</h1>
-                <h2>Repair Type: Ps repair</h2>
+                <div class="appointmentsss">
+                    <img src="../images/console.png" alt="" style="width:50%">
+                    <div class="app_info">
+                        <h4><b>Ps Repair </b></h4>
+                        <p>Date: 24-2-2023</p>
+                        <p>Hours Chosen: 8:00-9:30 AM</p>
+                    </div>
+                    <button class="remove_app">Remove Appointment</button>
+                </div>
+                <div class="appointmentsss">
+                    <img src="../images/console.png" alt="" style="width:50%">
+                    <div class="app_info">
+                        <h4><b>Ps Repair </b></h4>
+                        <p>Date: 24-2-2023</p>
+                        <p>Hours Chosen: 8:00-9:30 AM</p>
+                    </div>
+                    <button class="remove_app">Remove Appointment</button>
+                </div>
+                <div class="appointmentsss">
+                    <img src="../images/console.png" alt="" style="width:50%">
+                    <div class="app_info">
+                        <h4><b>Ps Repair </b></h4>
+                        <p>Date: 24-2-2023</p>
+                        <p>Hours Chosen: 8:00-9:30 AM</p>
+                    </div>
+                    <button class="remove_app">Remove Appointment</button>
+                </div>
+                <div class="appointmentsss">
+                    <img src="../images/console.png" alt="" style="width:50%">
+                    <div class="app_info">
+                        <h4><b>Ps Repair </b></h4>
+                        <p>Date: 24-2-2023</p>
+                        <p>Hours Chosen: 8:00-9:30 AM</p>
+                    </div>
+                    <button class="remove_app">Remove Appointment</button>
+                </div>
             </div>
 
 
