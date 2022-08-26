@@ -111,7 +111,6 @@ if (!isset($_SESSION['logged_bool'])) {
                 <li><a onclick="ShowBasket()" id="basket-button" title="View your current list of products added by you to basket">Shopping Basket</a></li>
                 <li><a onclick="ShowFavorites()" id="favorites-button" title="View list of products added by you to your favorites">Favorites List</a></li>
                 <li><a onclick="ShowAppointments()" id="appointments-button" title="View list of appointments added by you to your appointments section">Appoinments List</a></li>
-
                 <form action="../php/logout.php" method="post">
                     <button type="submit" class="logout-btn" onclick="return confirm('Are you sure you want to log out?');<?php unset($_SESSION['free_games']); ?>"><strong>Log out</strong></button>
                 </form>
@@ -218,9 +217,14 @@ if (!isset($_SESSION['logged_bool'])) {
         <!-- started appointments -->
         <div class="appointments fade" style="display: none;">
             <div>
-                <h2>Favorites List</h2>
-                <h3>You have a total of items in favorites list</h3>
+                <h2>Appointments List</h2>
+                <p>there are the list of appointments that you booked for some repairs
+                </p>
+                <h1>Date:12/5/2023</h1>
+                <h2>Repair Type: Ps repair</h2>
             </div>
+
+
 
             <div class="gotoshoppage_profile">
                 <button title="Go to Shop Page"><strong>Go To Shop Page</strong></button>

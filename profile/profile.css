@@ -106,9 +106,22 @@
     display: flex;
     flex-direction: column;
 }
+.appointments-products {
+    display: flex;
+    flex-direction: column;
+}
 
 
 .basket-product {
+    display: flex;
+    flex-direction: row;
+    box-shadow: 10px 10px 15px 1px rgba(21, 100, 219, 0.486);
+    margin: 10px;
+    margin-left: 20px;
+    border: 5px solid rgba(21, 100, 219, 0.486);
+    border-radius: 15px;
+}
+.appointments-product {
     display: flex;
     flex-direction: row;
     box-shadow: 10px 10px 15px 1px rgba(21, 100, 219, 0.486);
