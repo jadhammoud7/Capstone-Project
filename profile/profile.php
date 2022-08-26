@@ -229,34 +229,6 @@ if (!isset($_SESSION['logged_bool'])) {
                         <button class="remove_app"><strong>Remove Appointment</strong></button>
                     </div>
                 </div>
-                <div class="appointmentsss">
-                    <img src="../images/console.png" alt="" style="width:50%">
-                    <div class="app_info">
-                        <h4><b>Ps Repair </b></h4>
-                        <p>Date: 24-2-2023</p>
-                        <p>Hours: 8:00-9:30 AM</p>
-                        <button class="remove_app"><strong>Remove Appointment</strong></button>
-
-                    </div>
-                </div>
-                <div class="appointmentsss">
-                    <img src="../images/console.png" alt="" style="width:50%">
-                    <div class="app_info">
-                        <h4><b>Ps Repair </b></h4>
-                        <p>Date: 24-2-2023</p>
-                        <p>Hours: 8:00-9:30 AM</p>
-                        <button class="remove_app"><strong>Remove Appointment</strong></button>
-                    </div>
-                </div>
-                <div class="appointmentsss">
-                    <img src="../images/console.png" alt="" style="width:50%">
-                    <div class="app_info">
-                        <h4><b>Ps Repair </b></h4>
-                        <p>Date: 24-2-2023</p>
-                        <p>Hours: 8:00-9:30 AM</p>
-                        <button class="remove_app"><strong>Remove Appointment</strong></button>
-                    </div>
-                </div>
             </div>
 
 

@@ -67,3 +67,4 @@ function basket_connection($product_id, $name, $category, $price, $quantity)
 
     echo $element;
 }
+?>
