@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 25, 2022 at 11:49 PM
--- Server version: 8.0.23
--- PHP Version: 8.0.2
+-- Host: localhost:3306
+-- Generation Time: Aug 26, 2022 at 08:04 PM
+-- Server version: 8.0.27
+-- PHP Version: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `appointments` (
+  `appointment_id` int NOT NULL,
   `customer_id` int NOT NULL,
   `appointment_name` varchar(50) NOT NULL,
   `date` date NOT NULL,
@@ -39,15 +40,16 @@ CREATE TABLE `appointments` (
 -- Dumping data for table `appointments`
 --
 
-INSERT INTO `appointments` (`customer_id`, `appointment_name`, `date`, `hour`, `status`) VALUES
-(4, 'Repair Laptop', '2022-07-25', '8:00-9:30 AM', 'Pending'),
-(4, 'Repair Laptop', '2022-07-25', '8:00-9:30 AM', 'Pending'),
-(4, 'Repair Laptop', '2022-07-25', '8:00-9:30 AM', 'Pending'),
-(4, 'Repair Laptop', '2022-07-25', '8:00-9:30 AM', 'Pending'),
-(4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Pending'),
-(4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Pending'),
-(4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Pending'),
-(4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Pending');
+INSERT INTO `appointments` (`appointment_id`, `customer_id`, `appointment_name`, `date`, `hour`, `status`) VALUES
+(1, 4, 'Repair Laptop', '2022-07-25', '8:00-9:30 AM', 'Pending'),
+(2, 4, 'Repair Laptop', '2022-07-25', '8:00-9:30 AM', 'Pending'),
+(3, 4, 'Repair Laptop', '2022-07-25', '8:00-9:30 AM', 'Pending'),
+(4, 4, 'Repair Laptop', '2022-07-25', '8:00-9:30 AM', 'Pending'),
+(5, 4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Pending'),
+(6, 4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Pending'),
+(7, 4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Pending'),
+(8, 4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Pending'),
+(9, 1, 'Phone Repair', '2022-07-30', '6:00-7:30 PM', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -228,6 +230,12 @@ INSERT INTO `repair` (`repair_type`, `price_per_hour`, `description`, `image`) V
 --
 
 --
+-- Indexes for table `appointments`
+--
+ALTER TABLE `appointments`
+  ADD PRIMARY KEY (`appointment_id`);
+
+--
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
@@ -242,6 +250,12 @@ ALTER TABLE `products`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `appointments`
+--
+ALTER TABLE `appointments`
+  MODIFY `appointment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `customers`

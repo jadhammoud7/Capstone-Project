@@ -31,16 +31,20 @@ if (!isset($_SESSION['logged_bool'])) {
 }
 
 //for appointment list
-$query_app = "SELECT appointment_name,date,hour FROM appointments WHERE customer_id = '" . $customer_id . "' ";
+$query_app = "SELECT appointment_id,appointment_name,date,hour FROM appointments WHERE customer_id = '" . $customer_id . "' ";
 $stmt_app = $connection->prepare($query_app);
 $stmt_app->execute();
 $results_app = $stmt_app->get_result();
 
 //deleting app
-$query_app_delete = " appointment_name,date,hour FROM appointments WHERE customer_id = '" . $customer_id . "' ";
-$stmt_app_delete = $connection->prepare($query_app_delete);
-$stmt_app_delete->execute();
-$results_app_delete = $stmt_app_delete->get_result();
+if(isset($_GET['deleteAPPid'])){
+    $get_app_id=$_GET['deleteAPPid'];
+    $query_app_delete = " DELETE FROM appointments WHERE customer_id = '" . $customer_id . "' and appointment_id='".$get_app_id."'";
+    $stmt_app_delete = $connection->prepare($query_app_delete);
+    $stmt_app_delete->execute();
+
+}
+
 ?>
 
 
