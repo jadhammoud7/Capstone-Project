@@ -29,6 +29,9 @@ $results_basket = $stmt_basket->get_result();
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
+
+//for appointment list
+
 ?>
 
 
@@ -220,17 +223,8 @@ if (!isset($_SESSION['logged_bool'])) {
                 <h2>Appointments List</h2>
                 <p>there are the list of appointments that you booked for some repairs
                 </p>
-                <div class="appointmentsss">
-                    <img src="../images/console.png" alt="" style="width:50%">
-                    <div class="app_info">
-                        <h4><b>Ps Repair </b></h4>
-                        <p>Date: 24-2-2023</p>
-                        <p>Hours: 8:00-9:30 AM</p>
-                        <button class="remove_app"><strong>Remove Appointment</strong></button>
-                    </div>
-                </div>
-            </div>
-            
+
+
             <div class="gotoshoppage_profile">
                 <button title="Go to Shop Page"><strong>Go To Shop Page</strong></button>
             </div>

@@ -71,16 +71,16 @@ function basket_connection($product_id, $name, $category, $price, $quantity)
 
 
 
-function appointments_list_connection()
+function appointments_list_connection($image,$appointment_name,$date,$hour)
 {
 
     $element =  "
     <div class=\"appointmentsss\">
     <img src=\"../images/console.png\" alt=\"\" style=\"width:50%\">
     <div class=\"app_info\">
-        <h4><b>Ps Repair </b></h4>
-        <p>Date: 24-2-2023</p>
-        <p>Hours: 8:00-9:30 AM</p>
+        <h4><b>$appointment_name </b></h4>
+        <p>Date: $date</p>
+        <p>Hours: $hour</p>
         <button class=\"remove_app\"><strong>Remove Appointment</strong></button>
     </div>
 </div>
