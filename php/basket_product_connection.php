@@ -67,4 +67,25 @@ function basket_connection($product_id, $name, $category, $price, $quantity)
 
     echo $element;
 }
+
+
+
+
+function appointments_list_connection()
+{
+
+    $element =  "
+    <div class=\"appointmentsss\">
+    <img src=\"../images/console.png\" alt=\"\" style=\"width:50%\">
+    <div class=\"app_info\">
+        <h4><b>Ps Repair </b></h4>
+        <p>Date: 24-2-2023</p>
+        <p>Hours: 8:00-9:30 AM</p>
+        <button class=\"remove_app\"><strong>Remove Appointment</strong></button>
+    </div>
+</div>
+                ";
+
+    echo $element;
+}
 ?>

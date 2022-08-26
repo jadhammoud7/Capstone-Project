@@ -230,9 +230,7 @@ if (!isset($_SESSION['logged_bool'])) {
                     </div>
                 </div>
             </div>
-
-
-
+            
             <div class="gotoshoppage_profile">
                 <button title="Go to Shop Page"><strong>Go To Shop Page</strong></button>
             </div>
