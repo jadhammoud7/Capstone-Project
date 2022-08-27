@@ -80,16 +80,18 @@
     margin-bottom: 30px;
     padding: 30px;
 }
+
 .appointments {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 80%;
     box-shadow: 10px 10px 15px 1px royalblue;
     margin-left: 100px;
     margin-top: 30px;
     margin-bottom: 30px;
     padding: 30px;
 }
+
 .profile-part {
     display: flex;
     flex-direction: row;
@@ -102,10 +104,12 @@
     margin-right: 30px;
 }
 
-.basket-products {
+.basket-products,
+.appointments-part {
     display: flex;
     flex-direction: column;
 }
+
 /* .appointments-products {
     display: flex;
     flex-direction: column;
@@ -121,6 +125,17 @@
     border: 5px solid rgba(21, 100, 219, 0.486);
     border-radius: 15px;
 }
+
+.appointments-div {
+    display: flex;
+    flex-direction: row;
+    /* box-shadow: 10px 10px 15px 1px rgba(21, 100, 219, 0.486); */
+    margin: 10px;
+    margin-left: 20px;
+    /* border: 5px solid rgba(21, 100, 219, 0.486); */
+    /* border-radius: 15px; */
+}
+
 .appointments-product {
     display: flex;
     flex-direction: row;
@@ -132,20 +147,23 @@
 }
 
 
-.basket-product-img {
+.basket-product-img,
+.appointments-img {
     width: 20%;
     margin-left: 30px;
     margin-right: 30px;
     margin-top: 15px;
 }
 
-.basket-product-part {
+.basket-product-part,
+.appointments-part {
     text-align: center;
     margin-right: 30px;
     margin-left: 30px;
 }
 
-.favorites-products {
+.favorites-products,
+.appointments-list {
     display: flex;
     flex-direction: column;
     box-shadow: 10px 10px 15px 1px rgba(21, 100, 219, 0.486);
@@ -179,9 +197,14 @@
     margin-left: 30px;
 }
 
-.favorites-product-buttons {
+.favorites-product-buttons,
+.appointments-button {
     display: flex;
     flex-direction: row;
+}
+
+.appointments-button button {
+    margin: 10px;
 }
 
 .favorites-product-buttons div {
@@ -419,6 +442,10 @@ input[type="date"]:hover {
         width: 150px;
     }
 
+    .profile-sidebar {
+        text-align: center;
+    }
+
     .modal .join_our_family {
         font-size: 18px;
     }
@@ -555,16 +582,19 @@ input[type="date"]:hover {
         top: 725px;
     }
 
-    .basket-product {
+    .basket-product,
+    .appointments-div {
         flex-direction: column;
     }
 
-    .basket-product-img {
+    .basket-product-img,
+    .appointments-img {
         width: 80%;
         text-align: center;
     }
 
-    .basket-product-part h3 {
+    .basket-product-part h3,
+    .appointments-part h3 {
         color: royalblue;
     }
 
@@ -572,7 +602,8 @@ input[type="date"]:hover {
         flex-direction: column;
     }
 
-    .favorites-product-buttons {
+    .favorites-product-buttons,
+    .appointments-button {
         flex-direction: column;
         text-align: center;
     }
@@ -830,94 +861,114 @@ input[type="date"]:hover {
 
 /*for appointment list in profile page*/
 .appointmentsss {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     width: 40%;
     margin: 5px;
-  }
-  .appointmentsss img{
+    display: flex;
+    flex-direction: row;
+}
+
+.appointmentsss img {
     margin-left: 50px;
-  }
-  
-  .appointmentsss:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
-  
-  .app_info {
+}
+
+.appointmentsss:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.app_info {
     text-align: center;
-  }
-  .remove_app{
-    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.remove_app {
     border-radius: 15px;
     color: black;
+    text-align: center;
     background-color: red;
-  }
+}
 
 
-  @media screen and (max-width:888px){
-    .logout-btn{
+@media screen and (max-width:888px) {
+    .logout-btn {
         width: 20%;
     }
-  }
-  @media screen and (max-width:776px){
-    .appointmentsss img{
+}
+
+@media screen and (max-width:776px) {
+    .appointmentsss img {
         margin-left: 35px;
     }
-  }
-  @media screen and (max-width:720px){
-    .appointmentsss img{
+}
+
+@media screen and (max-width:720px) {
+    .appointmentsss img {
         margin-left: 40px;
     }
-    .appointmentsss{
+
+    .appointmentsss {
         width: 50%;
     }
-  }
-  @media screen and (max-width:624px){
-    .appointmentsss img{
+}
+
+@media screen and (max-width:624px) {
+    .appointmentsss img {
         margin-left: 40px;
     }
-    .appointmentsss{
+
+    .appointmentsss {
         width: 60%;
     }
-  }
-  @media screen and (max-width:537px){
-    .appointmentsss{
+}
+
+@media screen and (max-width:537px) {
+    .appointmentsss {
         width: 70%;
     }
-  }
-  @media screen and (max-width:485px){
-    .appointmentsss{
+}
+
+@media screen and (max-width:485px) {
+    .appointmentsss {
         width: 70%;
     }
-  }
-  @media screen and (max-width:479px){
-    .appointmentsss{
+}
+
+@media screen and (max-width:479px) {
+    .appointmentsss {
         width: 80%;
     }
-  }
-  @media screen and (max-width:424px){
-    .appointmentsss{
+}
+
+@media screen and (max-width:424px) {
+    .appointmentsss {
         width: 85%;
     }
-  }
-  @media screen and (max-width:405px){
-    .appointmentsss{
+}
+
+@media screen and (max-width:405px) {
+    .appointmentsss {
         width: 90%;
     }
-  }
-  @media screen and (max-width:372px){
-    .appointmentsss{
+}
+
+@media screen and (max-width:372px) {
+    .appointmentsss {
         width: 95%;
     }
-  }
-  @media screen and (max-width:341px){
-    .remove_app{
+}
+
+@media screen and (max-width:341px) {
+    .remove_app {
         width: 25%;
     }
-    .appointmentsss{
+
+    .appointmentsss {
         width: 95%;
     }
-    .appointments{
+
+    .appointments {
         width: 100%;
     }
-  }
+}
