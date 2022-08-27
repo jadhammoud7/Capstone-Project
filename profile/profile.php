@@ -14,6 +14,7 @@ $row = $results->fetch_assoc();
 
 include('../php/shop_product_connection.php');
 include('../php/basket_product_connection.php');
+include('../php/products_lists.php');
 
 $customer_id = $_SESSION['logged_id'];
 $query_add_to_favorites = "SELECT product_id FROM favorites_customer_product WHERE customer_id = '" . $customer_id . "' ";
@@ -37,12 +38,11 @@ $stmt_app->execute();
 $results_app = $stmt_app->get_result();
 
 //deleting app
-if(isset($_GET['deleteAPPid'])){
-    $get_app_id=$_GET['deleteAPPid'];
-    $query_app_delete = " DELETE FROM appointments WHERE customer_id = '" . $customer_id . "' and appointment_id='".$get_app_id."'";
+if (isset($_GET['deleteAPPid'])) {
+    $get_app_id = $_GET['deleteAPPid'];
+    $query_app_delete = " DELETE FROM appointments WHERE customer_id = '" . $customer_id . "' and appointment_id='" . $get_app_id . "'";
     $stmt_app_delete = $connection->prepare($query_app_delete);
     $stmt_app_delete->execute();
-
 }
 
 ?>
@@ -218,11 +218,11 @@ if(isset($_GET['deleteAPPid'])){
                 $stmt_get_product->execute();
                 $results_get_product = $stmt_get_product->get_result();
                 $row_get_product = $results_get_product->fetch_assoc();
-                add_to_favorites_connection($row_get_product['product_id'], $row_get_product['name'], $row_get_product['category'], $row_get_product['price']);
+                favorites_list_connection($row_get_product['product_id'], $row_get_product['name'], $row_get_product['category'], $row_get_product['price']);
             }
             ?>
             <div class="gotoshoppage_profile">
-                <button title="Go to Shop Page"><strong>Go To Shop Page</strong></button>
+                <button title="Go to Shop Page" onclick="window.location.href='../shop/shop.php';"><strong>Go To Shop Page</strong></button>
             </div>
         </div>
         <!-- ended favorites -->
@@ -243,168 +243,168 @@ if(isset($_GET['deleteAPPid'])){
                     // $stmt_app_image->execute();
                     // $results_app_image = $stmt_app_image->get_result();
                     // $row_app_image = $results_app_image->fetch_assoc();
-                    appointments_list_connection($row_app["appointment_id"],$row_app["appointment_name"], $row_app["date"], $row_app["hour"]);
+                    appointments_list_connection($row_app["appointment_id"], $row_app["appointment_name"], $row_app["date"], $row_app["hour"]);
                 }
                 ?>
 
                 <div class="gotoshoppage_profile">
-                    <button title="Go to Shop Page"><strong>Go To Shop Page</strong></button>
+                    <button title="Go to Appointments Page" onclick="window.location.href='../appointments/appointments.php';"><strong>Go To Appointments Page</strong></button>
                 </div>
             </div>
         </div>
     </div>
 
-        <!-- ended appointments -->
+    <!-- ended appointments -->
 
-        <!-- ended with profile body -->
-
-
+    <!-- ended with profile body -->
 
 
 
-        <!-- started return to top button -->
-        <button onclick="ReturnToTop()" id="TopBtn" title="Return to Top"><i class="fa fa-arrow-up"></i></button>
-        <!-- ended return to top button -->
+
+
+    <!-- started return to top button -->
+    <button onclick="ReturnToTop()" id="TopBtn" title="Return to Top"><i class="fa fa-arrow-up"></i></button>
+    <!-- ended return to top button -->
 
 
 
-        <!-- started footer -->
-        <footer>
-            <ol class="footer-list">
-                <li>
-                    <div>
-                        <ol class="footer-list-element">
-                            <li>
-                                <h3>Newbies Gamers Home</h3>
-                            </li>
-                            <li>
-                                <a href="../home-page/home-page.php#features" title="View Our specialists and features">Our
-                                    Specialists & Features</a>
-                            </li>
-                            <li>
-                                <a href="../home-page/home-page.php#about-us" title="Know more about us">About Us</a>
-                            </li>
-                            <li>
-                                <a href="../home-page/home-page.php#contact-us" title="Contact us for any enquiries or thoughts">Contact Us</a>
-                            </li>
-                            <li>
-                                <a href="../home-page/home-page.php#shop-products" title="Take a look at our products">Our
-                                    Products</a>
-                            </li>
-                            <li>
-                                <a href="../home-page/home-page.php#testimonials" title="See what our customers said about our service">Our Customers' opinions</a>
-                            </li>
-                        </ol>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <ol class="footer-list-element">
-                            <li>
-                                <h3>Newbies Gamers Shop</h3>
-                            </li>
-                            <li>
-                                <a href="../shop/shop.php" title="View all available products in Newbies Gamers and fill your basket to buy">Shop
-                                    Now</a>
-                            </li>
-                            <li>
-                                <a href="../basket/basket.php" title="View your shopping basket"><i class="fa fa-shopping-basket"></i>View your shopping basket</a>
-                            </li>
-                        </ol>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <ol class="footer-list-element">
-                            <li>
-                                <h3>About Newbies Gamers</h3>
-                            </li>
-                            <li>
-                                <a href="../aboutus/aboutus.php#history" title="Know about our history">Our History</a>
-                            </li>
-                            <li>
-                                <a href="../aboutus/aboutus.php#establishment" title="Know about our establishment">Our
-                                    Establishment</a>
-                            </li>
-                            <li>
-                                <a href="../aboutus/aboutus.php#specials" title="See what makes us special">Our
-                                    Specials</a>
-                            </li>
-                            <li>
-                                <i class="fa fa-location-arrow" title="Newbies Gamers shop location"></i>Beirut, Lebanon
-                            </li>
-                        </ol>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <ol class="footer-list-element">
-                            <li>
-                                <h3>Book an Appointment</h3>
-                            </li>
-                            <li>
-                                <a href="../appointments/appointments.php#laptop-repair">Laptop Repair</a>
-                            </li>
-                            <li>
-                                <a href="../appointments/appointments.php#laptop-cleaning">Laptop Cleaning</a>
-                            </li>
-                            <li>
-                                <a href="../appointments/appointments.php#cpu-repair">CPU Repair</a>
-                            </li>
-                            <li>
-                                <a href="../appointments/appointments.php#cpu-cleaning">CPU Cleaning</a>
-                            </li>
-                            <li>
-                                <a href="../appointments/appointments.php#phone-repair">Phone Repair</a>
-                            </li>
-                            <li>
-                                <a href="../appointments/appointments.php#ps-repair">PS Repair</a>
-                            </li>
-                            <li>
-                                <a href="../appointments/appointments.php#controller-repair">Controller Repair</a>
-                            </li>
-                        </ol>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <ol class="footer-list-element">
-                            <li>
-                                <h3>Contact Us</h3>
-                            </li>
-                            <li>
-                                <a href="../contactus/contactus.php" title="Share your thoughts and concerns to us">Share
-                                    your thoughts</a>
-                            </li>
-                            <li>
-                                <i class="fa fa-envelope" title="Our email to contact us"></i>newbies_gamers@gmail.com
-                            </li>
-                            <li>
-                                <i class="fa fa-phone" title="Call us or chat by whatsapp with us"></i>+961 01 111 111
-                            </li>
-                        </ol>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <ol class="footer-list-element">
-                            <li>
-                                <h3>Follow Us on Our Socials</h3>
-                            </li>
-                            <li>
-                                <a href="https://www.facebook.com" title="Newbies Gamers facebook account link"><i class="fa fa-facebook"></i>Facebook</a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com" title="Newbies Gamers instagram account link"><i class="fa fa-instagram"></i>Instagram</a>
-                            </li>
-                            <li>
-                                <a href="https://www.twitter.com" title="Newbies Gamers twitter account link"><i class="fa fa-twitter"></i>Twitter</a>
-                            </li>
-                        </ol>
-                    </div>
-                </li>
-            </ol>
-        </footer>
+    <!-- started footer -->
+    <footer>
+        <ol class="footer-list">
+            <li>
+                <div>
+                    <ol class="footer-list-element">
+                        <li>
+                            <h3>Newbies Gamers Home</h3>
+                        </li>
+                        <li>
+                            <a href="../home-page/home-page.php#features" title="View Our specialists and features">Our
+                                Specialists & Features</a>
+                        </li>
+                        <li>
+                            <a href="../home-page/home-page.php#about-us" title="Know more about us">About Us</a>
+                        </li>
+                        <li>
+                            <a href="../home-page/home-page.php#contact-us" title="Contact us for any enquiries or thoughts">Contact Us</a>
+                        </li>
+                        <li>
+                            <a href="../home-page/home-page.php#shop-products" title="Take a look at our products">Our
+                                Products</a>
+                        </li>
+                        <li>
+                            <a href="../home-page/home-page.php#testimonials" title="See what our customers said about our service">Our Customers' opinions</a>
+                        </li>
+                    </ol>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <ol class="footer-list-element">
+                        <li>
+                            <h3>Newbies Gamers Shop</h3>
+                        </li>
+                        <li>
+                            <a href="../shop/shop.php" title="View all available products in Newbies Gamers and fill your basket to buy">Shop
+                                Now</a>
+                        </li>
+                        <li>
+                            <a href="../basket/basket.php" title="View your shopping basket"><i class="fa fa-shopping-basket"></i>View your shopping basket</a>
+                        </li>
+                    </ol>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <ol class="footer-list-element">
+                        <li>
+                            <h3>About Newbies Gamers</h3>
+                        </li>
+                        <li>
+                            <a href="../aboutus/aboutus.php#history" title="Know about our history">Our History</a>
+                        </li>
+                        <li>
+                            <a href="../aboutus/aboutus.php#establishment" title="Know about our establishment">Our
+                                Establishment</a>
+                        </li>
+                        <li>
+                            <a href="../aboutus/aboutus.php#specials" title="See what makes us special">Our
+                                Specials</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-location-arrow" title="Newbies Gamers shop location"></i>Beirut, Lebanon
+                        </li>
+                    </ol>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <ol class="footer-list-element">
+                        <li>
+                            <h3>Book an Appointment</h3>
+                        </li>
+                        <li>
+                            <a href="../appointments/appointments.php#laptop-repair">Laptop Repair</a>
+                        </li>
+                        <li>
+                            <a href="../appointments/appointments.php#laptop-cleaning">Laptop Cleaning</a>
+                        </li>
+                        <li>
+                            <a href="../appointments/appointments.php#cpu-repair">CPU Repair</a>
+                        </li>
+                        <li>
+                            <a href="../appointments/appointments.php#cpu-cleaning">CPU Cleaning</a>
+                        </li>
+                        <li>
+                            <a href="../appointments/appointments.php#phone-repair">Phone Repair</a>
+                        </li>
+                        <li>
+                            <a href="../appointments/appointments.php#ps-repair">PS Repair</a>
+                        </li>
+                        <li>
+                            <a href="../appointments/appointments.php#controller-repair">Controller Repair</a>
+                        </li>
+                    </ol>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <ol class="footer-list-element">
+                        <li>
+                            <h3>Contact Us</h3>
+                        </li>
+                        <li>
+                            <a href="../contactus/contactus.php" title="Share your thoughts and concerns to us">Share
+                                your thoughts</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope" title="Our email to contact us"></i>newbies_gamers@gmail.com
+                        </li>
+                        <li>
+                            <i class="fa fa-phone" title="Call us or chat by whatsapp with us"></i>+961 01 111 111
+                        </li>
+                    </ol>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <ol class="footer-list-element">
+                        <li>
+                            <h3>Follow Us on Our Socials</h3>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com" title="Newbies Gamers facebook account link"><i class="fa fa-facebook"></i>Facebook</a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com" title="Newbies Gamers instagram account link"><i class="fa fa-instagram"></i>Instagram</a>
+                        </li>
+                        <li>
+                            <a href="https://www.twitter.com" title="Newbies Gamers twitter account link"><i class="fa fa-twitter"></i>Twitter</a>
+                        </li>
+                    </ol>
+                </div>
+            </li>
+        </ol>
+    </footer>
 </body>
 <!-- ended footer -->
 
