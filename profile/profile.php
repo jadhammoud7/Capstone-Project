@@ -27,6 +27,11 @@ $stmt_basket = $connection->prepare($query_basket);
 $stmt_basket->execute();
 $results_basket = $stmt_basket->get_result();
 
+$query_checkouts = "SELECT checkout_id, total_price, tax_price, total_price_including_tax, shipping_location FROM checkouts WHERE customer_id = '" . $customer_id . "' ";
+$stmt_checkouts = $connection->prepare($query_checkouts);
+$stmt_checkouts->execute();
+$results_checkouts = $stmt_checkouts->get_result();
+
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
@@ -128,6 +133,7 @@ if (isset($_GET['deleteAPPid'])) {
                 <li><a onclick="ShowBasket()" id="basket-button" title="View your current list of products added by you to basket">Shopping Basket</a></li>
                 <li><a onclick="ShowFavorites()" id="favorites-button" title="View list of products added by you to your favorites">Favorites List</a></li>
                 <li><a onclick="ShowAppointments()" id="appointments-button" title="View list of appointments added by you to your appointments section">Appointments List</a></li>
+                <li><a onclick="ShowCheckouts()" id="checkouts-button" title="View the list of shopping order checkouts submitted by you to the shop">Checkouts List</a></li>
                 <form action="../php/logout.php" method="post">
                     <button type="submit" class="logout-btn" onclick="return confirm('Are you sure you want to log out?');<?php unset($_SESSION['free_games']); ?>"><i class="fa fa-signout"></i><strong>Log out</strong></button>
                 </form>
@@ -228,9 +234,6 @@ if (isset($_GET['deleteAPPid'])) {
         </div>
         <!-- ended favorites -->
 
-
-
-
         <!-- started appointments -->
         <div class="appointments fade" style="display: none;">
             <div>
@@ -253,9 +256,25 @@ if (isset($_GET['deleteAPPid'])) {
                 </div>
             </div>
         </div>
+        <!-- ended appointments -->
+
+        <!-- started checkouts -->
+        <div class="appointments fade" style="display: none;">
+            <div>
+                <h2>Checkouts List</h2>
+                <p>These are the list of checkouts of orders requested by you from the shop</p>
+                <p>Total: <?php echo mysqli_num_rows($results_checkouts) ?></p>
+                <?php
+                while ($row_checkouts = $results_checkouts->fetch_assoc()) {
+                    checkouts_list_connection($row_checkouts['checkout_id'], $row_checkouts['shipping_location'], $row_checkouts['total_price'], $row_checkouts['tax_price'], $row_checkouts['total_price_including_tax']);
+                }
+                ?>
+            </div>
+        </div>
+        <!-- ended checkouts -->
+
     </div>
 
-    <!-- ended appointments -->
 
     <!-- ended with profile body -->
 

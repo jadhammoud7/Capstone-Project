@@ -3,23 +3,26 @@ var profile_part = document.querySelector(".profile");
 var basket_part = document.querySelector(".basket");
 var favorites_part = document.querySelector(".favorites");
 var appointments_part = document.querySelector(".appointments");
+var checkouts_part = document.querySelector(".checkouts");
 
 var profile_button = document.getElementById("profile-button");
 var basket_button = document.getElementById("basket-button");
 var favorites_button = document.getElementById("favorites-button");
 var appointments_button = document.getElementById("appointments-button");
-
+var checkouts_button = document.getElementById("checkouts-button");
 
 function ShowProfile() {
     profile_part.style.display = "block";
     // profile_part.classList.add("reveal-by-y");
     basket_part.style.display = "none";
     favorites_part.style.display = "none";
+    checkouts_part.style.display = "none";
     appointments_part.style.display = "none";
     profile_button.style.fontWeight = 800;
     basket_button.style.fontWeight = 500;
     favorites_button.style.fontWeight = 500;
     appointments_button.style.fontWeight = 500;
+    checkouts_button.style.fontWeight = 500;
 }
 
 function ShowBasket() {
@@ -28,17 +31,20 @@ function ShowBasket() {
     // basket_part.classList.add("reveal-by-y");
     favorites_part.style.display = "none";
     appointments_part.style.display = "none";
+    checkouts_part.style.display = "none";
 
     profile_button.style.fontWeight = 500;
     basket_button.style.fontWeight = 800;
     favorites_button.style.fontWeight = 500;
     appointments_button.style.fontWeight = 500;
+    checkouts_button.style.fontWeight = 500;
 }
 
 function ShowFavorites() {
     profile_part.style.display = "none";
     basket_part.style.display = "none";
     appointments_part.style.display = "none";
+    checkouts_part.style.display = "none";
 
     favorites_part.style.display = "block";
     // favorites_part.classList.add("reveal-by-y");
@@ -46,6 +52,7 @@ function ShowFavorites() {
     basket_button.style.fontWeight = 500;
     favorites_button.style.fontWeight = 800;
     appointments_button.style.fontWeight = 500;
+    checkouts_button.style.fontWeight = 500;
 }
 
 function ShowAppointments() {
@@ -53,11 +60,27 @@ function ShowAppointments() {
     basket_part.style.display = "none";
     favorites_part.style.display = "none";
     appointments_part.style.display = "block";
+    checkouts_part.style.display = "none";
     // appointments_part.classList.add("reveal-by-y");
     profile_button.style.fontWeight = 500;
     basket_button.style.fontWeight = 500;
     favorites_button.style.fontWeight = 500;
     appointments_button.style.fontWeight = 800;
+    checkouts_button.style.fontWeight = 500;
+}
+
+function ShowCheckouts() {
+    profile_part.style.display = "none";
+    basket_part.style.display = "none";
+    favorites_part.style.display = "none";
+    appointments_part.style.display = "none";
+    checkouts_part.style.display = "block";
+    // appointments_part.classList.add("reveal-by-y");
+    profile_button.style.fontWeight = 500;
+    basket_button.style.fontWeight = 500;
+    favorites_button.style.fontWeight = 500;
+    appointments_button.style.fontWeight = 500;
+    checkouts_button.style.fontWeight = 800;
 }
 
 const btn = document.querySelector(".edit_profile_btn");
