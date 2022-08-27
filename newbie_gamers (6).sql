@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Aug 26, 2022 at 08:04 PM
--- Server version: 8.0.27
--- PHP Version: 8.0.13
+-- Host: 127.0.0.1
+-- Generation Time: Aug 27, 2022 at 01:09 PM
+-- Server version: 8.0.23
+-- PHP Version: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,9 +41,6 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`appointment_id`, `customer_id`, `appointment_name`, `date`, `hour`, `status`) VALUES
-(1, 4, 'Repair Laptop', '2022-07-25', '8:00-9:30 AM', 'Pending'),
-(2, 4, 'Repair Laptop', '2022-07-25', '8:00-9:30 AM', 'Pending'),
-(3, 4, 'Repair Laptop', '2022-07-25', '8:00-9:30 AM', 'Pending'),
 (4, 4, 'Repair Laptop', '2022-07-25', '8:00-9:30 AM', 'Pending'),
 (5, 4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Pending'),
 (6, 4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Pending'),
@@ -80,6 +77,7 @@ INSERT INTO `baskets_customer_product` (`customer_id`, `product_id`, `quantity`,
 
 CREATE TABLE `checkouts` (
   `checkout_id` int NOT NULL,
+  `customer_id` int NOT NULL,
   `first_name` varchar(225) NOT NULL,
   `last_name` varchar(225) NOT NULL,
   `email` varchar(225) NOT NULL,
@@ -88,7 +86,10 @@ CREATE TABLE `checkouts` (
   `shipping_location` varchar(225) NOT NULL,
   `shipping_company` varchar(50) NOT NULL,
   `postcode` varchar(10) NOT NULL,
-  `order_notes` varchar(100) NOT NULL
+  `order_notes` varchar(100) NOT NULL,
+  `total_price` double NOT NULL,
+  `tax_price` double NOT NULL,
+  `total_price_including_tax` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -99,8 +100,9 @@ CREATE TABLE `checkouts` (
 
 CREATE TABLE `checkouts_customers_products` (
   `checkout_id` int NOT NULL,
-  `customer_id` int NOT NULL,
-  `product_id` int NOT NULL
+  `product_id` int NOT NULL,
+  `quantity` int NOT NULL,
+  `total_price` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -165,6 +167,13 @@ CREATE TABLE `favorites_customer_product` (
   `customer_id` int NOT NULL,
   `product_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `favorites_customer_product`
+--
+
+INSERT INTO `favorites_customer_product` (`customer_id`, `product_id`) VALUES
+(4, 1);
 
 -- --------------------------------------------------------
 
