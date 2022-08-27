@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 27, 2022 at 01:09 PM
+-- Generation Time: Aug 27, 2022 at 07:30 PM
 -- Server version: 8.0.23
 -- PHP Version: 8.0.2
 
@@ -66,8 +66,7 @@ CREATE TABLE `baskets_customer_product` (
 --
 
 INSERT INTO `baskets_customer_product` (`customer_id`, `product_id`, `quantity`, `price`) VALUES
-(4, 1, 3, 150),
-(4, 9, 2, 600);
+(4, 2, 1, 46);
 
 -- --------------------------------------------------------
 
@@ -89,8 +88,16 @@ CREATE TABLE `checkouts` (
   `order_notes` varchar(100) NOT NULL,
   `total_price` double NOT NULL,
   `tax_price` double NOT NULL,
-  `total_price_including_tax` double NOT NULL
+  `total_price_including_tax` double NOT NULL,
+  `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `checkouts`
+--
+
+INSERT INTO `checkouts` (`checkout_id`, `customer_id`, `first_name`, `last_name`, `email`, `phone_number`, `shipping_country`, `shipping_location`, `shipping_company`, `postcode`, `order_notes`, `total_price`, `tax_price`, `total_price_including_tax`, `status`) VALUES
+(2, 4, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '96171123805', 'Lebanon', 'Aramoun, Lebanon', 'LAU', '1548', '213213321132', 796, 79.60000000000001, 875.6, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -102,8 +109,17 @@ CREATE TABLE `checkouts_customers_products` (
   `checkout_id` int NOT NULL,
   `product_id` int NOT NULL,
   `quantity` int NOT NULL,
-  `total_price` double NOT NULL
+  `total_price` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `checkouts_customers_products`
+--
+
+INSERT INTO `checkouts_customers_products` (`checkout_id`, `product_id`, `quantity`, `total_price`) VALUES
+(2, 1, 3, 150),
+(2, 9, 2, 600),
+(2, 2, 1, 46);
 
 -- --------------------------------------------------------
 
@@ -245,6 +261,12 @@ ALTER TABLE `appointments`
   ADD PRIMARY KEY (`appointment_id`);
 
 --
+-- Indexes for table `checkouts`
+--
+ALTER TABLE `checkouts`
+  ADD PRIMARY KEY (`checkout_id`);
+
+--
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
@@ -265,6 +287,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `appointments`
   MODIFY `appointment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `checkouts`
+--
+ALTER TABLE `checkouts`
+  MODIFY `checkout_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `customers`

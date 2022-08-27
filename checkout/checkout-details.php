@@ -121,7 +121,7 @@ function checkout_products_connection($name, $quantity, $price)
                             <div class="input-container">
                                 <input type="text" name="first_name" id="first_name" value="<?php if (isset($row_checkout)) {
                                                                                                 echo $row_checkout['first_name'];
-                                                                                            } ?>" readonly>
+                                                                                            } ?>" readonly class="is-valid">
                                 <label for="first_name">First Name</label>
                             </div>
 
@@ -129,7 +129,7 @@ function checkout_products_connection($name, $quantity, $price)
 
                                 <input type="text" name="last_name" id="last_name" value="<?php if (isset($row_checkout)) {
                                                                                                 echo $row_checkout['last_name'];
-                                                                                            } ?>" readonly>
+                                                                                            } ?>" readonly class="is-valid">
                                 <label for="last_name">Last Name</label>
                             </div>
                         </div>
@@ -138,14 +138,14 @@ function checkout_products_connection($name, $quantity, $price)
                             <div class="input-container">
                                 <input type="email" name="email" id="email" value="<?php if (isset($row_checkout)) {
                                                                                         echo $row_checkout['email'];
-                                                                                    } ?>" readonly>
+                                                                                    } ?>" readonly class="is-valid">
                                 <label for="email">Email</label>
                             </div>
                             <div class="input-container">
 
                                 <input type="tel" name="phone_number" id="phone_number" value="<?php if (isset($row_checkout)) {
                                                                                                     echo $row_checkout['phone_number'];
-                                                                                                } ?>" readonly>
+                                                                                                } ?>" readonly class="is-valid">
                                 <label for="phone_number">Phone Number</label>
                             </div>
                         </div>
@@ -160,7 +160,7 @@ function checkout_products_connection($name, $quantity, $price)
 
                                 <input type="text" name="shipping_country" id="shipping_country" value="<?php if (isset($row_checkout)) {
                                                                                                             echo $row_checkout['shipping_country'];
-                                                                                                        } ?>" readonly>
+                                                                                                        } ?>" readonly class="is-valid">
                                 <label for="shipping_country">Country</label>
                             </div>
                         </div>
@@ -170,7 +170,7 @@ function checkout_products_connection($name, $quantity, $price)
 
                                 <input type="text" name="shipping_location" id="shipping_location" value="<?php if (isset($row_checkout)) {
                                                                                                                 echo $row_checkout['shipping_location'];
-                                                                                                            } ?>" readonly>
+                                                                                                            } ?>" readonly class="is-valid">
                                 <label for="shipping_location">Location (Town / City, Street, Home Address)</label>
                             </div>
                         </div>
@@ -180,14 +180,14 @@ function checkout_products_connection($name, $quantity, $price)
 
                                 <input type="text" name="shipping_company" id="shipping_company" value="<?php if (isset($row_checkout)) {
                                                                                                             echo $row_checkout['shipping_company'];
-                                                                                                        } ?>" readonly>
+                                                                                                        } ?>" readonly class="is-valid">
                                 <label for="shipping_company">Company Name (if any)</label>
                             </div>
                             <div class="input-container">
 
                                 <input type="number" name="postcode" id="postcode" value="<?php if (isset($row_checkout)) {
                                                                                                 echo $row_checkout['postcode'];
-                                                                                            } ?>" readonly>
+                                                                                            } ?>" readonly class="is-valid">
                                 <label for="postcode">Postcode / ZIP</label>
                             </div>
                         </div>
@@ -195,7 +195,7 @@ function checkout_products_connection($name, $quantity, $price)
                             <div class="input-container" style="width: 100%;">
                                 <input type="text" name="order_notes" id="order-notes" value="<?php if (isset($row_checkout)) {
                                                                                                     echo $row_checkout['order_notes'];
-                                                                                                } ?>" readonly>
+                                                                                                } ?>" readonly class="is-valid">
                                 <label for="order_notes">Order Notes (Special notes related to the delivery,
                                     optional)</label>
                             </div>
