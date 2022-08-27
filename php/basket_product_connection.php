@@ -85,7 +85,7 @@ function appointments_list_connection($appointment_id,$appointment_name,$date,$h
         <button onclick=\"window.location=\"../profile/profile.php?deleteAPPid=$appointment_id;\"\" class=\"remove_app\"><strong>Remove Appointment</strong></button>
     </div>
 </div>
-                ";
+";
 
     echo $element;
 }

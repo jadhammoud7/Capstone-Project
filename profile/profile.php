@@ -251,10 +251,16 @@ if(isset($_GET['deleteAPPid'])){
                     <button title="Go to Shop Page"><strong>Go To Shop Page</strong></button>
                 </div>
             </div>
-            <!-- ended appointments -->
-
         </div>
+    </div>
+
+        <!-- ended appointments -->
+
         <!-- ended with profile body -->
+
+
+
+
 
         <!-- started return to top button -->
         <button onclick="ReturnToTop()" id="TopBtn" title="Return to Top"><i class="fa fa-arrow-up"></i></button>
