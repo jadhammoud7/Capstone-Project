@@ -917,4 +917,7 @@ input[type="date"]:hover {
     .appointmentsss{
         width: 95%;
     }
+    .appointments{
+        width: 100%;
+    }
   }
