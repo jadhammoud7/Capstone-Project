@@ -162,6 +162,10 @@
     margin-left: 30px;
 }
 
+.appointments-part h3 {
+    color: royalblue;
+}
+
 .favorites-products,
 .appointments-list {
     display: flex;
@@ -504,12 +508,20 @@ input[type="date"]:hover {
         position: absolute;
         right: 300px;
     }
+
+    .appointments-img {
+        width: 80%;
+    }
 }
 
 @media screen and (max-width:1400px) {
     .close_form {
         position: absolute;
         right: 280px;
+    }
+
+    .appointments-img {
+        width: 80%;
     }
 }
 
@@ -518,6 +530,10 @@ input[type="date"]:hover {
         position: absolute;
         right: 240px;
     }
+
+    .appointments-img {
+        width: 80%;
+    }
 }
 
 @media screen and (max-width:1300px) {
@@ -525,11 +541,19 @@ input[type="date"]:hover {
         position: absolute;
         right: 240px;
     }
+
+    .appointments-img {
+        width: 80%;
+    }
 }
 
 @media screen and (max-width:1244px) {
     .close_form {
         right: 220px;
+    }
+
+    .appointments-img {
+        width: 80%;
     }
 }
 
@@ -537,11 +561,19 @@ input[type="date"]:hover {
     .close_form {
         right: 200px;
     }
+
+    .appointments-img {
+        width: 80%;
+    }
 }
 
 @media screen and (max-width:1172px) {
     .close_form {
         right: 180px;
+    }
+
+    .appointments-img {
+        width: 80%;
     }
 }
 
@@ -549,11 +581,19 @@ input[type="date"]:hover {
     .close_form {
         right: 160px;
     }
+
+    .appointments-img {
+        width: 80%;
+    }
 }
 
 @media screen and (max-width:1047px) {
     .close_form {
         right: 140px;
+    }
+
+    .appointments-img {
+        width: 80%;
     }
 }
 
@@ -567,11 +607,19 @@ input[type="date"]:hover {
     .close_form {
         right: 100px;
     }
+
+    .appointments-img {
+        width: 80%;
+    }
 }
 
 @media screen and (max-width:926px) {
     .close_form {
         right: 80px;
+    }
+
+    .appointments-img {
+        width: 80%;
     }
 }
 
@@ -591,6 +639,11 @@ input[type="date"]:hover {
     .appointments-img {
         width: 80%;
         text-align: center;
+    }
+
+    .appointments {
+        margin: 20px;
+        width: 90%;
     }
 
     .basket-product-part h3,

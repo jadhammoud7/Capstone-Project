@@ -33,7 +33,7 @@ function favorites_list_connection($product_id, $name, $category, $price)
 
 
 
-function appointments_list_connection($appointment_id, $appointment_name, $date, $hour)
+function appointments_list_connection($appointment_id, $appointment_name, $date, $hour, $status)
 {
     //dont forget to add thr image
     // $element =  "
@@ -66,9 +66,13 @@ function appointments_list_connection($appointment_id, $appointment_name, $date,
                     <h3>Hour</h3>
                     <h4>$hour</h4>
                 </div>
+                <div class=\"appointments-part\">
+                    <h3>Status</h3>
+                    <h4>$status</h4>
+                </div>
             </div>
             <div class=\"appointments-button\">
-                <button onclick=\"window.location=\"../profile/profile.php?deleteAPPid=$appointment_id;\"\" class=\"remove_app\"><i class=\"fa fa-remove\"></i><strong>Delete Appointment</strong></button>
+                <button onclick=\"if(confirm('Are you sure to delete this appointment?')){ window.location='../profile/profile.php?deleteAPPid=$appointment_id'; }\" class=\"remove_app\"><i class=\"fa fa-remove\"></i><strong>Delete Appointment</strong></button>
             </div>
         </div>";
     echo $element;

@@ -32,7 +32,7 @@ if (!isset($_SESSION['logged_bool'])) {
 }
 
 //for appointment list
-$query_app = "SELECT appointment_id,appointment_name,date,hour FROM appointments WHERE customer_id = '" . $customer_id . "' ";
+$query_app = "SELECT appointment_id, appointment_name, date, hour, status FROM appointments WHERE customer_id = '" . $customer_id . "' ";
 $stmt_app = $connection->prepare($query_app);
 $stmt_app->execute();
 $results_app = $stmt_app->get_result();
@@ -43,6 +43,7 @@ if (isset($_GET['deleteAPPid'])) {
     $query_app_delete = " DELETE FROM appointments WHERE customer_id = '" . $customer_id . "' and appointment_id='" . $get_app_id . "'";
     $stmt_app_delete = $connection->prepare($query_app_delete);
     $stmt_app_delete->execute();
+    header("Location: ../profile/profile.php");
 }
 
 ?>
@@ -234,8 +235,8 @@ if (isset($_GET['deleteAPPid'])) {
         <div class="appointments fade" style="display: none;">
             <div>
                 <h2>Appointments List</h2>
-                <p>there are the list of appointments that you booked for some repairs
-                </p>
+                <p>These are the list of appointments that you booked</p>
+                <p>Total: <?php echo mysqli_num_rows($results_app) ?></p>
                 <?php
                 while ($row_app = $results_app->fetch_assoc()) {
                     // $query_app_image = "SELECT image FROM repair WHERE  repair_type='".$row_app['appointment_name']."';";
@@ -243,7 +244,7 @@ if (isset($_GET['deleteAPPid'])) {
                     // $stmt_app_image->execute();
                     // $results_app_image = $stmt_app_image->get_result();
                     // $row_app_image = $results_app_image->fetch_assoc();
-                    appointments_list_connection($row_app["appointment_id"], $row_app["appointment_name"], $row_app["date"], $row_app["hour"]);
+                    appointments_list_connection($row_app["appointment_id"], $row_app["appointment_name"], $row_app["date"], $row_app["hour"], $row_app["status"]);
                 }
                 ?>
 
