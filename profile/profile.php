@@ -120,7 +120,7 @@ if(isset($_GET['deleteAPPid'])){
             <img src="../images/info.png" alt="">
             <ol class="profile-sidebar-user">
                 <li id="customer-name" title="My Username"><span><?php echo $row["username"]; ?></span></li>
-                <li id="customer" title="My Status"><span>Customer</span></li>
+                <!-- <li id="customer" title="My Status"><span>Customer</span></li> -->
             </ol>
             <ol class="profile-sidebar-list reveal-by-x">
                 <li><a onclick="ShowProfile()" id="profile-button" title="View your own personal info">Profile</a></li>

@@ -859,3 +859,62 @@ input[type="date"]:hover {
         width: 20%;
     }
   }
+  @media screen and (max-width:776px){
+    .appointmentsss img{
+        margin-left: 35px;
+    }
+  }
+  @media screen and (max-width:720px){
+    .appointmentsss img{
+        margin-left: 40px;
+    }
+    .appointmentsss{
+        width: 50%;
+    }
+  }
+  @media screen and (max-width:624px){
+    .appointmentsss img{
+        margin-left: 40px;
+    }
+    .appointmentsss{
+        width: 60%;
+    }
+  }
+  @media screen and (max-width:537px){
+    .appointmentsss{
+        width: 70%;
+    }
+  }
+  @media screen and (max-width:485px){
+    .appointmentsss{
+        width: 70%;
+    }
+  }
+  @media screen and (max-width:479px){
+    .appointmentsss{
+        width: 80%;
+    }
+  }
+  @media screen and (max-width:424px){
+    .appointmentsss{
+        width: 85%;
+    }
+  }
+  @media screen and (max-width:405px){
+    .appointmentsss{
+        width: 90%;
+    }
+  }
+  @media screen and (max-width:372px){
+    .appointmentsss{
+        width: 95%;
+    }
+  }
+  @media screen and (max-width:341px){
+    .remove_app{
+        width: 25%;
+    }
+    .appointmentsss{
+        width: 95%;
+    }
+  }

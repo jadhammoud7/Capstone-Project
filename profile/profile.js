@@ -12,7 +12,7 @@ var appointments_button = document.getElementById("appointments-button");
 
 function ShowProfile() {
     profile_part.style.display = "block";
-    profile_part.classList.add("reveal-by-y");
+    // profile_part.classList.add("reveal-by-y");
     basket_part.style.display = "none";
     favorites_part.style.display = "none";
     appointments_part.style.display = "none";
@@ -25,7 +25,7 @@ function ShowProfile() {
 function ShowBasket() {
     profile_part.style.display = "none";
     basket_part.style.display = "block";
-    basket_part.classList.add("reveal-by-y");
+    // basket_part.classList.add("reveal-by-y");
     favorites_part.style.display = "none";
     appointments_part.style.display = "none";
 
@@ -41,7 +41,7 @@ function ShowFavorites() {
     appointments_part.style.display = "none";
 
     favorites_part.style.display = "block";
-    favorites_part.classList.add("reveal-by-y");
+    // favorites_part.classList.add("reveal-by-y");
     profile_button.style.fontWeight = 500;
     basket_button.style.fontWeight = 500;
     favorites_button.style.fontWeight = 800;
@@ -53,7 +53,7 @@ function ShowAppointments() {
     basket_part.style.display = "none";
     favorites_part.style.display = "none";
     appointments_part.style.display = "block";
-    appointments_part.classList.add("reveal-by-y");
+    // appointments_part.classList.add("reveal-by-y");
     profile_button.style.fontWeight = 500;
     basket_button.style.fontWeight = 500;
     favorites_button.style.fontWeight = 500;
