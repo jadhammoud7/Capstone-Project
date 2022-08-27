@@ -40,6 +40,24 @@ function AddRevealX() {
     }
 }
 
+currentDate = new Date().getFullYear() + "-";
+if (new Date().getMonth() < 10) {
+    currentDate += "0" + (new Date().getMonth() + 1) + "-";
+}
+else {
+    currentDate += (new Date().getMonth() + 1) + "-";
+}
+
+if (new Date().getDate() < 10) {
+    currentDate += "0" + new Date().getDate();
+}
+else {
+    currentDate += new Date().getDate();
+}
+
+document.getElementById("date").value = currentDate;
+document.getElementById("date").classList += "is-valid";
+
 window.addEventListener("scroll", AddRevealX);
 window.addEventListener("pageshow", AddRevealX);
 

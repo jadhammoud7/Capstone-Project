@@ -146,13 +146,14 @@ $_SESSION['success'] = 'true';
 // }
 
 
-if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['email']) && isset($_POST['phone_number']) && isset($_POST['shipping_country']) && isset($_POST['shipping_location']) && isset($_POST['postcode']) && isset($_SESSION['total_price']) && isset($_SESSION['tax_price']) && isset($_SESSION['total_price_including_tax'])) {
+if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['email']) && isset($_POST['phone_number']) && isset($_POST['date']) && isset($_POST['shipping_country']) && isset($_POST['shipping_location']) && isset($_POST['postcode']) && isset($_SESSION['total_price']) && isset($_SESSION['tax_price']) && isset($_SESSION['total_price_including_tax'])) {
     //add to table checkouts all checkout info
     $total_price = $_SESSION['total_price'];
     $tax_price = $_SESSION['tax_price'];
     $total_price_including_tax = $_SESSION['total_price_including_tax'];
-    $insert_checkouts = $connection->prepare("INSERT INTO checkouts(customer_id, first_name, last_name, email, phone_number, shipping_country, shipping_location, shipping_company, postcode, order_notes, total_price, tax_price, total_price_including_tax, status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $insert_checkouts->bind_param("isssssssssddds", $customer_id, $first_name, $last_name, $email, $phone_number, $shipping_country, $shipping_location, $shipping_company, $postcode, $order_notes, $total_price, $tax_price, $total_price_including_tax, $status);
+    $date = $_POST['date'];
+    $insert_checkouts = $connection->prepare("INSERT INTO checkouts(customer_id, first_name, last_name, email, phone_number, shipping_country, shipping_location, shipping_company, postcode, order_notes, total_price, tax_price, total_price_including_tax, status, date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $insert_checkouts->bind_param("isssssssssdddss", $customer_id, $first_name, $last_name, $email, $phone_number, $shipping_country, $shipping_location, $shipping_company, $postcode, $order_notes, $total_price, $tax_price, $total_price_including_tax, $status, $date);
     $insert_checkouts->execute();
     $insert_checkouts->close();
 
@@ -374,6 +375,12 @@ $results_get_basket_products = $stmt_get_basket_products->get_result();
                             }
                             ?>
                         </p>
+                        <div class="form-container-part-inputs">
+                            <div class="input-container">
+                                <input type="text" name="date" value="" id="date" readonly>
+                                <label for="date">Date</label>
+                            </div>
+                        </div>
                         <div class="form-container-part-inputs">
                             <div class="input-container">
 

@@ -154,6 +154,14 @@ function checkout_products_connection($name, $quantity, $price)
                         <div>
                             <h3 class="form-container-part-title">Shipping Details</h3>
                         </div>
+                        <div class="form-container-part-inputs">
+                            <div class="input-container">
+                                <input type="text" name="date" value="<?php if (isset($row_checkout)) {
+                                                                            echo $row_checkout['date'];
+                                                                        } ?>" readonly class="is-valid">
+                                <label for="date">Date</label>
+                            </div>
+                        </div>
 
                         <div class="form-container-part-inputs">
                             <div class="input-container">

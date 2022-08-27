@@ -120,7 +120,8 @@ function checkouts_list_connection($checkout_id, $shipping_location, $status, $t
                 </table>
             </div>     
             <div class=\"checkouts-div\">
-                <button style=\"border-radius: 20px;\" onclick=\"window.location.href = '../checkout/checkout-details.php?checkout_id=$checkout_id';\"><i class=\"fa fa-info-circle\"></i>See Checkout Details</button>
+                <button style=\"border-radius: 20px;\" onclick=\"window.location.href = '../checkout/checkout-details.php?checkout_id=$checkout_id';\" title=\"See your checkout info including billing details and products buyed\"><i class=\"fa fa-info-circle\"></i>See Checkout Details</button>
+                <button style=\"margin-left: 10px; border-radius: 20px; background-color: red;\" onclick = \"if(confirm('Are you sure you want to delete your order?')){ window.location='../profile/profile.php?delete_checkout_id=$checkout_id'; }\" title=\"Delete your order\"><i class=\"fa fa-trash\"></i>Delete Order</button>
             </div>   
         </div>";
     echo $element;

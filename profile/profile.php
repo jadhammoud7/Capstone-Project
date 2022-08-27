@@ -51,6 +51,17 @@ if (isset($_GET['deleteAPPid'])) {
     header("Location: ../profile/profile.php");
 }
 
+if (isset($_GET['delete_checkout_id'])) {
+    $checkout_id_delete = $_GET['delete_checkout_id'];
+    $query_delete_from_checkouts = "DELETE FROM checkouts WHERE checkout_id = '" . $checkout_id_delete . "'";
+    $stmt_delete_checkout = $connection->prepare($query_delete_from_checkouts);
+    $stmt_delete_checkout->execute();
+    $query_delete_checkouts_customers_products = "DELETE FROM checkouts_customers_products WHERE checkout_id = '" . $checkout_id_delete . "' ";
+    $stmt_delete_checkouts_customers_products = $connection->prepare($query_delete_checkouts_customers_products);
+    $stmt_delete_checkouts_customers_products->execute();
+    header("Location: ../profile/profile.php");
+}
+
 ?>
 
 
