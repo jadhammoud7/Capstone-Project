@@ -103,14 +103,7 @@ function checkouts_list_connection($checkout_id, $shipping_location, $status, $t
             </div> 
 
             <div class=\"order-summary\">
-                <h2>Order Summary</h2>
-                <table id=\"order-products\">
-                    <tr>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Total Price</th>
-                    </tr>
-                </table>
+                <h2>Order Payment Summary</h2>
                 <table id=\"order-totals\">
                     <tr>
                         <th>Subtotal</th>
