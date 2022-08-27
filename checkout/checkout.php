@@ -20,7 +20,7 @@ $shipping_company = "";
 $postcode = "";
 $order_notes = "";
 
-
+//if button get user info pressed
 if (isset($_GET['customerID']) && $_GET['customerID'] != "") {
     $customer_id = $_GET['customerID'];
     $select_customer = $connection->prepare("SELECT first_name, last_name, email, phone_number FROM customers WHERE customer_id = '" . $customer_id . "'");
@@ -33,6 +33,7 @@ if (isset($_GET['customerID']) && $_GET['customerID'] != "") {
     $_SESSION['phone_number'] = $row_customer['phone_number'];
 }
 
+//check first name
 if (isset($_POST['first_name']) && $_POST['first_name'] != "") {
     $first_name = $_POST['first_name'];
     $_SESSION['first_name'] = $first_name;
@@ -45,6 +46,7 @@ if (isset($_POST['first_name']) && $_POST['first_name'] != "") {
     }
 }
 
+//check last name
 if (isset($_POST['last_name']) && $_POST['last_name'] != "") {
     $last_name = $_POST['last_name'];
     $_SESSION['last_name'] = $last_name;
@@ -57,6 +59,7 @@ if (isset($_POST['last_name']) && $_POST['last_name'] != "") {
     }
 }
 
+//check email
 if (isset($_POST['email']) && $_POST['email'] != "") {
     $email = $_POST['email'];
     $_SESSION['email'] = $email;
@@ -66,6 +69,8 @@ if (isset($_POST['email']) && $_POST['email'] != "") {
         die("WRONG email");
     }
 }
+
+//check phone number
 if (isset($_POST["phone_number"]) && $_POST["phone_number"] != "") {
     $phone_number = $_POST["phone_number"];
     $_SESSION['phone_number'] = $phone_number;
@@ -78,6 +83,7 @@ if (isset($_POST["phone_number"]) && $_POST["phone_number"] != "") {
     }
 }
 
+//check shipping country
 if (isset($_POST['shipping_country']) && $_POST['shipping_country'] != "") {
     $shipping_country = $_POST['shipping_country'];
     $_SESSION['shipping_country'] = $shipping_country;
@@ -88,6 +94,7 @@ if (isset($_POST['shipping_country']) && $_POST['shipping_country'] != "") {
     }
 }
 
+//check shipping location
 if (isset($_POST['shipping_location']) && $_POST['shipping_location'] != "") {
     $shipping_location = $_POST['shipping_location'];
     $_SESSION['shipping_location'] = $shipping_location;
@@ -98,6 +105,7 @@ if (isset($_POST['shipping_location']) && $_POST['shipping_location'] != "") {
     }
 }
 
+//check shipping company
 if (isset($_POST['shipping_company'])) {
     if ($_POST['shipping_company'] == '') {
         $shipping_company = "none";
@@ -107,6 +115,7 @@ if (isset($_POST['shipping_company'])) {
     }
 }
 
+//check postcode
 if (isset($_POST['postcode']) && $_POST['postcode'] != "") {
     $postcode = $_POST['postcode'];
     $_SESSION['postcode'] = $postcode;
@@ -117,6 +126,7 @@ if (isset($_POST['postcode']) && $_POST['postcode'] != "") {
     }
 }
 
+//check order notes
 if (isset($_POST['order_notes'])) {
     $order_notes = "";
     if ($_POST['order_notes'] == '') {
@@ -127,17 +137,23 @@ if (isset($_POST['order_notes'])) {
     }
 }
 
+//set success session to true
 $_SESSION['success'] = 'true';
 
 // if (!isset($_SESSION['first_name_error']) && !isset($_SESSION['last_name_error']) && !isset($_SESSION['email_error']) && !isset($_SESSION['phone_number_error']) && !isset($_SESSION['shipping_country_error']) && !isset($_SESSION['shipping_location_error']) && !isset($_SESSION['postcode_error'])) {
 //     echo "<script>alert('Your form was submitted successfully. An email will be sent to you soon.'); window.location.href='../shop/shop.php';</script>";
 // }
 
-if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['email']) && isset($_POST['phone_number']) && isset($_POST['shipping_country']) && isset($_POST['shipping_location']) && isset($_POST['postcode'])) {
-    $mysql = $connection->prepare("INSERT INTO checkouts(first_name, last_name, email, phone_number, shipping_country, shipping_location, shipping_company, postcode, order_notes) VALUES (?,?,?,?,?,?,?,?,?)");
-    $mysql->bind_param("sssssssss", $first_name, $last_name, $email, $phone_number, $shipping_country, $shipping_location, $shipping_company, $postcode, $order_notes);
-    $mysql->execute();
-    $mysql->close();
+
+if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['email']) && isset($_POST['phone_number']) && isset($_POST['shipping_country']) && isset($_POST['shipping_location']) && isset($_POST['postcode']) && isset($_SESSION['total_price']) && isset($_SESSION['tax_price']) && isset($_SESSION['total_price_including_tax'])) {
+    //add to table checkouts all checkout info
+    $total_price = $_SESSION['total_price'];
+    $tax_price = $_SESSION['tax_price'];
+    $total_price_including_tax = $_SESSION['total_price_including_tax'];
+    $insert_checkouts = $connection->prepare("INSERT INTO checkouts(customer_id, first_name, last_name, email, phone_number, shipping_country, shipping_location, shipping_company, postcode, order_notes, total_price, tax_price, total_price_including_tax) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $insert_checkouts->bind_param("isssssssssddd", $customer_id, $first_name, $last_name, $email, $phone_number, $shipping_country, $shipping_location, $shipping_company, $postcode, $order_notes, $total_price, $tax_price, $total_price_including_tax);
+    $insert_checkouts->execute();
+    $insert_checkouts->close();
 
     //get last checkout id
     $stmt_get_checkout_id = $connection->prepare("SELECT checkout_id FROM checkouts ORDER BY checkout_id DESC LIMIT 1");
@@ -148,20 +164,22 @@ if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['e
         $checkout_id = $row_get_checkout_id['checkout_id'];
 
         //get products in basket for current user
-        $query_basket = $connection->prepare("SELECT product_id FROM baskets_customer_product WHERE customer_id = '" . $_SESSION['logged_id'] . "' ");
+        $query_basket = $connection->prepare("SELECT product_id, quantity, price FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ");
         $query_basket->execute();
         $query_basket_result = $query_basket->get_result();
 
+
         while ($row_basket = $query_basket_result->fetch_assoc()) {
-            $query_checkout = $connection->prepare("INSERT INTO checkouts_customers_products(checkout_id, customer_id, product_id) VALUES (?,?,?)");
-            $query_checkout->bind_param("iii", $checkout_id, $_SESSION['logged_id'], $row_basket['product_id']);
+            //insert into table checkouts customers products
+            $query_checkout = $connection->prepare("INSERT INTO checkouts_customers_products(checkout_id, product_id, quantity, total_price) VALUES (?,?,?,?)");
+            $query_checkout->bind_param("iiii", $checkout_id, $row_basket['product_id'], $row_basket['quantity'], $row_basket['price']);
             $query_checkout->execute();
             $query_checkout->close();
         }
-
+        //display alert successful
         echo "<script>alert('Your checkout form was submitted. You will receive and email soon.'); window.location='../shop/shop.php';</script>";
-        //delete all products from basket
 
+        //delete all products from basket
         $delete_basket = $connection->prepare("DELETE FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "'");
         $delete_basket->execute();
     }
@@ -180,6 +198,7 @@ function checkout_products_connection($name, $quantity, $price)
     echo $element;
 }
 
+//to display products in table summary
 $stmt_get_basket_products = $connection->prepare("SELECT product_id, quantity FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ");
 $stmt_get_basket_products->execute();
 $results_get_basket_products = $stmt_get_basket_products->get_result();
