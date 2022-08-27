@@ -19,6 +19,7 @@ $shipping_location = "";
 $shipping_company = "";
 $postcode = "";
 $order_notes = "";
+$status = 'Pending';
 
 //if button get user info pressed
 if (isset($_GET['customerID']) && $_GET['customerID'] != "") {
@@ -150,8 +151,8 @@ if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['e
     $total_price = $_SESSION['total_price'];
     $tax_price = $_SESSION['tax_price'];
     $total_price_including_tax = $_SESSION['total_price_including_tax'];
-    $insert_checkouts = $connection->prepare("INSERT INTO checkouts(customer_id, first_name, last_name, email, phone_number, shipping_country, shipping_location, shipping_company, postcode, order_notes, total_price, tax_price, total_price_including_tax) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $insert_checkouts->bind_param("isssssssssddd", $customer_id, $first_name, $last_name, $email, $phone_number, $shipping_country, $shipping_location, $shipping_company, $postcode, $order_notes, $total_price, $tax_price, $total_price_including_tax);
+    $insert_checkouts = $connection->prepare("INSERT INTO checkouts(customer_id, first_name, last_name, email, phone_number, shipping_country, shipping_location, shipping_company, postcode, order_notes, total_price, tax_price, total_price_including_tax, status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $insert_checkouts->bind_param("isssssssssddds", $customer_id, $first_name, $last_name, $email, $phone_number, $shipping_country, $shipping_location, $shipping_company, $postcode, $order_notes, $total_price, $tax_price, $total_price_including_tax, $status);
     $insert_checkouts->execute();
     $insert_checkouts->close();
 

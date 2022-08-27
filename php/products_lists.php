@@ -78,49 +78,57 @@ function appointments_list_connection($appointment_id, $appointment_name, $date,
     echo $element;
 }
 
-function checkouts_list_connection($checkout_id, $shipping_location, $total_price, $tax_price, $total_price_including_tax)
-{
-    include("../php/connection.php");
-    include("../php/checkout.php");
-    $query_checkout_products = "SELECT product_id, quantity, price FROM checkouts_customers_products WHERE checkout_id = '" . $checkout_id . "' ";
-    $stmt_checkout_products = $connection->prepare($query_checkout_products);
-    $stmt_checkout_products->execute();
-    $results_checkout_products = $stmt_checkout_products->get_result();
+// function checkouts_products_list_connection($checkout_id)
+// {
+//     include("../php/connection.php");
+//     include("../php/checkout.php");
 
+//         checkout_products_connection($row_get_product['name'], $row_get_checkout_products['quantity'], $row_get_checkout_products['price']);
+
+// }
+
+function checkouts_list_connection($checkout_id, $shipping_location, $status, $total_price, $tax_price, $total_price_including_tax)
+{
     $element = "
         <div class=\"checkouts-list\">
-            <h3>Shipping Location/h3>
-            <h4>$shipping_location</h4>   
-            <table id=\"order-product\">
-                <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Total Price</th>
-                </tr>
-                <?php
-                while ($row_get_checkout_products = $results_checkout_products->fetch_assoc()) {
-                    $stmt_get_product = $connection->prepare(\"SELECT name FROM products WHERE product_id = '" . $row_get_basket_products["product_id"] . "' \");
-                    $stmt_get_product->execute();
-                    $results_get_product = $stmt_get_product->get_result();
-                    $row_get_product = $results_get_product->fetch_assoc();
-                    checkout_products_connection($row_get_product[name], $row_get_checkout_products[quantity], $row_get_checkout_products[price]);
-                }
-                ?>
-            </table>
-            <table id=\"order-totals\">
-                <tr>
-                    <th>Subtotal</th>
-                    <td>$total_price$</td>
-                </tr>
-                <tr>
-                    <th>Taxes</th>
-                    <td>$tax_price$</td>
-                </tr>
-                <tr>
-                    <th>Total</th>
-                    <td>$total_price_including_tax$</td>
-                </tr>
-            </table>            
+            <div class=\"checkouts-div\">
+                <div class=\"checkouts-part\">
+                    <h3>Shipping Location</h3>
+                    <h4>$shipping_location</h4> 
+                </div> 
+                <div class=\"checkouts-part\">
+                    <h3>Status</h3>
+                    <h4>$status</h4>
+                </div>
+            </div> 
+
+            <div class=\"order-summary\">
+                <h2>Order Summary</h2>
+                <table id=\"order-products\">
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                    </tr>
+                </table>
+                <table id=\"order-totals\">
+                    <tr>
+                        <th>Subtotal</th>
+                        <td>$total_price$</td>
+                    </tr>
+                    <tr>
+                        <th>Taxes</th>
+                        <td>$tax_price$</td>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <td>$total_price_including_tax$</td>
+                    </tr>
+                </table>
+            </div>     
+            <div class=\"checkouts-div\">
+                <button style=\"border-radius: 20px;\" onclick=\"window.location.href = '../checkout/checkout-details.php?checkout_id=$checkout_id';\"><i class=\"fa fa-info-circle\"></i>See Checkout Details</button>
+            </div>   
         </div>";
     echo $element;
 }

@@ -1,8 +1,8 @@
 <?php
 
-session_start();
-
 include("connection.php");
+
+$customer_id = $_SESSION['logged_id'];
 
 if (isset($_GET['customerID']) && $_GET['customerID'] != "") {
     $customer_id = $_GET['customerID'];
@@ -125,7 +125,7 @@ $row_get_checkout_id = $results_get_checkout_id->fetch_assoc();
 $checkout_id = $row_get_checkout_id['checkout_id'];
 
 //get products in basket for current user
-$query_basket = $connection->prepare("SELECT product_id FROM baskets_customer_product WHERE customer_id = '" . $_SESSION['customer_id'] . "' ");
+$query_basket = $connection->prepare("SELECT product_id FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ");
 $query_basket->execute();
 $query_basket_result = $query_basket->get_result();
 

@@ -27,7 +27,7 @@ $stmt_basket = $connection->prepare($query_basket);
 $stmt_basket->execute();
 $results_basket = $stmt_basket->get_result();
 
-$query_checkouts = "SELECT checkout_id, total_price, tax_price, total_price_including_tax, shipping_location FROM checkouts WHERE customer_id = '" . $customer_id . "' ";
+$query_checkouts = "SELECT checkout_id, shipping_location, status, total_price, tax_price, total_price_including_tax FROM checkouts WHERE customer_id = '" . $customer_id . "' ";
 $stmt_checkouts = $connection->prepare($query_checkouts);
 $stmt_checkouts->execute();
 $results_checkouts = $stmt_checkouts->get_result();
@@ -135,7 +135,7 @@ if (isset($_GET['deleteAPPid'])) {
                 <li><a onclick="ShowAppointments()" id="appointments-button" title="View list of appointments added by you to your appointments section">Appointments List</a></li>
                 <li><a onclick="ShowCheckouts()" id="checkouts-button" title="View the list of shopping order checkouts submitted by you to the shop">Checkouts List</a></li>
                 <form action="../php/logout.php" method="post">
-                    <button type="submit" class="logout-btn" onclick="return confirm('Are you sure you want to log out?');<?php unset($_SESSION['free_games']); ?>"><i class="fa fa-signout"></i><strong>Log out</strong></button>
+                    <button type="submit" class="logout-btn" onclick="return confirm('Are you sure you want to log out?');<?php unset($_SESSION['free_games']); ?>"><i class="fa fa-sign-out"></i><strong>Log out</strong></button>
                 </form>
             </ol>
         </div>
@@ -242,11 +242,6 @@ if (isset($_GET['deleteAPPid'])) {
                 <p>Total: <?php echo mysqli_num_rows($results_app) ?></p>
                 <?php
                 while ($row_app = $results_app->fetch_assoc()) {
-                    // $query_app_image = "SELECT image FROM repair WHERE  repair_type='".$row_app['appointment_name']."';";
-                    // $stmt_app_image = $connection->prepare($query_app_image);
-                    // $stmt_app_image->execute();
-                    // $results_app_image = $stmt_app_image->get_result();
-                    // $row_app_image = $results_app_image->fetch_assoc();
                     appointments_list_connection($row_app["appointment_id"], $row_app["appointment_name"], $row_app["date"], $row_app["hour"], $row_app["status"]);
                 }
                 ?>
@@ -259,14 +254,26 @@ if (isset($_GET['deleteAPPid'])) {
         <!-- ended appointments -->
 
         <!-- started checkouts -->
-        <div class="appointments fade" style="display: none;">
+        <div class="checkouts fade" style="display: none;">
             <div>
                 <h2>Checkouts List</h2>
                 <p>These are the list of checkouts of orders requested by you from the shop</p>
                 <p>Total: <?php echo mysqli_num_rows($results_checkouts) ?></p>
                 <?php
                 while ($row_checkouts = $results_checkouts->fetch_assoc()) {
-                    checkouts_list_connection($row_checkouts['checkout_id'], $row_checkouts['shipping_location'], $row_checkouts['total_price'], $row_checkouts['tax_price'], $row_checkouts['total_price_including_tax']);
+                    checkouts_list_connection($row_checkouts['checkout_id'], $row_checkouts['shipping_location'], $row_checkouts['status'], $row_checkouts['total_price'], $row_checkouts['tax_price'], $row_checkouts['total_price_including_tax']);
+                    // $query_checkout_products = "SELECT product_id, quantity, price FROM checkouts_customers_products WHERE checkout_id =$checkout_id";
+                    // $stmt_checkout_products = $connection->prepare($query_checkout_products);
+                    // $stmt_checkout_products->execute();
+                    // $results_checkout_products = $stmt_checkout_products->get_result();
+                    // echo "A total of " + mysqli_num_rows($results_checkout_products) + " products";
+                    // while ($row_get_checkout_products = $results_checkout_products->fetch_assoc()) {
+                    //     $stmt_get_product = $connection->prepare("SELECT name FROM products WHERE product_id = '" . $row_get_basket_products['product_id'] . "' ");
+                    //     $stmt_get_product->execute();
+                    //     $results_get_product = $stmt_get_product->get_result();
+                    //     $row_get_product = $results_get_product->fetch_assoc();
+                    //     echo "Quantity of " + $row_get_checkout_products['quantity'] + " of product " + $row_get_product['name'] + " of total price " + $row_get_checkout_products['total_price'];
+                    // }
                 }
                 ?>
             </div>
