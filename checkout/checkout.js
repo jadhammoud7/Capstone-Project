@@ -58,6 +58,21 @@ else {
 document.getElementById("date").value = currentDate;
 document.getElementById("date").classList += "is-valid";
 
+if (window.location.href.includes("checkout_form_submitted=true")) {
+    OpenCheckoutReceivedPopUp();
+}
+
+function OpenCheckoutReceivedPopUp() {
+    let checkout_received_popup = document.getElementById('checkout-received-confirmation');
+    checkout_received_popup.classList.add('open-popup');
+}
+
+function RemoveCheckoutReceivedPopUp() {
+    window.location = '../shop/shop.php';
+    let checkout_received_popup = document.getElementById('checkout-received-confirmation');
+    checkout_received_popup.classList.remove('open-popup');
+}
+
 window.addEventListener("scroll", AddRevealX);
 window.addEventListener("pageshow", AddRevealX);
 

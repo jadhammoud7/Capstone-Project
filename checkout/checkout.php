@@ -179,7 +179,7 @@ if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['e
             $query_checkout->close();
         }
         //display alert successful
-        echo "<script>alert('Your checkout form was submitted. You will receive and email soon.'); window.location='../shop/shop.php';</script>";
+        echo "<script>window.location='../checkout/checkout.php?checkout_form_submitted=true';</script>";
 
         //delete all products from basket
         $delete_basket = $connection->prepare("DELETE FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "'");
@@ -262,6 +262,13 @@ $results_get_basket_products = $stmt_get_basket_products->get_result();
     </header>
     <!-- ended with the menu bar -->
 
+    <!-- started popup message checkout form received -->
+    <div class="popup" id="checkout-received-confirmation">
+        <img src="../images/tick.png" alt="">
+        <h2>Checkout Received</h2>
+        <p>Your checkout form is received. Stay in touch to receive an email from us, and keep updated with your order progress from your profile page</p>
+        <button type="button" onclick="RemoveCheckoutReceivedPopUp()">OK</button>
+    </div>
 
     <!-- started with title page -->
     <div class="title">
