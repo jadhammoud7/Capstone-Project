@@ -50,9 +50,7 @@ if (isset($product_id)) {
         $stmt_update_price->bind_param("i", $price);
         $stmt_update_price->execute();
 
-        echo "<script>alert('Product already in basket. Quantity added by 1.'); window.location = '../shop/shop.php';</script>";
+        echo "<script>window.location = '../shop/shop.php?found_in_basket=true';</script>";
     }
 
 }
-
-?>

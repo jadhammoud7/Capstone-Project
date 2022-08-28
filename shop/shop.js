@@ -48,3 +48,24 @@ function SendFilters() {
     window.location = '?type=' + option_type.value + '&category=' + option_category.value + '&sortby=' + option.value;
 }
 
+if (window.location.href.includes("?found_in_basket=true")) {
+    OpenFoundInBasketPopUp();
+}
+
+function OpenFoundInBasketPopUp() {
+    let found_in_basket_popup = document.getElementById('found-in-basket-confirmation');
+    found_in_basket_popup.classList.add('open-popup');
+}
+
+function RemoveFoundInBasketPopUp() {
+    window.location = '../shop/shop.php';
+    let found_in_basket_popup = document.getElementById('found-in-basket-confirmation');
+    found_in_basket_popup.classList.remove('open-popup');
+}
+
+function GoToBasket() {
+    window.location = '../basket/basket.php';
+    let found_in_basket_popup = document.getElementById('found-in-basket-confirmation');
+    found_in_basket_popup.classList.remove('open-popup');
+}
+
