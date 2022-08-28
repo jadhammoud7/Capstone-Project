@@ -45,10 +45,25 @@ function AddRevealX() {
         testimonials.classList.add("reveal-by-x");
         testimonials.classList.add("fade");
     }
-    if(elementTopAppointments < windowHeight - elementVisible){
+    if (elementTopAppointments < windowHeight - elementVisible) {
         appointments_paragraph.classList.add("reveal-by-x");
         appointments_paragraph.classList.add("fade");
     }
+}
+
+if (window.location.href.includes("?login=true")) {
+    OpenLogInPopUp();
+}
+
+function OpenLogInPopUp() {
+    let login_popup = document.getElementById('login-confirmation');
+    login_popup.classList.add('open-popup');
+}
+
+function RemoveLogInPopUp() {
+    window.location = '../home-page/home-page.php';
+    let login_popup = document.getElementById('login-confirmation');
+    login_popup.classList.remove('open-popup');
 }
 
 window.addEventListener("scroll", AddRevealX);

@@ -80,6 +80,14 @@ $results_allproducts = $stmt_allproducts->get_result();
     </header>
     <!-- ended with the menu bar -->
 
+    <!-- started popup message login successful -->
+    <div class="popup" id="login-confirmation">
+        <img src="../images/tick.png" alt="">
+        <h2>Login Successful</h2>
+        <p>Welcome to Newbies Gamers</p>
+        <button type="button" onclick="RemoveLogInPopUp()">OK</button>
+    </div>
+
     <!-- start slideshow -->
     <div class="slideshow-container reveal-by-y">
         <div class="mySlides fade" title="Welcome to Newbies Gamers. We sell manu consoles and electronics for your games and more">
@@ -227,10 +235,10 @@ $results_allproducts = $stmt_allproducts->get_result();
             }
 
 
-        while($row_allproducts = $results_allproducts->fetch_assoc() ){
-            shop_connection($row_allproducts["product_id"],$row_allproducts["name"], $row_allproducts["price"]); 
-        }
-        ?>
+            while ($row_allproducts = $results_allproducts->fetch_assoc()) {
+                shop_connection($row_allproducts["product_id"], $row_allproducts["name"], $row_allproducts["price"]);
+            }
+            ?>
         </div>
         <!-- end of products -->
 
@@ -395,19 +403,7 @@ $results_allproducts = $stmt_allproducts->get_result();
         <!-- ended with footer -->
         <script src="../home-page/home-page.js"></script>
         <script src="../main/main.js"></script>
-
-        <script>
-            window.onunload = myFunction;
-
-            function myFunction() {
-                <?php
-                session_start();
-
-                unset($_SESSION["logged_user"]);
-                echo ($_SESSION["logged_user"]);
-                ?>
-            }
-        </script>
 </body>
 
+</html>
 </php>
