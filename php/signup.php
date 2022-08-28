@@ -50,7 +50,6 @@ if (isset($_POST["phone_number"]) && $_POST["phone_number"] != "") {
             die("WRONG Phone Number");
         }
     }
-
 }
 
 if (isset($_POST["address"]) && $_POST["address"] != "") {
@@ -111,7 +110,7 @@ $data1 = $statement_result1->fetch_assoc();
 
 $logged_id1 = $data1['customer_id'];
 $_SESSION['logged_id'] = $logged_id1;
-echo "<script>alert('Your account was create successfully. Welcome to Newbies Gamers.'); window.location='../home-page/home-page.php';</script>";
+echo "<script>window.location='../signup/signup.php?account_created=true';</script>";
 
 // echo "the id of the logged user is :", $_SESSION['logged_id'];
 //saving which user is logged in

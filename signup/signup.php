@@ -6,11 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../signup/signup.css">
+  <link rel="stylesheet" href="../main/main.css">
 
   <title>Sign up - Newbies Gamers</title>
 </head>
 
 <body>
+  <!-- started popup message account created -->
+  <div class="popup" id="account-created-confirmation">
+    <img src="../images/tick.png" alt="">
+    <h2>Account Created Successfully</h2>
+    <p>Your account was created successfully. Welcome to Newbies Gamers</p>
+    <button type="button" onclick="RemoveAccountCreatedPopUp()">OK</button>
+  </div>
+
   <div id="id01" class="modal">
     <a href="../home-page/home-page.php">
       <span class="close" title="Return to log in">&times;</span>
@@ -133,6 +142,8 @@
   </div>
 
 </body>
+
+<script src="../signup/signup.js"></script>
 
 
 </html>
