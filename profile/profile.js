@@ -134,6 +134,7 @@ function GoToLogIn() {
 }
 
 var APPid;
+//open delete appointment pop up
 function OpenDeleteAppointmentPopUp(appointment_id) {
     let appointment_popup = document.getElementById('delete-appointment-confirmation');
     appointment_popup.classList.add('open-popup');
@@ -145,9 +146,27 @@ function DeleteAppointment() {
     CloseDeleteAppointmentPopUp();
 }
 
+//close delete appointment popup
 function CloseDeleteAppointmentPopUp() {
     let appointment_popup = document.getElementById('delete-appointment-confirmation');
     appointment_popup.classList.remove('open-popup');
+}
+
+var productRemoveID;
+function OpenRemoveFavoritesPopUp(product_remove_id) {
+    let remove_favorites_popup = document.getElementById('remove-favorites-confirmation');
+    remove_favorites_popup.classList.add('open-popup');
+    productRemoveID = product_remove_id;
+}
+
+function RemoveFavorites() {
+    window.location = '../php/favorites.php?productRemoveID=' + productRemoveID;
+    CloseRemoveFavoritesPopUp();
+}
+
+function CloseRemoveFavoritesPopUp() {
+    let remove_favorites_popup = document.getElementById('remove-favorites-confirmation');
+    remove_favorites_popup.classList.remove('open-popup');
 }
 
 

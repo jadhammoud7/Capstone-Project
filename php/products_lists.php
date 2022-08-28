@@ -23,7 +23,7 @@ function favorites_list_connection($product_id, $name, $category, $price)
                         <button class=\"btn\" onclick=\"window.location.href = '../product_info/product_info.php?productID=$product_id';\" title=\"Check more information about this product\"><i class=\"fa fa-info-circle\"></i><strong>Check Info</strong></button>
                     </div>
                     <div>
-                        <button class=\"btn\" onclick=\"window.location.href = '../php/favorites.php?productRemoveID=$product_id';\" title=\"Remove this product from your favorites list\"><i class=\"fa fa-trash\"></i><strong>Remove From Favorites</strong></button>
+                        <button class=\"btn\" onclick=\"OpenRemoveFavoritesPopUp($product_id)\" title=\"Remove this product from your favorites list\"><i class=\"fa fa-trash\"></i><strong>Remove From Favorites</strong></button>
                     </div>
                 </div>
             </div>";

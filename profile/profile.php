@@ -167,6 +167,15 @@ if (isset($_GET['delete_checkout_id'])) {
             <button type="button" onclick="CloseDeleteAppointmentPopUp()">NO</button>
         </div>
 
+        <!-- started popup message remove from favorites -->
+        <div class="popup" id="remove-favorites-confirmation">
+            <img src="../images/question-mark.png" alt="">
+            <h2>Remove From Favorites Confirmation</h2>
+            <p>Are you sure that you want to remove this product from your favorites list?</p>
+            <button type="button" onclick="RemoveFavorites()">YES</button>
+            <button type="button" onclick="CloseRemoveFavoritesPopUp()">NO</button>
+        </div>
+
 
         <!-- started profile -->
         <div class="profile fade" style="display: none;">

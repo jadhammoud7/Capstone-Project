@@ -13,7 +13,7 @@ if(isset($_GET['productRemoveID'])){
   $product_id = $_GET['productRemoveID'];
   $delete_stmt = $connection->prepare("DELETE FROM favorites_customer_product WHERE product_id = '" . $product_id . "' AND customer_id = '" . $customer_id ."' ");
   $delete_stmt->execute();
-  echo "<script>alert('This product was removed from your favorites list'); window.location = '../profile/profile.php';</script>";
+  echo "<script>window.location = '../profile/profile.php';</script>";
 }
 
 if(isset($_GET['productID']) && $_GET['productID'] != ""){
@@ -35,5 +35,3 @@ if(isset($_GET['productID']) && $_GET['productID'] != ""){
       echo "<script>alert('The product is already added to your favorites list'); window.location = '../shop/shop.php';</script>";
   }
 }
-
-?>
