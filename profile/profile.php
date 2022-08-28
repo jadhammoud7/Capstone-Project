@@ -145,10 +145,19 @@ if (isset($_GET['delete_checkout_id'])) {
                 <li><a onclick="ShowFavorites()" id="favorites-button" title="View list of products added by you to your favorites">Favorites List</a></li>
                 <li><a onclick="ShowAppointments()" id="appointments-button" title="View list of appointments added by you to your appointments section">Appointments List</a></li>
                 <li><a onclick="ShowCheckouts()" id="checkouts-button" title="View the list of shopping order checkouts submitted by you to the shop">Checkouts List</a></li>
-                <form action="../php/logout.php" method="post">
-                    <button type="submit" class="logout-btn" onclick="return confirm('Are you sure you want to log out?');<?php unset($_SESSION['free_games']); ?>"><i class="fa fa-sign-out"></i><strong>Log out</strong></button>
-                </form>
+                <button type="submit" class="logout-btn" onclick="OpenLogOutPopUp()"><i class="fa fa-sign-out"></i><strong>Log out</strong></button>
             </ol>
+        </div>
+
+        <!-- started popup message logout -->
+        <div class="popup" id="logout-confirmation">
+            <img src="../images/question-mark.png" alt="">
+            <h2>Log Out Confirmation</h2>
+            <p>Are you sure that you want to logout?</p>
+            <button type="button" onclick="GoToLogIn(); <?php unset($_SESSION['free_games']);
+                                                        unset($_SESSION['logged_id']);
+                                                        unset($_SESSION['logged_bool']); ?>">YES</button>
+            <button type="button" onclick="CloseLogOutPopUp()">NO</button>
         </div>
 
 
