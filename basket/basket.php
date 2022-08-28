@@ -136,7 +136,7 @@ $_SESSION['total_price_including_tax'] = $total_inc_tax;
                 ?>
 
             </table>
-            <input type="submit" value="Update Cart" class="update-cart-btn">
+            <button type="submit" class="update-cart-btn" title="Update your shopping basket"><i class="fa fa-update"></i>Update Basket</button>
         </form>
 
         <!--start total price-->

@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 
 session_start();
@@ -29,9 +27,13 @@ if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
     $appointments_insert->execute();
     $appointments_insert->close();
 
-    echo "<script>alert('Your appointment is submitted!');</script>";
+    echo "<script>window.location='../calendar/calendar.php?appointment_submitted=true';</script>";
 }
 ?>
+
+
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -85,6 +87,14 @@ if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
         </nav>
     </header>
     <!-- ended with the menu bar -->
+
+    <!-- started popup message appointment submitted -->
+    <div class="popup" id="appointment-submitted-confirmation">
+        <img src="../images/tick.png" alt="">
+        <h2>Appointment Submitted</h2>
+        <p>Your appointment is submitted. Stay in touch to receive an email from us.</p>
+        <button type="button" onclick="RemoveAppointmentSubmittedPopUp()">OK</button>
+    </div>
 
 
     <!-- started with title page -->

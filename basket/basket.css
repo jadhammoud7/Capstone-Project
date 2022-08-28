@@ -92,6 +92,16 @@ input {
     border-radius: 15px;
 }
 
+.update-cart-btn {
+    float: left;
+    margin-left: 10px;
+    color: #fefefe;
+    background-color: royalblue;
+    width: 15%;
+    font-size: medium;
+    border-radius: 15px;
+}
+
 .empty-par {
     display: flex;
     flex-direction: column;
@@ -103,18 +113,6 @@ input {
     color: #fefefe;
     margin: 20px;
     border-radius: 5px;
-}
-
-.update-cart-btn {
-    color: #fefefe;
-    background-color: royalblue;
-    border-radius: 5px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 20px;
-    float: left;
 }
 
 /* start of making table responsive */
@@ -134,6 +132,10 @@ input {
     td input {
         margin-left: -50px;
     }
+
+    .update-cart-btn {
+        width: 40%;
+    }
 }
 
 @media screen and (max-width:820px) {
@@ -150,6 +152,10 @@ input {
     .card {
         margin-left: 130px;
     }
+
+    .update-cart-btn {
+        width: 50%;
+    }
 }
 
 @media screen and (max-width:492px) {
@@ -160,6 +166,10 @@ input {
     .cart-info img {
         height: 80px;
         width: 80px;
+    }
+
+    .update-cart-btn {
+        width: 50%;
     }
 
 }
@@ -174,6 +184,10 @@ input {
 @media screen and (max-width:376px) {
     .card {
         margin-left: 60px;
+    }
+
+    .update-cart-btn {
+        width: 75%;
     }
 }
 

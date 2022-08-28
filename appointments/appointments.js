@@ -24,8 +24,20 @@ function CloseAppointmentBooking() {
     appointment_book_div.style.display = "none";
 }
 
+if (window.location.href.includes("?appointment_submitted=true")) {
+    OpenAppointmentSubmittedPopUp();
+}
 
+function OpenAppointmentSubmittedPopUp() {
+    let appointment_submitted_popup = document.getElementById('appointment-submitted-confirmation');
+    appointment_submitted_popup.classList.add('open-popup');
+}
 
+function RemoveAppointmentSubmittedPopUp() {
+    window.location = '../appointments/appointments.php';
+    let appointment_submitted_popup = document.getElementById('appointment-submitted-confirmation');
+    appointment_submitted_popup.classList.remove('open-popup');
+}
 
 // trying calendar here
 const date = new Date();
