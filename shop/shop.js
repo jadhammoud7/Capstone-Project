@@ -84,4 +84,33 @@ function RemoveAddToBasketPopUp() {
     added_to_basket_popup.classList.remove('open-popup');
 }
 
+if (window.location.href.includes("added_to_favorites=true")) {
+    OpenAddedToFavoritesPopUp();
+}
+
+function OpenAddedToFavoritesPopUp() {
+    let added_to_favorites_popup = document.getElementById('added-to-favorites-confirmation');
+    added_to_favorites_popup.classList.add('open-popup');
+}
+
+function RemoveAddedToFavoritesPopUp() {
+    window.location = '../shop/shop.php';
+    let added_to_favorites_popup = document.getElementById('added-to-favorites-confirmation');
+    added_to_favorites_popup.classList.remove('open-popup');
+}
+
+if (window.location.href.includes("found_in_favorites=true")) {
+    OpenFoundInFavoritesPopUp();
+}
+
+function OpenFoundInFavoritesPopUp() {
+    let found_in_favorites_popup = document.getElementById('found-in-favorites-confirmation');
+    found_in_favorites_popup.classList.add('open-popup');
+}
+
+function RemoveFoundInFavoritesPopUp() {
+    window.location = '../shop/shop.php';
+    let found_in_favorites_popup = document.getElementById('found-in-favorites-confirmation');
+    found_in_favorites_popup.classList.remove('open-popup');
+}
 

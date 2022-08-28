@@ -187,6 +187,22 @@ $results_console_filter = $stmt_console_filter->get_result();
         <button type="button" onclick="GoToBasket()">Go To Shopping Basket</button>
     </div>
 
+    <!-- started popup message added to favorites -->
+    <div class="popup" id="added-to-favorites-confirmation">
+        <img src="../images/tick.png" alt="">
+        <h2>Added To Favorites</h2>
+        <p>Product has been added to your favorites list</p>
+        <button type="button" onclick="RemoveAddedToFavoritesPopUp()">OK</button>
+    </div>
+
+    <!-- started popup message added to basket -->
+    <div class="popup" id="found-in-favorites-confirmation">
+        <img src="../images/tick.png" alt="">
+        <h2>Found In Favorites</h2>
+        <p>Product is already found in your favorites list</p>
+        <button type="button" onclick="RemoveFoundInFavoritesPopUp()">OK</button>
+    </div>
+
 
     <!-- started with title page -->
     <div class="title">
