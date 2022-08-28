@@ -61,4 +61,4 @@ if ($address != "") {
     $query1->execute();
 }
 
-echo "<script>alert('Your changes are saved'); window.location='../profile/profile.php';</script>";
+echo "<script>window.location='../profile/profile.php?edit_profile=true'; OpenEditProfilePopUp();</script>";

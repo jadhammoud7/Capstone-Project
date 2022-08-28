@@ -61,7 +61,6 @@ if (isset($_GET['delete_checkout_id'])) {
     $stmt_delete_checkouts_customers_products->execute();
     header("Location: ../profile/profile.php");
 }
-
 ?>
 
 
@@ -176,6 +175,13 @@ if (isset($_GET['delete_checkout_id'])) {
             <button type="button" onclick="CloseRemoveFavoritesPopUp()">NO</button>
         </div>
 
+        <!-- started popup message edit profile -->
+        <div class="popup" id="edit-profile-confirmation">
+            <img src="../images/tick.png" alt="">
+            <h2>Edit Profile Confirmation</h2>
+            <p>Your changes have been saved</p>
+            <button type="button" onclick="RemoveEditProfilePopUp()">OK</button>
+        </div>
 
         <!-- started profile -->
         <div class="profile fade" style="display: none;">

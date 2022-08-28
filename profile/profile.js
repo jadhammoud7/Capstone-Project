@@ -168,6 +168,19 @@ function CloseRemoveFavoritesPopUp() {
     let remove_favorites_popup = document.getElementById('remove-favorites-confirmation');
     remove_favorites_popup.classList.remove('open-popup');
 }
+if (window.location.href.includes("?edit_profile=true")) {
+    OpenEditProfilePopUp();
+}
+function OpenEditProfilePopUp() {
+    let edit_profile_popup = document.getElementById('edit-profile-confirmation');
+    edit_profile_popup.classList.add('open-popup');
+}
+
+function RemoveEditProfilePopUp() {
+    window.location = '../profile/profile.php';
+    let edit_profile_popup = document.getElementById('edit-profile-confirmation');
+    edit_profile_popup.classList.remove('open-popup');
+}
 
 
 var topButton = document.getElementById("TopBtn");
