@@ -69,3 +69,19 @@ function GoToBasket() {
     found_in_basket_popup.classList.remove('open-popup');
 }
 
+if (window.location.href.includes("add_to_basket=true")) {
+    OpenAddedToBasketPopUp();
+}
+
+function OpenAddedToBasketPopUp() {
+    let added_to_basket_popup = document.getElementById('added-to-basket-confirmation');
+    added_to_basket_popup.classList.add('open-popup');
+}
+
+function RemoveAddToBasketPopUp() {
+    window.location = '../shop/shop.php';
+    let added_to_basket_popup = document.getElementById('added-to-basket-confirmation');
+    added_to_basket_popup.classList.remove('open-popup');
+}
+
+

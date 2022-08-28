@@ -178,6 +178,15 @@ $results_console_filter = $stmt_console_filter->get_result();
         <button type="button" onclick="GoToBasket()">Go To Shopping Basket</button>
     </div>
 
+    <!-- started popup message added to basket -->
+    <div class="popup" id="added-to-basket-confirmation">
+        <img src="../images/tick.png" alt="">
+        <h2>Added To Basket</h2>
+        <p>Product has been added to your basket</p>
+        <button type="button" onclick="RemoveAddToBasketPopUp()">OK</button>
+        <button type="button" onclick="GoToBasket()">Go To Shopping Basket</button>
+    </div>
+
 
     <!-- started with title page -->
     <div class="title">

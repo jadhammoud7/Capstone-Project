@@ -30,7 +30,7 @@ if (isset($product_id)) {
         $stmt->bind_param("iiii", $customer_id, $product_id, $quantity, $row_select_product_price['price']);
         $stmt->execute();
         $stmt->close();
-        echo "<script>alert('Product added to basket'); window.location = '../shop/shop.php';</script>";
+        echo "<script>window.location = '../shop/shop.php?add_to_basket=true';</script>";
     } else {
         $stmt_select_quantity = $connection->prepare("SELECT quantity FROM baskets_customer_product WHERE product_id = '" . $product_id . "' AND customer_id = '" . $customer_id . "' ");
         $stmt_select_quantity->execute();
@@ -52,5 +52,4 @@ if (isset($product_id)) {
 
         echo "<script>window.location = '../shop/shop.php?found_in_basket=true';</script>";
     }
-
 }
