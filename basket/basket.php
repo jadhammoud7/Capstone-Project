@@ -90,6 +90,14 @@ $_SESSION['total_price_including_tax'] = $total_inc_tax;
     </header>
     <!-- ended with the menu bar -->
 
+    <!-- started popup message removed from basket -->
+    <div class="popup" id="removed-from-basket-confirmation">
+        <img src="../images/tick.png" alt="">
+        <h2>Removed From Basket</h2>
+        <p>Product has been removed from your basket</p>
+        <button type="button" onclick="RemoveRemovedFromBasketPopUp()">OK</button>
+    </div>
+
 
 
     <!-- started with title page -->
@@ -306,5 +314,6 @@ $_SESSION['total_price_including_tax'] = $total_inc_tax;
 
 
 <script src="../main/main.js"></script>
+<script src="../basket/basket.js"></script>
 
 </php>

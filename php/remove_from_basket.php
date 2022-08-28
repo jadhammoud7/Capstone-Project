@@ -8,7 +8,7 @@ if (isset($_GET['productID']) && isset($_SESSION['logged_id'])) {
     $product_id = $_GET['productID'];
     $delete_stmt = $connection->prepare("DELETE FROM baskets_customer_product WHERE product_id = '" . $product_id . "' AND customer_id = '" . $customer_id . "' ");
     $delete_stmt->execute();
-    echo "<script>alert('The product was removed from your shopping basket'); window.location.href = '../basket/basket.php';</script>";
+    echo "<script>window.location.href = '../basket/basket.php?remove_product=true';</script>";
 }
 
 $stmt_select_all_prices = $connection->prepare("SELECT price FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ");
@@ -33,5 +33,3 @@ if ($select_prices_results == false) {
     $_SESSION['tax_price'] = $tax_price;
     $_SESSION['total_price_including_tax'] = $total_inc_tax;
 }
-
-?>
