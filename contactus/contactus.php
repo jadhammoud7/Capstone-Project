@@ -2,11 +2,12 @@
 <html lang="en">
 <?php
 
-    session_start();
-    if(!isset($_SESSION['logged_bool'])){
-        header("Location: ../login/login.php");
-    }
+session_start();
+if (!isset($_SESSION['logged_bool'])) {
+    header("Location: ../login/login.php");
+}
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,32 +29,25 @@
             <a href="" class="nav-branding">Newbie Gamers.</a>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page"> <i
-                            class="fa fa-home fa-lg"></i></a>
+                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page"> <i class="fa fa-home fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page"><i
-                            class="fa fa-shopping-cart fa-lg"></i></a>
+                    <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page"><i class="fa fa-shopping-cart fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../appointments/appointments.php" class="appointments_menu nav-link"
-                        title="Appointments"><i class="fa fa-wrench fa-lg"></i></a>
+                    <a href="../appointments/appointments.php" class="appointments_menu nav-link" title="Appointments"><i class="fa fa-wrench fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page"><i
-                            class="fa fa-phone fa-lg"></i></a>
+                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page"><i class="fa fa-phone fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page"><i
-                            class="fa fa-book fa-lg"></i></a>
+                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page"><i class="fa fa-book fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket"><i
-                            class="fa fa-shopping-basket fa-lg"></i></a>
+                    <a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket"><i class="fa fa-shopping-basket fa-lg"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account"><i
-                            class="fa fa-user fa-lg" style="margin-bottom: 30px;"></i></a>
+                    <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account"><i class="fa fa-user fa-lg" style="margin-bottom: 30px;"></i></a>
                 </li>
             </ul>
             <div class="hamburger">
@@ -65,6 +59,14 @@
         </nav>
     </header>
     <!-- ended with the menu bar -->
+
+    <!-- started popup message comment received -->
+    <div class="popup" id="comment-received-confirmation">
+        <img src="../images/tick.png" alt="">
+        <h2>Comment Received</h2>
+        <p>Your comment was well received. Thank you!</p>
+        <button type="button" onclick="RemoveCommentReceivedPopUp()">OK</button>
+    </div>
 
 
     <!-- started with title page -->
@@ -78,18 +80,14 @@
     <div class="contact-us-part">
         <div class="left_part reveal-by-y">
             <h2>Our Location</h2>
-            <iframe class="googlemaps"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.8733853344565!2d35.4756582150602!3d33.8929145806496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151f10d33335207b%3A0x576376fd4baf4902!2sLebanese%20American%20University!5e0!3m2!1sen!2slb!4v1657706136582!5m2!1sen!2slb"
-                style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade" title="Our Current Location View in Google Maps"></iframe>
+            <iframe class="googlemaps" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.8733853344565!2d35.4756582150602!3d33.8929145806496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151f10d33335207b%3A0x576376fd4baf4902!2sLebanese%20American%20University!5e0!3m2!1sen!2slb!4v1657706136582!5m2!1sen!2slb" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Our Current Location View in Google Maps"></iframe>
         </div>
         <div class="right_section reveal-by-x">
             <h2>Leave us a Comment</h2>
             <h4>Have any thoughts, concerns, or questions you would like to share to us, please write your comment, and
                 we will take your comment in consideration!</h3>
                 <form action="../php/comment.php" method="post" class="comment_section">
-                    <textarea name="comment" id="comment" cols="50" rows="10" class="comment-input"
-                        placeholder="Write your thoughts or comment here. Please be considerate. We care about your comments :)"></textarea>
+                    <textarea name="comment" id="comment" cols="50" rows="10" class="comment-input" placeholder="Write your thoughts or comment here. Please be considerate. We care about your comments :)"></textarea>
                     <br>
                     <br>
                     <input type="submit" value="Submit" class="submit">
@@ -106,8 +104,7 @@
                 <p><i class="fa fa-phone-square"></i>Phone: <a href="tel:+961-76123123"> +961-76123123 </a></p>
             </li>
             <li>
-                <p><i class="fa fa-envelope"></i>Email: <a
-                        href="newbies_gamers@hotmail.com">newbies_gamers@hotmail.com</a></p>
+                <p><i class="fa fa-envelope"></i>Email: <a href="newbies_gamers@hotmail.com">newbies_gamers@hotmail.com</a></p>
             </li>
             <p>Working hours
                 <li>Monday - Friday: 8.00 a.m. to 5.00 p.m.</li>
@@ -140,16 +137,14 @@
                             <a href="../home-page/home-page.php#about-us" title="Know more about us">About Us</a>
                         </li>
                         <li>
-                            <a href="../home-page/home-page.php#contact-us"
-                                title="Contact us for any enquiries or thoughts">Contact Us</a>
+                            <a href="../home-page/home-page.php#contact-us" title="Contact us for any enquiries or thoughts">Contact Us</a>
                         </li>
                         <li>
                             <a href="../home-page/home-page.php#shop-products" title="Take a look at our products">Our
                                 Products</a>
                         </li>
                         <li>
-                            <a href="../home-page/home-page.php#testimonials"
-                                title="See what our customers said about our service">Our Customers' opinions</a>
+                            <a href="../home-page/home-page.php#testimonials" title="See what our customers said about our service">Our Customers' opinions</a>
                         </li>
                     </ol>
                 </div>
@@ -248,16 +243,13 @@
                             <h3>Follow Us on Our Socials</h3>
                         </li>
                         <li>
-                            <a href="https://www.facebook.com" title="Newbies Gamers facebook account link"><i
-                                    class="fa fa-facebook"></i>Facebook</a>
+                            <a href="https://www.facebook.com" title="Newbies Gamers facebook account link"><i class="fa fa-facebook"></i>Facebook</a>
                         </li>
                         <li>
-                            <a href="https://www.instagram.com" title="Newbies Gamers instagram account link"><i
-                                    class="fa fa-instagram"></i>Instagram</a>
+                            <a href="https://www.instagram.com" title="Newbies Gamers instagram account link"><i class="fa fa-instagram"></i>Instagram</a>
                         </li>
                         <li>
-                            <a href="https://www.twitter.com" title="Newbies Gamers twitter account link"><i
-                                    class="fa fa-twitter"></i>Twitter</a>
+                            <a href="https://www.twitter.com" title="Newbies Gamers twitter account link"><i class="fa fa-twitter"></i>Twitter</a>
                         </li>
                     </ol>
                 </div>
@@ -267,6 +259,7 @@
     <!-- ended with footer -->
 
     <script src="../main/main.js"></script>
+    <script src="../contactus/contactus.js"></script>
 </body>
 
 </php>

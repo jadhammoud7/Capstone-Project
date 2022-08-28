@@ -21,6 +21,4 @@ $mysql = $connection->prepare("INSERT INTO comments(customer_id,username,comment
 $mysql->bind_param("iss", $customer_id, $username, $comment);
 $mysql->execute();
 
-echo '<script>alert("Your comment was well received! Thank you."); window.location = "../contactus/contactus.php";</script>';
-
-?>
+echo '<script>window.location = "../contactus/contactus.php?comment_submitted=true";</script>';
