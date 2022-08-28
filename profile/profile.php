@@ -154,10 +154,17 @@ if (isset($_GET['delete_checkout_id'])) {
             <img src="../images/question-mark.png" alt="">
             <h2>Log Out Confirmation</h2>
             <p>Are you sure that you want to logout?</p>
-            <button type="button" onclick="GoToLogIn(); <?php unset($_SESSION['free_games']);
-                                                        unset($_SESSION['logged_id']);
-                                                        unset($_SESSION['logged_bool']); ?>">YES</button>
+            <button type="button" onclick="GoToLogIn()">YES</button>
             <button type="button" onclick="CloseLogOutPopUp()">NO</button>
+        </div>
+
+        <!-- started popup message delete appointment -->
+        <div class="popup" id="delete-appointment-confirmation">
+            <img src="../images/question-mark.png" alt="">
+            <h2>Delete Appointment Confirmation</h2>
+            <p>Are you sure that you want to delete this appointment?</p>
+            <button type="button" onclick="DeleteAppointment()">YES</button>
+            <button type="button" onclick="CloseDeleteAppointmentPopUp()">NO</button>
         </div>
 
 

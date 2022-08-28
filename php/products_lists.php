@@ -72,7 +72,7 @@ function appointments_list_connection($appointment_id, $appointment_name, $date,
                 </div>
             </div>
             <div class=\"appointments-button\">
-                <button onclick=\"if(confirm('Are you sure to delete this appointment?')){ window.location='../profile/profile.php?deleteAPPid=$appointment_id'; }\" class=\"remove_app\"><i class=\"fa fa-remove\"></i><strong>Delete Appointment</strong></button>
+                <button onclick=\"OpenDeleteAppointmentPopUp($appointment_id)\" class=\"remove_app\"><i class=\"fa fa-remove\"></i><strong>Delete Appointment</strong></button>
             </div>
         </div>";
     echo $element;

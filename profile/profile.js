@@ -128,9 +128,26 @@ function CloseLogOutPopUp() {
 }
 
 //go to login
-function GoToLogIn(){
-    window.location.href = '../login/login.php';
+function GoToLogIn() {
+    window.location.href = '../php/logout.php';
     CloseLogOutPopUp();
+}
+
+var APPid;
+function OpenDeleteAppointmentPopUp(appointment_id) {
+    let appointment_popup = document.getElementById('delete-appointment-confirmation');
+    appointment_popup.classList.add('open-popup');
+    APPid = appointment_id;
+}
+//delete appointment
+function DeleteAppointment() {
+    window.location = '../profile/profile.php?deleteAPPid=' + APPid;
+    CloseDeleteAppointmentPopUp();
+}
+
+function CloseDeleteAppointmentPopUp() {
+    let appointment_popup = document.getElementById('delete-appointment-confirmation');
+    appointment_popup.classList.remove('open-popup');
 }
 
 
