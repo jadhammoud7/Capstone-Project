@@ -64,6 +64,7 @@ $results_allproducts = $stmt_allproducts->get_result();
                     <li><a href="../contactus/contactus.php">Contact Us</a></li>
                 </ul>
             </li>
+
             <li>
                 <a href="../profile/profile.php"> My Profile</a>
                 <ul>
@@ -71,6 +72,11 @@ $results_allproducts = $stmt_allproducts->get_result();
                 </ul>
             </li>
         </ul>
+        <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
     </nav>
 
 

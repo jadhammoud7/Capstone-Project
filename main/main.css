@@ -2,9 +2,7 @@ html {
     scroll-behavior: smooth;
 }
 
-i {
-    padding-right: 5px;
-}
+
 
 body {
     margin: 0;
@@ -33,7 +31,7 @@ header {
 .nav-bar {
     min-height: 70px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space- tween;
     align-items: center;
     padding: 0 24px;
 }
@@ -428,7 +426,7 @@ nav ul li{
     margin: 0 5px;
 }
 nav ul li a{
-    color: white;
+    color: royalblue;
     text-decoration: none;
     line-height: 70px;
     font-size: 18px;
@@ -481,7 +479,7 @@ nav ul ul ul li{
 }
 nav .logo{
     float: left;
-    color: white;
+    color: royalblue;
     font-size: 27px;
     font-weight: 600;
     line-height: 70px;
