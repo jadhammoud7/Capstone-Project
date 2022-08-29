@@ -61,8 +61,7 @@ $results_allproducts = $stmt_allproducts->get_result();
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
-                        <a href="#">Appointments</a>
-
+                        <a href="../appointments/appointments.php"><i class="fa fa-calendar fa-lg"></i>Appointments</a>
                     </div>
                 </div>
 
