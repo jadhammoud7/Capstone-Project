@@ -72,7 +72,7 @@ function appointments_list_connection($appointment_id, $appointment_name, $date,
                 </div>
             </div>
             <div class=\"appointments-button\">
-                <button onclick=\"OpenDeleteAppointmentPopUp($appointment_id)\" class=\"remove_app\"><i class=\"fa fa-remove\"></i><strong>Delete Appointment</strong></button>
+                <button onclick=\"OpenDeleteAppointmentPopUp($appointment_id, $date, $hour)\" class=\"remove_app\"><i class=\"fa fa-remove\"></i><strong>Delete Appointment</strong></button>
             </div>
         </div>";
     echo $element;
