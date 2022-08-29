@@ -132,31 +132,33 @@ $results_console_filter = $stmt_console_filter->get_result();
 <body>
 
 
-    <!-- started with the menu bar -->
+<!-- started with the menu bar -->
     <header>
         <nav class="nav-bar">
             <a href="" class="nav-branding">Newbie Gamers.</a>
             <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page"> <i class="fa fa-home fa-lg"></i></a>
+                <li>
+                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page"><i class="fa fa-shopping-cart fa-lg"></i></a>
+                <li>
+                    <a class="nav-link">Works<i class="fa fa-caret-down"></i></a>
+                    <ul class="works_menu">
+                        <li><a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page">Shop</a></li>
+                        <li><a href="../appointments/appointments.php" class="appointments_menu nav-link" title="Appointments">Appointments</a></li>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                    <a href="../appointments/appointments.php" class="appointments_menu nav-link" title="Appointments"><i class="fa fa-wrench fa-lg"></i></a>
+                <li>
+                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page">Contact</a>
                 </li>
-                <li class="nav-item">
-                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page"><i class="fa fa-phone fa-lg"></i></a>
+                <li>
+                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page">About</a>
                 </li>
-                <li class="nav-item">
-                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page"><i class="fa fa-book fa-lg"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket"><i class="fa fa-shopping-basket fa-lg"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account"><i class="fa fa-user fa-lg" style="margin-bottom: 30px;"></i></a>
+                <li>
+                    <a class="account_menu nav-link">Account<i class="fa fa-caret-down"></i></a>
+                    <ul class="account-dropdown">
+                        <li><a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account">My Profile</a></li>
+                        <li><a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket">My Basket</a></li>
+                    </ul>
                 </li>
             </ul>
             <div class="hamburger">
@@ -168,6 +170,7 @@ $results_console_filter = $stmt_console_filter->get_result();
         </nav>
     </header>
     <!-- ended with the menu bar -->
+
 
     <!-- started popup message found in basket -->
     <div class="popup" id="found-in-basket-confirmation">

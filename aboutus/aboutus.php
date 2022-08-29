@@ -2,11 +2,12 @@
 <html lang="en">
 <?php
 
-    session_start();
-    if(!isset($_SESSION['logged_bool'])){
-        header("Location: ../login/login.php");
-    }
+session_start();
+if (!isset($_SESSION['logged_bool'])) {
+    header("Location: ../login/login.php");
+}
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,33 +27,28 @@
         <nav class="nav-bar">
             <a href="" class="nav-branding">Newbie Gamers.</a>
             <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page"> <i
-                            class="fa fa-home fa-lg"></i></a>
+                <li>
+                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page"><i
-                            class="fa fa-shopping-cart fa-lg"></i></a>
+                <li>
+                    <a class="nav-link">Works<i class="fa fa-caret-down"></i></a>
+                    <ul class="works_menu">
+                        <li><a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page">Shop</a></li>
+                        <li><a href="../appointments/appointments.php" class="appointments_menu nav-link" title="Appointments">Appointments</a></li>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                    <a href="../appointments/appointments.php" class="appointments_menu nav-link"
-                        title="Appointments"><i class="fa fa-wrench fa-lg"></i></a>
+                <li>
+                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page">Contact</a>
                 </li>
-                <li class="nav-item">
-                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page"><i
-                            class="fa fa-phone fa-lg"></i></a>
+                <li>
+                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page">About</a>
                 </li>
-                <li class="nav-item">
-                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page"><i
-                            class="fa fa-book fa-lg"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket"><i
-                            class="fa fa-shopping-basket fa-lg"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account"><i
-                            class="fa fa-user fa-lg" style="margin-bottom: 30px;"></i></a>
+                <li>
+                    <a class="account_menu nav-link">Account<i class="fa fa-caret-down"></i></a>
+                    <ul class="account-dropdown">
+                        <li><a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account">My Profile</a></li>
+                        <li><a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket">My Basket</a></li>
+                    </ul>
                 </li>
             </ul>
             <div class="hamburger">
@@ -64,6 +60,7 @@
         </nav>
     </header>
     <!-- ended with the menu bar -->
+
 
 
     <!-- started with title page -->
@@ -152,16 +149,14 @@
                             <a href="../home-page/home-page.php#about-us" title="Know more about us">About Us</a>
                         </li>
                         <li>
-                            <a href="../home-page/home-page.php#contact-us"
-                                title="Contact us for any enquiries or thoughts">Contact Us</a>
+                            <a href="../home-page/home-page.php#contact-us" title="Contact us for any enquiries or thoughts">Contact Us</a>
                         </li>
                         <li>
                             <a href="../home-page/home-page.php#shop-products" title="Take a look at our products">Our
                                 Products</a>
                         </li>
                         <li>
-                            <a href="../home-page/home-page.php#testimonials"
-                                title="See what our customers said about our service">Our Customers' opinions</a>
+                            <a href="../home-page/home-page.php#testimonials" title="See what our customers said about our service">Our Customers' opinions</a>
                         </li>
                     </ol>
                 </div>
@@ -260,16 +255,13 @@
                             <h3>Follow Us on Our Socials</h3>
                         </li>
                         <li>
-                            <a href="https://www.facebook.com" title="Newbies Gamers facebook account link"><i
-                                    class="fa fa-facebook"></i>Facebook</a>
+                            <a href="https://www.facebook.com" title="Newbies Gamers facebook account link"><i class="fa fa-facebook"></i>Facebook</a>
                         </li>
                         <li>
-                            <a href="https://www.instagram.com" title="Newbies Gamers instagram account link"><i
-                                    class="fa fa-instagram"></i>Instagram</a>
+                            <a href="https://www.instagram.com" title="Newbies Gamers instagram account link"><i class="fa fa-instagram"></i>Instagram</a>
                         </li>
                         <li>
-                            <a href="https://www.twitter.com" title="Newbies Gamers twitter account link"><i
-                                    class="fa fa-twitter"></i>Twitter</a>
+                            <a href="https://www.twitter.com" title="Newbies Gamers twitter account link"><i class="fa fa-twitter"></i>Twitter</a>
                         </li>
                     </ol>
                 </div>
@@ -278,7 +270,7 @@
     </footer>
     <!-- ended with footer -->
 
-    
+
     <script src="../aboutus/aboutus.js"></script>
     <script src="../main/main.js"></script>
 </body>

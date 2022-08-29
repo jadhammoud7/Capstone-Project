@@ -72,6 +72,8 @@ nav ul ul {
     border-top: 3px solid royalblue;
     opacity: 0;
     visibility: hidden;
+    transition: 0.1s linear;
+    z-index: 100;
 }
 
 nav ul li:hover>ul {
