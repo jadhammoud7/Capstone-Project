@@ -132,8 +132,8 @@ $results_allproducts = $stmt_allproducts->get_result();
                     <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page">Home</a>
                 </li>
                 <li>
-                    <a>Works<i class="fa fa-caret-down"></i></a>
-                    <ul>
+                    <a class="nav-link">Works<i class="fa fa-caret-down"></i></a>
+                    <ul class="works_menu">
                         <li><a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page">Shop</a></li>
                         <li><a href="../appointments/appointments.php" class="appointments_menu nav-link" title="Appointments">Appointments</a></li>
                     </ul>
@@ -145,7 +145,7 @@ $results_allproducts = $stmt_allproducts->get_result();
                     <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page">About</a>
                 </li>
                 <li>
-                    <a>Account<i class="fa fa-caret-down"></i></a>
+                    <a class="account_menu nav-link">Account<i class="fa fa-caret-down"></i></a>
                     <ul class="account-dropdown">
                         <li><a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account">My Profile</a></li>
                         <li><a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket">My Basket</a></li>
