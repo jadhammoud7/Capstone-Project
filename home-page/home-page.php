@@ -44,10 +44,15 @@ $results_allproducts = $stmt_allproducts->get_result();
 
 <div class="topnav" id="myTopnav">
   <a href="../home-page/home-page.php" class="active">NewBie Gamers.</a>
+  <a href="#news" class="shop_menu nav-link">My Profile</a>
+  <a href="#news" class="shop_menu nav-link">Basket</a>
+  <a href="#news" class="shop_menu nav-link">Appointments</a>
   <a href="#contact" class="contact_menu nav-link">Contact us</a>
   <a href="#about" class="about_menu nav-link">About us</a>
+  <a href="#news" class="shop_menu nav-link">Services</a>
   <a href="#news" class="shop_menu nav-link">Shop</a>
   <a href="#news" class="home_menu nav-link">Home</a>
+
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
   </a>
