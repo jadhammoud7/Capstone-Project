@@ -49,10 +49,28 @@ $results_allproducts = $stmt_allproducts->get_result();
             <a href="" class="nav-branding">Newbie Gamers.</a>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page"> <i class="fa fa-home fa-lg"></i></a>
+                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page"><i class="fa fa-home fa-lg">Home</i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page"><i class="fa fa-shopping-cart fa-lg"></i></a>
+                    <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page"><i class="fa fa-shopping-cart fa-lg">Shop</i></a>
+                </li>
+
+
+                <div class="dropdown">
+                    <button class="dropbtn">Services
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">Appointments</a>
+
+                    </div>
+                </div>
+
+
+
+
+                <li class="nav-item">
+                    <a href="" class="services_menu nav-link" title="Services"><i class="fa fa-wrench fa-lg">Services</i></a>
                 </li>
                 <li class="nav-item">
                     <a href="../appointments/appointments.php" class="appointments_menu nav-link" title="Appointments"><i class="fa fa-wrench fa-lg"></i></a>
