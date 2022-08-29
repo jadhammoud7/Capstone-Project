@@ -82,7 +82,7 @@ $results_allproducts = $stmt_allproducts->get_result();
 
     <!-- started popup message login successful -->
     <div class="popup" id="login-confirmation">
-        <img src="../images/tick.png" alt="">
+        <img src="../images/tick.png" alt="successfully logged in">
         <h2>Login Successful</h2>
         <p>Welcome to Newbies Gamers</p>
         <button type="button" onclick="RemoveLogInPopUp()">OK</button>
