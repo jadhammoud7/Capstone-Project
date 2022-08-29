@@ -19,6 +19,84 @@
   display: none;
 }
 
+nav {
+  height: 70px;
+  background: #063247;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, .4);
+}
+
+/* nav ul {
+  float: right;
+  margin-right: 30px;
+} */
+
+nav ul li {
+  display: inline-block;
+}
+
+/* 
+nav ul li a {
+  color: white;
+  display: block;
+  padding: 0 15px;
+  line-height: 70px;
+  font-size: 20px;
+  background: #063247;
+  transition: .5s;
+} */
+
+nav ul li ul {
+  padding-inline-start: 0 !important;
+  text-align: center;
+  background-color: black;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: royalblue;
+}
+
+nav ul ul {
+  position: absolute;
+  top: 85px;
+  border-top: 3px solid royalblue;
+  opacity: 0;
+  visibility: hidden;
+}
+
+nav ul li:hover>ul {
+  top: 70px;
+  opacity: 1;
+  visibility: visible;
+  transition: .3s linear;
+  z-index: 100;
+  width: 8%;
+}
+
+.account-dropdown {
+  right: 10px;
+}
+
+nav ul li ul a {
+  line-height: 40px;
+  /* float: left; */
+  /* text-align: center; */
+}
+
+nav ul ul ul {
+  border-top: none;
+}
+
+/* nav ul ul ul li {
+  position: relative;
+  top: -70px;
+  left: 150px;
+} */
+
+/* nav ul ul li a i {
+  margin-left: 45px;
+} */
+
 .prev,
 .next {
   cursor: pointer;
@@ -788,5 +866,3 @@
 }
 
 /*end responsive */
-
-

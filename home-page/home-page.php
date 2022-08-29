@@ -42,7 +42,7 @@ $results_allproducts = $stmt_allproducts->get_result();
 
 <body onunload="myFunction()">
 
-<div class="topnav" id="myTopnav">
+    <!-- <div class="topnav" id="myTopnav">
   <a href="../home-page/home-page.php" class="active">NewBie Gamers.</a>
   <a href="#news" class="shop_menu nav-link">My Profile</a>
   <a href="#news" class="shop_menu nav-link">Basket</a>
@@ -56,18 +56,18 @@ $results_allproducts = $stmt_allproducts->get_result();
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
   </a>
-</div>
+</div> -->
 
 
     <!-- started with the menu bar -->
 
-<!-- 
-    <header>
+
+    <!-- <header>
         <nav class="nav-bar">
             <a href="" class="nav-branding">Newbie Gamers.</a>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="../home-page/home-page.php" class="home_menu nav-link" class="home_menu nav-link" style="font-size:1.2em" ><i class="fa fa-home"></i>Home</a>
+                    <a href="../home-page/home-page.php" class="home_menu nav-link" class="home_menu nav-link" style="font-size:1.2em"><i class="fa fa-home"></i>Home</a>
                 </li>
 
 
@@ -75,11 +75,11 @@ $results_allproducts = $stmt_allproducts->get_result();
                     <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page" style="font-size:1.2em"><i class="fa fa-shopping-cart"> Shop</i></a>
                 </li>
 
-
+                <li class="nav-item">
+                    <a href="" class="" title="" style="font-size:1.2em"><i class="fa fa-phone "> Newbie Gamers <i class="fa fa-angle-down"></i></i></a>
+                </li>
                 <div class="dropdown">
-                    <li class="nav-item">
-                        <a href="" class="" title="" style="font-size:1.2em"><i class="fa fa-phone "> Newbie Gamers <i class="fa fa-angle-down"></i></i></a>
-                    </li>
+
                     <div class="dropdown-content">
                         <li class="nav-item">
                             <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page" style="font-size:1.2em"><i class="fa fa-phone ">Contact Us</i></a>
@@ -124,6 +124,42 @@ $results_allproducts = $stmt_allproducts->get_result();
 
         </nav>
     </header> -->
+    <header>
+        <nav class="nav-bar">
+            <a href="" class="nav-branding">Newbie Gamers.</a>
+            <ul class="nav-menu">
+                <li>
+                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page">Home</a>
+                </li>
+                <li>
+                    <a>Works<i class="fa fa-caret-down"></i></a>
+                    <ul>
+                        <li><a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page">Shop</a></li>
+                        <li><a href="../appointments/appointments.php" class="appointments_menu nav-link" title="Appointments">Appointments</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page">Contact</a>
+                </li>
+                <li>
+                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page">About</a>
+                </li>
+                <li>
+                    <a>Account<i class="fa fa-caret-down"></i></a>
+                    <ul class="account-dropdown">
+                        <li><a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account">My Profile</a></li>
+                        <li><a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket">My Basket</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
+        </nav>
+    </header>
     <!-- ended with the menu bar -->
 
     <!-- started popup message login successful -->
