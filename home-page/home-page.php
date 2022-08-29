@@ -44,6 +44,34 @@ $results_allproducts = $stmt_allproducts->get_result();
 
 
     <!-- started with the menu bar -->
+    <nav>
+        <div class="logo">Codingnepal</div>
+        <ul>
+            <li><a href="../home-page/home-page.php">Home</a></li>
+            <li><a href="../shop/shop.php">Shop</a></li>
+            <li>
+            <li>
+                <a href="">Servies</a>
+                <ul>
+                    <li><a href="../appointments/appointments.php">Appointments</a></li>
+
+                </ul>
+            </li>
+
+                <a href="">Newbie Gamers</a>
+                <ul>
+                    <li><a href="../aboutus/aboutus.php">About Us</a></li>
+                    <li><a href="../contactus/contactus.php">Contact Us</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="../profile/profile.php"> My Profile</a>
+                <ul>
+                    <li><a href="../basket/basket.php">My Basket</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
 
 
 
@@ -55,7 +83,6 @@ $results_allproducts = $stmt_allproducts->get_result();
 
 
 
-    
     <!-- <header>
         <nav class="nav-bar">
             <a href="" class="nav-branding">Newbie Gamers.</a>
