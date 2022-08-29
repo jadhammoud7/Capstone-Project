@@ -91,49 +91,53 @@ $results_allproducts = $stmt_allproducts->get_result();
         <nav class="nav-bar">
             <a href="" class="nav-branding">Newbie Gamers.</a>
             <ul class="nav-menu">
-
+                <li class="nav-item">
+                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page" style="font-size:1.2em"> <i class="fa fa-home"> Home</i></a>
+                </li>
+                <li class="nav-item">
+                    <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page" style="font-size:1.2em"><i class="fa fa-shopping-cart"> Shop</i></a>
+                </li>
 
 
                 <div class="dropdown">
-                    <button class="dropbtn">Dropdown <i class="fa fa-angle-down"></i></button>
+                    <li class="nav-item">
+                        <a href="" class="" title="" style="font-size:1.2em"><i class="fa fa-phone ">Newbie Gamers</i></a>
+                    </li>
                     <div class="dropdown-content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
+                        <li class="nav-item">
+                            <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page" style="font-size:1.2em"><i class="fa fa-phone ">Contact Us</i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page" style="font-size:1.2em"><i class="fa fa-book"> About Us</i></a>
+                        </li>
+                    </div>
+                </div>
+
+
+                <div class="dropdown">
+                    <li class="nav-item">
+                        <a href="" class="" title="Appointments" style="font-size:1.2em"><i class="fa fa-wrench"> Services</i></a>
+                    </li>
+                    <div class="dropdown-content">
+                        <li class="nav-item">
+                            <a href="../appointments/appointments.php" class="appointments_menu nav-link" title="Appointments" style="font-size:1.2em"><i class="fa fa-wrench"> Appointments</i></a>
+                        </li>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <li class="nav-item">
+                        <a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket" style="font-size:1.2em"><i class="fa fa-shopping-basket"></i>My Basket <i class="fa fa-angle-down"></i></a>
+                    </li>
+                    <div class="dropdown-content">
+                        <li class="nav-item">
+                            <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account"><i class="fa fa-user fa-lg" style="font-size:1.2em"> Profile</i></a>
+                        </li>
                     </div>
                 </div>
 
 
 
-
-
-
-
-
-
-
-
-                <li class="nav-item">
-                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page"> <i class="fa fa-home fa-lg"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page"><i class="fa fa-shopping-cart fa-lg"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a href="../appointments/appointments.php" class="appointments_menu nav-link" title="Appointments"><i class="fa fa-wrench fa-lg"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page"><i class="fa fa-phone fa-lg"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page"><i class="fa fa-book fa-lg"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket"><i class="fa fa-shopping-basket fa-lg"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account"><i class="fa fa-user fa-lg" style="margin-bottom: 30px;"></i></a>
-                </li>
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>

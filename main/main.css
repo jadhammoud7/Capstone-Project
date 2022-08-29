@@ -155,8 +155,8 @@ header {
 
 /* Set a style for all buttons */
 button {
-    background-color: royalblue;
-    color: white;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: royalblue;
     padding: 12px 20px;
     margin-top: 6px;
     border: none;
@@ -355,7 +355,7 @@ footer a:hover {
 
 }
 
-.nav-item .home_menu:hover i::after {
+/* .nav-item .home_menu:hover i::after {
     content: "Home";
     margin-left: 5px;
     transition: 1s;
@@ -382,9 +382,9 @@ footer a:hover {
     content: "About us";
     margin-left: 5px;
     transition: 1s;
-}
+} */
 
-.nav-item .basket_menu:hover i::after {
+/* .nav-item .basket_menu:hover i::after {
     content: "Basket";
     margin-left: 5px;
     transition: 1s;
@@ -394,7 +394,7 @@ footer a:hover {
     content: "My Account";
     margin-left: 5px;
     transition: 1s;
-}
+} */
 
 .title {
     text-align: center;
@@ -409,7 +409,6 @@ footer a:hover {
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
   }
   
