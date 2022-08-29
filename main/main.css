@@ -355,47 +355,6 @@ footer a:hover {
 
 }
 
-/* .nav-item .home_menu:hover i::after {
-    content: "Home";
-    margin-left: 5px;
-    transition: 1s;
-}
-
-.nav-item .shop_menu:hover i::after {
-    content: "Shop";
-    margin-left: 5px;
-    transition: 1s;
-}
-
-.nav-item .appointments_menu:hover i::after {
-    content: "Appointments";
-    margin-left: 5px;
-}
-
-.nav-item .contact_menu:hover i::after {
-    content: "Contact";
-    margin-left: 5px;
-    transition: 1s;
-}
-
-.nav-item .about_menu:hover i::after {
-    content: "About us";
-    margin-left: 5px;
-    transition: 1s;
-} */
-
-/* .nav-item .basket_menu:hover i::after {
-    content: "Basket";
-    margin-left: 5px;
-    transition: 1s;
-}
-
-.nav-item .myaccount_menu:hover i::after {
-    content: "My Account";
-    margin-left: 5px;
-    transition: 1s;
-} */
-
 .title {
     text-align: center;
 }
@@ -404,8 +363,9 @@ footer a:hover {
 
 
   
-  .dropdown-content {
+  /* .dropdown-content {
     display: none;
+    color: royalblue;
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
@@ -414,10 +374,72 @@ footer a:hover {
   
   .dropdown-content a {
     color: black;
-    padding: 12px 16px;
+    padding: 120px 160px;
     text-decoration: none;
     display: block;
   }
-  .dropdown-content a:hover {background-color: #ddd;}
+  .dropdown-content a:hover {background-color: #ddd;
+    margin-top: 100px;
+}
 
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content {display: block;
+
+}
+ */
+
+
+
+
+ .topnav {
+    overflow: hidden;
+    background-color: #333;
+    padding: 10px;
+}
+  
+  .topnav .home_menu,.shop_menu, .about_menu,.contact_menu {
+    float: right;
+    display: block;
+    color: royalblue;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+  }
+  .topnav .home_menu,.shop_menu, .about_menu,.contact_menu:hover {
+
+    color: royalblue;
+
+  }
+  
+  .topnav a.active {
+    color: royalblue;
+    font-size: 40px;
+    top: 100px;
+  }
+  
+  .topnav .icon {
+    display: none;
+  }
+  
+  @media screen and (max-width: 746px) {
+    .topnav a:not(:first-child) {display: none;}
+    .topnav a.icon {
+      float: right;
+      display: block;
+    }
+  }
+  
+  @media screen and (max-width: 747px) {
+    .topnav.responsive {position: relative;}
+    .topnav.responsive .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+
+  }

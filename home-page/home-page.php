@@ -42,58 +42,30 @@ $results_allproducts = $stmt_allproducts->get_result();
 
 <body onunload="myFunction()">
 
+<div class="topnav" id="myTopnav">
+  <a href="../home-page/home-page.php" class="active">NewBie Gamers.</a>
+  <a href="#contact" class="contact_menu nav-link">Contact us</a>
+  <a href="#about" class="about_menu nav-link">About us</a>
+  <a href="#news" class="shop_menu nav-link">Shop</a>
+  <a href="#news" class="home_menu nav-link">Home</a>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+
 
     <!-- started with the menu bar -->
-    <!-- <nav>
-        <div class="content">
-            <div class="logo">Newbie Gamers.</div>
-            <ul class="links">
-                <li><a href="../home-page/home-page.php">Home</a></li>
-                <li><a href="../shop/shop.php">Shop</a></li>
-                <li>
-                <li>
-                    <a href="">Servies</a>
-                    <ul>
-                        <li><a href="../appointments/appointments.php">Appointments</a></li>
 
-                    </ul>
-                </li>
-                <li>
-                    <a href="">Newbie Gamers</a>
-                    <ul>
-                        <li><a href="../aboutus/aboutus.php">About Us</a></li>
-                        <li><a href="../contactus/contactus.php">Contact Us</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="../profile/profile.php"> My Profile</a>
-                    <ul>
-                        <li><a href="../basket/basket.php">My Basket</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
-    </nav> -->
-
-
-
-
-
-
-
-
-
-
-
+<!-- 
     <header>
         <nav class="nav-bar">
             <a href="" class="nav-branding">Newbie Gamers.</a>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page" style="font-size:1.2em"> <i class="fa fa-home"> Home</i></a>
+                    <a href="../home-page/home-page.php" class="home_menu nav-link" class="home_menu nav-link" style="font-size:1.2em" ><i class="fa fa-home"></i>Home</a>
                 </li>
+
+
                 <li class="nav-item">
                     <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page" style="font-size:1.2em"><i class="fa fa-shopping-cart"> Shop</i></a>
                 </li>
@@ -101,7 +73,7 @@ $results_allproducts = $stmt_allproducts->get_result();
 
                 <div class="dropdown">
                     <li class="nav-item">
-                        <a href="" class="" title="" style="font-size:1.2em"><i class="fa fa-phone ">Newbie Gamers</i></a>
+                        <a href="" class="" title="" style="font-size:1.2em"><i class="fa fa-phone "> Newbie Gamers <i class="fa fa-angle-down"></i></i></a>
                     </li>
                     <div class="dropdown-content">
                         <li class="nav-item">
@@ -127,11 +99,11 @@ $results_allproducts = $stmt_allproducts->get_result();
 
                 <div class="dropdown">
                     <li class="nav-item">
-                        <a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket" style="font-size:1.2em"><i class="fa fa-shopping-basket"></i>My Basket <i class="fa fa-angle-down"></i></a>
+                        <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account"><i class="fa fa-user fa-lg" style="font-size:1.2em"> Profile</i></a>
                     </li>
                     <div class="dropdown-content">
                         <li class="nav-item">
-                            <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account"><i class="fa fa-user fa-lg" style="font-size:1.2em"> Profile</i></a>
+                            <a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket" style="font-size:1.2em"><i class="fa fa-shopping-basket"></i>My Basket <i class="fa fa-angle-down"></i></a>
                         </li>
                     </div>
                 </div>
@@ -146,7 +118,7 @@ $results_allproducts = $stmt_allproducts->get_result();
             </div>
 
         </nav>
-    </header>
+    </header> -->
     <!-- ended with the menu bar -->
 
     <!-- started popup message login successful -->
