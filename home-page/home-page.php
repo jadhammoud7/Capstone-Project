@@ -44,48 +44,66 @@ $results_allproducts = $stmt_allproducts->get_result();
 
 
     <!-- started with the menu bar -->
-    <header>
+
+
+
+
+
+
+
+
+
+
+
+    
+    <!-- <header>
         <nav class="nav-bar">
             <a href="" class="nav-branding">Newbie Gamers.</a>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page" style="font-size: 1.2em;"><i class="fa fa-home">Home</i></a>
+                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page" style="font-size: 1.2em;"><i class="fa fa-home"> Home</i></a>
                 </li>
                 <li class="nav-item">
-                    <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page"><i class="fa fa-shopping-cart fa-lg">Shop</i></a>
+                    <a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page" style="font-size: 1.2em;"><i class="fa fa-shopping-cart"> Shop</i></a>
                 </li>
 
 
                 <div class="dropdown">
-                    <button class="dropbtn" style="color:royalblue;font-size:1.2em;"><i class="fa fa-wrench"></i>Services
+                    <button class="dropbtn" title="Services" style="color:royalblue;font-size:1.2em;"><i class="fa fa-wrench"></i>Services
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
-                        <a href="../appointments/appointments.php"><i class="fa fa-calendar fa-lg"></i>Appointments</a>
+                        <a href="../appointments/appointments.php" style="font-size: 1em;"><i class="fa fa-calendar"></i>Appointments</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn" title="Services" style="color:royalblue;font-size:1.2em;"><i class="fa fa-wrench"></i>Newbie Gamers
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        
+                <li class="nav-item">
+                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page" style="font-size: 1.2em;"><i class="fa fa-phone">Contact Us</i></a>
+                </li>
+                <li class="nav-item">
+                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page" style="font-size: 1.2em;"><i class="fa fa-book">About us</i></a>
+                </li>
                     </div>
                 </div>
 
 
 
+                <div class="dropdown">
 
-                <li class="nav-item">
-                    <a href="" class="services_menu nav-link" title="Services"><i class="fa fa-wrench fa-lg">Services</i></a>
-                </li>
-                <li class="nav-item">
-                    <a href="../appointments/appointments.php" class="appointments_menu nav-link" title="Appointments"><i class="fa fa-wrench fa-lg"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page"><i class="fa fa-phone fa-lg"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page"><i class="fa fa-book fa-lg"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket"><i class="fa fa-shopping-basket fa-lg"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account"><i class="fa fa-user fa-lg profile-nav"></i></a>
-                </li>
+                    <li class="dropbtn">
+                        <a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account" style="font-size: 1.2em;"><i class="fa fa-user profile-nav"> Profile <i class="fa fa-caret-down"></i></i></a>
+                    </li>
+                    <div class="dropdown-content">
+                        <li class="nav-item">
+                            <a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket"><i class="fa fa-shopping-basket"> My Basket</i></a>
+                        </li>
+                    </div>
+                </div>
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -94,7 +112,7 @@ $results_allproducts = $stmt_allproducts->get_result();
             </div>
 
         </nav>
-    </header>
+    </header> -->
     <!-- ended with the menu bar -->
 
     <!-- started popup message login successful -->
