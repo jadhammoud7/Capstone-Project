@@ -65,6 +65,7 @@ header {
     width: 25px;
     height: 3px;
     margin: 5px auto;
+    /* -webkit-transition:all .3s ease-in-out; */
     -webkit-transition: all 0.3s ease-in-out;
     transition: all .3s ease-in-out;
     background-color: white;
@@ -403,3 +404,66 @@ footer a:hover {
 }
 
 /* end of adding text when hover on icon */
+nav{
+    background-color: #1b1b1b;
+    
+}
+nav::after{
+    content: '';
+    clear: both;
+    display: table;
+}
+nav ul{
+    float: right;
+    list-style: none;
+    margin-right: 40px;
+    position: relative;
+}
+nav ul li{
+    float: left;
+    display: inline-block;
+    background: #1b1b1b;
+    margin: 0 5px;
+}
+nav ul li a{
+    color: white;
+    text-decoration: none;
+    line-height: 70px;
+    font-size: 18px;
+    padding: 8px 15px;
+}
+nav ul li a:hover{
+    color:cyan;
+    box-shadow: 0 0 5px #33ffff,
+                0 0 5px #66ffff;
+
+}
+
+nav ul ul{
+    position: absolute;
+    top:70px;
+    display: none;
+
+}
+nav ul ul li{
+    position: relative;
+    margin: 0px;
+    width: 150px;
+    float: none;
+    display:list-item;
+    border-bottom:1px solid rgba(0,0,0.0.3) ;
+}
+nav ul ul ul li{
+    position: relative;
+    top: -70px;
+    left: 150px;
+}
+nav .logo{
+    float: left;
+    color: white;
+    font-size: 27px;
+    font-weight: 600;
+    line-height: 70px;
+    padding-left: 60px;
+    display: none;
+}

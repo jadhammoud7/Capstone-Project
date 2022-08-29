@@ -45,7 +45,7 @@ $results_allproducts = $stmt_allproducts->get_result();
 
     <!-- started with the menu bar -->
     <nav>
-        <div class="logo">Codingnepal</div>
+        <div class="logo">Newbie Gamers.</div>
         <ul>
             <li><a href="../home-page/home-page.php">Home</a></li>
             <li><a href="../shop/shop.php">Shop</a></li>
@@ -57,10 +57,10 @@ $results_allproducts = $stmt_allproducts->get_result();
 
                 </ul>
             </li>
-
+            <li>
                 <a href="">Newbie Gamers</a>
                 <ul>
-                    <li><a href="../aboutus/aboutus.php">About Us</a></li>
+                <li><a href="../aboutus/aboutus.php">About Us</a></li>
                     <li><a href="../contactus/contactus.php">Contact Us</a></li>
                 </ul>
             </li>
