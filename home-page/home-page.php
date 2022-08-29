@@ -91,6 +91,28 @@ $results_allproducts = $stmt_allproducts->get_result();
         <nav class="nav-bar">
             <a href="" class="nav-branding">Newbie Gamers.</a>
             <ul class="nav-menu">
+
+
+
+                <div class="dropdown">
+                    <button class="dropbtn">Dropdown <i class="fa fa-angle-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
                 <li class="nav-item">
                     <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page"> <i class="fa fa-home fa-lg"></i></a>
                 </li>
