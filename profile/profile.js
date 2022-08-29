@@ -134,15 +134,20 @@ function GoToLogIn() {
 }
 
 var APPid;
+var APPdate;
+var APPhour;
 //open delete appointment pop up
-function OpenDeleteAppointmentPopUp(appointment_id) {
+function OpenDeleteAppointmentPopUp(appointment_id, date, hour) {
     let appointment_popup = document.getElementById('delete-appointment-confirmation');
     appointment_popup.classList.add('open-popup');
     APPid = appointment_id;
+    APPdate = date;
+    APPhour = hour;
 }
 //delete appointment
 function DeleteAppointment() {
     window.location = '../profile/profile.php?deleteAPPid=' + APPid;
+    localstorage.SetItem(APPdate + " " + APPhour, "false");
     CloseDeleteAppointmentPopUp();
 }
 
