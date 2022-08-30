@@ -68,7 +68,7 @@ nav ul li a.active {
 
 nav ul ul {
     position: absolute;
-    top: 85px;
+    /* top: -55px; */
     border-top: 3px solid royalblue;
     opacity: 0;
     visibility: hidden;
@@ -548,3 +548,11 @@ footer a:hover {
     }
 
 }
+/* 
+  nav ul li a:hover{
+    display: block;
+  }
+nav ul li a:hover .nav-link {
+    background-color: #555;
+    color: white;
+  } */

@@ -53,7 +53,7 @@ function book_now_for_each_repair_connection($repair_type)
 {
 
     $element = "
-        <h2>$repair_type</h2>
+        <h2 style=\"margin-top:50px;\">$repair_type</h2>
         <div class=\"appointment-item-info-schedule\">
             <img src=\"../images/ps_repair.jpg\" alt=\"\">
             <div class=\"appointment-item-info-schedule-part\">
