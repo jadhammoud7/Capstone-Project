@@ -41,7 +41,7 @@ function free_gift_connection($name)
     </div>
 </div>
 <div>
-    <button onclick=\"OpenAppointmentBooking(this)\" style=\"border-radius: 15px;color:black ;\"><strong>Book Now</strong></button>
+    <button onclick=\"OpenAppointmentBooking(this)\" style=\"border-radius: 15px;\"><strong>Book Now</strong></button>
 </div>
     ";
     echo $element;
@@ -70,7 +70,7 @@ function book_now_for_each_repair_connection($repair_type)
             <input type=\"radio\" id=\"app6\" name=\"appointments_time\" value=\"6:00-7:30 PM\">
             <label for=\"app6\">6:00-7:30 PM</label><br>
             </div>
-            <button onclick=\"SubmitAppointment()\" style=\"border-radius:15px\">Schedule your Appointment</button>
+            <button onclick=\"SubmitAppointment()\" style=\"border-radius:15px;padding: 10px; background-color:royalblue; color:black;\"><strong>Schedule your Appointment</strong></button>
         </div>
     ";
     echo $element;

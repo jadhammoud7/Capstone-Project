@@ -159,7 +159,7 @@ $results_gift = $stmt_gift->get_result();
                             a one
                             hour work. Don't hesitate to contact us for any concerns or information.</p>
                     </div>
-                    <button>Schedule your Appointment</button>
+                    <button >Schedule your Appointment</button>
                 </div>
             </div>
         </div>
