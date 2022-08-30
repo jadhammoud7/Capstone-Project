@@ -303,12 +303,35 @@
 }
 
 
+
+
 .calendar {
   width: 45rem;
   height: 52rem;
   background-color: #222227;
   box-shadow: 0.5rem 3rem rgba(0, 0, 0, 0.1);
 }
+@media screen and (max-width:784px){
+  .container{
+    width:auto;
+    height: 190vh;
+  }
+  .calendar{
+    width:40rem;
+    height: 60rem;
+  }
+}
+@media screen and (max-width:712px){
+  .container{
+    width:auto;
+    height: 190vh;
+  }
+  .calendar{
+    width:35rem;
+    height: 60rem;
+  }
+}
+
 
 .month {
   width: 100%;
