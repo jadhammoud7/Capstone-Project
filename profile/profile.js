@@ -146,9 +146,10 @@ function OpenDeleteAppointmentPopUp(appointment_id, date, hour) {
 }
 //delete appointment
 function DeleteAppointment() {
-    window.location = '../profile/profile.php?deleteAPPid=' + APPid;
-    localstorage.SetItem(APPdate + " " + APPhour, "false");
+    console.log(APPdate + " " + APPhour);
+    localStorage.setItem(APPdate + " " + APPhour, "false");
     CloseDeleteAppointmentPopUp();
+    window.location = '../profile/profile.php?deleteAPPid=' + APPid;
 }
 
 //close delete appointment popup

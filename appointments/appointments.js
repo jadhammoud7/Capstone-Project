@@ -69,7 +69,7 @@ const renderCalender = () => {
     for (let i = 1; i <= lastDay; i++) {
         if (i == new Date().getDate() && date.getMonth() == new Date().getMonth()) {
             days += `<div class="today" onclick="SetToCurrentDay(this)"> ${i} </div>`;
-            newDate.setMonth(new Date().getMonth());
+            newDate.setMonth(new Date().getMonth() + 1);
             newDate.setDate(new Date().getDate());
 
             if (newDate.getMonth() < 10) {
@@ -88,7 +88,12 @@ const renderCalender = () => {
             var hours = document.getElementsByName('appointments_time');
             for (let hour of hours) {
                 if (localStorage.getItem(currentDate + " " + hour.value) != null) {
-                    hour.disabled = localStorage.getItem(currentDate + " " + hour.value);
+                    console.log(currentDate + " " + hour.value);
+                    if (localStorage.getItem(currentDate + " " + hour.value) === 'true')
+                        hour.setAttribute('disabled', 'true');
+                    else
+                        if (hour.getAttribute('disabled') != null)
+                            hour.attributes.setNamedItem('disabled', '');
                 }
                 else {
                     hour.disabled = false;
@@ -117,7 +122,7 @@ function SetToCurrentDay(element) {
     }
     thisDay.classList.remove('otherdays');
     thisDay.classList.add('today');
-    newDate.setMonth(date.getMonth());
+    newDate.setMonth(date.getMonth() + 1);
     newDate.setDate(thisDay.innerHTML);
     // const array = newDate.toDateString().split(" ");
     // const day = array[2];

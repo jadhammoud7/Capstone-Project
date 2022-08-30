@@ -238,7 +238,7 @@ nav ul ul ul {
 
 /* Set a style for all buttons */
 button {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: royalblue;
     color: royalblue;
     padding: 12px 20px;
     margin-top: 6px;
@@ -548,6 +548,7 @@ footer a:hover {
     }
 
 }
+
 /* 
   nav ul li a:hover{
     display: block;
