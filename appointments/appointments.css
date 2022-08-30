@@ -390,17 +390,7 @@
   }
 
 }
-@media screen and (max-width:768px){
-  /* .container{
-    width:auto;
-    height: 190vh;
-  } */
-  .calendar{
-    width:45rem;
-    height: 120rem;
-  }
 
-}
 /* @media screen and (max-width:628px){
   .container{
     width:auto;
@@ -426,6 +416,24 @@
 
 .today {
   background-color: royalblue;
+}
+@media screen and (max-width:768px){
+  .container{
+    width:auto;
+    height: 150vh;
+  }
+  .calendar{
+    width:35rem;
+    height: 60rem;
+  }
+  .days div{
+    margin-right: -10px;
+    margin-top: -10px;
+    margin-bottom: -10px;
+    margin-left: -5px;
+  }
+
+
 }
 
 
