@@ -391,16 +391,6 @@
 
 }
 
-/* @media screen and (max-width:628px){
-  .container{
-    width:auto;
-    height: 190vh;
-  }
-  .calendar{
-    width:30rem;
-    height: 60rem;
-  }
-} */
 
 .days div:hover:not(.today) {
   background-color: #262626;
@@ -432,9 +422,49 @@
     margin-bottom: -10px;
     margin-left: -5px;
   }
-
-
 }
+@media screen and (max-width:623px){
+  .container{
+    width:auto;
+    height: 170vh;
+    margin-left: -20px;
+  }
+  .calendar{
+    width:30rem;
+    height: 46rem;
+  }
+  .days div{
+
+    margin-left: -15px;
+    margin-top: 10px;
+    padding: -12px;
+  }
+}
+@media screen and (max-width:623px){
+  .container{
+    margin-left: -10px;
+  }
+}
+@media screen and (max-width:506px){
+  .calendar{
+    width:23rem;
+    height: 46rem;
+    margin-left: 5px;
+  }
+  .days div{
+    margin-left: -20px;
+    margin-right:-22px ;
+  }
+  .weekdays div{
+    font-size: 1.0rem;
+  }
+  .appointment-item-info-schedule img{
+    width: 50%;
+    height: 100px;
+  }
+}
+
+
 
 
 /* start of making presend responsive */
