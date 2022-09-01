@@ -12,7 +12,8 @@
   max-width: 1000px;
   position: relative;
   margin: auto;
-  /* background-color: royalblue; */
+  border: rgba(65, 105, 225, 0.8) solid 2px;
+  border-radius: 20px;
 }
 
 .mySlides {
@@ -57,11 +58,8 @@
   font-size: 15px;
   padding: 20px 14px;
   position: absolute;
-  top: 50%;
-  left: 23%;
-  margin: 20px;
-  border: royalblue solid 5px;
-  border-radius: 10px;
+  bottom: 50px;
+  width: 100%;
   text-align: center;
   background-color: rgba(65, 105, 225, 0.6);
 }
