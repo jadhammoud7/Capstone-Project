@@ -97,27 +97,37 @@ $results_allproducts = $stmt_allproducts->get_result();
                 <h3>Welcome To Newbies Gamers</h3>
                 <p>We sell many consoles and electronics for your games and more</p>
             </div>
+            <div class="dot-div">
+                <span class="dot-current"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
         </div>
 
         <div class="mySlides fade" title="We offer phones and many accessories related to them such as charges and more.">
             <div class="numbertext">2 / 3</div>
             <img src="../images/image2.jpg" class="home-img" title="Phone Accessories Image">
             <div class="text">We offer phones and many accessories related to them such as chargers and more</div>
+            <div class="dot-div">
+                <span class="dot"></span>
+                <span class="dot-current"></span>
+                <span class="dot"></span>
+            </div>
         </div>
 
         <div class="mySlides fade" title="Enjoy playing your games by buying all online playing requirements such as PS Plus">
             <div class="numbertext">3 / 3</div>
             <img src="../images/image3.jpg" class="home-img" title="Online playing cards image">
             <div class="text">Enjoy playing your games by buying all online playing requirements such as PS Plus</div>
+            <div class="dot-div">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot-current"></span>
+            </div>
         </div>
     </div>
     <br>
 
-    <div class="dot-div">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-    </div>
     <!-- end slideshow -->
 
 
