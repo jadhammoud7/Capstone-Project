@@ -149,26 +149,26 @@ $results_console_filter = $stmt_console_filter->get_result();
             <a href="" class="nav-branding">Newbie Gamers.</a>
             <ul class="nav-menu">
                 <li>
-                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page">Home</a>
+                    <a href="../home-page/home-page.php" id="home-page-nav" class="home_menu nav-link" title="Home Page">Home</a>
                 </li>
                 <li>
-                    <a class="nav-link">Works<i class="fa fa-caret-down"></i></a>
+                    <a class="nav-link" id="works-nav">Works<i class="fa fa-caret-down"></i></a>
                     <ul class="works_menu">
-                        <li><a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page">Shop</a></li>
-                        <li><a href="../appointments/appointments.php" class="appointments_menu nav-link" title="Appointments">Appointments</a></li>
+                        <li><a href="../shop/shop.php" id="shop-nav" class="shop_menu nav-link" title="Shop Page">Shop</a></li>
+                        <li><a href="../appointments/appointments.php" id="appointments-nav" class="appointments_menu nav-link" title="Appointments">Appointments</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page">Contact</a>
+                    <a href="../contactus/contactus.php" id="contact-us-nav" class="contact_menu nav-link" title="Contact Us Page">Contact</a>
                 </li>
                 <li>
-                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page">About</a>
+                    <a href="../aboutus/aboutus.php" id="about-us-nav" class="about_menu nav-link" title="About us Page">About</a>
                 </li>
                 <li>
-                    <a class="account_menu nav-link">Account<i class="fa fa-caret-down"></i></a>
+                    <a class="account_menu nav-link" id="account-nav">Account<i class="fa fa-caret-down"></i></a>
                     <ul class="account-dropdown">
-                        <li><a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account">My Profile</a></li>
-                        <li><a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket">My Basket</a></li>
+                        <li><a href="../profile/profile.php" id="profile-nav" class="myaccount_menu nav-link" title="View my account">My Profile</a></li>
+                        <li><a href="../basket/basket.php" id="basket-nav" class="basket_menu nav-link" title="View my Shopping Basket">My Basket</a></li>
                     </ul>
                 </li>
             </ul>
@@ -227,18 +227,18 @@ $results_console_filter = $stmt_console_filter->get_result();
 
     <!-- started with products options -->
     <div class="tabs">
-        <button id="cds-btn" data-cont=".cd" class="active" onclick="window.location = '?type=cds'; SetCDActive();">CD's</button>
-        <button id="consoles-btn" data-cont=".consoles" onclick="window.location = '?type=consoles'; SetConsolesActive();">consoles</button>
-        <button id="phones-btn" data-cont=".cellphones" onclick="window.location = '?type=phones'; SetPhonesActive();">CellPhones</button>
-        <button id="offers-btn" data-cont=".offers" onclick="window.location ='?type=offers'; SetOffersActive();">Offers</button>
-        <button id="others-btn" data-cont=".others" onclick="window.location='?type=others'; SetOthersActive();">Others</button>
+        <button id="cds-btn" data-cont=".cd" class="active" onclick="window.location = '?type=cds'; SetCDActive();" title="Select all CDs products">CD's</button>
+        <button id="consoles-btn" data-cont=".consoles" onclick="window.location = '?type=consoles'; SetConsolesActive();" title="Select all consoles products">consoles</button>
+        <button id="phones-btn" data-cont=".cellphones" onclick="window.location = '?type=phones'; SetPhonesActive();" title="Select all cell phones products">CellPhones</button>
+        <button id="offers-btn" data-cont=".offers" onclick="window.location ='?type=offers'; SetOffersActive();" title="Select all offers">Offers</button>
+        <button id="others-btn" data-cont=".others" onclick="window.location='?type=others'; SetOthersActive();" title="Select other products">Others</button>
     </div>
 
     <!-- start search button -->
     <form action="../search/search.php" method="POST">
         <div class="search-container">
             <input type="text" placeholder="Search for a product.." name="search">
-            <button type="submit" name="submit_search"><i class="fa fa-search"></i></button>
+            <button type="submit" name="submit_search" title="Search for products that have name matching the one entered"><i class="fa fa-search"></i></button>
         </div>
     </form>
     <!-- end search button -->
@@ -247,7 +247,7 @@ $results_console_filter = $stmt_console_filter->get_result();
 
     <!-- started filters -->
     <div class="tabs-filter">
-        <button onclick="ShowFilters()"><i class="fa fa-filter"></i>Filter</button>
+        <button onclick="ShowFilters()" title="Open Filters Options to search products according to specific criteria you chose"><i class="fa fa-filter"></i>Filter</button>
         <div class="filters" style="display: none;">
             <div>
                 <h2>Type</h2>
@@ -433,7 +433,7 @@ $results_console_filter = $stmt_console_filter->get_result();
                     <h1><?php echo $_SESSION['title']; ?></h1>
                 </div>
                 <?php
-                if ((isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) || isset($_GET['type'])) {
+                if ((isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) || isset($_GET['type']) || !isset($_GET['type'])) {
                     while ($row = $results_shop->fetch_assoc()) {
                         shop_connection($row["product_id"], $row["name"], $row["price"]);
                     }

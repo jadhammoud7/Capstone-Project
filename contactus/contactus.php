@@ -29,26 +29,26 @@ if (!isset($_SESSION['logged_bool'])) {
             <a href="" class="nav-branding">Newbie Gamers.</a>
             <ul class="nav-menu">
                 <li>
-                    <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page">Home</a>
+                    <a href="../home-page/home-page.php" id="home-page-nav" class="home_menu nav-link" title="Home Page">Home</a>
                 </li>
                 <li>
-                    <a class="nav-link">Works<i class="fa fa-caret-down"></i></a>
+                    <a class="nav-link" id="works-nav">Works<i class="fa fa-caret-down"></i></a>
                     <ul class="works_menu">
-                        <li><a href="../shop/shop.php" class="shop_menu nav-link" title="Shop Page">Shop</a></li>
-                        <li><a href="../appointments/appointments.php" class="appointments_menu nav-link" title="Appointments">Appointments</a></li>
+                        <li><a href="../shop/shop.php" id="shop-nav" class="shop_menu nav-link" title="Shop Page">Shop</a></li>
+                        <li><a href="../appointments/appointments.php" id="appointments-nav" class="appointments_menu nav-link" title="Appointments">Appointments</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="../contactus/contactus.php" class="contact_menu nav-link" title="Contact Us Page">Contact</a>
+                    <a href="../contactus/contactus.php" id="contact-us-nav" class="contact_menu nav-link" title="Contact Us Page">Contact</a>
                 </li>
                 <li>
-                    <a href="../aboutus/aboutus.php" class="about_menu nav-link" title="About us Page">About</a>
+                    <a href="../aboutus/aboutus.php" id="about-us-nav" class="about_menu nav-link" title="About us Page">About</a>
                 </li>
                 <li>
-                    <a class="account_menu nav-link">Account<i class="fa fa-caret-down"></i></a>
+                    <a class="account_menu nav-link" id="account-nav">Account<i class="fa fa-caret-down"></i></a>
                     <ul class="account-dropdown">
-                        <li><a href="../profile/profile.php" class="myaccount_menu nav-link" title="View my account">My Profile</a></li>
-                        <li><a href="../basket/basket.php" class="basket_menu nav-link" title="View my Shopping Basket">My Basket</a></li>
+                        <li><a href="../profile/profile.php" id="profile-nav" class="myaccount_menu nav-link" title="View my account">My Profile</a></li>
+                        <li><a href="../basket/basket.php" id="basket-nav" class="basket_menu nav-link" title="View my Shopping Basket">My Basket</a></li>
                     </ul>
                 </li>
             </ul>

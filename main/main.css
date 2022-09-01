@@ -66,6 +66,16 @@ nav ul li a.active {
     color: royalblue;
 }
 
+.nav-active {
+    color: #fefefe !important;
+    background-color: royalblue !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    border-radius: 10px !important;
+}
+
 nav ul ul {
     position: absolute;
     /* top: -55px; */

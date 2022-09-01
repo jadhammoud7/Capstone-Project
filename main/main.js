@@ -116,3 +116,95 @@ function myFunction() {
         x.className = "topnav";
     }
 }
+
+const home_page_nav = document.getElementById('home-page-nav');
+const works_nav = document.getElementById('works-nav');
+const shop_nav = document.getElementById('shop-nav');
+const appointments_nav = document.getElementById('appointments-nav');
+const contact_us_nav = document.getElementById('contact-us-nav');
+const about_us_nav = document.getElementById('about-us-nav');
+const account_nav = document.getElementById('account-nav');
+const profile_nav = document.getElementById('profile-nav');
+const basket_nav = document.getElementById('basket-nav');
+
+if (window.location.href.includes('home-page.php')) {
+    home_page_nav.classList.add('nav-active');
+    works_nav.classList.remove('nav-active');
+    shop_nav.classList.remove('nav-active');
+    appointments_nav.classList.remove('nav-active');
+    contact_us_nav.classList.remove('nav-active');
+    about_us_nav.classList.remove('nav-active');
+    account_nav.classList.remove('nav-active');
+    profile_nav.classList.remove('nav-active');
+    basket_nav.classList.remove('nav-active');
+}
+
+if (window.location.href.includes('shop.php')) {
+    home_page_nav.classList.remove('nav-active');
+    works_nav.classList.add('nav-active');
+    shop_nav.classList.add('nav-active');
+    appointments_nav.classList.remove('nav-active');
+    contact_us_nav.classList.remove('nav-active');
+    about_us_nav.classList.remove('nav-active');
+    account_nav.classList.remove('nav-active');
+    profile_nav.classList.remove('nav-active');
+    basket_nav.classList.remove('nav-active');
+}
+if (window.location.href.includes('appointments.php')) {
+    home_page_nav.classList.remove('nav-active');
+    works_nav.classList.add('nav-active');
+    shop_nav.classList.remove('nav-active');
+    appointments_nav.classList.add('nav-active');
+    contact_us_nav.classList.remove('nav-active');
+    about_us_nav.classList.remove('nav-active');
+    account_nav.classList.remove('nav-active');
+    profile_nav.classList.remove('nav-active');
+    basket_nav.classList.remove('nav-active');
+}
+if (window.location.href.includes('contactus.php')) {
+    home_page_nav.classList.remove('nav-active');
+    works_nav.classList.remove('nav-active');
+    shop_nav.classList.remove('nav-active');
+    appointments_nav.classList.remove('nav-active');
+    contact_us_nav.classList.add('nav-active');
+    about_us_nav.classList.remove('nav-active');
+    account_nav.classList.remove('nav-active');
+    profile_nav.classList.remove('nav-active');
+    basket_nav.classList.remove('nav-active');
+}
+
+if (window.location.href.includes('aboutus.php')) {
+    home_page_nav.classList.remove('nav-active');
+    works_nav.classList.remove('nav-active');
+    shop_nav.classList.remove('nav-active');
+    appointments_nav.classList.remove('nav-active');
+    contact_us_nav.classList.remove('nav-active');
+    about_us_nav.classList.add('nav-active');
+    account_nav.classList.remove('nav-active');
+    profile_nav.classList.remove('nav-active');
+    basket_nav.classList.remove('nav-active');
+}
+if (window.location.href.includes('profile.php')) {
+    home_page_nav.classList.remove('nav-active');
+    works_nav.classList.remove('nav-active');
+    shop_nav.classList.remove('nav-active');
+    appointments_nav.classList.remove('nav-active');
+    contact_us_nav.classList.remove('nav-active');
+    about_us_nav.classList.remove('nav-active');
+    account_nav.classList.add('nav-active');
+    profile_nav.classList.add('nav-active');
+    basket_nav.classList.remove('nav-active');
+}
+if (window.location.href.includes('basket.php')) {
+    home_page_nav.classList.remove('nav-active');
+    works_nav.classList.remove('nav-active');
+    shop_nav.classList.remove('nav-active');
+    appointments_nav.classList.remove('nav-active');
+    contact_us_nav.classList.remove('nav-active');
+    about_us_nav.classList.remove('nav-active');
+    account_nav.classList.add('nav-active');
+    profile_nav.classList.remove('nav-active');
+    basket_nav.classList.add('nav-active');
+}
+
+
