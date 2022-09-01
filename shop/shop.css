@@ -71,6 +71,7 @@ h2 {
 
 .tabs button {
   background-color: royalblue;
+  color: #fefefe;
   border-radius: 30px;
   height: 50px;
   width: 150px;
@@ -78,6 +79,7 @@ h2 {
 
 .tabs-filter button {
   background-color: royalblue;
+  color: #fefefe;
   border-radius: 30px;
   height: 50px;
   width: 150px;

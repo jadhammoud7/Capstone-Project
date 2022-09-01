@@ -114,3 +114,50 @@ function RemoveFoundInFavoritesPopUp() {
     found_in_favorites_popup.classList.remove('open-popup');
 }
 
+var cds_button = document.getElementById('cds-btn');
+var consoles_button = document.getElementById('consoles-btn');
+var phones_button = document.getElementById('phones-btn');
+var offers_button = document.getElementById('offers-btn');
+var others_button = document.getElementById('others-btn');
+
+if (window.location.href.includes("cds")) {
+    cds_button.classList.add("active");
+    consoles_button.classList.remove("active");
+    phones_button.classList.remove("active");
+    offers_button.classList.remove("active");
+    others_button.classList.remove("active");
+}
+
+if (window.location.href.includes("consoles")) {
+    cds_button.classList.remove("active");
+    consoles_button.classList.add("active");
+    phones_button.classList.remove("active");
+    offers_button.classList.remove("active");
+    others_button.classList.remove("active");
+}
+
+
+if (window.location.href.includes("phones")) {
+    cds_button.classList.remove("active");
+    consoles_button.classList.remove("active");
+    phones_button.classList.add("active");
+    offers_button.classList.remove("active");
+    others_button.classList.remove("active");
+}
+
+if (window.location.href.includes("offers")) {
+    cds_button.classList.remove("active");
+    consoles_button.classList.remove("active");
+    phones_button.classList.remove("active");
+    offers_button.classList.add("active");
+    others_button.classList.remove("active");
+}
+
+if (window.location.href.includes("others")) {
+    cds_button.classList.remove("active");
+    consoles_button.classList.remove("active");
+    phones_button.classList.remove("active");
+    offers_button.classList.remove("active");
+    others_button.classList.add("active");
+}
+

@@ -29,6 +29,17 @@ if (!isset($_GET['type'])) {
     $stmt->execute();
     $results_shop = $stmt->get_result();
 }
+
+//if selected button to view products by type only not filter
+if (isset($_GET['type']) && !isset($_GET['category']) && !isset($_GET['sortby'])) {
+    $query = "SELECT product_id, name, price FROM products";
+    $type = $_GET['type']; //display cds as a starter
+    $_SESSION['title'] = $type; //for the title of the div 
+    $query = $query . " WHERE type= '" . $type . "' ";
+    $stmt = $connection->prepare($query);
+    $stmt->execute();
+    $results_shop = $stmt->get_result();
+}
 //if a get request of type was sent
 if (isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) {
     $query = "SELECT product_id, name, price FROM products";
@@ -132,7 +143,7 @@ $results_console_filter = $stmt_console_filter->get_result();
 <body>
 
 
-<!-- started with the menu bar -->
+    <!-- started with the menu bar -->
     <header>
         <nav class="nav-bar">
             <a href="" class="nav-branding">Newbie Gamers.</a>
@@ -216,11 +227,11 @@ $results_console_filter = $stmt_console_filter->get_result();
 
     <!-- started with products options -->
     <div class="tabs">
-        <button class="active" data-cont=".cd" onclick="window.location = '?type=cds'">CD's</button>
-        <button data-cont=".consoles" onclick="window.location = '?type=consoles';">consoles</button>
-        <button data-cont=".cellphones" onclick="window.location = '?type=phones';">CellPhones</button>
-        <button data-cont=".offers" onclick="window.location ='?type=offers';">Offers</button>
-        <button data-cont=".others" onclick="window.location='?type=others';">Others</button>
+        <button id="cds-btn" data-cont=".cd" class="active" onclick="window.location = '?type=cds'; SetCDActive();">CD's</button>
+        <button id="consoles-btn" data-cont=".consoles" onclick="window.location = '?type=consoles'; SetConsolesActive();">consoles</button>
+        <button id="phones-btn" data-cont=".cellphones" onclick="window.location = '?type=phones'; SetPhonesActive();">CellPhones</button>
+        <button id="offers-btn" data-cont=".offers" onclick="window.location ='?type=offers'; SetOffersActive();">Offers</button>
+        <button id="others-btn" data-cont=".others" onclick="window.location='?type=others'; SetOthersActive();">Others</button>
     </div>
 
     <!-- start search button -->
@@ -408,7 +419,7 @@ $results_console_filter = $stmt_console_filter->get_result();
                                                                                                                 }
                                                                                                                 ?>"</h4>
 
-        <?php if (!isset($_GET['type']) && !isset($_GET['category'])) {
+        <?php if (!isset($_GET['category'])) {
             echo "<script>document.getElementById('filter-result').style.display = 'none';</script>";
         } ?>
 
@@ -422,7 +433,7 @@ $results_console_filter = $stmt_console_filter->get_result();
                     <h1><?php echo $_SESSION['title']; ?></h1>
                 </div>
                 <?php
-                if ((isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) || !isset($_GET['type'])) {
+                if ((isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) || isset($_GET['type'])) {
                     while ($row = $results_shop->fetch_assoc()) {
                         shop_connection($row["product_id"], $row["name"], $row["price"]);
                     }
