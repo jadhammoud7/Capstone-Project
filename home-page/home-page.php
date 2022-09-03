@@ -255,6 +255,7 @@ $results_allproducts = $stmt_allproducts->get_result();
                 shop_connection($row_allproducts["product_id"], $row_allproducts["name"], $row_allproducts["price"]);
             }
             ?>
+            <button class="shop-page-button" title="Go to Shop Page to View all Our Products"><i class="fa fa-shopping-cart"></i>Go To Shop Page</button>
         </div>
         <!-- end of products -->
 

@@ -103,6 +103,10 @@
   display: inline-block;
 }
 
+.shop-products {
+  text-align: center;
+}
+
 .animate {
   -webkit-animation: animatezoom 0.6s;
   animation: animateZoom 0.6s;
@@ -182,9 +186,6 @@
 .about-us-location {
   margin-top: 50px;
 }
-
-
-
 
 .product1 {
   background-color: transparent;
@@ -315,24 +316,32 @@
   text-align: center;
   color: rgba(65, 105, 225, 0.6);
   font: 20px Arial, sans-serif;
+  margin-top: 200px;
+  margin-bottom: 100px;
 }
 
 .features-title {
   text-align: center;
   color: rgba(65, 105, 225, 0.6);
   font: 20px Arial, sans-serif;
+  margin-top: 200px;
+  margin-bottom: 100px;
 }
 
 .about-us-title {
   text-align: center;
   color: rgba(65, 105, 225, 0.6);
   font: 20px Arial, sans-serif;
+  margin-top: 200px;
+  margin-bottom: 100px;
 }
 
 .appointments-title {
   text-align: center;
   color: rgba(65, 105, 225, 0.6);
   font: 20px Arial, sans-serif;
+  margin-top: 200px;
+  margin-bottom: 100px;
 }
 
 .shop-products-title {
@@ -340,6 +349,23 @@
   text-align: center;
   color: rgba(65, 105, 225, 0.6);
   font: 20px Arial, sans-serif;
+  margin-top: 200px;
+  margin-bottom: 100px;
+}
+
+.shop-page-button {
+  margin-top: 50px;
+  text-align: center;
+  border-radius: 20px;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.shop-page-button:hover {
+  color: royalblue;
+  background-color: #bbb;
+  transition: 1s ease;
+  border: 5px royalblue solid;
 }
 
 .about-us {
@@ -348,6 +374,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   height: 400px;
+  border-radius: 50px;
 }
 
 .appointments {
@@ -356,6 +383,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   height: 400px;
+  border-radius: 50px;
 }
 
 .about-us-paragraph {
@@ -367,6 +395,7 @@
   margin-right: auto;
   padding: 20px;
   margin-top: 100px;
+  border-radius: 50px;
 }
 
 .appointments-paragraph {
@@ -379,6 +408,7 @@
   padding: 20px;
   margin-top: 100px;
   transform: matrix(1, 0, -0.2, 1, 50, 0);
+  border-radius: 50px;
 }
 
 
@@ -428,12 +458,15 @@
   flex-direction: row;
   background-color: rgba(65, 105, 225, 0.6);
   margin-bottom: 30px;
+  border-radius: 50px;
 }
 
 .contact-us-title {
   text-align: center;
   color: rgba(65, 105, 225, 0.6);
   font: 20px Arial, sans-serif;
+  margin-top: 200px;
+  margin-bottom: 100px;
 }
 
 .contact-us p {
@@ -444,7 +477,8 @@
 }
 
 .contact-us-img {
-  width: 40%;
+  width: 50%;
+  border-radius: 50px;
 }
 
 /* end resposive of contact us */
@@ -473,8 +507,9 @@
 .contact-us-images {
   width: 10%;
   height: 40px;
-  margin-left: 15px;
+  margin-left: 30px;
   margin-top: 20px;
+  color: #fefefe;
 }
 
 .test_profile_img {
@@ -571,6 +606,8 @@
 
   .testimonials-title {
     font-size: 15px;
+    margin-top: 100px;
+    margin-bottom: 50px;
   }
 }
 
@@ -596,6 +633,8 @@
 
   .features-title {
     font: 15px Arial, sans-serif !important;
+    margin-top: 100px;
+    margin-bottom: 50px;
   }
 
   .features {
@@ -611,20 +650,30 @@
   .about-us-title {
     font-size: 15px !important;
     padding-top: 40px;
+    margin-top: 100px;
+    margin-bottom: 50px;
   }
 
   .contact-us-title {
     font-size: 15px !important;
     padding-top: 40px;
+    margin-top: 100px;
+    margin-bottom: 50px;
   }
 
   .appointments-title {
     font-size: 15px !important;
     padding-top: 40px;
+    margin-top: 100px;
+    margin-bottom: 50px;
   }
 
   .contact-us {
     flex-direction: column !important;
+  }
+
+  .contact_us_paragraphs {
+    margin: 0;
   }
 
   .contact-us-img {
@@ -634,6 +683,8 @@
   .shop-products-title {
     font-size: 15px !important;
     padding-top: 40px;
+    margin-top: 100px;
+    margin-bottom: 50px;
   }
 
 }
