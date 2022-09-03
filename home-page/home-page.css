@@ -529,10 +529,6 @@
   left: 30px;
 }
 
-#first_test {
-  margin-top: 15px;
-}
-
 /* start responsive */
 @media screen and (max-width: 860px) {
   .testimonial_cover {

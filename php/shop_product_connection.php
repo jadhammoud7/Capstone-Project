@@ -15,7 +15,7 @@ function shop_connection($product_id, $name, $price)
                 <h1><i>$name</i></h1>
                 <h3><i>$price$</i></h3>
                 <a href=\"../product_info/product_info.php?productID=$product_id\">
-                    <img class=\"info\" src=\"../images/info.png\" title=\"read more\" alt=\"read more info\">
+                    <img class=\"info\" src=\"../images/info.png\" title=\"Read More Information\" alt=\"read more info\">
                 </a>
                 <a href=\"../php/add_to_basket.php?productID=$product_id\">
                     <img class=\"add_to_basket\" src=\"../images/shopping_cart.png\" title=\"Add To Basket\"

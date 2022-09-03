@@ -101,15 +101,15 @@ if (!isset($_SESSION['logged_bool'])) {
         <h2>SHOP INFO</h2>
         <ul>
             <li>
-                <p><i class="fa fa-map-marker"></i>Address: <br> Beirut, Lebanon </p>
+                <p title="Shop Address is in Beirut, Lebanon"><i class="fa fa-map-marker"></i>Address: <br> Beirut, Lebanon </p>
             </li>
             <li>
-                <p><i class="fa fa-phone-square"></i>Phone: <a href="tel:+961-76123123"> +961-76123123 </a></p>
+                <p title="Our Phone Number is +961-76123123"><i class="fa fa-phone-square"></i>Phone: <a href="tel:+961-76123123"> +961-76123123 </a></p>
             </li>
             <li>
-                <p><i class="fa fa-envelope"></i>Email: <a href="newbies_gamers@hotmail.com">newbies_gamers@hotmail.com</a></p>
+                <p title="Our Email Address is newbies_gamers@hotmail.com"><i class="fa fa-envelope"></i>Email: <a href="newbies_gamers@hotmail.com">newbies_gamers@hotmail.com</a></p>
             </li>
-            <p>Working hours
+            <p title="Our Working hours schedule in week">Working hours
                 <li>Monday - Friday: 8.00 a.m. to 5.00 p.m.</li>
                 <li>Saturday: 10.00 a.m. to 3.00 p.m.</li>
                 <li>Sunday: <span>Closed</span></li>

@@ -127,25 +127,6 @@
     background-color: rgba(65, 105, 225, 0.433);
 }
 
-#TopBtn {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 30px;
-    z-index: 99;
-    border: none;
-    outline: none;
-    background-color: rgba(65, 105, 225, 0.6);
-    color: #fefefe;
-    padding: 15px;
-    border-radius: 4px;
-    align-items: center;
-}
-
-#TopBtn:hover {
-    background-color: royalblue;
-}
-
 @media screen and (max-width: 1325px) {
     .contact-us-part {
         display: flex;
@@ -158,7 +139,6 @@
 
     #comment {
         margin-left: 0;
-        width: fit-content;
     }
 
     .left_part {
@@ -183,11 +163,6 @@
     .right_section {
         margin-left: 10px !important;
     }
-
-    #comment {
-        margin-left: 0;
-        width: fit-content;
-    }
 }
 
 @media screen and (max-width:309px) {
@@ -204,10 +179,6 @@
         margin-left: 10px !important;
     }
 
-    #comment {
-        margin-left: 0;
-        width: fit-content;
-    }
 }
 
 @media screen and (max-width: 598px) {
@@ -222,11 +193,6 @@
 
     .right_section {
         margin-left: 10px !important;
-    }
-
-    #comment {
-        margin-left: 0;
-        width: fit-content;
     }
 }
 
@@ -253,33 +219,3 @@
         width: 340px;
     }
 }
-/* start of adding text when hover on icon */
-.nav-item .home_menu:hover i::after {
-    content:"Home";
-    margin-left: 5px;
-  }
-  .nav-item .shop_menu:hover i::after {
-    content:"Shop";
-    margin-left: 5px;
-  }
-  .nav-item .appointments_menu:hover i::after {
-    content:"Appointments";
-    margin-left: 5px;
-  }
-  .nav-item .contact_menu:hover i::after {
-    content:"Contact";
-    margin-left: 5px;
-  }
-  .nav-item .about_menu:hover i::after {
-    content:"About us";
-    margin-left: 5px;
-  }
-  .nav-item .basket_menu:hover i::after {
-    content:"Basket";
-    margin-left: 5px;
-  }
-  .nav-item .myaccount_menu:hover i::after {
-    content:"My Account";
-    margin-left: 5px;
-  }
-  /* end of adding text when hover on icon */
