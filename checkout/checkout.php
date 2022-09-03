@@ -288,12 +288,6 @@ $results_get_basket_products = $stmt_get_basket_products->get_result();
             <p class="login-part-par">Want to proceed with the checkout faster with your personal information? </p>
             <button class="login-button" title="Click in order to proceed with the checkout with your account personal info" style="color: black;" onclick="window.location='../checkout/checkout.php?customerID=<?php echo $customer_id ?>';"><strong>Use your personal information</strong></button>
         </div>
-        <!--         <div class="login-part">
-            <p class="login-part-par">Want to proceed to your checkout faster and you don't have an account? </p>
-            <button class="login-button"
-                title="Click to create and account to proceed with the checkout with your account personal info" style="color: black;"><strong>Create
-                an account now </strong></button>
-        </div> -->
         <div class="billing-details">
             <h2>Billing Details</h2>
             <div class="form-container">
