@@ -64,7 +64,6 @@
   width: 100%;
   text-align: center;
   background-color: rgba(65, 105, 225, 0.7);
-  transition: translateY(100px) 1s ease;
 }
 
 .numbertext {
