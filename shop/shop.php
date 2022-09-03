@@ -187,7 +187,7 @@ $results_console_filter = $stmt_console_filter->get_result();
     <div class="popup" id="found-in-basket-confirmation">
         <img src="../images/tick.png" alt="">
         <h2>Added To Basket</h2>
-        <p>Product already added to basket. Quantity added by 1.</p>
+        <p>Product already added to basket. Quantity added.</p>
         <button type="button" onclick="RemoveFoundInBasketPopUp()">OK</button>
         <button type="button" onclick="GoToBasket()">Go To Shopping Basket</button>
     </div>

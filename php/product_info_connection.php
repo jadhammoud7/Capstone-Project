@@ -32,11 +32,15 @@ function product_info_connection($product_id, $name, $price, $category, $descrip
                 <h3>$age</h3>
             </div>
             <!-- <label for=\"points\">Quantity:</label> -->
-            <input type=\"number\" id=\"points\" name=\"points\" title=\"Quantity to add to basket\"> <br> <br>
-            <button class=\"product_info_addtobasket\" title=\"Add this product to your shopping basket\"  onclick=\"window.location.href = '../php/basket.php?productID=$product_id'\"><i
-                    class=\"fa fa-shopping-basket\"></i>Add to Basket</button>
+            <form action=\"../php/add_to_basket.php\" method=\"GET\">
+            <input type=\"hidden\" name=\"productID\" value=\"$product_id\">
+            <input type=\"number\" id=\"points\" name=\"quantities\" title=\"Quantity to add to basket\"> <br> <br>
+            <button class=\"product_info_addtobasket\" title=\"Add this product to your shopping basket\"><i
+                    class=\"fa fa-shopping-basket\" type=\"Submit\"></i>Add to Basket</button>
             <button class=\"product_info_addtofavorites\" title=\"Add this product to your favorites list\"><i
                     class=\"fa fa-heart\" onclick=\"window.location.href = '../php/product_info_connection.php?productID=$product_id';\"></i>Add to Favorites</button>
+            </form>
+                    
         </div>
     </div>
     ";

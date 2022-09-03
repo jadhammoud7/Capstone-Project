@@ -7,7 +7,7 @@ $total_price = 0;
 $tax_price = 0;
 $total_inc_tax = 0;
 
-if (isset($_GET['productID']) && $_GET['productID'] != "") {
+if (isset($_GET['productID'])) {
     $product_id = $_GET['productID'];
 }
 if (isset($_SESSION['logged_id'])) {
@@ -22,6 +22,10 @@ if (isset($product_id)) {
 
     if (empty($row_select['product_id'])) {
         $quantity = 1;
+        //if selected quantity in product info
+        if (isset($_GET['quantities'])) {
+            $quantity = $_GET['quantities'];
+        }
         $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE product_id = '" . $product_id . "' ");
         $stmt_select_product_price->execute();
         $result_select_product_price = $stmt_select_product_price->get_result();
@@ -37,6 +41,9 @@ if (isset($product_id)) {
         $select_quantity_results = $stmt_select_quantity->get_result();
         $row_select_quantity = $select_quantity_results->fetch_assoc();
         $quantity = $row_select_quantity['quantity'] + 1;
+        if (isset($_GET['quantities'])) {
+            $quantity = $row_select_quantity['quantity'] + $_GET['quantities'];
+        }
         $stmt_update_quantity = $connection->prepare("UPDATE baskets_customer_product SET quantity = ? WHERE product_id = '" . $product_id . "' AND customer_id = '" . $customer_id . "'");
         $stmt_update_quantity->bind_param("i", $quantity);
         $stmt_update_quantity->execute();

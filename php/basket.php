@@ -19,10 +19,11 @@ $select_products_results = $select_products_stmt->get_result();
 while ($select_products_row = $select_products_results->fetch_assoc()) {
     $product_id = $select_products_row['product_id'];
     $product_stmt = strval($product_id);
-    $quantity_stmt = $product_id.'-quantity';
+    $quantity_stmt = $product_id . '-quantity';
     //check if user changed quantity for this product
     if (isset($_POST[$quantity_stmt])) {
         $quantity = $_POST[$quantity_stmt];
+
         //update quantity
         $stmt_update_quantity = $connection->prepare("UPDATE baskets_customer_product SET quantity = ? WHERE product_id = '" . $product_id . "' and customer_id = '" . $customer_id . "'");
         $stmt_update_quantity->bind_param("i", $quantity);

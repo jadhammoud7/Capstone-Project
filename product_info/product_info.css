@@ -1,6 +1,4 @@
 .product_image {
-    /* height: 470px;
-    width: 430px; */
     width: 40%;
     float: left;
     margin-left: 100px;
@@ -8,7 +6,6 @@
 }
 
 .product_info_page {
-    /* float: right; */
     display: flex;
     flex-direction: row;
     margin-bottom: 50px;
@@ -54,33 +51,6 @@ input[type=number] {
     color: #fefefe;
 }
 
-.reveal-by-x {
-    position: relative;
-    transform: translateX(150px);
-    transition: 1s all ease;
-}
-
-.reveal-by-x.on {
-    transform: translateX(0);
-}
-
-.reveal-by-y {
-    position: relative;
-    transform: translateY(150px);
-    transition: 1s all ease;
-}
-
-.reveal-by-y.on {
-    transform: translateY(0);
-}
-
-@media screen and(max-width:1260px) {
-    /* .product_info_page{
-        float: none;
-        flex-direction:column !important;
-    } */
-}
-
 @media screen and (max-width: 970px) {
     .product_info_page {
         flex-direction: column !important;
@@ -107,33 +77,3 @@ input[type=number] {
         margin: 20px;
     }
 }
-/* start of adding text when hover on icon */
-.nav-item .home_menu:hover i::after {
-    content:"Home";
-    margin-left: 5px;
-  }
-  .nav-item .shop_menu:hover i::after {
-    content:"Shop";
-    margin-left: 5px;
-  }
-  .nav-item .appointments_menu:hover i::after {
-    content:"Appointments";
-    margin-left: 5px;
-  }
-  .nav-item .contact_menu:hover i::after {
-    content:"Contact";
-    margin-left: 5px;
-  }
-  .nav-item .about_menu:hover i::after {
-    content:"About us";
-    margin-left: 5px;
-  }
-  .nav-item .basket_menu:hover i::after {
-    content:"Basket";
-    margin-left: 5px;
-  }
-  .nav-item .myaccount_menu:hover i::after {
-    content:"My Account";
-    margin-left: 5px;
-  }
-  /* end of adding text when hover on icon */
