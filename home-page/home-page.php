@@ -107,7 +107,10 @@ $results_allproducts = $stmt_allproducts->get_result();
         <div class="mySlides fade" title="We offer phones and many accessories related to them such as charges and more.">
             <div class="numbertext">2 / 3</div>
             <img src="../images/image2.jpg" class="home-img" title="Phone Accessories Image">
-            <div class="text">We offer phones and many accessories related to them such as chargers and more</div>
+            <div class="text">
+                <h3>What We Sell?</h3>
+                <p>We offer phones and many accessories related to them such as chargers and more</p>
+            </div>
             <div class="dot-div">
                 <span class="dot"></span>
                 <span class="dot-current"></span>
@@ -118,7 +121,10 @@ $results_allproducts = $stmt_allproducts->get_result();
         <div class="mySlides fade" title="Enjoy playing your games by buying all online playing requirements such as PS Plus">
             <div class="numbertext">3 / 3</div>
             <img src="../images/image3.jpg" class="home-img" title="Online playing cards image">
-            <div class="text">Enjoy playing your games by buying all online playing requirements such as PS Plus</div>
+            <div class="text">
+                <h3>What we offer?</h3>
+                <p>Enjoy playing your games by buying all online playing requirements such as PS Plus</p>
+            </div>
             <div class="dot-div">
                 <span class="dot"></span>
                 <span class="dot"></span>
