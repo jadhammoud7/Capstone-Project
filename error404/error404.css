@@ -1,0 +1,9 @@
+.error404-div{
+    background-image: url(../images/error404-background.jpg);
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+.error404-gif{
+    width: 40%;
+}

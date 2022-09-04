@@ -206,16 +206,3 @@ if (window.location.href.includes('basket.php')) {
     profile_nav.classList.remove('nav-active');
     basket_nav.classList.add('nav-active');
 }
-
-const home_page_url = '../home-page/home-page.php';
-const login_url = '../login/login.php';
-const signup_url = '../signup/signup.php';
-const shop_url = '../shop/shop.php';
-const shop_consoles_url = '../shop/shop.php?type=consoles';
-const shop_cds_url = '../shop/shop.php?type=cds';
-const shop_phones_url = '../shop/shop.php?type=phones';
-const shop_offers_url = '../shop/shop.php?type=offers';
-const shop_others_url = '../shop/shop.php?type=others';
-
-
-
