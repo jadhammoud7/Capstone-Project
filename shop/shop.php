@@ -387,12 +387,12 @@ $results_console_filter = $stmt_console_filter->get_result();
                                                             UpdateSortSelect('highest-price');
                                                             if (isset($_SESSION['highest-price_selected'])) {
                                                                 echo $_SESSION['highest-price_selected'];
-                                                            } ?>>Price - highest</option>
+                                                            } ?>>Price-highest</option>
                             <option value="lowest-price" <?php
                                                             UpdateSortSelect('lowest-price');
                                                             if (isset($_SESSION['lowest-price_selected'])) {
                                                                 echo $_SESSION['lowest-price_selected'];
-                                                            } ?>>Price - lowest</option>
+                                                            } ?>>Price-lowest</option>
                             <option value="popularity" <?php
                                                         UpdateSortSelect('popular');
                                                         if (isset($_SESSION['popular_selected'])) {
