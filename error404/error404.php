@@ -15,6 +15,12 @@
 <body>
     <div class="error404-div">
         <img src="../images/error404.gif" alt="Error404 GIF" class="error404-gif">
+        <div class="error404-par">
+            <h1>Ooops! Page Not Found</h1>
+            <h3>It looks like the url you entered is either removed or not found at all. You may have wrongly typed the address or the page address have changed. </h3>
+            <h5>It is preferred to click the below button to go to the main home page.</h5>
+            <button onclick="window.location.href='../home-page/home-page.php';" title="Go To Home Page">Go To Home Page</button>
+        </div>
     </div>
 </body>
 

@@ -1,9 +1,109 @@
-.error404-div{
+.error404-div {
     background-image: url(../images/error404-background.jpg);
     background-repeat: no-repeat;
     text-align: center;
+    height: 100% !important;
 }
 
-.error404-gif{
+.error404-gif {
     width: 40%;
+}
+
+.error404-par {
+    background-color: rgba(61, 32, 190, 0.7);
+    border: royalblue 5px solid;
+    border-radius: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.error404-par h1 {
+    font-size: xx-large;
+    font-weight: 700;
+    color: #fefefe;
+}
+
+.error404-par h3 {
+    font-size: large;
+    font-weight: 600;
+    color: #fefefe;
+}
+
+
+.error404-par h5 {
+    font-size: large;
+    font-weight: 600;
+    color: #fefefe;
+}
+
+button {
+    background-color: royalblue;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #fefefe;
+    font-size: medium;
+    cursor: pointer;
+    margin-bottom: 30px;
+    border: rgba(61, 32, 190, 0.7) solid 2px;
+}
+
+button:hover {
+    background-color: rgba(74, 210, 235, 0.6);
+    color: royalblue;
+}
+
+@media screen and (max-width: 1000px) {
+    .error404-gif {
+        width: 60% !important;
+        height: 50% !important;
+    }
+
+    .error404-div {
+        height: 100% !important;
+    }
+}
+
+
+@media screen and (max-width: 900px) {
+    .error404-gif {
+        width: 60% !important;
+        height: 50% !important;
+    }
+
+    .error404-div {
+        height: 60% !important;
+    }
+}
+
+@media screen and (max-width: 800px) {
+
+
+    .error404-par {
+        margin-top: 80px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+
+    .error404-par {
+        margin-top: 100px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .error404-par {
+        margin-top: 120px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    .error404-par {
+        margin-top: 140px;
+    }
 }
