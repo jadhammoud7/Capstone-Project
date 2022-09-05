@@ -11,26 +11,20 @@ require_once('../php/repair.php');
 $type = "";
 if (isset($_GET['repair_type'])) {
     $type = $_GET['repair_type'];
-    $query = "SELECT * FROM repair WHERE repair_type= '" . $type . "'";
-    $stmt = $connection->prepare($query);
-    $stmt->execute();
-    $results = $stmt->get_result();
 }
 
 if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
     $appointment_time = $_GET["appointments_time"];
     $date = $_GET['date'];
     $status = "Pending";
-    //inserting
+    //inserting into table appointments
     $appointments_insert = $connection->prepare("INSERT INTO appointments(customer_id, appointment_name, date, hour, status) VALUES (?,?,?,?,?)");
     $appointments_insert->bind_param("issss", $customer_id, $type, $date, $appointment_time, $status);
     $appointments_insert->execute();
     $appointments_insert->close();
-
     echo "<script>window.location='../calendar/calendar.php?appointment_submitted=true';</script>";
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,8 +43,6 @@ if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
 </head>
 
 <body>
-
-
     <!-- started with the menu bar -->
     <header>
         <nav class="nav-bar">
@@ -90,7 +82,6 @@ if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
     </header>
     <!-- ended with the menu bar -->
 
-
     <!-- started popup message appointment submitted -->
     <div class="popup" id="appointment-submitted-confirmation">
         <img src="../images/tick.png" alt="">
@@ -99,16 +90,12 @@ if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
         <button type="button" onclick="RemoveAppointmentSubmittedPopUp()">OK</button>
     </div>
 
-
     <!-- started with title page -->
     <div class="title">
         <h1 style="color: #333;">Appointments</h1>
         <h5 style="color:#b4c3da;">Home / Appointments</h5>
     </div>
     <!-- ended with title page -->
-
-
-
 
     <!-- starting calendar -->
     <div class="container">
@@ -136,22 +123,19 @@ if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
         <div class="appointment-item-schedule">
             <?php
             if (isset($_GET['repair_type'])) {
-                while ($row = $results->fetch_assoc()) {
-                    book_now_for_each_repair_connection($row["repair_type"]);
-                }
+                book_now_for_each_repair_connection($_GET["repair_type"]);
+            }
+            if (isset($_GET['cd_name'])) {
+                book_now_for_each_repair_connection($_GET["cd_name"]);
             }
             ?>
         </div>
     </div>
     <!-- end calendar -->
 
-
-
-
     <!-- started return to top button -->
     <button onclick="ReturnToTop()" id="TopBtn" title="Return to Top"><i class="fa fa-arrow-up"></i></button>
     <!-- ended return to top button -->
-
 
     <!-- started with footer -->
     <footer>
@@ -291,9 +275,7 @@ if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
     </footer>
     <!-- ended with footer -->
 
-
     <script src="../appointments/appointments.js"></script>
     <script src="../main/main.js"></script>
 </body>
-
 </php>

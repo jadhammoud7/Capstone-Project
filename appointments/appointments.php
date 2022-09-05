@@ -7,15 +7,15 @@ if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
 
-
 require_once('../php/repair.php');
-$query = "SELECT * FROM repair;";
+//select all repair services
+$query = "SELECT * FROM repair";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
 
-
-$query_gift = "SELECT name,description FROM products WHERE type='cds' ORDER BY RAND() LIMIT 1;";
+//select random cd game for free gift appointment
+$query_gift = "SELECT name, description FROM products WHERE type='cds' ORDER BY RAND() LIMIT 1;";
 $stmt_gift = $connection->prepare($query_gift);
 $stmt_gift->execute();
 $results_gift = $stmt_gift->get_result();
@@ -35,8 +35,6 @@ $results_gift = $stmt_gift->get_result();
 </head>
 
 <body>
-
-
     <!-- started with the menu bar -->
     <header>
         <nav class="nav-bar">
@@ -76,15 +74,12 @@ $results_gift = $stmt_gift->get_result();
     </header>
     <!-- ended with the menu bar -->
 
-
-
     <!-- started with title page -->
     <div class="title">
         <h1 style="color: #333;">Appointments</h1>
         <h5 style="color:#b4c3da;">Home / Appointments</h5>
     </div>
     <!-- ended with title page -->
-
 
     <!-- started with present -->
     <div class="present" onclick="OpenGift()">
