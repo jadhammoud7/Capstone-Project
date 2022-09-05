@@ -187,5 +187,21 @@ function RemoveEditProfilePopUp() {
     let edit_profile_popup = document.getElementById('edit-profile-confirmation');
     edit_profile_popup.classList.remove('open-popup');
 }
+var checkoutID;
+function OpenRemoveCheckoutPopUp(checkout_id) {
+    let checkout_delete_popup = document.getElementById('delete-checkout-confirmation');
+    checkoutID = checkout_id; 
+    checkout_delete_popup.classList.add('open-popup');
+}
+
+function CloseRemoveCheckoutPopUp() {
+    let checkout_delete_popup = document.getElementById('delete-checkout-confirmation');
+    checkout_delete_popup.classList.remove('open-popup');
+}
+
+function RemoveCheckout() {
+    window.location = '../profile/profile.php?delete_checkout_id=' + checkoutID; 
+    CloseRemoveCheckoutPopUp();
+}
 
 window.addEventListener("pageshow", ShowProfile);

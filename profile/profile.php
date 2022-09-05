@@ -82,7 +82,6 @@ if (isset($_GET['delete_checkout_id'])) {
 
 <body>
 
-
     <!-- started with the menu bar -->
     <header>
         <nav class="nav-bar">
@@ -122,17 +121,12 @@ if (isset($_GET['delete_checkout_id'])) {
     </header>
     <!-- ended with the menu bar -->
 
-
-
-
     <!-- started with title page -->
     <div class="title">
         <h1 style="color: #333;">Hello <?php echo $row["username"]; ?></h1>
         <h5 style="color:#b4c3da;">My Account</h5>
     </div>
     <!-- ended with title page -->
-
-
 
     <!-- started with profile body -->
     <div class="profile-container">
@@ -185,6 +179,15 @@ if (isset($_GET['delete_checkout_id'])) {
             <h2>Edit Profile Confirmation</h2>
             <p>Your changes have been saved</p>
             <button type="button" onclick="RemoveEditProfilePopUp()">OK</button>
+        </div>
+
+        <!-- started popup message delete checkout -->
+        <div class="popup" id="delete-checkout-confirmation">
+            <img src="../images/question-mark.png" alt="">
+            <h2>Delete Checkout Confirmation</h2>
+            <p>Are you sure you want to delete this checkout?</p>
+            <button type="button" onclick="RemoveCheckout()">YES</button>
+            <button type="button" onclick="CloseRemoveCheckoutPopUp()">OK</button>
         </div>
 
         <!-- started profile -->
@@ -243,7 +246,6 @@ if (isset($_GET['delete_checkout_id'])) {
             }
 
             ?>
-
 
             <div>
                 <h3>Total Price: <?php if (isset($_SESSION['total_price'])) {
@@ -308,18 +310,6 @@ if (isset($_GET['delete_checkout_id'])) {
                 <?php
                 while ($row_checkouts = $results_checkouts->fetch_assoc()) {
                     checkouts_list_connection($row_checkouts['checkout_id'], $row_checkouts['shipping_location'], $row_checkouts['status'], $row_checkouts['total_price'], $row_checkouts['tax_price'], $row_checkouts['total_price_including_tax']);
-                    // $query_checkout_products = "SELECT product_id, quantity, price FROM checkouts_customers_products WHERE checkout_id =$checkout_id";
-                    // $stmt_checkout_products = $connection->prepare($query_checkout_products);
-                    // $stmt_checkout_products->execute();
-                    // $results_checkout_products = $stmt_checkout_products->get_result();
-                    // echo "A total of " + mysqli_num_rows($results_checkout_products) + " products";
-                    // while ($row_get_checkout_products = $results_checkout_products->fetch_assoc()) {
-                    //     $stmt_get_product = $connection->prepare("SELECT name FROM products WHERE product_id = '" . $row_get_basket_products['product_id'] . "' ");
-                    //     $stmt_get_product->execute();
-                    //     $results_get_product = $stmt_get_product->get_result();
-                    //     $row_get_product = $results_get_product->fetch_assoc();
-                    //     echo "Quantity of " + $row_get_checkout_products['quantity'] + " of product " + $row_get_product['name'] + " of total price " + $row_get_checkout_products['total_price'];
-                    // }
                 }
                 ?>
             </div>
@@ -327,19 +317,11 @@ if (isset($_GET['delete_checkout_id'])) {
         <!-- ended checkouts -->
 
     </div>
-
-
     <!-- ended with profile body -->
-
-
-
-
 
     <!-- started return to top button -->
     <button onclick="ReturnToTop()" id="TopBtn" title="Return to Top"><i class="fa fa-arrow-up"></i></button>
     <!-- ended return to top button -->
-
-
 
     <!-- started footer -->
     <footer>

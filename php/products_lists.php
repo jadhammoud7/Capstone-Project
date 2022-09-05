@@ -35,18 +35,6 @@ function favorites_list_connection($product_id, $name, $category, $price)
 
 function appointments_list_connection($appointment_id, $appointment_name, $date, $hour, $status)
 {
-    //dont forget to add thr image
-    // $element =  "
-    //     <div class=\"appointmentsss\">
-    //         <img src=\"../images/console.png\" alt=\"\" style=\"width:50%\">
-    //         <div class=\"app_info\">
-    //             <h4><b>$appointment_name </b></h4>
-    //             <p>Date: $date</p>
-    //             <p>Hours: $hour</p>
-    //             <button onclick=\"window.location=\"../profile/profile.php?deleteAPPid=$appointment_id;\"\" class=\"remove_app\"><strong>Remove Appointment</strong></button>
-    //         </div>
-    //     </div>
-    // ";
 
     $element = "
         <div class=\"appointments-list\">
@@ -77,15 +65,6 @@ function appointments_list_connection($appointment_id, $appointment_name, $date,
         </div>";
     echo $element;
 }
-
-// function checkouts_products_list_connection($checkout_id)
-// {
-//     include("../php/connection.php");
-//     include("../php/checkout.php");
-
-//         checkout_products_connection($row_get_product['name'], $row_get_checkout_products['quantity'], $row_get_checkout_products['price']);
-
-// }
 
 function checkouts_list_connection($checkout_id, $shipping_location, $status, $total_price, $tax_price, $total_price_including_tax)
 {
@@ -121,7 +100,7 @@ function checkouts_list_connection($checkout_id, $shipping_location, $status, $t
             </div>     
             <div class=\"checkouts-div\">
                 <button style=\"border-radius: 20px;\" onclick=\"window.location.href = '../checkout/checkout-details.php?checkout_id=$checkout_id';\" title=\"See your checkout info including billing details and products buyed\"><i class=\"fa fa-info-circle\"></i>See Checkout Details</button>
-                <button style=\"margin-left: 10px; border-radius: 20px; background-color: red;\" onclick = \"if(confirm('Are you sure you want to delete your order?')){ window.location='../profile/profile.php?delete_checkout_id=$checkout_id'; }\" title=\"Delete your order\"><i class=\"fa fa-trash\"></i>Delete Order</button>
+                <button style=\"margin-left: 10px; border-radius: 20px; background-color: red;\" onclick = \"OpenRemoveCheckoutPopUp($checkout_id)\" title=\"Delete your order\"><i class=\"fa fa-trash\"></i>Delete Order</button>
             </div>   
         </div>";
     echo $element;
