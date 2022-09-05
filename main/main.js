@@ -86,6 +86,8 @@ window.addEventListener("scroll", revealX2);
 window.addEventListener("scroll", revealY);
 window.addEventListener("pageshow", revealY);
 window.addEventListener("pageshow", revealX);
+window.addEventListener("animationstart", revealY);
+window.addEventListener("animationstart", revealX);
 
 var topButton = document.getElementById("TopBtn");
 
@@ -139,7 +141,7 @@ if (window.location.href.includes('home-page.php')) {
     basket_nav.classList.remove('nav-active');
 }
 
-if (window.location.href.includes('shop.php')) {
+if (window.location.href.includes('shop.php') || window.location.href.includes('product_info.php')) {
     home_page_nav.classList.remove('nav-active');
     works_nav.classList.add('nav-active');
     shop_nav.classList.add('nav-active');

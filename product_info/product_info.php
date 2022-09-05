@@ -1,21 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 
 session_start();
+
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
 
 //for product info
 include("../php/shop_product_connection.php");
-$id = $_GET['productID'];
-$query_info = "SELECT product_id, name, price,category,description,age FROM products WHERE product_id=$id ";
-$stmt_info = $connection->prepare($query_info);
-$stmt_info->execute();
-$results_info = $stmt_info->get_result();
 
+if (isset($_GET['productID'])) {
+    $id = $_GET['productID'];
+    $select_product_query = "SELECT product_id, name, price, category, description, age FROM products WHERE product_id = '" . $id . "'";
+    $stmt_select_product = $connection->prepare($select_product_query);
+    $stmt_select_product->execute();
+    $results_select_product = $stmt_select_product->get_result();
+}
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -72,34 +76,23 @@ $results_info = $stmt_info->get_result();
     </header>
     <!-- ended with the menu bar -->
 
-
-
-    <!-- started with title page -->
-    <!-- <div class="title">
-        <h1 style="color: #333;">Product x name</h1>
-        <h5 style="color:#b4c3da;">Shop / Product Info</h5>
-    </div> -->
-    <!-- ended with title page -->
-
-
-
     <!-- started with product info -->
     <?php
     require_once("../php/product_info_connection.php");
-    while ($row_info = $results_info->fetch_assoc()) {
-        product_info_connection($row_info["product_id"], $row_info["name"], $row_info["price"], $row_info["category"], $row_info["description"], $row_info["age"]);
+    if (isset($_GET['productID'])) {
+        if ($row_info = $results_select_product->fetch_assoc()) {
+            product_info_connection($row_info["product_id"], $row_info["name"], $row_info["price"], $row_info["category"], $row_info["description"], $row_info["age"]);
+        }
+    } else {
+        echo '<h3>There is no valid product info</h3>
+        <button onclick=\"window.location.href=\'../shop/shop.php\';\">Go To Shop Page</button>';
     }
     ?>
     <!-- ended with product info -->
 
-
-
-
     <!-- started return to top button -->
     <button onclick="ReturnToTop()" id="TopBtn" title="Return to Top"><i class="fa fa-arrow-up"></i></button>
     <!-- ended return to top button -->
-
-
 
     <!-- started with footer -->
     <footer>
@@ -238,7 +231,6 @@ $results_info = $stmt_info->get_result();
         </ol>
     </footer>
     <!-- ended with footer -->
-
 
     <script src="../shop/shop.js"></script>
     <script src="../main/main.js"></script>

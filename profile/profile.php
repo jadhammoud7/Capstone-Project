@@ -4,6 +4,10 @@ session_start();
 
 include("../php/connection.php");
 
+if (!isset($_SESSION['logged_bool'])) {
+    header("Location: ../login/login.php");
+}
+
 $customerid = $_SESSION['logged_id'];
 
 $query = "SELECT first_name, last_name, email, phone_number, username, address from customers WHERE customer_id = $customerid";
@@ -32,9 +36,6 @@ $stmt_checkouts = $connection->prepare($query_checkouts);
 $stmt_checkouts->execute();
 $results_checkouts = $stmt_checkouts->get_result();
 
-if (!isset($_SESSION['logged_bool'])) {
-    header("Location: ../login/login.php");
-}
 
 //for appointment list
 $query_app = "SELECT appointment_id, appointment_name, date, hour, status FROM appointments WHERE customer_id = '" . $customer_id . "' ";
