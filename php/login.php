@@ -46,6 +46,7 @@ else{
     if($stmt_data['password'] == $password){
         $_SESSION['logged_id'] = $logged_id;
         $_SESSION['logged_bool'] = true;
+        
         echo "<script>window.location = '../home-page/home-page.php?login=true';</script>";
     }
     else{

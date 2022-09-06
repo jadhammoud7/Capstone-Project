@@ -70,6 +70,17 @@ if (isset($_POST["address"]) && $_POST["address"] != "") {
 if (isset($_POST["username"]) && $_POST["username"] != "") {
     $username = $_POST["username"];
     $_SESSION['username'] = $username;
+    $query_check_username = "SELECT * FROM customers WHERE username = '" . $username . "'";
+    $select_check_username = $connection->prepare($query_check_username);
+    $select_check_username->execute();
+    $results_check_username = $select_check_username->get_result();
+    $data_check_username = $results_check_username->fetch_assoc();
+
+    if (!empty($data_check_username)) {
+        $_SESSION['username_error'] = "Username is already taken. Try another one.";
+        header("Location: ../signup/signup.php");
+        die("WRONG username");
+    }
     if (strlen($username) < 5) {
         $_SESSION['username_error'] = "Username should be of length 5 minimum";
         header("Location: ../signup/signup.php");
