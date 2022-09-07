@@ -43,7 +43,7 @@ if (!isset($_SESSION['logged_bool'])) {
         <button type="button" onclick="RemoveLogInPopUp()">OK</button>
     </div>
 
-     
+
     <div class="sidebar">
         <div class="sidebar-header">
             <h2>
@@ -95,9 +95,10 @@ if (!isset($_SESSION['logged_bool'])) {
     </div>
 
     <div class="main-content">
+        <div class="header">
             <h2>
                 <label for="">
-                    <span class="las la-bars"></span>
+                    <span ><i class="fa fa-bars"></i></span>
                 </label>
 
                 Dashboard
@@ -115,6 +116,7 @@ if (!isset($_SESSION['logged_bool'])) {
                     <small>Admin</small>
                 </div>
             </div>
+        </div>
 
         <main>
             <div class="dashboard-cards">
@@ -159,12 +161,6 @@ if (!isset($_SESSION['logged_bool'])) {
         </main>
     </div>
 
-
-    <!-- <div class="wrapper">
-        <main>
-            <h1>Fixed Side Drawer Hover Navigation </h1>
-        </main>
-    </div> -->
 
 
 
