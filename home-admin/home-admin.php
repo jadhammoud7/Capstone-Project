@@ -42,40 +42,8 @@ if (!isset($_SESSION['logged_bool'])) {
         <p>Welcome to Newbies Gamers</p>
         <button type="button" onclick="RemoveLogInPopUp()">OK</button>
     </div>
-    <!-- 
 
-    <nav class="nav__cont">
-        <ul class="nav">
-            <li class="nav__items ">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-                    <use xlink:href="#home"></use>
-                </svg>
-                <a href="">Home</a>
-            </li>
-
-            <li class="nav__items ">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-                    <use xlink:href="#search"></use>
-                </svg>
-                <a href="">Search</a>
-            </li>
-
-            <li class="nav__items ">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-                    <use xlink:href="#map"></use>
-                </svg>
-                <a href="">Map</a>
-            </li>
-
-            <li class="nav__items ">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 35.6">
-                    <use xlink:href="#planner"></use>
-                </svg>
-                <a href="">Planner</a>
-            </li>
-
-        </ul>
-    </nav> -->
+     
     <div class="sidebar">
         <div class="sidebar-header">
             <h1>
@@ -127,7 +95,7 @@ if (!isset($_SESSION['logged_bool'])) {
     </div>
 
     <div class="main-content">
-        <header>
+        <header class="header">
             <h1>
                 <label for="">
                     <span class="las la-bars"></span>
@@ -210,15 +178,7 @@ if (!isset($_SESSION['logged_bool'])) {
 
     <script src="../home-page/home-page.js"></script>
     <script src="../main/main.js"></script>
-    <script>
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-        }
 
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-        }
-    </script>
 </body>
 
 </html>
