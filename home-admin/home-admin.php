@@ -43,14 +43,11 @@ $results_allproducts = $stmt_allproducts->get_result();
 
 <body onunload="myFunction()">
     <!-- started with the menu bar -->
-    <header>
+    <!-- <header>
         <nav class="nav-bar" id="hhh">
             <a href="" class="nav-branding">Newbie Gamers.</a>
-
-
-
         </nav>
-    </header>
+    </header> -->
     <!-- ended with the menu bar -->
 
     <!-- started popup message login successful -->
@@ -60,7 +57,7 @@ $results_allproducts = $stmt_allproducts->get_result();
         <p>Welcome to Newbies Gamers</p>
         <button type="button" onclick="RemoveLogInPopUp()">OK</button>
     </div>
-
+    <!-- 
 
     <nav class="nav__cont">
         <ul class="nav">
@@ -93,14 +90,130 @@ $results_allproducts = $stmt_allproducts->get_result();
             </li>
 
         </ul>
-    </nav>
+    </nav> -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h1>
+                <span class="lab la-newbiesgamers"></span> Newbies Gamers
+            </h1>
+        </div>
+
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="">
+                        <span class="las la-igloo"></span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="las la-users"></span>
+                        <span>Customers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="las la-clipboard-list"></span>
+                        <span>Appointments</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="las la-shipping-bag"></span>
+                        <span>Checkouts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="las la-receipt"></span>
+                        <span>Products</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="las la-user-circle"></span>
+                        <span>Accounts</span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h1>
+                <label for="">
+                    <span class="las la-bars"></span>
+                </label>
+
+                Dashboard
+            </h1>
+
+            <div class="search-wrapper">
+                <span class="las la-search"></span>
+                <input type="search" placeholder="Search here" />
+            </div>
+
+            <div class="user-wrapper">
+                <img src="../images/info.png" width="40px" height="40px" alt="">
+                <div>
+                    <h4>John Doe</h4>
+                    <small>Admin</small>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="dashboard-cards">
+                <div class="card-single">
+                    <div>
+                        <h1>54</h1>
+                        <span>Customers</span>
+                    </div>
+                    <div>
+                        <span class="las la-users"></span>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div>
+                        <h1>79</h1>
+                        <span>Appointments</span>
+                    </div>
+                    <div>
+                        <span class="las la-clipboard"></span>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div>
+                        <h1>124</h1>
+                        <span>Chekouts</span>
+                    </div>
+                    <div>
+                        <span class="las la-shopping-bag"></span>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div>
+                        <h1>$6000</h1>
+                        <span>Income</span>
+                    </div>
+                    <div>
+                        <span class="las la-google-wallet"></span>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
 
 
-    <div class="wrapper">
+    <!-- <div class="wrapper">
         <main>
             <h1>Fixed Side Drawer Hover Navigation </h1>
         </main>
-    </div>
+    </div> -->
 
 
 
