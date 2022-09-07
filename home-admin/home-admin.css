@@ -9,7 +9,7 @@
   list-style-type: none;
   font-family: "Poppins", sans-serif;
 }
-.siderbar {
+.sidebar {
   width: 345px;
   position: fixed;
   height: 100%;
@@ -17,31 +17,31 @@
   left: 0;
   background: var(--main-color);
 }
-.siderbar-brand {
+.sidebar-brand {
   height: 90px;
   padding: 1rem 0rem 1rem 2rem;
   color: #fff;
 }
-.siderbar-brand span {
+.sidebar-brand span {
   display: inline-block;
   padding-right: 1rem;
 }
-.siderbar-menu li {
+.sidebar-menu li {
   width: 100%;
   margin-bottom: 1.7rem;
   padding-left: 1rem;
 }
-.siderbar-menu a {
+.sidebar-menu a {
   padding-left: 1rem;
   display: block;
   color: #fff;
   font-size: 1.1rem;
 }
 
-.siderbarmenu a span:first-child {
+.sidebarmenu a span:first-child {
   font-size: 1.5rem;
 }
-.siderbar-menu a.active {
+.sidebar-menu a.active {
   background: #fff;
   padding-bottom:1rem;
   padding-top:1rem;

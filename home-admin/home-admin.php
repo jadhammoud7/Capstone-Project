@@ -95,7 +95,6 @@ if (!isset($_SESSION['logged_bool'])) {
     </div>
 
     <div class="main-content">
-        <header class="header">
             <h2>
                 <label for="">
                     <span class="las la-bars"></span>
@@ -116,7 +115,6 @@ if (!isset($_SESSION['logged_bool'])) {
                     <small>Admin</small>
                 </div>
             </div>
-        </header>
 
         <main>
             <div class="dashboard-cards">
