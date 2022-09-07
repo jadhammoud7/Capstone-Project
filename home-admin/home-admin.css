@@ -117,12 +117,13 @@ main{
   background:#f1f5f9 ;
   min-height: calc(100vh- 90px);
 }
-.cards{
+.dashboard-cards{
   display: grid;
-  grid-template-columns: repeat(4,1fr);
+  grid-template-columns: repeat(4 , 1fr);
   grid-gap: 2rem;
 }
-.card{
+.card-single{
   display: flex;
-  
+  justify-content: space-between;
+  background:#fff ;
 }
