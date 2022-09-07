@@ -104,10 +104,7 @@ if (!isset($_SESSION['logged_bool'])) {
                 Dashboard
             </h2>
 
-            <div class="search-wrapper">
-                <span class="las la-search"></span>
-                <input type="search" placeholder="Search here" />
-            </div>
+
 
             <div class="user-wrapper">
                 <img src="../images/info.png" width="40px" height="40px" alt="">
@@ -126,7 +123,7 @@ if (!isset($_SESSION['logged_bool'])) {
                         <span>Customers</span>
                     </div>
                     <div>
-                        <span class="las la-users"></span>
+                        <span ><i class="fa fa-user"></i></span>
                     </div>
                 </div>
                 <div class="card-single">
@@ -135,7 +132,7 @@ if (!isset($_SESSION['logged_bool'])) {
                         <span>Appointments</span>
                     </div>
                     <div>
-                        <span class="las la-clipboard"></span>
+                        <span ><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>
                 <div class="card-single">
@@ -144,7 +141,7 @@ if (!isset($_SESSION['logged_bool'])) {
                         <span>Chekouts</span>
                     </div>
                     <div>
-                        <span class="las la-shopping-bag"></span>
+                        <span ><i class="fa fa-shopping-bag" aria-hidden="true"></i></span>
                     </div>
                 </div>
                 <div class="card-single">
@@ -153,7 +150,7 @@ if (!isset($_SESSION['logged_bool'])) {
                         <span>Income</span>
                     </div>
                     <div>
-                        <span class="las la-google-wallet"></span>
+                        <span ><i class="fa fa-google-wallet"></i></span>
                     </div>
                 </div>
 
