@@ -46,16 +46,16 @@ if (!isset($_SESSION['logged_bool'])) {
      
     <div class="sidebar">
         <div class="sidebar-header">
-            <h1>
+            <h2>
                 <span class="lab la-newbiesgamers"></span> Newbies Gamers
-            </h1>
+            </h2>
         </div>
 
         <div class="sidebar-menu">
             <ul>
                 <li>
                     <a href="">
-                        <span class="las la-igloo"></span>
+                        <span class="las la-igloo" class="active"></span>
                         <span>Dashboard</span>
                     </a>
                 </li>
@@ -96,13 +96,13 @@ if (!isset($_SESSION['logged_bool'])) {
 
     <div class="main-content">
         <header class="header">
-            <h1>
+            <h2>
                 <label for="">
                     <span class="las la-bars"></span>
                 </label>
 
                 Dashboard
-            </h1>
+            </h2>
 
             <div class="search-wrapper">
                 <span class="las la-search"></span>
