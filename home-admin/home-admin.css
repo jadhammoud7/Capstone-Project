@@ -137,3 +137,15 @@ main{
   font-size: 3rem;
   color: var(--main-color);
 }
+
+.card-single:last-child{
+  background:var(--main-color) ;
+  
+}
+
+.card-single:last-child div:last-child span,.card-single:last-child h1,.card-single:last-child div:first-child span{
+color:#fff  ;
+}
+table{
+  border-collapse:collapse ;
+}

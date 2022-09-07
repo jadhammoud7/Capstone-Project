@@ -98,7 +98,7 @@ if (!isset($_SESSION['logged_bool'])) {
         <div class="header">
             <h2>
                 <label for="">
-                    <span ><i class="fa fa-bars"></i></span>
+                    <span><i class="fa fa-bars"></i></span>
                 </label>
 
                 Dashboard
@@ -123,7 +123,7 @@ if (!isset($_SESSION['logged_bool'])) {
                         <span>Customers</span>
                     </div>
                     <div>
-                        <span ><i class="fa fa-user"></i></span>
+                        <span><i class="fa fa-user"></i></span>
                     </div>
                 </div>
                 <div class="card-single">
@@ -132,7 +132,7 @@ if (!isset($_SESSION['logged_bool'])) {
                         <span>Appointments</span>
                     </div>
                     <div>
-                        <span ><i class="fa fa-calendar"></i></span>
+                        <span><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>
                 <div class="card-single">
@@ -141,7 +141,7 @@ if (!isset($_SESSION['logged_bool'])) {
                         <span>Chekouts</span>
                     </div>
                     <div>
-                        <span ><i class="fa fa-shopping-bag" aria-hidden="true"></i></span>
+                        <span><i class="fa fa-shopping-bag" aria-hidden="true"></i></span>
                     </div>
                 </div>
                 <div class="card-single">
@@ -150,10 +150,123 @@ if (!isset($_SESSION['logged_bool'])) {
                         <span>Income</span>
                     </div>
                     <div>
-                        <span ><i class="fa fa-google-wallet"></i></span>
+                        <span><i class="fa fa-google-wallet"></i></span>
                     </div>
                 </div>
+            </div>
+            <div class="recent-grid">
+                <div class="projects">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Recent Projects</h3>
+                            <button>See all <span><i class="fa fa-arrow-right"></i></span></button>
+                        </div>
+                        <div class="card-body">
+                            <table width="100%">
+                                <thead>
+                                    <tr>
+                                        <td>Project Titles</td>
+                                        <td>Department</td>
+                                        <td>Status</td>
 
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>UI/Ux Design</td>
+                                        <td>ui Team</td>
+                                        <td>
+                                            <span class="status"></span>
+                                            review
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Web Developement</td>
+                                        <td>Frontend Team</td>
+                                        <td>
+                                            <span class="status"></span>
+                                            in progress
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ushop app</td>
+                                        <td>Mobile Team</td>
+                                        <td>
+                                            <span class="status"></span>
+                                            pending
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="customers">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>New Customer</h3>
+                            <button>See all <span><i class="fa fa-arrow-right"></i></span></button>
+                        </div>
+                        <div class="card-body">
+                            <div class="customer">
+                                <div>
+                                    <img src="../images/console.png" alt="" width="40px" height="40px">
+                                    <div>
+                                        <h4>Lewis hhhh</h4>
+                                        <small>CEO expert</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span><i class="fa fa-circle-user"></i></span>
+                                    <span><i class="fa fa-comment-alt"></i></span>
+                                    <span><i class="fa fa-phone"></i></span>
+                                </div>
+                            </div>
+                            <div class="customer">
+                                <div>
+                                    <img src="../images/console.png" alt="" width="40px" height="40px">
+                                    <div>
+                                        <h4>Lewis hhhh</h4>
+                                        <small>CEO expert</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span><i class="fa fa-circle-user"></i></span>
+                                    <span><i class="fa fa-comment-alt"></i></span>
+                                    <span><i class="fa fa-phone"></i></span>
+                                </div>
+                            </div>
+                            <div class="customer">
+                                <div>
+                                    <img src="../images/console.png" alt="" width="40px" height="40px">
+                                    <div>
+                                        <h4>Lewis hhhh</h4>
+                                        <small>CEO expert</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span><i class="fa fa-circle-user"></i></span>
+                                    <span><i class="fa fa-comment-alt"></i></span>
+                                    <span><i class="fa fa-phone"></i></span>
+                                </div>
+                            </div>
+                            <div class="customer">
+                                <div>
+                                    <img src="../images/console.png" alt="" width="40px" height="40px">
+                                    <div>
+                                        <h4>Lewis hhhh</h4>
+                                        <small>CEO expert</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span><i class="fa fa-circle-user"></i></span>
+                                    <span><i class="fa fa-comment-alt"></i></span>
+                                    <span><i class="fa fa-phone"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
