@@ -176,7 +176,7 @@ if (!isset($_SESSION['logged_bool'])) {
                                         <td>UI/Ux Design</td>
                                         <td>ui Team</td>
                                         <td>
-                                            <span class="status"></span>
+                                            <span class="status purple"></span>
                                             review
                                         </td>
                                     </tr>
@@ -184,7 +184,7 @@ if (!isset($_SESSION['logged_bool'])) {
                                         <td>Web Developement</td>
                                         <td>Frontend Team</td>
                                         <td>
-                                            <span class="status"></span>
+                                            <span class="status pink"></span>
                                             in progress
                                         </td>
                                     </tr>
@@ -192,7 +192,55 @@ if (!isset($_SESSION['logged_bool'])) {
                                         <td>Ushop app</td>
                                         <td>Mobile Team</td>
                                         <td>
-                                            <span class="status"></span>
+                                            <span class="status orange"></span>
+                                            pending
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>UI/Ux Design</td>
+                                        <td>ui Team</td>
+                                        <td>
+                                            <span class="status purple"></span>
+                                            review
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Web Developement</td>
+                                        <td>Frontend Team</td>
+                                        <td>
+                                            <span class="status pink"></span>
+                                            in progress
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ushop app</td>
+                                        <td>Mobile Team</td>
+                                        <td>
+                                            <span class="status orange"></span>
+                                            pending
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>UI/Ux Design</td>
+                                        <td>ui Team</td>
+                                        <td>
+                                            <span class="status purple"></span>
+                                            review
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Web Developement</td>
+                                        <td>Frontend Team</td>
+                                        <td>
+                                            <span class="status pink"></span>
+                                            in progress
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ushop app</td>
+                                        <td>Mobile Team</td>
+                                        <td>
+                                            <span class="status orange"></span>
                                             pending
                                         </td>
                                     </tr>
