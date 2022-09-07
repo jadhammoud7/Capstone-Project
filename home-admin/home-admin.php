@@ -7,21 +7,6 @@ if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
 
-require_once('../php/comment_connection.php');
-
-
-$query = "SELECT username, comment FROM comments ORDER BY RAND() LIMIT 3;";
-$stmt = $connection->prepare($query);
-$stmt->execute();
-$results = $stmt->get_result();
-
-//get all products(some of them )
-require_once("../php/shop_product_connection.php");
-$query_allproducts = "SELECT product_id,name, price FROM products ORDER BY RAND() LIMIT 8;";
-$stmt_allproducts = $connection->prepare($query_allproducts);
-$stmt_allproducts->execute();
-$results_allproducts = $stmt_allproducts->get_result();
-
 ?>
 
 
