@@ -162,90 +162,92 @@ if (!isset($_SESSION['logged_bool'])) {
                             <button>See all <span><i class="fa fa-arrow-right"></i></span></button>
                         </div>
                         <div class="card-body">
-                            <table width="100%">
-                                <thead>
-                                    <tr>
-                                        <td>Project Titles</td>
-                                        <td>Department</td>
-                                        <td>Status</td>
+                            <div class="table-responsive">
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <td>Project Titles</td>
+                                            <td>Department</td>
+                                            <td>Status</td>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>UI/Ux Design</td>
-                                        <td>ui Team</td>
-                                        <td>
-                                            <span class="status purple"></span>
-                                            review
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Web Developement</td>
-                                        <td>Frontend Team</td>
-                                        <td>
-                                            <span class="status pink"></span>
-                                            in progress
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ushop app</td>
-                                        <td>Mobile Team</td>
-                                        <td>
-                                            <span class="status orange"></span>
-                                            pending
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>UI/Ux Design</td>
-                                        <td>ui Team</td>
-                                        <td>
-                                            <span class="status purple"></span>
-                                            review
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Web Developement</td>
-                                        <td>Frontend Team</td>
-                                        <td>
-                                            <span class="status pink"></span>
-                                            in progress
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ushop app</td>
-                                        <td>Mobile Team</td>
-                                        <td>
-                                            <span class="status orange"></span>
-                                            pending
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>UI/Ux Design</td>
-                                        <td>ui Team</td>
-                                        <td>
-                                            <span class="status purple"></span>
-                                            review
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Web Developement</td>
-                                        <td>Frontend Team</td>
-                                        <td>
-                                            <span class="status pink"></span>
-                                            in progress
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ushop app</td>
-                                        <td>Mobile Team</td>
-                                        <td>
-                                            <span class="status orange"></span>
-                                            pending
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>UI/Ux Design</td>
+                                            <td>ui Team</td>
+                                            <td>
+                                                <span class="status purple"></span>
+                                                review
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Web Developement</td>
+                                            <td>Frontend Team</td>
+                                            <td>
+                                                <span class="status pink"></span>
+                                                in progress
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ushop app</td>
+                                            <td>Mobile Team</td>
+                                            <td>
+                                                <span class="status orange"></span>
+                                                pending
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>UI/Ux Design</td>
+                                            <td>ui Team</td>
+                                            <td>
+                                                <span class="status purple"></span>
+                                                review
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Web Developement</td>
+                                            <td>Frontend Team</td>
+                                            <td>
+                                                <span class="status pink"></span>
+                                                in progress
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ushop app</td>
+                                            <td>Mobile Team</td>
+                                            <td>
+                                                <span class="status orange"></span>
+                                                pending
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>UI/Ux Design</td>
+                                            <td>ui Team</td>
+                                            <td>
+                                                <span class="status purple"></span>
+                                                review
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Web Developement</td>
+                                            <td>Frontend Team</td>
+                                            <td>
+                                                <span class="status pink"></span>
+                                                in progress
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ushop app</td>
+                                            <td>Mobile Team</td>
+                                            <td>
+                                                <span class="status orange"></span>
+                                                pending
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -257,56 +259,56 @@ if (!isset($_SESSION['logged_bool'])) {
                         </div>
                         <div class="card-body">
                             <div class="customer">
-                                <div>
+                                <div class="info">
                                     <img src="../images/console.png" alt="" width="40px" height="40px">
                                     <div>
                                         <h4>Lewis hhhh</h4>
                                         <small>CEO expert</small>
                                     </div>
                                 </div>
-                                <div>
+                                <div class="contact">
                                     <span><i class="fa fa-circle-user"></i></span>
                                     <span><i class="fa fa-comment-alt"></i></span>
                                     <span><i class="fa fa-phone"></i></span>
                                 </div>
                             </div>
                             <div class="customer">
-                                <div>
+                                <div class="info">
                                     <img src="../images/console.png" alt="" width="40px" height="40px">
                                     <div>
                                         <h4>Lewis hhhh</h4>
                                         <small>CEO expert</small>
                                     </div>
                                 </div>
-                                <div>
+                                <div class="contact">
                                     <span><i class="fa fa-circle-user"></i></span>
                                     <span><i class="fa fa-comment-alt"></i></span>
                                     <span><i class="fa fa-phone"></i></span>
                                 </div>
                             </div>
                             <div class="customer">
-                                <div>
+                                <div class="info">
                                     <img src="../images/console.png" alt="" width="40px" height="40px">
                                     <div>
                                         <h4>Lewis hhhh</h4>
                                         <small>CEO expert</small>
                                     </div>
                                 </div>
-                                <div>
+                                <div class="contact">
                                     <span><i class="fa fa-circle-user"></i></span>
                                     <span><i class="fa fa-comment-alt"></i></span>
                                     <span><i class="fa fa-phone"></i></span>
                                 </div>
                             </div>
                             <div class="customer">
-                                <div>
+                                <div class="info">
                                     <img src="../images/console.png" alt="" width="40px" height="40px">
                                     <div>
                                         <h4>Lewis hhhh</h4>
                                         <small>CEO expert</small>
                                     </div>
                                 </div>
-                                <div>
+                                <div class="contact">
                                     <span><i class="fa fa-circle-user"></i></span>
                                     <span><i class="fa fa-comment-alt"></i></span>
                                     <span><i class="fa fa-phone"></i></span>
