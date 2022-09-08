@@ -73,13 +73,13 @@ if (!isset($_SESSION['logged_bool'])) {
                 </li>
                 <li>
                     <a href="">
-                        <span class="las la-shipping-bag"></span>
+                        <span class="las la-receipt"></span>
                         <span>Checkouts</span>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <span class="las la-receipt"></span>
+                        <span class="la la-product-hunt"></span>
                         <span>Products</span>
                     </a>
                 </li>
@@ -138,7 +138,7 @@ if (!isset($_SESSION['logged_bool'])) {
                 <div class="card-single">
                     <div>
                         <h1>124</h1>
-                        <span>Chekouts</span>
+                        <span><i class="fa fa-receipt"></i>Chekouts</span>
                     </div>
                     <div>
                         <span><i class="fa fa-shopping-bag" aria-hidden="true"></i></span>
