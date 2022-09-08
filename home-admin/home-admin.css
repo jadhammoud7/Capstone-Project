@@ -70,7 +70,7 @@
   margin-left: 345px;
 }
 
-.header {
+header {
   background: #fff;
   display: flex;
   justify-content: space-between;
@@ -112,16 +112,16 @@
   left: 70px;
 }
 
-.header h2 {
+header h2 {
   color: #222;
 }
 
-.header label span {
+header label span {
   font-size: 1.7rem;
   padding-right: 1rem;
 }
 
-.search-wrapper {
+/* .search-wrapper {
   border: 1px solid #f0f0f0;
   border-radius: 30px;
   height: 50px;
@@ -140,9 +140,8 @@
   height: 100%;
   padding: .5rem;
   border: none;
-  outline: none;
-
-}
+  outline: none; 
+} */
 
 .user-wrapper {
   display: flex;
@@ -163,10 +162,10 @@ main {
   margin-top: 85px;
   padding: 2rem 1.5rem;
   background: #f1f5f9;
-  min-height: calc(100vh- 90px);
+  min-height: calc(100vh - 90px);
 }
 
-.dashboard-cards {
+.cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 2rem;
@@ -192,7 +191,6 @@ main {
 
 .card-single:last-child {
   background: var(--main-color);
-
 }
 
 .card-single:last-child div:last-child span,
@@ -217,7 +215,8 @@ table {
   border-radius: 5px;
 }
 
-.card-header {
+.card-header,
+.card-body {
   padding: 1rem;
 }
 
@@ -226,7 +225,6 @@ table {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(#f0f0f0);
-
 }
 
 .card-header button {
@@ -241,7 +239,6 @@ table {
 thead tr {
   border-top: 1px solid #f0f0f0;
   border-bottom: 1px solid #f0f0f0;
-
 }
 
 thead td {
@@ -252,7 +249,6 @@ td {
   padding: .5rem 1rem;
   font-size: .9rem;
   color: #222;
-
 }
 
 td .status {
@@ -295,7 +291,6 @@ tr td:last-child {
 .info {
   display: flex;
   align-items: center;
-
 }
 
 .info img {
@@ -345,7 +340,7 @@ tr td:last-child {
     margin-left: 70px;
   }
 
-  .main-content header {
+  .main-contentheader {
     width: calc(100% - 70px);
     left: 70px;
   }
