@@ -15,11 +15,11 @@ if (!isset($_SESSION['logged_bool'])) {
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     </meta>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="../home-admin/home-admin.css">
     <link rel="stylesheet" href="../home-page/home-page.css">
     <link rel="stylesheet" href="../main/main.css">
@@ -43,11 +43,11 @@ if (!isset($_SESSION['logged_bool'])) {
         <button type="button" onclick="RemoveLogInPopUp()">OK</button>
     </div>
 
-
+    <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
         <div class="sidebar-header">
             <h2>
-                <span class="lab la-newbiesgamers"></span> Newbies Gamers
+                <span class="lab la-newbiesgamers"></span> <span>Newbies Gamers</span>
             </h2>
         </div>
 
@@ -97,7 +97,7 @@ if (!isset($_SESSION['logged_bool'])) {
     <div class="main-content">
         <div class="header">
             <h2>
-                <label for="">
+                <label for="nav-toggle">
                     <span><i class="fa fa-bars"></i></span>
                 </label>
 
@@ -329,9 +329,9 @@ if (!isset($_SESSION['logged_bool'])) {
     <!-- ended return to top button -->
 
 
-
+<!-- 
     <script src="../home-page/home-page.js"></script>
-    <script src="../main/main.js"></script>
+    <script src="../main/main.js"></script> -->
 
 </body>
 
