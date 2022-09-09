@@ -14,6 +14,19 @@ $results = $stmt->get_result();
 $row = $results->fetch_assoc();
 
 
+//sum of all customers
+$query_total_customers = "SELECT COUNT(customer_id) as count FROM customers";
+$stmt_total_customers = $connection->prepare($query_total_customers);
+$stmt_total_customers->execute();
+$results_total_customers = $stmt_total_customers->get_result();
+$row_total_customers = $results_total_customers->fetch_assoc();
+//sum of all appointments
+$query_total_appointments = "SELECT COUNT(appointment_id) as total_appointments FROM appointments";
+$stmt_total_appointments = $connection->prepare($query_total_appointments);
+$stmt_total_appointments->execute();
+$results_total_appointments = $stmt_total_appointments->get_result();
+$row_total_appointments = $results_total_appointments->fetch_assoc();
+
 ?>
 
 <!DOCTYPE html>
@@ -116,7 +129,7 @@ $row = $results->fetch_assoc();
             <div class="cards">
                 <div class="card-single">
                     <div>
-                        <h1>54</h1>
+                        <h1><?php echo  $row_total_customers['count'];?></h1>
                         <span>Customers</span>
                     </div>
                     <div>
@@ -125,7 +138,7 @@ $row = $results->fetch_assoc();
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>79</h1>
+                        <h1><?php echo $row_total_appointments['total_appointments']?></h1>
                         <span>Appointments</span>
                     </div>
                     <div>
