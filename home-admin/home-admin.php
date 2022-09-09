@@ -36,6 +36,12 @@ $stmt_total_profit->execute();
 $results_total_profit = $stmt_total_profit->get_result();
 $row_total_profit = $results_total_profit->fetch_assoc();
 
+//getting appointments
+$query_get_appointments = "SELECT customer_id,appointment_name,date,status FROM appointments";
+$stmt_get_appointments= $connection->prepare($query_get_appointments);
+$stmt_get_appointments->execute();
+$results_get_appointments = $stmt_get_appointments->get_result();
+
 ?>
 
 <!DOCTYPE html>
@@ -186,7 +192,8 @@ $row_total_profit = $results_total_profit->fetch_assoc();
                                     <thead>
                                         <tr>
                                             <td>Project Titles</td>
-                                            <td>Department</td>
+                                            <td>Customer Name</td>
+                                            <td>Date</td>
                                             <td>Status</td>
                                             <td>working status</td>
                                         </tr>
@@ -195,6 +202,7 @@ $row_total_profit = $results_total_profit->fetch_assoc();
                                         <tr>
                                             <td>UI/Ux Design</td>
                                             <td>ui Team</td>
+                                            <td>12/12/2021</td>
                                             <td>
                                                 <span class="status red"></span>
                                                 in progress
@@ -203,96 +211,9 @@ $row_total_profit = $results_total_profit->fetch_assoc();
                                                 <button>Done Work</button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Web Developement</td>
-                                            <td>Frontend Team</td>
-                                            <td>
-                                                <span class="status red"></span>
-                                                in progress
-                                            </td>
-                                            <td>
-                                                <button>Done Work</button>
-                                            </td>
-                                        </tr>
+                                        
                                         <tr>
                                             <button>hello</button>
-                                        </tr>
-                                        <tr>
-                                            <td>Ushop app</td>
-                                            <td>Mobile Team</td>
-                                            <td>
-                                                <span class="status red"></span>
-                                                in progress
-                                            </td>
-                                            <td>
-                                                <button>Done Work</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>UI/Ux Design</td>
-                                            <td>ui Team</td>
-                                            <td>
-                                                <span class="status red"></span>
-                                                in progress
-                                            </td>
-                                            <td>
-                                                <button>Done Work</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Web Developement</td>
-                                            <td>Frontend Team</td>
-                                            <td>
-                                                <span class="status red"></span>
-                                                in progress
-                                            </td>
-                                            <td>
-                                                <button>Done Work</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ushop app</td>
-                                            <td>Mobile Team</td>
-                                            <td>
-                                                <span class="status red"></span>
-                                                in progress
-                                            </td>
-                                            <td>
-                                                <button>Done Work</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>UI/Ux Design</td>
-                                            <td>ui Team</td>
-                                            <td>
-                                                <span class="status red"></span>
-                                                in progress
-                                            </td>
-                                            <td>
-                                                <button>Done Work</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Web Developement</td>
-                                            <td>Frontend Team</td>
-                                            <td>
-                                                <span class="status red"></span>
-                                                in progress
-                                            </td>
-                                            <td>
-                                                <button>Done Work</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ushop app</td>
-                                            <td>Mobile Team</td>
-                                            <td>
-                                                <span class="status red"></span>
-                                                in progress
-                                            </td>
-                                            <td>
-                                                <button>Done Work</button>
-                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
