@@ -3,7 +3,7 @@ include("connection.php");
 
 
 
-function get_appointment_in_admin_page_for_table_connection($customer_name, $appointment_name,$date,$status)
+function get_appointment_in_admin_page_for_table_connection($customer_name, $appointment_name, $date, $status)
 {
 
 
@@ -16,16 +16,17 @@ function get_appointment_in_admin_page_for_table_connection($customer_name, $app
         <span class=\"status red\"></span>
         $status
     </td>
-    <td>
-        <button class=\"btn_done_work\">Done Work</button>
+    <td class=\"edit_btn_status\">
+        <button  onclick=\"edit_status()\" style=\"display:block;\" class=\"btn_done_work\"><strong>Done Work</strong></button>
     </td>
+
 </tr>
     ";
     echo $element;
 }
 
 
-function latest_customers_connection($username,$email)
+function latest_customers_connection($username, $email)
 {
 
 

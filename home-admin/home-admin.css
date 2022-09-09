@@ -472,4 +472,14 @@ td .btn_done_work{
    font-size: .8rem;
    padding: .5rem 1rem;
    border: 1px solid var(--main-color);
+   /* display: block; */
+}
+td .work_set_to_done{
+  background: var(--main-color);
+  border-radius: 10px;
+  color: red;
+  font-size: .8rem;
+  padding: .5rem 1rem;
+  border: 1px solid var(--main-color);
+  /* display: none; */
 }

@@ -464,6 +464,7 @@ if (isset($_GET['delete_checkout_id'])) {
 <!-- ended footer -->
 
 <script src="../profile/profile.js"></script>
+<script src="../home-admin/home_admin.js"></script>
 <script src="../main/main.js"></script>
 
 </php>

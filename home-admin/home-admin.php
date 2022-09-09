@@ -266,6 +266,6 @@ $results_get_latest_customer = $stmt_get_latest_customer->get_result();
     <!-- ended return to top button -->
 
 </body>
-
+<script src="../home-admin/home_admin.js"></script>
 </html>
 </php>
