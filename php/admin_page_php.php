@@ -17,7 +17,7 @@ function get_appointment_in_admin_page_for_table_connection($customer_name, $app
         $status
     </td>
     <td>
-        <button>Done Work</button>
+        <button class=\"btn_done_work\">Done Work</button>
     </td>
 </tr>
     ";

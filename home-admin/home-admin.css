@@ -263,14 +263,14 @@ td .status {
 .status.red {
   background: red;
 }
-
+/* 
 .status.pink {
   background: deeppink;
 }
 
 .status.orange {
   background: orangered;
-}
+} */
 
 tr td:last-child {
   display: flex;
@@ -463,4 +463,13 @@ tr td:last-child {
   .cards {
     grid-template-columns: 100%;
   }
+}
+td .btn_done_work{
+
+   background: var(--main-color);
+   border-radius: 10px;
+   color: #fff;
+   font-size: .8rem;
+   padding: .5rem 1rem;
+   border: 1px solid var(--main-color);
 }
