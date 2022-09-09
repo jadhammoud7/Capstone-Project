@@ -39,7 +39,7 @@ $row_total_profit = $results_total_profit->fetch_assoc();
 //getting appointments
 require_once("../php/admin_page_php.php");
 $query_get_appointments = "SELECT customer_id,appointment_name,date,status FROM appointments";
-$stmt_get_appointments= $connection->prepare($query_get_appointments);
+$stmt_get_appointments = $connection->prepare($query_get_appointments);
 $stmt_get_appointments->execute();
 $results_get_appointments = $stmt_get_appointments->get_result();
 
@@ -135,7 +135,7 @@ $results_get_appointments = $stmt_get_appointments->get_result();
             <div class="user-wrapper">
                 <img src="../images/info.png" width="40px" height="40px" alt="">
                 <div>
-                    <h4> <?php echo $row["first_name"]," ",$row['last_name']; ?></h4>
+                    <h4> <?php echo $row["first_name"], " ", $row['last_name']; ?></h4>
                     <small>Admin</small>
                 </div>
             </div>
@@ -145,7 +145,7 @@ $results_get_appointments = $stmt_get_appointments->get_result();
             <div class="cards">
                 <div class="card-single">
                     <div>
-                        <h1><?php echo  $row_total_customers['count'];?></h1>
+                        <h1><?php echo  $row_total_customers['count']; ?></h1>
                         <span>Customers</span>
                     </div>
                     <div>
@@ -154,7 +154,7 @@ $results_get_appointments = $stmt_get_appointments->get_result();
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1><?php echo $row_total_appointments['total_appointments']?></h1>
+                        <h1><?php echo $row_total_appointments['total_appointments'] ?></h1>
                         <span>Appointments</span>
                     </div>
                     <div>
@@ -172,7 +172,7 @@ $results_get_appointments = $stmt_get_appointments->get_result();
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>$<?php echo $row_total_profit['total_profit']?></h1>
+                        <h1>$<?php echo $row_total_profit['total_profit'] ?></h1>
                         <span>Profit</span>
                     </div>
                     <div>
@@ -201,10 +201,22 @@ $results_get_appointments = $stmt_get_appointments->get_result();
                                     </thead>
                                     <tbody>
                                         <?php
-                                        while($row_get_appointments = $results_get_appointments->fetch_assoc()){
-                                            get_appointment_in_admin_page_for_table_connection($row_get_appointments['customer_id']
-                                        ,$row_get_appointments['appointment_name'],$row_get_appointments['date'],
-                                        $row_get_appointments['status']);
+                                        while ($row_get_appointments = $results_get_appointments->fetch_assoc()) {
+
+
+                                            $query_getuser = "SELECT username as customer_name  from customers WHERE customer_id ='" .$row_get_appointments['customer_id']. "'";
+                                            $stmt_getuser = $connection->prepare($query_getuser);
+                                            $stmt_getuser->execute();   
+                                            $results_getuser = $stmt_getuser->get_result();
+                                            $row_getuser = $results_getuser->fetch_assoc();
+
+
+                                            get_appointment_in_admin_page_for_table_connection(
+                                                $row_getuser['customer_name'],
+                                                $row_get_appointments['appointment_name'],
+                                                $row_get_appointments['date'],
+                                                $row_get_appointments['status']
+                                            );
                                         }
                                         ?>
                                     </tbody>
