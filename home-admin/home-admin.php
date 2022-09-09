@@ -6,6 +6,13 @@ include("../php/connection.php");
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
+$customerid = $_SESSION['logged_id'];
+$query = "SELECT first_name, last_name  from customers WHERE customer_id = $customerid";
+$stmt = $connection->prepare($query);
+$stmt->execute();
+$results = $stmt->get_result();
+$row = $results->fetch_assoc();
+
 
 ?>
 
@@ -99,7 +106,7 @@ if (!isset($_SESSION['logged_bool'])) {
             <div class="user-wrapper">
                 <img src="../images/info.png" width="40px" height="40px" alt="">
                 <div>
-                    <h4>John Doe</h4>
+                    <h4> <?php echo $row["first_name"]," ",$row['last_name']; ?></h4>
                     <small>Admin</small>
                 </div>
             </div>
