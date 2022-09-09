@@ -36,6 +36,13 @@ $stmt_total_profit->execute();
 $results_total_profit = $stmt_total_profit->get_result();
 $row_total_profit = $results_total_profit->fetch_assoc();
 
+//get total checkouts made
+$query_total_checkouts = "SELECT COUNT(checkout_id) as total_checkout FROM checkouts";
+$stmt_total_checkouts = $connection->prepare($query_total_checkouts);
+$stmt_total_checkouts->execute();
+$results_total_checkouts = $stmt_total_checkouts->get_result();
+$row_total_checkouts = $results_total_checkouts->fetch_assoc();
+
 //getting appointments
 require_once("../php/admin_page_php.php");
 $query_get_appointments = "SELECT customer_id,appointment_name,date,status FROM appointments";
@@ -43,6 +50,13 @@ $stmt_get_appointments = $connection->prepare($query_get_appointments);
 $stmt_get_appointments->execute();
 $results_get_appointments = $stmt_get_appointments->get_result();
 
+
+//getting latest customers added to us
+require_once("../php/admin_page_php.php");
+$query_get_latest_customer = "SELECT username,email FROM customers ORDER BY customer_id DESC LIMIT 5";
+$stmt_get_latest_customer = $connection->prepare($query_get_latest_customer);
+$stmt_get_latest_customer->execute();
+$results_get_latest_customer = $stmt_get_latest_customer->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -163,7 +177,7 @@ $results_get_appointments = $stmt_get_appointments->get_result();
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>124</h1>
+                        <h1><?php echo $row_total_checkouts['total_checkout'] ?></h1>
                         <span>Chekouts</span>
                     </div>
                     <div>
@@ -185,14 +199,14 @@ $results_get_appointments = $stmt_get_appointments->get_result();
                     <div class="card">
                         <div class="card-header">
                             <h3>Recent Projects</h3>
-                            <button>See all <span class="las la-arrow-right"></span></button>
+                            <!-- <button>See all <span class="las la-arrow-right"></span></button> -->
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table width="100%">
                                     <thead>
                                         <tr>
-                                            <td>Project Titles</td>
+                                            <td>Repair Type</td>
                                             <td>Customer Name</td>
                                             <td>Date</td>
                                             <td>Status</td>
@@ -204,9 +218,9 @@ $results_get_appointments = $stmt_get_appointments->get_result();
                                         while ($row_get_appointments = $results_get_appointments->fetch_assoc()) {
 
 
-                                            $query_getuser = "SELECT username as customer_name  from customers WHERE customer_id ='" .$row_get_appointments['customer_id']. "'";
+                                            $query_getuser = "SELECT username as customer_name  from customers WHERE customer_id ='" . $row_get_appointments['customer_id'] . "'";
                                             $stmt_getuser = $connection->prepare($query_getuser);
-                                            $stmt_getuser->execute();   
+                                            $stmt_getuser->execute();
                                             $results_getuser = $stmt_getuser->get_result();
                                             $row_getuser = $results_getuser->fetch_assoc();
 
@@ -228,66 +242,15 @@ $results_get_appointments = $stmt_get_appointments->get_result();
                 <div class="customers">
                     <div class="card">
                         <div class="card-header">
-                            <h3>New Customer</h3>
-                            <button>See all <span class="las la-arrow-right"></span></button>
+                            <h3>Latest Customers</h3>
+                            <!-- <button>See all <span class="las la-arrow-right"></span></button> -->
                         </div>
                         <div class="card-body">
-                            <div class="customer">
-                                <div class="info">
-                                    <img src="../images/console.png" alt="" width="40px" height="40px">
-                                    <div>
-                                        <h4>Lewis hhhh</h4>
-                                        <small>CEO expert</small>
-                                    </div>
-                                </div>
-                                <div class="contact">
-                                    <span><i class="las la-circle-user"></i></span>
-                                    <span><i class="las la-comment"></i></span>
-                                    <span><i class="las la-phone"></i></span>
-                                </div>
-                            </div>
-                            <div class="customer">
-                                <div class="info">
-                                    <img src="../images/console.png" alt="" width="40px" height="40px">
-                                    <div>
-                                        <h4>Lewis hhhh</h4>
-                                        <small>CEO expert</small>
-                                    </div>
-                                </div>
-                                <div class="contact">
-                                    <span><i class="las la-circle-user"></i></span>
-                                    <span><i class="las la-comment"></i></span>
-                                    <span><i class="las la-phone"></i></span>
-                                </div>
-                            </div>
-                            <div class="customer">
-                                <div class="info">
-                                    <img src="../images/console.png" alt="" width="40px" height="40px">
-                                    <div>
-                                        <h4>Lewis hhhh</h4>
-                                        <small>CEO expert</small>
-                                    </div>
-                                </div>
-                                <div class="contact">
-                                    <span><i class="las la-circle-user"></i></span>
-                                    <span><i class="las la-comment"></i></span>
-                                    <span><i class="las la-phone"></i></span>
-                                </div>
-                            </div>
-                            <div class="customer">
-                                <div class="info">
-                                    <img src="../images/console.png" alt="" width="40px" height="40px">
-                                    <div>
-                                        <h4>Lewis hhhh</h4>
-                                        <small>CEO expert</small>
-                                    </div>
-                                </div>
-                                <div class="contact">
-                                    <span><i class="las la-circle-user"></i></span>
-                                    <span><i class="las la-comment"></i></span>
-                                    <span><i class="las la-phone"></i></span>
-                                </div>
-                            </div>
+                            <?php
+                            while ($row_get_latest_customer = $results_get_latest_customer->fetch_assoc()) {
+                                latest_customers_connection($row_get_latest_customer['username'], $row_get_latest_customer['email']);
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>

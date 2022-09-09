@@ -24,4 +24,21 @@ function get_appointment_in_admin_page_for_table_connection($customer_name, $app
     echo $element;
 }
 
-?>
+
+function latest_customers_connection($username,$email)
+{
+
+
+    $element = "
+    <div class=\"customer\">
+    <div class=\"info\">
+        <img src=\"../images/console.png\" alt=\"\" width=\"40px\" height=\"40px\">
+        <div>
+            <h4>$username</h4>
+            <small>$email</small>
+        </div>
+    </div>
+</div>
+    ";
+    echo $element;
+}
