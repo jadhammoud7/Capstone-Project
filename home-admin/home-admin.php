@@ -37,6 +37,7 @@ $results_total_profit = $stmt_total_profit->get_result();
 $row_total_profit = $results_total_profit->fetch_assoc();
 
 //getting appointments
+require_once("../php/admin_page_php.php");
 $query_get_appointments = "SELECT customer_id,appointment_name,date,status FROM appointments";
 $stmt_get_appointments= $connection->prepare($query_get_appointments);
 $stmt_get_appointments->execute();
@@ -199,7 +200,13 @@ $results_get_appointments = $stmt_get_appointments->get_result();
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+                                        <?php
+                                        while($row_get_appointments = $results_get_appointments->fetch_assoc()){
+                                            get_appointment_in_admin_page_for_table_connection($row_get_appointments['customer_id']
+                                        ,$row_get_appointments['appointment_name'],$row_get_appointments['date'],
+                                        $row_get_appointments['status']);
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

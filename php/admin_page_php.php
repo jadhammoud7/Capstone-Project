@@ -20,10 +20,6 @@ function get_appointment_in_admin_page_for_table_connection($customer_id, $appoi
         <button>Done Work</button>
     </td>
 </tr>
-
-<tr>
-    <button>hello</button>
-</tr>
     ";
     echo $element;
 }
