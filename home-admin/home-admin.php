@@ -20,12 +20,21 @@ $stmt_total_customers = $connection->prepare($query_total_customers);
 $stmt_total_customers->execute();
 $results_total_customers = $stmt_total_customers->get_result();
 $row_total_customers = $results_total_customers->fetch_assoc();
+
+
 //sum of all appointments
 $query_total_appointments = "SELECT COUNT(appointment_id) as total_appointments FROM appointments";
 $stmt_total_appointments = $connection->prepare($query_total_appointments);
 $stmt_total_appointments->execute();
 $results_total_appointments = $stmt_total_appointments->get_result();
 $row_total_appointments = $results_total_appointments->fetch_assoc();
+
+//sum of all appointments
+$query_total_profit = "SELECT SUM(total_price_including_tax) as total_profit FROM checkouts";
+$stmt_total_profit = $connection->prepare($query_total_profit);
+$stmt_total_profit->execute();
+$results_total_profit = $stmt_total_profit->get_result();
+$row_total_profit = $results_total_profit->fetch_assoc();
 
 ?>
 
@@ -156,8 +165,8 @@ $row_total_appointments = $results_total_appointments->fetch_assoc();
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>$6000</h1>
-                        <span>Income</span>
+                        <h1>$<?php echo $row_total_profit['total_profit']?></h1>
+                        <span>Profit</span>
                     </div>
                     <div>
                         <span class="las la-google-wallet"></span>
