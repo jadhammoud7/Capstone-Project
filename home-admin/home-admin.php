@@ -199,22 +199,7 @@ $results_get_appointments = $stmt_get_appointments->get_result();
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>UI/Ux Design</td>
-                                            <td>ui Team</td>
-                                            <td>12/12/2021</td>
-                                            <td>
-                                                <span class="status red"></span>
-                                                in progress
-                                            </td>
-                                            <td>
-                                                <button>Done Work</button>
-                                            </td>
-                                        </tr>
                                         
-                                        <tr>
-                                            <button>hello</button>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
