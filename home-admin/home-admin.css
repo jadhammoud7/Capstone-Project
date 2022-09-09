@@ -259,8 +259,9 @@ td .status {
   margin-right: 1rem;
 }
 
-.status.purple {
-  background: rebeccapurple;
+
+.status.red {
+  background: red;
 }
 
 .status.pink {
