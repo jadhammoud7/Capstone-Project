@@ -464,7 +464,7 @@ tr td:last-child {
     grid-template-columns: 100%;
   }
 }
-td #btn_done_work{
+td .btn_done_work{
 
    background: var(--main-color);
    border-radius: 10px;
@@ -473,7 +473,7 @@ td #btn_done_work{
    padding: .5rem 1rem;
    border: 1px solid var(--main-color);
 }
-td #work_set_to_done{
+td .work_set_to_done{
   background: var(--main-color);
   border-radius: 10px;
   color: #fff;
