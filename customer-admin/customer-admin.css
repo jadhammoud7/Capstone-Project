@@ -486,3 +486,11 @@
   tr:nth-child(even) {
     background-color: #dddddd;
   }
+  .remove_cust{
+    background: red;
+    border-radius: 10px;
+    color: black;
+    font-size: .7rem;
+    padding: .5rem 1rem;
+    border: 1px solid var(--main-color);
+  }

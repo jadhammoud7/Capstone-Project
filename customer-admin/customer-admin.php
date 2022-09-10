@@ -203,6 +203,7 @@ $results_customer = $stmt_customer->get_result();
                                             <td>Phone Number</td>
                                             <td>Address</td>
                                             <td>Date of Birth</td>
+                                            <td>Remove Customer</td>
                                         </tr>
                                     </thead>
                                     <tbody>

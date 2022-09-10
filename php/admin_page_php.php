@@ -60,6 +60,10 @@ function get_all_customer_connection($first_name,$last_name,$username,$email,$ph
     <td>$phone_number</td>
     <td>$address</td>
     <td>$date_of_birth</td>
+    <td>
+    <a>
+        <button class=\"remove_cust\">Remove</button>
+    </a>
 
 </tr>
     ";
