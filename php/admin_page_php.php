@@ -4,7 +4,7 @@ include("connection.php");
 function get_appointment_in_admin_page_for_table_connection($appointment_id, $customer_name, $appointment_name, $date, $hour, $status)
 {
     $element = "
-    <tr>
+    <tr class=\"hi\">
     <td>$appointment_name</td>
     <td>$customer_name</td>
     <td>$date</td>
@@ -43,9 +43,24 @@ function latest_customers_connection($username, $email)
 function get_comments_connection($username,$comment)
 {
     $element = "
-    <tr>
+    <tr class=\"hello\">
     <td>$username</td>
     <td>$comment</td>
+</tr>
+    ";
+    echo $element;
+}
+function get_all_customer_connection($first_name,$last_name,$username,$email,$phone_number,$address,$date_of_birth)
+{
+    $element = "
+    <tr>
+    <td>$first_name $last_name</td>
+    <td>$username</td>
+    <td>$email</td>
+    <td>$phone_number</td>
+    <td>$address</td>
+    <td>$date_of_birth</td>
+
 </tr>
     ";
     echo $element;

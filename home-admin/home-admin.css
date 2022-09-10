@@ -482,3 +482,9 @@ td .work_set_to_done{
   padding: .5rem 1rem;
   border: 1px solid var(--main-color);
 }
+.hello:nth-child(even){
+  background-color: #dddddd;
+}
+.hi:nth-child(even){
+  background-color: #dddddd;
+}

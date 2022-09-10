@@ -302,7 +302,7 @@ $results_comment = $stmt_comment->get_result();
                                     <thead>
                                         <tr>
                                             <td>Customer Name</td>
-                                            <td>comment</td>
+                                            <td>Comment</td>
                                         </tr>
                                     </thead>
                                     <tbody>

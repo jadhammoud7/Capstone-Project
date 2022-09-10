@@ -42,6 +42,14 @@ $stmt_total_checkouts = $connection->prepare($query_total_checkouts);
 $stmt_total_checkouts->execute();
 $results_total_checkouts = $stmt_total_checkouts->get_result();
 $row_total_checkouts = $results_total_checkouts->fetch_assoc();
+
+
+//get all customer
+require_once("../php/admin_page_php.php");
+$query_customer = "SELECT first_name,last_name,username,phone_number,email,date_of_birth,address FROM customers";
+$stmt_customer = $connection->prepare($query_customer);
+$stmt_customer->execute();
+$results_customer = $stmt_customer->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -189,31 +197,28 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
                                 <table width="100%">
                                     <thead>
                                         <tr>
-                                            <td>Repair Type</td>
                                             <td>Customer Name</td>
-                                            <td>Date</td>
-                                            <td>Hour</td>
-                                            <td>Status</td>
-                                            <td>working status</td>
+                                            <td>Username</td>
+                                            <td>Email</td>
+                                            <td>Phone Number</td>
+                                            <td>Address</td>
+                                            <td>Date of Birth</td>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>hhhh</td>
-                                            <td>jjjjj</td>
-                                            <td>qqqqqq</td>
-                                            <td>tttttt</td>
-                                            <td>
-                                                <span class="status red"></span>
-                                                <a class="status_btn">$status</a>
-                                            </td>
-                                            <td>
-                                                <a>
-                                                    <button class="btn_done_work" >hello</button>
-                                                </a>
-                                            </td>
-
-                                        </tr>
+                                        <?php
+                                        while ($row_customer = $results_customer->fetch_assoc()) {
+                                            get_all_customer_connection(
+                                                $row_customer['first_name'],
+                                                $row_customer['last_name'],
+                                                $row_customer['username'],
+                                                $row_customer['email'],
+                                                $row_customer['phone_number'],
+                                                $row_customer['address'],
+                                                $row_customer['date_of_birth']
+                                            );
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

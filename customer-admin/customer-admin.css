@@ -482,3 +482,7 @@
     padding: .5rem 1rem;
     border: 1px solid var(--main-color);
   }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
