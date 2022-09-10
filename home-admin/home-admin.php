@@ -45,7 +45,7 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 //getting appointments
 require_once("../php/admin_page_php.php");
-$query_get_appointments = "SELECT customer_id,appointment_name,date,status FROM appointments";
+$query_get_appointments = "SELECT appointment_id,customer_id,appointment_name,date,status FROM appointments";
 $stmt_get_appointments = $connection->prepare($query_get_appointments);
 $stmt_get_appointments->execute();
 $results_get_appointments = $stmt_get_appointments->get_result();
@@ -57,6 +57,26 @@ $query_get_latest_customer = "SELECT username,email FROM customers ORDER BY cust
 $stmt_get_latest_customer = $connection->prepare($query_get_latest_customer);
 $stmt_get_latest_customer->execute();
 $results_get_latest_customer = $stmt_get_latest_customer->get_result();
+
+
+
+//updating working status from buttons
+if(isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])){
+$working_status=$_GET['set_to_done'];
+$appointmentID=$_GET['getAppointmentID'];
+if($working_status==true){
+    $query_settodone = $connection->prepare("UPDATE appointments SET status=? WHERE appointment_id='" . $appointmentID . "'");
+    $query_settodone->bind_param("s", "Done work");
+    $query_settodone->execute();
+    header("Location:../home-admin/home-admin.php");
+}else{
+    $query_settodone = $connection->prepare("UPDATE appointments SET status=? WHERE appointment_id='" . $appointmentID . "'");
+    $query_settodone->bind_param("s", "Pending");
+    $query_settodone->execute();
+    header("Location:../home-admin/home-admin.php");
+}
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -226,6 +246,7 @@ $results_get_latest_customer = $stmt_get_latest_customer->get_result();
 
 
                                             get_appointment_in_admin_page_for_table_connection(
+                                                $row_get_appointments['appointment_id'],
                                                 $row_getuser['customer_name'],
                                                 $row_get_appointments['appointment_name'],
                                                 $row_get_appointments['date'],

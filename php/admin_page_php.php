@@ -3,7 +3,7 @@ include("connection.php");
 
 
 
-function get_appointment_in_admin_page_for_table_connection($customer_name, $appointment_name, $date, $status)
+function get_appointment_in_admin_page_for_table_connection($appointment_id, $customer_name, $appointment_name, $date, $status)
 {
 
 
@@ -17,7 +17,9 @@ function get_appointment_in_admin_page_for_table_connection($customer_name, $app
         $status
     </td>
     <td>
-        <button class=\"btn_done_work\"><strong>Set Work To Done</strong></button>
+        <a href=\"?getAppointmentID=$appointment_id\">
+            <button class=\"btn_done_work\"><strong>Set Work To Done</strong></button>
+        </a>
     </td>
 
 </tr>
