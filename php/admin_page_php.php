@@ -10,11 +10,11 @@ function get_appointment_in_admin_page_for_table_connection($appointment_id, $cu
     <td>$date</td>
     <td>
         <span class=\"status red\"></span>
-        $status
+        <a class=\"status_btn\">$status</a>
     </td>
     <td>
         <a>
-            <button class=\"btn_done_work\" onclick=\"SetAppointmentID($appointment_id);\"><strong>Set Work To Done</strong></button>
+            <button class=\"btn_done_work\" id=\"SetStatusButton\" onclick=\"SetAppointmentID($appointment_id);\"></button>
         </a>
     </td>
 
