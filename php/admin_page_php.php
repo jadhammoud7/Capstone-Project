@@ -40,3 +40,13 @@ function latest_customers_connection($username, $email)
     ";
     echo $element;
 }
+function get_comments_connection($username,$comment)
+{
+    $element = "
+    <tr>
+    <td>$username</td>
+    <td>$comment</td>
+</tr>
+    ";
+    echo $element;
+}

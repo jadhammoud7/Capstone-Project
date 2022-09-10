@@ -65,13 +65,13 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
     $working_status = $_GET['set_to_done'];
     $appointmentID = $_GET['getAppointmentID'];
     $status = "";
-    if ($working_status=="true") {
+    if ($working_status == "true") {
         $status = "Done Work";
         $query_settodone = $connection->prepare("UPDATE appointments SET status=? WHERE appointment_id='" . $appointmentID . "'");
         $query_settodone->bind_param("s", $status);
         $query_settodone->execute();
         header("Location:../home-admin/home-admin.php");
-    } else if($working_status=="false") {
+    } else if ($working_status == "false") {
         $status = "Pending";
         $query_settodone = $connection->prepare("UPDATE appointments SET status=? WHERE appointment_id='" . $appointmentID . "'");
         $query_settodone->bind_param("s", $status);
@@ -79,7 +79,11 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
         header("Location:../home-admin/home-admin.php");
     }
 }
-
+//get all comments
+$query_comment = "SELECT username,comment  from comments";
+$stmt_comment = $connection->prepare($query_comment);
+$stmt_comment->execute();
+$results_comment = $stmt_comment->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -275,6 +279,41 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
                                 latest_customers_connection($row_get_latest_customer['username'], $row_get_latest_customer['email']);
                             }
                             ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="recent-grid">
+                <div class="projects">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Comments added by customers</h3>
+                            <!-- <button>See all <span class="las la-arrow-right"></span></button> -->
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <td>Customer Name</td>
+                                            <td>comment</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        while($row_comment = $results_comment->fetch_assoc()){
+                                            get_comments_connection($row_comment['username'],$row_comment['comment']);
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
