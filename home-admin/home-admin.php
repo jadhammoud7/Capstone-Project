@@ -153,9 +153,9 @@ $results_comment = $stmt_comment->get_result();
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="../admin-admin/admin-admin.php">
                         <span class="las la-user-circle"></span>
-                        <span>Accounts</span>
+                        <span>Admin Accounts</span>
                     </a>
                 </li>
             </ul>

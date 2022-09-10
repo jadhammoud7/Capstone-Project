@@ -72,7 +72,7 @@ if(isset($_GET['getCustomerIDtoRemove'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <link rel="stylesheet" href="../customer-admin/customer-admin.css">
+    <link rel="stylesheet" href="../admin-admin/admin-admin.css">
     <title>Home Admin - Newbies Gamers</title>
 </head>
 
@@ -217,20 +217,7 @@ if(isset($_GET['getCustomerIDtoRemove'])){
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
-                                        while ($row_customer = $results_customer->fetch_assoc()) {
-                                            get_all_customer_connection(
-                                                $row_customer['customer_id'],
-                                                $row_customer['first_name'],
-                                                $row_customer['last_name'],
-                                                $row_customer['username'],
-                                                $row_customer['email'],
-                                                $row_customer['phone_number'],
-                                                $row_customer['address'],
-                                                $row_customer['date_of_birth']
-                                            );
-                                        }
-                                        ?>
+
                                     </tbody>
                                 </table>
                             </div>
