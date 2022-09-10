@@ -45,7 +45,7 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 //getting appointments
 require_once("../php/admin_page_php.php");
-$query_get_appointments = "SELECT appointment_id,customer_id,appointment_name,date,status FROM appointments";
+$query_get_appointments = "SELECT appointment_id, customer_id, appointment_name, date, hour, status FROM appointments";
 $stmt_get_appointments = $connection->prepare($query_get_appointments);
 $stmt_get_appointments->execute();
 $results_get_appointments = $stmt_get_appointments->get_result();
@@ -221,7 +221,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Recent Projects</h3>
+                            <h3>Recent Appointments</h3>
                             <!-- <button>See all <span class="las la-arrow-right"></span></button> -->
                         </div>
                         <div class="card-body">
@@ -232,6 +232,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
                                             <td>Repair Type</td>
                                             <td>Customer Name</td>
                                             <td>Date</td>
+                                            <td>Hour</td>
                                             <td>Status</td>
                                             <td>working status</td>
                                         </tr>
@@ -240,19 +241,18 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
                                         <?php
                                         while ($row_get_appointments = $results_get_appointments->fetch_assoc()) {
 
-
                                             $query_getuser = "SELECT username as customer_name  from customers WHERE customer_id ='" . $row_get_appointments['customer_id'] . "'";
                                             $stmt_getuser = $connection->prepare($query_getuser);
                                             $stmt_getuser->execute();
                                             $results_getuser = $stmt_getuser->get_result();
                                             $row_getuser = $results_getuser->fetch_assoc();
 
-
                                             get_appointment_in_admin_page_for_table_connection(
                                                 $row_get_appointments['appointment_id'],
                                                 $row_getuser['customer_name'],
                                                 $row_get_appointments['appointment_name'],
                                                 $row_get_appointments['date'],
+                                                $row_get_appointments['hour'],
                                                 $row_get_appointments['status']
                                             );
                                         }
