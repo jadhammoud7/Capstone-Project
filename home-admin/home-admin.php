@@ -61,20 +61,23 @@ $results_get_latest_customer = $stmt_get_latest_customer->get_result();
 
 
 //updating working status from buttons
-if(isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])){
-$working_status=$_GET['set_to_done'];
-$appointmentID=$_GET['getAppointmentID'];
-if($working_status==true){
-    $query_settodone = $connection->prepare("UPDATE appointments SET status=? WHERE appointment_id='" . $appointmentID . "'");
-    $query_settodone->bind_param("s", "Done work");
-    $query_settodone->execute();
-    header("Location:../home-admin/home-admin.php");
-}else{
-    $query_settodone = $connection->prepare("UPDATE appointments SET status=? WHERE appointment_id='" . $appointmentID . "'");
-    $query_settodone->bind_param("s", "Pending");
-    $query_settodone->execute();
-    header("Location:../home-admin/home-admin.php");
-}
+if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
+    $working_status = $_GET['set_to_done'];
+    $appointmentID = $_GET['getAppointmentID'];
+    $status = "";
+    if ($working_status) {
+        $status = "Done Work";
+        $query_settodone = $connection->prepare("UPDATE appointments SET status=? WHERE appointment_id='" . $appointmentID . "'");
+        $query_settodone->bind_param("s", $status);
+        $query_settodone->execute();
+        header("Location:../home-admin/home-admin.php");
+    } else {
+        $status = "Pending";
+        $query_settodone = $connection->prepare("UPDATE appointments SET status=? WHERE appointment_id='" . $appointmentID . "'");
+        $query_settodone->bind_param("s", $status);
+        $query_settodone->execute();
+        header("Location:../home-admin/home-admin.php");
+    }
 }
 
 ?>
@@ -288,5 +291,6 @@ if($working_status==true){
 
 </body>
 <script src="../home-admin/home_admin.js"></script>
+
 </html>
 </php>
