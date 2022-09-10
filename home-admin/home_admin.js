@@ -13,14 +13,14 @@ function SetButton(status, button,status_color) {
         SetButtonToPending(button,status_color);
 }
 function SetButtonToPending(button,status_color) {
-    button.innerHTML = "Set to pending";
+    button.innerHTML = "Pending";
     button.style.color = "black";
     button.style.background = "red";
     status_color.style.background="green";
 }
 
 function SetButtonToDone(button,status_color) {
-    button.innerHTML = "Set Work To Done";
+    button.innerHTML = "Done Work";
     button.style.color = "white";
     button.style.background = "royalblue";
     status_color.style.background="red";
@@ -32,7 +32,7 @@ const status_color = document.getElementsByClassName('status red');
 
 for (let i = 0; i < btn.length; i++) {
     btn[i].addEventListener('click', function handleClick() {
-        if (btn[i].innerHTML.includes("Set Work To Done")) {
+        if (btn[i].innerHTML.includes("Done Work")) {
             // SetButtonToPending(btn[i]);
             window.location = '../home-admin/home-admin.php?getAppointmentID=' + AppointmentID + '&set_to_done=true';
             //yaane heye pending w bade hawela la done
