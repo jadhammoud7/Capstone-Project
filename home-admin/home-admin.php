@@ -158,12 +158,6 @@ $results_comment = $stmt_comment->get_result();
                         <span>Admin Accounts</span>
                     </a>
                 </li>
-                <li>
-                    <a>
-                        <span><i class="fa fa-sign-out"></i></span>
-                        <button type="submit" class="logout-btn" onclick="OpenLogOutPopUp()"><strong>Logout</strong></button>
-                    </a>
-                </li>
             </ul>
 
         </div>

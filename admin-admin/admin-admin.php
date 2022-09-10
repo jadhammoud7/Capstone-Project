@@ -208,14 +208,111 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <tr>
+                                            <td>g</td>
+                                            <td>f</td>
+                                            <td>g</td>
+                                            <td>f</td>
+                                            <td>g</td>
+                                            <td>f</td>
+                                            <td>g</td>
+                                        </tr>
+                                        <tr>
+                                            <td>g</td>
+                                            <td>f</td>
+                                            <td>g</td>
+                                            <td>f</td>
+                                            <td>g</td>
+                                            <td>f</td>
+                                            <td>g</td>
+                                        </tr>
+                                        <tr>
+                                            <td>g</td>
+                                            <td>f</td>
+                                            <td>g</td>
+                                            <td>f</td>
+                                            <td>g</td>
+                                            <td>f</td>
+                                            <td>g</td>
+                                        </tr>
+                                        <tr>
+                                            <td>g</td>
+                                            <td>f</td>
+                                            <td>g</td>
+                                            <td>f</td>
+                                            <td>g</td>
+                                            <td>f</td>
+                                            <td>g</td>
+                                        </tr>
+                                        <tr>
+                                            <td>g</td>
+                                            <td>f</td>
+                                            <td>g</td>
+                                            <td>f</td>
+                                            <td>g</td>
+                                            <td>f</td>
+                                            <td>g</td>
+                                        </tr>
 
                                     </tbody>
                                 </table>
+                                <button class="add_user" id="add_user1" onclick="myFunction()">Add Admin Account</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
+
+
+
+        <!-- testing -->
+            <div class="container" style="display:none;" id="container1">
+                <form>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="fname">First Name</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="lname">Last Name</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="country">Country</label>
+                        </div>
+                        <div class="col-75">
+                            <select id="country" name="country">
+                                <option value="australia">Australia</option>
+                                <option value="canada">Canada</option>
+                                <option value="usa">USA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="subject">Subject</label>
+                        </div>
+                        <div class="col-75">
+                            <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input type="submit" value="Submit">
+                    </div>
+                </form>
+            </div>
+
+
         </main>
     </div>
 
@@ -228,6 +325,28 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 </body>
 <script src="../profile/profile.js"></script>
-<script src="../admin-admin/admin-admin.js"></script>
+<!-- <script src="../admin-admin/admin-admin.js"></script> -->
+<script>
+
+function myFunction() {
+    if(document.getElementById("add_user1").innerHTML=="Add Admin Account"){
+        document.getElementById("add_user1").innerHTML="Return";
+        document.getElementById("add_user1").style.background="red";
+        document.getElementById("add_user1").style.color="black";
+        document.getElementById("container1").style.display = "block";
+        document.getElementById("add_user1").style.border="1px solid red";
+    }else{
+        document.getElementById("add_user1").innerHTML="Add Admin Account";
+        document.getElementById("add_user1").style.background="royalblue";
+        document.getElementById("add_user1").style.color="white";
+        document.getElementById("container1").style.display = "none";
+        document.getElementById("add_user1").style.border="1px solid royalblue";
+
+    }
+
+  }
+
+</script>
+
 </html>
 </php>
