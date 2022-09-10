@@ -44,21 +44,6 @@ $results_total_checkouts = $stmt_total_checkouts->get_result();
 $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 
-//get all customer
-require_once("../php/admin_page_php.php");
-$query_customer = "SELECT customer_id,first_name,last_name,username,phone_number,email,date_of_birth,address FROM customers";
-$stmt_customer = $connection->prepare($query_customer);
-$stmt_customer->execute();
-$results_customer = $stmt_customer->get_result();
-
-//delete customer
-if(isset($_GET['getCustomerIDtoRemove'])){
-    $remove_customer=$_GET['getCustomerIDtoRemove'];
-    $query_delete_customer = "DELETE FROM customers WHERE customer_id=$remove_customer";
-    $stmt_delete_customer = $connection->prepare($query_delete_customer);
-    $stmt_delete_customer->execute();
-
-}
 
 ?>
 
@@ -130,6 +115,12 @@ if(isset($_GET['getCustomerIDtoRemove'])){
                     <a href="../admin-admin/admin-admin.php">
                         <span class="las la-user-circle"></span>
                         <span> Admin Accounts</span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <span><i class="fa fa-sign-out"></i></span>
+                        <button type="submit" class="logout-btn" onclick="OpenLogOutPopUp()"><strong>Logout</strong></button>
                     </a>
                 </li>
             </ul>
@@ -236,6 +227,7 @@ if(isset($_GET['getCustomerIDtoRemove'])){
     <!-- ended return to top button -->
 
 </body>
-
+<script src="../profile/profile.js"></script>
+<script src="../admin-admin/admin-admin.js"></script>
 </html>
 </php>
