@@ -78,6 +78,7 @@ header {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   position: fixed;
   left: 345px;
+  /* left: 71px; */
   width: calc(100% - 345px);
   top: 0;
   z-index: 100;
