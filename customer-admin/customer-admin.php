@@ -46,10 +46,20 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 //get all customer
 require_once("../php/admin_page_php.php");
-$query_customer = "SELECT first_name,last_name,username,phone_number,email,date_of_birth,address FROM customers";
+$query_customer = "SELECT customer_id,first_name,last_name,username,phone_number,email,date_of_birth,address FROM customers";
 $stmt_customer = $connection->prepare($query_customer);
 $stmt_customer->execute();
 $results_customer = $stmt_customer->get_result();
+
+//delete customer
+if(isset($_GET['getCustomerIDtoRemove'])){
+    $remove_customer=$_GET['getCustomerIDtoRemove'];
+    $query_delete_customer = "DELETE FROM customers WHERE customer_id=$remove_customer";
+    $stmt_delete_customer = $connection->prepare($query_delete_customer);
+    $stmt_delete_customer->execute();
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -210,6 +220,7 @@ $results_customer = $stmt_customer->get_result();
                                         <?php
                                         while ($row_customer = $results_customer->fetch_assoc()) {
                                             get_all_customer_connection(
+                                                $row_customer['customer_id'],
                                                 $row_customer['first_name'],
                                                 $row_customer['last_name'],
                                                 $row_customer['username'],
