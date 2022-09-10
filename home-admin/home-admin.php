@@ -22,7 +22,7 @@ $results_total_customers = $stmt_total_customers->get_result();
 $row_total_customers = $results_total_customers->fetch_assoc();
 
 
-//sum of all appointments
+//count of all appointments
 $query_total_appointments = "SELECT COUNT(appointment_id) as total_appointments FROM appointments";
 $stmt_total_appointments = $connection->prepare($query_total_appointments);
 $stmt_total_appointments->execute();
@@ -119,13 +119,13 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="">
+                    <a href="../home-admin/home-admin.php">
                         <span class="las la-igloo" class="active"></span>
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="../customer-admin/customer-admin.php">
                         <span class="las la-users"></span>
                         <span>Customers</span>
                     </a>
