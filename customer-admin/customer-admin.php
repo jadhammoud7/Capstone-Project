@@ -71,7 +71,8 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <link rel="stylesheet" href="../customer-admin/customer-admin.css">
+    <link rel="stylesheet" href="customer-admin.css">
+    <link rel="stylesheet" href="../home-admin/home-admin.css">
     <title>Admin | Customers - Newbies Gamers</title>
 </head>
 
@@ -84,6 +85,15 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
         <p>Welcome to Newbies Gamers</p>
         <button type="button" onclick="RemoveLogInPopUp()">OK</button>
     </div> -->
+
+    <!-- started popup message logout -->
+    <div class="popup" id="logout-confirmation">
+        <img src="../images/question-mark.png" alt="">
+        <h2>Log Out Confirmation</h2>
+        <p>Are you sure that you want to logout?</p>
+        <button type="button" onclick="GoToLogIn()">YES</button>
+        <button type="button" onclick="CloseLogOutPopUp()">NO</button>
+    </div>
 
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
@@ -128,13 +138,15 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
                 <li>
                     <a href="../admin-admin/admin-admin.php">
                         <span class="las la-user-circle"></span>
-                        <span> Admin Accounts</span>
+                        <span>Admin Accounts</span>
                     </a>
                 </li>
                 <li>
                     <a>
-                        <button type="submit" class="logout-btn" onclick="OpenLogOutPopUp()"> <span><i class="fa fa-sign-out"></i></span>
-                            <strong>Logout</strong></button>
+                        <a class="logout-btn" onclick="OpenLogOutPopUp()">
+                            <span class="las la-sign-out-alt"></span>
+                            <span>Logout</span>
+                        </a>
                     </a>
                 </li>
             </ul>
@@ -245,14 +257,12 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
         </main>
     </div>
 
-
-
-
     <!-- started return to top button -->
     <button onclick="ReturnToTop()" id="TopBtn" title="Return to Top"><i class="fa fa-arrow-up"></i></button>
     <!-- ended return to top button -->
 
 </body>
+<script src="customer-admin.js"></script>
 
 </html>
 </php>

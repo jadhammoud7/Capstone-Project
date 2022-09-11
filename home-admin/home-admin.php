@@ -168,8 +168,10 @@ $results_comment = $stmt_comment->get_result();
                 </li>
                 <li>
                     <a>
-                        <button type="submit" class="logout-btn" onclick="OpenLogOutPopUp()"> <span><i class="fa fa-sign-out"></i></span>
-                            <strong>Logout</strong></button>
+                        <a class="logout-btn" onclick="OpenLogOutPopUp()">
+                            <span class="las la-sign-out-alt"></span>
+                            <span>Logout</span>
+                        </a>
                     </a>
                 </li>
             </ul>
