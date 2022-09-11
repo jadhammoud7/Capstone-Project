@@ -117,12 +117,7 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
                         <span> Admin Accounts</span>
                     </a>
                 </li>
-                <li>
-                    <a>
-                        <span><i class="fa fa-sign-out"></i></span>
-                        <button type="submit" class="logout-btn" onclick="OpenLogOutPopUp()"><strong>Logout</strong></button>
-                    </a>
-                </li>
+
             </ul>
 
         </div>
@@ -256,7 +251,8 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
                                     </tbody>
                                 </table>
-                                <button class="add_user" id="add_user1" onclick="myFunction()">Add Admin Account</button>
+                                <!-- <button class="add_user" id="add_user1" onclick="myFunction()">Add Admin Account</button> -->
+                                <button class="add_user" id="add_user1" onclick="OpenGift()">Add Admin Account</button>
                             </div>
                         </div>
                     </div>
@@ -268,7 +264,8 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 
         <!-- testing -->
-            <div class="container" style="display:none;" id="container1">
+            <div class="container"  id="container1">
+                <span onclick="CloseGift()" class="close" title="Close Modal">&times;</span>
                 <form>
                     <div class="row">
                         <div class="col-25">
@@ -325,26 +322,26 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 </body>
 <script src="../profile/profile.js"></script>
-<!-- <script src="../admin-admin/admin-admin.js"></script> -->
+<script src="../admin-admin/admin-admin.js"></script>
 <script>
 
-function myFunction() {
-    if(document.getElementById("add_user1").innerHTML=="Add Admin Account"){
-        document.getElementById("add_user1").innerHTML="Return";
-        document.getElementById("add_user1").style.background="red";
-        document.getElementById("add_user1").style.color="black";
-        document.getElementById("container1").style.display = "block";
-        document.getElementById("add_user1").style.border="1px solid red";
-    }else{
-        document.getElementById("add_user1").innerHTML="Add Admin Account";
-        document.getElementById("add_user1").style.background="royalblue";
-        document.getElementById("add_user1").style.color="white";
-        document.getElementById("container1").style.display = "none";
-        document.getElementById("add_user1").style.border="1px solid royalblue";
+// function myFunction() {
+//     if(document.getElementById("add_user1").innerHTML=="Add Admin Account"){
+//         document.getElementById("add_user1").innerHTML="Return";
+//         document.getElementById("add_user1").style.background="red";
+//         document.getElementById("add_user1").style.color="black";
+//         document.getElementById("container1").style.display = "block";
+//         document.getElementById("add_user1").style.border="1px solid red";
+//     }else{
+//         document.getElementById("add_user1").innerHTML="Add Admin Account";
+//         document.getElementById("add_user1").style.background="royalblue";
+//         document.getElementById("add_user1").style.color="white";
+//         document.getElementById("container1").style.display = "none";
+//         document.getElementById("add_user1").style.border="1px solid royalblue";
 
-    }
+//     }
 
-  }
+//   }
 
 </script>
 
