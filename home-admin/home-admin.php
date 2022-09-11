@@ -111,6 +111,15 @@ $results_comment = $stmt_comment->get_result();
         <button type="button" onclick="RemoveLogInPopUp()">OK</button>
     </div>
 
+    <!-- started popup message logout -->
+    <div class="popup" id="logout-confirmation">
+        <img src="../images/question-mark.png" alt="">
+        <h2>Log Out Confirmation</h2>
+        <p>Are you sure that you want to logout?</p>
+        <button type="button" onclick="GoToLogIn()">YES</button>
+        <button type="button" onclick="CloseLogOutPopUp()">NO</button>
+    </div>
+
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
         <div class="sidebar-brand">
@@ -155,6 +164,12 @@ $results_comment = $stmt_comment->get_result();
                     <a href="../admin-admin/admin-admin.php">
                         <span class="las la-user-circle"></span>
                         <span>Admin Accounts</span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <button type="submit" class="logout-btn" onclick="OpenLogOutPopUp()"> <span><i class="fa fa-sign-out"></i></span>
+                            <strong>Logout</strong></button>
                     </a>
                 </li>
             </ul>
@@ -301,8 +316,8 @@ $results_comment = $stmt_comment->get_result();
                                     </thead>
                                     <tbody>
                                         <?php
-                                        while($row_comment = $results_comment->fetch_assoc()){
-                                            get_comments_connection($row_comment['username'],$row_comment['comment']);
+                                        while ($row_comment = $results_comment->fetch_assoc()) {
+                                            get_comments_connection($row_comment['username'], $row_comment['comment']);
                                         }
                                         ?>
                                     </tbody>
