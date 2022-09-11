@@ -104,12 +104,12 @@ $results_comment = $stmt_comment->get_result();
 <body onunload="myFunction()">
 
     <!-- started popup message login successful -->
-    <!-- <div class="popup" id="login-confirmation">
+    <div class="popup" id="login-confirmation">
         <img src="../images/tick.png" alt="successfully logged in">
         <h2>Login Successful</h2>
-        <p>Welcome to Newbies Gamers</p>
+        <p>Welcome Admin to Newbies Gamers Admin Page</p>
         <button type="button" onclick="RemoveLogInPopUp()">OK</button>
-    </div> -->
+    </div>
 
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
