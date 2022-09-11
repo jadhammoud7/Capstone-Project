@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2022 at 09:25 PM
+-- Generation Time: Sep 11, 2022 at 02:39 PM
 -- Server version: 8.0.23
 -- PHP Version: 8.0.2
 
@@ -20,6 +20,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `newbie_gamers`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admins`
+--
+
+CREATE TABLE `admins` (
+  `admin_id` int NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `email_address` varchar(225) NOT NULL,
+  `phone_number` varchar(50) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`admin_id`, `first_name`, `last_name`, `email_address`, `phone_number`, `username`, `password`) VALUES
+(2, 'mohamad', 'nabaa', 'mohamad.nabaa01@lau.com', '71123805', 'MNabaa2001', 'Mn123654'),
+(4, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '96171123805', 'MNabaa', '578835a5afad634f5716badf3d801e8910dec33e73ec5c9e86b8d409f229263d'),
+(5, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '96171123805', 'MNabaa111', '578835a5afad634f5716badf3d801e8910dec33e73ec5c9e86b8d409f229263d');
 
 -- --------------------------------------------------------
 
@@ -41,10 +66,8 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`appointment_id`, `customer_id`, `appointment_name`, `date`, `hour`, `status`) VALUES
-(5, 4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Pending'),
-(6, 4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Pending'),
-(7, 4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Pending'),
-(8, 4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Pending'),
+(7, 4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Done Work'),
+(8, 4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Done Work'),
 (9, 1, 'Phone Repair', '2022-07-30', '6:00-7:30 PM', 'Pending'),
 (10, 4, 'Repair Laptop', '2022-07-28', '8:00-9:30 AM', 'Pending'),
 (11, 4, 'Repair Laptop', '2022-07-28', '8:00-9:30 AM', 'Pending'),
@@ -52,7 +75,11 @@ INSERT INTO `appointments` (`appointment_id`, `customer_id`, `appointment_name`,
 (13, 4, 'Repair Laptop', '2022-07-28', '12:00-1:30 PM', 'Pending'),
 (14, 4, 'Repair Laptop', '2022-07-28', '2:00-3:30 PM', 'Pending'),
 (15, 4, 'Repair Laptop', '2022-07-28', '2:00-3:30 PM', 'Pending'),
-(16, 4, 'Repair Laptop', '2022-07-28', '4:00-5:30 PM', 'Pending');
+(16, 4, 'Repair Laptop', '2022-07-28', '4:00-5:30 PM', 'Pending'),
+(17, 4, 'Repair Laptop', '2022-07-30', '8:00-9:30 AM', 'Pending'),
+(20, 4, 'Repair Laptop', '2022-08-30', '8:00-9:30 AM', 'Pending'),
+(21, 4, 'Repair Laptop', '2022-08-30', '8:00-9:30 AM', 'Pending'),
+(22, 4, 'Repair Laptop', '2022-08-30', '8:00-9:30 AM', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -97,7 +124,6 @@ CREATE TABLE `checkouts` (
 --
 
 INSERT INTO `checkouts` (`checkout_id`, `customer_id`, `first_name`, `last_name`, `email`, `phone_number`, `shipping_country`, `shipping_location`, `shipping_company`, `postcode`, `order_notes`, `total_price`, `tax_price`, `total_price_including_tax`, `status`, `date`) VALUES
-(2, 4, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '96171123805', 'Lebanon', 'Aramoun, Lebanon', 'LAU', '1548', '213213321132', 796, 79.60000000000001, 875.6, 'Pending', '2022-08-27'),
 (4, 4, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '96171123805', 'Lebanon', 'Aramoun, Lebanon', 'LAU', '1548', 'none', 300, 30, 330, 'Pending', '2022-08-28'),
 (5, 4, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '96171123805', 'Lebanon', 'Aramoun, Lebanon', 'LAU', '1548', 'none', 46, 4.6000000000000005, 50.6, 'Pending', '2022-08-28');
 
@@ -119,9 +145,6 @@ CREATE TABLE `checkouts_customers_products` (
 --
 
 INSERT INTO `checkouts_customers_products` (`checkout_id`, `product_id`, `quantity`, `total_price`) VALUES
-(2, 1, 3, 150),
-(2, 9, 2, 600),
-(2, 2, 1, 46),
 (4, 1, 4, 300),
 (5, 2, 1, 46);
 
@@ -173,7 +196,6 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`customer_id`, `first_name`, `last_name`, `email`, `date_of_birth`, `phone_number`, `address`, `username`, `password`) VALUES
-(1, 'admin', 'admin', 'admin@hotmail.com', '2022-08-10', '76666666', 'beirut', 'admin', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'),
 (2, 'jad', 'hammoud', 'jad.hammoud@gmail.com', '2022-09-06', '76939605', 'beirut', 'jad', '8384caf9895a1f9ab17aa8055b0b5869f3e8eba263aac96585f1ee871dd3d5f0'),
 (3, 'mohamad', 'Nabaa', 'mohamad@gmail.com', '2022-08-22', '71123805', 'beirut', 'mhmd', '8f9cebbfdc1a99ce7a4941ad08c34c4f1f08089ceff43b802dab3b951d6cbfd1'),
 (4, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '2022-08-01', '+96171123805', 'Aramoun', 'Mohamad Nabaa', '578835a5afad634f5716badf3d801e8910dec33e73ec5c9e86b8d409f229263d'),
@@ -261,6 +283,12 @@ INSERT INTO `repair` (`repair_type`, `price_per_hour`, `description`, `image`) V
 --
 
 --
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`admin_id`);
+
+--
 -- Indexes for table `appointments`
 --
 ALTER TABLE `appointments`
@@ -289,10 +317,16 @@ ALTER TABLE `products`
 --
 
 --
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `admin_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `appointment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `appointment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `checkouts`
