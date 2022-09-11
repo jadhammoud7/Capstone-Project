@@ -252,7 +252,7 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
                                     </tbody>
                                 </table>
                                 <!-- <button class="add_user" id="add_user1" onclick="myFunction()">Add Admin Account</button> -->
-                                <button class="add_user" id="add_user1" onclick="OpenGift()">Add Admin Account</button>
+                                <button class="add_user" id="add_user1" onclick="OpenAddUser()">Add Admin Account</button>
                             </div>
                         </div>
                     </div>
@@ -265,7 +265,7 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
         <!-- testing -->
             <div class="container"  id="container1">
-                <span onclick="CloseGift()" class="close" title="Close Modal">&times;</span>
+                <span onclick="CloseAddUser()" class="close" title="Close Modal">&times;</span>
                 <form>
                     <div class="row">
                         <div class="col-25">

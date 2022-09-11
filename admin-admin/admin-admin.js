@@ -1,9 +1,9 @@
-function OpenGift() {
+function OpenAddUser() {
     const gift_div = document.getElementById("container1");
     gift_div.style.display = "block";
 }
 
-function CloseGift() {
+function CloseAddUser() {
     const gift_div = document.getElementById("container1");
     gift_div.style.display = "none";
 }
