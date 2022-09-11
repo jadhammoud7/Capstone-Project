@@ -68,7 +68,6 @@ CREATE TABLE `appointments` (
 INSERT INTO `appointments` (`appointment_id`, `customer_id`, `appointment_name`, `date`, `hour`, `status`) VALUES
 (7, 4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Done Work'),
 (8, 4, 'Repair Laptop', '2022-07-26', '8:00-9:30 AM', 'Done Work'),
-(9, 1, 'Phone Repair', '2022-07-30', '6:00-7:30 PM', 'Pending'),
 (10, 4, 'Repair Laptop', '2022-07-28', '8:00-9:30 AM', 'Pending'),
 (11, 4, 'Repair Laptop', '2022-07-28', '8:00-9:30 AM', 'Pending'),
 (12, 4, 'Repair Laptop', '2022-07-28', '10:00-11:30 AM', 'Pending'),
