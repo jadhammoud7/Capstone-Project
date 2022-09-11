@@ -234,8 +234,8 @@ $results_admins = $stmt_admins->get_result();
                 <span onclick="CloseAddUser()" class="close" title="Close Modal">&times;</span>
                 <form class="modal-content">
                     <div class="container">
-                        <h1 class="title">Sign Up</h1>
-                        <p class="title">Please fill in this form to create an account.</p>
+                        <h1 class="title">Create New Admin Account</h1>
+                        <p class="title">Please fill in this form to create a new admin account.</p>
                         <hr>
                         <p class="error" id="first_name_error">
                             <?php
@@ -277,12 +277,6 @@ $results_admins = $stmt_admins->get_result();
                                                                                                         echo $_SESSION['email'];
                                                                                                     } ?>" required>
 
-                        <label for="date_of_birth"><b>Date Of Birth</b></label>
-                        <input type="date" placeholder="Enter your date of birth" name="date_of_birth" id="date_of_birth" value="<?php if (isset($_SESSION['date_of_birth'])) {
-                                                                                                                                        echo $_SESSION['date_of_birth'];
-                                                                                                                                    } ?>" required> <br> <br>
-
-
                         <p class="error" id="phone_number_error">
                             <?php
                             if (isset($_SESSION['phone_number_error'])) {
@@ -295,20 +289,6 @@ $results_admins = $stmt_admins->get_result();
                         <input type="text" placeholder="Enter your phone number" name="phone_number" id="phone_number" value="<?php if (isset($_SESSION['phone_number'])) {
                                                                                                                                     echo $_SESSION['phone_number'];
                                                                                                                                 } ?>" required> <br> <br>
-
-                        <p class="error" id="address_error">
-                            <?php
-                            if (isset($_SESSION['address_error'])) {
-                                echo "<script>document.getElementById('address_error').style.display='block';</script>";
-                                echo $_SESSION['address_error'];
-                                unset($_SESSION['address_error']);
-                            } ?>
-                        </p>
-                        <label for="address"><b>Address</b></label>
-                        <input type="text" placeholder="Enter address" name="address" id="address" value="<?php if (isset($_SESSION['address'])) {
-                                                                                                                echo $_SESSION['address'];
-                                                                                                            } ?>" required>
-
 
                         <p class="error" id="username_error">
                             <?php
@@ -338,7 +318,7 @@ $results_admins = $stmt_admins->get_result();
 
 
                         <div class="clearfix">
-                            <button type="submit" class="signupbtn" title="Sign Up"><strong>Sign Up</strong></button>
+                            <button type="submit" class="signupbtn" title="Add new admin user"><strong>Add User</strong></button>
                         </div>
                     </div>
                 </form>
