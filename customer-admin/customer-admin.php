@@ -6,8 +6,8 @@ include("../php/connection.php");
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
-$customerid = $_SESSION['logged_id'];
-$query = "SELECT first_name, last_name  from customers WHERE customer_id = $customerid";
+$admin_id = $_SESSION['logged_id'];
+$query = "SELECT first_name, last_name FROM admins WHERE admin_id = $admin_id";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
@@ -52,12 +52,11 @@ $stmt_customer->execute();
 $results_customer = $stmt_customer->get_result();
 
 //delete customer
-if(isset($_GET['getCustomerIDtoRemove'])){
-    $remove_customer=$_GET['getCustomerIDtoRemove'];
+if (isset($_GET['getCustomerIDtoRemove'])) {
+    $remove_customer = $_GET['getCustomerIDtoRemove'];
     $query_delete_customer = "DELETE FROM customers WHERE customer_id=$remove_customer";
     $stmt_delete_customer = $connection->prepare($query_delete_customer);
     $stmt_delete_customer->execute();
-
 }
 
 ?>
@@ -73,7 +72,7 @@ if(isset($_GET['getCustomerIDtoRemove'])){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="../customer-admin/customer-admin.css">
-    <title>Home Admin - Newbies Gamers</title>
+    <title>Admin | Customers - Newbies Gamers</title>
 </head>
 
 <body onunload="myFunction()">
@@ -134,8 +133,8 @@ if(isset($_GET['getCustomerIDtoRemove'])){
                 </li>
                 <li>
                     <a>
-                        <span><i class="fa fa-sign-out"></i></span>
-                        <button type="submit" class="logout-btn" onclick="OpenLogOutPopUp()"><strong>Logout</strong></button>
+                        <button type="submit" class="logout-btn" onclick="OpenLogOutPopUp()"> <span><i class="fa fa-sign-out"></i></span>
+                            <strong>Logout</strong></button>
                     </a>
                 </li>
             </ul>
@@ -149,8 +148,7 @@ if(isset($_GET['getCustomerIDtoRemove'])){
                 <label for="nav-toggle">
                     <span><i class="las la-bars"></i></span>
                 </label>
-
-                Dashboard
+                Customers List
             </h2>
 
             <div class="user-wrapper">
@@ -201,11 +199,11 @@ if(isset($_GET['getCustomerIDtoRemove'])){
                     </div>
                 </div>
             </div>
-            <div class="recent-grid">
+            <div class="recent-grid" style="display: block !important;">
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Recent Appointments</h3>
+                            <h3>Customers List</h3>
                             <!-- <button>See all <span class="las la-arrow-right"></span></button> -->
                         </div>
                         <div class="card-body">

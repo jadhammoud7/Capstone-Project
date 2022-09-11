@@ -225,7 +225,7 @@ $results_comment = $stmt_comment->get_result();
                     <div class="card">
                         <div class="card-header">
                             <h3>Recent Appointments</h3>
-                            <!-- <button>See all <span class="las la-arrow-right"></span></button> -->
+                            <button onclick="window.location.href = '../appointments-admin/appointments-admin.php'">See all <span class="las la-arrow-right"></span></button>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -270,7 +270,7 @@ $results_comment = $stmt_comment->get_result();
                     <div class="card">
                         <div class="card-header">
                             <h3>Latest Customers</h3>
-                            <!-- <button>See all <span class="las la-arrow-right"></span></button> -->
+                            <button onclick="window.location.href = '../customer-admin/customer-admin.php';">See all <span class="las la-arrow-right"></span></button>
                         </div>
                         <div class="card-body">
                             <?php
