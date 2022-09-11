@@ -264,6 +264,7 @@ td .status {
 .status.red {
   background: red;
 }
+
 /* 
 .status.pink {
   background: deeppink;
@@ -316,6 +317,58 @@ tr td:last-child {
   display: inline-block;
   margin-left: .5rem;
   color: var(--main-color);
+}
+
+/* started popup design */
+.popup {
+  width: 400px;
+  background: #fff;
+  border-radius: 6px;
+  border: royalblue solid 5px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  text-align: center;
+  padding: 0 30px 30px;
+  color: #333;
+  visibility: hidden;
+  transition: transform 0.4s, top 0.4s;
+  z-index: 100;
+}
+
+.open-popup {
+  visibility: visible;
+  top: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.popup img {
+  width: 100px;
+  margin-top: -50px;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.popup h2 {
+  font-size: 38px;
+  font-weight: 500;
+  margin: 30px 0 10px;
+}
+
+.popup button {
+  width: 100%;
+  margin-top: 50px;
+  padding: 10px 0;
+  background: rgba(65, 105, 225, 0.6);
+  color: #fff;
+  border: 0;
+  outline: none;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 @media screen and (max-width: 1200px) {
@@ -465,16 +518,9 @@ tr td:last-child {
     grid-template-columns: 100%;
   }
 }
-td .btn_done_work{
 
-   background: var(--main-color);
-   border-radius: 10px;
-   color: #fff;
-   font-size: .8rem;
-   padding: .5rem 1rem;
-   border: 1px solid var(--main-color);
-}
-td .work_set_to_done{
+td .btn_done_work {
+
   background: var(--main-color);
   border-radius: 10px;
   color: #fff;
@@ -482,13 +528,25 @@ td .work_set_to_done{
   padding: .5rem 1rem;
   border: 1px solid var(--main-color);
 }
-.hello:nth-child(even){
+
+td .work_set_to_done {
+  background: var(--main-color);
+  border-radius: 10px;
+  color: #fff;
+  font-size: .8rem;
+  padding: .5rem 1rem;
+  border: 1px solid var(--main-color);
+}
+
+.hello:nth-child(even) {
   background-color: #dddddd;
 }
-.hi:nth-child(even){
+
+.hi:nth-child(even) {
   background-color: #dddddd;
 }
-.logout-btn{
+
+.logout-btn {
   background-color: red;
   border: solid 1px royalblue;
   border-radius: 10px;

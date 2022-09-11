@@ -6,8 +6,8 @@ include("../php/connection.php");
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
-$customerid = $_SESSION['logged_id'];
-$query = "SELECT first_name, last_name  from customers WHERE customer_id = $customerid";
+$admin_id = $_SESSION['logged_id'];
+$query = "SELECT first_name, last_name  from admins WHERE admin_id =  '" . $admin_id . "' ";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
@@ -53,7 +53,7 @@ $results_get_appointments = $stmt_get_appointments->get_result();
 
 //getting latest customers added to us
 require_once("../php/admin_page_php.php");
-$query_get_latest_customer = "SELECT username,email FROM customers ORDER BY customer_id DESC LIMIT 5";
+$query_get_latest_customer = "SELECT username, email FROM customers ORDER BY customer_id DESC LIMIT 5";
 $stmt_get_latest_customer = $connection->prepare($query_get_latest_customer);
 $stmt_get_latest_customer->execute();
 $results_get_latest_customer = $stmt_get_latest_customer->get_result();

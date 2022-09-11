@@ -1,18 +1,18 @@
 <?php
 
 session_start();
+
 include("../php/connection.php");
 
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
-$customerid = $_SESSION['logged_id'];
-$query = "SELECT first_name, last_name from customers WHERE customer_id = $customerid";
+$admin_id = $_SESSION['logged_id'];
+$query = "SELECT first_name, last_name FROM admins WHERE admin_id = '" . $admin_id . "' ";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
 $row = $results->fetch_assoc();
-
 
 //sum of all customers
 $query_total_customers = "SELECT COUNT(customer_id) as count FROM customers";
@@ -20,7 +20,6 @@ $stmt_total_customers = $connection->prepare($query_total_customers);
 $stmt_total_customers->execute();
 $results_total_customers = $stmt_total_customers->get_result();
 $row_total_customers = $results_total_customers->fetch_assoc();
-
 
 //count of all appointments
 $query_total_appointments = "SELECT COUNT(appointment_id) as total_appointments FROM appointments";
@@ -49,6 +48,94 @@ $query_admins = "SELECT admin_id, first_name, last_name, email_address, phone_nu
 $stmt_admins = $connection->prepare($query_admins);
 $stmt_admins->execute();
 $results_admins = $stmt_admins->get_result();
+
+if (isset($_POST["first_name"]) && $_POST["first_name"] != "") {
+    $first_name = $_POST["first_name"];
+    $_SESSION['first_name'] = $first_name;
+    for ($i = 0; $i < strlen($first_name); $i++) {
+        if (is_numeric($first_name[$i])) {
+            $_SESSION['first_name_error'] = "First Name should not contain numbers";
+            header("Location: ../admin-admin/admin-admin.php?open_add_user=true");
+            die("WRONG first name");
+        }
+    }
+}
+if (isset($_POST["last_name"]) && $_POST["last_name"] != "") {
+    $last_name = $_POST["last_name"];
+    $_SESSION['last_name'] = $last_name;
+    for ($i = 0; $i < strlen($last_name); $i++) {
+        if (is_numeric($last_name[$i])) {
+            $_SESSION['last_name_error'] = "Last Name should not contain numbers";
+            header("Location: ../admin-admin/admin-admin.php?open_add_user=true");
+            die("WRONG last name");
+        }
+    }
+}
+
+if (isset($_POST["email"]) && $_POST["email"] != "") {
+    $email = $_POST["email"];
+    $_SESSION['email'] = $email;
+    if (!str_contains($email, ".com") && !str_contains($email, "@")) {
+        $_SESSION['email_error'] = "Email is invalid";
+        header("Location: ../admin-admin/admin-admin.php?open_add_user=true");
+        die("WRONG email");
+    }
+}
+
+if (isset($_POST["phone_number"]) && $_POST["phone_number"] != "") {
+    $phone_number = $_POST["phone_number"];
+    $_SESSION['phone_number'] = $phone_number;
+    for ($j = 0; $j < strlen($phone_number); $j++) {
+        if (!is_numeric($phone_number[$j])) {
+            $_SESSION['phone_number_error'] = "Phone number should not contain any characters other than numbers";
+            header("Location: ../signup/signup.php");
+            die("WRONG Phone Number");
+        }
+    }
+}
+
+if (isset($_POST["username"]) && $_POST["username"] != "") {
+    $username = $_POST["username"];
+    $_SESSION['username'] = $username;
+    $query_check_username = "SELECT * FROM admins WHERE username = '" . $username . "'";
+    $select_check_username = $connection->prepare($query_check_username);
+    $select_check_username->execute();
+    $results_check_username = $select_check_username->get_result();
+    $data_check_username = $results_check_username->fetch_assoc();
+
+    if (!empty($data_check_username)) {
+        $_SESSION['username_error'] = "Username is already taken. Try another one.";
+        header("Location: ../admin-admin/admin-admin.php?open_add_user=true");
+        die("WRONG username");
+    }
+    if (strlen($username) < 5) {
+        $_SESSION['username_error'] = "Username should be of length 5 minimum";
+        header("Location: ../admin-admin/admin-admin.php?open_add_user=true");
+        die("WRONG username");
+    }
+}
+
+if (isset($_POST["password"]) && $_POST["password"] != "") {
+    $password_text = $_POST["password"];
+    $_SESSION['password'] = $password_text;
+    if (strlen($password_text) < 8) {
+        $_SESSION['password_error'] = "Password should be of length 8 minimum";
+        header("Location: ../admin-admin/admin-admin.php?open_add_user=true");
+        die("WRONG password");
+    }
+    if (is_numeric($password_text)) {
+        $_SESSION['password_error'] = "Password should not be numeric, should contain characters";
+        header("Location: '../admin-admin/admin-admin.php?open_add_user=true");
+        die("WRONG password");
+    }
+    $password = hash("sha256", $password_text);
+}
+
+$mysql = $connection->prepare("INSERT INTO admins(first_name, last_name, email_address, phone_number, username, password) VALUES (?,?,?,?,?,?)");
+$mysql->bind_param("ssssss", $first_name, $last_name, $email, $phone_number, $username, $password);
+$mysql->execute();
+$mysql->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -133,7 +220,6 @@ $results_admins = $stmt_admins->get_result();
                 <label for="nav-toggle">
                     <span><i class="las la-bars"></i></span>
                 </label>
-
                 Admin Accounts
             </h2>
 
@@ -194,7 +280,6 @@ $results_admins = $stmt_admins->get_result();
                     <div class="card">
                         <div class="card-header">
                             <h3>List of Admin Accounts</h3>
-                            <!-- <button>See all <span class="las la-arrow-right"></span></button> -->
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -223,7 +308,6 @@ $results_admins = $stmt_admins->get_result();
                                         ?>
                                     </tbody>
                                 </table>
-                                <!-- <button class="add_user" id="add_user1" onclick="myFunction()">Add Admin Account</button> -->
                             </div>
                         </div>
                     </div>
@@ -232,7 +316,7 @@ $results_admins = $stmt_admins->get_result();
 
             <div id="id01" class="modal">
                 <span onclick="CloseAddUser()" class="close" title="Close Modal">&times;</span>
-                <form class="modal-content">
+                <form class="modal-content" action="../admin-admin/admin-admin.php" method="POST">
                     <div class="container">
                         <h1 class="title">Create New Admin Account</h1>
                         <p class="title">Please fill in this form to create a new admin account.</p>
@@ -322,24 +406,14 @@ $results_admins = $stmt_admins->get_result();
                         </div>
                     </div>
                 </form>
-
-
-
-
-
-
         </main>
     </div>
-
-
-
 
     <!-- started return to top button -->
     <button onclick="ReturnToTop()" id="TopBtn" title="Return to Top"><i class="fa fa-arrow-up"></i></button>
     <!-- ended return to top button -->
 
 </body>
-<script src="../profile/profile.js"></script>
 <script src="../admin-admin/admin-admin.js"></script>
 <script>
 

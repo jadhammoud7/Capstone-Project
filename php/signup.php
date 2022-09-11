@@ -110,14 +110,11 @@ $mysql->execute();
 $mysql->close();
 // header("Location:../home-page/home-page.php");
 
-
-
 //getting the id of this user to that when he/she has signed up there id will be saved
 $statement1 = $connection->prepare("SELECT customer_id FROM customers WHERE username = '" . $username . "' ");
 $statement1->execute();
 $statement_result1 = $statement1->get_result();
 $data1 = $statement_result1->fetch_assoc();
-
 
 $logged_id1 = $data1['customer_id'];
 $_SESSION['logged_id'] = $logged_id1;
