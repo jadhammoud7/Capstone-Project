@@ -259,7 +259,7 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
                 </div>
             </div>
 
-            <div class="container_top" id="container1">
+            <div id="id01" class="modal">
                 <span onclick="CloseAddUser()" class="close" title="Close Modal">&times;</span>
                 <form class="modal-content">
                     <div class="container">
@@ -367,10 +367,6 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 
                         <div class="clearfix">
-                            <a href="../home-page/home-page.php">
-                                <button type="button" class="cancelbtn" title="Return to Home Page">Back to
-                                    Home</button>
-                            </a>
                             <button type="submit" class="signupbtn" title="Sign Up"><strong>Sign Up</strong></button>
                         </div>
                     </div>
@@ -379,40 +375,6 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 
 
-
-                <!-- testing -->
-                <!-- <div class="container"  id="container1">
-                <span onclick="CloseAddUser()" class="close" title="Close Modal">&times;</span>
-                <form>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="fname">First Name</label>
-                        </div>
-                        <div class="col-75">
-                            <input type="text" id="fname" name="firstname" placeholder="Your first name..">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="lname">Last Name</label>
-                        </div>
-                        <div class="col-75">
-                            <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="lname">Last Name</label>
-                        </div>
-                        <div class="col-75">
-                            <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <input type="submit" value="Submit">
-                    </div>
-                </form>
-            </div> -->
 
 
         </main>
@@ -429,23 +391,7 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 <script src="../profile/profile.js"></script>
 <script src="../admin-admin/admin-admin.js"></script>
 <script>
-    // function myFunction() {
-    //     if(document.getElementById("add_user1").innerHTML=="Add Admin Account"){
-    //         document.getElementById("add_user1").innerHTML="Return";
-    //         document.getElementById("add_user1").style.background="red";
-    //         document.getElementById("add_user1").style.color="black";
-    //         document.getElementById("container1").style.display = "block";
-    //         document.getElementById("add_user1").style.border="1px solid red";
-    //     }else{
-    //         document.getElementById("add_user1").innerHTML="Add Admin Account";
-    //         document.getElementById("add_user1").style.background="royalblue";
-    //         document.getElementById("add_user1").style.color="white";
-    //         document.getElementById("container1").style.display = "none";
-    //         document.getElementById("add_user1").style.border="1px solid royalblue";
 
-    //     }
-
-    //   }
 </script>
 
 </html>

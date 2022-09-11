@@ -516,49 +516,17 @@
 
 
 
-  /* old form */
-  /* input[type=text], select, textarea {
-    width: 90%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical;
-  }
   
-  label {
-    padding: 12px 12px 12px 0;
-    display: inline-block;
-  }
-  
-  input[type=submit] {
-    background-color: #04AA6D;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    float: right;
-    margin-right: 125px;
-  }
-  
-  input[type=submit]:hover {
-    background-color: #45a049;
-  } */
-  
-  .container_top {
-    /* border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-    display: none; */
+  .modal {
     display: none;
     position: fixed;
     z-index: 1;
     left: 0;
-    top: 100px;
+    top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color:white;
+    background-color: rgba(0, 0, 0, 0.4);
     padding-top: 60px;
   }
   .close {
@@ -571,33 +539,6 @@
     color: red;
   }
   
-  /* .col-25 {
-    float: left;
-    width: 25%;
-    margin-top: 6px;
-  }
-  
-  .col-75 {
-    float: left;
-    width: 75%;
-    margin-top: 6px;
-  }
-  
-  /* Clear floats after the columns */
-  /* .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  
-  /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-  /* @media screen and (max-width: 600px) {
-    .col-25, .col-75, input[type=submit] {
-      width: 100%;
-      margin-top: 0;
-    }
-  }  */
-
 
 
 
@@ -651,143 +592,141 @@
     opacity: 1;
   }
   
-/* Extra styles for the cancel button */
-.cancelbtn {
-  padding: 14px 20px;
-  background-color: #f44336;
-  color: black;
-  border-radius: 20px;
-}
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn {
-  float: left;
-  width: 45%;
-}
-
-.signupbtn {
-  float: right;
-  width: 45%;
-  border-radius: 20px;
-  color: black;
-}
-
-/* Add padding to container elements */
-.container {
-  padding: 16px;
-}
-
-.container p {
-  color: royalblue;
-}
-
-/* The Modal (background) */
-.modal {
-  background-image: url(../images/wallpaper3.jpg);
-  position: fixed;
-  /* Stay in place */
-  z-index: 1;
-  /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%;
-  /* Full width */
-  height: 100%;
-  /* Full height */
-  overflow: auto;
-  /* Enable scroll if needed */
-  background-color: #474e5d;
-  padding-top: 50px;
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin-left:400px;
-  /* 5% from the top, 15% from the bottom and centered */
-  border: 1px solid #888;
-  width: 60%;
-  /* Could be more or less, depending on screen size */
-  border-radius: 50px;
-}
-
-/* Style the horizontal ruler */
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
-
-/* The Close Button (x) */
-.close {
-  position: absolute;
-  right: 35px;
-  top: 15px;
-  font-size: 40px;
-  font-weight: bold;
-  color: red;
-}
-
-.close:hover,
-.close:focus {
-  color: red;
-  cursor: pointer;
-}
-
-.clearfix {
-  padding-bottom: 30px;
-}
-
-/* Clear floats */
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-.error {
-  background: #f2dede;
-  color: #a94442 !important;
-  padding: 10px;
-  width: 95%;
-  border-radius: 5px;
-  margin: 20px auto;
-}
-
-#first_name_error {
-  display: none;
-}
-
-#last_name_error {
-  display: none;
-}
-
-#email_error {
-  display: none;
-}
-#phone_number_error {
-  display: none;
-}
-#address_error {
-  display: none;
-}
-
-#username_error {
-  display: none;
-}
-
-#password_error {
-  display: none;
-}
-
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-
-  .cancelbtn,
-  .signupbtn {
-    width: 100%;
+  /* Extra styles for the cancel button */
+  .cancelbtn {
+    padding: 14px 20px;
+    background-color: #f44336;
+    color: black;
+    border-radius: 20px;
   }
-}
-
-.title {
-  text-align: center;
-}
+  
+  /* Float cancel and signup buttons and add an equal width */
+  .cancelbtn {
+    float: left;
+    width: 45%;
+  }
+  
+  .signupbtn {
+    width: 45%;
+    border-radius: 20px;
+    color: black;
+  }
+  
+  /* Add padding to container elements */
+  .container {
+    padding: 16px;
+  }
+  
+  .container p {
+    color: royalblue;
+  }
+  
+  /* The Modal (background) */
+  .modal {
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 50px;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.695);
+    padding-top: 50px;
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% 25%;
+    /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 60%;
+    /* Could be more or less, depending on screen size */
+    border-radius: 50px;
+  }
+  
+  /* Style the horizontal ruler */
+  hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+  }
+  
+  /* The Close Button (x) */
+  .close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: red;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: red;
+    cursor: pointer;
+  }
+  
+  .clearfix {
+    padding-bottom: 30px;
+  }
+  
+  /* Clear floats */
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .error {
+    background: #f2dede;
+    color: #a94442 !important;
+    padding: 10px;
+    width: 95%;
+    border-radius: 5px;
+    margin: 20px auto;
+  }
+  
+  #first_name_error {
+    display: none;
+  }
+  
+  #last_name_error {
+    display: none;
+  }
+  
+  #email_error {
+    display: none;
+  }
+  #phone_number_error {
+    display: none;
+  }
+  #address_error {
+    display: none;
+  }
+  
+  #username_error {
+    display: none;
+  }
+  
+  #password_error {
+    display: none;
+  }
+  
+  /* Change styles for cancel button and signup button on extra small screens */
+  @media screen and (max-width: 300px) {
+  
+    .cancelbtn,
+    .signupbtn {
+      width: 100%;
+    }
+  }
+  
+  .title {
+    text-align: center;
+  }
