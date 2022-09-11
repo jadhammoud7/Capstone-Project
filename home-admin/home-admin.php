@@ -59,7 +59,6 @@ $stmt_get_latest_customer->execute();
 $results_get_latest_customer = $stmt_get_latest_customer->get_result();
 
 
-
 //updating working status from buttons
 if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
     $working_status = $_GET['set_to_done'];
@@ -284,11 +283,6 @@ $results_comment = $stmt_comment->get_result();
                 </div>
             </div>
 
-
-
-
-
-
             <div class="recent-grid">
                 <div class="projects">
                     <div class="card">
@@ -320,9 +314,6 @@ $results_comment = $stmt_comment->get_result();
             </div>
         </main>
     </div>
-
-
-
 
     <!-- started return to top button -->
     <button onclick="ReturnToTop()" id="TopBtn" title="Return to Top"><i class="fa fa-arrow-up"></i></button>

@@ -7,7 +7,7 @@ if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
 $customerid = $_SESSION['logged_id'];
-$query = "SELECT first_name, last_name  from customers WHERE customer_id = $customerid";
+$query = "SELECT first_name, last_name from customers WHERE customer_id = $customerid";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
@@ -43,8 +43,12 @@ $stmt_total_checkouts->execute();
 $results_total_checkouts = $stmt_total_checkouts->get_result();
 $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
-
-
+//get all customer
+require_once("../php/admin_page_php.php");
+$query_admins = "SELECT admin_id, first_name, last_name, email_address, phone_number, username, password FROM admins";
+$stmt_admins = $connection->prepare($query_admins);
+$stmt_admins->execute();
+$results_admins = $stmt_admins->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +62,7 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="../admin-admin/admin-admin.css">
-    <title>Home Admin - Newbies Gamers</title>
+    <title>Admin | Admin Accounts - Newbies Gamers</title>
 </head>
 
 <body onunload="myFunction()">
@@ -130,7 +134,7 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
                     <span><i class="las la-bars"></i></span>
                 </label>
 
-                Dashboard
+                Admin Accounts
             </h2>
 
             <div class="user-wrapper">
@@ -181,11 +185,15 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
                     </div>
                 </div>
             </div>
+
+            <div class="card-single add_admin">
+                <button class="add_user" id="add_user1" onclick="OpenAddUser()" title="Add new admin account, such as employee or owner account"><span class="las la-plus"></span>Add Admin Account</button>
+            </div>
             <div class="recent-grid">
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Recent Appointments</h3>
+                            <h3>List of Admin Accounts</h3>
                             <!-- <button>See all <span class="las la-arrow-right"></span></button> -->
                         </div>
                         <div class="card-body">
@@ -193,66 +201,29 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
                                 <table width="100%">
                                     <thead>
                                         <tr>
-                                            <td>Customer Name</td>
+                                            <td>Name</td>
                                             <td>Username</td>
-                                            <td>Email</td>
+                                            <td>Email Address</td>
                                             <td>Phone Number</td>
-                                            <td>Address</td>
-                                            <td>Date of Birth</td>
-                                            <td>Remove Customer</td>
+                                            <td>Remove Admin</td>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>g</td>
-                                            <td>f</td>
-                                            <td>g</td>
-                                            <td>f</td>
-                                            <td>g</td>
-                                            <td>f</td>
-                                            <td>g</td>
-                                        </tr>
-                                        <tr>
-                                            <td>g</td>
-                                            <td>f</td>
-                                            <td>g</td>
-                                            <td>f</td>
-                                            <td>g</td>
-                                            <td>f</td>
-                                            <td>g</td>
-                                        </tr>
-                                        <tr>
-                                            <td>g</td>
-                                            <td>f</td>
-                                            <td>g</td>
-                                            <td>f</td>
-                                            <td>g</td>
-                                            <td>f</td>
-                                            <td>g</td>
-                                        </tr>
-                                        <tr>
-                                            <td>g</td>
-                                            <td>f</td>
-                                            <td>g</td>
-                                            <td>f</td>
-                                            <td>g</td>
-                                            <td>f</td>
-                                            <td>g</td>
-                                        </tr>
-                                        <tr>
-                                            <td>g</td>
-                                            <td>f</td>
-                                            <td>g</td>
-                                            <td>f</td>
-                                            <td>g</td>
-                                            <td>f</td>
-                                            <td>g</td>
-                                        </tr>
-
+                                        <?php
+                                        while ($row_admin = $results_admins->fetch_assoc()) {
+                                            get_all_admins_connection(
+                                                $row_admin['admin_id'],
+                                                $row_admin['first_name'],
+                                                $row_admin['last_name'],
+                                                $row_admin['username'],
+                                                $row_admin['email_address'],
+                                                $row_admin['phone_number']
+                                            );
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
                                 <!-- <button class="add_user" id="add_user1" onclick="myFunction()">Add Admin Account</button> -->
-                                <button class="add_user" id="add_user1" onclick="OpenAddUser()">Add Admin Account</button>
                             </div>
                         </div>
                     </div>

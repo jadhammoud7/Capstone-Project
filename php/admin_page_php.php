@@ -40,7 +40,7 @@ function latest_customers_connection($username, $email)
     ";
     echo $element;
 }
-function get_comments_connection($username,$comment)
+function get_comments_connection($username, $comment)
 {
     $element = "
     <tr class=\"hello\">
@@ -50,7 +50,7 @@ function get_comments_connection($username,$comment)
     ";
     echo $element;
 }
-function get_all_customer_connection($customer_id,$first_name,$last_name,$username,$email,$phone_number,$address,$date_of_birth)
+function get_all_customer_connection($customer_id, $first_name, $last_name, $username, $email, $phone_number, $address, $date_of_birth)
 {
     $element = "
     <tr>
@@ -67,5 +67,23 @@ function get_all_customer_connection($customer_id,$first_name,$last_name,$userna
 
 </tr>
     ";
+    echo $element;
+}
+
+function get_all_admins_connection($admin_id, $admin_first_name, $admin_last_name, $admin_name, $email_address, $phone_number)
+{
+    $element = "
+    <tr>
+        <td>$admin_first_name $admin_last_name</td>
+        <td>$admin_name</td>
+        <td>$email_address</td>
+        <td>$phone_number</td>
+        <td>
+            <a href=\"../admin-admin/admin-admin.php?getAdminIDtoRemove=$admin_id\">
+                <button class=\"remove_cust\">Remove</button>
+            </a>
+        </td>
+    </tr>";
+
     echo $element;
 }
