@@ -70,7 +70,7 @@ input[type=date]:hover {
 }
 
 /* Set a style for all buttons */
-button {
+button.add_user, button .add_admin{
   background-color: royalblue;
   color: white;
   padding: 14px 20px;

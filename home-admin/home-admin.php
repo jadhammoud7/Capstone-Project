@@ -336,7 +336,7 @@ $results_comment = $stmt_comment->get_result();
     <!-- ended return to top button -->
 
 </body>
-<script src="../home-admin/home_admin.js"></script>
+<script src="home_admin.js"></script>
+<script src="../admin-main/admin-main.js"></script>
 
 </html>
-</php>

@@ -509,6 +509,25 @@ tr:nth-child(even) {
     padding: .5rem;
 }
 
+#TopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: rgba(65, 105, 225, 0.6);
+    color: #fefefe;
+    padding: 15px;
+    border-radius: 4px;
+    align-items: center;
+}
+
+#TopBtn:hover {
+    background-color: royalblue;
+}
+
 /* started popup design */
 .popup {
     width: 400px;

@@ -263,6 +263,6 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
 
 </body>
 <script src="customer-admin.js"></script>
+<script src="../admin-main/admin-main.js"></script>
 
 </html>
-</php>

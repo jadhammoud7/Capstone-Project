@@ -431,10 +431,7 @@ $mysql->close();
     <!-- ended return to top button -->
 
 </body>
-<script src="../admin-admin/admin-admin.js"></script>
-<script>
-
-</script>
+<script src="admin-admin.js"></script>
+<script src="../admin-main/admin-main.js"></script>
 
 </html>
-</php>
