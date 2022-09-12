@@ -79,7 +79,7 @@ function get_all_customer_connection($customer_id, $first_name, $last_name, $use
         <td>$date_of_birth</td>
         <td>
         <a>
-            <button class=\"remove_cust\" onclick=\"OpenRemoveCustomerPopUp($customer_id, `$first_name`, `$last_name`)\">Remove</button>
+            <button class=\"remove_cust\" onclick=\"OpenRemoveCustomerPopUp($customer_id, `$first_name`, `$last_name`)\" title=\"Remove customer '$first_name $last_name'?\">Remove</button>
         </a>
     </tr>
     ";
@@ -95,8 +95,8 @@ function get_all_admins_connection($admin_id, $admin_first_name, $admin_last_nam
         <td>$email_address</td>
         <td>$phone_number</td>
         <td>
-            <a href=\"../admin-admin/admin-admin.php?getAdminIDtoRemove=$admin_id\">
-                <button class=\"remove_cust\">Remove</button>
+            <a>
+                <button class=\"remove_cust\" onclick=\"OpenRemoveAdminPopUp($admin_id, `$admin_first_name`, `$admin_last_name`)\" title=\"Remove admin '$admin_first_name $admin_last_name'?\">Remove</button>
             </a>
         </td>
     </tr>";

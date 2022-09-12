@@ -156,12 +156,13 @@ $mysql->close();
 <body onunload="myFunction()">
 
     <!-- started popup message login successful -->
-    <!-- <div class="popup" id="login-confirmation">
-        <img src="../images/tick.png" alt="successfully logged in">
-        <h2>Login Successful</h2>
-        <p>Welcome to Newbies Gamers</p>
-        <button type="button" onclick="RemoveLogInPopUp()">OK</button>
-    </div> -->
+    <div class="popup" id="remove-confirmation">
+        <img src="../images/question-mark.png" alt="remove confirmation">
+        <h2>Delete Confirmation</h2>
+        <p id="remove-confirmation-text"></p>
+        <button type="button" onclick="DeleteAdmin()">YES</button>
+        <button type="button" onclick="CloseRemoveAdminPopUp()">NO</button>
+    </div>
 
     <!-- started popup message logout -->
     <div class="popup" id="logout-confirmation">
@@ -292,7 +293,7 @@ $mysql->close();
             <div class="card-single add_admin">
                 <button class="add_user" id="add_user1" onclick="OpenAddUser()" title="Add new admin account, such as employee or owner account"><span class="las la-plus"></span>Add Admin Account</button>
             </div>
-            <div class="recent-grid">
+            <div class="recent-grid" style="display: block !important;">
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
