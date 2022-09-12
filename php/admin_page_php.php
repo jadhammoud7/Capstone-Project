@@ -78,8 +78,8 @@ function get_all_customer_connection($customer_id, $first_name, $last_name, $use
         <td>$address</td>
         <td>$date_of_birth</td>
         <td>
-        <a href=\"../customer-admin/customer-admin.php?getCustomerIDtoRemove=$customer_id\">
-            <button class=\"remove_cust\">Remove</button>
+        <a>
+            <button class=\"remove_cust\" onclick=\"OpenRemoveCustomerPopUp($customer_id, `$first_name`, `$last_name`)\">Remove</button>
         </a>
     </tr>
     ";

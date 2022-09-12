@@ -79,12 +79,13 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
 <body onunload="myFunction()">
 
     <!-- started popup message login successful -->
-    <!-- <div class="popup" id="login-confirmation">
-        <img src="../images/tick.png" alt="successfully logged in">
-        <h2>Login Successful</h2>
-        <p>Welcome to Newbies Gamers</p>
-        <button type="button" onclick="RemoveLogInPopUp()">OK</button>
-    </div> -->
+    <div class="popup" id="remove-confirmation">
+        <img src="../images/question-mark.png" alt="remove confirmation">
+        <h2>Delete Confirmation</h2>
+        <p id="remove-confirmation-text"></p>
+        <button type="button" onclick="DeleteCustomer()">YES</button>
+        <button type="button" onclick="CloseRemoveCustomerPopUp()">NO</button>
+    </div>
 
     <!-- started popup message logout -->
     <div class="popup" id="logout-confirmation">
