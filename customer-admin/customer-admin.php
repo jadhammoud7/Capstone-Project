@@ -106,37 +106,37 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="../home-admin/home-admin.php">
+                    <a href="../home-admin/home-admin.php" id="dashboard-link">
                         <span class="las la-igloo" class="active"></span>
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../customer-admin/customer-admin.php">
+                    <a href="../customer-admin/customer-admin.php" id="customers-link">
                         <span class="las la-users"></span>
                         <span>Customers</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="" id="appointments-link">
                         <span class="las la-clipboard-list"></span>
                         <span>Appointments</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="" id="checkouts-link">
                         <span class="las la-receipt"></span>
                         <span>Checkouts</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="" id="products-link">
                         <span class="la la-product-hunt"></span>
                         <span>Products</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../admin-admin/admin-admin.php">
+                    <a href="../admin-admin/admin-admin.php" id="admins-link">
                         <span class="las la-user-circle"></span>
                         <span>Admin Accounts</span>
                     </a>
