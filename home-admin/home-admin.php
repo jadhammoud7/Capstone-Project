@@ -58,6 +58,13 @@ $stmt_get_latest_customer = $connection->prepare($query_get_latest_customer);
 $stmt_get_latest_customer->execute();
 $results_get_latest_customer = $stmt_get_latest_customer->get_result();
 
+//getting latest admins added to us
+require_once("../php/admin_page_php.php");
+$query_get_latest_admins = "SELECT first_name, last_name, email_address FROM admins ORDER BY admin_id DESC LIMIT 5";
+$stmt_get_latest_admins = $connection->prepare($query_get_latest_admins);
+$stmt_get_latest_admins->execute();
+$results_get_latest_admins = $stmt_get_latest_admins->get_result();
+
 
 //updating working status from buttons
 if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
@@ -324,6 +331,21 @@ $results_comment = $stmt_comment->get_result();
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="customers">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Latest Admins</h3>
+                            <button onclick="window.location.href = '../admin-admin/admin-admin.php';" title="Go To See the list of all admins accounts created">See all <span class="las la-arrow-right"></span></button>
+                        </div>
+                        <div class="card-body">
+                            <?php
+                            while ($row_get_latest_admins = $results_get_latest_admins->fetch_assoc()) {
+                                latest_admins_connection($row_get_latest_admins['first_name'], $row_get_latest_admins['last_name'], $row_get_latest_admins['email_address']);
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
