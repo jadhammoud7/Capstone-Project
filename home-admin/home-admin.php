@@ -22,6 +22,13 @@ $results_total_customers = $stmt_total_customers->get_result();
 $row_total_customers = $results_total_customers->fetch_assoc();
 
 
+//sum of all admins
+$query_total_admins = "SELECT COUNT(admin_id) as count FROM admins";
+$stmt_total_admins = $connection->prepare($query_total_admins);
+$stmt_total_admins->execute();
+$results_total_admins = $stmt_total_admins->get_result();
+$row_total_admins = $results_total_admins->fetch_assoc();
+
 //count of all appointments
 $query_total_appointments = "SELECT COUNT(appointment_id) as total_appointments FROM appointments";
 $stmt_total_appointments = $connection->prepare($query_total_appointments);
@@ -105,6 +112,7 @@ $results_comment = $stmt_comment->get_result();
     <link rel="stylesheet" href="home-admin.css">
     <link rel="stylesheet" href="../admin-main/admin-main.css">
     <title>Home Admin - Newbies Gamers</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 
 <body onunload="myFunction()">
@@ -350,6 +358,8 @@ $results_comment = $stmt_comment->get_result();
                     </div>
                 </div>
             </div>
+
+            <canvas id="myChart" style="width: 100%; max-width: 600px;"></canvas>
         </main>
     </div>
 
@@ -360,5 +370,30 @@ $results_comment = $stmt_comment->get_result();
 </body>
 <script src="home_admin.js"></script>
 <script src="../admin-main/admin-main.js"></script>
+<script>
+    var xValues = ["Customers", "Admins"];
+    var yValues = [<?php echo $row_total_customers['count']; ?>, <?php echo $row_total_admins['count']; ?>];
+    var barColors = [
+        "#b91d47",
+        '#00aba9'
+    ]
+
+    new Chart("myChart", {
+        type: "pie",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Distribution of All Accounts"
+            }
+        }
+    });
+</script>
 
 </html>

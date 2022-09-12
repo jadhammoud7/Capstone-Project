@@ -69,8 +69,10 @@ input[type=date]:hover {
   outline: none;
 }
 
+
 /* Set a style for all buttons */
-button.add_user, button .add_admin{
+button.add_user,
+button .add_admin {
   background-color: royalblue;
   color: white;
   padding: 14px 20px;
@@ -85,7 +87,7 @@ button:hover {
   opacity: 1;
 }
 
-.add_admin{
+.add_admin {
   margin-top: 50px;
 }
 
@@ -107,6 +109,22 @@ button:hover {
   width: 45%;
   border-radius: 20px;
   color: black;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: royalblue;
+  color: #fefefe;
+  padding: 12px 20px;
+  margin-top: 6px;
+  border: none;
+  cursor: pointer;
+  align-items: flex-start;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
 }
 
 /* Add padding to container elements */
