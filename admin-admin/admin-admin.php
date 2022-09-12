@@ -149,7 +149,7 @@ $mysql->close();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="admin-admin.css">
-    <link rel="stylesheet" href="../home-admin/home-admin.css">
+    <link rel="stylesheet" href="../admin-main/admin-main.css">
     <title>Admin | Admin Accounts - Newbies Gamers</title>
 </head>
 
