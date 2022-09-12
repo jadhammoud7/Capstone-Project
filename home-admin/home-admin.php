@@ -45,7 +45,7 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 //getting appointments
 require_once("../php/admin_page_php.php");
-$query_get_appointments = "SELECT appointment_id, customer_id, appointment_name, date, hour, status FROM appointments";
+$query_get_appointments = "SELECT appointment_id, customer_id, appointment_name, date, hour, status FROM appointments ORDER BY appointment_id DESC LIMIT 5";
 $stmt_get_appointments = $connection->prepare($query_get_appointments);
 $stmt_get_appointments->execute();
 $results_get_appointments = $stmt_get_appointments->get_result();
@@ -79,7 +79,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
     }
 }
 //get all comments
-$query_comment = "SELECT username,comment  from comments";
+$query_comment = "SELECT username,comment FROM comments";
 $stmt_comment = $connection->prepare($query_comment);
 $stmt_comment->execute();
 $results_comment = $stmt_comment->get_result();
@@ -241,7 +241,7 @@ $results_comment = $stmt_comment->get_result();
                     <div class="card">
                         <div class="card-header">
                             <h3>Recent Appointments</h3>
-                            <button onclick="window.location.href = '../appointments-admin/appointments-admin.php'">See all <span class="las la-arrow-right"></span></button>
+                            <button onclick="window.location.href = '../appointments-admin/appointments-admin.php'" title="Go To See the list of all appointments requested by your customers">See all <span class="las la-arrow-right"></span></button>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -286,7 +286,7 @@ $results_comment = $stmt_comment->get_result();
                     <div class="card">
                         <div class="card-header">
                             <h3>Latest Customers</h3>
-                            <button onclick="window.location.href = '../customer-admin/customer-admin.php';">See all <span class="las la-arrow-right"></span></button>
+                            <button onclick="window.location.href = '../customer-admin/customer-admin.php';" title="Go To See the list of all customers accounts created">See all <span class="las la-arrow-right"></span></button>
                         </div>
                         <div class="card-body">
                             <?php
