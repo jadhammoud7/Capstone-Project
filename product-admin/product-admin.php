@@ -64,6 +64,7 @@ $results_products = $stmt_products->get_result();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="../admin-main/admin-main.css">
+    <link rel="stylesheet" href="../product-admin/product-admin.css">
     <title>Admin | Appointments - Newbies Gamers</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
@@ -198,6 +199,9 @@ $results_products = $stmt_products->get_result();
             <!-- <div>
                 <canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
             </div> -->
+            <div class="card-single add_admin">
+                <button class="add_product" id="add_user1" onclick="OpenAddUser()" title="Add a new product"><span class="las la-plus"></span>Add Product</button>
+            </div>
             <div class="recent-grid" style="display: block !important;">
                 <div class="projects">
                     <div class="card">

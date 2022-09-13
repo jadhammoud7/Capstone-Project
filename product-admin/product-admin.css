@@ -1,0 +1,21 @@
+.add_product {
+    background-color: var(--main-color);
+    border: solid 1px royalblue;
+    border-radius: 10px;
+    color: white;
+    font-weight: 100;
+    font-size: 1rem;
+    padding: .5rem;
+    margin-top: 10px;
+  }
+  button.add_product,
+button .add_admin {
+  background-color: royalblue;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
