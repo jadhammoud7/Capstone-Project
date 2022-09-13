@@ -111,7 +111,7 @@ $results_comment = $stmt_comment->get_result();
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="home-admin.css">
     <link rel="stylesheet" href="../admin-main/admin-main.css">
-    <title>Home Admin - Newbies Gamers</title>
+    <title>Admin | Home - Newbies Gamers</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 
@@ -359,7 +359,53 @@ $results_comment = $stmt_comment->get_result();
                 </div>
             </div>
 
-            <canvas id="myChart" style="width: 100%; max-width: 600px;"></canvas>
+            <div class="recent-grid">
+                <div class="projects">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Recent Checkouts Orders</h3>
+                            <button onclick="window.location.href='../checkouts-admin/checkouts-admin.php';">See all <span class="las la-arrow-right"></span></button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <td>Customer Name</td>
+                                            <td>Email</td>
+                                            <td>Phone Number</td>
+                                            <td>Shipping Country</td>
+                                            <td>Shipping Location</td>
+                                            <td>Shipping Company</td>
+                                            <td>PostCode</td>
+                                            <td>Order Notes</td>
+                                            <td>Total Price</td>
+                                            <td>Tax Price</td>
+                                            <td>Total Price Inc. Tax</td>
+                                            <td>Date</td>
+                                            <td>Status</td>
+                                            <td>Change Status</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        while ($row_comment = $results_comment->fetch_assoc()) {
+                                            get_comments_connection($row_comment['username'], $row_comment['comment']);
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="customers">
+                    <div class="card">
+                        <canvas id="myChart" style="width: 100%; max-width: 600px;"></canvas>
+                    </div>
+                </div>
+            </div>
+
         </main>
     </div>
 
