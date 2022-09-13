@@ -44,12 +44,30 @@ $results_total_checkouts = $stmt_total_checkouts->get_result();
 $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 
-//get all customer
+//get all appointments
 require_once("../php/admin_page_php.php");
 $query_appointments = "SELECT appointment_id, customer_id, appointment_name, date, hour, status FROM appointments";
 $stmt_appointments = $connection->prepare($query_appointments);
 $stmt_appointments->execute();
 $results_appointments = $stmt_appointments->get_result();
+
+//get count of appointments pending
+$status = "Pending";
+$query_get_pending_appointments = "SELECT COUNT(*) as total_pending_appointments FROM appointments WHERE status=?";
+$stmt_get_pending_appointments = $connection->prepare($query_get_pending_appointments);
+$stmt_get_pending_appointments->bind_param("s", $status);
+$stmt_get_pending_appointments->execute();
+$results_get_pending_appointments = $stmt_get_pending_appointments->get_result();
+$row_get_pending_appointments = $results_get_pending_appointments->fetch_assoc();
+
+//get count of appointments done work
+$status = "Done Work";
+$query_get_done_appointments = "SELECT COUNT(*) as total_done_appointments FROM appointments WHERE status=?";
+$stmt_get_done_appointments = $connection->prepare($query_get_done_appointments);
+$stmt_get_done_appointments->bind_param("s", $status);
+$stmt_get_done_appointments->execute();
+$results_get_done_appointments = $stmt_get_done_appointments->get_result();
+$row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
 
 //updating working status from buttons
 if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
@@ -85,6 +103,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="../admin-main/admin-main.css">
     <title>Admin | Appointments - Newbies Gamers</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 
 <body onunload="myFunction()">
@@ -214,6 +233,9 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
                     </div>
                 </div>
             </div>
+            <div>
+                <canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
+            </div>
             <div class="recent-grid" style="display: block !important;">
                 <div class="projects">
                     <div class="card">
@@ -269,5 +291,30 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
 </body>
 <script src="appointments-admin.js"></script>
 <script src="../admin-main/admin-main.js"></script>
+<script>
+    var xValues = ["Pending Appointments", "Done Appointments"];
+    var yValues = [<?php echo $row_get_pending_appointments['total_pending_appointments']; ?>, <?php echo $row_get_done_appointments['total_done_appointments']; ?>]
+    var barColors = [
+        "#b91d47",
+        "#00aba9"
+    ]
+
+    new Chart("myChart", {
+        type: "pie",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Distribution of All Appointments"
+            }
+        }
+    });
+</script>
 
 </html>
