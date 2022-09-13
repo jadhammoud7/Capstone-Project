@@ -87,3 +87,18 @@ else {
     admins_link.style.paddingBottom = '0px';
 }
 
+if (window.location.href.includes('appointments-admin')) {
+    appointments_link.style.backgroundColor = '#fff';
+    appointments_link.style.color = 'var(--main-color)';
+    appointments_link.style.borderRadius = '20px';
+    appointments_link.style.paddingTop = '10px';
+    appointments_link.style.paddingBottom = '10px';
+}
+else {
+    appointments_link.style.backgroundColor = 'var(--main-color)';
+    appointments_link.style.color = '#fff';
+    appointments_link.style.borderRadius = '0px';
+    appointments_link.style.paddingTop = '0px';
+    appointments_link.style.paddingBottom = '0px';
+}
+

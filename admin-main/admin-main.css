@@ -468,7 +468,7 @@ tr td:last-child {
 }
 
 td .btn_done_work {
-
+    cursor: pointer;
     background: var(--main-color);
     border-radius: 10px;
     color: #fff;
