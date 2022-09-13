@@ -136,6 +136,16 @@ $mysql->bind_param("ssssss", $first_name, $last_name, $email, $phone_number, $us
 $mysql->execute();
 $mysql->close();
 
+
+
+//delete customer
+if (isset($_GET['getAdminIDtoRemove'])) {
+    $remove_admin = $_GET['getAdminIDtoRemove'];
+    $query_delete_admin = "DELETE FROM admins WHERE admin_id='" . $remove_admin . "' ";
+    $stmt_delete_admin = $connection->prepare($query_delete_admin);
+    $stmt_delete_admin->execute();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -433,7 +443,7 @@ $mysql->close();
     <!-- ended return to top button -->
 
 </body>
-<script src="admin-admin.js"></script>
+<script src="../admin-admin/admin-admin.js"></script>
 <script src="../admin-main/admin-main.js"></script>
 
 </html>

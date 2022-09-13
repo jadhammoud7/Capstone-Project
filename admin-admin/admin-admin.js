@@ -34,6 +34,6 @@ function CloseRemoveAdminPopUp(){
 }
 
 function DeleteAdmin(){
-    window.location.href = 'admin-admin.php?getAdminIDtoRemove' + admin_id;
+    window.location.href = '../admin-admin/admin-admin.php?getAdminIDtoRemove=' + admin_id;
     CloseRemoveAdminPopUp();
 }
