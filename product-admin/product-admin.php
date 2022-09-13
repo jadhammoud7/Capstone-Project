@@ -46,48 +46,10 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 //get all appointments
 require_once("../php/admin_page_php.php");
-$query_appointments = "SELECT appointment_id, customer_id, appointment_name, date, hour, status FROM appointments";
-$stmt_appointments = $connection->prepare($query_appointments);
-$stmt_appointments->execute();
-$results_appointments = $stmt_appointments->get_result();
-
-//get count of appointments pending
-$status = "Pending";
-$query_get_pending_appointments = "SELECT COUNT(*) as total_pending_appointments FROM appointments WHERE status=?";
-$stmt_get_pending_appointments = $connection->prepare($query_get_pending_appointments);
-$stmt_get_pending_appointments->bind_param("s", $status);
-$stmt_get_pending_appointments->execute();
-$results_get_pending_appointments = $stmt_get_pending_appointments->get_result();
-$row_get_pending_appointments = $results_get_pending_appointments->fetch_assoc();
-
-//get count of appointments done work
-$status = "Done Work";
-$query_get_done_appointments = "SELECT COUNT(*) as total_done_appointments FROM appointments WHERE status=?";
-$stmt_get_done_appointments = $connection->prepare($query_get_done_appointments);
-$stmt_get_done_appointments->bind_param("s", $status);
-$stmt_get_done_appointments->execute();
-$results_get_done_appointments = $stmt_get_done_appointments->get_result();
-$row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
-
-//updating working status from buttons
-if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
-    $working_status = $_GET['set_to_done'];
-    $appointmentID = $_GET['getAppointmentID'];
-    $status = "";
-    if ($working_status == "true") {
-        $status = "Done Work";
-        $query_settodone = $connection->prepare("UPDATE appointments SET status=? WHERE appointment_id='" . $appointmentID . "'");
-        $query_settodone->bind_param("s", $status);
-        $query_settodone->execute();
-        header("Location:../appointments-admin/appointments-admin.php");
-    } else if ($working_status == "false") {
-        $status = "Pending";
-        $query_settodone = $connection->prepare("UPDATE appointments SET status=? WHERE appointment_id='" . $appointmentID . "'");
-        $query_settodone->bind_param("s", $status);
-        $query_settodone->execute();
-        header("Location:../appointments-admin/appointments-admin.php");
-    }
-}
+$query_products = "SELECT name,price,type,category,description,age FROM products";
+$stmt_products = $connection->prepare($query_products);
+$stmt_products->execute();
+$results_products = $stmt_products->get_result();
 
 ?>
 
@@ -152,7 +114,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
                     </a>
                 </li>
                 <li>
-                    <a href="../product-admin/product-admin.php" id="products-link">
+                    <a href="" id="products-link">
                         <span class="la la-product-hunt"></span>
                         <span>Products</span>
                     </a>
@@ -233,45 +195,32 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
                     </div>
                 </div>
             </div>
-            <div>
+            <!-- <div>
                 <canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
-            </div>
+            </div> -->
             <div class="recent-grid" style="display: block !important;">
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Appointments List</h3>
+                            <h3>Products List</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table width="100%">
                                     <thead>
                                         <tr>
-                                            <td>Appointment Name</td>
-                                            <td>Customer Name</td>
-                                            <td>Date</td>
-                                            <td>Hour</td>
-                                            <td>Status</td>
-                                            <td>Change Status</td>
+                                            <td>Product Name</td>
+                                            <td>Price</td>
+                                            <td>Type</td>
+                                            <td>Category</td>
+                                            <td>Desciption</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        while ($row_appointments = $results_appointments->fetch_assoc()) {
-                                            $query_get_user = "SELECT first_name, last_name FROM customers WHERE customer_id = '" . $row_appointments['customer_id'] . "' ";
-                                            $stmt_get_user = $connection->prepare($query_get_user);
-                                            $stmt_get_user->execute();
-                                            $results_get_user = $stmt_get_user->get_result();
-                                            $row_get_user = $results_get_user->fetch_assoc();
-
-                                            echo get_appointment_in_admin_page_for_table_connection(
-                                                $row_appointments['appointment_id'],
-                                                $row_get_user['first_name'] . ' ' . $row_get_user['last_name'],
-                                                $row_appointments['appointment_name'],
-                                                $row_appointments['date'],
-                                                $row_appointments['hour'],
-                                                $row_appointments['status'],
-                                            );
+                                        while($row_products = $results_products->fetch_assoc()){
+                                            get_all_products($row_products['name'],$row_products['price'],
+                                            $row_products['category'],$row_products['type'],$row_products['description']);
                                         }
                                         ?>
                                     </tbody>
@@ -291,7 +240,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
 </body>
 <script src="appointments-admin.js"></script>
 <script src="../admin-main/admin-main.js"></script>
-<script>
+<!-- <script>
     var xValues = ["Pending Appointments", "Done Appointments"];
     var yValues = [<?php echo $row_get_pending_appointments['total_pending_appointments']; ?>, <?php echo $row_get_done_appointments['total_done_appointments']; ?>]
     var barColors = [
@@ -315,6 +264,6 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
             }
         }
     });
-</script>
+</script> -->
 
 </html>

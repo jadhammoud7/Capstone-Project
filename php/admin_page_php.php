@@ -107,3 +107,16 @@ function get_all_admins_connection($admin_id, $admin_first_name, $admin_last_nam
 function get_all_checkouts_connection($checkout_id, $customer_id, $first_name, $last_name, $email, $phone_number){
     
 }
+function get_all_products($name,$price,$type,$category,$description)
+{
+    $element = "
+    <tr class=\"hello\">
+    <td>$name</td>
+    <td>$price</td>
+    <td>$type</td>
+    <td>$category</td>
+    <td>$description</td>
+    </tr>
+    ";
+    echo $element;
+}
