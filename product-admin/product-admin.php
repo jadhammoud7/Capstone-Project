@@ -101,8 +101,8 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="../admin-main/admin-main.css">
-    <link rel="stylesheet" href="../product-admin/product-admin.css">
-    <title>Admin | Appointments - Newbies Gamers</title>
+    <link rel="stylesheet" href="product-admin.css">
+    <title>Admin | Products - Newbies Gamers</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 
@@ -152,7 +152,7 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
                     </a>
                 </li>
                 <li>
-                    <a href="" id="products-link">
+                    <a href="../product-admin/product-admin.php" id="products-link">
                         <span class="la la-product-hunt"></span>
                         <span>Products</span>
                     </a>
@@ -182,7 +182,7 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
                 <label for="nav-toggle">
                     <span><i class="las la-bars"></i></span>
                 </label>
-                Appointments List
+                Products List
             </h2>
 
             <div class="user-wrapper">
@@ -287,27 +287,27 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
                         <hr>
 
                         <label for="product_name"><b>Product Name</b></label>
-                        <input type="text" placeholder="Enter product's name" name="product_name" id="product_name" value="product_name" required />
+                        <input type="text" placeholder="Enter product's name" name="product_name" id="product_name" value="" required />
 
 
                         <label for="product_price"><b>Product Price</b></label>
-                        <input type="number" placeholder="Enter product's price" name="product_price" id="product_price" value="product_price" required>
+                        <input type="number" placeholder="Enter product's price" name="product_price" id="product_price" value="" required>
 
 
                         <label for="product_type"><b>Product Type</b></label>
-                        <input type="text" placeholder="Enter product's type" name="product_type" id="product_type" value="product_type" required>
+                        <input type="text" placeholder="Enter product's type" name="product_type" id="product_type" value="" required>
 
 
                         <label for="product_category"><b>Product Category</b></label>
-                        <input type="text" placeholder="Enter product's category " name="product_category" id="product_category" value="product_category" required> <br> <br>
+                        <input type="text" placeholder="Enter product's category " name="product_category" id="product_category" value="" required> <br> <br>
 
 
                         <label for="product_desciption"><b>Desciption</b></label>
-                        <input type="text" placeholder="Enter product's desciption" name="product_desciption" id="product_desciption" value="product_desciption" required>
+                        <input type="text" placeholder="Enter product's desciption" name="product_desciption" id="product_desciption" value="" required>
 
 
                         <label for="product_age"><b>Age Restriction</b></label>
-                        <input type="text" placeholder="Enter product's age restriction" name="product_age" id="product_age" value="product_age" required>
+                        <input type="text" placeholder="Enter product's age restriction" name="product_age" id="product_age" value="" required>
 
 
                         <div class="clearfix">

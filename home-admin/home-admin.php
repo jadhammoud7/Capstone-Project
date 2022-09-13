@@ -169,7 +169,7 @@ $results_comment = $stmt_comment->get_result();
                     </a>
                 </li>
                 <li>
-                    <a href="" id="products-link">
+                    <a href="../product-admin/product-admin.php" id="products-link">
                         <span class="la la-product-hunt"></span>
                         <span>Products</span>
                     </a>

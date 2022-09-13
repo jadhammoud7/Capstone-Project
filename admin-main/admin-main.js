@@ -102,3 +102,18 @@ else {
     appointments_link.style.paddingBottom = '0px';
 }
 
+if (window.location.href.includes('product-admin')) {
+    products_link.style.backgroundColor = '#fff';
+    products_link.style.color = 'var(--main-color)';
+    products_link.style.borderRadius = '20px';
+    products_link.style.paddingTop = '10px';
+    products_link.style.paddingBottom = '10px';
+}
+else {
+    products_link.style.backgroundColor = 'var(--main-color)';
+    products_link.style.color = '#fff';
+    products_link.style.borderRadius = '0px';
+    products_link.style.paddingTop = '0px';
+    products_link.style.paddingBottom = '0px';
+}
+
