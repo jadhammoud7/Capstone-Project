@@ -200,7 +200,7 @@ $results_products = $stmt_products->get_result();
                 <canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
             </div> -->
             <div class="card-single add_admin">
-                <button class="add_product" id="add_user1" onclick="OpenAddUser()" title="Add a new product"><span class="las la-plus"></span>Add Product</button>
+                <button class="add_product" id="add_user1" onclick="OpenAddProduct()" title="Add a new product"><span class="las la-plus"></span>Add Product</button>
             </div>
             <div class="recent-grid" style="display: block !important;">
                 <div class="projects">
@@ -234,6 +234,46 @@ $results_products = $stmt_products->get_result();
                     </div>
                 </div>
             </div>
+
+            <!-- adding form -->
+            <div id="id01" class="modal">
+                <span onclick="CloseAddProduct()" class="close" title="Close Modal">&times;</span>
+                <form class="modal-content" action="../product-admin/product-admin.php" method="POST">
+                    <div class="container">
+                        <h1 class="title">Create New Product</h1>
+                        <p class="title">Please fill in this form to add a new product.</p>
+                        <hr>
+
+                        <label for="first_name"><b>First Name</b></label>
+                        <input type="text" placeholder="Enter your first name" name="first_name" id="first_name" value="" required />
+
+
+                        <label for="last_name"><b>Last Name</b></label>
+                        <input type="text" placeholder="Enter your last name" name="last_name" id="last_name" value="" required>
+
+
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" placeholder="Enter Email" name="email" id="email" value="" required>
+
+
+                        <label for="phone_number"><b>Phone Number</b></label>
+                        <input type="text" placeholder="Enter your phone number" name="phone_number" id="phone_number" value="" required> <br> <br>
+
+
+                        <label for="username"><b>Username</b></label>
+                        <input type="text" placeholder="Enter username of your own" name="username" id="username" value="" required>
+
+
+                        <label for="password"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="password" id="password" value="" required>
+
+
+                        <div class="clearfix">
+                            <button type="submit" class="signupbtn" title="Add new admin user"><strong>Add Product</strong></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </main>
     </div>
 
@@ -242,7 +282,8 @@ $results_products = $stmt_products->get_result();
     <!-- ended return to top button -->
 
 </body>
-<script src="appointments-admin.js"></script>
+<script src="../product-admin/product-admin.js"></script>
+
 <script src="../admin-main/admin-main.js"></script>
 <!-- <script>
     var xValues = ["Pending Appointments", "Done Appointments"];

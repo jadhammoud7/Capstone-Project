@@ -424,6 +424,7 @@ $mysql->close();
                         </div>
                     </div>
                 </form>
+            </div>
         </main>
     </div>
 
