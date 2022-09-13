@@ -104,8 +104,35 @@ function get_all_admins_connection($admin_id, $admin_first_name, $admin_last_nam
     echo $element;
 }
 
-function get_all_checkouts_connection($checkout_id, $customer_id, $first_name, $last_name, $email, $phone_number)
+function get_all_checkouts_connection($checkout_id, $customer_id, $first_name, $last_name, $email, $phone_number, $shipping_country, $shipping_location, $shipping_company, $postcode, $order_notes, $total_price, $tax_price, $total_price_including_tax, $date, $status)
 {
+    $element = "
+    <tr>
+        <td>$first_name $last_name</td>
+        <td>$email</td>
+        <td>$phone_number</td>
+        <td>$shipping_country</td>
+        <td>$shipping_location</td>
+        <td>$shipping_company</td>
+        <td>$postcode</td>
+        <td>$order_notes</td>
+        <td>$total_price</td>
+        <td>$tax_price</td>
+        <td>$total_price_including_tax</td>
+        <td>$date</td>
+        <td>
+            <span class=\"status_checkout red\"></span>
+            <a class=\"status_btn_checkout\">$status</a>
+        </td>
+        <td>
+            <a>
+                <button class=\"btn_done_work_checkout\" id=\"SetStatusCheckoutButton\" onclick=\"SetCheckoutID($checkout_id);\"></button>
+            </a>
+        </td>
+    </tr>    
+    ";
+
+    echo $element;
 }
 function get_all_products($name, $price, $type, $category, $description)
 {

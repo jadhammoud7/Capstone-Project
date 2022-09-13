@@ -92,11 +92,39 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
         header("Location:../home-admin/home-admin.php");
     }
 }
+
+
+//updating working status from buttons checkouts
+if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
+    $working_status = $_GET['set_to_done'];
+    $checkoutID = $_GET['getCheckoutID'];
+    $status = "";
+    if ($working_status == "true") {
+        $status = "Done Work";
+        $query_settodone = $connection->prepare("UPDATE checkouts SET status=? WHERE checkout_id='" . $checkoutID . "'");
+        $query_settodone->bind_param("s", $status);
+        $query_settodone->execute();
+        header("Location:../home-admin/home-admin.php");
+    } else if ($working_status == "false") {
+        $status = "Pending";
+        $query_settodone = $connection->prepare("UPDATE checkouts SET status=? WHERE checkout_id='" . $checkoutID . "'");
+        $query_settodone->bind_param("s", $status);
+        $query_settodone->execute();
+        header("Location:../home-admin/home-admin.php");
+    }
+}
 //get all comments
 $query_comment = "SELECT username,comment FROM comments";
 $stmt_comment = $connection->prepare($query_comment);
 $stmt_comment->execute();
 $results_comment = $stmt_comment->get_result();
+
+//get all checkouts
+$query_checkouts = "SELECT * FROM checkouts";
+$stmt_checkouts = $connection->prepare($query_checkouts);
+$stmt_checkouts->execute();
+$results_checkouts = $stmt_checkouts->get_result();
+
 ?>
 
 <!DOCTYPE html>
@@ -389,8 +417,25 @@ $results_comment = $stmt_comment->get_result();
                                     </thead>
                                     <tbody>
                                         <?php
-                                        while ($row_comment = $results_comment->fetch_assoc()) {
-                                            get_comments_connection($row_comment['username'], $row_comment['comment']);
+                                        while ($row_checkouts = $results_checkouts->fetch_assoc()) {
+                                            get_all_checkouts_connection(
+                                                $row_checkouts['checkout_id'],
+                                                $row_checkouts['customer_id'],
+                                                $row_checkouts['first_name'],
+                                                $row_checkouts['last_name'],
+                                                $row_checkouts['email'],
+                                                $row_checkouts['phone_number'],
+                                                $row_checkouts['shipping_country'],
+                                                $row_checkouts['shipping_location'],
+                                                $row_checkouts['shipping_company'],
+                                                $row_checkouts['postcode'],
+                                                $row_checkouts['order_notes'],
+                                                $row_checkouts['total_price'],
+                                                $row_checkouts['tax_price'],
+                                                $row_checkouts['total_price_including_tax'],
+                                                $row_checkouts['date'],
+                                                $row_checkouts['status']
+                                            );
                                         }
                                         ?>
                                     </tbody>

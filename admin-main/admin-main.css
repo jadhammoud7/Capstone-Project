@@ -252,8 +252,9 @@ td {
     color: #222;
 }
 
-td .status {
-    display: inline-block;
+td .status,
+td .status_checkout {
+    display: inline-block;  
     height: 10px;
     width: 10px;
     border-radius: 50%;
@@ -261,7 +262,8 @@ td .status {
 }
 
 
-.status.red {
+.status.red,
+.status_checkout .red {
     background: red;
 }
 
@@ -467,7 +469,8 @@ tr td:last-child {
     }
 }
 
-td .btn_done_work {
+td .btn_done_work,
+td .btn_done_work_checkout {
     cursor: pointer;
     background: var(--main-color);
     border-radius: 10px;
