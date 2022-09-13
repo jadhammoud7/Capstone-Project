@@ -244,32 +244,32 @@ $results_products = $stmt_products->get_result();
                         <p class="title">Please fill in this form to add a new product.</p>
                         <hr>
 
-                        <label for="first_name"><b>First Name</b></label>
-                        <input type="text" placeholder="Enter your first name" name="first_name" id="first_name" value="" required />
+                        <label for="product_name"><b>Product Name</b></label>
+                        <input type="text" placeholder="Enter product's name" name="product_name" id="product_name" value="" required />
 
 
-                        <label for="last_name"><b>Last Name</b></label>
-                        <input type="text" placeholder="Enter your last name" name="last_name" id="last_name" value="" required>
+                        <label for="product_price"><b>Product Price</b></label>
+                        <input type="text" placeholder="Enter product's price" name="product_price" id="product_price" value="" required>
 
 
-                        <label for="email"><b>Email</b></label>
-                        <input type="text" placeholder="Enter Email" name="email" id="email" value="" required>
+                        <label for="product_type"><b>Product Type</b></label>
+                        <input type="text" placeholder="Enter product's type" name="product_type" id="product_type" value="" required>
 
 
-                        <label for="phone_number"><b>Phone Number</b></label>
-                        <input type="text" placeholder="Enter your phone number" name="phone_number" id="phone_number" value="" required> <br> <br>
+                        <label for="product_category"><b>Product Category</b></label>
+                        <input type="text" placeholder="Enter product's category " name="product_category" id="product_category" value="" required> <br> <br>
 
 
-                        <label for="username"><b>Username</b></label>
-                        <input type="text" placeholder="Enter username of your own" name="username" id="username" value="" required>
+                        <label for="product_desciption"><b>Desciption</b></label>
+                        <input type="text" placeholder="Enter product's desciption" name="product_desciption" id="product_desciption" value="" required>
 
 
-                        <label for="password"><b>Password</b></label>
-                        <input type="password" placeholder="Enter Password" name="password" id="password" value="" required>
+                        <label for="product_age"><b>Age Restriction</b></label>
+                        <input type="password" placeholder="Enter product's age restriction" name="product_age" id="product_age" value="" required>
 
 
                         <div class="clearfix">
-                            <button type="submit" class="signupbtn" title="Add new admin user"><strong>Add Product</strong></button>
+                            <button type="submit" class="addproductbtn" title="Add new product"><strong>Add Product</strong></button>
                         </div>
                     </div>
                 </form>
