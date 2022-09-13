@@ -44,52 +44,46 @@ $results_total_checkouts = $stmt_total_checkouts->get_result();
 $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 
-//get all appointments
+//get all products
 require_once("../php/admin_page_php.php");
-$query_products = "SELECT name,price,type,category,description,age FROM products";
+$query_products = "SELECT name, price, type, category, description, age FROM products";
 $stmt_products = $connection->prepare($query_products);
 $stmt_products->execute();
 $results_products = $stmt_products->get_result();
 
 //form of adding new product
 
-if (isset($_POST["product_name"]) && $_POST["product_name"] != "") {
+if (isset($_POST["product_name"])) {
     $product_name = $_POST["product_name"];
-}else{
-    die("WRONG product name");
 }
-if (isset($_POST["product_price"]) && $_POST["product_price"] != "") {
+
+if (isset($_POST["product_price"])) {
     $product_price = $_POST["product_price"];
-}else{
-    die("WRONG product price");
 }
-if (isset($_POST["product_type"]) && $_POST["product_type"] != "") {
+
+if (isset($_POST["product_type"])) {
     $product_type = $_POST["product_type"];
-}else{
-    die("WRONG product type");
 }
-if (isset($_POST["product_category"]) && $_POST["product_category"] != "") {
+
+if (isset($_POST["product_category"])) {
     $product_category = $_POST["product_category"];
-}else{
-    die("WRONG product category");
 }
-if (isset($_POST["product_desciption"]) && $_POST["product_desciption"] != "") {
+
+if (isset($_POST["product_desciption"])) {
     $product_desciption = $_POST["product_desciption"];
-}else{
-    die("WRONG product description");
 }
-if (isset($_POST["product_age"]) && $_POST["product_age"] != "") {
+
+if (isset($_POST["product_age"])) {
     $product_age = $_POST["product_age"];
-}else{
-    die("WRONG product age");
 }
 
-
-
-$mysql1 = $connection->prepare("INSERT INTO products(name,price,type,category,description,age) VALUES (?,?,?,?,?,?)");
-$mysql1->bind_param("sissss", $product_name,$product_price,$product_type,$product_category,$product_desciption,$product_age);
-$mysql1->execute();
-$mysql1->close();
+if (isset($product_name) && isset($product_price) && isset($product_type) && isset($product_category) && isset($product_desciption) && isset($product_age)) {
+    $image = 'image.png';
+    $mysql1 = $connection->prepare("INSERT INTO products(name, price, type, category, description, age, image) VALUES (?,?,?,?,?,?,?)");
+    $mysql1->bind_param("sisssss", $product_name, $product_price, $product_type, $product_category, $product_desciption, $product_age, $image);
+    $mysql1->execute();
+    $mysql1->close();
+}
 
 
 // echo "<script>window.location='../product-admin/product-admin.php';</script>";
@@ -260,14 +254,19 @@ $mysql1->close();
                                             <td>Price</td>
                                             <td>Type</td>
                                             <td>Category</td>
-                                            <td>Desciption</td>
+                                            <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        while($row_products = $results_products->fetch_assoc()){
-                                            get_all_products($row_products['name'],$row_products['price'],
-                                            $row_products['category'],$row_products['type'],$row_products['description']);
+                                        while ($row_products = $results_products->fetch_assoc()) {
+                                            get_all_products(
+                                                $row_products['name'],
+                                                $row_products['price'],
+                                                $row_products['category'],
+                                                $row_products['type'],
+                                                $row_products['description']
+                                            );
                                         }
                                         ?>
                                     </tbody>
@@ -281,7 +280,7 @@ $mysql1->close();
             <!-- adding form -->
             <div id="id01" class="modal">
                 <span onclick="CloseAddProduct()" class="close" title="Close Modal">&times;</span>
-                <form class="modal-content" action="../product-admin/product-admin.php" method="POST">
+                <form class="modal-content" action="product-admin.php" method="POST">
                     <div class="container">
                         <h1 class="title">Add New Product</h1>
                         <p class="title">Please fill in this form to add a new product.</p>

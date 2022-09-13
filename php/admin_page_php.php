@@ -104,10 +104,10 @@ function get_all_admins_connection($admin_id, $admin_first_name, $admin_last_nam
     echo $element;
 }
 
-function get_all_checkouts_connection($checkout_id, $customer_id, $first_name, $last_name, $email, $phone_number){
-    
+function get_all_checkouts_connection($checkout_id, $customer_id, $first_name, $last_name, $email, $phone_number)
+{
 }
-function get_all_products($name,$price,$type,$category,$description)
+function get_all_products($name, $price, $type, $category, $description)
 {
     $element = "
     <tr class=\"hello\">
