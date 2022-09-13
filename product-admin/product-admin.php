@@ -92,7 +92,7 @@ $mysql1->execute();
 $mysql1->close();
 
 
-echo "<script>window.location='../product-admin/product-admin.php';</script>";
+// echo "<script>window.location='../product-admin/product-admin.php';</script>";
 
 ?>
 
@@ -292,7 +292,7 @@ echo "<script>window.location='../product-admin/product-admin.php';</script>";
 
 
                         <label for="product_price"><b>Product Price</b></label>
-                        <input type="text" placeholder="Enter product's price" name="product_price" id="product_price" value="product_price" required>
+                        <input type="number" placeholder="Enter product's price" name="product_price" id="product_price" value="product_price" required>
 
 
                         <label for="product_type"><b>Product Type</b></label>
@@ -300,7 +300,7 @@ echo "<script>window.location='../product-admin/product-admin.php';</script>";
 
 
                         <label for="product_category"><b>Product Category</b></label>
-                        <input type="number" placeholder="Enter product's category " name="product_category" id="product_category" value="product_category" required> <br> <br>
+                        <input type="text" placeholder="Enter product's category " name="product_category" id="product_category" value="product_category" required> <br> <br>
 
 
                         <label for="product_desciption"><b>Desciption</b></label>
@@ -308,7 +308,7 @@ echo "<script>window.location='../product-admin/product-admin.php';</script>";
 
 
                         <label for="product_age"><b>Age Restriction</b></label>
-                        <input type="password" placeholder="Enter product's age restriction" name="product_age" id="product_age" value="product_age" required>
+                        <input type="text" placeholder="Enter product's age restriction" name="product_age" id="product_age" value="product_age" required>
 
 
                         <div class="clearfix">
