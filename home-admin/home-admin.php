@@ -157,7 +157,7 @@ $results_comment = $stmt_comment->get_result();
                     </a>
                 </li>
                 <li>
-                    <a href="" id="appointments-link">
+                    <a href="../appointments-admin/appointments-admin.php" id="appointments-link">
                         <span class="las la-clipboard-list"></span>
                         <span>Appointments</span>
                     </a>

@@ -46,17 +46,29 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 //get all customer
 require_once("../php/admin_page_php.php");
-$query_customer = "SELECT customer_id,first_name,last_name,username,phone_number,email,date_of_birth,address FROM customers";
-$stmt_customer = $connection->prepare($query_customer);
-$stmt_customer->execute();
-$results_customer = $stmt_customer->get_result();
+$query_appointments = "SELECT appointment_id, customer_id, appointment_name, date, hour, status FROM appointments";
+$stmt_appointments = $connection->prepare($query_appointments);
+$stmt_appointments->execute();
+$results_appointments = $stmt_appointments->get_result();
 
-//delete customer
-if (isset($_GET['getCustomerIDtoRemove'])) {
-    $remove_customer = $_GET['getCustomerIDtoRemove'];
-    $query_delete_customer = "DELETE FROM customers WHERE customer_id=$remove_customer";
-    $stmt_delete_customer = $connection->prepare($query_delete_customer);
-    $stmt_delete_customer->execute();
+//updating working status from buttons
+if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
+    $working_status = $_GET['set_to_done'];
+    $appointmentID = $_GET['getAppointmentID'];
+    $status = "";
+    if ($working_status == "true") {
+        $status = "Done Work";
+        $query_settodone = $connection->prepare("UPDATE appointments SET status=? WHERE appointment_id='" . $appointmentID . "'");
+        $query_settodone->bind_param("s", $status);
+        $query_settodone->execute();
+        header("Location:../appointments-admin/appointments-admin.php");
+    } else if ($working_status == "false") {
+        $status = "Pending";
+        $query_settodone = $connection->prepare("UPDATE appointments SET status=? WHERE appointment_id='" . $appointmentID . "'");
+        $query_settodone->bind_param("s", $status);
+        $query_settodone->execute();
+        header("Location:../appointments-admin/appointments-admin.php");
+    }
 }
 
 ?>
@@ -71,21 +83,11 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <link rel="stylesheet" href="customer-admin.css">
     <link rel="stylesheet" href="../admin-main/admin-main.css">
-    <title>Admin | Customers - Newbies Gamers</title>
+    <title>Admin | Appointments - Newbies Gamers</title>
 </head>
 
 <body onunload="myFunction()">
-
-    <!-- started popup message login successful -->
-    <div class="popup" id="remove-confirmation">
-        <img src="../images/question-mark.png" alt="remove confirmation">
-        <h2>Delete Confirmation</h2>
-        <p id="remove-confirmation-text"></p>
-        <button type="button" onclick="DeleteCustomer()">YES</button>
-        <button type="button" onclick="CloseRemoveCustomerPopUp()">NO</button>
-    </div>
 
     <!-- started popup message logout -->
     <div class="popup" id="logout-confirmation">
@@ -161,7 +163,7 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
                 <label for="nav-toggle">
                     <span><i class="las la-bars"></i></span>
                 </label>
-                Customers List
+                Appointments List
             </h2>
 
             <div class="user-wrapper">
@@ -216,35 +218,37 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Customers List</h3>
-                            <!-- <button>See all <span class="las la-arrow-right"></span></button> -->
+                            <h3>Appointments List</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table width="100%">
                                     <thead>
                                         <tr>
+                                            <td>Appointment Name</td>
                                             <td>Customer Name</td>
-                                            <td>Username</td>
-                                            <td>Email</td>
-                                            <td>Phone Number</td>
-                                            <td>Address</td>
-                                            <td>Date of Birth</td>
-                                            <td>Remove Customer</td>
+                                            <td>Date</td>
+                                            <td>Hour</td>
+                                            <td>Status</td>
+                                            <td>Change Status</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        while ($row_customer = $results_customer->fetch_assoc()) {
-                                            get_all_customer_connection(
-                                                $row_customer['customer_id'],
-                                                $row_customer['first_name'],
-                                                $row_customer['last_name'],
-                                                $row_customer['username'],
-                                                $row_customer['email'],
-                                                $row_customer['phone_number'],
-                                                $row_customer['address'],
-                                                $row_customer['date_of_birth']
+                                        while ($row_appointments = $results_appointments->fetch_assoc()) {
+                                            $query_get_user = "SELECT first_name, last_name FROM customers WHERE customer_id = '" . $row_appointments['customer_id'] . "' ";
+                                            $stmt_get_user = $connection->prepare($query_get_user);
+                                            $stmt_get_user->execute();
+                                            $results_get_user = $stmt_get_user->get_result();
+                                            $row_get_user = $results_get_user->fetch_assoc();
+
+                                            echo get_appointment_in_admin_page_for_table_connection(
+                                                $row_appointments['appointment_id'],
+                                                $row_get_user['first_name'] . ' ' . $row_get_user['last_name'],
+                                                $row_appointments['appointment_name'],
+                                                $row_appointments['date'],
+                                                $row_appointments['hour'],
+                                                $row_appointments['status'],
                                             );
                                         }
                                         ?>
@@ -263,7 +267,7 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
     <!-- ended return to top button -->
 
 </body>
-<script src="customer-admin.js"></script>
+<script src="appointments-admin.js"></script>
 <script src="../admin-main/admin-main.js"></script>
 
 </html>

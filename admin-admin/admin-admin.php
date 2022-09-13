@@ -196,7 +196,7 @@ $mysql->close();
                     </a>
                 </li>
                 <li>
-                    <a href="" id="appointments-link">
+                    <a href="../appointments-admin/appointments-admin.php" id="appointments-link">
                         <span class="las la-clipboard-list"></span>
                         <span>Appointments</span>
                     </a>
