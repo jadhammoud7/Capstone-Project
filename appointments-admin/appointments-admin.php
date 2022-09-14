@@ -146,7 +146,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
                     </a>
                 </li>
                 <li>
-                    <a href="" id="checkouts-link">
+                    <a href="../checkouts-admin/checkouts-admin.php" id="checkouts-link">
                         <span class="las la-receipt"></span>
                         <span>Checkouts</span>
                     </a>

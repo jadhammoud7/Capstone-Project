@@ -70,22 +70,22 @@ $results_get_done_checkouts = $stmt_get_done_checkouts->get_result();
 $row_get_done_checkouts = $results_get_done_checkouts->fetch_assoc();
 
 //updating working status from buttons
-if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
+if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
     $working_status = $_GET['set_to_done'];
-    $appointmentID = $_GET['getAppointmentID'];
+    $checkoutID = $_GET['getCheckoutID'];
     $status = "";
     if ($working_status == "true") {
         $status = "Done Work";
-        $query_settodone = $connection->prepare("UPDATE appointments SET status=? WHERE appointment_id='" . $appointmentID . "'");
+        $query_settodone = $connection->prepare("UPDATE checkouts SET status=? WHERE checkout_id='" . $checkoutID . "'");
         $query_settodone->bind_param("s", $status);
         $query_settodone->execute();
-        header("Location:../appointments-admin/appointments-admin.php");
+        header("Location:../checkouts-admin/checkouts-admin.php");
     } else if ($working_status == "false") {
         $status = "Pending";
-        $query_settodone = $connection->prepare("UPDATE appointments SET status=? WHERE appointment_id='" . $appointmentID . "'");
+        $query_settodone = $connection->prepare("UPDATE checkouts SET status=? WHERE checkout_id='" . $checkoutID . "'");
         $query_settodone->bind_param("s", $status);
         $query_settodone->execute();
-        header("Location:../appointments-admin/appointments-admin.php");
+        header("Location:../checkouts-admin/checkouts-admin.php");
     }
 }
 
@@ -146,7 +146,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
                     </a>
                 </li>
                 <li>
-                    <a href="" id="checkouts-link">
+                    <a href="../checkouts-admin/checkouts-admin.php" id="checkouts-link">
                         <span class="las la-receipt"></span>
                         <span>Checkouts</span>
                     </a>

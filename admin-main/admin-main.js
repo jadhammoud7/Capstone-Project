@@ -117,3 +117,18 @@ else {
     products_link.style.paddingBottom = '0px';
 }
 
+if (window.location.href.includes('checkouts-admin')) {
+    checkouts_link.style.backgroundColor = '#fff';
+    checkouts_link.style.color = 'var(--main-color)';
+    checkouts_link.style.borderRadius = '20px';
+    checkouts_link.style.paddingTop = '10px';
+    checkouts_link.style.paddingBottom = '10px';
+}
+else {
+    checkouts_link.style.backgroundColor = 'var(--main-color)';
+    checkouts_link.style.color = '#fff';
+    checkouts_link.style.borderRadius = '0px';
+    checkouts_link.style.paddingTop = '0px';
+    checkouts_link.style.paddingBottom = '0px';
+}
+

@@ -209,7 +209,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                     </a>
                 </li>
                 <li>
-                    <a href="" id="checkouts-link">
+                    <a href="../checkouts-admin/checkouts-admin.php" id="checkouts-link">
                         <span class="las la-receipt"></span>
                         <span>Checkouts</span>
                     </a>

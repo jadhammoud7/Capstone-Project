@@ -212,7 +212,7 @@ if (isset($_GET['getAdminIDtoRemove'])) {
                     </a>
                 </li>
                 <li>
-                    <a href="" id="checkouts-link">
+                    <a href="../checkouts-admin/checkouts-admin.php" id="checkouts-link">
                         <span class="las la-receipt"></span>
                         <span>Checkouts</span>
                     </a>
