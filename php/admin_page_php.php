@@ -129,6 +129,11 @@ function get_all_checkouts_connection($checkout_id, $customer_id, $first_name, $
                 <button class=\"btn_done_work_checkout\" id=\"SetStatusCheckoutButton\" onclick=\"SetCheckoutID($checkout_id);\"></button>
             </a>
         </td>
+        <td>
+            <a>
+                <button class=\"btn_view_checkout_order\" onclick=\"window.location.href = 'checkout-admin-details.php?checkout_id=$checkout_id';\">View Order</button>
+            </a>
+        </td>
     </tr>    
     ";
 

@@ -256,7 +256,7 @@ td {
 
 td .status,
 td .status_checkout {
-    display: inline-block;  
+    display: inline-block;
     height: 10px;
     width: 10px;
     border-radius: 50%;
@@ -472,7 +472,8 @@ tr td:last-child {
 }
 
 td .btn_done_work,
-td .btn_done_work_checkout {
+td .btn_done_work_checkout,
+td .btn_view_checkout_order {
     cursor: pointer;
     background: var(--main-color);
     border-radius: 10px;
@@ -507,6 +508,7 @@ tr:nth-child(even) {
 }
 
 .logout-btn {
+    cursor: pointer;
     background-color: red;
     border: solid 1px royalblue;
     border-radius: 10px;

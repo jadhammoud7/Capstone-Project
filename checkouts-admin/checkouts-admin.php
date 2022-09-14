@@ -261,6 +261,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
                                             <td>Date</td>
                                             <td>Status</td>
                                             <td>Change Status</td>
+                                            <td>View Order</td>
                                         </tr>
                                     </thead>
                                     <tbody>
