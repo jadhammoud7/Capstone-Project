@@ -70,7 +70,7 @@ for (let i = 0; i < btn_checkout.length; i++) {
             //yane heye done w bade hawela la pending
         }
     });
-    SetButton(statusbtn[i].textContent, btn_checkout[i], status_color[i]);
+    SetButton(statusbtn_checkout[i].textContent, btn_checkout[i], status_color_checkout[i]);
 }
 
 

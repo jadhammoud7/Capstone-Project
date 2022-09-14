@@ -214,6 +214,7 @@ table {
 .card {
     background: #fff;
     border-radius: 5px;
+    box-shadow: 2px 2px 5px royalblue;
 }
 
 .card-header,
@@ -229,6 +230,7 @@ table {
 }
 
 .card-header button {
+    cursor: pointer;
     background: var(--main-color);
     border-radius: 10px;
     color: #fff;

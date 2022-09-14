@@ -125,6 +125,24 @@ $stmt_checkouts = $connection->prepare($query_checkouts);
 $stmt_checkouts->execute();
 $results_checkouts = $stmt_checkouts->get_result();
 
+//get count of appointments pending
+$status = "Pending";
+$query_get_pending_appointments = "SELECT COUNT(*) as total_pending_appointments FROM appointments WHERE status=?";
+$stmt_get_pending_appointments = $connection->prepare($query_get_pending_appointments);
+$stmt_get_pending_appointments->bind_param("s", $status);
+$stmt_get_pending_appointments->execute();
+$results_get_pending_appointments = $stmt_get_pending_appointments->get_result();
+$row_get_pending_appointments = $results_get_pending_appointments->fetch_assoc();
+
+//get count of appointments done work
+$status = "Done Work";
+$query_get_done_appointments = "SELECT COUNT(*) as total_done_appointments FROM appointments WHERE status=?";
+$stmt_get_done_appointments = $connection->prepare($query_get_done_appointments);
+$stmt_get_done_appointments->bind_param("s", $status);
+$stmt_get_done_appointments->execute();
+$results_get_done_appointments = $stmt_get_done_appointments->get_result();
+$row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
+
 ?>
 
 <!DOCTYPE html>
@@ -283,6 +301,9 @@ $results_checkouts = $stmt_checkouts->get_result();
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
+                            <canvas id="AppointmentsChart" style="width: 100%; max-width: 600px;"></canvas>
+                        </div>
+                        <div class="card-header">
                             <h3>Recent Appointments</h3>
                             <button onclick="window.location.href = '../appointments-admin/appointments-admin.php'" title="Go To See the list of all appointments requested by your customers">See all <span class="las la-arrow-right"></span></button>
                         </div>
@@ -327,6 +348,11 @@ $results_checkouts = $stmt_checkouts->get_result();
                 </div>
                 <div class="customers">
                     <div class="card">
+
+                        <div class="card-header">
+                            <canvas id="myChart" style="width: 100%; max-width: 600px;"></canvas>
+                        </div>
+
                         <div class="card-header">
                             <h3>Latest Customers</h3>
                             <button onclick="window.location.href = '../customer-admin/customer-admin.php';" title="Go To See the list of all customers accounts created">See all <span class="las la-arrow-right"></span></button>
@@ -335,6 +361,17 @@ $results_checkouts = $stmt_checkouts->get_result();
                             <?php
                             while ($row_get_latest_customer = $results_get_latest_customer->fetch_assoc()) {
                                 latest_customers_connection($row_get_latest_customer['username'], $row_get_latest_customer['email']);
+                            }
+                            ?>
+                        </div>
+                        <div class="card-header">
+                            <h3>Latest Admins</h3>
+                            <button onclick="window.location.href = '../admin-admin/admin-admin.php';" title="Go To See the list of all admins accounts created">See all <span class="las la-arrow-right"></span></button>
+                        </div>
+                        <div class="card-body">
+                            <?php
+                            while ($row_get_latest_admins = $results_get_latest_admins->fetch_assoc()) {
+                                latest_admins_connection($row_get_latest_admins['first_name'], $row_get_latest_admins['last_name'], $row_get_latest_admins['email_address']);
                             }
                             ?>
                         </div>
@@ -370,21 +407,7 @@ $results_checkouts = $stmt_checkouts->get_result();
                         </div>
                     </div>
                 </div>
-                <div class="customers">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Latest Admins</h3>
-                            <button onclick="window.location.href = '../admin-admin/admin-admin.php';" title="Go To See the list of all admins accounts created">See all <span class="las la-arrow-right"></span></button>
-                        </div>
-                        <div class="card-body">
-                            <?php
-                            while ($row_get_latest_admins = $results_get_latest_admins->fetch_assoc()) {
-                                latest_admins_connection($row_get_latest_admins['first_name'], $row_get_latest_admins['last_name'], $row_get_latest_admins['email_address']);
-                            }
-                            ?>
-                        </div>
-                    </div>
-                </div>
+
             </div>
 
             <div class="recent-grid">
@@ -444,11 +467,7 @@ $results_checkouts = $stmt_checkouts->get_result();
                         </div>
                     </div>
                 </div>
-                <div class="customers">
-                    <div class="card">
-                        <canvas id="myChart" style="width: 100%; max-width: 600px;"></canvas>
-                    </div>
-                </div>
+
             </div>
 
         </main>
@@ -482,6 +501,29 @@ $results_checkouts = $stmt_checkouts->get_result();
             title: {
                 display: true,
                 text: "Distribution of All Accounts"
+            }
+        }
+    });
+    var xValuesAppointments = ["Pending Appointments", "Done Appointments"];
+    var yValuesAppointments = [<?php echo $row_get_pending_appointments['total_pending_appointments']; ?>, <?php echo $row_get_done_appointments['total_done_appointments']; ?>]
+    var barColorsAppointments = [
+        "#b91d47",
+        "#00aba9"
+    ]
+
+    new Chart("AppointmentsChart", {
+        type: "pie",
+        data: {
+            labels: xValuesAppointments,
+            datasets: [{
+                backgroundColor: barColorsAppointments,
+                data: yValuesAppointments
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Distribution of All Appointments"
             }
         }
     });
