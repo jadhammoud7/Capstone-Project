@@ -92,7 +92,7 @@ function ChangeProfile() {
     const email = document.querySelector(".email_editprofile");
     const phonenumber = document.querySelector(".phone_number_editprofile");
     const address = document.querySelector(".address_editprofile");
-
+    const city = document.querySelector(".city_editprofile");
 
     console.log("edit profile btn clicked");
 
@@ -104,6 +104,7 @@ function ChangeProfile() {
         email.style.display = 'block';
         phonenumber.style.display = 'block';
         address.style.display = 'block';
+        city.style.display = 'block';
     } else {
         btn_div.innerHTML = " <button onclick=\"ChangeProfile()\" class=\"edit_profile_btn\" title=\"Edit your profile\" style=\"color: black; \"><i class=\"fa fa-edit\"></i>Edit Profile</button>";
         // 👇️ this HIDES the form
@@ -112,6 +113,7 @@ function ChangeProfile() {
         email.style.display = 'none';
         phonenumber.style.display = 'none';
         address.style.display = 'none';
+        city.style.display = 'none';
     }
 }
 

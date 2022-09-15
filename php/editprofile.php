@@ -30,6 +30,13 @@ if (isset($_POST["phonenumber_editprofile"]) && $_POST["phonenumber_editprofile"
 if (isset($_POST["address_editprofile"]) && $_POST["address_editprofile"] != "") {
     $address = $_POST["address_editprofile"];
 }
+if (isset($_POST["city_editprofile"]) && $_POST["city_editprofile"] != "") {
+
+    $city = $_POST["city_editprofile"];
+    $city1="";
+    $city1=strtolower($city);
+}
+
 
 if ($first_name != "") {
     $query1 = $connection->prepare("UPDATE customers SET first_name=? WHERE customer_id='" . $customer_id . "'");
@@ -58,6 +65,11 @@ if ($phone_number != "") {
 if ($address != "") {
     $query1 = $connection->prepare("UPDATE customers SET address=? WHERE customer_id='" . $customer_id . "'");
     $query1->bind_param("s", $address);
+    $query1->execute();
+}
+if ($city1 != "") {
+    $query1 = $connection->prepare("UPDATE customers SET city=? WHERE customer_id='" . $customer_id . "'");
+    $query1->bind_param("s", $city1);
     $query1->execute();
 }
 

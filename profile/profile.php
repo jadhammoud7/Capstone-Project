@@ -10,7 +10,7 @@ if (!isset($_SESSION['logged_bool'])) {
 
 $customerid = $_SESSION['logged_id'];
 
-$query = "SELECT first_name, last_name, email, phone_number, username, address from customers WHERE customer_id = $customerid";
+$query = "SELECT first_name, last_name, email, phone_number, username, address,city from customers WHERE customer_id = $customerid";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
@@ -219,6 +219,12 @@ if (isset($_GET['delete_checkout_id'])) {
                     <h3><?php echo $row["address"] ?></h3>
                 </div>
                 <input type="text" name="address_editprofile" id="" placeholder="new address.." class="address_editprofile" style="display: none;">
+
+                <div class="profile-part">
+                    <h3 id="attribute">City: </h3>
+                    <h3><?php echo $row["city"] ?></h3>
+                </div>
+                <input type="text" name="city_editprofile" id="" placeholder="new city.." class="city_editprofile" style="display: none;">
 
                 <div class="edit_save_btn">
                     <button onclick="ChangeProfile()" class="edit_profile_btn" title="Edit your profile"> <i class="fa fa-edit"></i><strong>Edit

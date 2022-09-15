@@ -287,6 +287,7 @@
 .last_name_editprofile,
 .email_editprofile,
 .phone_number_editprofile,
+.city_editprofile,
 .address_editprofile {
     border-radius: 15px;
 }
