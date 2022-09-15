@@ -59,7 +59,7 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
     $stmt_delete_customer->execute();
 }
 //get locations
-$query_location = "SELECT DISTINCT address FROM customers";
+$query_location = "SELECT DISTINCT city FROM customers";
 $stmt_location = $connection->prepare($query_location);
 $stmt_location->execute();
 $results_location = $stmt_location->get_result();
@@ -280,25 +280,36 @@ $results_location = $stmt_location->get_result();
 <script src="../admin-main/admin-main.js"></script>
 <script>
     const array = [];
-    const array_count=[];
+    const array_count = [];
     <?php
     if (isset($results_location)) {
         while ($row_location = $results_location->fetch_assoc()) {
     ?>
             array.push("<?php
-                        echo $row_location['address'];
-
+                        echo $row_location['city'];
                         ?>");
+            <?php
+            $query_location_count = "SELECT COUNT(city) as city FROM customers WHERE city='" . $row_location['city'] . "'";
+            $stmt_location_count = $connection->prepare($query_location_count);
+            $stmt_location_count->execute();
+            $results_location_count = $stmt_location_count->get_result();
+            $row_location_count = $results_location_count->fetch_assoc();
+            ?>
+            
+            array_count.push("<?php
+                                echo $row_location_count['city'];
+                                ?>");
     <?php }
     }
     ?>;
     var xValues = array;
-    console.log(xValues);
-    var yValues = [1, 1, 1];
+    var yValues = array_count;
+
     var barColors = [
         "#b91d47",
         '#00aba9',
-        "#00cd20"
+        '#00cd20',
+
     ]
     new Chart("myChart", {
         type: "pie",
