@@ -323,6 +323,14 @@ tr td:last-child {
     color: var(--main-color);
 }
 
+.customer_link{
+    color: #222 !important;
+}
+.customer_link:hover {
+    text-decoration-line: underline !important;
+    color: #4169e1 !important;
+}
+
 @media screen and (max-width: 1200px) {
     .sidebar {
         width: 70px;

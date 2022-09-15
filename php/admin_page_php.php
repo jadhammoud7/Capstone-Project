@@ -71,7 +71,7 @@ function get_all_customer_connection($customer_id, $first_name, $last_name, $use
 {
     $element = "
     <tr>
-        <td>$first_name $last_name</td>
+        <td><a href='../customer-admin/customer-details.php?customer_id=$customer_id' class=\"customer_link\" title=\"See details about '$first_name $last_name'\">$first_name $last_name</a></td>
         <td>$username</td>
         <td>$email</td>
         <td>$phone_number</td>
