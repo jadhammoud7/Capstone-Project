@@ -250,13 +250,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
                                             <td>Customer Name</td>
                                             <td>Email</td>
                                             <td>Phone Number</td>
-                                            <td>Shipping Country</td>
-                                            <td>Shipping Location</td>
-                                            <td>Shipping Company</td>
-                                            <td>PostCode</td>
-                                            <td>Order Notes</td>
                                             <td>Total Price</td>
-                                            <td>Tax Price</td>
                                             <td>Total Price Inc. Tax</td>
                                             <td>Date</td>
                                             <td>Status</td>
@@ -274,13 +268,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
                                                 $row_checkouts['last_name'],
                                                 $row_checkouts['email'],
                                                 $row_checkouts['phone_number'],
-                                                $row_checkouts['shipping_country'],
-                                                $row_checkouts['shipping_location'],
-                                                $row_checkouts['shipping_company'],
-                                                $row_checkouts['postcode'],
-                                                $row_checkouts['order_notes'],
                                                 $row_checkouts['total_price'],
-                                                $row_checkouts['tax_price'],
                                                 $row_checkouts['total_price_including_tax'],
                                                 $row_checkouts['date'],
                                                 $row_checkouts['status']
