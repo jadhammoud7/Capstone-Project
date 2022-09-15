@@ -262,6 +262,16 @@ if (isset($_GET['customer_id'])) {
                                 <div class="form-container-part-inputs">
                                     <div class="input-container">
 
+                                        <input type="text" name="city" id="city" value="<?php if (isset($row_customer)) {
+                                                                                                    echo $row_customer['city'];
+                                                                                                } ?>" readonly class="is-valid">
+                                        <label for="city">City</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-container-part-inputs">
+                                    <div class="input-container">
+
                                         <input type="text" name="address" id="address" value="<?php if (isset($row_customer)) {
                                                                                                     echo $row_customer['address'];
                                                                                                 } ?>" readonly class="is-valid">
