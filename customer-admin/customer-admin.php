@@ -295,7 +295,7 @@ $results_location = $stmt_location->get_result();
             $results_location_count = $stmt_location_count->get_result();
             $row_location_count = $results_location_count->fetch_assoc();
             ?>
-            
+
             array_count.push("<?php
                                 echo $row_location_count['city'];
                                 ?>");
@@ -304,13 +304,25 @@ $results_location = $stmt_location->get_result();
     ?>;
     var xValues = array;
     var yValues = array_count;
+    var colorsss = [];
+    const size = array.length;
+    getNewColor(0);
 
-    var barColors = [
-        "#b91d47",
-        '#00aba9',
-        '#00cd20',
+    function getNewColor(start) {
+        for (var i = start; i < size; i++) {
+            const random = "#" + Math.floor(Math.random()*(255 + 1));
+            if (colorsss.values != random) {
+                colorsss.push(random);
+            } else {
+                getNewColor(i);
+            }
+        }
+    }
 
-    ]
+
+
+
+    var barColors = colorsss;
     new Chart("myChart", {
         type: "pie",
         data: {
