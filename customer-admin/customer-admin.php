@@ -212,8 +212,15 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
                     </div>
                 </div>
             </div>
+
             <div class="recent-grid" style="display: block !important;">
+
                 <div class="projects">
+                    <div class="card">
+                        <div class="card-header">
+                            <canvas id="myChart" style="width: 100%; max-width: 600px;"></canvas>
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="card-header">
                             <h3>Customers List</h3>
