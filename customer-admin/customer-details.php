@@ -32,21 +32,21 @@ if (isset($_GET['customer_id'])) {
     $row_total_comments = $results_total_comments->fetch_assoc();
 
     //count of all appointments
-    $query_total_appointments = "SELECT COUNT(*) as total_appointments FROM appointments WHERE customer_id = '" . $customer_id . "'";
+    $query_total_appointments = "SELECT COUNT(*) as total_appointments FROM appointments WHERE customer_id = '" . $_GET['customer_id'] . "'";
     $stmt_total_appointments = $connection->prepare($query_total_appointments);
     $stmt_total_appointments->execute();
     $results_total_appointments = $stmt_total_appointments->get_result();
     $row_total_appointments = $results_total_appointments->fetch_assoc();
 
     //sum of all appointments
-    $query_total_profit = "SELECT SUM(total_price_including_tax) as total_profit FROM checkouts WHERE customer_id = '" . $customer_id . "'";
+    $query_total_profit = "SELECT SUM(total_price_including_tax) as total_profit FROM checkouts WHERE customer_id = '" . $_GET['customer_id'] . "'";
     $stmt_total_profit = $connection->prepare($query_total_profit);
     $stmt_total_profit->execute();
     $results_total_profit = $stmt_total_profit->get_result();
     $row_total_profit = $results_total_profit->fetch_assoc();
 
     //get total checkouts made
-    $query_total_checkouts = "SELECT COUNT(checkout_id) as total_checkout FROM checkouts WHERE customer_id = '" . $customer_id . "'";
+    $query_total_checkouts = "SELECT COUNT(checkout_id) as total_checkout FROM checkouts WHERE customer_id = '" . $_GET['customer_id'] . "'";
     $stmt_total_checkouts = $connection->prepare($query_total_checkouts);
     $stmt_total_checkouts->execute();
     $results_total_checkouts = $stmt_total_checkouts->get_result();
@@ -170,10 +170,10 @@ if (isset($_GET['customer_id'])) {
                 <div class="card-single">
                     <div>
                         <h1><?php echo  $row_total_comments['count']; ?></h1>
-                        <span>Customers</span>
+                        <span>Comments</span>
                     </div>
                     <div>
-                        <span class="las la-users"></span>
+                        <span class="las la-comments"></span>
                     </div>
                 </div>
                 <div class="card-single">
