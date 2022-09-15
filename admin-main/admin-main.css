@@ -519,7 +519,7 @@ tr:nth-child(even) {
     cursor: pointer;
     background-color: red;
     border: solid 1px royalblue;
-    border-radius: 10px;
+    border-radius: 20px;
     color: black;
     font-weight: 100;
     font-size: 1rem;
