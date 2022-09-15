@@ -173,6 +173,9 @@ hr {
 #address_error {
   display: none;
 }
+#city_error{
+  display: none;
+}
 
 #username_error {
   display: none;

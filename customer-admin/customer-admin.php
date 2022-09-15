@@ -58,6 +58,11 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
     $stmt_delete_customer = $connection->prepare($query_delete_customer);
     $stmt_delete_customer->execute();
 }
+//get locations
+$query_location = "SELECT DISTINCT address FROM customers";
+$stmt_location = $connection->prepare($query_location);
+$stmt_location->execute();
+$results_location = $stmt_location->get_result();
 
 ?>
 
@@ -73,6 +78,7 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="customer-admin.css">
     <link rel="stylesheet" href="../admin-main/admin-main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <title>Admin | Customers - Newbies Gamers</title>
 </head>
 
@@ -272,5 +278,44 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
 </body>
 <script src="customer-admin.js"></script>
 <script src="../admin-main/admin-main.js"></script>
+<script>
+    const array = [];
+    const array_count=[];
+    <?php
+    if (isset($results_location)) {
+        while ($row_location = $results_location->fetch_assoc()) {
+    ?>
+            array.push("<?php
+                        echo $row_location['address'];
+
+                        ?>");
+    <?php }
+    }
+    ?>;
+    var xValues = array;
+    console.log(xValues);
+    var yValues = [1, 1, 1];
+    var barColors = [
+        "#b91d47",
+        '#00aba9',
+        "#00cd20"
+    ]
+    new Chart("myChart", {
+        type: "pie",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Where Newbie Gamers is most famous from"
+            }
+        }
+    });
+</script>
 
 </html>

@@ -67,6 +67,18 @@ if (isset($_POST["address"]) && $_POST["address"] != "") {
     }
 }
 
+if (isset($_POST["city"]) && $_POST["city"] != "") {
+    $city = $_POST["city"];
+    $city1="";
+    $_SESSION['city'] = $city;
+    $city1=strtolower($city);
+    if (is_numeric($city)) {
+        $_SESSION['city_error'] = "City should not be numeric";
+        header("Location: ../signup/signup.php");
+        die("WRONG city");
+    }
+}
+
 if (isset($_POST["username"]) && $_POST["username"] != "") {
     $username = $_POST["username"];
     $_SESSION['username'] = $username;
@@ -104,8 +116,8 @@ if (isset($_POST["password"]) && $_POST["password"] != "") {
     $password = hash("sha256", $password_text);
 }
 
-$mysql = $connection->prepare("INSERT INTO customers(first_name, last_name, email, date_of_birth, phone_number, address, username, password) VALUES (?,?,?,?,?,?,?,?)");
-$mysql->bind_param("ssssssss", $first_name, $last_name, $email, $date_of_birth, $phone_number, $address, $username, $password);
+$mysql = $connection->prepare("INSERT INTO customers(first_name, last_name, email, date_of_birth, phone_number, address,city, username, password) VALUES (?,?,?,?,?,?,?,?,?)");
+$mysql->bind_param("sssssssss", $first_name, $last_name, $email, $date_of_birth, $phone_number, $address,$city1, $username, $password);
 $mysql->execute();
 $mysql->close();
 // header("Location:../home-page/home-page.php");

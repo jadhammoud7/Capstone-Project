@@ -101,6 +101,18 @@
                                                                                             echo $_SESSION['address'];
                                                                                           } ?>" required>
 
+        <p class="error" id="city_error">
+          <?php
+          if (isset($_SESSION['city_error'])) {
+            echo "<script>document.getElementById('city_error').style.display='block';</script>";
+            echo $_SESSION['city_error'];
+            unset($_SESSION['city_error']);
+          } ?>
+        </p>
+        <label for="city"><b>City</b></label>
+        <input type="text" placeholder="Enter city" name="city" id="city" value="<?php if (isset($_SESSION['city'])) {
+                                                                                            echo $_SESSION['city'];
+                                                                                          } ?>" required>
 
         <p class="error" id="username_error">
           <?php
