@@ -19,10 +19,17 @@ if (isset($_GET['customer_id'])) {
     $result_customer = $stmt_get_customer->get_result();
     $row_customer = $result_customer->fetch_assoc();
 
-    //to display products in table summary
-    // $stmt_get_checkout_products = $connection->prepare("SELECT product_id, quantity, total_price FROM checkouts_customers_products WHERE checkout_id = '" . $_GET['checkout_id'] . "' ");
-    // $stmt_get_checkout_products->execute();
-    // $results_get_checkout_products = $stmt_get_checkout_products->get_result();
+    //get appointments for this customer
+    $query_get_customer_appointments = "SELECT appointment_id, appointment_name, date, hour, status FROM appointments WHERE customer_id = '" . $_GET['customer_id'] . "'";
+    $stmt_get_customer_appointments = $connection->prepare($query_get_customer_appointments);
+    $stmt_get_customer_appointments->execute();
+    $results_get_customer_appointments = $stmt_get_customer_appointments->get_result();
+
+    //get checkouts for this customer
+    $query_get_customer_checkouts = "SELECT * FROM checkouts WHERE customer_id = '" . $_GET['customer_id'] . "'";
+    $stmt_get_customer_checkouts = $connection->prepare($query_get_customer_checkouts);
+    $stmt_get_customer_checkouts->execute();
+    $results_get_customer_checkouts = $stmt_get_customer_checkouts->get_result();
 
     //sum of all comments
     $query_total_comments = "SELECT COUNT(*) as count FROM comments WHERE username = '" . $row_customer['username'] . "'";
@@ -51,20 +58,45 @@ if (isset($_GET['customer_id'])) {
     $stmt_total_checkouts->execute();
     $results_total_checkouts = $stmt_total_checkouts->get_result();
     $row_total_checkouts = $results_total_checkouts->fetch_assoc();
+
+    //get count of appointments pending
+    $status = "Pending";
+    $query_get_pending_appointments = "SELECT COUNT(*) as total_pending_appointments FROM appointments WHERE status=? AND customer_id = '" . $_GET['customer_id'] . "'";
+    $stmt_get_pending_appointments = $connection->prepare($query_get_pending_appointments);
+    $stmt_get_pending_appointments->bind_param("s", $status);
+    $stmt_get_pending_appointments->execute();
+    $results_get_pending_appointments = $stmt_get_pending_appointments->get_result();
+    $row_get_pending_appointments = $results_get_pending_appointments->fetch_assoc();
+
+    //get count of appointments done work
+    $status = "Done Work";
+    $query_get_done_appointments = "SELECT COUNT(*) as total_done_appointments FROM appointments WHERE status=? AND customer_id = '" . $_GET['customer_id'] . "'";
+    $stmt_get_done_appointments = $connection->prepare($query_get_done_appointments);
+    $stmt_get_done_appointments->bind_param("s", $status);
+    $stmt_get_done_appointments->execute();
+    $results_get_done_appointments = $stmt_get_done_appointments->get_result();
+    $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
+
+    //updating working status from buttons
+    if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
+        $working_status = $_GET['set_to_done'];
+        $appointmentID = $_GET['getAppointmentID'];
+        $status = "";
+        if ($working_status == "true") {
+            $status = "Done Work";
+            $query_settodone = $connection->prepare("UPDATE appointments SET status=? WHERE appointment_id='" . $appointmentID . "'");
+            $query_settodone->bind_param("s", $status);
+            $query_settodone->execute();
+            header("Location:../customer-admin/customer-details.php?customer_id=" . $_GET['customer_id']);
+        } else if ($working_status == "false") {
+            $status = "Pending";
+            $query_settodone = $connection->prepare("UPDATE appointments SET status=? WHERE appointment_id='" . $appointmentID . "'");
+            $query_settodone->bind_param("s", $status);
+            $query_settodone->execute();
+            header("Location:../customer-admin/customer-details.php?customer_id=" . $_GET['customer_id']);
+        }
+    }
 }
-
-//for product summary in checkout
-// function checkout_products_connection($name, $quantity, $price)
-// {
-//     $element = "
-//     <tr>
-//         <td>$name</td>
-//         <td>$quantity</td>
-//         <td>$price$</td>
-//     </tr>";
-
-//     echo $element;
-// }
 
 ?>
 
@@ -207,7 +239,7 @@ if (isset($_GET['customer_id'])) {
 
             <!-- started with checkout form -->
             <div>
-                <div class="billing-details">
+                <div class="details">
                     <h2>Customer Details</h2>
                     <div class="form-container">
                         <form>
@@ -263,8 +295,8 @@ if (isset($_GET['customer_id'])) {
                                     <div class="input-container">
 
                                         <input type="text" name="city" id="city" value="<?php if (isset($row_customer)) {
-                                                                                                    echo $row_customer['city'];
-                                                                                                } ?>" readonly class="is-valid">
+                                                                                            echo $row_customer['city'];
+                                                                                        } ?>" readonly class="is-valid">
                                         <label for="city">City</label>
                                     </div>
                                 </div>
@@ -292,39 +324,49 @@ if (isset($_GET['customer_id'])) {
                         </form>
                     </div>
                 </div>
-                <!-- <div class="order-summary">
-                    <h2>Order Summary</h2>
-                    <table id="order-products">
-                        <tr>
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Total Price</th>
-                        </tr>
-                        <?php
-                        while ($row_get_checkout_products = $results_get_checkout_products->fetch_assoc()) {
-                            $stmt_get_product = $connection->prepare("SELECT name, price FROM products WHERE product_id = '" . $row_get_checkout_products["product_id"] . "' ");
-                            $stmt_get_product->execute();
-                            $results_get_product = $stmt_get_product->get_result();
-                            $row_get_product = $results_get_product->fetch_assoc();
-                            checkout_products_connection($row_get_product['name'], $row_get_checkout_products['quantity'], $row_get_checkout_products['total_price']);
-                        }
-                        ?>
-                    </table>
-                    <table id="order-totals">
-                        <tr>
-                            <th>Subtotal</th>
-                            <td><?php echo $row_checkout['total_price']; ?>$</td>
-                        </tr>
-                        <tr>
-                            <th>Taxes</th>
-                            <td><?php echo $row_checkout['tax_price']; ?>$</td>
-                        </tr>
-                        <tr>
-                            <th>Total</th>
-                            <td><?php echo $row_checkout['total_price_including_tax']; ?>$</td>
-                        </tr>
-                    </table>
-                </div> -->
+                <div class="recent-grid" style="grid-template-columns: 100%;">
+                    <div class="projects">
+                        <div class="card">
+                            <div class="card-header" style="text-align: center;">
+                                <canvas id="AppointmentsChart" style="width: 100%; max-width: 600px;"></canvas>
+                            </div>
+                            <div class="card-header">
+                                <h3>Appointments from <?php echo $row_customer['first_name']; ?> <?php echo $row_customer['last_name']; ?></h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table width="100%">
+                                        <thead>
+                                            <tr>
+                                                <td>Appointment Name</td>
+                                                <td>Date</td>
+                                                <td>Hour</td>
+                                                <td>Status</td>
+                                                <td>Change Status</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            require('../php/admin_page_php.php');
+                                            while ($row_get_appointments = $results_get_customer_appointments->fetch_assoc()) {
+                                                echo get_appointments_in_customer_details(
+                                                    $row_get_appointments['appointment_id'],
+                                                    $row_get_appointments['appointment_name'],
+                                                    $row_get_appointments['date'],
+                                                    $row_get_appointments['hour'],
+                                                    $row_get_appointments['status']
+                                                );
+                                            }
+                                            ?>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="checkout-buttons">
                     <button class="back_to_shoppingbasket" onclick="window.location.href='../checkouts-admin/checkouts-admin.php';" title="Return to checkouts list"><span class="las la-arrow-left"></span>Return to
                         Checkouts List</button>
@@ -340,6 +382,32 @@ if (isset($_GET['customer_id'])) {
     <!-- ended return to top button -->
 </body>
 <script src="../admin-main/admin-main.js"></script>
+<script src="customer-details.js"></script>
+<script>
 
+    var xValuesAppointments = ["Pending Appointments", "Done Appointments"];
+    var yValuesAppointments = [<?php echo $row_get_pending_appointments['total_pending_appointments']; ?>, <?php echo $row_get_done_appointments['total_done_appointments']; ?>]
+    var barColorsAppointments = [
+        "#b91d47",
+        "#00aba9"
+    ]
+
+    new Chart("AppointmentsChart", {
+        type: "pie",
+        data: {
+            labels: xValuesAppointments,
+            datasets: [{
+                backgroundColor: barColorsAppointments,
+                data: yValuesAppointments
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Distribution of All Appointments"
+            }
+        }
+    });
+</script>
 
 </html>

@@ -4,7 +4,7 @@ include("connection.php");
 function get_appointment_in_admin_page_for_table_connection($appointment_id, $customer_name, $appointment_name, $date, $hour, $status)
 {
     $element = "
-    <tr class=\"hi\">
+    <tr>
         <td>$appointment_name</td>
         <td>$customer_name</td>
         <td>$date</td>
@@ -20,6 +20,26 @@ function get_appointment_in_admin_page_for_table_connection($appointment_id, $cu
         </td>
     </tr>
     ";
+    echo $element;
+}
+
+function get_appointments_in_customer_details($appointment_id, $appointment_name, $date, $hour, $status)
+{
+    $element = "
+    <tr>
+        <td>$appointment_name</td>
+        <td>$date</td>
+        <td>$hour</td>
+        <td>
+            <span class=\"status red\"></span>
+            <a class=\"status_btn\">$status</a>
+        </td>
+        <td>
+            <a>
+                <button class=\"btn_done_work\" id=\"SetStatusButton\" onclick=\"SetAppointmentID($appointment_id)\"></button>
+            </a>
+        </td>
+    </tr>";
     echo $element;
 }
 
