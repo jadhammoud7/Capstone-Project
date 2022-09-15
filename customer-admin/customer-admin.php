@@ -46,7 +46,7 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 //get all customer
 require_once("../php/admin_page_php.php");
-$query_customer = "SELECT customer_id,first_name,last_name,username,phone_number,email,date_of_birth,address FROM customers";
+$query_customer = "SELECT customer_id, first_name, last_name, username, phone_number, email, date_of_birth, city, address FROM customers";
 $stmt_customer = $connection->prepare($query_customer);
 $stmt_customer->execute();
 $results_customer = $stmt_customer->get_result();
@@ -241,6 +241,7 @@ $results_location = $stmt_location->get_result();
                                             <td>Username</td>
                                             <td>Email</td>
                                             <td>Phone Number</td>
+                                            <td>City</td>
                                             <td>Address</td>
                                             <td>Date of Birth</td>
                                             <td>Remove Customer</td>
@@ -256,6 +257,7 @@ $results_location = $stmt_location->get_result();
                                                 $row_customer['username'],
                                                 $row_customer['email'],
                                                 $row_customer['phone_number'],
+                                                $row_customer['city'],
                                                 $row_customer['address'],
                                                 $row_customer['date_of_birth']
                                             );
@@ -279,15 +281,15 @@ $results_location = $stmt_location->get_result();
 <script src="customer-admin.js"></script>
 <script src="../admin-main/admin-main.js"></script>
 <script>
-    const array = [];
-    const array_count = [];
+    const array_cities = [];
+    const array_cities_count = [];
     <?php
     if (isset($results_location)) {
         while ($row_location = $results_location->fetch_assoc()) {
     ?>
-            array.push("<?php
-                        echo $row_location['city'];
-                        ?>");
+            array_cities.push("<?php
+                                echo $row_location['city'];
+                                ?>");
             <?php
             $query_location_count = "SELECT COUNT(city) as city FROM customers WHERE city='" . $row_location['city'] . "'";
             $stmt_location_count = $connection->prepare($query_location_count);
@@ -296,33 +298,31 @@ $results_location = $stmt_location->get_result();
             $row_location_count = $results_location_count->fetch_assoc();
             ?>
 
-            array_count.push("<?php
-                                echo $row_location_count['city'];
-                                ?>");
+            array_cities_count.push("<?php
+                                        echo $row_location_count['city'];
+                                        ?>");
     <?php }
     }
     ?>;
-    var xValues = array;
-    var yValues = array_count;
-    var colorsss = [];
-    const size = array.length;
-    getNewColor(0);
+    var xValues = array_cities;
+    var yValues = array_cities_count;
+    var random_colors = [];
+
+    const size = array_cities.length;
 
     function getNewColor(start) {
         for (var i = start; i < size; i++) {
-            const random = "#" + Math.floor(Math.random()*(255 + 1));
-            if (colorsss.values != random) {
-                colorsss.push(random);
+            const random = "#" + Math.floor(Math.random() * (255 + 1));
+            if (random_colors.values != random) {
+                random_colors.push(random);
             } else {
                 getNewColor(i);
             }
         }
     }
+    getNewColor(0);
 
-
-
-
-    var barColors = colorsss;
+    var barColors = random_colors;
     new Chart("myChart", {
         type: "pie",
         data: {

@@ -67,7 +67,7 @@ function get_comments_connection($username, $comment)
     echo $element;
 }
 
-function get_all_customer_connection($customer_id, $first_name, $last_name, $username, $email, $phone_number, $address, $date_of_birth)
+function get_all_customer_connection($customer_id, $first_name, $last_name, $username, $email, $phone_number, $city, $address, $date_of_birth)
 {
     $element = "
     <tr>
@@ -75,6 +75,7 @@ function get_all_customer_connection($customer_id, $first_name, $last_name, $use
         <td>$username</td>
         <td>$email</td>
         <td>$phone_number</td>
+        <td>$city</td>
         <td>$address</td>
         <td>$date_of_birth</td>
         <td>
