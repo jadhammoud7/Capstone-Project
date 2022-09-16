@@ -42,7 +42,7 @@ form {
     background-color: #dcdcdc;
 }
 
-label {
+.input-container label {
     display: block;
     position: absolute;
     top: 50%;

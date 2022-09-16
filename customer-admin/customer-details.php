@@ -2,6 +2,7 @@
 
 session_start();
 include("../php/connection.php");
+require('../php/admin_page_php.php');
 
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
@@ -97,6 +98,16 @@ if (isset($_GET['customer_id'])) {
         }
     }
 
+
+    //get count of checkouts pending
+    $status = "Pending";
+    $query_get_pending_checkouts = "SELECT COUNT(*) as total_pending_checkouts FROM checkouts WHERE status=? AND customer_id = '" . $_GET['customer_id'] . "'";
+    $stmt_get_pending_checkouts = $connection->prepare($query_get_pending_checkouts);
+    $stmt_get_pending_checkouts->bind_param("s", $status);
+    $stmt_get_pending_checkouts->execute();
+    $results_get_pending_checkouts = $stmt_get_pending_checkouts->get_result();
+    $row_get_pending_checkouts = $results_get_pending_checkouts->fetch_assoc();
+
     //get count of checkouts done work
     $status = "Done Work";
     $query_get_done_checkouts = "SELECT COUNT(*) as total_done_checkouts FROM checkouts WHERE status=?";
@@ -116,13 +127,13 @@ if (isset($_GET['customer_id'])) {
             $query_settodone = $connection->prepare("UPDATE checkouts SET status=? WHERE checkout_id='" . $checkoutID . "'");
             $query_settodone->bind_param("s", $status);
             $query_settodone->execute();
-            header("Location:../checkouts-admin/checkouts-admin.php");
+            header("Location:../customer-admin/customer-details.php?customer_id=" . $_GET['customer_id']);
         } else if ($working_status == "false") {
             $status = "Pending";
             $query_settodone = $connection->prepare("UPDATE checkouts SET status=? WHERE checkout_id='" . $checkoutID . "'");
             $query_settodone->bind_param("s", $status);
             $query_settodone->execute();
-            header("Location:../checkouts-admin/checkouts-admin.php");
+            header("Location:../customer-admin/customer-details.php?customer_id=" . $_GET['customer_id']);
         }
     }
 }
@@ -147,7 +158,7 @@ if (isset($_GET['customer_id'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 
-<body>
+<body onunload="myFunction()">
 
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
@@ -214,7 +225,7 @@ if (isset($_GET['customer_id'])) {
                 <label for="nav-toggle">
                     <span><i class="las la-bars"></i></span>
                 </label>
-                Customer Detail
+                Customer Details
             </h2>
 
             <div class="user-wrapper">
@@ -356,39 +367,50 @@ if (isset($_GET['customer_id'])) {
                 <div class="recent-grid" style="grid-template-columns: 100%;">
                     <div class="projects">
                         <div class="card">
-                            <div class="card-header" style="text-align: center;">
-                                <canvas id="AppointmentsChart" style="width: 100%; max-width: 600px;"></canvas>
-                            </div>
+                            <?php
+                            if ($results_get_customer_appointments) {
+                            ?>
+                                <div class="card-header">
+                                    <canvas id="AppointmentsChart"></canvas>
+                                </div>
+                            <?php
+                            }
+                            ?>
                             <div class="card-header">
                                 <h3>Appointments from <?php echo $row_customer['first_name']; ?> <?php echo $row_customer['last_name']; ?></h3>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table width="100%">
-                                        <thead>
-                                            <tr>
-                                                <td>Appointment Name</td>
-                                                <td>Date</td>
-                                                <td>Hour</td>
-                                                <td>Status</td>
-                                                <td>Change Status</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            require('../php/admin_page_php.php');
-                                            while ($row_get_appointments = $results_get_customer_appointments->fetch_assoc()) {
-                                                echo get_appointments_in_customer_details(
-                                                    $row_get_appointments['appointment_id'],
-                                                    $row_get_appointments['appointment_name'],
-                                                    $row_get_appointments['date'],
-                                                    $row_get_appointments['hour'],
-                                                    $row_get_appointments['status']
-                                                );
-                                            }
-                                            ?>
-                                        </tbody>
-
+                                        <?php
+                                        if (!$results_get_customer_appointments) {
+                                            echo "This customer has not any appointments yet";
+                                        } else { ?>
+                                            <thead>
+                                                <tr>
+                                                    <td>Appointment Name</td>
+                                                    <td>Date</td>
+                                                    <td>Hour</td>
+                                                    <td>Status</td>
+                                                    <td>Change Status</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                while ($row_get_appointments = $results_get_customer_appointments->fetch_assoc()) {
+                                                    echo get_appointments_in_customer_details(
+                                                        $row_get_appointments['appointment_id'],
+                                                        $row_get_appointments['appointment_name'],
+                                                        $row_get_appointments['date'],
+                                                        $row_get_appointments['hour'],
+                                                        $row_get_appointments['status']
+                                                    );
+                                                }
+                                                ?>
+                                            </tbody>
+                                        <?php
+                                        }
+                                        ?>
                                     </table>
                                 </div>
                             </div>
@@ -399,47 +421,56 @@ if (isset($_GET['customer_id'])) {
                 <div class="recent-grid" style="grid-template-columns: 100%;">
                     <div class="projects">
                         <div class="card">
-                            <div class="card-header" style="text-align: center;">
-                                <canvas id="AppointmentsChart" style="width: 100%; max-width: 600px;"></canvas>
-                            </div>
+                            <?php
+                            if ($results_get_customer_checkouts) {
+                            ?>
+                                <div class="card-header">
+                                    <canvas id="CheckoutsChart"></canvas>
+                                </div>
+                            <?php } ?>
                             <div class="card-header">
                                 <h3>Checkouts from <?php echo $row_customer['first_name']; ?> <?php echo $row_customer['last_name']; ?></h3>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table width="100%">
-                                        <thead>
-                                            <tr>
-                                                <td>Customer Name</td>
-                                                <td>Email</td>
-                                                <td>Phone Number</td>
-                                                <td>Total Price</td>
-                                                <td>Total Price Inc. Tax</td>
-                                                <td>Date</td>
-                                                <td>Status</td>
-                                                <td>Change Status</td>
-                                                <td>View Order</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            while ($row_get_checkouts = $results_get_customer_checkouts->fetch_assoc()) {
-                                                get_all_checkouts_connection(
-                                                    $row_get_checkouts['checkout_id'],
-                                                    $row_get_checkouts['customer_id'],
-                                                    $row_get_checkouts['first_name'],
-                                                    $row_get_checkouts['last_name'],
-                                                    $row_get_checkouts['email'],
-                                                    $row_get_checkouts['phone_number'],
-                                                    $row_get_checkouts['total_price'],
-                                                    $row_get_checkouts['total_price_including_tax'],
-                                                    $row_get_checkouts['date'],
-                                                    $row_get_checkouts['status']
-                                                );
-                                            }
-                                            ?>
-                                        </tbody>
-
+                                        <?php
+                                        if (!$results_get_customer_checkouts) {
+                                            echo "This customer has not any checkouts yet";
+                                        } else { ?>
+                                            <thead>
+                                                <tr>
+                                                    <td>Customer Name</td>
+                                                    <td>Email</td>
+                                                    <td>Phone Number</td>
+                                                    <td>Total Price</td>
+                                                    <td>Total Price Inc. Tax</td>
+                                                    <td>Date</td>
+                                                    <td>Status</td>
+                                                    <td>Change Status</td>
+                                                    <td>View Order</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                while ($row_get_checkouts = $results_get_customer_checkouts->fetch_assoc()) {
+                                                    echo get_all_checkouts_connection(
+                                                        $row_get_checkouts['checkout_id'],
+                                                        $row_get_checkouts['customer_id'],
+                                                        $row_get_checkouts['first_name'],
+                                                        $row_get_checkouts['last_name'],
+                                                        $row_get_checkouts['email'],
+                                                        $row_get_checkouts['phone_number'],
+                                                        $row_get_checkouts['total_price'],
+                                                        $row_get_checkouts['total_price_including_tax'],
+                                                        $row_get_checkouts['date'],
+                                                        $row_get_checkouts['status']
+                                                    );
+                                                }
+                                                ?>
+                                            </tbody>
+                                        <?php
+                                        } ?>
                                     </table>
                                 </div>
                             </div>
@@ -484,6 +515,30 @@ if (isset($_GET['customer_id'])) {
             title: {
                 display: true,
                 text: "Distribution of All Appointments"
+            }
+        }
+    });
+
+    var xValuesCheckouts = ["Pending Checkouts", "Done Checkouts"];
+    var yValuesCheckouts = [<?php echo $row_get_pending_checkouts['total_pending_checkouts']; ?>, <?php echo $row_get_done_checkouts['total_done_checkouts']; ?>]
+    var barColorsCheckouts = [
+        "#b91d47",
+        "#00aba9"
+    ]
+
+    new Chart("CheckoutsChart", {
+        type: "pie",
+        data: {
+            labels: xValuesCheckouts,
+            datasets: [{
+                backgroundColor: barColorsCheckouts,
+                data: yValuesCheckouts
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Distribution of All Checkouts"
             }
         }
     });

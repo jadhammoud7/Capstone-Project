@@ -224,7 +224,7 @@ $results_location = $stmt_location->get_result();
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
-                            <canvas id="myChart" style="width: 100%; max-width: 600px;"></canvas>
+                            <canvas id="myChart"></canvas>
                         </div>
                     </div>
                     <div class="card">
