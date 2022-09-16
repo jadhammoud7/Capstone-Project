@@ -88,6 +88,30 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
         header("Location:../checkouts-admin/checkouts-admin.php");
     }
 }
+//sum checkouts depending on privces
+$query_condition_1 = "SELECT COUNT(total_price_including_tax) as total_price_including_tax FROM checkouts WHERE total_price_including_tax BETWEEN 0.0 AND 100.0";
+$stmt_condition_1 = $connection->prepare($query_condition_1);
+$stmt_condition_1->execute();
+$results_condition_1= $stmt_condition_1->get_result();
+$row_condition_1 = $results_condition_1->fetch_assoc();
+
+$query_condition_2 = "SELECT COUNT(total_price_including_tax) as total_price_including_tax FROM checkouts WHERE total_price_including_tax BETWEEN 101.0 AND 300.0";
+$stmt_condition_2 = $connection->prepare($query_condition_2);
+$stmt_condition_2->execute();
+$results_condition_2= $stmt_condition_2->get_result();
+$row_condition_2 = $results_condition_2->fetch_assoc();
+
+$query_condition_3 = "SELECT COUNT(total_price_including_tax) as total_price_including_tax FROM checkouts WHERE total_price_including_tax BETWEEN 301.0 AND 1000.0";
+$stmt_condition_3 = $connection->prepare($query_condition_3);
+$stmt_condition_3->execute();
+$results_condition_3= $stmt_condition_3->get_result();
+$row_condition_3 = $results_condition_3->fetch_assoc();
+
+$query_condition_4 = "SELECT COUNT(total_price_including_tax) as total_price_including_tax FROM checkouts WHERE total_price_including_tax >1001.0";
+$stmt_condition_4 = $connection->prepare($query_condition_4);
+$stmt_condition_4->execute();
+$results_condition_4= $stmt_condition_4->get_result();
+$row_condition_4 = $results_condition_4->fetch_assoc();
 
 ?>
 
@@ -234,7 +258,8 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
                 </div>
             </div>
             <div>
-                <canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
+                <canvas id="myChart" style="width: 100%; max-width: 600px; float:left"></canvas>
+                <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
             </div>
             <div class="recent-grid" style="display: block !important;">
                 <div class="projects">
@@ -313,6 +338,66 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
             title: {
                 display: true,
                 text: "Distribution of All Checkouts By Status"
+            }
+        }
+    });
+        //start of t=second chart
+        const prices_count=[];
+    <?php
+    if (isset($results_condition_1) ) {
+    ?>
+            prices_count.push("<?php
+                                echo $row_condition_1['total_price_including_tax'];
+                                ?>");
+    <?php }
+    ?>;
+        <?php
+    if (isset($results_condition_2) ) {
+    ?>
+            prices_count.push("<?php
+                                echo $row_condition_2['total_price_including_tax'];
+                                ?>");
+    <?php }
+    ?>;
+        <?php
+    if (isset($results_condition_3) ) {
+    ?>
+            prices_count.push("<?php
+                                echo $row_condition_3['total_price_including_tax'];
+                                ?>");
+    <?php }
+    ?>;
+        <?php
+    if (isset($results_condition_4) ) {
+    ?>
+            prices_count.push("<?php
+                                echo $row_condition_4['total_price_including_tax'];
+                                ?>");
+    <?php }
+    ?>;
+
+    var xValues = ["Between 0$ and 100$","Between 100$ and 300$","Between 300$ and 1000$","Greater than 1000$"];
+    console.log(xValues);
+    var yValues = prices_count;
+    console.log(yValues);
+    var barColors = ["red", "green", "blue", "orange"];
+
+    new Chart("myChart2", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            title: {
+                display: true,
+                text: "Prices"
             }
         }
     });
