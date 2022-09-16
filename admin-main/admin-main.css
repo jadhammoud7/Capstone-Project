@@ -211,7 +211,7 @@ table {
     grid-gap: 2rem;
 }
 
-.recent-grid-complete{
+.recent-grid-complete {
     margin-top: 3.5rem;
     display: grid;
     grid-template-columns: 100%;
@@ -276,12 +276,13 @@ td .status_checkout {
     background: red;
 }
 
-canvas{
+
+canvas {
     width: 100%;
     max-height: 600px;
 }
 
-.sidebar-menu ul li a span:first-child{
+.sidebar-menu ul li a span:first-child {
     font-size: 1.5rem;
 }
 
@@ -342,9 +343,10 @@ tr td:last-child {
     color: var(--main-color);
 }
 
-.customer_link{
+.customer_link {
     color: #222 !important;
 }
+
 .customer_link:hover {
     text-decoration-line: underline !important;
     color: #4169e1 !important;
@@ -521,6 +523,10 @@ td .work_set_to_done {
 
 tr:nth-child(even) {
     background-color: #dddddd;
+}
+
+tbody tr:hover {
+    background-color: rgba(38, 143, 241, 0.644);
 }
 
 .remove_cust {

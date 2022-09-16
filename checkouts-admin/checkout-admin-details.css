@@ -41,7 +41,7 @@ form {
     background-color: #dcdcdc;
 }
 
-label {
+.input-container label {
     display: block;
     position: absolute;
     top: 50%;
@@ -52,6 +52,7 @@ label {
     --webkit-user-select: none;
     transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1), color 150ms cubic-bezier(0.4, 0, 0.2, 1), top 500ms;
 }
+
 
 input {
     width: 100%;
@@ -182,13 +183,13 @@ input.is-valid+label {
     color: black;
 }
 
-@media screen and (max-width: 500px){
-    .form-container-part-inputs{
+@media screen and (max-width: 500px) {
+    .form-container-part-inputs {
         display: flex;
         flex-direction: column;
     }
 
-    .input-container{
+    .input-container {
         width: max-content !important;
     }
 }

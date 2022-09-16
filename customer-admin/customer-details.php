@@ -136,6 +136,12 @@ if (isset($_GET['customer_id'])) {
             header("Location:../customer-admin/customer-details.php?customer_id=" . $_GET['customer_id']);
         }
     }
+
+    //get all comments from this customer
+    $query_get_customer_comments = "SELECT comment FROM comments WHERE customer_id = '" . $_GET['customer_id'] . "'";
+    $stmt_get_customer_comments = $connection->prepare($query_get_customer_comments);
+    $stmt_get_customer_comments->execute();
+    $results_get_customer_comments = $stmt_get_customer_comments->get_result();
 }
 
 ?>
@@ -388,11 +394,11 @@ if (isset($_GET['customer_id'])) {
                                         } else { ?>
                                             <thead>
                                                 <tr>
-                                                    <td>Appointment Name</td>
-                                                    <td>Date</td>
-                                                    <td>Hour</td>
-                                                    <td>Status</td>
-                                                    <td>Change Status</td>
+                                                    <td title="Name of the serive or repair work requested">Appointment Name</td>
+                                                    <td title="Date of the appointment to be done according to the customer's choice">Date</td>
+                                                    <td title="The hour of the appointment to be tasked">Hour</td>
+                                                    <td title="The current progress or status of the appointment, can be pending (in progress or not started yet) or work done (appointment done completely)">Status</td>
+                                                    <td title="Change status of the appointment from pending to work done and vice versa">Change Status</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -440,15 +446,15 @@ if (isset($_GET['customer_id'])) {
                                         } else { ?>
                                             <thead>
                                                 <tr>
-                                                    <td>Customer Name</td>
-                                                    <td>Email</td>
-                                                    <td>Phone Number</td>
-                                                    <td>Total Price</td>
-                                                    <td>Total Price Inc. Tax</td>
-                                                    <td>Date</td>
-                                                    <td>Status</td>
-                                                    <td>Change Status</td>
-                                                    <td>View Order</td>
+                                                    <td title="Name of the customer who requested the order">Customer Name</td>
+                                                    <td title="The email of the customer who will receive the order">Email</td>
+                                                    <td title="The phone number of the order receiver">Phone Number</td>
+                                                    <td title="Total price of the order, meaning the total of the prices of all products and their quantities">Total Price</td>
+                                                    <td title="The total price including tax rate added">Total Price Inc. Tax</td>
+                                                    <td title="The date the order was received by the customer">Date</td>
+                                                    <td title="The current status of the order, can be pending or work done">Status</td>
+                                                    <td title="Change status of the order to keep the customer in track of his/her order">Change Status</td>
+                                                    <td title="View more information about the order, related to billing detials and products ordered">View Order</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -465,6 +471,44 @@ if (isset($_GET['customer_id'])) {
                                                         $row_get_checkouts['total_price_including_tax'],
                                                         $row_get_checkouts['date'],
                                                         $row_get_checkouts['status']
+                                                    );
+                                                }
+                                                ?>
+                                            </tbody>
+                                        <?php
+                                        } ?>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-grid" style="grid-template-columns: 100%;">
+                    <div class="projects">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Comments from <?php echo $row_customer['first_name']; ?> <?php echo $row_customer['last_name']; ?></h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table width="100%">
+                                        <?php
+                                        if (!$results_get_customer_checkouts) {
+                                            echo "This customer has not any comments yet";
+                                        } else { ?>
+                                            <thead>
+                                                <tr>
+                                                    <td title="Name of the customer who added the comment">Customer Name</td>
+                                                    <td title="The comment the user shared to express his/her opinion, thought, or any concern related to the shop">Comment</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                while ($row_get_comments = $results_get_customer_comments->fetch_assoc()) {
+                                                    echo get_comments_connection(
+                                                        $row_customer['first_name'] . ' ' . $row_customer['last_name'],
+                                                        $row_get_comments['comment']
                                                     );
                                                 }
                                                 ?>
