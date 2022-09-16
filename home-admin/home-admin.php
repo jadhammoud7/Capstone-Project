@@ -301,7 +301,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
-                            <canvas id="AppointmentsChart" style="width: 100%; max-width: 600px;"></canvas>
+                            <canvas id="AppointmentsChart"></canvas>
                         </div>
                         <div class="card-header">
                             <h3>Recent Appointments</h3>
@@ -350,7 +350,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                     <div class="card">
 
                         <div class="card-header">
-                            <canvas id="myChart" style="width: 100%; max-width: 600px;"></canvas>
+                            <canvas id="myChart"></canvas>
                         </div>
 
                         <div class="card-header">
@@ -379,7 +379,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                 </div>
             </div>
 
-            <div class="recent-grid">
+            <div class="recent-grid-complete">
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
@@ -391,7 +391,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                                 <table width="100%">
                                     <thead>
                                         <tr>
-                                            <td>Customer Name</td>
+                                            <td>Customer Username</td>
                                             <td>Comment</td>
                                         </tr>
                                     </thead>
@@ -410,7 +410,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
 
             </div>
 
-            <div class="recent-grid">
+            <div class="recent-grid-complete">
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
@@ -425,13 +425,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                                             <td>Customer Name</td>
                                             <td>Email</td>
                                             <td>Phone Number</td>
-                                            <td>Shipping Country</td>
-                                            <td>Shipping Location</td>
-                                            <td>Shipping Company</td>
-                                            <td>PostCode</td>
-                                            <td>Order Notes</td>
                                             <td>Total Price</td>
-                                            <td>Tax Price</td>
                                             <td>Total Price Inc. Tax</td>
                                             <td>Date</td>
                                             <td>Status</td>
@@ -448,13 +442,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                                                 $row_checkouts['last_name'],
                                                 $row_checkouts['email'],
                                                 $row_checkouts['phone_number'],
-                                                $row_checkouts['shipping_country'],
-                                                $row_checkouts['shipping_location'],
-                                                $row_checkouts['shipping_company'],
-                                                $row_checkouts['postcode'],
-                                                $row_checkouts['order_notes'],
                                                 $row_checkouts['total_price'],
-                                                $row_checkouts['tax_price'],
                                                 $row_checkouts['total_price_including_tax'],
                                                 $row_checkouts['date'],
                                                 $row_checkouts['status']
