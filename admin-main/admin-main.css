@@ -278,6 +278,11 @@ td .status_checkout {
 
 canvas{
     width: 100%;
+    max-height: 500px;
+}
+
+.sidebar-menu ul li a span:first-child{
+    font-size: 1.5rem;
 }
 
 /* 

@@ -20,7 +20,7 @@ function SetButton(status, button, status_color) {
 }
 function SetButtonToPending(button, status_color) {
     button.innerHTML = "Pending";
-    button.title = "Set the status of this appointment to Pending";
+    button.title = "Set the status to Pending";
     button.style.color = "black";
     button.style.background = "red";
     status_color.style.background = "green";
@@ -28,7 +28,7 @@ function SetButtonToPending(button, status_color) {
 
 function SetButtonToDone(button, status_color) {
     button.innerHTML = "Done Work";
-    button.title = "Set the status of this appointment to Done";
+    button.title = "Set the status to Done";
     button.style.color = "white";
     button.style.background = "royalblue";
     status_color.style.background = "red";

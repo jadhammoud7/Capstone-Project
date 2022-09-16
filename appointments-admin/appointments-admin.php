@@ -239,8 +239,8 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                 </div>
             </div>
             <div>
-                <canvas id="myChart" style="width: 100%; max-width: 600px;float:left;"></canvas>
-                <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
+                <canvas id="myChart"></canvas>
+                <canvas id="myChart2"></canvas>
             </div>
             <div class="recent-grid" style="display: block !important;">
                 <div class="projects">
@@ -298,7 +298,6 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
 <script src="appointments-admin.js"></script>
 <script src="../admin-main/admin-main.js"></script>
 <script>
-
     var xValues = ["Pending Appointments", "Done Appointments"];
     var yValues = [<?php echo $row_get_pending_appointments['total_pending_appointments']; ?>, <?php echo $row_get_done_appointments['total_done_appointments']; ?>]
     var barColors = [
@@ -324,12 +323,11 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
     });
 
     //start of t=second chart
-    const type_array=[];
-    const array_repair_count=[];
+    const type_array = [];
+    const array_repair_count = [];
     <?php
     if (isset($results_type_of_repairs)) {
-        while ($row_type_of_repairs = $results_type_of_repairs->fetch_assoc()
-        ) {
+        while ($row_type_of_repairs = $results_type_of_repairs->fetch_assoc()) {
     ?>
             type_array.push("<?php
                                 echo $row_type_of_repairs['repair_type'];
@@ -352,7 +350,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
     console.log(xValues);
     var yValues = array_repair_count;
     console.log(yValues);
-    var barColors = ["red", "green", "blue", "orange", "brown","purple","yellow"];
+    var barColors = ["red", "green", "blue", "orange", "brown", "purple", "yellow"];
 
     new Chart("myChart2", {
         type: "bar",
