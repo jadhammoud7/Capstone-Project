@@ -89,7 +89,10 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
     }
 }
 //get all types of repairs
-
+$query_type_of_repairs = "SELECT repair_type as repair_type FROM repair";
+$stmt_type_of_repairs = $connection->prepare($query_type_of_repairs);
+$stmt_type_of_repairs->execute();
+$results_type_of_repairs = $stmt_type_of_repairs->get_result();
 
 ?>
 
@@ -295,6 +298,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
 <script src="appointments-admin.js"></script>
 <script src="../admin-main/admin-main.js"></script>
 <script>
+
     var xValues = ["Pending Appointments", "Done Appointments"];
     var yValues = [<?php echo $row_get_pending_appointments['total_pending_appointments']; ?>, <?php echo $row_get_done_appointments['total_done_appointments']; ?>]
     var barColors = [
@@ -318,8 +322,36 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
             }
         }
     });
-    var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-    var yValues = [55, 49, 44, 24, 15];
+
+    //start of t=second chart
+    const type_array=[];
+    const array_repair_count=[];
+    <?php
+    if (isset($results_type_of_repairs)) {
+        while ($row_type_of_repairs = $results_type_of_repairs->fetch_assoc()
+        ) {
+    ?>
+            type_array.push("<?php
+                                echo $row_type_of_repairs['repair_type'];
+                                ?>");
+            <?php
+            $query_repair_count = "SELECT COUNT(appointment_name) as repair_count FROM appointments WHERE appointment_name='" . $row_type_of_repairs['repair_type'] . "'";
+            $stmt_repair_count = $connection->prepare($query_repair_count);
+            $stmt_repair_count->execute();
+            $results_repair_count = $stmt_repair_count->get_result();
+            $row_repair_count = $results_repair_count->fetch_assoc();
+            ?>
+
+            array_repair_count.push("<?php
+                                        echo $row_repair_count['repair_count'];
+                                        ?>");
+    <?php }
+    }
+    ?>;
+    var xValues = type_array;
+    console.log(xValues);
+    var yValues = array_repair_count;
+    console.log(yValues);
     var barColors = ["red", "green", "blue", "orange", "brown","purple","yellow"];
 
     new Chart("myChart2", {
@@ -337,7 +369,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
             },
             title: {
                 display: true,
-                text: "World Wine Production 2018"
+                text: "Chosen Repairs"
             }
         }
     });
