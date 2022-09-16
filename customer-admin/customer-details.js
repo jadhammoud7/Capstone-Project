@@ -5,6 +5,11 @@ function SetAppointmentID(appointment_id) {
     AppointmentID = appointment_id;
 }
 
+var CheckoutID;
+
+function SetCheckoutID(checkout_id) {
+    CheckoutID = checkout_id;
+}
 function SetButton(status, button, status_color) {
     if (status == "Pending")
         SetButtonToDone(button, status_color);
@@ -45,4 +50,25 @@ for (let i = 0; i < btn.length; i++) {
         }
     });
     SetButton(statusbtn[i].textContent, btn[i], status_color[i]);
+}
+
+
+const btn_checkout = document.getElementsByClassName('btn_done_work_checkout');
+const statusbtn_checkout = document.getElementsByClassName('status_btn_checkout');
+const status_color_checkout = document.getElementsByClassName('status_checkout red');
+
+
+for (let i = 0; i < btn_checkout.length; i++) {
+    btn_checkout[i].addEventListener('click', function handleClick() {
+        if (btn_checkout[i].innerHTML.includes("Done Work")) {
+            // SetButtonToPending(btn[i]);
+            window.location = current_url + '&getCheckoutID=' + CheckoutID + '&set_to_done=true';
+            //yaane heye pending w bade hawela la done
+        } else {
+            // SetButtonToDone(btn[i]);
+            window.location = current_url + '&getCheckoutID=' + CheckoutID + '&set_to_done=false';
+            //yane heye done w bade hawela la pending
+        }
+    });
+    SetButton(statusbtn_checkout[i].textContent, btn_checkout[i], status_color_checkout[i]);
 }

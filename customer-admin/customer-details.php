@@ -96,6 +96,35 @@ if (isset($_GET['customer_id'])) {
             header("Location:../customer-admin/customer-details.php?customer_id=" . $_GET['customer_id']);
         }
     }
+
+    //get count of checkouts done work
+    $status = "Done Work";
+    $query_get_done_checkouts = "SELECT COUNT(*) as total_done_checkouts FROM checkouts WHERE status=?";
+    $stmt_get_done_checkouts = $connection->prepare($query_get_done_checkouts);
+    $stmt_get_done_checkouts->bind_param("s", $status);
+    $stmt_get_done_checkouts->execute();
+    $results_get_done_checkouts = $stmt_get_done_checkouts->get_result();
+    $row_get_done_checkouts = $results_get_done_checkouts->fetch_assoc();
+
+    //updating working status from buttons
+    if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
+        $working_status = $_GET['set_to_done'];
+        $checkoutID = $_GET['getCheckoutID'];
+        $status = "";
+        if ($working_status == "true") {
+            $status = "Done Work";
+            $query_settodone = $connection->prepare("UPDATE checkouts SET status=? WHERE checkout_id='" . $checkoutID . "'");
+            $query_settodone->bind_param("s", $status);
+            $query_settodone->execute();
+            header("Location:../checkouts-admin/checkouts-admin.php");
+        } else if ($working_status == "false") {
+            $status = "Pending";
+            $query_settodone = $connection->prepare("UPDATE checkouts SET status=? WHERE checkout_id='" . $checkoutID . "'");
+            $query_settodone->bind_param("s", $status);
+            $query_settodone->execute();
+            header("Location:../checkouts-admin/checkouts-admin.php");
+        }
+    }
 }
 
 ?>
@@ -367,6 +396,57 @@ if (isset($_GET['customer_id'])) {
                     </div>
                 </div>
 
+                <div class="recent-grid" style="grid-template-columns: 100%;">
+                    <div class="projects">
+                        <div class="card">
+                            <div class="card-header" style="text-align: center;">
+                                <canvas id="AppointmentsChart" style="width: 100%; max-width: 600px;"></canvas>
+                            </div>
+                            <div class="card-header">
+                                <h3>Checkouts from <?php echo $row_customer['first_name']; ?> <?php echo $row_customer['last_name']; ?></h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table width="100%">
+                                        <thead>
+                                            <tr>
+                                                <td>Customer Name</td>
+                                                <td>Email</td>
+                                                <td>Phone Number</td>
+                                                <td>Total Price</td>
+                                                <td>Total Price Inc. Tax</td>
+                                                <td>Date</td>
+                                                <td>Status</td>
+                                                <td>Change Status</td>
+                                                <td>View Order</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            while ($row_get_checkouts = $results_get_customer_checkouts->fetch_assoc()) {
+                                                get_all_checkouts_connection(
+                                                    $row_get_checkouts['checkout_id'],
+                                                    $row_get_checkouts['customer_id'],
+                                                    $row_get_checkouts['first_name'],
+                                                    $row_get_checkouts['last_name'],
+                                                    $row_get_checkouts['email'],
+                                                    $row_get_checkouts['phone_number'],
+                                                    $row_get_checkouts['total_price'],
+                                                    $row_get_checkouts['total_price_including_tax'],
+                                                    $row_get_checkouts['date'],
+                                                    $row_get_checkouts['status']
+                                                );
+                                            }
+                                            ?>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="checkout-buttons">
                     <button class="back_to_shoppingbasket" onclick="window.location.href='../checkouts-admin/checkouts-admin.php';" title="Return to checkouts list"><span class="las la-arrow-left"></span>Return to
                         Checkouts List</button>
@@ -384,7 +464,6 @@ if (isset($_GET['customer_id'])) {
 <script src="../admin-main/admin-main.js"></script>
 <script src="customer-details.js"></script>
 <script>
-
     var xValuesAppointments = ["Pending Appointments", "Done Appointments"];
     var yValuesAppointments = [<?php echo $row_get_pending_appointments['total_pending_appointments']; ?>, <?php echo $row_get_done_appointments['total_done_appointments']; ?>]
     var barColorsAppointments = [
