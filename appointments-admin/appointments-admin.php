@@ -88,6 +88,8 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
         header("Location:../appointments-admin/appointments-admin.php");
     }
 }
+//get all types of repairs
+
 
 ?>
 
@@ -234,7 +236,8 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
                 </div>
             </div>
             <div>
-                <canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
+                <canvas id="myChart" style="width: 100%; max-width: 600px;float:left;"></canvas>
+                <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
             </div>
             <div class="recent-grid" style="display: block !important;">
                 <div class="projects">
@@ -312,6 +315,29 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
             title: {
                 display: true,
                 text: "Distribution of All Appointments"
+            }
+        }
+    });
+    var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+    var yValues = [55, 49, 44, 24, 15];
+    var barColors = ["red", "green", "blue", "orange", "brown","purple","yellow"];
+
+    new Chart("myChart2", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            title: {
+                display: true,
+                text: "World Wine Production 2018"
             }
         }
     });
