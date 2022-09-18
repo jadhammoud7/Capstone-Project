@@ -254,7 +254,6 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
                                             <td>Price</td>
                                             <td>Type</td>
                                             <td>Category</td>
-                                            <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -264,8 +263,7 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
                                                 $row_products['name'],
                                                 $row_products['price'],
                                                 $row_products['category'],
-                                                $row_products['type'],
-                                                $row_products['description']
+                                                $row_products['type']
                                             );
                                         }
                                         ?>
