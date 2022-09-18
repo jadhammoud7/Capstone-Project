@@ -19,27 +19,6 @@ if (isset($_GET['product_id'])) {
     $stmt_get_product->execute();
     $result_product = $stmt_get_product->get_result();
     $row_product = $result_product->fetch_assoc();
-
-    //count of all appointments
-    $query_total_appointments = "SELECT COUNT(*) as total_appointments FROM appointments WHERE customer_id = '" . $_GET['customer_id'] . "'";
-    $stmt_total_appointments = $connection->prepare($query_total_appointments);
-    $stmt_total_appointments->execute();
-    $results_total_appointments = $stmt_total_appointments->get_result();
-    $row_total_appointments = $results_total_appointments->fetch_assoc();
-
-    //sum of all appointments
-    $query_total_profit = "SELECT SUM(total_price_including_tax) as total_profit FROM checkouts WHERE customer_id = '" . $_GET['customer_id'] . "'";
-    $stmt_total_profit = $connection->prepare($query_total_profit);
-    $stmt_total_profit->execute();
-    $results_total_profit = $stmt_total_profit->get_result();
-    $row_total_profit = $results_total_profit->fetch_assoc();
-
-    //get total checkouts made
-    $query_total_checkouts = "SELECT COUNT(checkout_id) as total_checkouts FROM checkouts WHERE customer_id = '" . $_GET['customer_id'] . "'";
-    $stmt_total_checkouts = $connection->prepare($query_total_checkouts);
-    $stmt_total_checkouts->execute();
-    $results_total_checkouts = $stmt_total_checkouts->get_result();
-    $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 }
 
 ?>
@@ -141,289 +120,97 @@ if (isset($_GET['product_id'])) {
         </header>
 
         <main>
-            <div class="cards">
-                <div class="card-single">
-                    <div>
-                        <h1><?php echo  $row_total_comments['total_comments']; ?></h1>
-                        <span>Comments</span>
-                    </div>
-                    <div>
-                        <span class="las la-comments"></span>
-                    </div>
-                </div>
-                <div class="card-single">
-                    <div>
-                        <h1><?php echo $row_total_appointments['total_appointments'] ?></h1>
-                        <span>Appointments</span>
-                    </div>
-                    <div>
-                        <span class="las la-clipboard"></span>
-                    </div>
-                </div>
-                <div class="card-single">
-                    <div>
-                        <h1><?php echo $row_total_checkouts['total_checkouts'] ?></h1>
-                        <span>Chekouts</span>
-                    </div>
-                    <div>
-                        <span class="las la-shopping-bag"></span>
-                    </div>
-                </div>
-                <div class="card-single">
-                    <div>
-                        <h1>$<?php echo $row_total_profit['total_profit'] ?></h1>
-                        <span>Profit</span>
-                    </div>
-                    <div>
-                        <span class="las la-google-wallet"></span>
-                    </div>
-                </div>
-            </div>
-
             <!-- started with checkout form -->
             <div>
                 <div class="details">
                     <div class="card">
                         <div class="card-header">
-                            <h2>Customer Details</h2>
+                            <h2>Product Details</h2>
                         </div>
                         <div class="form-container card-body">
                             <form>
                                 <div class="form-container-part">
 
                                     <div>
-                                        <h3 class="form-container-part-title">Personal Information</h3>
+                                        <h3 class="form-container-part-title">Product Information</h3>
                                     </div>
 
                                     <div class="form-container-part-inputs">
                                         <div class="input-container">
-                                            <input type="text" name="first_name" id="first_name" value="<?php if (isset($row_customer)) {
-                                                                                                            echo $row_customer['first_name'];
-                                                                                                        } ?>" readonly class="is-valid">
-                                            <label for="first_name">First Name</label>
-                                        </div>
-
-                                        <div class="input-container">
-
-                                            <input type="text" name="last_name" id="last_name" value="<?php if (isset($row_customer)) {
-                                                                                                            echo $row_customer['last_name'];
-                                                                                                        } ?>" readonly class="is-valid">
-                                            <label for="last_name">Last Name</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-container-part-inputs">
-                                        <div class="input-container">
-                                            <input type="email" name="email" id="email" value="<?php if (isset($row_customer)) {
-                                                                                                    echo $row_customer['email'];
-                                                                                                } ?>" readonly class="is-valid">
-                                            <label for="email">Email</label>
-                                        </div>
-                                        <div class="input-container">
-
-                                            <input type="tel" name="phone_number" id="phone_number" value="<?php if (isset($row_customer)) {
-                                                                                                                echo $row_customer['phone_number'];
+                                            <input type="number" name="product_id" id="product_id" value="<?php if (isset($row_product)) {
+                                                                                                                echo $row_product['product_id'];
                                                                                                             } ?>" readonly class="is-valid">
-                                            <label for="phone_number">Phone Number</label>
+                                            <label for="product_id">Product ID</label>
+                                        </div>
+
+                                        <div class="input-container">
+
+                                            <input type="text" name="product_name" id="product_name" value="<?php if (isset($row_product)) {
+                                                                                                                echo $row_product['name'];
+                                                                                                            } ?>" readonly class="is-valid">
+                                            <label for="product_name">Product Name</label>
                                         </div>
                                     </div>
 
                                     <div class="form-container-part-inputs">
                                         <div class="input-container">
-                                            <input type="date" name="date_of_birth" value="<?php if (isset($row_customer)) {
-                                                                                                echo $row_customer['date_of_birth'];
+                                            <input type="number" name="price" id="price" value="<?php if (isset($row_product)) {
+                                                                                                    echo $row_product['price'];
+                                                                                                } ?>" readonly class="is-valid">
+                                            <label for="price">Price</label>
+                                        </div>
+                                        <div class="input-container">
+
+                                            <input type="text" name="type" id="type" value="<?php if (isset($row_product)) {
+                                                                                                echo $row_product['type'];
                                                                                             } ?>" readonly class="is-valid">
-                                            <label for="date_of_birth">Date Of Birth</label>
+                                            <label for="type">Type</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-container-part-inputs">
+                                        <div class="input-container">
+                                            <input type="text" name="category" value="<?php if (isset($row_product)) {
+                                                                                            echo $row_product['category'];
+                                                                                        } ?>" readonly class="is-valid">
+                                            <label for="category">Category</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-container-part-inputs">
+                                        <div class="input-container description">
+                                            <div class="description-body">
+                                                <h3>Description</h3>
+                                                <p><?php if (isset($row_product)) {
+                                                        echo $row_product['description'];
+                                                    } ?></p>
+                                            </div>
+
+
+                                            <!-- <input type="text" name="description" id="description" value="<?php if (isset($row_product)) {
+                                                                                                                    echo $row_product['description'];
+                                                                                                                } ?>" readonly class="is-valid">
+                                            <label for="description">Description</label> -->
                                         </div>
                                     </div>
 
                                     <div class="form-container-part-inputs">
                                         <div class="input-container">
 
-                                            <input type="text" name="city" id="city" value="<?php if (isset($row_customer)) {
-                                                                                                echo $row_customer['city'];
+                                            <input type="text" name="age" id="age" value="<?php if (isset($row_product)) {
+                                                                                                echo $row_product['age'];
                                                                                             } ?>" readonly class="is-valid">
-                                            <label for="city">City</label>
+                                            <label for="age">Age</label>
                                         </div>
                                     </div>
 
-                                    <div class="form-container-part-inputs">
-                                        <div class="input-container">
-
-                                            <input type="text" name="address" id="address" value="<?php if (isset($row_customer)) {
-                                                                                                        echo $row_customer['address'];
-                                                                                                    } ?>" readonly class="is-valid">
-                                            <label for="address">Address</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-container-part-inputs">
-                                        <div class="input-container" style="width: 100%;">
-
-                                            <input type="text" name="username" id="username" value="<?php if (isset($row_customer)) {
-                                                                                                        echo $row_customer['username'];
-                                                                                                    } ?>" readonly class="is-valid">
-                                            <label for="username">Username</label>
-                                        </div>
-                                    </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                <div class="recent-grid" style="grid-template-columns: 100%;">
-                    <div class="projects">
-                        <div class="card">
-                            <?php
-                            if ($row_total_appointments['total_appointments'] > 0) {
-                            ?>
-                                <div class="card-header">
-                                    <canvas id="AppointmentsChart"></canvas>
-                                </div>
-                            <?php
-                            }
-                            ?>
-                            <div class="card-header">
-                                <h3>Appointments from <?php echo $row_customer['first_name']; ?> <?php echo $row_customer['last_name']; ?></h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table width="100%">
-                                        <?php
-                                        if ($row_total_appointments['total_appointments'] == 0) {
-                                            echo "This customer has not any appointments yet";
-                                        } else { ?>
-                                            <thead>
-                                                <tr>
-                                                    <td title="Name of the serive or repair work requested">Appointment Name</td>
-                                                    <td title="Date of the appointment to be done according to the customer's choice">Date</td>
-                                                    <td title="The hour of the appointment to be tasked">Hour</td>
-                                                    <td title="The current progress or status of the appointment, can be pending (in progress or not started yet) or work done (appointment done completely)">Status</td>
-                                                    <td title="Change status of the appointment from pending to work done and vice versa">Change Status</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                while ($row_get_appointments = $results_get_customer_appointments->fetch_assoc()) {
-                                                    echo get_appointments_in_customer_details(
-                                                        $row_get_appointments['appointment_id'],
-                                                        $row_get_appointments['appointment_name'],
-                                                        $row_get_appointments['date'],
-                                                        $row_get_appointments['hour'],
-                                                        $row_get_appointments['status']
-                                                    );
-                                                }
-                                                ?>
-                                            </tbody>
-                                        <?php
-                                        }
-                                        ?>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="recent-grid" style="grid-template-columns: 100%;">
-                    <div class="projects">
-                        <div class="card">
-                            <?php
-                            if ($row_total_checkouts['total_checkouts'] > 0) {
-                            ?>
-                                <div class="card-header">
-                                    <canvas id="CheckoutsChart"></canvas>
-                                </div>
-                            <?php } ?>
-                            <div class="card-header">
-                                <h3>Checkouts from <?php echo $row_customer['first_name']; ?> <?php echo $row_customer['last_name']; ?></h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table width="100%">
-                                        <?php
-                                        if ($row_total_checkouts['total_checkouts'] == 0) {
-                                            echo "This customer has not any checkouts yet";
-                                        } else { ?>
-                                            <thead>
-                                                <tr>
-                                                    <td title="Name of the customer who requested the order">Customer Name</td>
-                                                    <td title="The email of the customer who will receive the order">Email</td>
-                                                    <td title="The phone number of the order receiver">Phone Number</td>
-                                                    <td title="Total price of the order, meaning the total of the prices of all products and their quantities">Total Price</td>
-                                                    <td title="The total price including tax rate added">Total Price Inc. Tax</td>
-                                                    <td title="The date the order was received by the customer">Date</td>
-                                                    <td title="The current status of the order, can be pending or work done">Status</td>
-                                                    <td title="Change status of the order to keep the customer in track of his/her order">Change Status</td>
-                                                    <td title="View more information about the order, related to billing detials and products ordered">View Order</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                while ($row_get_checkouts = $results_get_customer_checkouts->fetch_assoc()) {
-                                                    echo get_all_checkouts_connection(
-                                                        $row_get_checkouts['checkout_id'],
-                                                        $row_get_checkouts['customer_id'],
-                                                        $row_get_checkouts['first_name'],
-                                                        $row_get_checkouts['last_name'],
-                                                        $row_get_checkouts['email'],
-                                                        $row_get_checkouts['phone_number'],
-                                                        $row_get_checkouts['total_price'],
-                                                        $row_get_checkouts['total_price_including_tax'],
-                                                        $row_get_checkouts['date'],
-                                                        $row_get_checkouts['status']
-                                                    );
-                                                }
-                                                ?>
-                                            </tbody>
-                                        <?php
-                                        } ?>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="recent-grid" style="grid-template-columns: 100%;">
-                    <div class="projects">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3>Comments from <?php echo $row_customer['first_name']; ?> <?php echo $row_customer['last_name']; ?></h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table width="100%">
-                                        <?php
-                                        if ($row_total_comments['total_comments'] == 0) {
-                                            echo "This customer has not any comments yet";
-                                        } else { ?>
-                                            <thead>
-                                                <tr>
-                                                    <td title="Name of the customer who added the comment">Customer Name</td>
-                                                    <td title="The comment the user shared to express his/her opinion, thought, or any concern related to the shop">Comment</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                while ($row_get_comments = $results_get_customer_comments->fetch_assoc()) {
-                                                    echo get_comments_connection(
-                                                        $row_customer['first_name'] . ' ' . $row_customer['last_name'],
-                                                        $row_get_comments['comment']
-                                                    );
-                                                }
-                                                ?>
-                                            </tbody>
-                                        <?php
-                                        } ?>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="customer-details-buttons">
+                <div class="product-details-buttons">
                     <button class="back" onclick="history.back();" title="Return to Previous Page"><span class="las la-arrow-left" style="font-size: 1.4rem;"></span>Return to
                         Previous Page</button>
                 </div>
