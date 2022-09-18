@@ -33,7 +33,7 @@ if (isset($_GET['customer_id'])) {
     $results_get_customer_checkouts = $stmt_get_customer_checkouts->get_result();
 
     //sum of all comments
-    $query_total_comments = "SELECT COUNT(*) as count FROM comments WHERE username = '" . $row_customer['username'] . "'";
+    $query_total_comments = "SELECT COUNT(*) as total_comments FROM comments WHERE username = '" . $row_customer['username'] . "'";
     $stmt_total_comments = $connection->prepare($query_total_comments);
     $stmt_total_comments->execute();
     $results_total_comments = $stmt_total_comments->get_result();
@@ -54,7 +54,7 @@ if (isset($_GET['customer_id'])) {
     $row_total_profit = $results_total_profit->fetch_assoc();
 
     //get total checkouts made
-    $query_total_checkouts = "SELECT COUNT(checkout_id) as total_checkout FROM checkouts WHERE customer_id = '" . $_GET['customer_id'] . "'";
+    $query_total_checkouts = "SELECT COUNT(checkout_id) as total_checkouts FROM checkouts WHERE customer_id = '" . $_GET['customer_id'] . "'";
     $stmt_total_checkouts = $connection->prepare($query_total_checkouts);
     $stmt_total_checkouts->execute();
     $results_total_checkouts = $stmt_total_checkouts->get_result();
@@ -247,7 +247,7 @@ if (isset($_GET['customer_id'])) {
             <div class="cards">
                 <div class="card-single">
                     <div>
-                        <h1><?php echo  $row_total_comments['count']; ?></h1>
+                        <h1><?php echo  $row_total_comments['total_comments']; ?></h1>
                         <span>Comments</span>
                     </div>
                     <div>
@@ -265,7 +265,7 @@ if (isset($_GET['customer_id'])) {
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1><?php echo $row_total_checkouts['total_checkout'] ?></h1>
+                        <h1><?php echo $row_total_checkouts['total_checkouts'] ?></h1>
                         <span>Chekouts</span>
                     </div>
                     <div>
@@ -286,95 +286,99 @@ if (isset($_GET['customer_id'])) {
             <!-- started with checkout form -->
             <div>
                 <div class="details">
-                    <h2>Customer Details</h2>
-                    <div class="form-container">
-                        <form>
-                            <div class="form-container-part">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Customer Details</h2>
+                        </div>
+                        <div class="form-container card-body">
+                            <form>
+                                <div class="form-container-part">
 
-                                <div>
-                                    <h3 class="form-container-part-title">Personal Information</h3>
-                                </div>
-
-                                <div class="form-container-part-inputs">
-                                    <div class="input-container">
-                                        <input type="text" name="first_name" id="first_name" value="<?php if (isset($row_customer)) {
-                                                                                                        echo $row_customer['first_name'];
-                                                                                                    } ?>" readonly class="is-valid">
-                                        <label for="first_name">First Name</label>
+                                    <div>
+                                        <h3 class="form-container-part-title">Personal Information</h3>
                                     </div>
 
-                                    <div class="input-container">
-
-                                        <input type="text" name="last_name" id="last_name" value="<?php if (isset($row_customer)) {
-                                                                                                        echo $row_customer['last_name'];
-                                                                                                    } ?>" readonly class="is-valid">
-                                        <label for="last_name">Last Name</label>
-                                    </div>
-                                </div>
-
-                                <div class="form-container-part-inputs">
-                                    <div class="input-container">
-                                        <input type="email" name="email" id="email" value="<?php if (isset($row_customer)) {
-                                                                                                echo $row_customer['email'];
-                                                                                            } ?>" readonly class="is-valid">
-                                        <label for="email">Email</label>
-                                    </div>
-                                    <div class="input-container">
-
-                                        <input type="tel" name="phone_number" id="phone_number" value="<?php if (isset($row_customer)) {
-                                                                                                            echo $row_customer['phone_number'];
+                                    <div class="form-container-part-inputs">
+                                        <div class="input-container">
+                                            <input type="text" name="first_name" id="first_name" value="<?php if (isset($row_customer)) {
+                                                                                                            echo $row_customer['first_name'];
                                                                                                         } ?>" readonly class="is-valid">
-                                        <label for="phone_number">Phone Number</label>
+                                            <label for="first_name">First Name</label>
+                                        </div>
+
+                                        <div class="input-container">
+
+                                            <input type="text" name="last_name" id="last_name" value="<?php if (isset($row_customer)) {
+                                                                                                            echo $row_customer['last_name'];
+                                                                                                        } ?>" readonly class="is-valid">
+                                            <label for="last_name">Last Name</label>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-container-part-inputs">
-                                    <div class="input-container">
-                                        <input type="date" name="date_of_birth" value="<?php if (isset($row_customer)) {
-                                                                                            echo $row_customer['date_of_birth'];
-                                                                                        } ?>" readonly class="is-valid">
-                                        <label for="date_of_birth">Date Of Birth</label>
-                                    </div>
-                                </div>
-
-                                <div class="form-container-part-inputs">
-                                    <div class="input-container">
-
-                                        <input type="text" name="city" id="city" value="<?php if (isset($row_customer)) {
-                                                                                            echo $row_customer['city'];
-                                                                                        } ?>" readonly class="is-valid">
-                                        <label for="city">City</label>
-                                    </div>
-                                </div>
-
-                                <div class="form-container-part-inputs">
-                                    <div class="input-container">
-
-                                        <input type="text" name="address" id="address" value="<?php if (isset($row_customer)) {
-                                                                                                    echo $row_customer['address'];
+                                    <div class="form-container-part-inputs">
+                                        <div class="input-container">
+                                            <input type="email" name="email" id="email" value="<?php if (isset($row_customer)) {
+                                                                                                    echo $row_customer['email'];
                                                                                                 } ?>" readonly class="is-valid">
-                                        <label for="address">Address</label>
+                                            <label for="email">Email</label>
+                                        </div>
+                                        <div class="input-container">
+
+                                            <input type="tel" name="phone_number" id="phone_number" value="<?php if (isset($row_customer)) {
+                                                                                                                echo $row_customer['phone_number'];
+                                                                                                            } ?>" readonly class="is-valid">
+                                            <label for="phone_number">Phone Number</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-container-part-inputs">
+                                        <div class="input-container">
+                                            <input type="date" name="date_of_birth" value="<?php if (isset($row_customer)) {
+                                                                                                echo $row_customer['date_of_birth'];
+                                                                                            } ?>" readonly class="is-valid">
+                                            <label for="date_of_birth">Date Of Birth</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-container-part-inputs">
+                                        <div class="input-container">
+
+                                            <input type="text" name="city" id="city" value="<?php if (isset($row_customer)) {
+                                                                                                echo $row_customer['city'];
+                                                                                            } ?>" readonly class="is-valid">
+                                            <label for="city">City</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-container-part-inputs">
+                                        <div class="input-container">
+
+                                            <input type="text" name="address" id="address" value="<?php if (isset($row_customer)) {
+                                                                                                        echo $row_customer['address'];
+                                                                                                    } ?>" readonly class="is-valid">
+                                            <label for="address">Address</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-container-part-inputs">
+                                        <div class="input-container" style="width: 100%;">
+
+                                            <input type="text" name="username" id="username" value="<?php if (isset($row_customer)) {
+                                                                                                        echo $row_customer['username'];
+                                                                                                    } ?>" readonly class="is-valid">
+                                            <label for="username">Username</label>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div class="form-container-part-inputs">
-                                    <div class="input-container" style="width: 100%;">
-
-                                        <input type="text" name="username" id="username" value="<?php if (isset($row_customer)) {
-                                                                                                    echo $row_customer['username'];
-                                                                                                } ?>" readonly class="is-valid">
-                                        <label for="username">Username</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <div class="recent-grid" style="grid-template-columns: 100%;">
                     <div class="projects">
                         <div class="card">
                             <?php
-                            if ($results_get_customer_appointments) {
+                            if ($row_total_appointments['total_appointments'] > 0) {
                             ?>
                                 <div class="card-header">
                                     <canvas id="AppointmentsChart"></canvas>
@@ -389,7 +393,7 @@ if (isset($_GET['customer_id'])) {
                                 <div class="table-responsive">
                                     <table width="100%">
                                         <?php
-                                        if (!$results_get_customer_appointments) {
+                                        if ($row_total_appointments['total_appointments'] == 0) {
                                             echo "This customer has not any appointments yet";
                                         } else { ?>
                                             <thead>
@@ -428,7 +432,7 @@ if (isset($_GET['customer_id'])) {
                     <div class="projects">
                         <div class="card">
                             <?php
-                            if ($results_get_customer_checkouts) {
+                            if ($row_total_checkouts['total_checkouts'] > 0) {
                             ?>
                                 <div class="card-header">
                                     <canvas id="CheckoutsChart"></canvas>
@@ -441,7 +445,7 @@ if (isset($_GET['customer_id'])) {
                                 <div class="table-responsive">
                                     <table width="100%">
                                         <?php
-                                        if (!$results_get_customer_checkouts) {
+                                        if ($row_total_checkouts['total_checkouts'] == 0) {
                                             echo "This customer has not any checkouts yet";
                                         } else { ?>
                                             <thead>
@@ -494,7 +498,7 @@ if (isset($_GET['customer_id'])) {
                                 <div class="table-responsive">
                                     <table width="100%">
                                         <?php
-                                        if (!$results_get_customer_checkouts) {
+                                        if ($row_total_comments['total_comments'] == 0) {
                                             echo "This customer has not any comments yet";
                                         } else { ?>
                                             <thead>
@@ -522,9 +526,9 @@ if (isset($_GET['customer_id'])) {
                     </div>
                 </div>
 
-                <div class="checkout-buttons">
-                    <button class="back_to_shoppingbasket" onclick="window.location.href='../checkouts-admin/checkouts-admin.php';" title="Return to checkouts list"><span class="las la-arrow-left"></span>Return to
-                        Checkouts List</button>
+                <div class="customer-details-buttons">
+                    <button class="back" onclick="history.back();" title="Return to Previous Page"><span class="las la-arrow-left" style="font-size: 1.4rem;"></span>Return to
+                        Previous Page</button>
                 </div>
             </div>
         </main>

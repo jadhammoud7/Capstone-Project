@@ -415,7 +415,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                     <div class="card">
                         <div class="card-header">
                             <h3>Recent Checkouts Orders</h3>
-                            <button onclick="window.location.href='../checkouts-admin/checkouts-admin.php';">See all <span class="las la-arrow-right"></span></button>
+                            <button onclick="window.location.href='../checkouts-admin/checkouts-admin.php';" title="See the list of all checkout orders sent by customers and proceed to deliver them">See all <span class="las la-arrow-right"></span></button>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -430,6 +430,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                                             <td>Date</td>
                                             <td>Status</td>
                                             <td>Change Status</td>
+                                            <td>View Order</td>
                                         </tr>
                                     </thead>
                                     <tbody>

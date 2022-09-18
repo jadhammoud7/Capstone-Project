@@ -161,7 +161,7 @@ input.is-valid+label {
     color: white;
 }
 
-.checkout-buttons {
+.customer-details-buttons {
     display: block;
     text-align: center;
     text-align: center;
@@ -169,18 +169,19 @@ input.is-valid+label {
     width: 100%;
 }
 
-.back_to_shoppingbasket {
+.back {
     background-color: #F44336;
     color: black;
 }
 
-.checkout-buttons button {
+.customer-details-buttons button {
     margin: 30px;
     font-size: large;
     font-weight: 700;
     border-radius: 10px;
     padding: 15px;
     color: black;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 500px) {
