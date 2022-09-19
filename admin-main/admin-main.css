@@ -352,7 +352,7 @@ tr td:last-child {
     color: #4169e1 !important;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1426px) {
     .sidebar {
         width: 70px;
     }
