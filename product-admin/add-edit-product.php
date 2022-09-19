@@ -20,6 +20,30 @@ if (isset($_GET['product_id'])) {
     $result_product = $stmt_get_product->get_result();
     $row_product = $result_product->fetch_assoc();
 }
+
+if(isset($_POST['product_name'])){
+    $product_name = $_POST['product_name'];
+}
+
+if(isset($_POST['price'])){
+    $price = $_POST['price'];
+}
+
+if(isset($_POST['type'])){
+    $type = $_POST['type'];
+}
+
+if(isset($_POST['category'])){
+    $category = $_POST['category'];
+}
+
+if(isset($_POST['description'])){
+    $description = $_POST['description'];
+}
+
+if(isset($_POST['age'])){
+    $age = $_POST['age'];
+}
 ?>
 
 
@@ -147,15 +171,38 @@ if (isset($_GET['product_id'])) {
                                             <label for="price">Price</label>
                                         </div>
                                         <div class="input-container">
-                                            <input type="text" name="type" id="type" value="">
-                                            <label for="type">Type</label>
+                                            <label for="type"> Type
+                                                <select name="type" id="type">
+                                                    <option value="cds">CDs</option>
+                                                    <option value="consoles">Consoles</option>
+                                                    <option value="accessories">Accessories</option>
+                                                    <option value="phones">Phones</option>
+                                                    <option value="cards">Online cards</option>
+                                                    <option value="electronics">Electronics</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </div>
 
                                     <div class="form-container-part-inputs">
                                         <div class="input-container">
-                                            <input type="text" name="category" value="">
-                                            <label for="category">Category</label>
+                                            <label for="category">
+                                                Category
+                                                    <select name="category" id="category">
+                                                        <option value="action">Action</option>
+                                                        <option value="gaming">Gaming</option>
+                                                        <option value="strategy">Strategy</option>
+                                                        <option value="PS2">PS2</option>
+                                                        <option value="PS3">PS3</option>
+                                                        <option value="PS4">PS4</option>
+                                                        <option value="PS5">PS5</option>
+                                                        <option value="XBox">XBox</option>
+                                                        <option value="iphone">IPhone</option>
+                                                        <option value="Samsung">Samsung</option>
+                                                        <option value="PsPlus">PS Plus</option>
+                                                    </select>
+                                        
+                                            </label>
                                         </div>
                                     </div>
 

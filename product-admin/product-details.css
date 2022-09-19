@@ -166,7 +166,7 @@ input.is-valid+label {
     height: 70%;
 }
 
-.description h3{
+.description h3 {
     color: #8390A2;
 }
 
@@ -181,6 +181,27 @@ input.is-valid+label {
     margin-bottom: 50px;
     width: 100%;
 }
+
+select {
+    background-color: royalblue;
+    border: none;
+    color: #fefefe;
+    font-size: 15px;
+    width: 400px;
+}
+
+select:hover {
+    background-color: rgb(200, 192, 192);
+    color: royalblue;
+}
+
+option {
+    font-weight: bold;
+    padding: 15px 15px 15px;
+    min-height: 2em;
+    font-size: large;
+}
+
 
 .back {
     background-color: #F44336;
