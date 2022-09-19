@@ -46,7 +46,7 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 //get all products
 require_once("../php/admin_page_php.php");
-$query_products = "SELECT product_id, name, price, type, category, description, age FROM products";
+$query_products = "SELECT product_id,name, price, type, category, description, age FROM products";
 $stmt_products = $connection->prepare($query_products);
 $stmt_products->execute();
 $results_products = $stmt_products->get_result();
@@ -237,7 +237,7 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
                 <canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
             </div> -->
             <div class="card-single add_admin">
-                <button class="add_product" id="add_user1" onclick="window.location.href='add-edit-product.php';" title="Add a new product"><span class="las la-plus"></span>Add Product</button>
+                <button class="add_product" id="add_user1" onclick="OpenAddProduct()" title="Add a new product"><span class="las la-plus"></span>Add Product</button>
             </div>
             <div class="recent-grid" style="display: block !important;">
                 <div class="projects">
@@ -254,6 +254,7 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
                                             <td>Price</td>
                                             <td>Type</td>
                                             <td>Category</td>
+                                            <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -264,7 +265,8 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
                                                 $row_products['name'],
                                                 $row_products['price'],
                                                 $row_products['category'],
-                                                $row_products['type']
+                                                $row_products['type'],
+                                                $row_products['description']
                                             );
                                         }
                                         ?>
@@ -290,8 +292,8 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
 
 
                         <label for="product_price"><b>Product Price</b></label>
-                        <input type="number" placeholder="Enter product's price" name="product_price" id="product_price" value="" required>
-
+                        <input style="height: 35px;" type="number" placeholder="Enter product's price" name="product_price" id="product_price" value="" required>
+                        <br> <br>
 
                         <label for="product_type"><b>Product Type</b></label>
                         <input type="text" placeholder="Enter product's type" name="product_type" id="product_type" value="" required>
@@ -333,7 +335,6 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
         "#b91d47",
         "#00aba9"
     ]
-
     new Chart("myChart", {
         type: "pie",
         data: {
