@@ -187,6 +187,11 @@ input.is-valid+label {
     color: black;
 }
 
+.add-new-product {
+    background-color: #63A7E4;
+    color: #fefefe;
+}
+
 .product-details-buttons button {
     margin: 30px;
     font-size: large;

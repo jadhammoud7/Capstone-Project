@@ -46,7 +46,7 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 //get all products
 require_once("../php/admin_page_php.php");
-$query_products = "SELECT name, price, type, category, description, age FROM products";
+$query_products = "SELECT product_id, name, price, type, category, description, age FROM products";
 $stmt_products = $connection->prepare($query_products);
 $stmt_products->execute();
 $results_products = $stmt_products->get_result();
@@ -237,7 +237,7 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
                 <canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
             </div> -->
             <div class="card-single add_admin">
-                <button class="add_product" id="add_user1" onclick="OpenAddProduct()" title="Add a new product"><span class="las la-plus"></span>Add Product</button>
+                <button class="add_product" id="add_user1" onclick="window.location.href='add-edit-product.php';" title="Add a new product"><span class="las la-plus"></span>Add Product</button>
             </div>
             <div class="recent-grid" style="display: block !important;">
                 <div class="projects">
@@ -260,6 +260,7 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
                                         <?php
                                         while ($row_products = $results_products->fetch_assoc()) {
                                             get_all_products(
+                                                $row_products['product_id'],
                                                 $row_products['name'],
                                                 $row_products['price'],
                                                 $row_products['category'],

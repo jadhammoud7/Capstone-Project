@@ -154,11 +154,15 @@ function get_all_checkouts_connection($checkout_id, $customer_id, $first_name, $
 
     echo $element;
 }
-function get_all_products($name, $price, $type, $category)
+function get_all_products($product_id, $name, $price, $type, $category)
 {
     $element = "
     <tr class=\"hello\">
-        <td>$name</td>
+        <td>
+            <a href='product-details.php?product_id=$product_id'>
+                $name
+            </a>
+        </td>
         <td>$price</td>
         <td>$type</td>
         <td>$category</td>
