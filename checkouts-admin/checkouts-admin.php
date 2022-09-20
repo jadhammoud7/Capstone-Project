@@ -92,12 +92,42 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
             $product_name = $row_select_product_inventory['name'];
             $product_quantity = $row_check_checkout_products['quantity'];
             $product_inventory = $row_select_product_inventory['inventory'];
+            //if this product cannot be proceeded, since inventory less than quantity needed, then checkout error
             if ($product_inventory < $product_quantity) {
                 $products_found_in_stock = false;
                 header("Location: checkouts-admin.php?checkout-error=true&product-name=$product_name&quantity=$product_quantity&inventory=$product_inventory");
             }
         }
+        //if all products were found in stock, so checkout can be done successfully
         if ($products_found_in_stock == true) {
+
+            //check all products in checkout to see if there is enough inventory
+            $stmt_check_checkout_products = $connection->prepare("SELECT product_id, quantity FROM checkouts_customers_products WHERE checkout_id = '" . $checkoutID . "'");
+            $stmt_check_checkout_products->execute();
+            $results_check_checkout_products = $stmt_check_checkout_products->get_result();
+            //loop over all products in checkout
+            while ($row_check_checkout_products = $results_check_checkout_products->fetch_assoc()) {
+                //quantity needed in checkout
+                $quantity = $row_check_checkout_products['quantity'];
+                //select product inventory
+                $stmt_select_product_inventory = $connection->prepare("SELECT inventory FROM products WHERE product_id = '" . $row_check_checkout_products['product_id'] . "'");
+                $stmt_select_product_inventory->execute();
+                $results_select_product_inventory = $stmt_select_product_inventory->get_result();
+                $row_select_product_inventory = $results_select_product_inventory->fetch_assoc();
+                $inventory = $row_select_product_inventory['inventory'];
+
+                //new product inventory will be inventory minus the quantity delivered
+                $new_inventory = $inventory - $quantity;
+                $stmt_update_product_inventory = $connection->prepare("UPDATE products SET inventory=? WHERE product_id = '" . $row_check_checkout_products['product_id'] . "'");
+                $stmt_update_product_inventory->bind_param("i", $new_inventory);
+                $stmt_update_product_inventory->execute();
+
+                //update sales number of product
+                $new_sales = $quantity;
+                $stmt_update_product_sales = $connection->prepare("UPDATE products SET sales_number=? WHERE product_id = '" . $row_check_checkout_products['product_id'] . "'");
+                $stmt_update_product_sales->bind_param("i", $new_sales);
+                $stmt_update_product_sales->execute();
+            }
             $query_settodone = $connection->prepare("UPDATE checkouts SET status=? WHERE checkout_id='" . $checkoutID . "'");
             $query_settodone->bind_param("s", $status);
             $query_settodone->execute();
