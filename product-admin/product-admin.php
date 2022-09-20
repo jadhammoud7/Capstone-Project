@@ -46,7 +46,7 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 //get all products
 require_once("../php/admin_page_php.php");
-$query_products = "SELECT product_id,name, price, type, category, description, age, inventory FROM products";
+$query_products = "SELECT product_id,name, price, type, category, description, age, inventory, sales_number FROM products";
 $stmt_products = $connection->prepare($query_products);
 $stmt_products->execute();
 $results_products = $stmt_products->get_result();
@@ -268,6 +268,7 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
                                             <td>Type</td>
                                             <td>Category</td>
                                             <td>Inventory</td>
+                                            <td>Sales Number</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -279,7 +280,8 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
                                                 $row_products['price'],
                                                 $row_products['category'],
                                                 $row_products['type'],
-                                                $row_products['inventory']
+                                                $row_products['inventory'],
+                                                $row_products['sales_number']
                                             );
                                         }
                                         ?>

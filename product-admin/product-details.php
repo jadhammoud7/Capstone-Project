@@ -213,6 +213,14 @@ if (isset($_GET['product_id'])) {
                                         </div>
                                     </div>
 
+                                    <div class="form-container-part-inputs">
+                                        <div class="input-container">
+                                            <input type="number" name="sales_number" id="sales_number" value="<?php if (isset($row_product)) {
+                                                                                                            echo $row_product['sales_number'];
+                                                                                                        } ?>" readonly class="is-valid">
+                                            <label for="sales_number">Sales Number</label>
+                                        </div>
+                                    </div>
                                     <!-- here to add upload file -->
 
                                 </div>
