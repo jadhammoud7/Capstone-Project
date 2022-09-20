@@ -77,12 +77,21 @@ if (isset($_POST["product_age"])) {
     $product_age = $_POST["product_age"];
 }
 
-if (isset($product_name) && isset($product_price) && isset($product_type) && isset($product_category) && isset($product_desciption) && isset($product_age)) {
-    $image = 'image.png';
-    $mysql1 = $connection->prepare("INSERT INTO products(name, price, type, category, description, age, image) VALUES (?,?,?,?,?,?,?)");
-    $mysql1->bind_param("sisssss", $product_name, $product_price, $product_type, $product_category, $product_desciption, $product_age, $image);
-    $mysql1->execute();
-    $mysql1->close();
+$targetDir = "images/";
+$filename = basename($_FILES["file"]["name"]);
+$targetFilePath = $targetDir . $filename;
+$fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+
+if (isset($product_name) && isset($product_price) && isset($product_type) && isset($product_category) && isset($product_desciption) && isset($product_age) && isset($_POST["submit"]) && !empty($_FILES["file"]["name"])) {
+    $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
+    if (in_array($fileType, $allowTypes)) {
+        if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
+            $mysql1 = $connection->prepare("INSERT INTO products(name, price, type, category, description, age, image) VALUES (?,?,?,?,?,?,?)");
+            $mysql1->bind_param("sisssss", $product_name, $product_price, $product_type, $product_category, $product_desciption, $product_age, $filename);
+            $mysql1->execute();
+            $mysql1->close();
+        }
+    }
 }
 
 
@@ -283,7 +292,7 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
                     <div class="container">
                         <h1 class="title">Add New Product</h1>
                         <p class="title">Please fill in this form to add a new product.</p>
-                        <hr>
+                        <br>
 
                         <label for="product_name"><b>Product Name</b></label>
                         <input type="text" placeholder="Enter product's name" name="product_name" id="product_name" value="" required />
@@ -307,8 +316,7 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
 
                         <label for="product_age"><b>Age Restriction</b></label>
                         <input type="text" placeholder="Enter product's age restriction" name="product_age" id="product_age" value="" required>
-
-
+                        
                         <div class="clearfix">
                             <button type="submit" class="addproductbtn" title="Add new product"><strong>Add Product</strong></button>
                         </div>

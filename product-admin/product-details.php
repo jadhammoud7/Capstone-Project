@@ -204,6 +204,8 @@ if (isset($_GET['product_id'])) {
                                         </div>
                                     </div>
 
+                                    <!-- here to add upload file -->
+
                                 </div>
                             </form>
                         </div>
