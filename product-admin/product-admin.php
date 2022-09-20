@@ -46,7 +46,7 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 //get all products
 require_once("../php/admin_page_php.php");
-$query_products = "SELECT product_id,name, price, type, category, description, age FROM products";
+$query_products = "SELECT product_id,name, price, type, category, description, age, inventory FROM products";
 $stmt_products = $connection->prepare($query_products);
 $stmt_products->execute();
 $results_products = $stmt_products->get_result();
@@ -77,12 +77,16 @@ if (isset($_POST["product_age"])) {
     $product_age = $_POST["product_age"];
 }
 
+if (isset($_POST['product_inventory'])) {
+    $product_inventory = $_POST['product_inventory'];
+}
+
 $targetDir = "images/";
 $filename = basename($_FILES["file"]["name"]);
 $targetFilePath = $targetDir . $filename;
 $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
-if (isset($product_name) && isset($product_price) && isset($product_type) && isset($product_category) && isset($product_desciption) && isset($product_age) && isset($_POST["submit"]) && !empty($_FILES["file"]["name"])) {
+if (isset($product_name) && isset($product_price) && isset($product_type) && isset($product_category) && isset($product_desciption) && isset($product_age) && isset($product_inventory) && isset($_POST["submit"]) && !empty($_FILES["file"]["name"])) {
     $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
     if (in_array($fileType, $allowTypes)) {
         if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
@@ -263,6 +267,7 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
                                             <td>Price</td>
                                             <td>Type</td>
                                             <td>Category</td>
+                                            <td>Inventory</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -274,6 +279,7 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
                                                 $row_products['price'],
                                                 $row_products['category'],
                                                 $row_products['type'],
+                                                $row_products['inventory']
                                             );
                                         }
                                         ?>
@@ -316,7 +322,10 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
 
                         <label for="product_age"><b>Age Restriction</b></label>
                         <input type="text" placeholder="Enter product's age restriction" name="product_age" id="product_age" value="" required>
-                        
+
+                        <label for="product_inventory"><b>Current Inventory:</b></label>
+                        <input type="number" placeholder="Enter product's current inventory in stock" name="product_inventory" id="product_inventory" style="height: 35px;" value="" required>
+
                         <div class="clearfix">
                             <button type="submit" class="addproductbtn" title="Add new product"><strong>Add Product</strong></button>
                         </div>
