@@ -76,41 +76,58 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
     $status = "";
     if ($working_status == "true") {
         $status = "Done Work";
-        $query_settodone = $connection->prepare("UPDATE checkouts SET status=? WHERE checkout_id='" . $checkoutID . "'");
-        $query_settodone->bind_param("s", $status);
-        $query_settodone->execute();
-        header("Location:../checkouts-admin/checkouts-admin.php");
-    } else if ($working_status == "false") {
-        $status = "Pending";
-        $query_settodone = $connection->prepare("UPDATE checkouts SET status=? WHERE checkout_id='" . $checkoutID . "'");
-        $query_settodone->bind_param("s", $status);
-        $query_settodone->execute();
-        header("Location:../checkouts-admin/checkouts-admin.php");
+        $products_found_in_stock = true;
+
+        //check all products in checkout to see if there is enough inventory
+        $stmt_check_checkout_products = $connection->prepare("SELECT product_id, quantity FROM checkouts_customers_products WHERE checkout_id = '" . $checkoutID . "'");
+        $stmt_check_checkout_products->execute();
+        $results_check_checkout_products = $stmt_check_checkout_products->get_result();
+        //loop over all products in checkouts
+        while ($row_check_checkout_products = $results_check_checkout_products->fetch_assoc()) {
+            //get product inventory
+            $stmt_select_product_inventory = $connection->prepare("SELECT name, inventory FROM products WHERE product_id = '" . $row_check_checkout_products['product_id'] . "'");
+            $stmt_select_product_inventory->execute();
+            $results_select_product_inventory = $stmt_select_product_inventory->get_result();
+            $row_select_product_inventory = $results_select_product_inventory->fetch_assoc();
+            $product_name = $row_select_product_inventory['name'];
+            $product_quantity = $row_check_checkout_products['quantity'];
+            $product_inventory = $row_select_product_inventory['inventory'];
+            if ($product_inventory < $product_quantity) {
+                $products_found_in_stock = false;
+                header("Location: checkouts-admin.php?checkout-error=true&product-name=$product_name&quantity=$product_quantity&inventory=$product_inventory");
+            }
+        }
+        if ($products_found_in_stock == true) {
+            $query_settodone = $connection->prepare("UPDATE checkouts SET status=? WHERE checkout_id='" . $checkoutID . "'");
+            $query_settodone->bind_param("s", $status);
+            $query_settodone->execute();
+            header("Location: checkouts-admin.php");
+        }
     }
 }
 //sum checkouts depending on privces
 $query_condition_1 = "SELECT COUNT(total_price_including_tax) as total_price_including_tax FROM checkouts WHERE total_price_including_tax BETWEEN 0.0 AND 100.0";
 $stmt_condition_1 = $connection->prepare($query_condition_1);
 $stmt_condition_1->execute();
-$results_condition_1= $stmt_condition_1->get_result();
+$results_condition_1 = $stmt_condition_1->get_result();
 $row_condition_1 = $results_condition_1->fetch_assoc();
 
 $query_condition_2 = "SELECT COUNT(total_price_including_tax) as total_price_including_tax FROM checkouts WHERE total_price_including_tax BETWEEN 101.0 AND 300.0";
 $stmt_condition_2 = $connection->prepare($query_condition_2);
 $stmt_condition_2->execute();
-$results_condition_2= $stmt_condition_2->get_result();
+$results_condition_2 = $stmt_condition_2->get_result();
 $row_condition_2 = $results_condition_2->fetch_assoc();
 
 $query_condition_3 = "SELECT COUNT(total_price_including_tax) as total_price_including_tax FROM checkouts WHERE total_price_including_tax BETWEEN 301.0 AND 1000.0";
 $stmt_condition_3 = $connection->prepare($query_condition_3);
 $stmt_condition_3->execute();
-$results_condition_3= $stmt_condition_3->get_result();
+$results_condition_3 = $stmt_condition_3->get_result();
 $row_condition_3 = $results_condition_3->fetch_assoc();
 
 $query_condition_4 = "SELECT COUNT(total_price_including_tax) as total_price_including_tax FROM checkouts WHERE total_price_including_tax >1001.0";
 $stmt_condition_4 = $connection->prepare($query_condition_4);
 $stmt_condition_4->execute();
-$results_condition_4= $stmt_condition_4->get_result();
+$results_condition_4 = $stmt_condition_4->get_result();
 $row_condition_4 = $results_condition_4->fetch_assoc();
 
 ?>
@@ -139,6 +156,27 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
         <p>Are you sure that you want to logout?</p>
         <button type="button" onclick="GoToLogIn()">YES</button>
         <button type="button" onclick="CloseLogOutPopUp()">NO</button>
+    </div>
+
+    <!-- started popup message change status -->
+    <div class="popup" id="done-checkout-confirmation">
+        <img src="../images/question-mark.png" alt="">
+        <h2>Done Checkout Confirmation</h2>
+        <p>Are you sure that you want to set this checkout status to done? This action cannot be undone</p>
+        <button type="button" onclick="<?php if (isset($_GET['checkout-id'])) { ?>
+            SetCheckoutID(<?php echo $_GET['checkout-id']; ?>);" <?php } ?>>YES</button>
+        <button type="button" onclick="CloseDoneCheckoutPopUp()">NO</button>
+    </div>
+
+
+    <!-- started popup message checkout already done -->
+    <div class="popup" id="checkout-error-alert">
+        <img src="../images/info.png" alt="">
+        <h2>Checkout Cannot Be Done</h2>
+        <?php if (isset($_GET['checkout-error'])) { ?>
+            <p>Checkout cannot be done. The product "<?php echo $_GET['product-name']; ?>" requires quantity of <?php echo $_GET['quantity']; ?> while only <?php echo $_GET['inventory']; ?> are present in stock!</p>
+        <?php } ?>
+        <button type="button" onclick="CloseCheckoutDoneAlert();">OK</button>
     </div>
 
     <input type="checkbox" id="nav-toggle">
@@ -341,42 +379,42 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
             }
         }
     });
-        //start of t=second chart
-        const prices_count=[];
+    //start of t=second chart
+    const prices_count = [];
     <?php
-    if (isset($results_condition_1) ) {
+    if (isset($results_condition_1)) {
     ?>
-            prices_count.push("<?php
-                                echo $row_condition_1['total_price_including_tax'];
-                                ?>");
+        prices_count.push("<?php
+                            echo $row_condition_1['total_price_including_tax'];
+                            ?>");
     <?php }
     ?>;
-        <?php
-    if (isset($results_condition_2) ) {
+    <?php
+    if (isset($results_condition_2)) {
     ?>
-            prices_count.push("<?php
-                                echo $row_condition_2['total_price_including_tax'];
-                                ?>");
+        prices_count.push("<?php
+                            echo $row_condition_2['total_price_including_tax'];
+                            ?>");
     <?php }
     ?>;
-        <?php
-    if (isset($results_condition_3) ) {
+    <?php
+    if (isset($results_condition_3)) {
     ?>
-            prices_count.push("<?php
-                                echo $row_condition_3['total_price_including_tax'];
-                                ?>");
+        prices_count.push("<?php
+                            echo $row_condition_3['total_price_including_tax'];
+                            ?>");
     <?php }
     ?>;
-        <?php
-    if (isset($results_condition_4) ) {
+    <?php
+    if (isset($results_condition_4)) {
     ?>
-            prices_count.push("<?php
-                                echo $row_condition_4['total_price_including_tax'];
-                                ?>");
+        prices_count.push("<?php
+                            echo $row_condition_4['total_price_including_tax'];
+                            ?>");
     <?php }
     ?>;
 
-    var xValues = ["Between 0$ and 100$","Between 100$ and 300$","Between 300$ and 1000$","Greater than 1000$"];
+    var xValues = ["Between 0$ and 100$", "Between 100$ and 300$", "Between 300$ and 1000$", "Greater than 1000$"];
     console.log(xValues);
     var yValues = prices_count;
     console.log(yValues);
