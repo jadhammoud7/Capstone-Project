@@ -223,14 +223,14 @@ if (isset($_GET['product_id'])) {
                                     </div>
                                     <!-- here to add upload file -->
                                     <div class="form-container-part-inputs">
-                                        <div class="input-container">
+                                        <div class="input-container product-image">
                                             <div class="image-body">
                                                 <h3>Product Image</h3>
-                                                <p>
-                                                <div><img src='../images/<?php if (isset($row_product)) {
-                                                                                echo $row_product['image'];
-                                                                            } ?>'></div>
-                                                </p>
+                                                <div>
+                                                    <img src='../images/<?php if (isset($row_product)) {
+                                                                            echo $row_product['image'];
+                                                                        } ?>'>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

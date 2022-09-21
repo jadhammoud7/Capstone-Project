@@ -161,7 +161,7 @@ input.is-valid+label {
     color: white;
 }
 
-.description {
+.description, .product-image {
     width: 100%;
     height: 70%;
 }
@@ -170,26 +170,18 @@ input.is-valid+label {
     color: #8390A2;
 }
 
-.description-body{
+.description-body {
     margin: 20px;
 }
 
-.image-body div{
+.image-body div {
     margin: 20px;
-    height: 300px;
+    height: 500px;
 }
 
-.image-body div p{
-    height: 300px;
-}
-
-.image-body div p img{
+.image-body div img {
     width: 100%;
-    height: 100%;
-}
-
-.product-image{
-    width: 80%;
+    height: 70%;
 }
 
 .product-details-buttons {
