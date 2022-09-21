@@ -224,7 +224,7 @@ $results_location = $stmt_location->get_result();
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
-                            <canvas id="myChart"></canvas>
+                            <canvas id="myChart1"></canvas>
                         </div>
                     </div>
                     <div class="card">
@@ -323,7 +323,7 @@ $results_location = $stmt_location->get_result();
     getNewColor(0);
 
     var barColors = random_colors;
-    new Chart("myChart", {
+    new Chart("myChart1", {
         type: "pie",
         data: {
             labels: xValues,

@@ -173,3 +173,15 @@ function get_all_products($product_id, $name, $price, $type, $category, $invento
     ";
     echo $element;
 }
+
+function get_products_in_asc($name,$inventory, $sales_number)
+{
+    $element = "
+    <tr class=\"hello\">
+        <td>$name</td>
+        <td>$inventory</td>
+        <td>$sales_number</td>
+    </tr>
+    ";
+    echo $element;
+}

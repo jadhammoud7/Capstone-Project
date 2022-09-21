@@ -107,6 +107,12 @@ if ($product_name != "" && $product_price != 0 && $product_type != "" && $produc
     }
 }
 
+//get products in ascending 
+$query_nbofsales = "SELECT name,inventory,sales_number FROM products ORDER BY sales_number ASC;";
+$stmt_nbofsales = $connection->prepare($query_nbofsales);
+$stmt_nbofsales->execute();
+$results_nbofsales = $stmt_nbofsales->get_result();
+
 
 // echo "<script>window.location='../product-admin/product-admin.php';</script>";
 
@@ -255,9 +261,7 @@ if ($product_name != "" && $product_price != 0 && $product_type != "" && $produc
                     </div>
                 </div>
             </div>
-            <!-- <div>
-                <canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
-            </div> -->
+            <!-- <canvas id="myChart1"></canvas> -->
             <div class="card-single add_admin">
                 <button class="add_product" id="add_user1" onclick="OpenAddProduct()" title="Add a new product"><span class="las la-plus"></span>Add Product</button>
             </div>
@@ -301,6 +305,42 @@ if ($product_name != "" && $product_price != 0 && $product_type != "" && $produc
                     </div>
                 </div>
             </div>
+
+
+
+            <!-- second table having asceding and descending -->
+            <div class="recent-grid" style="display: block !important;">
+                <div class="projects">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3> Top and Lowest Baught Product</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <td>Product Name</td>
+                                            <td>Inventory</td>
+                                            <td>Sales Number</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        while($row_nbofsales = $results_nbofsales->fetch_assoc()){
+                                            
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
 
             <!-- adding form -->
             <div id="id01" class="modal">
@@ -358,29 +398,30 @@ if ($product_name != "" && $product_price != 0 && $product_type != "" && $produc
 <script src="../product-admin/product-admin.js"></script>
 
 <script src="../admin-main/admin-main.js"></script>
-<!-- <script>
-    var xValues = ["Pending Appointments", "Done Appointments"];
-    var yValues = [<?php echo $row_get_pending_appointments['total_pending_appointments']; ?>, <?php echo $row_get_done_appointments['total_done_appointments']; ?>]
-    var barColors = [
-        "#b91d47",
-        "#00aba9"
-    ]
-    new Chart("myChart", {
-        type: "pie",
-        data: {
-            labels: xValues,
-            datasets: [{
-                backgroundColor: barColors,
-                data: yValues
-            }]
-        },
-        options: {
-            title: {
-                display: true,
-                text: "Distribution of All Appointments"
-            }
-        }
-    });
-</script> -->
+<script>
+    // var xValues = ["Pending Appointments", "Done Appointments"];
+    // var yValues = []
+    // var barColors = [
+    //     "#b91d47",
+    //     "#00aba9"
+    // ]
+
+    // new Chart("myChart", {
+    //     type: "pie",
+    //     data: {
+    //         labels: xValues,
+    //         datasets: [{
+    //             backgroundColor: barColors,
+    //             data: yValues
+    //         }]
+    //     },
+    //     options: {
+    //         title: {
+    //             display: true,
+    //             text: "Distribution of All Appointments"
+    //         }
+    //     }
+    // });
+</script>
 
 </html>

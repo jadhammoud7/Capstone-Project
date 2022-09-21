@@ -277,10 +277,10 @@ td .status_checkout {
 }
 
 
-canvas {
-    width: 100%;
-    max-height: 600px;
-}
+/* canvas {
+    width: 480px!important;
+    max-height: 240px!important;
+} */
 
 .sidebar-menu ul li a span:first-child {
     font-size: 1.5rem;

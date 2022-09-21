@@ -239,7 +239,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                 </div>
             </div>
             <div>
-                <canvas id="myChart"></canvas>
+                <canvas id="myChart" style="float: left;"></canvas>
                 <canvas id="myChart2"></canvas>
             </div>
             <div class="recent-grid" style="display: block !important;">
