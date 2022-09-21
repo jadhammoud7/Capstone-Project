@@ -114,6 +114,19 @@ $stmt_nbofsales->execute();
 $results_nbofsales = $stmt_nbofsales->get_result();
 
 
+//get lowest products 
+$query_lowest_products = "SELECT name,sales_number FROM products ORDER BY sales_number ASC LIMIT 5;";
+$stmt_lowest_products = $connection->prepare($query_lowest_products);
+$stmt_lowest_products->execute();
+$results_lowest_products = $stmt_lowest_products->get_result();
+
+//get top products 
+$query_top_products = "SELECT name,sales_number FROM products ORDER BY sales_number DESC LIMIT 5;";
+$stmt_top_products = $connection->prepare($query_top_products);
+$stmt_top_products->execute();
+$results_top_products = $stmt_top_products->get_result();
+
+
 // echo "<script>window.location='../product-admin/product-admin.php';</script>";
 
 ?>
@@ -129,6 +142,7 @@ $results_nbofsales = $stmt_nbofsales->get_result();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="../admin-main/admin-main.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link rel="stylesheet" href="product-admin.css">
     <title>Admin | Products - Newbies Gamers</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
@@ -261,7 +275,12 @@ $results_nbofsales = $stmt_nbofsales->get_result();
                     </div>
                 </div>
             </div>
-            <!-- <canvas id="myChart1"></canvas> -->
+            <div style="margin-top: 30px;">
+                <div id="myPlot" style="width:100%;max-width:700px;float:right"></div>
+                <div id="myPlot1" style="width:100%;max-width:700px"></div>
+
+            </div>
+
             <div class="card-single add_admin">
                 <button class="add_product" id="add_user1" onclick="OpenAddProduct()" title="Add a new product"><span class="las la-plus"></span>Add Product</button>
             </div>
@@ -402,29 +421,80 @@ $results_nbofsales = $stmt_nbofsales->get_result();
 
 <script src="../admin-main/admin-main.js"></script>
 <script>
-    // var xValues = ["Pending Appointments", "Done Appointments"];
-    // var yValues = []
-    // var barColors = [
-    //     "#b91d47",
-    //     "#00aba9"
-    // ]
+    const array_products = [];
+    const array_products_count = [];
+    <?php
+    if (isset($results_lowest_products)) {
+        while ($row_lowest_products = $results_lowest_products->fetch_assoc()) {
+    ?>
+            array_products.push("<?php
+                                    echo $row_lowest_products['name'];
+                                    ?>");
+            array_products_count.push("<?php
+                                        echo $row_lowest_products['sales_number'];
+                                        ?>");
+    <?php }
+    }
+    ?>;
+    var xArray = array_products_count;
+    var yArray = array_products;
 
-    // new Chart("myChart", {
-    //     type: "pie",
-    //     data: {
-    //         labels: xValues,
-    //         datasets: [{
-    //             backgroundColor: barColors,
-    //             data: yValues
-    //         }]
-    //     },
-    //     options: {
-    //         title: {
-    //             display: true,
-    //             text: "Distribution of All Appointments"
-    //         }
-    //     }
-    // });
+    var data = [{
+        x: xArray,
+        y: yArray,
+        type: "bar",
+        orientation: "h",
+        marker: {
+            color: "red"
+        }
+    }];
+
+    var layout = {
+        title: "Lowest products being sold"
+    };
+
+    Plotly.newPlot("myPlot", data, layout);
+
+
+
+
+    const array_products_top = [];
+    const array_products_count_top = [];
+    <?php
+    if (isset($results_top_products)) {
+        while ($row_top_products = $results_top_products->fetch_assoc()) {
+    ?>
+            array_products_top.push("<?php
+                                    echo $row_top_products['name'];
+                                    ?>");
+            array_products_count_top.push("<?php
+                                        echo $row_top_products['sales_number'];
+                                        ?>");
+    <?php }
+    }
+    ?>;
+    var xArray = array_products_count_top;
+    var yArray = array_products_top;
+
+    var data = [{
+        x: xArray,
+        y: yArray,
+        type: "bar",
+        orientation: "h",
+        marker: {
+            color: "green"
+        }
+    }];
+
+    var layout = {
+        title: "Top products being sold"
+    };
+
+    Plotly.newPlot("myPlot1", data, layout);
+
+
+
+    //second chart which is the lowest
 </script>
 
 </html>
