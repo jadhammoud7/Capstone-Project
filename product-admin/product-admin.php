@@ -327,11 +327,14 @@ $results_nbofsales = $stmt_nbofsales->get_result();
                                     </thead>
                                     <tbody>
                                         <?php
-                                        while($row_nbofsales = $results_nbofsales->fetch_assoc()){
-                                            
+                                        while ($row_nbofsales = $results_nbofsales->fetch_assoc()) {
+                                            get_products_in_asc_desc($row_nbofsales['name'], $row_nbofsales['inventory'], $row_nbofsales['sales_number']);
                                         }
                                         ?>
                                     </tbody>
+                                    <a>
+                                        <button style="border-radius: 15px;" id="asc_desc" onclick="asc_desc()">Get In Descending</button>
+                                    </a>
                                 </table>
                             </div>
                         </div>

@@ -37,3 +37,16 @@ function CloseRemoveAdminPopUp(){
 //     window.location.href = 'product-admin.php?getAdminIDtoRemove' + admin_id;
 //     CloseRemoveAdminPopUp();
 // }
+const asc_desc1 = document.getElementById("asc_desc");
+function asc_desc() {
+    if(asc_desc1.textContent=="Get In Descending"){
+        asc_desc1.innerHTML="Get in ascending";
+        asc_desc1.style.backgroundColor="red";
+        asc_desc1.style.color="black";
+    }else if(asc_desc1.textContent=="Get in ascending"){
+        asc_desc1.innerHTML="Get In Descending";
+        asc_desc1.style.backgroundColor="royalblue";
+        asc_desc1.style.color="white";
+    }
+
+}

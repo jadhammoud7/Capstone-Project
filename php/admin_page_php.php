@@ -174,7 +174,7 @@ function get_all_products($product_id, $name, $price, $type, $category, $invento
     echo $element;
 }
 
-function get_products_in_asc($name,$inventory, $sales_number)
+function get_products_in_asc_desc($name,$inventory, $sales_number)
 {
     $element = "
     <tr class=\"hello\">
@@ -182,6 +182,7 @@ function get_products_in_asc($name,$inventory, $sales_number)
         <td>$inventory</td>
         <td>$sales_number</td>
     </tr>
+
     ";
     echo $element;
 }
