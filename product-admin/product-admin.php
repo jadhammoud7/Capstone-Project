@@ -52,6 +52,15 @@ $stmt_products->execute();
 $results_products = $stmt_products->get_result();
 
 //form of adding new product
+$product_name = "";
+$product_price = 0;
+$product_type = "";
+$product_category = "";
+$product_desciption = "";
+$product_age = "";
+$product_image = "";
+$product_inventory = 0;
+$product_sales_number = 0;
 
 if (isset($_POST["product_name"])) {
     $product_name = $_POST["product_name"];
@@ -81,19 +90,19 @@ if (isset($_POST['product_inventory'])) {
     $product_inventory = $_POST['product_inventory'];
 }
 
-$targetDir = "images/";
-$filename = basename($_FILES["file"]["name"]);
-$targetFilePath = $targetDir . $filename;
-$fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
-
-if (isset($product_name) && isset($product_price) && isset($product_type) && isset($product_category) && isset($product_desciption) && isset($product_age) && isset($product_inventory) && isset($_POST["submit"]) && !empty($_FILES["file"]["name"])) {
+if ($product_name != "" && $product_price != 0 && $product_type != "" && $product_category != "" && $product_desciption != "" && $product_age != "" && $product_inventory != 0) {
+    $target_dir = "../images/";
+    $filename = basename($_FILES['product_image']['name']);
+    $target_file = $target_dir . $filename;
+    $fileType = pathinfo($target_file, PATHINFO_EXTENSION);
     $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
     if (in_array($fileType, $allowTypes)) {
-        if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
-            $mysql1 = $connection->prepare("INSERT INTO products(name, price, type, category, description, age, image) VALUES (?,?,?,?,?,?,?)");
-            $mysql1->bind_param("sisssss", $product_name, $product_price, $product_type, $product_category, $product_desciption, $product_age, $filename);
-            $mysql1->execute();
-            $mysql1->close();
+        if (move_uploaded_file($_FILES['product_image']['tmp_name'], $target_file)) {
+            $sales_number = 0;
+            $stmt_add_new_product = $connection->prepare("INSERT INTO products(name, price, type, category, description, age, image, inventory, sales_number) VALUES (?,?,?,?,?,?,?,?,?)");
+            $stmt_add_new_product->bind_param("sisssssii", $product_name, $product_price, $product_type, $product_category, $product_desciption, $product_age, $filename, $product_inventory, $sales_number);
+            $stmt_add_new_product->execute();
+            $stmt_add_new_product->close();
         }
     }
 }
@@ -321,13 +330,17 @@ if (isset($product_name) && isset($product_price) && isset($product_type) && iss
                         <label for="product_desciption"><b>Desciption</b></label>
                         <input type="text" placeholder="Enter product's desciption" name="product_desciption" id="product_desciption" value="" required>
 
-
                         <label for="product_age"><b>Age Restriction</b></label>
                         <input type="text" placeholder="Enter product's age restriction" name="product_age" id="product_age" value="" required>
 
                         <label for="product_inventory"><b>Current Inventory:</b></label>
                         <input type="number" placeholder="Enter product's current inventory in stock" name="product_inventory" id="product_inventory" style="height: 35px;" value="" required>
 
+                        <br><br>
+
+                        <label for="product_image"><b>Upload Product Image:</b></label>
+                        <input type="file" name="product_image" id="product_image" value="" required>
+                        <br>
                         <div class="clearfix">
                             <button type="submit" class="addproductbtn" title="Add new product"><strong>Add Product</strong></button>
                         </div>
