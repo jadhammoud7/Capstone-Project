@@ -46,7 +46,7 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 //get all products
 require_once("../php/admin_page_php.php");
-$query_products = "SELECT product_id,name, price, type, category, description, age, inventory, sales_number FROM products";
+$query_products = "SELECT product_id, name, price, type, category, description, age, inventory, sales_number FROM products";
 $stmt_products = $connection->prepare($query_products);
 $stmt_products->execute();
 $results_products = $stmt_products->get_result();
@@ -99,8 +99,9 @@ if ($product_name != "" && $product_price != 0 && $product_type != "" && $produc
     if (in_array($fileType, $allowTypes)) {
         if (move_uploaded_file($_FILES['product_image']['tmp_name'], $target_file)) {
             $sales_number = 0;
+            $product_image = $filename;
             $stmt_add_new_product = $connection->prepare("INSERT INTO products(name, price, type, category, description, age, image, inventory, sales_number) VALUES (?,?,?,?,?,?,?,?,?)");
-            $stmt_add_new_product->bind_param("sisssssii", $product_name, $product_price, $product_type, $product_category, $product_desciption, $product_age, $filename, $product_inventory, $sales_number);
+            $stmt_add_new_product->bind_param("sisssssii", $product_name, $product_price, $product_type, $product_category, $product_desciption, $product_age, $product_image, $product_inventory, $sales_number);
             $stmt_add_new_product->execute();
             $stmt_add_new_product->close();
         }
@@ -367,7 +368,7 @@ $results_top_products = $stmt_top_products->get_result();
             <!-- adding form -->
             <div id="id01" class="modal">
                 <span onclick="CloseAddProduct()" class="close" title="Close Modal">&times;</span>
-                <form class="modal-content" action="product-admin.php" method="POST">
+                <form class="modal-content" action="product-admin.php" method="POST" enctype="multipart/form-data">
                     <div class="container">
                         <h1 class="title">Add New Product</h1>
                         <p class="title">Please fill in this form to add a new product.</p>
@@ -400,9 +401,10 @@ $results_top_products = $stmt_top_products->get_result();
 
                         <br><br>
 
-                        <label for="product_image"><b>Upload Product Image:</b></label>
+                        <label><b>Upload Product Image:</b></label>
                         <input type="file" name="product_image" id="product_image" value="" required>
                         <br>
+
                         <div class="clearfix">
                             <button type="submit" class="addproductbtn" title="Add new product"><strong>Add Product</strong></button>
                         </div>
@@ -455,9 +457,6 @@ $results_top_products = $stmt_top_products->get_result();
 
     Plotly.newPlot("myPlot", data, layout);
 
-
-
-
     const array_products_top = [];
     const array_products_count_top = [];
     <?php
@@ -465,11 +464,11 @@ $results_top_products = $stmt_top_products->get_result();
         while ($row_top_products = $results_top_products->fetch_assoc()) {
     ?>
             array_products_top.push("<?php
-                                    echo $row_top_products['name'];
-                                    ?>");
-            array_products_count_top.push("<?php
-                                        echo $row_top_products['sales_number'];
+                                        echo $row_top_products['name'];
                                         ?>");
+            array_products_count_top.push("<?php
+                                            echo $row_top_products['sales_number'];
+                                            ?>");
     <?php }
     }
     ?>;

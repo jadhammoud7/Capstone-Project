@@ -170,8 +170,26 @@ input.is-valid+label {
     color: #8390A2;
 }
 
-.description-body {
+.description-body{
     margin: 20px;
+}
+
+.image-body div{
+    margin: 20px;
+    height: 300px;
+}
+
+.image-body div p{
+    height: 300px;
+}
+
+.image-body div p img{
+    width: 100%;
+    height: 100%;
+}
+
+.product-image{
+    width: 80%;
 }
 
 .product-details-buttons {
