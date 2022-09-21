@@ -236,6 +236,10 @@ hr {
   display: none;
 }
 
+#product-name-column:hover{
+  cursor: pointer;
+}
+
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
 

@@ -104,6 +104,7 @@ if ($product_name != "" && $product_price != 0 && $product_type != "" && $produc
             $stmt_add_new_product->bind_param("sisssssii", $product_name, $product_price, $product_type, $product_category, $product_desciption, $product_age, $product_image, $product_inventory, $sales_number);
             $stmt_add_new_product->execute();
             $stmt_add_new_product->close();
+            header("Location: product-admin.php?product-added=1");
         }
     }
 }
@@ -158,6 +159,14 @@ $results_top_products = $stmt_top_products->get_result();
         <p>Are you sure that you want to logout?</p>
         <button type="button" onclick="GoToLogIn()">YES</button>
         <button type="button" onclick="CloseLogOutPopUp()">NO</button>
+    </div>
+
+    <!-- started popup message logout -->
+    <div class="popup" id="product-added-confirmation">
+        <img src="../images/tick.png" alt="">
+        <h2>Product Added Confirmation</h2>
+        <p>A new product was added successfully</p>
+        <button type="button" onclick="CloseProductAddedPopUp()">OK</button>
     </div>
 
     <input type="checkbox" id="nav-toggle">
@@ -293,10 +302,10 @@ $results_top_products = $stmt_top_products->get_result();
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table width="100%">
+                                <table width="100%" id="products_table">
                                     <thead>
                                         <tr>
-                                            <td>Product Name</td>
+                                            <td id="product-name-column" title="Sort Product Name by descending">Product Name</td>
                                             <td>Price</td>
                                             <td>Type</td>
                                             <td>Category</td>
