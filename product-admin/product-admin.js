@@ -246,31 +246,15 @@ function sortTable(n, dir) {
                 y = rows[i + 1].getElementsByTagName("td")[n];
             }
             if (dir == "asc") {
-                if (!isNaN(x) && !isNaN(y)) {
-                    if (x > y) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
-                else {
-                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
                 }
             }
             else if (dir == "desc") {
-                if (!isNaN(x) && !isNaN(y)) {
-                    if (x < y) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
-                else {
-                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
+                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
                 }
             }
         }

@@ -335,6 +335,13 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
                         <div class="card-header">
                             <h3>Checkouts List</h3>
                         </div>
+                        <div class="card-header">
+                            <h3>
+                                <p style="text-decoration: underline; color: royalblue;" id="filter-text"></p>
+                                <br>
+                                <p id="table-sort"></p>
+                            </h3>
+                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table width="100%" id="checkouts_table">
@@ -344,9 +351,9 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
                                             <td id="email-column" title="Sort Email by descending">Email</td>
                                             <td id="phone-number-column" title="Sort Phone Number by descending">Phone Number</td>
                                             <td id="total-price-column" title="Sort Total Price by descending">Total Price</td>
-                                            <td>Total Price Inc. Tax</td>
-                                            <td>Date</td>
-                                            <td>Status</td>
+                                            <td id="total-price-inc-tax-column" title="Sort Total Price Inc. Tax by descending">Total Price Inc. Tax</td>
+                                            <td id="checkout-date-column" title="Sort Date by descending">Date</td>
+                                            <td id="status-column" title="Sort Status by descending">Status</td>
                                             <td>Change Status</td>
                                             <td>View Order</td>
                                         </tr>
