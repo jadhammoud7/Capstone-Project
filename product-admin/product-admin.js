@@ -64,6 +64,9 @@ function asc_desc() {
     }
 }
 
+const table_sort = document.getElementById('table-sort');
+const filter_text = document.getElementById('filter-text');
+
 const product_name_column = document.getElementById('product-name-column');
 console.log(product_name_column.innerHTML);
 product_name_column.addEventListener('click', function SetSorting() {
@@ -71,16 +74,22 @@ product_name_column.addEventListener('click', function SetSorting() {
     if (product_name_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
         product_name_column.innerHTML = "Product Name <span class=\"las la-sort-up\"></span>";
         sortTable(0, "desc");
+        table_sort.innerHTML = 'Product Name by descending order';
+        filter_text.innerHTML = 'Filter';
         product_name_column.title = 'Sort Product Name by ascending';
     }
     if (product_name_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
         product_name_column.innerHTML = "Product Name <span class=\"las la-sort-down\"></span>";
         sortTable(0, "asc");
+        table_sort.innerHTML = 'Product Name by ascending order';
+        filter_text.innerHTML = 'Filter';
         product_name_column.title = 'Sort Product Name by descending';
     }
     if (product_name_column_innerHTML == "Product Name") {
         product_name_column.innerHTML = "Product Name <span class=\"las la-sort-up\"></span>";
         sortTable(0, "desc");
+        table_sort.innerHTML = 'Product Name by descending order';
+        filter_text.innerHTML = 'Filter';
         product_name_column.title = 'Sort Product Name by ascending';
     }
 });
@@ -92,16 +101,22 @@ product_price_column.addEventListener('click', function SetSorting() {
     if (product_price_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
         product_price_column.innerHTML = "Price <span class=\"las la-sort-up\"></span>";
         sortTable(1, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Products of highest to lowest prices';
         product_price_column.title = 'Sort Price by ascending';
     }
     if (product_price_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
         product_price_column.innerHTML = "Price <span class=\"las la-sort-down\"></span>";
         sortTable(1, "asc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Products of lowest to highest prices';
         product_price_column.title = 'Sort Price by descending';
     }
     if (product_price_column_innerHTML == "Price") {
         product_price_column.innerHTML = "Price <span class=\"las la-sort-up\"></span>";
         sortTable(1, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Products of highest to lowest prices';
         product_price_column.title = 'Sort Price by ascending';
     }
 });
@@ -112,16 +127,22 @@ product_type_column.addEventListener('click', function SetSorting() {
     if (product_type_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
         product_type_column.innerHTML = "Type <span class=\"las la-sort-up\"></span>";
         sortTable(2, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Type by descending order';
         product_type_column.title = 'Sort Type by ascending';
     }
     if (product_type_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
         product_type_column.innerHTML = "Type <span class=\"las la-sort-down\"></span>";
         sortTable(2, "asc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Type by ascending order';
         product_type_column.title = 'Sort Type by descending';
     }
     if (product_type_column_innerHTML == "Type") {
         product_type_column.innerHTML = "Type <span class=\"las la-sort-up\"></span>";
         sortTable(2, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Type by descending order';
         product_type_column.title = 'Sort Type by ascending';
     }
 });
@@ -133,16 +154,22 @@ product_category_column.addEventListener('click', function SetSorting() {
     if (product_category_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
         product_category_column.innerHTML = "Category <span class=\"las la-sort-up\"></span>";
         sortTable(3, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Category by descending order';
         product_category_column.title = 'Sort Category by ascending';
     }
     if (product_category_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
         product_category_column.innerHTML = "Category <span class=\"las la-sort-down\"></span>";
         sortTable(3, "asc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Category by ascending order';
         product_category_column.title = 'Sort Category by descending';
     }
     if (product_category_column_innerHTML == "Category") {
         product_category_column.innerHTML = "Category <span class=\"las la-sort-up\"></span>";
         sortTable(3, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Category by descending order';
         product_category_column.title = 'Sort Category by ascending';
     }
 });
@@ -153,16 +180,22 @@ product_inventory_column.addEventListener('click', function SetSorting() {
     if (product_inventory_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
         product_inventory_column.innerHTML = "Inventory <span class=\"las la-sort-up\"></span>";
         sortTable(4, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Products from most to least available in stock';
         product_inventory_column.title = 'Sort Inventory by ascending';
     }
     if (product_inventory_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
         product_inventory_column.innerHTML = "Inventory <span class=\"las la-sort-down\"></span>";
         sortTable(4, "asc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Products from least to most available in stock';
         product_inventory_column.title = 'Sort Inventory by descending';
     }
     if (product_inventory_column_innerHTML == "Inventory") {
         product_inventory_column.innerHTML = "Inventory <span class=\"las la-sort-up\"></span>";
         sortTable(4, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Products from most to least available in stock';
         product_inventory_column.title = 'Sort Inventory by ascending';
     }
 });
@@ -174,16 +207,22 @@ product_sales_column.addEventListener('click', function SetSorting() {
     if (product_sales_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
         product_sales_column.innerHTML = "Sales Number <span class=\"las la-sort-up\"></span>";
         sortTable(5, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Products from most to least sold';
         product_sales_column.title = 'Sort Sales Number by ascending';
     }
     if (product_sales_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
         product_sales_column.innerHTML = "Sales Number <span class=\"las la-sort-down\"></span>";
         sortTable(5, "asc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Products from least to most sold';
         product_sales_column.title = 'Sort Sales Number by descending';
     }
     if (product_sales_column_innerHTML == "Sales Number") {
         product_sales_column.innerHTML = "Sales Number <span class=\"las la-sort-up\"></span>";
         sortTable(5, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Products from most to least sold';
         product_sales_column.title = 'Sort Sales Number by ascending';
     }
 });

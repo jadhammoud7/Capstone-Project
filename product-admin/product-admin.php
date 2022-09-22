@@ -300,6 +300,13 @@ $results_top_products = $stmt_top_products->get_result();
                         <div class="card-header">
                             <h3>Products List</h3>
                         </div>
+                        <div class="card-header">
+                            <h3>
+                                <p style="text-decoration: underline; color: royalblue;" id="filter-text"></p>
+                                <br>
+                                <p id="table-sort"></p>
+                            </h3>
+                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table width="100%" id="products_table">
