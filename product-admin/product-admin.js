@@ -68,7 +68,6 @@ const table_sort = document.getElementById('table-sort');
 const filter_text = document.getElementById('filter-text');
 
 const product_name_column = document.getElementById('product-name-column');
-console.log(product_name_column.innerHTML);
 product_name_column.addEventListener('click', function SetSorting() {
     var product_name_column_innerHTML = product_name_column.innerHTML;
     if (product_name_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {

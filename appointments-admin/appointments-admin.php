@@ -239,8 +239,8 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                 </div>
             </div>
             <div>
-            <canvas id="myChart" style="width:100%;max-width:600px;float:left"></canvas>
-            <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
+                <canvas id="myChart" style="width:100%;max-width:600px;float:left"></canvas>
+                <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
             </div>
             <div class="recent-grid" style="display: block !important;">
                 <div class="projects">
@@ -248,16 +248,23 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                         <div class="card-header">
                             <h3>Appointments List</h3>
                         </div>
+                        <div class="card-header">
+                            <h3>
+                                <p style="text-decoration: underline; color: royalblue;" id="filter-text"></p>
+                                <br>
+                                <p id="table-sort"></p>
+                            </h3>
+                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table width="100%">
+                                <table width="100%" id="appointments_table">
                                     <thead>
                                         <tr>
-                                            <td>Appointment Name</td>
-                                            <td>Customer Name</td>
-                                            <td>Date</td>
+                                            <td id="appointment-name-column" title="Sort Appointment Name by descending">Appointment Name</td>
+                                            <td id="customer-name-column" title="Sort Customer Name by descending">Customer Name</td>
+                                            <td id="date-column" title="Sort Date by descending">Date</td>
                                             <td>Hour</td>
-                                            <td>Status</td>
+                                            <td id="status-column" title="Sort Status by descending">Status</td>
                                             <td>Change Status</td>
                                         </tr>
                                     </thead>
