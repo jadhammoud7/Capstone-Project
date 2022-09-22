@@ -350,7 +350,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                     <div class="card">
 
                         <div class="card-header">
-                            <canvas id="myChart"></canvas>
+                        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
                         </div>
 
                         <div class="card-header">

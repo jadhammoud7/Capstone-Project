@@ -22,6 +22,13 @@ $stmt_allproducts = $connection->prepare($query_allproducts);
 $stmt_allproducts->execute();
 $results_allproducts = $stmt_allproducts->get_result();
 
+//get all products
+require_once("../php/admin_page_php.php");
+$query_products = "SELECT product_id, name, price, type, category, description, age, inventory, sales_number FROM products";
+$stmt_products = $connection->prepare($query_products);
+$stmt_products->execute();
+$results_products = $stmt_products->get_result();
+
 ?>
 
 
@@ -172,9 +179,51 @@ $results_allproducts = $stmt_allproducts->get_result();
             </div>
         </div>
     </div>
-
     <!-- ended features here -->
 
+
+    <!-- start of asc and desc table-->
+    <div class="recent-grid" style="display: block !important;">
+                <div class="projects">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Products List</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table width="100%" id="products_table">
+                                    <thead>
+                                        <tr>
+                                            <td id="product-name-column" title="Sort Product Name by descending">Product Name</td>
+                                            <td id="product-price-column" title="Sort Price by descending">Price</td>
+                                            <td id="product-type-column" title="Sort Type by descending">Type</td>
+                                            <td id="product-category-column" title="Sort Category by descending">Category</td>
+                                            <td id="product-inventory-column" title="Sort Inventory by descending">Inventory</td>
+                                            <td id="product-sales-column" title="Sort Sales Number by descending">Sales Number</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        while ($row_products = $results_products->fetch_assoc()) {
+                                            get_all_products(
+                                                $row_products['product_id'],
+                                                $row_products['name'],
+                                                $row_products['price'],
+                                                $row_products['category'],
+                                                $row_products['type'],
+                                                $row_products['inventory'],
+                                                $row_products['sales_number']
+                                            );
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of asc and desc products -->
 
 
     <!-- starting about us here -->

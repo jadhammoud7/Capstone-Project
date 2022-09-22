@@ -337,40 +337,6 @@ $results_top_products = $stmt_top_products->get_result();
 
 
 
-            <!-- second table having asceding and descending -->
-            <div class="recent-grid" style="display: block !important;">
-                <div class="projects">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3> Top and Lowest Baught Product</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table width="100%">
-                                    <thead>
-                                        <tr>
-                                            <td>Product Name</td>
-                                            <td>Inventory</td>
-                                            <td>Sales Number</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        while ($row_nbofsales = $results_nbofsales->fetch_assoc()) {
-                                            get_products_in_asc_desc($row_nbofsales['name'], $row_nbofsales['inventory'], $row_nbofsales['sales_number']);
-                                        }
-                                        ?>
-                                    </tbody>
-                                    <a>
-                                        <button style="border-radius: 15px;" id="asc_desc" onclick="asc_desc()">Get In Descending</button>
-                                    </a>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
 
 
 
