@@ -236,9 +236,31 @@ hr {
   display: none;
 }
 
-#product-name-column:hover{
+#product-name-column:hover {
   cursor: pointer;
 }
+
+select {
+  background-color: royalblue;
+  border: none;
+  color: #fefefe;
+  font-size: 15px;
+  width: 400px;
+}
+
+select:hover {
+  background-color: rgb(200, 192, 192);
+  color: royalblue;
+}
+
+option {
+  font-weight: bold;
+  padding: 15px 15px 15px;
+  min-height: 2em;
+  font-size: large;
+}
+
+
 
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {

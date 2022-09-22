@@ -342,11 +342,6 @@ $results_top_products = $stmt_top_products->get_result();
                 </div>
             </div>
 
-
-
-
-
-
             <!-- adding form -->
             <div id="id01" class="modal">
                 <span onclick="CloseAddProduct()" class="close" title="Close Modal">&times;</span>
@@ -360,17 +355,38 @@ $results_top_products = $stmt_top_products->get_result();
                         <input type="text" placeholder="Enter product's name" name="product_name" id="product_name" value="" required />
 
 
-                        <label for="product_price"><b>Product Price</b></label>
+                        <label for="product_price"><b>Product Price</b></label><br>
                         <input style="height: 35px;" type="number" placeholder="Enter product's price" name="product_price" id="product_price" value="" required>
-                        <br> <br>
+                        <br><br>
 
-                        <label for="product_type"><b>Product Type</b></label>
-                        <input type="text" placeholder="Enter product's type" name="product_type" id="product_type" value="" required>
+                        <label for="product_type"><b>Product Type</b><br>
+                            <select name="product_type" id="product_type">
+                                <option value="cds">CDs</option>
+                                <option value="consoles">Consoles</option>
+                                <option value="accessories">Accessories</option>
+                                <option value="phones">Phones</option>
+                                <option value="cards">Online cards</option>
+                                <option value="electronics">Electronics</option>
+                            </select>
+                        </label>
+                        <br><br>
 
-
-                        <label for="product_category"><b>Product Category</b></label>
-                        <input type="text" placeholder="Enter product's category " name="product_category" id="product_category" value="" required> <br> <br>
-
+                        <label for="product_category"><b>Product Category</b><br>
+                            <select name="product_category" id="product_category">
+                                <option value="action">Action</option>
+                                <option value="gaming">Gaming</option>
+                                <option value="strategy">Strategy</option>
+                                <option value="PS2">PS2</option>
+                                <option value="PS3">PS3</option>
+                                <option value="PS4">PS4</option>
+                                <option value="PS5">PS5</option>
+                                <option value="XBox">XBox</option>
+                                <option value="iphone">IPhone</option>
+                                <option value="Samsung">Samsung</option>
+                                <option value="PsPlus">PS Plus</option>
+                            </select>
+                        </label>
+                        <br><br>
 
                         <label for="product_desciption"><b>Desciption</b></label>
                         <input type="text" placeholder="Enter product's desciption" name="product_desciption" id="product_desciption" value="" required>
@@ -378,7 +394,7 @@ $results_top_products = $stmt_top_products->get_result();
                         <label for="product_age"><b>Age Restriction</b></label>
                         <input type="text" placeholder="Enter product's age restriction" name="product_age" id="product_age" value="" required>
 
-                        <label for="product_inventory"><b>Current Inventory:</b></label>
+                        <label for="product_inventory"><b>Current Inventory:</b></label><br>
                         <input type="number" placeholder="Enter product's current inventory in stock" name="product_inventory" id="product_inventory" style="height: 35px;" value="" required>
 
                         <br><br>
