@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 20, 2022 at 11:59 PM
+-- Generation Time: Sep 23, 2022 at 12:05 AM
 -- Server version: 8.0.23
 -- PHP Version: 8.0.2
 
@@ -189,20 +189,21 @@ CREATE TABLE `customers` (
   `address` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `city` varchar(255) NOT NULL,
   `username` varchar(225) NOT NULL,
-  `password` varchar(225) NOT NULL
+  `password` varchar(225) NOT NULL,
+  `loyalty_points` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`customer_id`, `first_name`, `last_name`, `email`, `date_of_birth`, `phone_number`, `address`, `city`, `username`, `password`) VALUES
-(2, 'jad', 'hammoud', 'jad.hammoud@gmail.com', '2022-09-06', '76939605', 'beirut ras el nabeh', 'aaramun', 'jad', '8384caf9895a1f9ab17aa8055b0b5869f3e8eba263aac96585f1ee871dd3d5f0'),
-(3, 'mohamad', 'Nabaa', 'mohamad@gmail.com', '2022-08-22', '71123805', 'beirut next to fakhani second floor', 'bshamoun', 'mhmd', '8f9cebbfdc1a99ce7a4941ad08c34c4f1f08089ceff43b802dab3b951d6cbfd1'),
-(4, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '2022-08-01', '+96171123805', 'Aramoun next to chamsine third floor', 'aaramun', 'Mohamad Nabaa', '578835a5afad634f5716badf3d801e8910dec33e73ec5c9e86b8d409f229263d'),
-(16, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '2001-07-18', '96171123805', 'Aramoun next to chamsine third floor', 'beirut', 'Mohamad Nabaa', '578835a5afad634f5716badf3d801e8910dec33e73ec5c9e86b8d409f229263d'),
-(17, 'Omar ', 'Atieh', 'omar4Atieh@hotmail.com', '2022-09-21', '878887878788', 'Bshamoun , al wadi street Al nader building block B second floor', 'bshamoun', 'omar1234567', '75523907535270f2f12668aea07b507433e81ed0e625b9455bdb8554855687e0'),
-(21, 'Ahmad', 'Serhan', 'ahmadserhan@gmail.com', '2022-08-30', '45657888878', 'Bshamoun , al wadi street Al nader building block B second floor', 'beirut', 'ahmad1231234', '68a8b4c8464fa9bc797ce97b47bff6807ba10d8ddb061fce39b28842389888fa');
+INSERT INTO `customers` (`customer_id`, `first_name`, `last_name`, `email`, `date_of_birth`, `phone_number`, `address`, `city`, `username`, `password`, `loyalty_points`) VALUES
+(2, 'jad', 'hammoud', 'jad.hammoud@gmail.com', '2022-09-06', '76939605', 'beirut ras el nabeh', 'aaramun', 'jad', '8384caf9895a1f9ab17aa8055b0b5869f3e8eba263aac96585f1ee871dd3d5f0', 0),
+(3, 'mohamad', 'Nabaa', 'mohamad@gmail.com', '2022-08-22', '71123805', 'beirut next to fakhani second floor', 'bshamoun', 'mhmd', '8f9cebbfdc1a99ce7a4941ad08c34c4f1f08089ceff43b802dab3b951d6cbfd1', 0),
+(4, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '2022-08-01', '+96171123805', 'Aramoun next to chamsine third floor', 'aaramun', 'Mohamad Nabaa', '578835a5afad634f5716badf3d801e8910dec33e73ec5c9e86b8d409f229263d', 0),
+(16, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '2001-07-18', '96171123805', 'Aramoun next to chamsine third floor', 'beirut', 'Mohamad Nabaa', '578835a5afad634f5716badf3d801e8910dec33e73ec5c9e86b8d409f229263d', 0),
+(17, 'Omar ', 'Atieh', 'omar4Atieh@hotmail.com', '2022-09-21', '878887878788', 'Bshamoun , al wadi street Al nader building block B second floor', 'bshamoun', 'omar1234567', '75523907535270f2f12668aea07b507433e81ed0e625b9455bdb8554855687e0', 0),
+(21, 'Ahmad', 'Serhan', 'ahmadserhan@gmail.com', '2022-08-30', '45657888878', 'Bshamoun , al wadi street Al nader building block B second floor', 'beirut', 'ahmad1231234', '68a8b4c8464fa9bc797ce97b47bff6807ba10d8ddb061fce39b28842389888fa', 0);
 
 -- --------------------------------------------------------
 
@@ -255,7 +256,16 @@ INSERT INTO `products` (`product_id`, `name`, `price`, `type`, `category`, `desc
 (7, 'Galaxy Z Fold2', 990, 'phones', 'Cellphone', 'The Samsung Galaxy Z Fold 2 (stylized as Samsung Galaxy Z Fold2, sold as Samsung Galaxy Fold 2 in certain territories) is an Android-based foldable smartphone developed by Samsung Electronics for its Samsung Galaxy Z series, succeeding the Samsung Galaxy Z Fold. It was announced on 5 August 2020 alongside the Samsung Galaxy Note 20, the Samsung Galaxy Tab S7, the Galaxy Buds Live, and the Galaxy Watch 3. Samsung later revealed pricing and availability details on 1 September.\r\n\r\n', 'Any', '', 0, 0),
 (8, 'Sonic', 46, 'cds', 'PS3 Cd', 'Sonic the Hedgehog CD is a 1993 platform game for the Sega CD developed and published by Sega. The story follows Sonic the Hedgehog as he attempts to save an extraterrestrial body, Little Planet, from Doctor Robotnik. Like other Sonic games, Sonic runs and jumps through several themed levels while collecting rings and defeating robots. Sonic CD is distinguished by its time travel feature, a key aspect to the story and gameplay. By traveling through time, players can access different versions of stages, featuring alternative layouts, music, and graphics.', '9+', '', 0, 0),
 (9, 'PlayStation 3', 300, 'console', 'PS3', 'The PlayStation 3 (PS3) is a home video game console developed by Sony Computer Entertainment. The successor to the PlayStation 2, it is part of the PlayStation brand of consoles. It was first released on November 11, 2006, in Japan, November 17, 2006, in North America, and March 23, 2007, in Europe and Australia. The PlayStation 3 competed primarily against Microsoft\'s Xbox 360 and Nintendo\'s Wii as part of the seventh generation of video game consoles.', 'Any', '', 0, 0),
-(10, 'PlayStation 4', 550, 'console', 'PS4', 'The PlayStation 4 (PS4) is a home video game console developed by Sony Computer Entertainment. Announced as the successor to the PlayStation 3 in February 2013, it was launched on November 15, 2013, in North America, November 29, 2013 in Europe, South America and Australia, and on February 22, 2014 in Japan. A console of the eighth generation, it competes with Microsoft\'s Xbox One and Nintendo\'s Wii U and Switch.', 'Any', '', 0, 0);
+(10, 'PlayStation 4', 550, 'console', 'PS4', 'The PlayStation 4 (PS4) is a home video game console developed by Sony Computer Entertainment. Announced as the successor to the PlayStation 3 in February 2013, it was launched on November 15, 2013, in North America, November 29, 2013 in Europe, South America and Australia, and on February 22, 2014 in Japan. A console of the eighth generation, it competes with Microsoft\'s Xbox One and Nintendo\'s Wii U and Switch.', 'Any', '', 0, 0),
+(11, 'qqq', 1, 'qqq', 'qqq', 'qqqqq', '12+ age', 'image.png', 12, 0),
+(12, 'qqq', 12, 'qqq', 'qqq', 'qqqqq', '12+ age', 'image.png', 12, 0),
+(13, 'qqq', 12, 'qqq', 'qqq', 'qqqqq', '12+ age', '', 12, 0),
+(14, 'qqq', 12, 'qqq', 'qqq', 'qqqqq', '12+ age', '', 12, 0),
+(15, 'qqq', 12, 'qqq', 'qqq', 'qqqqq', '12+ age', '', 12, 0),
+(16, 'qqq', 12, 'qqq', 'qqq', 'qqqqq', '12+ age', '', 12, 0),
+(17, 'qqq', 12, 'qqq', 'qqq', 'qqqqq', '12+ age', 'circuit.jpg', 12, 0),
+(18, 'qqq', 12, 'qqq', 'qqq', 'qqqqq', '12+ age', 'circuit.jpg', 12, 0),
+(19, 'qqq', 12, 'qqq', 'qqq', 'qqqqq', '12+ age', 'circuit.jpg', 12, 0);
 
 -- --------------------------------------------------------
 
@@ -282,6 +292,35 @@ INSERT INTO `repair` (`repair_type`, `price_per_hour`, `description`, `image`) V
 ('Phone Repair', 75, 'Schedule now and bring your Phones for repair or maintanence. We require a total of 10$ for a one hour work. Don\'t hesitate to contact us for any concerns or information.', NULL),
 ('PS Repair', 30, 'Schedule now and bring your ps consoles for repair or maintanence. We require a total of 10$ for a one hour work. Don\'t hesitate to contact us for any concerns or information.', NULL),
 ('Controller Repair', 15, 'Schedule now and bring your constrolers for repair or maintanence.Thos offer includes controllers for all type of consoles (ps2, ps3, ps4, ps5..). We require a total of 10$ for a one hour work. Don\'t hesitate to contact us for any concerns or information.', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sales`
+--
+
+CREATE TABLE `sales` (
+  `sales_id` int NOT NULL,
+  `customer_id` int NOT NULL,
+  `total_price` double NOT NULL,
+  `tax_price` double NOT NULL,
+  `total_price_including_tax` double NOT NULL,
+  `discount_rate` int NOT NULL,
+  `total_price_after_discount` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sales_products`
+--
+
+CREATE TABLE `sales_products` (
+  `sales_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `quantity` int NOT NULL,
+  `price` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Indexes for dumped tables
@@ -318,6 +357,12 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`);
 
 --
+-- Indexes for table `sales`
+--
+ALTER TABLE `sales`
+  ADD PRIMARY KEY (`sales_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -349,7 +394,13 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `sales`
+--
+ALTER TABLE `sales`
+  MODIFY `sales_id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
