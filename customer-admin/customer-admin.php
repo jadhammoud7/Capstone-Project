@@ -243,20 +243,26 @@ $results_location = $stmt_location->get_result();
                     <div class="card">
                         <div class="card-header">
                             <h3>Customers List</h3>
-                            <!-- <button>See all <span class="las la-arrow-right"></span></button> -->
+                        </div>
+                        <div class="card-header">
+                            <h3>
+                                <p style="text-decoration: underline; color: royalblue;" id="filter-text"></p>
+                                <br>
+                                <p id="table-sort"></p>
+                            </h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table width="100%">
+                                <table width="100%" id="customers_table">
                                     <thead>
                                         <tr>
-                                            <td>Customer Name</td>
-                                            <td>Username</td>
-                                            <td>Email</td>
-                                            <td>Phone Number</td>
-                                            <td>City</td>
-                                            <td>Address</td>
-                                            <td>Date of Birth</td>
+                                            <td id="customer-name-column" title="Sort Customer Name by descending">Customer Name</td>
+                                            <td id="username-column" title="Sort Username by descending">Username</td>
+                                            <td id="email-column" title="Sort Email by descending">Email</td>
+                                            <td id="phone-number-column" title="Sort Phone Number by descending">Phone Number</td>
+                                            <td id="city-column" title="Sort City by descending">City</td>
+                                            <td id="address-column" title="Sort Address by descending">Address</td>
+                                            <td id="date-of-birth-column" title="Sort Date Of Birth by descending">Date of Birth</td>
                                             <td>Remove Customer</td>
                                         </tr>
                                     </thead>
@@ -363,11 +369,11 @@ $results_location = $stmt_location->get_result();
         while ($row_repair = $results_repair->fetch_assoc()) {
     ?>
             array_repair.push("<?php
-                       $query_cust_name = "SELECT username FROM customers WHERE customer_id='" . $row_repair['customer_id'] . "'";
-                       $stmt_cust_name = $connection->prepare($query_cust_name);
-                       $stmt_cust_name->execute();
-                       $results_cust_name = $stmt_cust_name->get_result();
-                       $row_cust_name = $results_cust_name->fetch_assoc(); 
+                                $query_cust_name = "SELECT username FROM customers WHERE customer_id='" . $row_repair['customer_id'] . "'";
+                                $stmt_cust_name = $connection->prepare($query_cust_name);
+                                $stmt_cust_name->execute();
+                                $results_cust_name = $stmt_cust_name->get_result();
+                                $row_cust_name = $results_cust_name->fetch_assoc();
                                 echo $row_cust_name['username'];
                                 ?>");
             <?php
