@@ -157,21 +157,21 @@ phone_number_column.addEventListener('click', function SetSorting() {
     var phone_number_column_innerHTML = phone_number_column.innerHTML;
     if (phone_number_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
         phone_number_column.innerHTML = "Phone Number <span class=\"las la-sort-up\"></span>";
-        sortTable(4, "desc");
+        sortTable(3, "desc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'Phone Number by descending';
         phone_number_column.title = 'Sort Phone Number by ascending';
     }
     if (phone_number_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
         phone_number_column.innerHTML = "Phone Number <span class=\"las la-sort-down\"></span>";
-        sortTable(4, "asc");
+        sortTable(3, "asc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'Phone Number by ascending';
         phone_number_column.title = 'Sort Phone Number by descending';
     }
     if (phone_number_column_innerHTML == "Phone Number") {
         phone_number_column.innerHTML = "Phone Number <span class=\"las la-sort-up\"></span>";
-        sortTable(4, "desc");
+        sortTable(3, "desc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'Phone Number by descending';
         phone_number_column.title = 'Sort Phone Number by ascending';
@@ -184,21 +184,21 @@ city_column.addEventListener('click', function SetSorting() {
     var city_column_innerHTML = city_column.innerHTML;
     if (city_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
         city_column.innerHTML = "City <span class=\"las la-sort-up\"></span>";
-        sortTable(5, "desc");
+        sortTable(4, "desc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'City by descending';
         city_column.title = 'Sort City by ascending';
     }
     if (city_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
         city_column.innerHTML = "City <span class=\"las la-sort-down\"></span>";
-        sortTable(5, "asc");
+        sortTable(4, "asc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'City by ascending';
         city_column.title = 'Sort City by descending';
     }
     if (city_column_innerHTML == "City") {
         city_column.innerHTML = "City <span class=\"las la-sort-up\"></span>";
-        sortTable(5, "desc");
+        sortTable(4, "desc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'City by descending';
         city_column.title = 'Sort City by ascending';
@@ -210,21 +210,21 @@ address_column.addEventListener('click', function SetSorting() {
     var address_column_innerHTML = address_column.innerHTML;
     if (address_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
         address_column.innerHTML = "Address <span class=\"las la-sort-up\"></span>";
-        sortTable(6, "desc");
+        sortTable(5, "desc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'Address by descending';
         address_column.title = 'Sort Address by ascending';
     }
     if (address_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
         address_column.innerHTML = "Address <span class=\"las la-sort-down\"></span>";
-        sortTable(6, "asc");
+        sortTable(5, "asc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'Address by ascending';
         address_column.title = 'Sort Address by descending';
     }
     if (address_column_innerHTML == "Address") {
         address_column.innerHTML = "Address <span class=\"las la-sort-up\"></span>";
-        sortTable(6, "desc");
+        sortTable(5, "desc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'Address by descending';
         address_column.title = 'Sort Address by ascending';
@@ -236,21 +236,21 @@ date_of_birth_column.addEventListener('click', function SetSorting() {
     var date_of_birth_column_innerHTML = date_of_birth_column.innerHTML;
     if (date_of_birth_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
         date_of_birth_column.innerHTML = "Date of Birth <span class=\"las la-sort-up\"></span>";
-        sortTable(7, "desc");
+        sortTable(6, "desc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'Date of Birth by descending';
         date_of_birth_column.title = 'Sort Date of Birth by ascending';
     }
     if (date_of_birth_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
         date_of_birth_column.innerHTML = "Date of Birth <span class=\"las la-sort-down\"></span>";
-        sortTable(7, "asc");
+        sortTable(6, "asc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'Date of Birth by ascending';
         date_of_birth_column.title = 'Sort Date of Birth by descending';
     }
     if (date_of_birth_column_innerHTML == "Date of Birth") {
         date_of_birth_column.innerHTML = "Date of Birth <span class=\"las la-sort-up\"></span>";
-        sortTable(7, "desc");
+        sortTable(6, "desc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'Date of Birth by descending';
         date_of_birth_column.title = 'Sort Date of Birth by ascending';

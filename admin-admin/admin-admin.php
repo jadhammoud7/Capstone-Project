@@ -309,15 +309,22 @@ if (isset($_GET['getAdminIDtoRemove'])) {
                         <div class="card-header">
                             <h3>List of Admin Accounts</h3>
                         </div>
+                        <div class="card-header">
+                            <h3>
+                                <p style="text-decoration: underline; color: royalblue;" id="filter-text"></p>
+                                <br>
+                                <p id="table-sort"></p>
+                            </h3>
+                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table width="100%">
+                                <table width="100%" id="admins_table">
                                     <thead>
                                         <tr>
-                                            <td>Name</td>
-                                            <td>Username</td>
-                                            <td>Email Address</td>
-                                            <td>Phone Number</td>
+                                            <td id="name-column" title="Sort Name by descending">Name</td>
+                                            <td id="username-column" title="Sort Username by descending">Username</td>
+                                            <td id="email-column" title="Sort Email Address by descending">Email Address</td>
+                                            <td id="phone-number-column" title="Sort Phone Number by descending">Phone Number</td>
                                             <td>Remove Admin</td>
                                         </tr>
                                     </thead>
