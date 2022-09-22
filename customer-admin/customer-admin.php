@@ -390,7 +390,7 @@ $results_location = $stmt_location->get_result();
     console.log(yArray);
 
     var layout = {
-        title: "World Wide Wine Production"
+        title: "Random Customers Loyalty to Appointments"
     };
 
     var data = [{
