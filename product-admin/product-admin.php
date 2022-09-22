@@ -306,11 +306,11 @@ $results_top_products = $stmt_top_products->get_result();
                                     <thead>
                                         <tr>
                                             <td id="product-name-column" title="Sort Product Name by descending">Product Name</td>
-                                            <td>Price</td>
-                                            <td>Type</td>
-                                            <td>Category</td>
-                                            <td>Inventory</td>
-                                            <td>Sales Number</td>
+                                            <td id="product-price-column" title="Sort Price by descending">Price</td>
+                                            <td id="product-type-column" title="Sort Type by descending">Type</td>
+                                            <td id="product-category-column" title="Sort Category by descending">Category</td>
+                                            <td id="product-inventory-column" title="Sort Inventory by descending">Inventory</td>
+                                            <td id="product-sales-column" title="Sort Sales Number by descending">Sales Number</td>
                                         </tr>
                                     </thead>
                                     <tbody>

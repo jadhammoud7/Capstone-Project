@@ -85,6 +85,110 @@ product_name_column.addEventListener('click', function SetSorting() {
     }
 });
 
+
+const product_price_column = document.getElementById('product-price-column');
+product_price_column.addEventListener('click', function SetSorting() {
+    var product_price_column_innerHTML = product_price_column.innerHTML;
+    if (product_price_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        product_price_column.innerHTML = "Price <span class=\"las la-sort-up\"></span>";
+        sortTable(1, "desc");
+        product_price_column.title = 'Sort Price by ascending';
+    }
+    if (product_price_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        product_price_column.innerHTML = "Price <span class=\"las la-sort-down\"></span>";
+        sortTable(1, "asc");
+        product_price_column.title = 'Sort Price by descending';
+    }
+    if (product_price_column_innerHTML == "Price") {
+        product_price_column.innerHTML = "Price <span class=\"las la-sort-up\"></span>";
+        sortTable(1, "desc");
+        product_price_column.title = 'Sort Price by ascending';
+    }
+});
+
+const product_type_column = document.getElementById('product-type-column');
+product_type_column.addEventListener('click', function SetSorting() {
+    var product_type_column_innerHTML = product_type_column.innerHTML;
+    if (product_type_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        product_type_column.innerHTML = "Type <span class=\"las la-sort-up\"></span>";
+        sortTable(2, "desc");
+        product_type_column.title = 'Sort Type by ascending';
+    }
+    if (product_type_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        product_type_column.innerHTML = "Type <span class=\"las la-sort-down\"></span>";
+        sortTable(2, "asc");
+        product_type_column.title = 'Sort Type by descending';
+    }
+    if (product_type_column_innerHTML == "Type") {
+        product_type_column.innerHTML = "Type <span class=\"las la-sort-up\"></span>";
+        sortTable(2, "desc");
+        product_type_column.title = 'Sort Type by ascending';
+    }
+});
+
+
+const product_category_column = document.getElementById('product-category-column');
+product_category_column.addEventListener('click', function SetSorting() {
+    var product_category_column_innerHTML = product_category_column.innerHTML;
+    if (product_category_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        product_category_column.innerHTML = "Category <span class=\"las la-sort-up\"></span>";
+        sortTable(3, "desc");
+        product_category_column.title = 'Sort Category by ascending';
+    }
+    if (product_category_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        product_category_column.innerHTML = "Category <span class=\"las la-sort-down\"></span>";
+        sortTable(3, "asc");
+        product_category_column.title = 'Sort Category by descending';
+    }
+    if (product_category_column_innerHTML == "Category") {
+        product_category_column.innerHTML = "Category <span class=\"las la-sort-up\"></span>";
+        sortTable(3, "desc");
+        product_category_column.title = 'Sort Category by ascending';
+    }
+});
+
+const product_inventory_column = document.getElementById('product-inventory-column');
+product_inventory_column.addEventListener('click', function SetSorting() {
+    var product_inventory_column_innerHTML = product_inventory_column.innerHTML;
+    if (product_inventory_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        product_inventory_column.innerHTML = "Inventory <span class=\"las la-sort-up\"></span>";
+        sortTable(4, "desc");
+        product_inventory_column.title = 'Sort Inventory by ascending';
+    }
+    if (product_inventory_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        product_inventory_column.innerHTML = "Inventory <span class=\"las la-sort-down\"></span>";
+        sortTable(4, "asc");
+        product_inventory_column.title = 'Sort Inventory by descending';
+    }
+    if (product_inventory_column_innerHTML == "Inventory") {
+        product_inventory_column.innerHTML = "Inventory <span class=\"las la-sort-up\"></span>";
+        sortTable(4, "desc");
+        product_inventory_column.title = 'Sort Inventory by ascending';
+    }
+});
+
+
+const product_sales_column = document.getElementById('product-sales-column');
+product_sales_column.addEventListener('click', function SetSorting() {
+    var product_sales_column_innerHTML = product_sales_column.innerHTML;
+    if (product_sales_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        product_sales_column.innerHTML = "Sales Number <span class=\"las la-sort-up\"></span>";
+        sortTable(5, "desc");
+        product_sales_column.title = 'Sort Sales Number by ascending';
+    }
+    if (product_sales_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        product_sales_column.innerHTML = "Sales Number <span class=\"las la-sort-down\"></span>";
+        sortTable(5, "asc");
+        product_sales_column.title = 'Sort Sales Number by descending';
+    }
+    if (product_sales_column_innerHTML == "Sales Number") {
+        product_sales_column.innerHTML = "Sales Number <span class=\"las la-sort-up\"></span>";
+        sortTable(5, "desc");
+        product_sales_column.title = 'Sort Sales Number by ascending';
+    }
+});
+
+
 function sortTable(n, dir) {
     var table, rows, switching, i, x, y, shouldSwitch, switchcount = 0;
     table = document.getElementById('products_table');
@@ -92,21 +196,42 @@ function sortTable(n, dir) {
     while (switching) {
         switching = false;
         rows = table.tBodies[0].rows;
-        console.log(rows);
         for (i = 0; i < (rows.length - 1); i++) {
             shouldSwitch = false;
-            x = rows[i].getElementsByTagName("td")[n].getElementsByTagName("a")[0];
-            y = rows[i + 1].getElementsByTagName("td")[n].getElementsByTagName("a")[0];
+            if (n == 0) {
+                x = rows[i].getElementsByTagName("td")[n].getElementsByTagName("a")[0];
+                y = rows[i + 1].getElementsByTagName("td")[n].getElementsByTagName("a")[0];
+            }
+            else {
+                x = rows[i].getElementsByTagName("td")[n];
+                y = rows[i + 1].getElementsByTagName("td")[n];
+            }
             if (dir == "asc") {
-                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                    shouldSwitch = true;
-                    break;
+                if (!isNaN(x) && !isNaN(y)) {
+                    if (x > y) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                else {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
                 }
             }
             else if (dir == "desc") {
-                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                    shouldSwitch = true;
-                    break;
+                if (!isNaN(x) && !isNaN(y)) {
+                    if (x < y) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                else {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
                 }
             }
         }
