@@ -19,7 +19,7 @@ function CloseDoneCheckoutPopUp() {
     done_checkout_popup.classList.remove('open-popup');
 }
 
-if(window.location.href.includes('checkout-error')){
+if (window.location.href.includes('checkout-error')) {
     OpenCheckoutErrorAlert();
 }
 
@@ -75,4 +75,145 @@ for (let i = 0; i < btn_checkout.length; i++) {
     //     }
     // });
     SetButton(statusbtn_checkout[i].textContent, btn_checkout[i], status_color_checkout[i]);
+}
+
+const customer_name_column = document.getElementById('customer-name-column');
+customer_name_column.addEventListener('click', function SetSorting() {
+    var customer_name_column_innerHTML = customer_name_column.innerHTML;
+    if (customer_name_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        customer_name_column.innerHTML = "Customer Name <span class=\"las la-sort-up\"></span>";
+        sortTable(0, "desc");
+        customer_name_column.title = 'Sort Customer Name by ascending';
+    }
+    if (customer_name_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        customer_name_column.innerHTML = "Customer Name <span class=\"las la-sort-down\"></span>";
+        sortTable(0, "asc");
+        customer_name_column.title = 'Sort Customer Name by descending';
+    }
+    if (customer_name_column_innerHTML == "Customer Name") {
+        customer_name_column.innerHTML = "Customer Name <span class=\"las la-sort-up\"></span>";
+        sortTable(0, "desc");
+        customer_name_column.title = 'Sort Customer Name by ascending';
+    }
+});
+
+const email_column = document.getElementById('email-column');
+email_column.addEventListener('click', function SetSorting() {
+    var email_column_innerHTML = email_column.innerHTML;
+    if (email_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        email_column.innerHTML = "Email <span class=\"las la-sort-up\"></span>";
+        sortTable(1, "desc");
+        email_column.title = 'Sort Email by ascending';
+    }
+    if (email_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        email_column.innerHTML = "Email <span class=\"las la-sort-down\"></span>";
+        sortTable(1, "asc");
+        email_column.title = 'Sort Email by descending';
+    }
+    if (email_column_innerHTML == "Email") {
+        email_column.innerHTML = "Email <span class=\"las la-sort-up\"></span>";
+        sortTable(1, "desc");
+        email_column.title = 'Sort Email by ascending';
+    }
+});
+
+
+const phone_number_column = document.getElementById('phone-number-column');
+phone_number_column.addEventListener('click', function SetSorting() {
+    var phone_number_column_innerHTML = phone_number_column.innerHTML;
+    if (phone_number_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        phone_number_column.innerHTML = "Phone Number <span class=\"las la-sort-up\"></span>";
+        sortTable(2, "desc");
+        phone_number_column.title = 'Sort Phone Number by ascending';
+    }
+    if (phone_number_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        phone_number_column.innerHTML = "Phone Number <span class=\"las la-sort-down\"></span>";
+        sortTable(2, "asc");
+        phone_number_column.title = 'Sort Phone Number by descending';
+    }
+    if (phone_number_column_innerHTML == "Phone Number") {
+        phone_number_column.innerHTML = "Phone Number <span class=\"las la-sort-up\"></span>";
+        sortTable(2, "desc");
+        phone_number_column.title = 'Sort Phone Number by ascending';
+    }
+});
+
+const total_price_column = document.getElementById('total-price-column');
+total_price_column.addEventListener('click', function SetSorting() {
+    var total_price_column_innerHTML = total_price_column.innerHTML;
+    if (total_price_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        total_price_column.innerHTML = "Total Price <span class=\"las la-sort-up\"></span>";
+        sortTable(3, "desc");
+        total_price_column.title = 'Sort Total Price by ascending';
+    }
+    if (total_price_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        total_price_column.innerHTML = "Total Price <span class=\"las la-sort-down\"></span>";
+        sortTable(3, "asc");
+        total_price_column.title = 'Sort Total Price by descending';
+    }
+    if (total_price_column_innerHTML == "Total Price") {
+        total_price_column.innerHTML = "Total Price <span class=\"las la-sort-up\"></span>";
+        sortTable(3, "desc");
+        total_price_column.title = 'Sort Total Price by ascending';
+    }
+});
+
+function sortTable(n, dir) {
+    var table, rows, switching, i, x, y, shouldSwitch, switchcount = 0;
+    table = document.getElementById('checkouts_table');
+    switching = true;
+    while (switching) {
+        switching = false;
+        rows = table.tBodies[0].rows;
+        for (i = 0; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            if (n == 6) {
+                x = rows[i].getElementsByTagName("td")[n].getElementsByTagName("a")[0];
+                y = rows[i + 1].getElementsByTagName("td")[n].getElementsByTagName("a")[0];
+            }
+            else {
+                x = rows[i].getElementsByTagName("td")[n];
+                y = rows[i + 1].getElementsByTagName("td")[n];
+            }
+            if (dir == "asc") {
+                if (!isNaN(x) && !isNaN(y)) {
+                    if (x > y) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                else {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            else if (dir == "desc") {
+                if (!isNaN(x) && !isNaN(y)) {
+                    if (x < y) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                else {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount++;
+        }
+        else {
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
+    }
 }

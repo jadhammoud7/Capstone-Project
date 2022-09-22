@@ -337,13 +337,13 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table width="100%">
+                                <table width="100%" id="checkouts_table">
                                     <thead>
                                         <tr>
-                                            <td>Customer Name</td>
-                                            <td>Email</td>
-                                            <td>Phone Number</td>
-                                            <td>Total Price</td>
+                                            <td id="customer-name-column" title="Sort Customer Name by descending">Customer Name</td>
+                                            <td id="email-column" title="Sort Email by descending">Email</td>
+                                            <td id="phone-number-column" title="Sort Phone Number by descending">Phone Number</td>
+                                            <td id="total-price-column" title="Sort Total Price by descending">Total Price</td>
                                             <td>Total Price Inc. Tax</td>
                                             <td>Date</td>
                                             <td>Status</td>
