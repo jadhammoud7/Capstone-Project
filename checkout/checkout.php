@@ -409,7 +409,7 @@ $results_get_basket_products = $stmt_get_basket_products->get_result();
                                 <input type="text" name="shipping_location" id="shipping_location" value="<?php if (isset($_SESSION['shipping_location'])) {
                                                                                                                 echo $_SESSION['shipping_location'];
                                                                                                             } ?>" required>
-                                <label for="shipping_location">Location (Town / City, Street, Home Address)</label>
+                                <label for="shipping_location">Address (Town / City, Street, Building)</label>
                             </div>
                         </div>
                         <p class="error" id="shipping_company_error">
