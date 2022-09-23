@@ -124,6 +124,35 @@ $stmt_console_filter->execute();
 $results_console_filter = $stmt_console_filter->get_result();
 
 
+
+//adding loyalty points to customers table
+$query_loyalty = "SELECT customer_id FROM customers";
+$stmt_loyalty = $connection->prepare($query_loyalty);
+$stmt_loyalty->execute();
+$results_loyalty = $stmt_loyalty->get_result();
+
+while ($row_loyalty = $results_loyalty->fetch_assoc()) {
+    $query_loyalty_baught_products = "SELECT SUM(quantity) as sum_products_of_single_customer FROM checkouts_customers_products WHERE checkout_id='".$row_loyalty['customer_id']."'";
+    $stmt_loyalty_baught_products = $connection->prepare($query_loyalty_baught_products);
+    $stmt_loyalty_baught_products->execute();
+    $results_loyalty_baught_products = $stmt_loyalty_baught_products->get_result();
+    $sum=[];
+    while($row_loyalty_baught_products = $results_loyalty_baught_products->fetch_assoc()){
+        $sum=$row_loyalty_baught_products['sum_products_of_single_customer'];
+    }
+    echo $sum;
+
+    // inserting to db
+    // if(isset($results_loyalty_baught_products['sum_products_of_single_customer'])){
+    //     $mysql_insert_loyalty = $connection->prepare("INSERT INTO customers(loyalty_points) VALUES (?)");
+    //     $mysql_insert_loyalty->bind_param("i",$results_loyalty_baught_products['sum_products_of_single_customer']);
+    //     $mysql_insert_loyalty->execute();
+    //     $mysql_insert_loyalty->close();
+    // }
+
+}
+
+
 ?>
 
 <head>

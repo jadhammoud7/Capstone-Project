@@ -204,6 +204,12 @@ function checkout_products_connection($name, $quantity, $price)
 $stmt_get_basket_products = $connection->prepare("SELECT product_id, quantity FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ");
 $stmt_get_basket_products->execute();
 $results_get_basket_products = $stmt_get_basket_products->get_result();
+
+
+
+
+
+
 ?>
 
 
