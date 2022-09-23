@@ -127,13 +127,20 @@ if (isset($_GET['product_id'])) {
                         <div class="card-header">
                             <h2>Product Details</h2>
                         </div>
+                        <div>
+                            <button class="edit-button" title="Edit Product '<?php if (isset($row_product)) {
+                                                                                    echo $row_product['name'];
+                                                                                } ?>'" onclick="EditProfile()"><span class="las la-edit"></span>Edit Product</button>
+                        </div>
                         <div class="form-container card-body">
-                            <form>
+
+                            <form action="product-details.php" method="POST">
                                 <div class="form-container-part">
 
                                     <div>
                                         <h3 class="form-container-part-title">Product Information</h3>
                                     </div>
+
 
                                     <div class="form-container-part-inputs">
                                         <div class="input-container">
@@ -170,7 +177,7 @@ if (isset($_GET['product_id'])) {
 
                                     <div class="form-container-part-inputs">
                                         <div class="input-container">
-                                            <input type="text" name="category" value="<?php if (isset($row_product)) {
+                                            <input type="text" name="category" id="category" value="<?php if (isset($row_product)) {
                                                                                             echo $row_product['category'];
                                                                                         } ?>" readonly class="is-valid">
                                             <label for="category">Category</label>
@@ -181,7 +188,7 @@ if (isset($_GET['product_id'])) {
                                         <div class="input-container description">
                                             <div class="description-body">
                                                 <h3>Description</h3>
-                                                <p><?php if (isset($row_product)) {
+                                                <p id="description"><?php if (isset($row_product)) {
                                                         echo $row_product['description'];
                                                     } ?></p>
                                             </div>
@@ -256,55 +263,6 @@ if (isset($_GET['product_id'])) {
     <!-- ended return to top button -->
 </body>
 <script src="../admin-main/admin-main.js"></script>
-<script src="customer-details.js"></script>
-<script>
-    var xValuesAppointments = ["Pending Appointments", "Done Appointments"];
-    var yValuesAppointments = [<?php echo $row_get_pending_appointments['total_pending_appointments']; ?>, <?php echo $row_get_done_appointments['total_done_appointments']; ?>]
-    var barColorsAppointments = [
-        "#b91d47",
-        "#00aba9"
-    ]
-
-    new Chart("AppointmentsChart", {
-        type: "pie",
-        data: {
-            labels: xValuesAppointments,
-            datasets: [{
-                backgroundColor: barColorsAppointments,
-                data: yValuesAppointments
-            }]
-        },
-        options: {
-            title: {
-                display: true,
-                text: "Distribution of All Appointments"
-            }
-        }
-    });
-
-    var xValuesCheckouts = ["Pending Checkouts", "Done Checkouts"];
-    var yValuesCheckouts = [<?php echo $row_get_pending_checkouts['total_pending_checkouts']; ?>, <?php echo $row_get_done_checkouts['total_done_checkouts']; ?>]
-    var barColorsCheckouts = [
-        "#b91d47",
-        "#00aba9"
-    ]
-
-    new Chart("CheckoutsChart", {
-        type: "pie",
-        data: {
-            labels: xValuesCheckouts,
-            datasets: [{
-                backgroundColor: barColorsCheckouts,
-                data: yValuesCheckouts
-            }]
-        },
-        options: {
-            title: {
-                display: true,
-                text: "Distribution of All Checkouts"
-            }
-        }
-    });
-</script>
+<script src="product-details.js"></script>
 
 </html>
