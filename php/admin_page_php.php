@@ -141,7 +141,7 @@ function get_all_checkouts_connection($checkout_id, $customer_id, $first_name, $
         </td>
         <td>
             <a>
-                <button class=\"btn_done_work_checkout\" id=\"SetStatusCheckoutButton\" onclick=\"window.location.href='checkouts-admin.php?change-status=1&checkout-id=$checkout_id';\"></button>
+                <button class=\"btn_done_work_checkout\" id=\"SetStatusCheckoutButton\" onclick=\"window.location.href='checkouts-admin.php?checkout-id=$checkout_id&change-status=1';\"></button>
             </a>
         </td>
         <td>
@@ -174,7 +174,7 @@ function get_all_products($product_id, $name, $price, $type, $category, $invento
     echo $element;
 }
 
-function get_products_in_asc_desc($name,$inventory, $sales_number)
+function get_products_in_asc_desc($name, $inventory, $sales_number)
 {
     $element = "
     <tr class=\"hello\">

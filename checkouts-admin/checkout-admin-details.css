@@ -170,6 +170,16 @@ input.is-valid+label {
     width: 100%;
 }
 
+.btn_done_work_checkout {
+    cursor: pointer;
+    background: rgb(35, 235, 118);
+    border-radius: 10px;
+    color: #fff;
+    font-size: .8rem;
+    padding: .5rem 1rem;
+    border: 1px solid var(--main-color);
+}
+
 .back {
     background-color: #F44336;
     color: black;
