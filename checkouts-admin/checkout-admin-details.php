@@ -93,9 +93,11 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
         if ($products_found_in_stock == true) {
 
             //check all products in checkout to see if there is enough inventory
-            $stmt_check_checkout_products = $connection->prepare("SELECT product_id, quantity FROM checkouts_customers_products WHERE checkout_id = '" . $checkoutID . "'");
+            $stmt_check_checkout_products = $connection->prepare("SELECT product_id, quantity, customer_id FROM checkouts_customers_products WHERE checkout_id = '" . $checkoutID . "'");
             $stmt_check_checkout_products->execute();
             $results_check_checkout_products = $stmt_check_checkout_products->get_result();
+
+            $total_products_quantities = 0;
             //loop over all products in checkout
             while ($row_check_checkout_products = $results_check_checkout_products->fetch_assoc()) {
                 //quantity needed in checkout
@@ -113,11 +115,29 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
                 $stmt_update_product_inventory->bind_param("i", $new_inventory);
                 $stmt_update_product_inventory->execute();
 
+                $stmt_select_product_sales = $connection->prepare("SELECT sales_number FROM products WHERE product_id = '" . $row_check_checkout_products['product_id'] . "'");
+                $stmt_select_product_sales->execute();
+                $results_select_product_sales = $stmt_select_product_sales->get_result();
+                $row_select_product_sales = $results_select_product_sales->fetch_assoc();
+                $sales = $row_select_product_sales['sales_number'];
+
                 //update sales number of product
-                $new_sales = $quantity;
+                $new_sales = $sales + $quantity;
+                $total_products_quantities = $total_products_quantities + $new_sales;
                 $stmt_update_product_sales = $connection->prepare("UPDATE products SET sales_number=? WHERE product_id = '" . $row_check_checkout_products['product_id'] . "'");
                 $stmt_update_product_sales->bind_param("i", $new_sales);
                 $stmt_update_product_sales->execute();
+
+                //update loyalty point for customer
+                $stmt_get_customer = $connection->prepare("SELECT loyalty_points FROM customers WHERE customer_id = '" . $row_check_checkout_products['customer_id'] . "'");
+                $stmt_get_customer->execute();
+                $results_get_customer = $stmt_get_customer->get_result();
+                $row_get_customer = $results_get_customer->fetch_assoc();
+
+                $new_loyalty = $row_get_customer['loyalty_points'] + $quantity;
+                $stmt_update_customer_loyalty_points = $connection->prepare("UPDATE products SET loyalty_points=? WHERE customer_id = '" . $row_check_checkout_products['customer_id'] . "'");
+                $stmt_update_customer_loyalty_points->bind_param("i", $new_loyalty);
+                $stmt_update_customer_loyalty_points->execute();
             }
             $query_settodone = $connection->prepare("UPDATE checkouts SET status=? WHERE checkout_id='" . $checkoutID . "'");
             $query_settodone->bind_param("s", $status);
