@@ -315,13 +315,20 @@ var add_more_fields = document.getElementById('add_more_fields');
 var remove_fields = document.getElementById('remove_fields');
 
 add_more_fields.onclick = function(){
-  var newField = document.createElement('input');
-  newField.setAttribute('type','text');
-  newField.setAttribute('name','survey_options[]');
-  newField.setAttribute('class','survey_options');
-  newField.setAttribute('siz',50);
-  newField.setAttribute('placeholder','Another Field');
-  survey_options.appendChild(newField);
+  var newField1 = document.createElement('input');
+  var newField2 = document.createElement('input');
+  newField1.setAttribute('type','text');
+  newField1.setAttribute('name','survey_options[]');
+  newField1.setAttribute('class','survey_options');
+  newField1.setAttribute('siz',50);
+  newField1.setAttribute('placeholder','Another product name');
+  survey_options.appendChild(newField1);
+  newField2.setAttribute('type','number');
+  newField2.setAttribute('name','survey_options[]');
+  newField2.setAttribute('class','survey_options');
+  newField2.setAttribute('siz',50);
+  newField2.setAttribute('placeholder','quantity');
+  survey_options.appendChild(newField2);
 }
 
 remove_fields.onclick = function(){

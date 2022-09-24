@@ -30,6 +30,22 @@ input[type="text"]:focus {
   outline: none;
 }
 
+input[type="text"]{
+  padding: 10px;
+  margin: 10px auto;
+  display: block;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  background: none;
+  width: 274px;
+  color: black;
+}
+
+input[type="text"]:focus {
+  outline: none;
+}
+
+
 .controls {
   width: 294px;
   margin: 15px auto;

@@ -389,9 +389,10 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
 
   <div class="wrapper">
     <div id="survey_options">
-      <input type="text" name="survey_options[]" class="survey_options" size="50" placeholder="Name">
+      <input type="text" name="survey_options[]" class="survey_options" size="50" placeholder="customer name">
+      <input type="text" name="survey_options[]" class="survey_options" size="50" placeholder="Phone number">
       <input type="text" name="survey_options[]" class="survey_options" size="50" placeholder="Email">
-      <input type="text" name="survey_options[]" class="survey_options" size="50" placeholder="Another Field">
+      <input type="number" name="survey_options[]" class="survey_options" size="50" placeholder="quantity">
     </div>
     <div class="controls">
       <a href="#" id="add_more_fields"><i class="fa fa-plus"></i>Add More</a>
