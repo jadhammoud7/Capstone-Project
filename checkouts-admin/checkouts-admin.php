@@ -402,6 +402,8 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
         </main>
     </div>
 
+
+    <h1 class="sales_store">Add Customers Purchaces At Store</h1>
     <div class="wrapper">
         <div id="survey_options">
             <input type="text" name="survey_options[]" class="survey_options" size="50" placeholder="customer name">
