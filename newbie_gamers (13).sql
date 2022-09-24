@@ -327,6 +327,21 @@ CREATE TABLE `sales_products` (
 -- Indexes for dumped tables
 --
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `store_sales`
+--
+
+CREATE TABLE `store_sales` (
+  `store_sales_id` int NOT NULL,
+  `customer_name` varchar(255) NOT NULL,
+  `phone_number` varchar(255) NOT NULL,
+  `product_name` varchar(255) NOT NULL,
+  `quantity` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
 --
 -- Indexes for table `admins`
 --
@@ -365,7 +380,12 @@ ALTER TABLE `sales`
 
 --
 -- AUTO_INCREMENT for dumped tables
+----
+-- Indexes for table `store_sales`
 --
+ALTER TABLE `store_sales`
+  ADD PRIMARY KEY (`store_sales_id`);
+
 
 --
 -- AUTO_INCREMENT for table `admins`
@@ -402,6 +422,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `sales`
   MODIFY `sales_id` int NOT NULL AUTO_INCREMENT;
+  
+--
+-- AUTO_INCREMENT for table `store_sales`
+--
+ALTER TABLE `store_sales`
+  MODIFY `store_sales_id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
