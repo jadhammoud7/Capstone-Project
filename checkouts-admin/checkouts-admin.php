@@ -412,8 +412,8 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
             <input type="number" name="survey_options[]" class="survey_options" size="50" placeholder="quantity">
         </div>
         <div class="controls">
-            <a href="#survey_options" id="add_more_fields"><i class="fa fa-plus"></i>Add More</a>
-            <a href="#survey_options" id="remove_fields"><i class="fa fa-plus"></i>Remove Field</a>
+            <a href="#survey_options" id="add_more_fields"><i class="fa fa-plus"></i>Add More Products</a>
+            <a href="#survey_options" id="remove_fields"><i class="fa fa-plus"></i>Remove Products</a>
         </div>
     </div>
 
