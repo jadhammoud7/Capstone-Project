@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+include("../php/connection.php");
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 } else {
@@ -12,17 +13,39 @@ $type = "";
 if (isset($_GET['repair_type'])) {
     $type = $_GET['repair_type'];
 }
+$cd_name = "";
+if (isset($_GET['cd_name'])) {
+    $cd_name = "Try a free game " . $_GET['cd_name'];
+}
 
 if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
     $appointment_time = $_GET["appointments_time"];
     $date = $_GET['date'];
     $status = "Pending";
-    //inserting into table appointments
-    $appointments_insert = $connection->prepare("INSERT INTO appointments(customer_id, appointment_name, date, hour, status) VALUES (?,?,?,?,?)");
-    $appointments_insert->bind_param("issss", $customer_id, $type, $date, $appointment_time, $status);
-    $appointments_insert->execute();
-    $appointments_insert->close();
-    echo "<script>window.location='../calendar/calendar.php?appointment_submitted=true';</script>";
+    if ($type != "") {
+        //select appointment price
+        $stmt_select_repair_price = $connection->prepare("SELECT price_per_hour FROM repair WHERE repair_type = $type");
+        $stmt_select_repair_price->execute();
+        $results_select_repair_price = $stmt_select_repair_price->get_result();
+        $row_select_repair_price = $results_select_repair_price->fetch_assoc();
+
+        $appointment_price_per_hour = $row_select_repair_price['price_per_hour'];
+        //inserting into table appointments
+        $appointments_insert = $connection->prepare("INSERT INTO appointments(customer_id, appointment_name, price_per_hour, date, hour, status) VALUES (?,?,?,?,?,?)");
+        $appointments_insert->bind_param("isisss", $customer_id, $type, $appointment_price_per_hour, $date, $appointment_time, $status);
+        $appointments_insert->execute();
+        $appointments_insert->close();
+        echo "<script>window.location='../calendar/calendar.php?appointment_submitted=true';</script>";
+    }
+    if ($cd_name != "") {
+        $appointment_price_per_hour = 0;
+        //inserting into table appointments
+        $appointments_insert = $connection->prepare("INSERT INTO appointments(customer_id, appointment_name, price_per_hour, date, hour, status) VALUES (?,?,?,?,?,?)");
+        $appointments_insert->bind_param("isisss", $customer_id, $type, $appointment_price_per_hour, $date, $appointment_time, $status);
+        $appointments_insert->execute();
+        $appointments_insert->close();
+        echo "<script>window.location='../calendar/calendar.php?appointment_submitted=true';</script>";
+    }
 }
 ?>
 
