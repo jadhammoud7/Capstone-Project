@@ -146,26 +146,53 @@ customer_name_column.addEventListener('click', function SetSorting() {
     }
 });
 
+const price_per_hour_column = document.getElementById('price-per-hour-column');
+price_per_hour_column.addEventListener('click', function SetSorting() {
+    var price_per_hour_column_innerHTML = price_per_hour_column.innerHTML;
+    if (price_per_hour_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        price_per_hour_column.innerHTML = "Price Per Hour <span class=\"las la-sort-up\"></span>";
+        sortTable(2, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Appointments From highest to lowest price per hour';
+        price_per_hour_column.title = 'Sort Price Per Hour by ascending';
+    }
+    if (price_per_hour_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        price_per_hour_column.innerHTML = "Price Per Hour <span class=\"las la-sort-down\"></span>";
+        sortTable(2, "asc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Appointments From lowest to highest price per hour';
+        price_per_hour_column.title = 'Sort Price Per Hour by descending';
+    }
+    if (price_per_hour_column_innerHTML == "Price Per Hour") {
+        price_per_hour_column.innerHTML = "Price Per Hour <span class=\"las la-sort-up\"></span>";
+        sortTable(2, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Appointments From highest to lowest price per hour';
+        price_per_hour_column.title = 'Sort Price Per Hour by ascending';
+    }
+});
+
+
 const date_column = document.getElementById('date-column');
 date_column.addEventListener('click', function SetSorting() {
     var date_column_innerHTML = date_column.innerHTML;
     if (date_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
         date_column.innerHTML = "Date <span class=\"las la-sort-up\"></span>";
-        sortTable(2, "desc");
+        sortTable(3, "desc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'Appointments from newest to oldest';
         date_column.title = 'Sort Date by ascending';
     }
     if (date_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
         date_column.innerHTML = "Date <span class=\"las la-sort-down\"></span>";
-        sortTable(2, "asc");
+        sortTable(3, "asc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'Appointments from oldest to newest';
         date_column.title = 'Sort Date by descending';
     }
     if (date_column_innerHTML == "Date") {
         date_column.innerHTML = "Date <span class=\"las la-sort-up\"></span>";
-        sortTable(2, "desc");
+        sortTable(3, "desc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'Appointments from newest to oldest';
         date_column.title = 'Sort Date by ascending';
@@ -177,21 +204,21 @@ status_column.addEventListener('click', function SetSorting() {
     var status_column_innerHTML = status_column.innerHTML;
     if (status_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
         status_column.innerHTML = "Status <span class=\"las la-sort-up\"></span>";
-        sortTable(4, "desc");
+        sortTable(5, "desc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'Appointments Status from pending to done';
         status_column.title = 'Sort Status by ascending';
     }
     if (status_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
         status_column.innerHTML = "Status <span class=\"las la-sort-down\"></span>";
-        sortTable(4, "asc");
+        sortTable(5, "asc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'Appointments Status from done to pending';
         status_column.title = 'Sort Status by descending';
     }
     if (status_column_innerHTML == "Status") {
         status_column.innerHTML = "Hour <span class=\"las la-sort-up\"></span>";
-        sortTable(4, "desc");
+        sortTable(5, "desc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'Appointments Status from pending to done';
         status_column.title = 'Sort Hour by ascending';

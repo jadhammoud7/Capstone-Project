@@ -1,12 +1,13 @@
 <?php
 include("connection.php");
 
-function get_appointment_in_admin_page_for_table_connection($appointment_id, $customer_name, $appointment_name, $date, $hour, $status)
+function get_appointment_in_admin_page_for_table_connection($appointment_id, $customer_name, $appointment_name, $price_per_hour, $date, $hour, $status)
 {
     $element = "
     <tr>
         <td>$appointment_name</td>
         <td>$customer_name</td>
+        <td>$price_per_hour</td>
         <td>$date</td>
         <td>$hour</td>
         <td>

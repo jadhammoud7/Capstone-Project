@@ -46,7 +46,7 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 //get all appointments
 require_once("../php/admin_page_php.php");
-$query_appointments = "SELECT appointment_id, customer_id, appointment_name, date, hour, status FROM appointments";
+$query_appointments = "SELECT appointment_id, customer_id, appointment_name, price_per_hour, date, hour, status FROM appointments";
 $stmt_appointments = $connection->prepare($query_appointments);
 $stmt_appointments->execute();
 $results_appointments = $stmt_appointments->get_result();
@@ -262,6 +262,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                                         <tr>
                                             <td id="appointment-name-column" title="Sort Appointment Name by descending">Appointment Name</td>
                                             <td id="customer-name-column" title="Sort Customer Name by descending">Customer Name</td>
+                                            <td id="price-per-hour-column" title="Sort Price Per Hour by descending">Price Per Hour</td>
                                             <td id="date-column" title="Sort Date by descending">Date</td>
                                             <td>Hour</td>
                                             <td id="status-column" title="Sort Status by descending">Status</td>
@@ -281,6 +282,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                                                 $row_appointments['appointment_id'],
                                                 $row_get_user['first_name'] . ' ' . $row_get_user['last_name'],
                                                 $row_appointments['appointment_name'],
+                                                $row_appointments['price_per_hour'],
                                                 $row_appointments['date'],
                                                 $row_appointments['hour'],
                                                 $row_appointments['status'],

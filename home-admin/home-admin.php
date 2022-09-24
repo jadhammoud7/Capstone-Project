@@ -52,7 +52,7 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 //getting appointments
 require_once("../php/admin_page_php.php");
-$query_get_appointments = "SELECT appointment_id, customer_id, appointment_name, date, hour, status FROM appointments ORDER BY appointment_id DESC LIMIT 5";
+$query_get_appointments = "SELECT appointment_id, customer_id, appointment_name, price_per_hour, date, hour, status FROM appointments ORDER BY appointment_id DESC LIMIT 5";
 $stmt_get_appointments = $connection->prepare($query_get_appointments);
 $stmt_get_appointments->execute();
 $results_get_appointments = $stmt_get_appointments->get_result();
@@ -314,6 +314,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                                         <tr>
                                             <td>Repair Type</td>
                                             <td>Customer Name</td>
+                                            <td>Price Per Hour</td>
                                             <td>Date</td>
                                             <td>Hour</td>
                                             <td>Status</td>
@@ -334,6 +335,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                                                 $row_get_appointments['appointment_id'],
                                                 $row_getuser['username'],
                                                 $row_get_appointments['appointment_name'],
+                                                $row_get_appointments['price_per_hour'],
                                                 $row_get_appointments['date'],
                                                 $row_get_appointments['hour'],
                                                 $row_get_appointments['status']
@@ -350,7 +352,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                     <div class="card">
 
                         <div class="card-header">
-                        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+                            <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
                         </div>
 
                         <div class="card-header">
