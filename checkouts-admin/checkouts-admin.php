@@ -173,6 +173,8 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="../admin-main/admin-main.css">
+    <link rel="stylesheet" href="../checkouts-admin/checkouts-admin.css">
+    
     <title>Admin | Checkouts - Newbies Gamers</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
@@ -385,12 +387,25 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
         </main>
     </div>
 
+  <div class="wrapper">
+    <div id="survey_options">
+      <input type="text" name="survey_options[]" class="survey_options" size="50" placeholder="Name">
+      <input type="text" name="survey_options[]" class="survey_options" size="50" placeholder="Email">
+      <input type="text" name="survey_options[]" class="survey_options" size="50" placeholder="Another Field">
+    </div>
+    <div class="controls">
+      <a href="#" id="add_more_fields"><i class="fa fa-plus"></i>Add More</a>
+      <a href="#" id="remove_fields"><i class="fa fa-plus"></i>Remove Field</a>
+    </div>
+  </div>
+
+
     <!-- started return to top button -->
     <button onclick="ReturnToTop()" id="TopBtn" title="Return to Top"><i class="fa fa-arrow-up"></i></button>
     <!-- ended return to top button -->
 
 </body>
-<script src="checkouts-admin.js"></script>
+<script src="../checkouts-admin/checkouts-admin.js"></script>
 <script src="../admin-main/admin-main.js"></script>
 <script>
     var xValues = ["Pending Checkouts", "Done Checkouts"];
