@@ -338,7 +338,7 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
                         <span>Total Checkouts Prices</span>
                     </div>
                     <div>
-                        <span class="las la-google-wallet"></span>
+                        <span class="las la-wallet"></span>
                     </div>
                 </div>
             </div>
