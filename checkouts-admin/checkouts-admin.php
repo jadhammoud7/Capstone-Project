@@ -15,19 +15,16 @@ $row = $results->fetch_assoc();
 
 
 //sum of all customers
-$query_total_customers = "SELECT COUNT(customer_id) as count FROM customers";
-$stmt_total_customers = $connection->prepare($query_total_customers);
-$stmt_total_customers->execute();
-$results_total_customers = $stmt_total_customers->get_result();
-$row_total_customers = $results_total_customers->fetch_assoc();
+$query_total_customers_in_checkouts = "SELECT DISTINCT customer_id FROM checkouts";
+$stmt_total_customers_in_checkouts = $connection->prepare($query_total_customers_in_checkouts);
+$stmt_total_customers_in_checkouts->execute();
+$results_total_customers_in_checkouts = $stmt_total_customers_in_checkouts->get_result();
 
-
-//count of all appointments
-$query_total_appointments = "SELECT COUNT(appointment_id) as total_appointments FROM appointments";
-$stmt_total_appointments = $connection->prepare($query_total_appointments);
-$stmt_total_appointments->execute();
-$results_total_appointments = $stmt_total_appointments->get_result();
-$row_total_appointments = $results_total_appointments->fetch_assoc();
+//count of all ordered products
+$query_total_ordered_products = "SELECT DISTINCT product_id  FROM checkouts_customers_products";
+$stmt_total_ordered_products = $connection->prepare($query_total_ordered_products);
+$stmt_total_ordered_products->execute();
+$results_total_ordered_products = $stmt_total_ordered_products->get_result();
 
 //sum of all appointments
 $query_total_profit = "SELECT SUM(total_price_including_tax) as total_profit FROM checkouts";
@@ -174,7 +171,7 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="../admin-main/admin-main.css">
     <link rel="stylesheet" href="../checkouts-admin/checkouts-admin.css">
-    
+
     <title>Admin | Checkouts - Newbies Gamers</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
@@ -290,27 +287,27 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
 
         <main>
             <div class="cards">
-                <div class="card-single">
+                <div class="card-single" title="This is the number of customers who have ordered checkouts">
                     <div>
-                        <h1><?php echo  $row_total_customers['count']; ?></h1>
+                        <h1><?php echo $results_total_customers_in_checkouts->num_rows; ?></h1>
                         <span>Customers</span>
                     </div>
                     <div>
                         <span class="las la-users"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the number of different products that customers have ordered in their checkouts">
                     <div>
-                        <h1><?php echo $row_total_appointments['total_appointments'] ?></h1>
-                        <span>Appointments</span>
+                        <h1><?php echo $results_total_ordered_products->num_rows; ?></h1>
+                        <span>Ordered Products</span>
                     </div>
                     <div>
-                        <span class="las la-clipboard"></span>
+                        <span class="las la-box"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of checkouts that have been ordered by customers">
                     <div>
-                        <h1><?php echo $row_total_checkouts['total_checkout'] ?></h1>
+                        <h1><?php echo $row_total_checkouts['total_checkout']; ?></h1>
                         <span>Chekouts</span>
                     </div>
                     <div>
@@ -320,7 +317,7 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
                 <div class="card-single">
                     <div>
                         <h1>$<?php echo $row_total_profit['total_profit'] ?></h1>
-                        <span>Profit</span>
+                        <span>Total Checkouts Prices</span>
                     </div>
                     <div>
                         <span class="las la-google-wallet"></span>
@@ -387,18 +384,18 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
         </main>
     </div>
 
-  <div class="wrapper">
-    <div id="survey_options">
-      <input type="text" name="survey_options[]" class="survey_options" size="50" placeholder="customer name">
-      <input type="text" name="survey_options[]" class="survey_options" size="50" placeholder="Email">
-      <input type="text" name="survey_options[]" class="survey_options" size="50" placeholder="Product name">
-      <input type="number" name="survey_options[]" class="survey_options" size="50" placeholder="quantity">
+    <div class="wrapper">
+        <div id="survey_options">
+            <input type="text" name="survey_options[]" class="survey_options" size="50" placeholder="customer name">
+            <input type="text" name="survey_options[]" class="survey_options" size="50" placeholder="Email">
+            <input type="text" name="survey_options[]" class="survey_options" size="50" placeholder="Product name">
+            <input type="number" name="survey_options[]" class="survey_options" size="50" placeholder="quantity">
+        </div>
+        <div class="controls">
+            <a href="#survey_options" id="add_more_fields"><i class="fa fa-plus"></i>Add More</a>
+            <a href="#survey_options" id="remove_fields"><i class="fa fa-plus"></i>Remove Field</a>
+        </div>
     </div>
-    <div class="controls">
-      <a href="#" id="add_more_fields"><i class="fa fa-plus"></i>Add More</a>
-      <a href="#" id="remove_fields"><i class="fa fa-plus"></i>Remove Field</a>
-    </div>
-  </div>
 
 
     <!-- started return to top button -->
