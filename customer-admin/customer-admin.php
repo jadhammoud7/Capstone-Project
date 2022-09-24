@@ -59,10 +59,10 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
     $stmt_delete_customer->execute();
 }
 //get id from repair
-$query_repair = "SELECT DISTINCT customer_id FROM appointments ORDER BY RAND() LIMIT 5";
-$stmt_repair = $connection->prepare($query_repair);
-$stmt_repair->execute();
-$results_repair = $stmt_repair->get_result();
+$query_loyalty_customers = "SELECT username,loyalty_points FROM customers ORDER BY loyalty_points DESC LIMIT 5";
+$stmt_loyalty_customers = $connection->prepare($query_loyalty_customers);
+$stmt_loyalty_customers->execute();
+$results_loyalty_customers = $stmt_loyalty_customers->get_result();
 
 
 //get locations
@@ -84,7 +84,7 @@ $results_location = $stmt_location->get_result();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="customer-admin.css">
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <link rel="stylesheet" href="../admin-main/admin-main.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <title>Admin | Customers - Newbies Gamers</title>
@@ -227,8 +227,8 @@ $results_location = $stmt_location->get_result();
                 </div>
             </div>
             <div style="margin-top: 30px;">
-                <canvas id="myChart1" style="width:100%;max-width:600px;"></canvas>
-                <div id="myPlot" style="width:100%;max-width:600px"></div>
+                <canvas id="myChart1" style="width:100%;max-width:600px; float:left;"></canvas>
+                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
 
 
             </div>
@@ -365,47 +365,41 @@ $results_location = $stmt_location->get_result();
     const array_repair = [];
     const array_repair_count = [];
     <?php
-    if (isset($results_repair)) {
-        while ($row_repair = $results_repair->fetch_assoc()) {
+    if (isset($results_loyalty_customers)) {
+        while ($row_loyalty_customers = $results_loyalty_customers->fetch_assoc()) {
     ?>
             array_repair.push("<?php
-                                $query_cust_name = "SELECT username FROM customers WHERE customer_id='" . $row_repair['customer_id'] . "'";
-                                $stmt_cust_name = $connection->prepare($query_cust_name);
-                                $stmt_cust_name->execute();
-                                $results_cust_name = $stmt_cust_name->get_result();
-                                $row_cust_name = $results_cust_name->fetch_assoc();
-                                echo $row_cust_name['username'];
+                                echo $row_loyalty_customers['username'];
                                 ?>");
-            <?php
-            $query_repair_count = "SELECT COUNT(customer_id) as customer_count_repair FROM appointments WHERE customer_id='" . $row_repair['customer_id'] . "'";
-            $stmt_repair_count = $connection->prepare($query_repair_count);
-            $stmt_repair_count->execute();
-            $results_repair_count = $stmt_repair_count->get_result();
-            $row_repair_count = $results_repair_count->fetch_assoc();
-            ?>
-
             array_repair_count.push("<?php
-                                        echo $row_repair_count['customer_count_repair'];
+                                        echo $row_loyalty_customers['loyalty_points'];
                                         ?>");
     <?php }
     }
     ?>;
-    var xArray = array_repair;
-    var yArray = array_repair_count;
-    console.log(xArray);
-    console.log(yArray);
+    var xValues = array_repair;
+    var yValues = array_repair_count;
+    var barColors = ["red", "green", "blue", "orange", "brown"];
 
-    var layout = {
-        title: "Random Customers Loyalty to Appointments"
-    };
-
-    var data = [{
-        labels: xArray,
-        values: yArray,
-        type: "pie"
-    }];
-
-    Plotly.newPlot("myPlot", data, layout);
+    new Chart("myChart", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            title: {
+                display: true,
+                text: "Loaylty Customers"
+            }
+        }
+    });
 </script>
 
 </html>
