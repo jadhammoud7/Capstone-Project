@@ -42,6 +42,16 @@ if (isset($_GET['product_id'])) {
 
 <body onunload="myFunction()">
 
+    <!-- started popup message product updated -->
+    <div class="popup" id="product-updated-confirmation">
+        <img src="../images/tick.png" alt="">
+        <h2>Product Updated</h2>
+        <p>The product of ID "<?php if (isset($_GET['product-id'])) {
+                                    echo $_GET['product-id'];
+                                } ?>" is updated successfully</p>
+        <button type="button" onclick="CloseProductUpdatedPopUp()">OK</button>
+    </div>
+
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
         <div class="sidebar-brand">
@@ -128,13 +138,13 @@ if (isset($_GET['product_id'])) {
                             <h2>Product Details</h2>
                         </div>
                         <div>
-                            <button class="edit-button" title="Edit Product '<?php if (isset($row_product)) {
-                                                                                    echo $row_product['name'];
-                                                                                } ?>'" onclick="EditProfile()"><span class="las la-edit"></span>Edit Product</button>
+                            <button id="edit-button" class="edit-button" title="Edit Product '<?php if (isset($row_product)) {
+                                                                                                    echo $row_product['name'];
+                                                                                                } ?>'" onclick="EditProduct()"><span class="las la-edit"></span> Edit Product</button>
                         </div>
                         <div class="form-container card-body">
 
-                            <form action="product-details.php" method="POST">
+                            <form action="../php/edit_product.php" method="POST" enctype="multipart/form-data">
                                 <div class="form-container-part">
 
                                     <div>
@@ -178,8 +188,8 @@ if (isset($_GET['product_id'])) {
                                     <div class="form-container-part-inputs">
                                         <div class="input-container">
                                             <input type="text" name="category" id="category" value="<?php if (isset($row_product)) {
-                                                                                            echo $row_product['category'];
-                                                                                        } ?>" readonly class="is-valid">
+                                                                                                        echo $row_product['category'];
+                                                                                                    } ?>" readonly class="is-valid">
                                             <label for="category">Category</label>
                                         </div>
                                     </div>
@@ -189,8 +199,8 @@ if (isset($_GET['product_id'])) {
                                             <div class="description-body">
                                                 <h3>Description</h3>
                                                 <p id="description"><?php if (isset($row_product)) {
-                                                        echo $row_product['description'];
-                                                    } ?></p>
+                                                                        echo $row_product['description'];
+                                                                    } ?></p>
                                             </div>
 
 
@@ -233,13 +243,16 @@ if (isset($_GET['product_id'])) {
                                         <div class="input-container product-image">
                                             <div class="image-body">
                                                 <h3>Product Image</h3>
-                                                <div>
+                                                <div id="product_image">
                                                     <img src='../images/<?php if (isset($row_product)) {
                                                                             echo $row_product['image'];
                                                                         } ?>'>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div>
+                                        <button type="submit" id="edit-product-submit" class="edit-product-submit" style="visibility: hidden;"><span class="las la-share-square"></span> Apply Changes</button>
                                     </div>
 
                                 </div>

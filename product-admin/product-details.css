@@ -168,12 +168,26 @@ input.is-valid+label {
     margin: 8px 15px;
     border: none;
     cursor: pointer;
-    width: 25%;
+    width: 100%;
     opacity: 0.9;
+    font-size: 1rem;
     border-radius: 20px;
 }
 
-.edit-button:hover{
+.edit-product-submit {
+    background-color: royalblue;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 15px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    font-size: 1.2rem;
+    border-radius: 20px;
+}
+
+.edit-button:hover {
     background-color: #63A7E4;
 }
 
