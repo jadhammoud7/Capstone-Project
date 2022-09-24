@@ -59,8 +59,7 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
         if (in_array($fileType, $allowTypes)) {
             if (move_uploaded_file($_FILES['product_image']['tmp_name'], $target_file)) {
                 $product_image = $filename;
-                $stmt_update_product = $connection->prepare("UPDATE products SET name = ?, price = ?, type = ?, category = ?, description = ?, age = ?, image = ?, inventory = ?, sales_number = ? WHERE product_id = ?");
-                $stmt_update_product->bind_param("sisssssiii", $product_name, $product_price, $product_type, $product_category, $product_desciption, $product_age, $product_image, $product_inventory, $sales_number, $product_id);
+                $stmt_update_product = $connection->prepare("UPDATE products SET name='" . $product_name . "', price= '" . $product_price . "', type='" . $product_type . "', category='" . $product_category . "', description='" . $product_description . "', age='" . $product_age . "', image='" . $product_image . "', inventory='" . $product_inventory . "', sales_number='" . $product_sales . "' WHERE product_id='" . $product_id . "'");
                 $stmt_update_product->execute();
                 $stmt_update_product->close();
                 header("Location: ../product-admin/product-details.php?product-id=$product_id&product-updated=1");
