@@ -14,13 +14,11 @@ $results = $stmt->get_result();
 $row = $results->fetch_assoc();
 
 
-//sum of all customers
-$query_total_customers = "SELECT COUNT(customer_id) as count FROM customers";
-$stmt_total_customers = $connection->prepare($query_total_customers);
-$stmt_total_customers->execute();
-$results_total_customers = $stmt_total_customers->get_result();
-$row_total_customers = $results_total_customers->fetch_assoc();
-
+//sum of all customers in appointments
+$query_total_customers_in_appointments = "SELECT DISTINCT customer_id FROM appointments";
+$stmt_total_customers_in_appointments = $connection->prepare($query_total_customers_in_appointments);
+$stmt_total_customers_in_appointments->execute();
+$results_total_customers_in_appointments = $stmt_total_customers_in_appointments->get_result();
 
 //count of all appointments
 $query_total_appointments = "SELECT COUNT(appointment_id) as total_appointments FROM appointments";
@@ -29,19 +27,20 @@ $stmt_total_appointments->execute();
 $results_total_appointments = $stmt_total_appointments->get_result();
 $row_total_appointments = $results_total_appointments->fetch_assoc();
 
-//sum of all appointments
-$query_total_profit = "SELECT SUM(total_price_including_tax) as total_profit FROM checkouts";
-$stmt_total_profit = $connection->prepare($query_total_profit);
-$stmt_total_profit->execute();
-$results_total_profit = $stmt_total_profit->get_result();
-$row_total_profit = $results_total_profit->fetch_assoc();
+//sum of all appointments price per hour
+$query_total_appointments_prices = "SELECT SUM(price_per_hour) as total_appointments_prices FROM appointments";
+$stmt_total_appointments_prices = $connection->prepare($query_total_appointments_prices);
+$stmt_total_appointments_prices->execute();
+$results_total_appointments_prices = $stmt_total_appointments_prices->get_result();
+$row_total_appointments_prices = $results_total_appointments_prices->fetch_assoc();
 
-//get total checkouts made
-$query_total_checkouts = "SELECT COUNT(checkout_id) as total_checkout FROM checkouts";
-$stmt_total_checkouts = $connection->prepare($query_total_checkouts);
-$stmt_total_checkouts->execute();
-$results_total_checkouts = $stmt_total_checkouts->get_result();
-$row_total_checkouts = $results_total_checkouts->fetch_assoc();
+//get total appointments today
+$currentDate = new DateTime();
+$query_total_appointments_today = "SELECT COUNT(*) as total_appointments_today FROM appointments WHERE date LIKE '" . $currentDate->format('Y-m-d') . "'";
+$stmt_total_appointments_today = $connection->prepare($query_total_appointments_today);
+$stmt_total_appointments_today->execute();
+$results_total_appointments_today = $stmt_total_appointments_today->get_result();
+$row_total_appointments_today = $results_total_appointments_today->fetch_assoc();
 
 
 //get all appointments
@@ -203,7 +202,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
             <div class="cards">
                 <div class="card-single">
                     <div>
-                        <h1><?php echo  $row_total_customers['count']; ?></h1>
+                        <h1><?php echo $results_total_customers_in_appointments->num_rows; ?></h1>
                         <span>Customers</span>
                     </div>
                     <div>
@@ -221,20 +220,20 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1><?php echo $row_total_checkouts['total_checkout'] ?></h1>
-                        <span>Chekouts</span>
+                        <h1><?php echo $row_total_appointments_today['total_appointments_today'] ?></h1>
+                        <span>Appointments Today</span>
                     </div>
                     <div>
-                        <span class="las la-shopping-bag"></span>
+                        <span class="las la-calendar-day"></span>
                     </div>
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>$<?php echo $row_total_profit['total_profit'] ?></h1>
-                        <span>Profit</span>
+                        <h1>$<?php echo $row_total_appointments_prices['total_appointments_prices'] ?></h1>
+                        <span>Total Appointments Prices</span>
                     </div>
                     <div>
-                        <span class="las la-google-wallet"></span>
+                        <span class="las la-wallet"></span>
                     </div>
                 </div>
             </div>
