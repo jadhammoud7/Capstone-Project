@@ -286,7 +286,7 @@ add_more_fields.onclick = function () {
     label1.setAttribute("for","products");
     label1.innerHTML="Choose a product";
     label1.appendChild(clone);
-    label1.setAttribute('class', 'survey_options');
+    label1.setAttribute('id', 'choose-product');
     label1.setAttribute('size', 50);
     survey_options.appendChild(label1);
 

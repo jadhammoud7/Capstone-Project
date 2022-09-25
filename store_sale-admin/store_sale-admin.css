@@ -1,209 +1,220 @@
 .add_checkout {
-    background-color: var(--main-color);
-    border: solid 1px royalblue;
-    border-radius: 10px;
-    color: white;
-    font-weight: 100;
-    font-size: 1rem;
-    padding: .5rem;
-    margin-top: 10px;
-  }
-  
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 100px;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    padding-top: 60px;
-  }
-  
-  .close {
-    position: absolute;
-    right: 25px;
-    top: 0;
-    color: #000;
-    font-size: 35px;
-    font-weight: bold;
-    color: red;
-  }
-  
- 
-  
-  /* Set a style for all buttons */
-  button.add_checkout,
-  button .add_admin {
-    background-color: royalblue;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    opacity: 0.9;
-  }
-  
-  button:hover {
-    opacity: 1;
-  }
-  
-  .add_admin {
-    margin-top: 50px;
-  }
-  
-  /* Extra styles for the cancel button */
-  .cancelbtn {
-    padding: 14px 20px;
-    background-color: #f44336;
-    color: black;
-    border-radius: 20px;
-  }
-  
-  /* Float cancel and signup buttons and add an equal width */
-  .cancelbtn {
-    float: left;
-    width: 45%;
-  }
-  
-  .addproductbtn {
-    width: 45%;
-    border-radius: 20px;
-    color: black;
-  }
-  
-  /* Set a style for all buttons */
-  button {
-    background-color: royalblue;
-    color: #fefefe;
-    padding: 12px 20px;
-    margin-top: 6px;
-    border: none;
-    cursor: pointer;
-    align-items: flex-start;
-  }
-  
-  /* Add a hover effect for buttons */
-  button:hover {
-    opacity: 0.8;
-  }
-  
-  /* Add padding to container elements */
-  #survey_options {
-    padding: 16px;
-  }
-  
-  #survey_options p {
-    color: royalblue;
-  }
-  
-  /* The Modal (background) */
-  .modal {
-    position: fixed;
-    /* Stay in place */
-    z-index: 1;
-    /* Sit on top */
-    left: 0;
-    top: 50px;
-    width: 100%;
-    /* Full width */
-    height: 100%;
-    /* Full height */
-    overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.695);
-    padding-top: 50px;
-  }
-  
-  /* Modal Content/Box */
-  .modal-content {
-    background-color: #fefefe;
-    margin: 5% auto 15% 25%;
-    /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
-    width: 60%;
-    /* Could be more or less, depending on screen size */
-    border-radius: 50px;
-  }
-  
-  /* Style the horizontal ruler */
-  hr {
-    border: 1px solid #f1f1f1;
-    margin-bottom: 25px;
-  }
-  
-  /* The Close Button (x) */
-  .close {
-    position: absolute;
-    right: 35px;
-    top: 30px;
-    font-size: 40px;
-    font-weight: bold;
-    color: red;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: red;
-    cursor: pointer;
-  }
-  
-  .clearfix {
-    padding-bottom: 30px;
-  }
-  
-  /* Clear floats */
-  .clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-  
-  .error {
-    background: #f2dede;
-    color: #a94442 !important;
-    padding: 10px;
-    width: 95%;
-    border-radius: 5px;
-    margin: 20px auto;
-  }
-  
-  #first_name_error {
-    display: none;
-  }
-  
-  #last_name_error {
-    display: none;
-  }
-  
-  #email_error {
-    display: none;
-  }
-  
-  #phone_number_error {
-    display: none;
-  }
-  
-  #address_error {
-    display: none;
-  }
-  
-  #username_error {
-    display: none;
-  }
-  
-  #password_error {
-    display: none;
-  }
-  
-  #product-name-column:hover {
-    cursor: pointer;
-  }
-  
-  /* select {
+  background-color: var(--main-color);
+  border: solid 1px royalblue;
+  border-radius: 10px;
+  color: white;
+  font-weight: 100;
+  font-size: 1rem;
+  padding: .5rem;
+  margin-top: 10px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 100px;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 60px;
+}
+
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+  color: red;
+}
+
+
+
+/* Set a style for all buttons */
+button.add_checkout,
+button .add_admin {
+  background-color: royalblue;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity: 1;
+}
+
+.add_admin {
+  margin-top: 50px;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+  color: black;
+  border-radius: 20px;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn {
+  float: left;
+  width: 45%;
+}
+
+.addproductbtn {
+  width: 45%;
+  border-radius: 20px;
+  color: black;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: royalblue;
+  color: #fefefe;
+  padding: 12px 20px;
+  margin-top: 6px;
+  border: none;
+  cursor: pointer;
+  align-items: flex-start;
+}
+
+button#add-button,
+button#remove-button {
+  padding: 5px 4px;
+  border-radius: 20px;
+}
+
+button#remove-button {
+  background-color: #f44336;
+}
+
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+}
+
+/* Add padding to container elements */
+#survey_options {
+  padding: 16px;
+}
+
+#survey_options p {
+  color: royalblue;
+}
+
+/* The Modal (background) */
+.modal {
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 50px;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.695);
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% 25%;
+  /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 60%;
+  /* Could be more or less, depending on screen size */
+  border-radius: 50px;
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 30px;
+  font-size: 40px;
+  font-weight: bold;
+  color: red;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+.clearfix {
+  padding-bottom: 30px;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.error {
+  background: #f2dede;
+  color: #a94442 !important;
+  padding: 10px;
+  width: 95%;
+  border-radius: 5px;
+  margin: 20px auto;
+}
+
+#first_name_error {
+  display: none;
+}
+
+#last_name_error {
+  display: none;
+}
+
+#email_error {
+  display: none;
+}
+
+#phone_number_error {
+  display: none;
+}
+
+#address_error {
+  display: none;
+}
+
+#username_error {
+  display: none;
+}
+
+#password_error {
+  display: none;
+}
+
+#product-name-column:hover {
+  cursor: pointer;
+}
+
+/* select {
     background-color: royalblue;
     border: none;
     color: #fefefe;
@@ -222,27 +233,27 @@
     min-height: 2em;
     font-size: large;
   } */
-  
-  
-  
-  /* Change styles for cancel button and signup button on extra small screens */
-  @media screen and (max-width: 300px) {
-  
-    .cancelbtn {
-      width: 100%;
-    }
+
+
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+
+  .cancelbtn {
+    width: 100%;
   }
-  
-  .title {
-    text-align: center;
-  }
+}
+
+.title {
+  text-align: center;
+}
 
 
 
 
 
 
-  @import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;300;400;700&display=swap');
 
 
 
@@ -252,10 +263,10 @@
   padding: 10px;
   border-radius: 5px;
   background: white;
-  box-shadow: 0px 10px 40px 0px rgba(47,47,47,.1);
+  box-shadow: 0px 10px 40px 0px rgba(47, 47, 47, .1);
 }
 
-input[type="number"]{
+input[type="number"] {
   padding: 10px;
   margin: 10px auto;
   display: block;
@@ -270,7 +281,8 @@ input[type="number"]:focus {
   outline: none;
 }
 
-input[type="text"]{
+input[type="text"],
+#choose-product {
   padding: 10px;
   margin: 10px auto;
   display: block;
@@ -285,6 +297,9 @@ input[type="text"]:focus {
   outline: none;
 }
 
+select {
+  width: 300px;
+}
 
 .controls {
   width: 294px;
@@ -294,6 +309,7 @@ input[type="text"]:focus {
 #remove_fields {
   float: right;
 }
+
 .controls a i.fa-minus {
   margin-right: 5px;
 }
@@ -307,11 +323,13 @@ h1 {
   font-size: 2em;
   color: #232c3d;
 }
-.sales_store{
+
+.sales_store {
   text-align: center;
   margin-top: 30px;
 }
-#save{
+
+#save {
   background-color: royalblue;
   color: black;
   border-radius: 15px;
