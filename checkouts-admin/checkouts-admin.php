@@ -217,21 +217,23 @@ if (isset($_POST['save'])) {
             $stmt_insert_store_sales->execute();
             $stmt_insert_store_sales->close();
         } else {
-            $query_check_username = "SELECT customer_id,loyalty_points from customers WHERE username='".$username."'";
+            $query_check_username = "SELECT customer_id,loyalty_points from customers WHERE username='" . $username . "'";
             $stmt_check_username = $connection->prepare($query_check_username);
             $stmt_check_username->execute();
             $results_check_username = $stmt_check_username->get_result();
             $row_check_username = $results_check_username->fetch_assoc();
 
-            if(empty($row_check_username)){
+            if (empty($row_check_username)) {
                 $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, product_name, quantity) VALUES (?,?,?,?,?,?)");
                 $stmt_insert_store_sales->bind_param("issssi", $store_sales_id, $customer_name, $username, $email, $product_name[$x], $quantity[$x]);
                 $stmt_insert_store_sales->execute();
                 $stmt_insert_store_sales->close();
-            }else{
-                $add=$row_check_username['loyalty_points']+1;
+            } else {
+                //addinf quantity of all products needed
+
+                $add_result = $row_check_username['loyalty_points'] + $quantity[$x];
                 $stmt_insert_loyalty = $connection->prepare("UPDATE customers SET loyalty_points=? WHERE customer_id='" . $row_check_username['customer_id'] . "'");
-                $stmt_insert_loyalty->bind_param("i", $add);
+                $stmt_insert_loyalty->bind_param("i", $add_result);
                 $stmt_insert_loyalty->execute();
                 $stmt_insert_loyalty->close();
                 $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, product_name, quantity) VALUES (?,?,?,?,?,?)");
