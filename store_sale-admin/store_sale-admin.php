@@ -324,7 +324,7 @@
                     <div class="projects">
                         <div class="card">
                             <div class="card-header">
-                                <h3>Purchaces Via Store List</h3>
+                                <h3>Sales Via Store List</h3>
                             </div>
                             <div class="card-header">
                                 <h3>
@@ -342,7 +342,6 @@
                                                 <td>Email</td>
                                                 <td>Product Name</td>
                                                 <td>Quantity</td>
-
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -369,8 +368,8 @@
                     <span onclick="CloseAddCheckout()" class="close" title="Close Modal">&times;</span>
                     <form class="modal-content" action="../store_sale-admin/store_sale-admin.php" method="POST" enctype="multipart/form-data">
                         <div id="survey_options">
-                            <h1 class="title">Add customer purchases via store</h1>
-                            <p class="title">Please fill in this form to add a new Purchaces.</p>
+                            <h1 class="title">Add customer sales via store</h1>
+                            <p class="title">Please fill in this form to add a new Sales.</p>
                             <br>
 
                             <input type="text" name="customer_name" class="survey_options" size="50" placeholder="customer name.." required>

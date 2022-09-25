@@ -219,7 +219,7 @@ if (isset($_GET['getAdminIDtoRemove'])) {
                 </li>
                 <li>
                     <a href="../store_sale-admin/store_sale-admin.php" id="store_sale-link">
-                        <span class="las la-receipt"></span>
+                        <span class="las la-money-check"></span>
                         <span>Store Sales</span>
                     </a>
                 </li>
