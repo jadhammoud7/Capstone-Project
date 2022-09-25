@@ -187,3 +187,16 @@ function get_products_in_asc_desc($name, $inventory, $sales_number)
     ";
     echo $element;
 }
+
+function get_all_purchaces_store($customer_name,$email, $product_name, $quantity)
+{
+    $element = "
+    <tr class=\"hello\">
+        <td>$customer_name</td>
+        <td>$email</td>
+        <td>$product_name</td>
+        <td>$quantity</td>
+    </tr>
+    ";
+    echo $element;
+}

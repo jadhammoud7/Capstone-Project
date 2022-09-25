@@ -44,12 +44,12 @@ $results_total_checkouts = $stmt_total_checkouts->get_result();
 $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 
-//get all products
+//get all customer purchases from store
 require_once("../php/admin_page_php.php");
-$query_products = "SELECT product_id, name, price, type, category, description, age, inventory, sales_number FROM products";
-$stmt_products = $connection->prepare($query_products);
-$stmt_products->execute();
-$results_products = $stmt_products->get_result();
+$query_store_purchaces = "SELECT customer_name,email, product_name, quantity FROM store_sales";
+$stmt_store_purchaces = $connection->prepare($query_store_purchaces);
+$stmt_store_purchaces->execute();
+$results_store_purchaces= $stmt_store_purchaces->get_result();
 
 //form of adding new product
 $product_name = "";
@@ -145,7 +145,7 @@ $results_top_products = $stmt_top_products->get_result();
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="../admin-main/admin-main.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<link rel="stylesheet" href="../store_sale-admin/store_sale-admin.css">
+    <link rel="stylesheet" href="../store_sale-admin/store_sale-admin.css">
     <title>Admin | Products - Newbies Gamers</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
@@ -304,7 +304,7 @@ $results_top_products = $stmt_top_products->get_result();
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Products List</h3>
+                            <h3>Purchaces Via Store List</h3>
                         </div>
                         <div class="card-header">
                             <h3>
@@ -318,25 +318,21 @@ $results_top_products = $stmt_top_products->get_result();
                                 <table width="100%" id="products_table">
                                     <thead>
                                         <tr>
-                                            <td id="product-name-column" title="Sort Product Name by descending">Product Name</td>
-                                            <td id="product-price-column" title="Sort Price by descending">Price</td>
-                                            <td id="product-type-column" title="Sort Type by descending">Type</td>
-                                            <td id="product-category-column" title="Sort Category by descending">Category</td>
-                                            <td id="product-inventory-column" title="Sort Inventory by descending">Inventory</td>
-                                            <td id="product-sales-column" title="Sort Sales Number by descending">Sales Number</td>
+                                            <td >Customer Name</td>
+                                            <td >Email</td>
+                                            <td >Product Name</td>
+                                            <td >Quantity</td>
+
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        while ($row_products = $results_products->fetch_assoc()) {
-                                            get_all_products(
-                                                $row_products['product_id'],
-                                                $row_products['name'],
-                                                $row_products['price'],
-                                                $row_products['category'],
-                                                $row_products['type'],
-                                                $row_products['inventory'],
-                                                $row_products['sales_number']
+                                        while ($row_store_purchaces = $results_store_purchaces->fetch_assoc()) {
+                                            get_all_purchaces_store(
+                                                $row_store_purchaces['customer_name'],
+                                                $row_store_purchaces['email'],
+                                                $row_store_purchaces['product_name'],
+                                                $row_store_purchaces['quantity']
                                             );
                                         }
                                         ?>
