@@ -406,11 +406,11 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
     <h1 class="sales_store">Add Customers Purchaces At Store</h1>
     <div class="wrapper">
         <div id="survey_options">
-            <input type="text" name="survey_options" class="survey_options" size="50" placeholder="customer name..">
+            <input type="text" name="survey_options" class="survey_options" size="50" placeholder="customer name.." required>
             <input type="text" name="survey_options" class="survey_options" size="50" placeholder="username if any..">
-            <input type="text" name="survey_options" class="survey_options" size="50" placeholder="email..">
-            <input type="text" name="survey_options[]" class="survey_options" size="50" placeholder="product name..">
-            <input type="number" name="survey_options[]" class="survey_options" size="50" placeholder="quantity...">
+            <input type="text" name="survey_options" class="survey_options" size="50" placeholder="email.." required>
+            <input type="text" name="survey_options[]" class="survey_options" size="50" placeholder="product name.." required>
+            <input type="number" name="survey_options[]" class="survey_options" size="50" placeholder="quantity..." required>
         </div>
         <div class="controls">
             <a href="#survey_options" id="add_more_fields"><i class="fa fa-plus"></i>Add More Products</a>
@@ -419,9 +419,7 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
         <center>
             <input class="btn btn-success" type="submit" name="save" id="save" value="Save Data">
         </center>
-        <?php
-        
-        ?>
+
     </div>
 
 
