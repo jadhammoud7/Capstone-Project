@@ -175,82 +175,6 @@ $stmt_condition_4->execute();
 $results_condition_4 = $stmt_condition_4->get_result();
 $row_condition_4 = $results_condition_4->fetch_assoc();
 
-//the add sales form
-
-if (isset($_POST['save'])) {
-    $stmt_select_all_store_sales = $connection->prepare("SELECT * FROM store_sales");
-    $stmt_select_all_store_sales->execute();
-    $results_all_store_sales = $stmt_select_all_store_sales->get_result();
-
-    $store_sales_id = 1;
-    if ($results_all_store_sales->num_rows == 0) {
-        $store_sales_id = 1;
-    } else {
-        $stmt_select_last_sales_id = $connection->prepare("SELECT store_sales_id FROM store_sales ORDER BY store_sales_id DESC LIMIT 1");
-        $stmt_select_last_sales_id->execute();
-        $results_select_last_sales_id = $stmt_select_last_sales_id->get_result();
-        $row_last_sales_id = $results_select_last_sales_id->fetch_assoc();
-        $store_sales_id = $row_last_sales_id['store_sales_id'] + 1;
-    }
-    $product_name = [];
-    $quantity = [];
-    if (isset($_POST['customer_name']) && $_POST["customer_name"] != "") {
-        $customer_name = $_POST['customer_name'];
-    }
-    if (isset($_POST['username']) && $_POST["username"] != "") {
-        $username = $_POST['username'];
-    }
-    if (isset($_POST['email']) && $_POST["email"] != "") {
-        $email = $_POST['email'];
-    }
-    if (isset($_POST['product_name']) && $_POST["product_name"] != "") {
-        $product_name = $_POST['product_name'];
-    }
-    if (isset($_POST['quantity']) && $_POST["quantity"] != "") {
-        $quantity = $_POST['quantity'];
-    }
-
-    for ($x = 0; $x < count($product_name); $x++) {
-        if (empty($username)) {
-            $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, product_name, quantity) VALUES (?,?,?,?,?,?)");
-            $stmt_insert_store_sales->bind_param("issssi", $store_sales_id, $customer_name, $username, $email, $product_name[$x], $quantity[$x]);
-            $stmt_insert_store_sales->execute();
-            $stmt_insert_store_sales->close();
-        } else {
-            $query_check_username = "SELECT customer_id,loyalty_points from customers WHERE username='" . $username . "'";
-            $stmt_check_username = $connection->prepare($query_check_username);
-            $stmt_check_username->execute();
-            $results_check_username = $stmt_check_username->get_result();
-            $row_check_username = $results_check_username->fetch_assoc();
-
-            if (empty($row_check_username)) {
-                $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, product_name, quantity) VALUES (?,?,?,?,?,?)");
-                $stmt_insert_store_sales->bind_param("issssi", $store_sales_id, $customer_name, $username, $email, $product_name[$x], $quantity[$x]);
-                $stmt_insert_store_sales->execute();
-                $stmt_insert_store_sales->close();
-            } else {
-                //addinf quantity of all products needed
-
-                $add_result = $row_check_username['loyalty_points'] + $quantity[$x];
-                $stmt_insert_loyalty = $connection->prepare("UPDATE customers SET loyalty_points=? WHERE customer_id='" . $row_check_username['customer_id'] . "'");
-                $stmt_insert_loyalty->bind_param("i", $add_result);
-                $stmt_insert_loyalty->execute();
-                $stmt_insert_loyalty->close();
-                $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, product_name, quantity) VALUES (?,?,?,?,?,?)");
-                $stmt_insert_store_sales->bind_param("issssi", $store_sales_id, $customer_name, $username, $email, $product_name[$x], $quantity[$x]);
-                $stmt_insert_store_sales->execute();
-                $stmt_insert_store_sales->close();
-            }
-        }
-    }
-}
-
-//get all products
-require_once("../php/checkout-store_sales.php");
-$query_get_all_products = "SELECT name FROM products";
-$stmt_get_all_products = $connection->prepare($query_get_all_products);
-$stmt_get_all_products->execute();
-$results_get_all_products = $stmt_get_all_products->get_result();
 
 ?>
 
@@ -485,35 +409,6 @@ $results_get_all_products = $stmt_get_all_products->get_result();
         </main>
     </div>
 
-    <h1 class="sales_store">Add Customers Purchaces At Store</h1>
-    <div class="wrapper">
-        <form action="checkouts-admin.php" method="POST">
-            <div id="survey_options">
-                <input type="text" name="customer_name" class="survey_options" size="50" placeholder="customer name.." required>
-                <input type="text" name="username" class="survey_options" size="50" placeholder="username if any..">
-                <input type="text" name="email" class="survey_options" size="50" placeholder="email.." required>
-                <label for="products">Choose a product:
-                    <select id="products" name="product_name[]" required>
-                        <?php
-                        while ($row_get_all_products = $results_get_all_products->fetch_assoc()) {
-                            store_sales_connection($row_get_all_products['name']);
-                        }
-                        ?>
-                    </select>
-                </label>
-
-                <input type="number" name="quantity[]" class="survey_options" size="50" placeholder="quantity..." required>
-            </div>
-            <div class="controls">
-                <a href="#survey_options" id="add_more_fields"><i class="fa fa-plus"></i>Add More Products</a>
-                <a href="#survey_options" id="remove_fields"><i class="fa fa-plus"></i>Remove Products</a>
-            </div>
-            <center>
-                <input class="btn btn-success" type="submit" name="save" id="save" value="Save Data">
-            </center>
-        </form>
-
-    </div>
 
 
     <!-- started return to top button -->
