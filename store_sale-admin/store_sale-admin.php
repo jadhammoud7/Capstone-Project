@@ -145,7 +145,7 @@ $results_top_products = $stmt_top_products->get_result();
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="../admin-main/admin-main.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link rel="stylesheet" href="product-admin.css">
+<link rel="stylesheet" href="../store_sale-admin/store_sale-admin.css">
     <title>Admin | Products - Newbies Gamers</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
@@ -201,6 +201,12 @@ $results_top_products = $stmt_top_products->get_result();
                     <a href="../checkouts-admin/checkouts-admin.php" id="checkouts-link">
                         <span class="las la-receipt"></span>
                         <span>Checkouts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../store_sale-admin/store_sale-admin.php" id="store_sale-link">
+                        <span class="las la-receipt"></span>
+                        <span>Store Sales</span>
                     </a>
                 </li>
                 <li>
@@ -417,7 +423,7 @@ $results_top_products = $stmt_top_products->get_result();
     <!-- ended return to top button -->
 
 </body>
-<script src="../product-admin/product-admin.js"></script>
+<script src="../store_sale-admin/store_sale-admin.js"></script>
 
 <script src="../admin-main/admin-main.js"></script>
 <script>

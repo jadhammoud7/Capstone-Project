@@ -38,8 +38,10 @@ const dashboard_link = document.getElementById('dashboard-link');
 const customers_link = document.getElementById('customers-link');
 const appointments_link = document.getElementById('appointments-link');
 const checkouts_link = document.getElementById('checkouts-link');
+const store_sale_link = document.getElementById('store_sale-link');
 const products_link = document.getElementById('products-link');
 const admins_link = document.getElementById('admins-link');
+
 
 if (window.location.href.includes('home-admin')) {
     dashboard_link.style.backgroundColor = '#fff';
@@ -130,5 +132,19 @@ else {
     checkouts_link.style.borderRadius = '0px';
     checkouts_link.style.paddingTop = '0px';
     checkouts_link.style.paddingBottom = '0px';
+}
+if (window.location.href.includes('store_sale-admin')) {
+    store_sale_link.style.backgroundColor = '#fff';
+    store_sale_link.style.color = 'var(--main-color)';
+    store_sale_link.style.borderRadius = '20px';
+    store_sale_link.style.paddingTop = '10px';
+    store_sale_link.style.paddingBottom = '10px';
+}
+else {
+    store_sale_link.style.backgroundColor = 'var(--main-color)';
+    store_sale_link.style.color = '#fff';
+    store_sale_link.style.borderRadius = '0px';
+    store_sale_link.style.paddingTop = '0px';
+    store_sale_link.style.paddingBottom = '0px';
 }
 

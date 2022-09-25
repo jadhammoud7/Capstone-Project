@@ -145,6 +145,12 @@ $results_location = $stmt_location->get_result();
                     </a>
                 </li>
                 <li>
+                    <a href="../store_sale-admin/store_sale-admin.php" id="store_sale-link">
+                        <span class="las la-receipt"></span>
+                        <span>Store Sales</span>
+                    </a>
+                </li>
+                <li>
                     <a href="../product-admin/product-admin.php" id="products-link">
                         <span class="la la-product-hunt"></span>
                         <span>Products</span>
