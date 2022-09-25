@@ -321,7 +321,7 @@ add_more_fields.onclick = function(){
   newField1.setAttribute('name','survey_options[]');
   newField1.setAttribute('class','survey_options');
   newField1.setAttribute('siz',50);
-  newField1.setAttribute('placeholder','Another product name');
+  newField1.setAttribute('placeholder','another product name');
   survey_options.appendChild(newField1);
   newField2.setAttribute('type','number');
   newField2.setAttribute('name','survey_options[]');
