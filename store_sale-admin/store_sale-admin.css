@@ -1,4 +1,4 @@
-.add_product {
+.add_checkout {
     background-color: var(--main-color);
     border: solid 1px royalblue;
     border-radius: 10px;
@@ -32,47 +32,10 @@
     color: red;
   }
   
-  
-  
-  
-  
-  /* new form */
-  input {
-    border-radius: 30px;
-  }
-  
-  /* Full-width input fields */
-  input[type=text],
-  input[type=password],
-  input[type=file] {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
-  }
-  
-  /* Add a background color when the inputs get focus */
-  input[type=text]:focus,
-  input[type=password]:focus,
-  input[type=date]:focus {
-    background-color: white;
-    outline: none;
-    border: 2px solid black;
-    color: black
-  }
-  
-  input[type=text]:hover,
-  input[type=password]:hover,
-  input[type=date]:hover {
-    background-color: #ddd;
-    outline: none;
-  }
-  
+ 
   
   /* Set a style for all buttons */
-  button.add_product,
+  button.add_checkout,
   button .add_admin {
     background-color: royalblue;
     color: white;
@@ -129,11 +92,11 @@
   }
   
   /* Add padding to container elements */
-  .container {
+  #survey_options {
     padding: 16px;
   }
   
-  .container p {
+  #survey_options p {
     color: royalblue;
   }
   
@@ -240,7 +203,7 @@
     cursor: pointer;
   }
   
-  select {
+  /* select {
     background-color: royalblue;
     border: none;
     color: #fefefe;
@@ -258,15 +221,14 @@
     padding: 15px 15px 15px;
     min-height: 2em;
     font-size: large;
-  }
+  } */
   
   
   
   /* Change styles for cancel button and signup button on extra small screens */
   @media screen and (max-width: 300px) {
   
-    .cancelbtn,
-    .addproductbtn {
+    .cancelbtn {
       width: 100%;
     }
   }
@@ -274,3 +236,85 @@
   .title {
     text-align: center;
   }
+
+
+
+
+
+
+  @import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;300;400;700&display=swap');
+
+
+
+.wrapper {
+  width: 370px;
+  margin: 40px auto;
+  padding: 10px;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0px 10px 40px 0px rgba(47,47,47,.1);
+}
+
+input[type="number"]{
+  padding: 10px;
+  margin: 10px auto;
+  display: block;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  background: none;
+  width: 350px;
+  color: black;
+}
+
+input[type="number"]:focus {
+  outline: none;
+}
+
+input[type="text"]{
+  padding: 10px;
+  margin: 10px auto;
+  display: block;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  background: none;
+  width: 350px;
+  color: black;
+}
+
+input[type="text"]:focus {
+  outline: none;
+}
+
+
+.controls {
+  width: 294px;
+  margin: 15px auto;
+}
+
+#remove_fields {
+  float: right;
+}
+.controls a i.fa-minus {
+  margin-right: 5px;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 2em;
+  color: #232c3d;
+}
+.sales_store{
+  text-align: center;
+  margin-top: 30px;
+}
+#save{
+  background-color: royalblue;
+  color: black;
+  border-radius: 15px;
+  border: 1px solid royalblue;
+  padding: 10px;
+}

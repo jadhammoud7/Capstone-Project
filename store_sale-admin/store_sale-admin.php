@@ -49,87 +49,107 @@ require_once("../php/admin_page_php.php");
 $query_store_purchaces = "SELECT customer_name,email, product_name, quantity FROM store_sales";
 $stmt_store_purchaces = $connection->prepare($query_store_purchaces);
 $stmt_store_purchaces->execute();
-$results_store_purchaces= $stmt_store_purchaces->get_result();
+$results_store_purchaces = $stmt_store_purchaces->get_result();
 
-//form of adding new product
-$product_name = "";
-$product_price = 0;
-$product_type = "";
-$product_category = "";
-$product_desciption = "";
-$product_age = "";
-$product_image = "";
-$product_inventory = 0;
-$product_sales_number = 0;
 
-if (isset($_POST["product_name"])) {
-    $product_name = $_POST["product_name"];
-}
+//get products in ascending 
+// $query_nbofsales = "SELECT name,inventory,sales_number FROM products ORDER BY sales_number ASC;";
+// $stmt_nbofsales = $connection->prepare($query_nbofsales);
+// $stmt_nbofsales->execute();
+// $results_nbofsales = $stmt_nbofsales->get_result();
 
-if (isset($_POST["product_price"])) {
-    $product_price = $_POST["product_price"];
-}
 
-if (isset($_POST["product_type"])) {
-    $product_type = $_POST["product_type"];
-}
+//get lowest products 
+// $query_lowest_products = "SELECT name,sales_number FROM products ORDER BY sales_number ASC LIMIT 5;";
+// $stmt_lowest_products = $connection->prepare($query_lowest_products);
+// $stmt_lowest_products->execute();
+// $results_lowest_products = $stmt_lowest_products->get_result();
 
-if (isset($_POST["product_category"])) {
-    $product_category = $_POST["product_category"];
-}
+//get top products 
+// $query_top_products = "SELECT name,sales_number FROM products ORDER BY sales_number DESC LIMIT 5;";
+// $stmt_top_products = $connection->prepare($query_top_products);
+// $stmt_top_products->execute();
+// $results_top_products = $stmt_top_products->get_result();
 
-if (isset($_POST["product_desciption"])) {
-    $product_desciption = $_POST["product_desciption"];
-}
 
-if (isset($_POST["product_age"])) {
-    $product_age = $_POST["product_age"];
-}
+// echo "<script>window.location='../product-admin/product-admin.php';</script>";
 
-if (isset($_POST['product_inventory'])) {
-    $product_inventory = $_POST['product_inventory'];
-}
+//the add sales form
 
-if ($product_name != "" && $product_price != 0 && $product_type != "" && $product_category != "" && $product_desciption != "" && $product_age != "" && $product_inventory != 0) {
-    $target_dir = "../images/";
-    $filename = basename($_FILES['product_image']['name']);
-    $target_file = $target_dir . $filename;
-    $fileType = pathinfo($target_file, PATHINFO_EXTENSION);
-    $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
-    if (in_array($fileType, $allowTypes)) {
-        if (move_uploaded_file($_FILES['product_image']['tmp_name'], $target_file)) {
-            $sales_number = 0;
-            $product_image = $filename;
-            $stmt_add_new_product = $connection->prepare("INSERT INTO products(name, price, type, category, description, age, image, inventory, sales_number) VALUES (?,?,?,?,?,?,?,?,?)");
-            $stmt_add_new_product->bind_param("sisssssii", $product_name, $product_price, $product_type, $product_category, $product_desciption, $product_age, $product_image, $product_inventory, $sales_number);
-            $stmt_add_new_product->execute();
-            $stmt_add_new_product->close();
-            header("Location: product-admin.php?product-added=1");
+if (isset($_POST['save'])) {
+    $stmt_select_all_store_sales = $connection->prepare("SELECT * FROM store_sales");
+    $stmt_select_all_store_sales->execute();
+    $results_all_store_sales = $stmt_select_all_store_sales->get_result();
+
+    $store_sales_id = 1;
+    if ($results_all_store_sales->num_rows == 0) {
+        $store_sales_id = 1;
+    } else {
+        $stmt_select_last_sales_id = $connection->prepare("SELECT store_sales_id FROM store_sales ORDER BY store_sales_id DESC LIMIT 1");
+        $stmt_select_last_sales_id->execute();
+        $results_select_last_sales_id = $stmt_select_last_sales_id->get_result();
+        $row_last_sales_id = $results_select_last_sales_id->fetch_assoc();
+        $store_sales_id = $row_last_sales_id['store_sales_id'] + 1;
+    }
+    $product_name = [];
+    $quantity = [];
+    if (isset($_POST['customer_name']) && $_POST["customer_name"] != "") {
+        $customer_name = $_POST['customer_name'];
+    }
+    if (isset($_POST['username']) && $_POST["username"] != "") {
+        $username = $_POST['username'];
+    }
+    if (isset($_POST['email']) && $_POST["email"] != "") {
+        $email = $_POST['email'];
+    }
+    if (isset($_POST['product_name']) && $_POST["product_name"] != "") {
+        $product_name = $_POST['product_name'];
+    }
+    if (isset($_POST['quantity']) && $_POST["quantity"] != "") {
+        $quantity = $_POST['quantity'];
+    }
+
+    for ($x = 0; $x < count($product_name); $x++) {
+        if (empty($username)) {
+            $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, product_name, quantity) VALUES (?,?,?,?,?,?)");
+            $stmt_insert_store_sales->bind_param("issssi", $store_sales_id, $customer_name, $username, $email, $product_name[$x], $quantity[$x]);
+            $stmt_insert_store_sales->execute();
+            $stmt_insert_store_sales->close();
+        } else {
+            $query_check_username = "SELECT customer_id,loyalty_points from customers WHERE username='" . $username . "'";
+            $stmt_check_username = $connection->prepare($query_check_username);
+            $stmt_check_username->execute();
+            $results_check_username = $stmt_check_username->get_result();
+            $row_check_username = $results_check_username->fetch_assoc();
+
+            if (empty($row_check_username)) {
+                $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, product_name, quantity) VALUES (?,?,?,?,?,?)");
+                $stmt_insert_store_sales->bind_param("issssi", $store_sales_id, $customer_name, $username, $email, $product_name[$x], $quantity[$x]);
+                $stmt_insert_store_sales->execute();
+                $stmt_insert_store_sales->close();
+            } else {
+                //addinf quantity of all products needed
+
+                $add_result = $row_check_username['loyalty_points'] + $quantity[$x];
+                $stmt_insert_loyalty = $connection->prepare("UPDATE customers SET loyalty_points=? WHERE customer_id='" . $row_check_username['customer_id'] . "'");
+                $stmt_insert_loyalty->bind_param("i", $add_result);
+                $stmt_insert_loyalty->execute();
+                $stmt_insert_loyalty->close();
+                $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, product_name, quantity) VALUES (?,?,?,?,?,?)");
+                $stmt_insert_store_sales->bind_param("issssi", $store_sales_id, $customer_name, $username, $email, $product_name[$x], $quantity[$x]);
+                $stmt_insert_store_sales->execute();
+                $stmt_insert_store_sales->close();
+            }
         }
     }
 }
 
-//get products in ascending 
-$query_nbofsales = "SELECT name,inventory,sales_number FROM products ORDER BY sales_number ASC;";
-$stmt_nbofsales = $connection->prepare($query_nbofsales);
-$stmt_nbofsales->execute();
-$results_nbofsales = $stmt_nbofsales->get_result();
 
-
-//get lowest products 
-$query_lowest_products = "SELECT name,sales_number FROM products ORDER BY sales_number ASC LIMIT 5;";
-$stmt_lowest_products = $connection->prepare($query_lowest_products);
-$stmt_lowest_products->execute();
-$results_lowest_products = $stmt_lowest_products->get_result();
-
-//get top products 
-$query_top_products = "SELECT name,sales_number FROM products ORDER BY sales_number DESC LIMIT 5;";
-$stmt_top_products = $connection->prepare($query_top_products);
-$stmt_top_products->execute();
-$results_top_products = $stmt_top_products->get_result();
-
-
-// echo "<script>window.location='../product-admin/product-admin.php';</script>";
+require_once("../php/checkout-store_sales.php");
+$query_get_all_products = "SELECT name FROM products";
+$stmt_get_all_products = $connection->prepare($query_get_all_products);
+$stmt_get_all_products->execute();
+$results_get_all_products = $stmt_get_all_products->get_result();
 
 ?>
 
@@ -162,11 +182,11 @@ $results_top_products = $stmt_top_products->get_result();
     </div>
 
     <!-- started popup message logout -->
-    <div class="popup" id="product-added-confirmation">
+    <div class="popup" id="checkout-added-confirmation">
         <img src="../images/tick.png" alt="">
         <h2>Product Added Confirmation</h2>
         <p>A new product was added successfully</p>
-        <button type="button" onclick="CloseProductAddedPopUp()">OK</button>
+        <button type="button" onclick="CloseCheckoutAddedPopUp()">OK</button>
     </div>
 
     <input type="checkbox" id="nav-toggle">
@@ -298,8 +318,9 @@ $results_top_products = $stmt_top_products->get_result();
             </div>
 
             <div class="card-single add_admin">
-                <button class="add_product" id="add_user1" onclick="OpenAddProduct()" title="Add a new product"><span class="las la-plus"></span>Add Product</button>
+                <button class="add_checkout" id="add_user1" onclick="OpenAddCheckout()" title="Add a new product"><span class="las la-plus"></span>Add Customer Purchaces Via Store</button>
             </div>
+
             <div class="recent-grid" style="display: block !important;">
                 <div class="projects">
                     <div class="card">
@@ -318,10 +339,10 @@ $results_top_products = $stmt_top_products->get_result();
                                 <table width="100%" id="products_table">
                                     <thead>
                                         <tr>
-                                            <td >Customer Name</td>
-                                            <td >Email</td>
-                                            <td >Product Name</td>
-                                            <td >Quantity</td>
+                                            <td>Customer Name</td>
+                                            <td>Email</td>
+                                            <td>Product Name</td>
+                                            <td>Quantity</td>
 
                                         </tr>
                                     </thead>
@@ -346,69 +367,35 @@ $results_top_products = $stmt_top_products->get_result();
 
             <!-- adding form -->
             <div id="id01" class="modal">
-                <span onclick="CloseAddProduct()" class="close" title="Close Modal">&times;</span>
-                <form class="modal-content" action="product-admin.php" method="POST" enctype="multipart/form-data">
-                    <div class="container">
-                        <h1 class="title">Add New Product</h1>
-                        <p class="title">Please fill in this form to add a new product.</p>
+                <span onclick="CloseAddCheckout()" class="close" title="Close Modal">&times;</span>
+                <form class="modal-content" action="../store_sale-admin/store_sale-admin.php" method="POST" enctype="multipart/form-data">
+                    <div id="survey_options">
+                        <h1 class="title">Add customer purchases via store</h1>
+                        <p class="title">Please fill in this form to add a new Purchaces.</p>
                         <br>
 
-                        <label for="product_name"><b>Product Name</b></label>
-                        <input type="text" placeholder="Enter product's name" name="product_name" id="product_name" value="" required />
-
-
-                        <label for="product_price"><b>Product Price</b></label><br>
-                        <input style="height: 35px;" type="number" placeholder="Enter product's price" name="product_price" id="product_price" value="" required>
-                        <br><br>
-
-                        <label for="product_type"><b>Product Type</b><br>
-                            <select name="product_type" id="product_type">
-                                <option value="cds">CDs</option>
-                                <option value="consoles">Consoles</option>
-                                <option value="accessories">Accessories</option>
-                                <option value="phones">Phones</option>
-                                <option value="cards">Online cards</option>
-                                <option value="electronics">Electronics</option>
+                        <input type="text" name="customer_name" class="survey_options" size="50" placeholder="customer name.." required>
+                        <input type="text" name="username" class="survey_options" size="50" placeholder="username if any..">
+                        <input type="text" name="email" class="survey_options" size="50" placeholder="email.." required>
+                        <label for="products">Choose a product:
+                            <select id="products" name="product_name[]" required>
+                                <?php
+                                while ($row_get_all_products = $results_get_all_products->fetch_assoc()) {
+                                    store_sales_connection($row_get_all_products['name']);
+                                }
+                                ?>
                             </select>
                         </label>
-                        <br><br>
 
-                        <label for="product_category"><b>Product Category</b><br>
-                            <select name="product_category" id="product_category">
-                                <option value="action">Action</option>
-                                <option value="gaming">Gaming</option>
-                                <option value="strategy">Strategy</option>
-                                <option value="PS2">PS2</option>
-                                <option value="PS3">PS3</option>
-                                <option value="PS4">PS4</option>
-                                <option value="PS5">PS5</option>
-                                <option value="XBox">XBox</option>
-                                <option value="iphone">IPhone</option>
-                                <option value="Samsung">Samsung</option>
-                                <option value="PsPlus">PS Plus</option>
-                            </select>
-                        </label>
-                        <br><br>
-
-                        <label for="product_desciption"><b>Desciption</b></label>
-                        <input type="text" placeholder="Enter product's desciption" name="product_desciption" id="product_desciption" value="" required>
-
-                        <label for="product_age"><b>Age Restriction</b></label>
-                        <input type="text" placeholder="Enter product's age restriction" name="product_age" id="product_age" value="" required>
-
-                        <label for="product_inventory"><b>Current Inventory:</b></label><br>
-                        <input type="number" placeholder="Enter product's current inventory in stock" name="product_inventory" id="product_inventory" style="height: 35px;" value="" required>
-
-                        <br><br>
-
-                        <label><b>Upload Product Image:</b></label>
-                        <input type="file" name="product_image" id="product_image" value="" required>
-                        <br>
-
-                        <div class="clearfix">
-                            <button type="submit" class="addproductbtn" title="Add new product"><strong>Add Product</strong></button>
-                        </div>
+                        <input type="number" name="quantity[]" class="survey_options" size="50" placeholder="quantity..." required>
                     </div>
+                    <div class="controls">
+                        <a href="#survey_options" id="add_more_fields"><i class="fa fa-plus"></i>Add More Products</a>
+                        <a href="#survey_options" id="remove_fields"><i class="fa fa-plus"></i>Remove Products</a>
+                    </div>
+                    <center>
+                        <input class="btn btn-success" type="submit" name="save" id="save" value="Save Data">
+                    </center>
                 </form>
             </div>
         </main>
@@ -422,78 +409,6 @@ $results_top_products = $stmt_top_products->get_result();
 <script src="../store_sale-admin/store_sale-admin.js"></script>
 
 <script src="../admin-main/admin-main.js"></script>
-<script>
-    const array_products = [];
-    const array_products_count = [];
-    <?php
-    if (isset($results_lowest_products)) {
-        while ($row_lowest_products = $results_lowest_products->fetch_assoc()) {
-    ?>
-            array_products.push("<?php
-                                    echo $row_lowest_products['name'];
-                                    ?>");
-            array_products_count.push("<?php
-                                        echo $row_lowest_products['sales_number'];
-                                        ?>");
-    <?php }
-    }
-    ?>;
-    var xArray = array_products_count;
-    var yArray = array_products;
 
-    var data = [{
-        x: xArray,
-        y: yArray,
-        type: "bar",
-        orientation: "h",
-        marker: {
-            color: "red"
-        }
-    }];
-
-    var layout = {
-        title: "Lowest products being sold"
-    };
-
-    Plotly.newPlot("myPlot", data, layout);
-
-    const array_products_top = [];
-    const array_products_count_top = [];
-    <?php
-    if (isset($results_top_products)) {
-        while ($row_top_products = $results_top_products->fetch_assoc()) {
-    ?>
-            array_products_top.push("<?php
-                                        echo $row_top_products['name'];
-                                        ?>");
-            array_products_count_top.push("<?php
-                                            echo $row_top_products['sales_number'];
-                                            ?>");
-    <?php }
-    }
-    ?>;
-    var xArray = array_products_count_top;
-    var yArray = array_products_top;
-
-    var data = [{
-        x: xArray,
-        y: yArray,
-        type: "bar",
-        orientation: "h",
-        marker: {
-            color: "green"
-        }
-    }];
-
-    var layout = {
-        title: "Top products being sold"
-    };
-
-    Plotly.newPlot("myPlot1", data, layout);
-
-
-
-    //second chart which is the lowest
-</script>
 
 </html>
