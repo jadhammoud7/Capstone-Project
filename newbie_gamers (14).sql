@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2022 at 07:28 PM
+-- Generation Time: Sep 25, 2022 at 12:35 PM
 -- Server version: 8.0.23
 -- PHP Version: 8.0.2
 
@@ -323,10 +323,6 @@ CREATE TABLE `sales_products` (
   `price` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Indexes for dumped tables
---
-
 -- --------------------------------------------------------
 
 --
@@ -335,12 +331,36 @@ CREATE TABLE `sales_products` (
 
 CREATE TABLE `store_sales` (
   `store_sales_id` int NOT NULL,
-  `customer_name` varchar(255) NOT NULL,
-  `phone_number` varchar(255) NOT NULL,
-  `product_name` varchar(255) NOT NULL,
+  `customer_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `product_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `quantity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `store_sales`
+--
+
+INSERT INTO `store_sales` (`store_sales_id`, `customer_name`, `username`, `email`, `product_name`, `quantity`) VALUES
+(0, 'Mohamad Nabaa', 'MNabaa111', 'mnabaa53@gmail.com', 'Iphone13', 12),
+(1, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
+(2, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
+(3, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
+(4, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
+(5, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
+(6, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 12),
+(7, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 12),
+(8, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
+(9, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
+(10, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
+(11, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
+(12, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
+(12, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'dooms', 1);
+
+--
+-- Indexes for dumped tables
+--
 
 --
 -- Indexes for table `admins`
@@ -377,57 +397,6 @@ ALTER TABLE `products`
 --
 ALTER TABLE `sales`
   ADD PRIMARY KEY (`sales_id`);
-
---
--- AUTO_INCREMENT for dumped tables
-----
--- Indexes for table `store_sales`
---
-ALTER TABLE `store_sales`
-  ADD PRIMARY KEY (`store_sales_id`);
-
-
---
--- AUTO_INCREMENT for table `admins`
---
-ALTER TABLE `admins`
-  MODIFY `admin_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `appointments`
---
-ALTER TABLE `appointments`
-  MODIFY `appointment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-
---
--- AUTO_INCREMENT for table `checkouts`
---
-ALTER TABLE `checkouts`
-  MODIFY `checkout_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `customers`
---
-ALTER TABLE `customers`
-  MODIFY `customer_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
---
--- AUTO_INCREMENT for table `products`
---
-ALTER TABLE `products`
-  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
--- AUTO_INCREMENT for table `sales`
---
-ALTER TABLE `sales`
-  MODIFY `sales_id` int NOT NULL AUTO_INCREMENT;
-  
---
--- AUTO_INCREMENT for table `store_sales`
---
-ALTER TABLE `store_sales`
-  MODIFY `store_sales_id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
