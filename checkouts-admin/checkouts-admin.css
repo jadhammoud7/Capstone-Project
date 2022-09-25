@@ -1,10 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;300;400;700&display=swap');
 
-/* body {
-  background-color: #f0f5ff;
-  font-family: 'Jost',sans-serif;
-  color: #fff;
-} */
+
 
 .wrapper {
   width: 370px;
@@ -64,7 +60,6 @@ a {
 }
 
 h1 {
-  /* text-align: center; */
   font-size: 2em;
   color: #232c3d;
 }

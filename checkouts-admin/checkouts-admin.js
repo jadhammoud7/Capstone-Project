@@ -324,16 +324,11 @@ add_more_fields.onclick = function () {
     label1.setAttribute("for","products");
     label1.innerHTML="Choose a product";
     label1.appendChild(clone);
+    label1.setAttribute('class', 'survey_options');
+    label1.setAttribute('size', 50);
     survey_options.appendChild(label1);
 
-
-    // newField1.setAttribute('type', 'text');
-    // newField1.setAttribute('name', 'product_name[]');
-    // newField1.setAttribute('class', 'survey_options');
-    // newField1.setAttribute('size', 50);
-    // newField1.setAttribute('placeholder', 'another product name');
-    // newField1.required = "required";
-    // survey_options.appendChild(newField1);
+    
     newField2.setAttribute('type', 'number');
     newField2.setAttribute('name', 'quantity[]');
     newField2.setAttribute('class', 'survey_options');

@@ -455,7 +455,6 @@ $results_get_all_products = $stmt_get_all_products->get_result();
         </main>
     </div>
 
-
     <h1 class="sales_store">Add Customers Purchaces At Store</h1>
     <div class="wrapper">
         <form action="checkouts-admin.php" method="POST">
@@ -465,15 +464,14 @@ $results_get_all_products = $stmt_get_all_products->get_result();
                 <input type="text" name="email" class="survey_options" size="50" placeholder="email.." required>
                 <label for="products">Choose a product:
                     <select id="products" name="product_name[]" required>
-                    <?php
-                    while ($row_get_all_products = $results_get_all_products->fetch_assoc()) {
-                        store_sales_connection($row_get_all_products['name']);
-                    }
-                    ?>
-                </select>
+                        <?php
+                        while ($row_get_all_products = $results_get_all_products->fetch_assoc()) {
+                            store_sales_connection($row_get_all_products['name']);
+                        }
+                        ?>
+                    </select>
                 </label>
 
-                <!-- <input type="text" name="product_name[]" class="survey_options" size="50" placeholder="product name.." required> -->
                 <input type="number" name="quantity[]" class="survey_options" size="50" placeholder="quantity..." required>
             </div>
             <div class="controls">
@@ -484,6 +482,7 @@ $results_get_all_products = $stmt_get_all_products->get_result();
                 <input class="btn btn-success" type="submit" name="save" id="save" value="Save Data">
             </center>
         </form>
+
     </div>
 
 
