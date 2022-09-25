@@ -405,21 +405,53 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
 
     <h1 class="sales_store">Add Customers Purchaces At Store</h1>
     <div class="wrapper">
-        <div id="survey_options">
-            <input type="text" name="survey_options" class="survey_options" size="50" placeholder="customer name.." required>
-            <input type="text" name="survey_options" class="survey_options" size="50" placeholder="username if any..">
-            <input type="text" name="survey_options" class="survey_options" size="50" placeholder="email.." required>
-            <input type="text" name="survey_options[]" class="survey_options" size="50" placeholder="product name.." required>
-            <input type="number" name="survey_options[]" class="survey_options" size="50" placeholder="quantity..." required>
-        </div>
-        <div class="controls">
-            <a href="#survey_options" id="add_more_fields"><i class="fa fa-plus"></i>Add More Products</a>
-            <a href="#survey_options" id="remove_fields"><i class="fa fa-plus"></i>Remove Products</a>
-        </div>
-        <center>
-            <input class="btn btn-success" type="submit" name="save" id="save" value="Save Data">
-        </center>
+        <form action="../checkouts-admin/checkouts-admin.php" method="post">
+            <div id="survey_options">
+                <input type="text" name="customer_name" class="survey_options" size="50" placeholder="customer name.." required>
+                <input type="text" name="username" class="survey_options" size="50" placeholder="username if any..">
+                <input type="text" name="email" class="survey_options" size="50" placeholder="email.." required>
+                <input type="text" name="product_name[]" class="survey_options" size="50" placeholder="product name.." required>
+                <input type="number" name="quantity[]" class="survey_options" size="50" placeholder="quantity..." required>
+            </div>
+            <div class="controls">
+                <a href="#survey_options" id="add_more_fields"><i class="fa fa-plus"></i>Add More Products</a>
+                <a href="#survey_options" id="remove_fields"><i class="fa fa-plus"></i>Remove Products</a>
+            </div>
+            <center>
+                <input class="btn btn-success" type="submit" name="save" id="save" value="Save Data">
+            </center>
+        </form>
 
+        <?php
+        if (isset($_POST['save'])) {
+            if (isset($_POST['customer_name'])&& $_POST["customer_name"] != "") {
+                $customer_name = $_POST['customer_name'];
+            }
+            if (isset($_POST['username'])&& $_POST["username"] != "") {
+                $username = $_POST['username'];
+            }
+            if (isset($_POST['email'])&& $_POST["email"] != "") {
+                $email = $_POST['email'];
+            }
+            if (isset($_POST['product_name'])&& $_POST["product_name"] != "") {
+                $product_name = $_POST['product_name'];
+            }
+            if (isset($_POST['quantity'])&& $_POST["quantity"] != "") {
+                $quantity = $_POST['quantity'];
+            }
+            echo $product_name;
+            // for ($x = 0; $x < count($product_name); $x++) {
+            //     if (empty($username)) {
+            //     } else {
+            //         $mysql_store = $connection->prepare("INSERT INTO store_sales(customer_name, email, product_name, quantity) VALUES (?,?,?,?)");
+            //         $mysql_store->bind_param("sssi", $customer_name, $email, $product_name[$x], $quantity[$x]);
+            //         $mysql_store->execute();
+            //         $mysql_store->close();
+            //     }
+            // }
+        }
+
+        ?>
     </div>
 
 
