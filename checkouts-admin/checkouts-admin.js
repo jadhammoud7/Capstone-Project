@@ -313,17 +313,27 @@ function sortTable(n, dir) {
 var survey_options = document.getElementById('survey_options');
 var add_more_fields = document.getElementById('add_more_fields');
 var remove_fields = document.getElementById('remove_fields');
+var options = document.getElementById('products');
+const clone=options.cloneNode(true);
+
 
 add_more_fields.onclick = function () {
     var newField1 = document.createElement('input');
     var newField2 = document.createElement('input');
-    newField1.setAttribute('type', 'text');
-    newField1.setAttribute('name', 'product_name[]');
-    newField1.setAttribute('class', 'survey_options');
-    newField1.setAttribute('size', 50);
-    newField1.setAttribute('placeholder', 'another product name');
-    newField1.required = "required";
-    survey_options.appendChild(newField1);
+    var label1 = document.createElement('label');
+    label1.setAttribute("for","products");
+    label1.innerHTML="Choose a product";
+    label1.appendChild(clone);
+    survey_options.appendChild(label1);
+
+
+    // newField1.setAttribute('type', 'text');
+    // newField1.setAttribute('name', 'product_name[]');
+    // newField1.setAttribute('class', 'survey_options');
+    // newField1.setAttribute('size', 50);
+    // newField1.setAttribute('placeholder', 'another product name');
+    // newField1.required = "required";
+    // survey_options.appendChild(newField1);
     newField2.setAttribute('type', 'number');
     newField2.setAttribute('name', 'quantity[]');
     newField2.setAttribute('class', 'survey_options');
@@ -335,8 +345,11 @@ add_more_fields.onclick = function () {
 
 remove_fields.onclick = function () {
     var input_tags = survey_options.getElementsByTagName('input');
-    if (input_tags.length > 4) {
+    var label2=survey_options.getElementsByTagName('label');
+
+    if (input_tags.length > 4 && label2.length>1) {
         survey_options.removeChild(input_tags[(input_tags.length) - 1]);
-        survey_options.removeChild(input_tags[(input_tags.length) - 1]);
+        survey_options.removeChild(label2[(label2.length) - 1]);
+
     }
 }
