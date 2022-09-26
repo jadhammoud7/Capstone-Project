@@ -359,7 +359,6 @@ h1 {
 
 #save {
   background-color: transparent;
-  text-transform: uppercase;
   font-size: 14px;
   padding: 10px 20px;
   font-weight: 300;
@@ -367,18 +366,11 @@ h1 {
   background-color: royalblue;
   margin-bottom: 20px;
   border-radius: 20px;
-  border: 1px solid royalblue;
-}
-#save:hover {
-  color: #000;
-  background-color: royalblue;
-  -webkit-box-shadow: 10px 10px 99px 6px royalblue;
-  -moz-box-shadow: 10px 10px 99px 6px royalblue;
-  box-shadow: 10px 10px 99px 6px royalblue;
 }
 
+#save:hover,
 button#add-button:hover {
-  color: #000;
+  cursor: pointer;
   background-color: royalblue;
   -webkit-box-shadow: 10px 10px 99px 6px royalblue;
   -moz-box-shadow: 10px 10px 99px 6px royalblue;
@@ -386,9 +378,8 @@ button#add-button:hover {
 }
 
 button#remove-button:hover {
-  color: #000;
-  background-color: red;
-  -webkit-box-shadow: 10px 10px 99px 6px red;
-  -moz-box-shadow: 10px 10px 99px 6px red;
-  box-shadow: 10px 10px 99px 6px red;
+  background-color: #f44336;
+  -webkit-box-shadow: 10px 10px 99px 6px #f44336;
+  -moz-box-shadow: 10px 10px 99px 6px #f44336;
+  box-shadow: 10px 10px 99px 6px #f44336;
 }
