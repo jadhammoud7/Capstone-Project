@@ -192,14 +192,14 @@ function get_all_store_sales($store_sales_id, $customer_name, $email, $total_pro
 {
     $element = "
         <tr class=\"hello\">
-            <td>$customer_name</td>
-            <td>$email</td>
-            <td>$total_products</td>
-            <td>$total_quantity</td>
-            <td>$total_price</td>
+            <td title=\"$customer_name\">$customer_name</td>
+            <td title=\"$email\">$email</td>
+            <td title=\"$total_products\">$total_products</td>
+            <td title=\"$total_quantity\">$total_quantity</td>
+            <td title=\"$total_price\">$total_price</td>
             <td>
                 <a>
-                    <button class=\"btn_view_store_sales_order\" onclick=\"window.location.href = 'store-sale-admin-details.php?store_sale_id=$store_sales_id';\">View Order</button>
+                    <button class=\"btn_view_store_sales_order\" onclick=\"window.location.href = 'store-sale-admin-details.php?store_sale_id=$store_sales_id';\" title=\"View Details Related to this store sale order\">View Order</button>
                 </a>
             </td>
         </tr>

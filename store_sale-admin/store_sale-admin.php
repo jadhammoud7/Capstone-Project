@@ -369,14 +369,14 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table width="100%" id="products_table">
+                                    <table width="100%" id="store_sales_table">
                                         <thead>
                                             <tr>
-                                                <td>Customer Name</td>
-                                                <td>Email</td>
-                                                <td>Total Products</td>
-                                                <td>Total Quantity</td>
-                                                <td>Total Price</td>
+                                                <td id="customer-name-column" title="Sort Customer Name by descending">Customer Name</td>
+                                                <td id="email-column" title="Sort Email by descending">Email</td>
+                                                <td id="total-products-column" title="Sort Store Sales from most to least products containing">Total Products</td>
+                                                <td id="total-quantity-column" title="Sort Store Sales from most to least quantities containing">Total Quantity</td>
+                                                <td id="total-price-column" title="Sort Store Sales from most to least money gained">Total Price</td>
                                                 <td>View Order</td>
                                             </tr>
                                         </thead>
@@ -455,9 +455,9 @@
     <script src="../admin-main/admin-main.js"></script>
     <script>
         const array_count = [];
-        
+
         var xArray = ["purchases via website", "purchases via store"];
-        var yArray = [<?php echo $row_count_website['website']; ?>,<?php echo $row_count_store['store']; ?>];
+        var yArray = [<?php echo $row_count_website['website']; ?>, <?php echo $row_count_store['store']; ?>];
 
         var layout = {
             title: "Percentage of  how products are being purchasesd"

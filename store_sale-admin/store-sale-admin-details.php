@@ -320,6 +320,5 @@ function store_sales_products_connection($product_name, $quantity, $price)
 </body>
 
 <script src="../admin-main/admin-main.js"></script>
-<script src="checkout-admin-details.js"></script>
 
 </html>
