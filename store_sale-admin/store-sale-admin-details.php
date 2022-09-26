@@ -13,28 +13,26 @@ $stmt->execute();
 $results = $stmt->get_result();
 $row = $results->fetch_assoc();
 
-//select status
-$query_get_checkout_status = "SELECT status FROM checkouts WHERE checkout_id =  '" . $_GET['checkout_id'] . "'";
-$stmt_get_checkout_status = $connection->prepare($query_get_checkout_status);
-$stmt_get_checkout_status->execute();
-$results_get_checkout_status = $stmt_get_checkout_status->get_result();
-$row_get_checkout_status = $results_get_checkout_status->fetch_assoc();
-
-//sum of all quantity products
-$query_total_product_quantities = "SELECT SUM(quantity) as total_product_quantities FROM checkouts_customers_products WHERE checkout_id = '" . $_GET['checkout_id'] . "'";
-$stmt_total_product_quantities = $connection->prepare($query_total_product_quantities);
-$stmt_total_product_quantities->execute();
-$results_total_product_quantities = $stmt_total_product_quantities->get_result();
-$row_total_product_quantities = $results_total_product_quantities->fetch_assoc();
-
-//sum of all profit
-$query_total_profit = "SELECT SUM(total_price_including_tax) as total_profit FROM checkouts";
-$stmt_total_profit = $connection->prepare($query_total_profit);
-$stmt_total_profit->execute();
-$results_total_profit = $stmt_total_profit->get_result();
-$row_total_profit = $results_total_profit->fetch_assoc();
-
 if (isset($_GET['store_sale_id'])) {
+    //select sales total products
+    $stmt_get_sales_total_products = $connection->prepare("SELECT total_products FROM store_sales WHERE store_sales_id = '" . $_GET['store_sale_id'] . "'");
+    $stmt_get_sales_total_products->execute();
+    $results_total_products = $stmt_get_sales_total_products->get_result();
+    $row_total_products = $results_total_products->fetch_assoc();
+
+    //select sales total quantities
+    $stmt_get_sales_total_quantity = $connection->prepare("SELECT total_quantity FROM store_sales WHERE store_sales_id = '" . $_GET['store_sale_id'] . "'");
+    $stmt_get_sales_total_quantity->execute();
+    $results_total_quantity = $stmt_get_sales_total_quantity->get_result();
+    $row_total_quantity = $results_total_quantity->fetch_assoc();
+
+    //select sales total price
+    $stmt_get_sales_total_price = $connection->prepare("SELECT total_price FROM store_sales WHERE store_sales_id = '" . $_GET['store_sale_id'] . "'");
+    $stmt_get_sales_total_price->execute();
+    $results_total_price = $stmt_get_sales_total_price->get_result();
+    $row_total_price = $results_total_price->fetch_assoc();
+
+
     $stmt_get_store_sale = $connection->prepare("SELECT * FROM store_sales WHERE store_sales_id = '" . $_GET['store_sale_id'] . "'");
     $stmt_get_store_sale->execute();
     $result_store_sale = $stmt_get_store_sale->get_result();
@@ -74,7 +72,7 @@ function store_sales_products_connection($product_name, $quantity, $price)
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="../admin-main/admin-main.css">
-    <link rel="stylesheet" href="checkout-admin-details.css">
+    <link rel="stylesheet" href="store-sale-admin-details.css">
     <title>Admin | Store Sale Details - Newbies Gamers</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
@@ -168,8 +166,8 @@ function store_sales_products_connection($product_name, $quantity, $price)
             <div class="cards">
                 <div class="card-single">
                     <div>
-                        <h1><?php echo $_GET['checkout_id']; ?></h1>
-                        <span>Checkout No.</span>
+                        <h1><?php echo $_GET['store_sale_id']; ?></h1>
+                        <span>Store Sales No.</span>
                     </div>
                     <div>
                         <span class="las la-list-ol"></span>
@@ -177,8 +175,8 @@ function store_sales_products_connection($product_name, $quantity, $price)
                 </div>
                 <div class="card-single">
                     <div>
-                        <h2 id="checkout_status"><?php echo $row_get_checkout_status['status'] ?></h2>
-                        <span>Status</span>
+                        <h2><?php echo $row_total_products['total_products'] ?></h2>
+                        <span>Total Products</span>
                     </div>
                     <div>
                         <span class="las la-clipboard-list"></span>
@@ -186,8 +184,8 @@ function store_sales_products_connection($product_name, $quantity, $price)
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1><?php echo $row_total_product_quantities['total_product_quantities'] ?></h1>
-                        <span>Total Products Quantities</span>
+                        <h1><?php echo $row_total_quantity['total_quantity'] ?></h1>
+                        <span>Total Quantities</span>
                     </div>
                     <div>
                         <span class="las la-shopping-bag"></span>
@@ -195,7 +193,7 @@ function store_sales_products_connection($product_name, $quantity, $price)
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>$<?php echo $row_total_profit['total_profit'] ?></h1>
+                        <h1>$<?php echo $row_total_price['total_price'] ?></h1>
                         <span>Total Price</span>
                     </div>
                     <div>
@@ -216,45 +214,40 @@ function store_sales_products_connection($product_name, $quantity, $price)
                                 <div class="form-container-part">
 
                                     <div>
-                                        <h3 class="form-container-part-title">Personal Information</h3>
+                                        <h3 class="form-container-part-title">Customer Personal Information</h3>
                                     </div>
 
                                     <div class="form-container-part-inputs">
-                                        <div class="input-container">
-                                            <input type="text" name="first_name" id="first_name" value="<?php if (isset($row_checkout)) {
-                                                                                                            echo $row_checkout['first_name'];
-                                                                                                        } ?>" readonly class="is-valid">
-                                            <label for="first_name">First Name</label>
-                                        </div>
 
                                         <div class="input-container">
 
-                                            <input type="text" name="last_name" id="last_name" value="<?php if (isset($row_checkout)) {
-                                                                                                            echo $row_checkout['last_name'];
-                                                                                                        } ?>" readonly class="is-valid">
-                                            <label for="last_name">Last Name</label>
+                                            <input type="text" name="customer_name" id="customer_name" value="<?php if (isset($row_store_sale)) {
+                                                                                                                    echo $row_store_sale['customer_name'];
+                                                                                                                } ?>" readonly class="is-valid">
+                                            <label for="customer_name">Customer Name</label>
                                         </div>
                                     </div>
 
                                     <div class="form-container-part-inputs">
                                         <div class="input-container">
-                                            <input type="email" name="email" id="email" value="<?php if (isset($row_checkout)) {
-                                                                                                    echo $row_checkout['email'];
+
+                                            <input type="text" name="username" id="username" value="<?php if (isset($row_store_sale)) {
+                                                                                                        echo $row_store_sale['username'];
+                                                                                                    } ?>" readonly class="is-valid">
+                                            <label for="username">Username</label>
+                                        </div>
+                                        <div class="input-container">
+                                            <input type="email" name="email" id="email" value="<?php if (isset($row_store_sale)) {
+                                                                                                    echo $row_store_sale['email'];
                                                                                                 } ?>" readonly class="is-valid">
                                             <label for="email">Email</label>
                                         </div>
-                                        <div class="input-container">
 
-                                            <input type="tel" name="phone_number" id="phone_number" value="<?php if (isset($row_checkout)) {
-                                                                                                                echo $row_checkout['phone_number'];
-                                                                                                            } ?>" readonly class="is-valid">
-                                            <label for="phone_number">Phone Number</label>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-container-part">
                                     <div>
-                                        <h3 class="form-container-part-title">Shipping Details</h3>
+                                        <h3 class="form-container-part-title">Sales Details</h3>
                                     </div>
                                     <div class="form-container-part-inputs">
                                         <div class="input-container">
@@ -268,46 +261,20 @@ function store_sales_products_connection($product_name, $quantity, $price)
                                     <div class="form-container-part-inputs">
                                         <div class="input-container">
 
-                                            <input type="text" name="shipping_country" id="shipping_country" value="<?php if (isset($row_checkout)) {
-                                                                                                                        echo $row_checkout['shipping_country'];
+                                            <input type="number" name="total_products" id="total_products" value="<?php if (isset($row_store_sale)) {
+                                                                                                                        echo $row_store_sale['total_products'];
                                                                                                                     } ?>" readonly class="is-valid">
-                                            <label for="shipping_country">Country</label>
+                                            <label for="total_products">Total Products</label>
                                         </div>
                                     </div>
 
                                     <div class="form-container-part-inputs">
                                         <div class="input-container" style="width: 100%;">
 
-                                            <input type="text" name="shipping_location" id="shipping_location" value="<?php if (isset($row_checkout)) {
-                                                                                                                            echo $row_checkout['shipping_location'];
-                                                                                                                        } ?>" readonly class="is-valid">
-                                            <label for="shipping_location">Location (Town / City, Street, Home Address)</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-container-part-inputs">
-                                        <div class="input-container">
-
-                                            <input type="text" name="shipping_company" id="shipping_company" value="<?php if (isset($row_checkout)) {
-                                                                                                                        echo $row_checkout['shipping_company'];
+                                            <input type="number" name="total_quantity" id="total_quantity" value="<?php if (isset($row_store_sale)) {
+                                                                                                                        echo $row_store_sale['total_quantity'];
                                                                                                                     } ?>" readonly class="is-valid">
-                                            <label for="shipping_company">Company Name (if any)</label>
-                                        </div>
-                                        <div class="input-container">
-
-                                            <input type="number" name="postcode" id="postcode" value="<?php if (isset($row_checkout)) {
-                                                                                                            echo $row_checkout['postcode'];
-                                                                                                        } ?>" readonly class="is-valid">
-                                            <label for="postcode">Postcode / ZIP</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-container-part-inputs">
-                                        <div class="input-container" style="width: 100%;">
-                                            <input type="text" name="order_notes" id="order-notes" value="<?php if (isset($row_checkout)) {
-                                                                                                                echo $row_checkout['order_notes'];
-                                                                                                            } ?>" readonly class="is-valid">
-                                            <label for="order_notes">Order Notes (Special notes related to the delivery,
-                                                optional)</label>
+                                            <label for="total_quantity">Total Quantity</label>
                                         </div>
                                     </div>
                                 </div>
@@ -322,37 +289,22 @@ function store_sales_products_connection($product_name, $quantity, $price)
                     <tr>
                         <th>Product</th>
                         <th>Quantity</th>
-                        <th>Inventory</th>
                         <th>Total Price</th>
                     </tr>
                     <?php
-                    while ($row_get_checkout_products = $results_get_checkout_products->fetch_assoc()) {
-                        $stmt_get_product = $connection->prepare("SELECT name, price, inventory FROM products WHERE product_id = '" . $row_get_checkout_products["product_id"] . "' ");
-                        $stmt_get_product->execute();
-                        $results_get_product = $stmt_get_product->get_result();
-                        $row_get_product = $results_get_product->fetch_assoc();
-                        checkout_products_connection($row_get_product['name'], $row_get_checkout_products['quantity'], $row_get_product['inventory'], $row_get_checkout_products['total_price']);
+                    while ($row_store_sale_products = $result_store_sale_products->fetch_assoc()) {
+                        store_sales_products_connection($row_store_sale_products['product_name'], $row_store_sale_products['quantity'], $row_store_sale_products['price']);
                     }
                     ?>
                 </table>
                 <table id="order-totals">
                     <tr>
-                        <th>Subtotal</th>
-                        <td><?php echo $row_checkout['total_price']; ?>$</td>
-                    </tr>
-                    <tr>
-                        <th>Taxes</th>
-                        <td><?php echo $row_checkout['tax_price']; ?>$</td>
-                    </tr>
-                    <tr>
-                        <th>Total</th>
-                        <td><?php echo $row_checkout['total_price_including_tax']; ?>$</td>
+                        <th>Total Price</th>
+                        <td><?php echo $row_store_sale['total_price']; ?>$</td>
                     </tr>
                 </table>
             </div>
             <div class="checkout-details-buttons">
-                <button class="btn_done_work_checkout" id="SetStatusCheckoutButton" onclick="window.location.href='checkout-admin-details.php?checkout_id=<?php echo $_GET['checkout_id']; ?>&change-status=1';">
-                    <span class="las la-check"></span> Set Checkout To Done</button>
 
                 <button class="back" onclick="history.back();" title="Return to previous page"><span class="las la-arrow-left"></span>Return to
                     Previous Page</button>
