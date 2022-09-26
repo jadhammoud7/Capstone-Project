@@ -46,7 +46,7 @@
 
     //get all customer purchases from store
     require_once("../php/admin_page_php.php");
-    $query_store_sales = "SELECT customer_name, email, total_products, total_quantity, total_price FROM store_sales";
+    $query_store_sales = "SELECT store_sales_id, customer_name, email, total_products, total_quantity, total_price FROM store_sales";
     $stmt_store_sales = $connection->prepare($query_store_sales);
     $stmt_store_sales->execute();
     $results_store_sales = $stmt_store_sales->get_result();
@@ -375,12 +375,14 @@
                                                 <td>Total Products</td>
                                                 <td>Total Quantity</td>
                                                 <td>Total Price</td>
+                                                <td>View Order</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             while ($row_store_sales = $results_store_sales->fetch_assoc()) {
                                                 get_all_store_sales(
+                                                    $row_store_sales['store_sales_id'],
                                                     $row_store_sales['customer_name'],
                                                     $row_store_sales['email'],
                                                     $row_store_sales['total_products'],

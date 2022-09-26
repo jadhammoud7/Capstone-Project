@@ -188,7 +188,7 @@ function get_products_in_asc_desc($name, $inventory, $sales_number)
     echo $element;
 }
 
-function get_all_store_sales($customer_name, $email, $total_products, $total_quantity, $total_price)
+function get_all_store_sales($store_sales_id, $customer_name, $email, $total_products, $total_quantity, $total_price)
 {
     $element = "
         <tr class=\"hello\">
@@ -197,6 +197,11 @@ function get_all_store_sales($customer_name, $email, $total_products, $total_qua
             <td>$total_products</td>
             <td>$total_quantity</td>
             <td>$total_price</td>
+            <td>
+                <a>
+                    <button class=\"btn_view_store_sales_order\" onclick=\"window.location.href = 'store-sale-admin-details.php?store_sale_id=$store_sales_id';\">View Order</button>
+                </a>
+            </td>
         </tr>
     ";
     echo $element;

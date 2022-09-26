@@ -111,6 +111,16 @@ button:hover {
   color: royalblue;
 }
 
+td .btn_view_store_sales_order {
+  cursor: pointer;
+  background: var(--main-color);
+  border-radius: 10px;
+  color: #fff;
+  font-size: .8rem;
+  padding: .5rem 1rem;
+  border: 1px solid var(--main-color);
+}
+
 /* The Modal (background) */
 .modal {
   position: fixed;
