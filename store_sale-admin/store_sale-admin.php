@@ -46,10 +46,10 @@
 
     //get all customer purchases from store
     require_once("../php/admin_page_php.php");
-    $query_store_purchaces = "SELECT customer_name,email, product_name, quantity FROM store_sales";
-    $stmt_store_purchaces = $connection->prepare($query_store_purchaces);
-    $stmt_store_purchaces->execute();
-    $results_store_purchaces = $stmt_store_purchaces->get_result();
+    $query_store_sales = "SELECT customer_name, email, total_products, total_quantity, total_price FROM store_sales";
+    $stmt_store_sales = $connection->prepare($query_store_sales);
+    $stmt_store_sales->execute();
+    $results_store_sales = $stmt_store_sales->get_result();
 
 
     //get products in ascending 
@@ -109,39 +109,71 @@
             $quantity = $_POST['quantity'];
         }
 
+        $total_sales_products = 0;
+        $total_sales_price = 0;
+        $total_sales_quantity = 0;
+
         for ($x = 0; $x < count($product_name); $x++) {
-            if (empty($username)) {
-                $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, product_name, quantity) VALUES (?,?,?,?,?,?)");
-                $stmt_insert_store_sales->bind_param("issssi", $store_sales_id, $customer_name, $username, $email, $product_name[$x], $quantity[$x]);
-                $stmt_insert_store_sales->execute();
-                $stmt_insert_store_sales->close();
-            } else {
-                $query_check_username = "SELECT customer_id,loyalty_points from customers WHERE username='" . $username . "'";
+            if (!empty($username)) {
+                $query_check_username = "SELECT customer_id, loyalty_points FROM customers WHERE username='" . $username . "'";
                 $stmt_check_username = $connection->prepare($query_check_username);
                 $stmt_check_username->execute();
                 $results_check_username = $stmt_check_username->get_result();
                 $row_check_username = $results_check_username->fetch_assoc();
 
+                //if the customer does not exist in table customers
                 if (empty($row_check_username)) {
-                    $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, product_name, quantity) VALUES (?,?,?,?,?,?)");
-                    $stmt_insert_store_sales->bind_param("issssi", $store_sales_id, $customer_name, $username, $email, $product_name[$x], $quantity[$x]);
+                    //select product price
+                    $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE name = '" . $product_name[$x] . "'");
+                    $stmt_select_product_price->execute();
+                    $result_product_price = $stmt_select_product_price->get_result();
+                    $row_product_price = $result_product_price->fetch_assoc();
+
+                    //let product price be unit price * quantity
+                    $total_product_price = $row_product_price['price'] * $quantity[$x];
+                    //update product sales by 1
+                    $total_sales_products = $total_sales_products + 1;
+                    //update sales price by increasing total product price
+                    $total_sales_price = $total_sales_price + $total_product_price;
+                    //update sales quantity by increasing product quantity
+                    $total_sales_quantity = $total_sales_quantity + $quantity[$x];
+                    //insert product info to table sales_products
+                    $stmt_insert_store_sales = $connection->prepare("INSERT INTO sales_products(sales_id, product_name, quantity, price) VALUES (?,?,?,?)");
+                    $stmt_insert_store_sales->bind_param("issi", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_price);
                     $stmt_insert_store_sales->execute();
                     $stmt_insert_store_sales->close();
                 } else {
+                    //if customer exists in table customers
                     //addinf quantity of all products needed
 
+                    //update customer loyalty points
                     $add_result = $row_check_username['loyalty_points'] + $quantity[$x];
-                    $stmt_insert_loyalty = $connection->prepare("UPDATE customers SET loyalty_points=? WHERE customer_id='" . $row_check_username['customer_id'] . "'");
-                    $stmt_insert_loyalty->bind_param("i", $add_result);
-                    $stmt_insert_loyalty->execute();
-                    $stmt_insert_loyalty->close();
-                    $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, product_name, quantity) VALUES (?,?,?,?,?,?)");
-                    $stmt_insert_store_sales->bind_param("issssi", $store_sales_id, $customer_name, $username, $email, $product_name[$x], $quantity[$x]);
+                    $stmt_update_loyalty = $connection->prepare("UPDATE customers SET loyalty_points=? WHERE customer_id='" . $row_check_username['customer_id'] . "'");
+                    $stmt_update_loyalty->bind_param("i", $add_result);
+                    $stmt_update_loyalty->execute();
+                    $stmt_update_loyalty->close();
+
+                    //select price and add to sales products, same as above condition
+                    $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE name = '" . $product_name[$x] . "'");
+                    $stmt_select_product_price->execute();
+                    $result_product_price = $stmt_select_product_price->get_result();
+                    $row_product_price = $result_product_price->fetch_assoc();
+
+                    $total_product_price = $row_product_price['price'] * $quantity[$x];
+                    $total_sales_products = $total_sales_products + 1;
+                    $total_sales_price = $total_sales_price + $total_product_price;
+                    $total_sales_quantity = $total_sales_quantity + $quantity[$x];
+                    $stmt_insert_store_sales = $connection->prepare("INSERT INTO sales_products(sales_id, product_name, quantity, price) VALUES (?,?,?,?)");
+                    $stmt_insert_store_sales->bind_param("issi", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_price);
                     $stmt_insert_store_sales->execute();
                     $stmt_insert_store_sales->close();
                 }
             }
         }
+        $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, total_products, total_quantity, total_price) VALUES (?,?,?,?,?,?,?)");
+        $stmt_insert_store_sales->bind_param("isssiii", $store_sales_id, $customer_name, $username, $email, $total_sales_products, $total_sales_quantity, $total_sales_price);
+        $stmt_insert_store_sales->execute();
+        $stmt_insert_store_sales->close();
     }
 
     require_once("../php/checkout-store_sales.php");
@@ -340,18 +372,20 @@
                                             <tr>
                                                 <td>Customer Name</td>
                                                 <td>Email</td>
-                                                <td>Product Name</td>
-                                                <td>Quantity</td>
+                                                <td>Total Products</td>
+                                                <td>Total Quantity</td>
+                                                <td>Total Price</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                            while ($row_store_purchaces = $results_store_purchaces->fetch_assoc()) {
-                                                get_all_purchaces_store(
-                                                    $row_store_purchaces['customer_name'],
-                                                    $row_store_purchaces['email'],
-                                                    $row_store_purchaces['product_name'],
-                                                    $row_store_purchaces['quantity']
+                                            while ($row_store_sales = $results_store_sales->fetch_assoc()) {
+                                                get_all_store_sales(
+                                                    $row_store_sales['customer_name'],
+                                                    $row_store_sales['email'],
+                                                    $row_store_sales['total_products'],
+                                                    $row_store_sales['total_quantity'],
+                                                    $row_store_sales['total_price']
                                                 );
                                             }
                                             ?>

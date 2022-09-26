@@ -188,15 +188,16 @@ function get_products_in_asc_desc($name, $inventory, $sales_number)
     echo $element;
 }
 
-function get_all_purchaces_store($customer_name,$email, $product_name, $quantity)
+function get_all_store_sales($customer_name, $email, $total_products, $total_quantity, $total_price)
 {
     $element = "
-    <tr class=\"hello\">
-        <td>$customer_name</td>
-        <td>$email</td>
-        <td>$product_name</td>
-        <td>$quantity</td>
-    </tr>
+        <tr class=\"hello\">
+            <td>$customer_name</td>
+            <td>$email</td>
+            <td>$total_products</td>
+            <td>$total_quantity</td>
+            <td>$total_price</td>
+        </tr>
     ";
     echo $element;
 }
