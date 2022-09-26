@@ -34,117 +34,29 @@ $stmt_total_profit->execute();
 $results_total_profit = $stmt_total_profit->get_result();
 $row_total_profit = $results_total_profit->fetch_assoc();
 
-if (isset($_GET['checkout_id'])) {
-    $stmt_get_checkout = $connection->prepare("SELECT * FROM checkouts WHERE checkout_id = '" . $_GET['checkout_id'] . "'");
-    $stmt_get_checkout->execute();
-    $result_checkout = $stmt_get_checkout->get_result();
-    $row_checkout = $result_checkout->fetch_assoc();
+if (isset($_GET['store_sale_id'])) {
+    $stmt_get_store_sale = $connection->prepare("SELECT * FROM store_sales WHERE store_sales_id = '" . $_GET['store_sale_id'] . "'");
+    $stmt_get_store_sale->execute();
+    $result_store_sale = $stmt_get_store_sale->get_result();
+    $row_store_sale = $result_store_sale->fetch_assoc();
 
     //to display products in table summary
-    $stmt_get_checkout_products = $connection->prepare("SELECT product_id, quantity, total_price FROM checkouts_customers_products WHERE checkout_id = '" . $_GET['checkout_id'] . "' ");
-    $stmt_get_checkout_products->execute();
-    $results_get_checkout_products = $stmt_get_checkout_products->get_result();
+    $stmt_get_store_sale_products = $connection->prepare("SELECT product_name, quantity, price FROM sales_products WHERE sales_id = '" . $_GET['store_sale_id'] . "' ");
+    $stmt_get_store_sale_products->execute();
+    $result_store_sale_products = $stmt_get_store_sale_products->get_result();
 }
 
 //for product summary in checkout
-function checkout_products_connection($name, $quantity, $inventory, $price)
+function store_sales_products_connection($product_name, $quantity, $price)
 {
     $element = "
     <tr>
-        <td>$name</td>
+        <td>$product_name</td>
         <td>$quantity</td>
-        <td>$inventory</td>
         <td>$price$</td>
     </tr>";
 
     echo $element;
-}
-
-//updating working status from buttons
-if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
-    $working_status = $_GET['set_to_done'];
-    $checkoutID = $_GET['getCheckoutID'];
-    $status = "";
-    if ($working_status == "true") {
-        $status = "Done Work";
-        $products_found_in_stock = true;
-
-        //check all products in checkout to see if there is enough inventory
-        $stmt_check_checkout_products = $connection->prepare("SELECT product_id, quantity FROM checkouts_customers_products WHERE checkout_id = '" . $checkoutID . "'");
-        $stmt_check_checkout_products->execute();
-        $results_check_checkout_products = $stmt_check_checkout_products->get_result();
-        //loop over all products in checkouts
-        while ($row_check_checkout_products = $results_check_checkout_products->fetch_assoc()) {
-            //get product inventory
-            $stmt_select_product_inventory = $connection->prepare("SELECT name, inventory FROM products WHERE product_id = '" . $row_check_checkout_products['product_id'] . "'");
-            $stmt_select_product_inventory->execute();
-            $results_select_product_inventory = $stmt_select_product_inventory->get_result();
-            $row_select_product_inventory = $results_select_product_inventory->fetch_assoc();
-            $product_name = $row_select_product_inventory['name'];
-            $product_quantity = $row_check_checkout_products['quantity'];
-            $product_inventory = $row_select_product_inventory['inventory'];
-            //if this product cannot be proceeded, since inventory less than quantity needed, then checkout error
-            if ($product_inventory < $product_quantity) {
-                $products_found_in_stock = false;
-                header("Location: checkout-admin-details.php?checkout_id=$checkoutID&checkout-error=true&product-name=$product_name&quantity=$product_quantity&inventory=$product_inventory");
-            }
-        }
-        //if all products were found in stock, so checkout can be done successfully
-        if ($products_found_in_stock == true) {
-
-            //check all products in checkout to see if there is enough inventory
-            $stmt_check_checkout_products = $connection->prepare("SELECT product_id, quantity, customer_id FROM checkouts_customers_products WHERE checkout_id = '" . $checkoutID . "'");
-            $stmt_check_checkout_products->execute();
-            $results_check_checkout_products = $stmt_check_checkout_products->get_result();
-
-            $total_products_quantities = 0;
-            //loop over all products in checkout
-            while ($row_check_checkout_products = $results_check_checkout_products->fetch_assoc()) {
-                //quantity needed in checkout
-                $quantity = $row_check_checkout_products['quantity'];
-                //select product inventory
-                $stmt_select_product_inventory = $connection->prepare("SELECT inventory FROM products WHERE product_id = '" . $row_check_checkout_products['product_id'] . "'");
-                $stmt_select_product_inventory->execute();
-                $results_select_product_inventory = $stmt_select_product_inventory->get_result();
-                $row_select_product_inventory = $results_select_product_inventory->fetch_assoc();
-                $inventory = $row_select_product_inventory['inventory'];
-
-                //new product inventory will be inventory minus the quantity delivered
-                $new_inventory = $inventory - $quantity;
-                $stmt_update_product_inventory = $connection->prepare("UPDATE products SET inventory=? WHERE product_id = '" . $row_check_checkout_products['product_id'] . "'");
-                $stmt_update_product_inventory->bind_param("i", $new_inventory);
-                $stmt_update_product_inventory->execute();
-
-                $stmt_select_product_sales = $connection->prepare("SELECT sales_number FROM products WHERE product_id = '" . $row_check_checkout_products['product_id'] . "'");
-                $stmt_select_product_sales->execute();
-                $results_select_product_sales = $stmt_select_product_sales->get_result();
-                $row_select_product_sales = $results_select_product_sales->fetch_assoc();
-                $sales = $row_select_product_sales['sales_number'];
-
-                //update sales number of product
-                $new_sales = $sales + $quantity;
-                $total_products_quantities = $total_products_quantities + $new_sales;
-                $stmt_update_product_sales = $connection->prepare("UPDATE products SET sales_number=? WHERE product_id = '" . $row_check_checkout_products['product_id'] . "'");
-                $stmt_update_product_sales->bind_param("i", $new_sales);
-                $stmt_update_product_sales->execute();
-
-                //update loyalty point for customer
-                $stmt_get_customer = $connection->prepare("SELECT loyalty_points FROM customers WHERE customer_id = '" . $row_check_checkout_products['customer_id'] . "'");
-                $stmt_get_customer->execute();
-                $results_get_customer = $stmt_get_customer->get_result();
-                $row_get_customer = $results_get_customer->fetch_assoc();
-
-                $new_loyalty = $row_get_customer['loyalty_points'] + $quantity;
-                $stmt_update_customer_loyalty_points = $connection->prepare("UPDATE products SET loyalty_points=? WHERE customer_id = '" . $row_check_checkout_products['customer_id'] . "'");
-                $stmt_update_customer_loyalty_points->bind_param("i", $new_loyalty);
-                $stmt_update_customer_loyalty_points->execute();
-            }
-            $query_settodone = $connection->prepare("UPDATE checkouts SET status=? WHERE checkout_id='" . $checkoutID . "'");
-            $query_settodone->bind_param("s", $status);
-            $query_settodone->execute();
-            header("Location: checkout-admin-details.php");
-        }
-    }
 }
 
 ?>
@@ -163,32 +75,12 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="../admin-main/admin-main.css">
     <link rel="stylesheet" href="checkout-admin-details.css">
-    <title>Admin | Checkout Detail - Newbies Gamers</title>
+    <title>Admin | Store Sale Details - Newbies Gamers</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 
 <body>
 
-    <!-- started popup message change status -->
-    <div class="popup" id="done-checkout-confirmation">
-        <img src="../images/question-mark.png" alt="">
-        <h2>Done Checkout Confirmation</h2>
-        <p>Are you sure that you want to set this checkout status to done? This action cannot be undone</p>
-        <button type="button" onclick="<?php if (isset($_GET['checkout_id'])) { ?>
-            SetCheckoutID(<?php echo $_GET['checkout_id']; ?>);" <?php } ?>>YES</button>
-        <button type="button" onclick="CloseDoneCheckoutPopUp()">NO</button>
-    </div>
-
-
-    <!-- started popup message checkout already done -->
-    <div class="popup" id="checkout-error-alert">
-        <img src="../images/info.png" alt="">
-        <h2>Checkout Cannot Be Done</h2>
-        <?php if (isset($_GET['checkout-error'])) { ?>
-            <p>Checkout cannot be done. The product "<?php echo $_GET['product-name']; ?>" requires quantity of <?php echo $_GET['quantity']; ?> while only <?php echo $_GET['inventory']; ?> are present in stock!</p>
-        <?php } ?>
-        <button type="button" onclick="CloseCheckoutDoneAlert();">OK</button>
-    </div>
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
         <div class="sidebar-brand">
@@ -260,7 +152,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
                 <label for="nav-toggle">
                     <span><i class="las la-bars"></i></span>
                 </label>
-                Checkout Detail
+                Store Sale Details
             </h2>
 
             <div class="user-wrapper">
