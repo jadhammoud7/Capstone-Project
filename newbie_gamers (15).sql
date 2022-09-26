@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2022 at 12:35 PM
+-- Generation Time: Sep 26, 2022 at 08:33 AM
 -- Server version: 8.0.23
 -- PHP Version: 8.0.2
 
@@ -201,7 +201,7 @@ CREATE TABLE `customers` (
 INSERT INTO `customers` (`customer_id`, `first_name`, `last_name`, `email`, `date_of_birth`, `phone_number`, `address`, `city`, `username`, `password`, `loyalty_points`) VALUES
 (2, 'jad', 'hammoud', 'jad.hammoud@gmail.com', '2022-09-06', '76939605', 'beirut ras el nabeh', 'aaramun', 'jad', '8384caf9895a1f9ab17aa8055b0b5869f3e8eba263aac96585f1ee871dd3d5f0', 0),
 (3, 'mohamad', 'Nabaa', 'mohamad@gmail.com', '2022-08-22', '71123805', 'beirut next to fakhani second floor', 'bshamoun', 'mhmd', '8f9cebbfdc1a99ce7a4941ad08c34c4f1f08089ceff43b802dab3b951d6cbfd1', 0),
-(4, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '2022-08-01', '+96171123805', 'Aramoun next to chamsine third floor', 'aaramun', 'Mohamad Nabaa', '578835a5afad634f5716badf3d801e8910dec33e73ec5c9e86b8d409f229263d', 5),
+(4, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '2022-08-01', '+96171123805', 'Aramoun next to chamsine third floor', 'aaramun', 'Mohamad Nabaa', '578835a5afad634f5716badf3d801e8910dec33e73ec5c9e86b8d409f229263d', 35),
 (16, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '2001-07-18', '96171123805', 'Aramoun next to chamsine third floor', 'beirut', 'Mohamad Nabaa', '578835a5afad634f5716badf3d801e8910dec33e73ec5c9e86b8d409f229263d', 0),
 (17, 'Omar ', 'Atieh', 'omar4Atieh@hotmail.com', '2022-09-21', '878887878788', 'Bshamoun , al wadi street Al nader building block B second floor', 'bshamoun', 'omar1234567', '75523907535270f2f12668aea07b507433e81ed0e625b9455bdb8554855687e0', 0),
 (21, 'Ahmad', 'Serhan', 'ahmadserhan@gmail.com', '2022-08-30', '45657888878', 'Bshamoun , al wadi street Al nader building block B second floor', 'beirut', 'ahmad1231234', '68a8b4c8464fa9bc797ce97b47bff6807ba10d8ddb061fce39b28842389888fa', 0);
@@ -318,10 +318,20 @@ CREATE TABLE `sales` (
 
 CREATE TABLE `sales_products` (
   `sales_id` int NOT NULL,
-  `product_id` int NOT NULL,
+  `product_name` varchar(50) NOT NULL,
   `quantity` int NOT NULL,
   `price` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `sales_products`
+--
+
+INSERT INTO `sales_products` (`sales_id`, `product_name`, `quantity`, `price`) VALUES
+(13, 'Doom Eternal', 10, 1000),
+(13, 'Watch Dogs: Legion', 5, 250),
+(14, 'Doom Eternal', 10, 1000),
+(14, 'Watch Dogs: Legion', 5, 250);
 
 -- --------------------------------------------------------
 
@@ -334,29 +344,32 @@ CREATE TABLE `store_sales` (
   `customer_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `username` varchar(50) NOT NULL,
   `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `product_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `quantity` int NOT NULL
+  `total_products` int NOT NULL,
+  `total_quantity` int NOT NULL,
+  `total_price` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `store_sales`
 --
 
-INSERT INTO `store_sales` (`store_sales_id`, `customer_name`, `username`, `email`, `product_name`, `quantity`) VALUES
-(0, 'Mohamad Nabaa', 'MNabaa111', 'mnabaa53@gmail.com', 'Iphone13', 12),
-(1, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
-(2, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
-(3, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
-(4, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
-(5, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
-(6, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 12),
-(7, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 12),
-(8, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
-(9, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
-(10, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
-(11, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
-(12, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'Iphone13', 10),
-(12, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 'dooms', 1);
+INSERT INTO `store_sales` (`store_sales_id`, `customer_name`, `username`, `email`, `total_products`, `total_quantity`, `total_price`) VALUES
+(0, 'Mohamad Nabaa', 'MNabaa111', 'mnabaa53@gmail.com', 0, 0, 0),
+(1, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0),
+(2, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0),
+(3, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0),
+(4, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0),
+(5, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0),
+(6, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0),
+(7, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0),
+(8, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0),
+(9, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0),
+(10, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0),
+(11, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0),
+(12, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0),
+(12, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0),
+(13, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 2, 15, 1250),
+(14, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 2, 15, 1250);
 
 --
 -- Indexes for dumped tables
