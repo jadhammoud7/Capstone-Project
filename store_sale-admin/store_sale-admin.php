@@ -197,6 +197,7 @@
         <link rel="stylesheet" href="../admin-main/admin-main.css">
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <link rel="stylesheet" href="../store_sale-admin/store_sale-admin.css">
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <title>Admin | Store Sales - Newbies Gamers</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     </head>
@@ -303,6 +304,7 @@
                 </div>
             </header>
 
+
             <main>
                 <div class="cards">
                     <div class="card-single">
@@ -343,10 +345,11 @@
                     </div>
                 </div>
                 <div style="margin-top: 30px;">
-                    <div id="myPlot" style="width:100%;max-width:700px;float:right"></div>
-                    <div id="myPlot1" style="width:100%;max-width:700px"></div>
-
+                    <!--add chart-->
+                    <div id="myPlot" style="width:100%;max-width:700px"></div>
                 </div>
+
+
 
                 <div class="card-single add_admin">
                     <button class="add_checkout" id="add_user1" onclick="OpenAddCheckout()" title="Add a new product"><span class="las la-plus"></span>Add Customer Purchaces Via Store</button>
@@ -451,6 +454,22 @@
     <script src="../store_sale-admin/store_sale-admin.js"></script>
 
     <script src="../admin-main/admin-main.js"></script>
+    <script>
+        var xArray = ["Italy", "France", "Spain", "USA", "Argentina"];
+        var yArray = [55, 49, 44, 24, 15];
+
+        var layout = {
+            title: "World Wide Wine Production"
+        };
+
+        var data = [{
+            labels: xArray,
+            values: yArray,
+            type: "pie"
+        }];
+
+        Plotly.newPlot("myPlot", data, layout);
+    </script>
 
 
     </html>

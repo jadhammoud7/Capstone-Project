@@ -367,6 +367,7 @@ h1 {
   background-color: royalblue;
   margin-bottom: 20px;
   border-radius: 20px;
+  border: 1px solid royalblue;
 }
 #save:hover {
   color: #000;
@@ -374,4 +375,20 @@ h1 {
   -webkit-box-shadow: 10px 10px 99px 6px royalblue;
   -moz-box-shadow: 10px 10px 99px 6px royalblue;
   box-shadow: 10px 10px 99px 6px royalblue;
+}
+
+button#add-button:hover {
+  color: #000;
+  background-color: royalblue;
+  -webkit-box-shadow: 10px 10px 99px 6px royalblue;
+  -moz-box-shadow: 10px 10px 99px 6px royalblue;
+  box-shadow: 10px 10px 99px 6px royalblue;
+}
+
+button#remove-button:hover {
+  color: #000;
+  background-color: red;
+  -webkit-box-shadow: 10px 10px 99px 6px red;
+  -moz-box-shadow: 10px 10px 99px 6px red;
+  box-shadow: 10px 10px 99px 6px red;
 }
