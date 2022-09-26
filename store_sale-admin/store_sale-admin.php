@@ -52,27 +52,7 @@
     $results_store_sales = $stmt_store_sales->get_result();
 
 
-    //get products in ascending 
-    // $query_nbofsales = "SELECT name,inventory,sales_number FROM products ORDER BY sales_number ASC;";
-    // $stmt_nbofsales = $connection->prepare($query_nbofsales);
-    // $stmt_nbofsales->execute();
-    // $results_nbofsales = $stmt_nbofsales->get_result();
 
-
-    //get lowest products 
-    // $query_lowest_products = "SELECT name,sales_number FROM products ORDER BY sales_number ASC LIMIT 5;";
-    // $stmt_lowest_products = $connection->prepare($query_lowest_products);
-    // $stmt_lowest_products->execute();
-    // $results_lowest_products = $stmt_lowest_products->get_result();
-
-    //get top products 
-    // $query_top_products = "SELECT name,sales_number FROM products ORDER BY sales_number DESC LIMIT 5;";
-    // $stmt_top_products = $connection->prepare($query_top_products);
-    // $stmt_top_products->execute();
-    // $results_top_products = $stmt_top_products->get_result();
-
-
-    // echo "<script>window.location='../product-admin/product-admin.php';</script>";
 
     //the add sales form
 
@@ -181,6 +161,25 @@
     $stmt_get_all_products = $connection->prepare($query_get_all_products);
     $stmt_get_all_products->execute();
     $results_get_all_products = $stmt_get_all_products->get_result();
+
+
+
+
+
+
+    //select count of all customers purchasing via website
+    $query_count_website = "SELECT COUNT(*) as website FROM checkouts";
+    $stmt_count_website = $connection->prepare($query_count_website);
+    $stmt_count_website->execute();
+    $results_count_website = $stmt_count_website->get_result();
+    $row_count_website = $results_count_website->fetch_assoc();
+
+    //select count of all customers purchasing via store
+    $query_count_store = "SELECT COUNT(*) as store FROM store_sales";
+    $stmt_count_store = $connection->prepare($query_count_store);
+    $stmt_count_store->execute();
+    $results_count_store = $stmt_count_store->get_result();
+    $row_count_store = $results_count_store->fetch_assoc();
 
     ?>
 
@@ -455,11 +454,13 @@
 
     <script src="../admin-main/admin-main.js"></script>
     <script>
-        var xArray = ["Italy", "France", "Spain", "USA", "Argentina"];
-        var yArray = [55, 49, 44, 24, 15];
+        const array_count = [];
+        
+        var xArray = ["purchases via website", "purchases via store"];
+        var yArray = [<?php echo $row_count_website['website']; ?>,<?php echo $row_count_store['store']; ?>];
 
         var layout = {
-            title: "World Wide Wine Production"
+            title: "Percentage of  how products are being purchasesd"
         };
 
         var data = [{
