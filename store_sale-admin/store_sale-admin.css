@@ -88,7 +88,7 @@ button {
 
 button#add-button,
 button#remove-button {
-  padding: 5px 4px;
+  padding: 10px;
   border-radius: 20px;
 }
 
@@ -341,8 +341,9 @@ h1 {
 
 #save {
   background-color: royalblue;
-  color: black;
+  color: #fefefe;
   border-radius: 15px;
   border: 1px solid royalblue;
   padding: 10px;
+  margin-bottom: 10px;
 }
