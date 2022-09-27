@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2022 at 08:33 AM
+-- Generation Time: Sep 27, 2022 at 12:25 PM
 -- Server version: 8.0.23
 -- PHP Version: 8.0.2
 
@@ -201,7 +201,7 @@ CREATE TABLE `customers` (
 INSERT INTO `customers` (`customer_id`, `first_name`, `last_name`, `email`, `date_of_birth`, `phone_number`, `address`, `city`, `username`, `password`, `loyalty_points`) VALUES
 (2, 'jad', 'hammoud', 'jad.hammoud@gmail.com', '2022-09-06', '76939605', 'beirut ras el nabeh', 'aaramun', 'jad', '8384caf9895a1f9ab17aa8055b0b5869f3e8eba263aac96585f1ee871dd3d5f0', 0),
 (3, 'mohamad', 'Nabaa', 'mohamad@gmail.com', '2022-08-22', '71123805', 'beirut next to fakhani second floor', 'bshamoun', 'mhmd', '8f9cebbfdc1a99ce7a4941ad08c34c4f1f08089ceff43b802dab3b951d6cbfd1', 0),
-(4, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '2022-08-01', '+96171123805', 'Aramoun next to chamsine third floor', 'aaramun', 'Mohamad Nabaa', '578835a5afad634f5716badf3d801e8910dec33e73ec5c9e86b8d409f229263d', 35),
+(4, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '2022-08-01', '+96171123805', 'Aramoun next to chamsine third floor', 'aaramun', 'Mohamad Nabaa', '578835a5afad634f5716badf3d801e8910dec33e73ec5c9e86b8d409f229263d', 65),
 (16, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '2001-07-18', '96171123805', 'Aramoun next to chamsine third floor', 'beirut', 'Mohamad Nabaa', '578835a5afad634f5716badf3d801e8910dec33e73ec5c9e86b8d409f229263d', 0),
 (17, 'Omar ', 'Atieh', 'omar4Atieh@hotmail.com', '2022-09-21', '878887878788', 'Bshamoun , al wadi street Al nader building block B second floor', 'bshamoun', 'omar1234567', '75523907535270f2f12668aea07b507433e81ed0e625b9455bdb8554855687e0', 0),
 (21, 'Ahmad', 'Serhan', 'ahmadserhan@gmail.com', '2022-08-30', '45657888878', 'Bshamoun , al wadi street Al nader building block B second floor', 'beirut', 'ahmad1231234', '68a8b4c8464fa9bc797ce97b47bff6807ba10d8ddb061fce39b28842389888fa', 0);
@@ -271,10 +271,10 @@ INSERT INTO `products` (`product_id`, `name`, `price`, `type`, `category`, `desc
 -- --------------------------------------------------------
 
 --
--- Table structure for table `repair`
+-- Table structure for table `repairs`
 --
 
-CREATE TABLE `repair` (
+CREATE TABLE `repairs` (
   `repair_type` varchar(255) NOT NULL,
   `price_per_hour` int NOT NULL,
   `description` varchar(255) NOT NULL,
@@ -282,10 +282,10 @@ CREATE TABLE `repair` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `repair`
+-- Dumping data for table `repairs`
 --
 
-INSERT INTO `repair` (`repair_type`, `price_per_hour`, `description`, `image`) VALUES
+INSERT INTO `repairs` (`repair_type`, `price_per_hour`, `description`, `image`) VALUES
 ('Repair Laptop', 10, 'Schedule now and bring your ps consoles for repair or maintanence. We require a total of 10$ for a one hour work. Don\'t hesitate to contact us for any concerns or information.', NULL),
 ('Laptop Cleaning', 10, 'Schedule now and bring your laptop for a special spa day. We require a total of 10$ for a one\r\nhour work. Don\'t hesitate to contact us for any concerns or information.', NULL),
 ('CPU Repair including gaming and normal ones', 25, 'Schedule now and bring your CPU for repair or maintanence for your CPU.This offer includes gaming CPU and normal ones. We require a total of 10$ for a one hour work. Don\'t hesitate to contact us for any concerns or information.', NULL),
@@ -331,7 +331,11 @@ INSERT INTO `sales_products` (`sales_id`, `product_name`, `quantity`, `price`) V
 (13, 'Doom Eternal', 10, 1000),
 (13, 'Watch Dogs: Legion', 5, 250),
 (14, 'Doom Eternal', 10, 1000),
-(14, 'Watch Dogs: Legion', 5, 250);
+(14, 'Watch Dogs: Legion', 5, 250),
+(15, 'Doom Eternal', 10, 1000),
+(15, 'Watch Dogs: Legion', 5, 250),
+(16, 'Doom Eternal', 10, 1000),
+(16, 'Watch Dogs: Legion', 5, 250);
 
 -- --------------------------------------------------------
 
@@ -369,7 +373,9 @@ INSERT INTO `store_sales` (`store_sales_id`, `customer_name`, `username`, `email
 (12, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0),
 (12, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0),
 (13, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 2, 15, 1250),
-(14, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 2, 15, 1250);
+(14, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 2, 15, 1250),
+(15, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 2, 15, 1250),
+(16, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 2, 15, 1250);
 
 --
 -- Indexes for dumped tables
