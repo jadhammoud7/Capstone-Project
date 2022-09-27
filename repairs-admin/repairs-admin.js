@@ -16,7 +16,7 @@ function CloseRemoveRepairPopUp() {
 }
 
 function DeleteRepair() {
-    window.location.href = 'repairs_admin.php?getRepairIDtoRemove=' + repair_id;
+    window.location.href = 'repairs-admin.php?getRepairIDtoRemove=' + repair_id;
     CloseRemoveRepairPopUp();
 }
 
@@ -41,6 +41,7 @@ function OpenRepairAddedPopUp() {
 function CloseRepairAddedPopUp() {
     const repair_added_popup = document.getElementById('repair-added-confirmation');
     repair_added_popup.classList.remove('open-popup');
+    window.location.href = 'repairs-admin.php';
 }
 
 function CloseAddRepair() {

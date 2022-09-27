@@ -48,7 +48,7 @@ require_once("../php/admin_page_php.php");
 //delete customer
 if (isset($_GET['getRepairIDtoRemove'])) {
     $remove_repair_id = $_GET['getRepairIDtoRemove'];
-    $query_delete_repair = "DELETE FROM repairs WHERE repair_id = $remove_repair_id";
+    $query_delete_repair = "DELETE FROM repairs WHERE repair_id = '" . $remove_repair_id . "' ";
     $stmt_delete_repair = $connection->prepare($query_delete_repair);
     $stmt_delete_repair->execute();
 }
@@ -66,6 +66,31 @@ if (isset($_POST['repair_type'])) {
     $repair_type = $_POST['repair_type'];
 }
 
+if (isset($_POST['price_per_hour'])) {
+    $price_per_hour = $_POST['price_per_hour'];
+}
+
+if (isset($_POST['description'])) {
+    $description = $_POST['description'];
+}
+
+if ($repair_type != "" && $price_per_hour != 0 && $description != "") {
+    $target_dir = "../images/";
+    $filename = basename($_FILES['repair_image']['name']);
+    $target_file = $target_dir . $filename;
+    $fileType = pathinfo($target_file, PATHINFO_EXTENSION);
+    $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
+    if (in_array($fileType, $allowTypes)) {
+        if (move_uploaded_file($_FILES['repair_image']['tmp_name'], $target_file)) {
+            $repair_image = $filename;
+            $stmt_add_new_repair = $connection->prepare("INSERT INTO repairs(repair_type, price_per_hour, description, image) VALUES (?,?,?,?)");
+            $stmt_add_new_repair->bind_param("sisi", $repair_type, $price_per_hour, $description, $repair_image);
+            $stmt_add_new_repair->execute();
+            $stmt_add_new_repair->close();
+            header("Location: repairs-admin.php?repair-added=1");
+        }
+    }
+}
 
 ?>
 
@@ -308,7 +333,7 @@ if (isset($_POST['repair_type'])) {
                         <br><br>
 
                         <label for="description"><b>Desciption</b></label>
-                        <input type="text" placeholder="Enter repair's desciption" name="desciption" id="desciption" value="" required>
+                        <input type="text" placeholder="Enter repair's desciption" name="description" id="description" value="" required>
                         <br><br>
 
                         <label><b>Upload Repair Image:</b></label>

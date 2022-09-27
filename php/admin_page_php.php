@@ -220,7 +220,7 @@ function get_all_repairs($repair_id, $repair_type, $price_per_hour)
             </td>
             <td>
                 <a>
-                    <button class=\"btn_remove_repair\" onclick=\"OpenRemoveRepairPopUp($repair_id, $repair_type)\" title=\"Remove this repair\">Remove Repair</button>
+                    <button class=\"btn_remove_repair\" onclick=\"OpenRemoveRepairPopUp($repair_id, '$repair_type');\" title=\"Remove this repair\">Remove Repair</button>
                 </a>
             </td>
         </tr>
