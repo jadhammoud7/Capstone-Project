@@ -88,7 +88,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
     }
 }
 //get all types of repairs
-$query_type_of_repairs = "SELECT repair_type as repair_type FROM repair";
+$query_type_of_repairs = "SELECT repair_type as repair_type FROM repairs";
 $stmt_type_of_repairs = $connection->prepare($query_type_of_repairs);
 $stmt_type_of_repairs->execute();
 $results_type_of_repairs = $stmt_type_of_repairs->get_result();
@@ -165,6 +165,12 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                     <a href="../product-admin/product-admin.php" id="products-link">
                         <span class="la la-product-hunt"></span>
                         <span>Products</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../repairs-admin/repairs-admin.php" id="repairs-link">
+                        <span class="las la-tools"></span>
+                        <span>Repairs</span>
                     </a>
                 </li>
                 <li>

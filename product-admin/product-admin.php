@@ -216,6 +216,12 @@ $results_top_products = $stmt_top_products->get_result();
                     </a>
                 </li>
                 <li>
+                    <a href="../repairs-admin/repairs-admin.php" id="repairs-link">
+                        <span class="las la-tools"></span>
+                        <span>Repairs</span>
+                    </a>
+                </li>
+                <li>
                     <a href="../admin-admin/admin-admin.php" id="admins-link">
                         <span class="las la-user-circle"></span>
                         <span>Admin Accounts</span>

@@ -15,11 +15,11 @@ $row = $results->fetch_assoc();
 
 
 //sum of all repairs
-$query_total_customers = "SELECT COUNT(*) as total_repairs FROM repairs";
-$stmt_total_customers = $connection->prepare($query_total_customers);
-$stmt_total_customers->execute();
-$results_total_customers = $stmt_total_customers->get_result();
-$row_total_customers = $results_total_customers->fetch_assoc();
+$query_total_repairs = "SELECT COUNT(*) as total_repairs FROM repairs";
+$stmt_total_repairs = $connection->prepare($query_total_repairs);
+$stmt_total_repairs->execute();
+$results_total_repairs = $stmt_total_repairs->get_result();
+$row_total_repairs = $results_total_repairs->fetch_assoc();
 
 
 //count of all appointments
@@ -29,27 +29,21 @@ $stmt_total_appointments->execute();
 $results_total_appointments = $stmt_total_appointments->get_result();
 $row_total_appointments = $results_total_appointments->fetch_assoc();
 
-//sum of all appointments
-$query_total_profit = "SELECT SUM(total_price_including_tax) as total_profit FROM checkouts";
-$stmt_total_profit = $connection->prepare($query_total_profit);
-$stmt_total_profit->execute();
-$results_total_profit = $stmt_total_profit->get_result();
-$row_total_profit = $results_total_profit->fetch_assoc();
+//sum of all total price per hour
+$query_total_prices_per_hour = "SELECT SUM(price_per_hour) as total_price_per_hour FROM repairs";
+$stmt_total_prices_per_hour = $connection->prepare($query_total_prices_per_hour);
+$stmt_total_prices_per_hour->execute();
+$results_total_prices_per_hour = $stmt_total_prices_per_hour->get_result();
+$row_total_prices_per_hour = $results_total_prices_per_hour->fetch_assoc();
 
-//get total checkouts made
-$query_total_checkouts = "SELECT COUNT(checkout_id) as total_checkout FROM checkouts";
-$stmt_total_checkouts = $connection->prepare($query_total_checkouts);
-$stmt_total_checkouts->execute();
-$results_total_checkouts = $stmt_total_checkouts->get_result();
-$row_total_checkouts = $results_total_checkouts->fetch_assoc();
+//get total appointments total prices
+$query_total_repairs_profits = "SELECT SUM(price_per_hour) as total_repairs_profits FROM appointments";
+$stmt_total_repairs_profits = $connection->prepare($query_total_repairs_profits);
+$stmt_total_repairs_profits->execute();
+$results_total_repairs_profits = $stmt_total_repairs_profits->get_result();
+$row_total_repairs_profits = $results_total_repairs_profits->fetch_assoc();
 
-
-//get all customer
 require_once("../php/admin_page_php.php");
-$query_customer = "SELECT customer_id, first_name, last_name, username, phone_number, email, date_of_birth, city, address FROM customers";
-$stmt_customer = $connection->prepare($query_customer);
-$stmt_customer->execute();
-$results_customer = $stmt_customer->get_result();
 
 //delete customer
 if (isset($_GET['getCustomerIDtoRemove'])) {
@@ -58,18 +52,6 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
     $stmt_delete_customer = $connection->prepare($query_delete_customer);
     $stmt_delete_customer->execute();
 }
-//get id from repair
-$query_loyalty_customers = "SELECT username,loyalty_points FROM customers ORDER BY loyalty_points DESC LIMIT 5";
-$stmt_loyalty_customers = $connection->prepare($query_loyalty_customers);
-$stmt_loyalty_customers->execute();
-$results_loyalty_customers = $stmt_loyalty_customers->get_result();
-
-
-//get locations
-$query_location = "SELECT DISTINCT city FROM customers";
-$stmt_location = $connection->prepare($query_location);
-$stmt_location->execute();
-$results_location = $stmt_location->get_result();
 
 ?>
 
@@ -83,11 +65,11 @@ $results_location = $stmt_location->get_result();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <link rel="stylesheet" href="customer-admin.css">
+    <link rel="stylesheet" href="repairs-admin.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <link rel="stylesheet" href="../admin-main/admin-main.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <title>Admin | Customers - Newbies Gamers</title>
+    <title>Admin | Repairs - Newbies Gamers</title>
 </head>
 
 <body onunload="myFunction()">
@@ -154,6 +136,12 @@ $results_location = $stmt_location->get_result();
                     <a href="../product-admin/product-admin.php" id="products-link">
                         <span class="la la-product-hunt"></span>
                         <span>Products</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../repairs-admin/repairs-admin.php" id="repairs-link">
+                        <span class="las la-tools"></span>
+                        <span>Repairs</span>
                     </a>
                 </li>
                 <li>
