@@ -173,7 +173,7 @@ $results_repairs = $stmt_select_repairs->get_result();
                 <label for="nav-toggle">
                     <span><i class="las la-bars"></i></span>
                 </label>
-                Customers List
+                Repairs List
             </h2>
 
             <div class="user-wrapper">
@@ -226,16 +226,12 @@ $results_repairs = $stmt_select_repairs->get_result();
             </div>
             <div style="margin-top: 30px;">
                 <canvas id="myChart1" style="width:100%;max-width:600px; float:left;"></canvas>
+                <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
             </div>
 
             <div class="recent-grid" style="display: block !important;">
 
                 <div class="projects">
-                    <div class="card">
-                        <div class="card-header">
-
-                        </div>
-                    </div>
                     <div class="card">
                         <div class="card-header">
                             <h3>Repairs List</h3>
@@ -286,10 +282,10 @@ $results_repairs = $stmt_select_repairs->get_result();
 <script src="customer-admin.js"></script>
 <script src="../admin-main/admin-main.js"></script>
 <script>
-    const array_repairs = [];
-    const array_repairs_count = [];
+    var array_repairs = [];
+    var array_repairs_count = [];
     <?php
-    $stmt_select_all_repairs = $connection->prepare("SELECT * FROM repairs");
+    $stmt_select_all_repairs = $connection->prepare("SELECT repair_type FROM repairs");
     $stmt_select_all_repairs->execute();
     $results_all_repairs = $stmt_select_all_repairs->get_result();
     while ($row_all_repairs = $results_all_repairs->fetch_assoc()) {
@@ -338,9 +334,60 @@ $results_repairs = $stmt_select_repairs->get_result();
             }]
         },
         options: {
+            legend: {
+                diplay: false
+            },
             title: {
                 display: true,
                 text: "Repairs by Total Appointments"
+            }
+        }
+    });
+    //started second chart
+    var array_repairs_price_per_hour = [];
+    var xValues2 = array_repairs;
+    <?php
+    $stmt_select_all_repairs = $connection->prepare("SELECT price_per_hour FROM repairs");
+    $stmt_select_all_repairs->execute();
+    $results_all_repairs = $stmt_select_all_repairs->get_result();
+    while ($row_all_repairs = $results_all_repairs->fetch_assoc()) {
+    ?>
+        array_repairs_price_per_hour.push("<?php
+                                            echo $row_all_repairs['price_per_hour'];
+                                            ?>");
+    <?php } ?>;
+    var yValues2 = array_repairs_price_per_hour;
+    const size2 = array_repairs_price_per_hour.length;
+
+    var random_colors2 = [];
+
+    function getNewColor2(start) {
+        for (var i = start; i < size2; i++) {
+            const random2 = "#" + Math.floor(Math.random() * (255 + 1));
+            if (random_colors2.values != random2) {
+                random_colors2.push(random2);
+            } else {
+                getNewColor2(i);
+            }
+        }
+    }
+    getNewColor2(0);
+
+    var barColors2 = random_colors2;
+
+    new Chart("myChart2", {
+        type: "pie",
+        data: {
+            labels: xValues2,
+            datasets: [{
+                backgroundColor: barColors2,
+                data: yValues2
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Distribution of Appointments By Price Per Hour"
             }
         }
     });
