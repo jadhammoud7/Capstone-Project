@@ -53,6 +53,10 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
     $stmt_delete_customer->execute();
 }
 
+$stmt_select_repairs = $connection->prepare("SELECT * FROM repairs");
+$stmt_select_repairs->execute();
+$results_repairs = $stmt_total_repairs->get_result();
+
 ?>
 
 <!DOCTYPE html>
@@ -185,8 +189,8 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
             <div class="cards">
                 <div class="card-single">
                     <div>
-                        <h1><?php echo  $row_total_customers['count']; ?></h1>
-                        <span>Customers</span>
+                        <h1><?php echo  $row_total_repairs['total_repairs']; ?></h1>
+                        <span>Total Repairs</span>
                     </div>
                     <div>
                         <span class="las la-users"></span>
@@ -195,7 +199,7 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
                 <div class="card-single">
                     <div>
                         <h1><?php echo $row_total_appointments['total_appointments'] ?></h1>
-                        <span>Appointments</span>
+                        <span>Total Appointments Repairs</span>
                     </div>
                     <div>
                         <span class="las la-clipboard"></span>
@@ -203,8 +207,8 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1><?php echo $row_total_checkouts['total_checkout'] ?></h1>
-                        <span>Chekouts</span>
+                        <h1><?php echo $row_total_prices_per_hour['total_price_per_hour'] ?></h1>
+                        <span>Total Price Per Hour</span>
                     </div>
                     <div>
                         <span class="las la-shopping-bag"></span>
@@ -212,20 +216,19 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>$<?php echo $row_total_profit['total_profit'] ?></h1>
-                        <span>Profit</span>
+                        <h1>$<?php echo $row_total_repairs_profits['total_repairs_profits'] ?></h1>
+                        <span>Total Repairs Profits</span>
                     </div>
                     <div>
-                        <span class="las la-google-wallet"></span>
+                        <span class="las la-wallet"></span>
                     </div>
                 </div>
             </div>
             <div style="margin-top: 30px;">
                 <canvas id="myChart1" style="width:100%;max-width:600px; float:left;"></canvas>
                 <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-
-
             </div>
+
             <div class="recent-grid" style="display: block !important;">
 
                 <div class="projects">
@@ -294,17 +297,16 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
 <script src="customer-admin.js"></script>
 <script src="../admin-main/admin-main.js"></script>
 <script>
-    const array_cities = [];
-    const array_cities_count = [];
+    const array_repairs = [];
+    const array_repairs_count = [];
     <?php
-    if (isset($results_location)) {
-        while ($row_location = $results_location->fetch_assoc()) {
+        while ($row_repairs = $results_repairs->fetch_assoc()) {
     ?>
-            array_cities.push("<?php
-                                echo $row_location['city'];
+            array_repairs.push("<?php
+                                echo $row_repairs['repair_type'];
                                 ?>");
             <?php
-            $query_location_count = "SELECT COUNT(city) as city FROM customers WHERE city='" . $row_location['city'] . "'";
+            $query_repairs_count = "SELECT COUNT(*) as total_appointments_count FROM customers WHERE city='" . $row_location['city'] . "'";
             $stmt_location_count = $connection->prepare($query_location_count);
             $stmt_location_count->execute();
             $results_location_count = $stmt_location_count->get_result();
@@ -317,11 +319,11 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
     <?php }
     }
     ?>;
-    var xValues = array_cities;
-    var yValues = array_cities_count;
+    var xValues = array_repairs;
+    var yValues = array_repairs_count;
     var random_colors = [];
 
-    const size = array_cities.length;
+    const size = array_repairs.length;
 
     function getNewColor(start) {
         for (var i = start; i < size; i++) {
@@ -337,7 +339,7 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
 
     var barColors = random_colors;
     new Chart("myChart1", {
-        type: "pie",
+        type: "bar",
         data: {
             labels: xValues,
             datasets: [{
@@ -348,7 +350,7 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
         options: {
             title: {
                 display: true,
-                text: "Where Newbie Gamers is most famous from"
+                text: "Repairs by Total Appointments"
             }
         }
     });
