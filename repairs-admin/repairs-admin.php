@@ -55,7 +55,7 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
 
 $stmt_select_repairs = $connection->prepare("SELECT * FROM repairs");
 $stmt_select_repairs->execute();
-$results_repairs = $stmt_total_repairs->get_result();
+$results_repairs = $stmt_select_repairs->get_result();
 
 ?>
 
@@ -226,7 +226,6 @@ $results_repairs = $stmt_total_repairs->get_result();
             </div>
             <div style="margin-top: 30px;">
                 <canvas id="myChart1" style="width:100%;max-width:600px; float:left;"></canvas>
-                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
             </div>
 
             <div class="recent-grid" style="display: block !important;">
@@ -239,7 +238,7 @@ $results_repairs = $stmt_total_repairs->get_result();
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            <h3>Customers List</h3>
+                            <h3>Repairs List</h3>
                         </div>
                         <div class="card-header">
                             <h3>
@@ -250,32 +249,22 @@ $results_repairs = $stmt_total_repairs->get_result();
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table width="100%" id="customers_table">
+                                <table width="100%" id="repairs_table">
                                     <thead>
                                         <tr>
-                                            <td id="customer-name-column" title="Sort Customer Name by descending">Customer Name</td>
-                                            <td id="username-column" title="Sort Username by descending">Username</td>
-                                            <td id="email-column" title="Sort Email by descending">Email</td>
-                                            <td id="phone-number-column" title="Sort Phone Number by descending">Phone Number</td>
-                                            <td id="city-column" title="Sort City by descending">City</td>
-                                            <td id="address-column" title="Sort Address by descending">Address</td>
-                                            <td id="date-of-birth-column" title="Sort Date Of Birth by descending">Date of Birth</td>
-                                            <td>Remove Customer</td>
+                                            <td id="repair-type-column" title="Sort Repair Type by descending">Repair Type</td>
+                                            <td id="price-per-hour-column" title="Sort Price Per Hour by descending">Price Per Hour</td>
+                                            <td>View Details</td>
+                                            <td>Remove Repair</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        while ($row_customer = $results_customer->fetch_assoc()) {
-                                            get_all_customer_connection(
-                                                $row_customer['customer_id'],
-                                                $row_customer['first_name'],
-                                                $row_customer['last_name'],
-                                                $row_customer['username'],
-                                                $row_customer['email'],
-                                                $row_customer['phone_number'],
-                                                $row_customer['city'],
-                                                $row_customer['address'],
-                                                $row_customer['date_of_birth']
+                                        while ($row_repair = $results_repairs->fetch_assoc()) {
+                                            get_all_repairs(
+                                                $row_repair['repair_id'],
+                                                $row_repair['repair_type'],
+                                                $row_repair['price_per_hour']
                                             );
                                         }
                                         ?>
@@ -300,25 +289,26 @@ $results_repairs = $stmt_total_repairs->get_result();
     const array_repairs = [];
     const array_repairs_count = [];
     <?php
-        while ($row_repairs = $results_repairs->fetch_assoc()) {
+    $stmt_select_all_repairs = $connection->prepare("SELECT * FROM repairs");
+    $stmt_select_all_repairs->execute();
+    $results_all_repairs = $stmt_select_all_repairs->get_result();
+    while ($row_all_repairs = $results_all_repairs->fetch_assoc()) {
     ?>
-            array_repairs.push("<?php
-                                echo $row_repairs['repair_type'];
-                                ?>");
-            <?php
-            $query_repairs_count = "SELECT COUNT(*) as total_appointments_count FROM customers WHERE city='" . $row_location['city'] . "'";
-            $stmt_location_count = $connection->prepare($query_location_count);
-            $stmt_location_count->execute();
-            $results_location_count = $stmt_location_count->get_result();
-            $row_location_count = $results_location_count->fetch_assoc();
-            ?>
+        array_repairs.push("<?php
+                            echo $row_all_repairs['repair_type'];
+                            ?>");
+        <?php
+        $query_repairs_count = "SELECT COUNT(*) as total_appointments_count FROM appointments WHERE appointment_name ='" . $row_all_repairs['repair_type'] . "'";
+        $stmt_repairs_count = $connection->prepare($query_repairs_count);
+        $stmt_repairs_count->execute();
+        $results_repairs_count = $stmt_repairs_count->get_result();
+        $row_repairs_count = $results_repairs_count->fetch_assoc();
+        ?>
 
-            array_cities_count.push("<?php
-                                        echo $row_location_count['city'];
-                                        ?>");
-    <?php }
-    }
-    ?>;
+        array_repairs_count.push("<?php
+                                    echo $row_repairs_count['total_appointments_count'];
+                                    ?>");
+    <?php } ?>;
     var xValues = array_repairs;
     var yValues = array_repairs_count;
     var random_colors = [];
@@ -351,48 +341,6 @@ $results_repairs = $stmt_total_repairs->get_result();
             title: {
                 display: true,
                 text: "Repairs by Total Appointments"
-            }
-        }
-    });
-
-
-
-    //2nd chart
-    const array_repair = [];
-    const array_repair_count = [];
-    <?php
-    if (isset($results_loyalty_customers)) {
-        while ($row_loyalty_customers = $results_loyalty_customers->fetch_assoc()) {
-    ?>
-            array_repair.push("<?php
-                                echo $row_loyalty_customers['username'];
-                                ?>");
-            array_repair_count.push("<?php
-                                        echo $row_loyalty_customers['loyalty_points'];
-                                        ?>");
-    <?php }
-    }
-    ?>;
-    var xValues = array_repair;
-    var yValues = array_repair_count;
-    var barColors = ["red", "green", "blue", "orange", "brown"];
-
-    new Chart("myChart", {
-        type: "bar",
-        data: {
-            labels: xValues,
-            datasets: [{
-                backgroundColor: barColors,
-                data: yValues
-            }]
-        },
-        options: {
-            legend: {
-                display: false
-            },
-            title: {
-                display: true,
-                text: "Loaylty Customers"
             }
         }
     });

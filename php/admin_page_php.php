@@ -206,3 +206,24 @@ function get_all_store_sales($store_sales_id, $customer_name, $email, $total_pro
     ";
     echo $element;
 }
+
+function get_all_repairs($repair_id, $repair_type, $price_per_hour)
+{
+    $element = "
+        <tr>
+            <td title=\"$repair_type\">$repair_type</td>
+            <td title=\"$price_per_hour\">$price_per_hour</td>
+            <td>
+                <a>
+                    <button class=\"btn_view_repair\" onclick=\"window.location.href = 'repair-admin-details.php?repair-id=$repair_id';\" title=\"View details for this repair\">View Detials</button>
+                </a>
+            </td>
+            <td>
+                <a>
+                    <button class=\"btn_remove_repair\" onclick=\"OpenRemoveRepairPopUp($repair_id, $repair_type)\" title=\"Remove this repair\">Remove Repair</button>
+                </a>
+            </td>
+        </tr>
+    ";
+    echo $element;
+}
