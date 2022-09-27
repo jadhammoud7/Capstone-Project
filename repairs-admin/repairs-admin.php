@@ -46,16 +46,26 @@ $row_total_repairs_profits = $results_total_repairs_profits->fetch_assoc();
 require_once("../php/admin_page_php.php");
 
 //delete customer
-if (isset($_GET['getCustomerIDtoRemove'])) {
-    $remove_customer = $_GET['getCustomerIDtoRemove'];
-    $query_delete_customer = "DELETE FROM customers WHERE customer_id=$remove_customer";
-    $stmt_delete_customer = $connection->prepare($query_delete_customer);
-    $stmt_delete_customer->execute();
+if (isset($_GET['getRepairIDtoRemove'])) {
+    $remove_repair_id = $_GET['getRepairIDtoRemove'];
+    $query_delete_repair = "DELETE FROM repairs WHERE repair_id = $remove_repair_id";
+    $stmt_delete_repair = $connection->prepare($query_delete_repair);
+    $stmt_delete_repair->execute();
 }
 
 $stmt_select_repairs = $connection->prepare("SELECT * FROM repairs");
 $stmt_select_repairs->execute();
 $results_repairs = $stmt_select_repairs->get_result();
+
+$repair_type = "";
+$price_per_hour = 0;
+$description = "";
+$repair_image = "";
+
+if (isset($_POST['repair_type'])) {
+    $repair_type = $_POST['repair_type'];
+}
+
 
 ?>
 
@@ -94,6 +104,14 @@ $results_repairs = $stmt_select_repairs->get_result();
         <p>Are you sure that you want to logout?</p>
         <button type="button" onclick="GoToLogIn()">YES</button>
         <button type="button" onclick="CloseLogOutPopUp()">NO</button>
+    </div>
+
+    <!-- started popup message logout -->
+    <div class="popup" id="repair-added-confirmation">
+        <img src="../images/tick.png" alt="">
+        <h2>Repair Added Confirmation</h2>
+        <p>A new repair was added successfully</p>
+        <button type="button" onclick="CloseRepairAddedPopUp()">OK</button>
     </div>
 
     <input type="checkbox" id="nav-toggle">
@@ -228,7 +246,9 @@ $results_repairs = $stmt_select_repairs->get_result();
                 <canvas id="myChart1" style="width:100%;max-width:600px; float:left;"></canvas>
                 <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
             </div>
-
+            <div class="card-single add_admin">
+                <button class="add_repair" onclick="OpenAddRepair()" title="Add a new repair"><span class="las la-plus"></span> Add Repair</button>
+            </div>
             <div class="recent-grid" style="display: block !important;">
 
                 <div class="projects">
@@ -270,6 +290,36 @@ $results_repairs = $stmt_select_repairs->get_result();
                         </div>
                     </div>
                 </div>
+            </div>
+            <!-- adding form -->
+            <div id="new_repair_form" class="modal">
+                <span onclick="CloseAddRepair()" class="close" title="Close Modal">&times;</span>
+                <form class="modal-content" action="repairs-admin.php" method="POST" enctype="multipart/form-data">
+                    <div class="container">
+                        <h1 class="title">Add New Repair</h1>
+                        <p class="title">Please fill in this form to add a new repair.</p>
+                        <br>
+
+                        <label for="repair_type"><b>Repair Type</b></label>
+                        <input type="text" placeholder="Enter repair type name" name="repair_type" id="repair_type" value="" required />
+
+                        <label for="price_per_hour"><b>Price Per Hour</b></label><br>
+                        <input style="height: 35px;" type="number" placeholder="Enter repair's price per hour" name="price_per_hour" id="price_per_hour" value="" required>
+                        <br><br>
+
+                        <label for="description"><b>Desciption</b></label>
+                        <input type="text" placeholder="Enter repair's desciption" name="desciption" id="desciption" value="" required>
+                        <br><br>
+
+                        <label><b>Upload Repair Image:</b></label>
+                        <input type="file" name="repair_image" id="repair_image" value="" required>
+                        <br>
+
+                        <div class="clearfix">
+                            <button type="submit" class="addrepairbtn" title="Add new repair"><strong>Add Repair</strong></button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </main>
     </div>

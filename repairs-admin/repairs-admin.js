@@ -20,6 +20,35 @@ function DeleteRepair() {
     CloseRemoveRepairPopUp();
 }
 
+function OpenAddRepair() {
+    window.location.href = window.location.href + '?open_add_repair=true';
+}
+
+if (window.location.href.includes('open_add_repair=true')) {
+    const repair_form = document.getElementById('new_repair_form');
+    repair_form.style.display = "block";
+}
+
+if (window.location.href.includes('repair-added=1')) {
+    OpenRepairAddedPopUp();
+}
+
+function OpenRepairAddedPopUp() {
+    const repair_added_popup = document.getElementById('repair-added-confirmation');
+    repair_added_popup.classList.add('open-popup');
+}
+
+function CloseRepairAddedPopUp() {
+    const repair_added_popup = document.getElementById('repair-added-confirmation');
+    repair_added_popup.classList.remove('open-popup');
+}
+
+function CloseAddRepair() {
+    window.location.href = 'repairs-admin.php';
+    const repair_form = document.getElementById("new_repair_form");
+    repair_form.style.display = "none";
+}
+
 
 function sortTable(n, dir) {
     var table, rows, switching, i, x, y, shouldSwitch, switchcount = 0;
@@ -112,138 +141,5 @@ price_per_hour_column.addEventListener('click', function SetSorting() {
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'Repairs From highest to lowest cost';
         price_per_hour_column.title = 'Sort Price Per Hour by ascending';
-    }
-});
-
-
-
-const email_column = document.getElementById('email-column');
-email_column.addEventListener('click', function SetSorting() {
-    var email_column_innerHTML = email_column.innerHTML;
-    if (email_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
-        email_column.innerHTML = "Email <span class=\"las la-sort-up\"></span>";
-        sortTable(2, "desc");
-        filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'Email by descending';
-        email_column.title = 'Sort Email by ascending';
-    }
-    if (email_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
-        email_column.innerHTML = "Email <span class=\"las la-sort-down\"></span>";
-        sortTable(2, "asc");
-        filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'Email by ascending';
-        email_column.title = 'Sort Email by descending';
-    }
-    if (email_column_innerHTML == "Email") {
-        email_column.innerHTML = "Email <span class=\"las la-sort-up\"></span>";
-        sortTable(2, "desc");
-        filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'Email by descending';
-        email_column.title = 'Sort Email by ascending';
-    }
-});
-
-const phone_number_column = document.getElementById('phone-number-column');
-phone_number_column.addEventListener('click', function SetSorting() {
-    var phone_number_column_innerHTML = phone_number_column.innerHTML;
-    if (phone_number_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
-        phone_number_column.innerHTML = "Phone Number <span class=\"las la-sort-up\"></span>";
-        sortTable(3, "desc");
-        filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'Phone Number by descending';
-        phone_number_column.title = 'Sort Phone Number by ascending';
-    }
-    if (phone_number_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
-        phone_number_column.innerHTML = "Phone Number <span class=\"las la-sort-down\"></span>";
-        sortTable(3, "asc");
-        filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'Phone Number by ascending';
-        phone_number_column.title = 'Sort Phone Number by descending';
-    }
-    if (phone_number_column_innerHTML == "Phone Number") {
-        phone_number_column.innerHTML = "Phone Number <span class=\"las la-sort-up\"></span>";
-        sortTable(3, "desc");
-        filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'Phone Number by descending';
-        phone_number_column.title = 'Sort Phone Number by ascending';
-    }
-});
-
-
-const city_column = document.getElementById('city-column');
-city_column.addEventListener('click', function SetSorting() {
-    var city_column_innerHTML = city_column.innerHTML;
-    if (city_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
-        city_column.innerHTML = "City <span class=\"las la-sort-up\"></span>";
-        sortTable(4, "desc");
-        filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'City by descending';
-        city_column.title = 'Sort City by ascending';
-    }
-    if (city_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
-        city_column.innerHTML = "City <span class=\"las la-sort-down\"></span>";
-        sortTable(4, "asc");
-        filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'City by ascending';
-        city_column.title = 'Sort City by descending';
-    }
-    if (city_column_innerHTML == "City") {
-        city_column.innerHTML = "City <span class=\"las la-sort-up\"></span>";
-        sortTable(4, "desc");
-        filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'City by descending';
-        city_column.title = 'Sort City by ascending';
-    }
-});
-
-const address_column = document.getElementById('address-column');
-address_column.addEventListener('click', function SetSorting() {
-    var address_column_innerHTML = address_column.innerHTML;
-    if (address_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
-        address_column.innerHTML = "Address <span class=\"las la-sort-up\"></span>";
-        sortTable(5, "desc");
-        filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'Address by descending';
-        address_column.title = 'Sort Address by ascending';
-    }
-    if (address_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
-        address_column.innerHTML = "Address <span class=\"las la-sort-down\"></span>";
-        sortTable(5, "asc");
-        filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'Address by ascending';
-        address_column.title = 'Sort Address by descending';
-    }
-    if (address_column_innerHTML == "Address") {
-        address_column.innerHTML = "Address <span class=\"las la-sort-up\"></span>";
-        sortTable(5, "desc");
-        filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'Address by descending';
-        address_column.title = 'Sort Address by ascending';
-    }
-});
-
-const date_of_birth_column = document.getElementById('date-of-birth-column');
-date_of_birth_column.addEventListener('click', function SetSorting() {
-    var date_of_birth_column_innerHTML = date_of_birth_column.innerHTML;
-    if (date_of_birth_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
-        date_of_birth_column.innerHTML = "Date of Birth <span class=\"las la-sort-up\"></span>";
-        sortTable(6, "desc");
-        filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'Date of Birth by descending';
-        date_of_birth_column.title = 'Sort Date of Birth by ascending';
-    }
-    if (date_of_birth_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
-        date_of_birth_column.innerHTML = "Date of Birth <span class=\"las la-sort-down\"></span>";
-        sortTable(6, "asc");
-        filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'Date of Birth by ascending';
-        date_of_birth_column.title = 'Sort Date of Birth by descending';
-    }
-    if (date_of_birth_column_innerHTML == "Date of Birth") {
-        date_of_birth_column.innerHTML = "Date of Birth <span class=\"las la-sort-up\"></span>";
-        sortTable(6, "desc");
-        filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'Date of Birth by descending';
-        date_of_birth_column.title = 'Sort Date of Birth by ascending';
     }
 });
