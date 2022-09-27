@@ -79,12 +79,12 @@ $results_repairs = $stmt_select_repairs->get_result();
 <body onunload="myFunction()">
 
     <!-- started popup message login successful -->
-    <div class="popup" id="remove-confirmation">
+    <div class="popup" id="remove-repair-confirmation">
         <img src="../images/question-mark.png" alt="remove confirmation">
         <h2>Delete Confirmation</h2>
         <p id="remove-confirmation-text"></p>
-        <button type="button" onclick="DeleteCustomer()">YES</button>
-        <button type="button" onclick="CloseRemoveCustomerPopUp()">NO</button>
+        <button type="button" onclick="DeleteRepair()">YES</button>
+        <button type="button" onclick="CloseRemoveRepairPopUp()">NO</button>
     </div>
 
     <!-- started popup message logout -->
@@ -279,7 +279,7 @@ $results_repairs = $stmt_select_repairs->get_result();
     <!-- ended return to top button -->
 
 </body>
-<script src="customer-admin.js"></script>
+<script src="repairs-admin.js"></script>
 <script src="../admin-main/admin-main.js"></script>
 <script>
     var array_repairs = [];
