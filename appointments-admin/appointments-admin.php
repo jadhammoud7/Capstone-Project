@@ -166,7 +166,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                 </li>
                 <li>
                     <a href="../product-admin/product-admin.php" id="products-link">
-                        <span class="la la-product-hunt"></span>
+                        <span class="las la-box"></span>
                         <span>Products</span>
                     </a>
                 </li>

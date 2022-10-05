@@ -184,7 +184,7 @@ if ($repair_type != "" && $price_per_hour != 0 && $description != "") {
                 </li>
                 <li>
                     <a href="../product-admin/product-admin.php" id="products-link">
-                        <span class="la la-product-hunt"></span>
+                        <span class="las la-box"></span>
                         <span>Products</span>
                     </a>
                 </li>

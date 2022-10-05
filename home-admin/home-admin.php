@@ -225,7 +225,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                 </li>
                 <li>
                     <a href="../product-admin/product-admin.php" id="products-link">
-                        <span class="la la-product-hunt"></span>
+                        <span class="las la-box"></span>
                         <span>Products</span>
                     </a>
                 </li>
