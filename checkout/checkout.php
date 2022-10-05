@@ -10,6 +10,11 @@ if (!isset($_SESSION['logged_bool'])) {
     $customer_id = $_SESSION['logged_id'];
 }
 
+
+if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'customer') {
+    header("Location: ../home-admin/home-admin.php");
+}
+
 $first_name = "";
 $last_name = "";
 $email = "";

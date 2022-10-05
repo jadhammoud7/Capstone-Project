@@ -7,6 +7,10 @@ if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
 
+if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'customer') {
+    header("Location: ../home-admin/home-admin.php");
+}
+
 require_once('../php/comment_connection.php');
 
 
@@ -184,46 +188,46 @@ $results_products = $stmt_products->get_result();
 
     <!-- start of asc and desc table-->
     <div class="recent-grid" style="display: block !important;">
-                <div class="projects">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Products List</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table width="100%" id="products_table">
-                                    <thead>
-                                        <tr>
-                                            <td >Product Name</td>
-                                            <td >Price</td>
-                                            <td >Type</td>
-                                            <td >Category</td>
-                                            <td id="product-inventory-column" title="Sort Inventory by descending">Inventory</td>
-                                            <td id="product-sales-column" title="Sort Sales Number by descending">Sales Number</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        while ($row_products = $results_products->fetch_assoc()) {
-                                            get_all_products(
-                                                $row_products['product_id'],
-                                                $row_products['name'],
-                                                $row_products['price'],
-                                                $row_products['category'],
-                                                $row_products['type'],
-                                                $row_products['inventory'],
-                                                $row_products['sales_number']
-                                            );
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+        <div class="projects">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Products List</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table width="100%" id="products_table">
+                            <thead>
+                                <tr>
+                                    <td>Product Name</td>
+                                    <td>Price</td>
+                                    <td>Type</td>
+                                    <td>Category</td>
+                                    <td id="product-inventory-column" title="Sort Inventory by descending">Inventory</td>
+                                    <td id="product-sales-column" title="Sort Sales Number by descending">Sales Number</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                while ($row_products = $results_products->fetch_assoc()) {
+                                    get_all_products(
+                                        $row_products['product_id'],
+                                        $row_products['name'],
+                                        $row_products['price'],
+                                        $row_products['category'],
+                                        $row_products['type'],
+                                        $row_products['inventory'],
+                                        $row_products['sales_number']
+                                    );
+                                }
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <!-- end of asc and desc products -->
+        </div>
+    </div>
+    <!-- end of asc and desc products -->
 
 
     <!-- starting about us here -->

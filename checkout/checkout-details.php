@@ -10,6 +10,9 @@ if (!isset($_SESSION['logged_bool'])) {
     $customer_id = $_SESSION['logged_id'];
 }
 
+if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'customer') {
+    header("Location: ../home-admin/home-admin.php");
+}
 if (isset($_GET['checkout_id'])) {
     $stmt_get_checkout = $connection->prepare("SELECT * FROM checkouts WHERE checkout_id = '" . $_GET['checkout_id'] . "'");
     $stmt_get_checkout->execute();
@@ -56,7 +59,7 @@ function checkout_products_connection($name, $quantity, $price)
 <body>
 
 
-<!-- started with the menu bar -->
+    <!-- started with the menu bar -->
     <header>
         <nav class="nav-bar">
             <a href="" class="nav-branding">Newbie Gamers.</a>

@@ -2,6 +2,10 @@
 
 session_start();
 include("../php/connection.php");
+
+if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'customer') {
+    header("Location: ../home-admin/home-admin.php");
+}
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 } else {
@@ -17,6 +21,7 @@ $cd_name = "";
 if (isset($_GET['cd_name'])) {
     $cd_name = "Try a free game " . $_GET['cd_name'];
 }
+
 
 if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
     $appointment_time = $_GET["appointments_time"];

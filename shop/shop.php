@@ -3,6 +3,9 @@
 session_start();
 include('../php/connection.php');
 
+if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'customer') {
+    header("Location: ../home-admin/home-admin.php");
+}
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }

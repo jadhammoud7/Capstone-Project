@@ -40,12 +40,14 @@ if (empty($row_admin)) {
         die("WRONG username");
     } else {
         $logged_id = $row_customer['customer_id'];
+        $logged_type = 'customer';
         //saving which user is logged in
         $stmt = $connection->prepare("SELECT password FROM customers WHERE username='" . $username . "' ");
         $stmt->execute();
         $stmt_result = $stmt->get_result();
         $stmt_data = $stmt_result->fetch_assoc();
         if ($stmt_data['password'] == $password) {
+            $_SESSION['logged_type'] = $logged_type;
             $_SESSION['logged_id'] = $logged_id;
             $_SESSION['logged_bool'] = true;
             echo "<script>window.location = '../home-page/home-page.php?login=true';</script>";
@@ -57,12 +59,14 @@ if (empty($row_admin)) {
     }
 } else {
     $logged_id = $row_admin['admin_id'];
+    $logged_type = 'admin';
     //saving which user is logged in
     $stmt = $connection->prepare("SELECT password FROM admins WHERE username='" . $username . "' ");
     $stmt->execute();
     $stmt_result = $stmt->get_result();
     $stmt_data = $stmt_result->fetch_assoc();
     if ($stmt_data['password'] == $password) {
+        $_SESSION['logged_type'] = $logged_type;
         $_SESSION['logged_id'] = $logged_id;
         $_SESSION['logged_bool'] = true;
         echo "<script>window.location = '../home-admin/home-admin.php?login=true';</script>";
