@@ -46,11 +46,11 @@ if (isset($_GET['repair-id'])) {
 <body onunload="myFunction()">
 
     <!-- started popup message product updated -->
-    <div class="popup" id="product-updated-confirmation">
+    <div class="popup" id="repair-updated-confirmation">
         <img src="../images/tick.png" alt="">
-        <h2>Product Updated</h2>
-        <p>The product of ID "<?php if (isset($_GET['product-id'])) {
-                                    echo $_GET['product-id'];
+        <h2>Repair Updated</h2>
+        <p>The repair of ID "<?php if (isset($_GET['repair-id'])) {
+                                    echo $_GET['repair-id'];
                                 } ?>" is updated successfully</p>
         <button type="button" onclick="CloseProductUpdatedPopUp()">OK</button>
     </div>
@@ -132,7 +132,7 @@ if (isset($_GET['repair-id'])) {
                 <label for="nav-toggle">
                     <span><i class="las la-bars"></i></span>
                 </label>
-                Product Details
+                Repair Details
             </h2>
 
             <div class="user-wrapper">
@@ -150,12 +150,12 @@ if (isset($_GET['repair-id'])) {
                 <div class="details">
                     <div class="card">
                         <div class="card-header">
-                            <h2>Product Details</h2>
+                            <h2>Repair Details</h2>
                         </div>
                         <div>
-                            <button id="edit-button" class="edit-button" title="Edit Product '<?php if (isset($row_product)) {
-                                                                                                    echo $row_product['name'];
-                                                                                                } ?>'" onclick="EditProduct()"><span class="las la-edit"></span> Edit Product</button>
+                            <button id="edit-button" class="edit-button" title="Edit Product '<?php if (isset($row_repair)) {
+                                                                                                    echo $row_repair['repair_type'];
+                                                                                                } ?>'" onclick="EditProduct()"><span class="las la-edit"></span> Edit Repair</button>
                         </div>
                         <div class="form-container card-body">
 
@@ -163,49 +163,33 @@ if (isset($_GET['repair-id'])) {
                                 <div class="form-container-part">
 
                                     <div>
-                                        <h3 class="form-container-part-title">Product Information</h3>
+                                        <h3 class="form-container-part-title">Repair Information</h3>
                                     </div>
 
 
                                     <div class="form-container-part-inputs">
                                         <div class="input-container">
-                                            <input type="number" name="product_id" id="product_id" value="<?php if (isset($row_product)) {
-                                                                                                                echo $row_product['product_id'];
+                                            <input type="number" name="repair_id" id="repair_id" value="<?php if (isset($row_repair)) {
+                                                                                                                echo $row_repair['repair_id'];
                                                                                                             } ?>" readonly class="is-valid">
-                                            <label for="product_id">Product ID</label>
+                                            <label for="repair_id">Repair ID</label>
                                         </div>
 
                                         <div class="input-container">
 
-                                            <input type="text" name="product_name" id="product_name" value="<?php if (isset($row_product)) {
-                                                                                                                echo $row_product['name'];
+                                            <input type="text" name="repair_type" id="repair_type" value="<?php if (isset($row_repair)) {
+                                                                                                                echo $row_repair['repair_type'];
                                                                                                             } ?>" readonly class="is-valid">
-                                            <label for="product_name">Product Name</label>
+                                            <label for="repair_type">Repair Type</label>
                                         </div>
                                     </div>
 
                                     <div class="form-container-part-inputs">
                                         <div class="input-container">
-                                            <input type="number" name="price" id="price" value="<?php if (isset($row_product)) {
-                                                                                                    echo $row_product['price'];
+                                            <input type="number" name="price_per_hour" id="price_per_hour" value="<?php if (isset($row_repair)) {
+                                                                                                    echo $row_repair['price_per_hour'];
                                                                                                 } ?>" readonly class="is-valid">
-                                            <label for="price">Price</label>
-                                        </div>
-                                        <div class="input-container">
-
-                                            <input type="text" name="type" id="type" value="<?php if (isset($row_product)) {
-                                                                                                echo $row_product['type'];
-                                                                                            } ?>" readonly class="is-valid">
-                                            <label for="type">Type</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-container-part-inputs">
-                                        <div class="input-container">
-                                            <input type="text" name="category" id="category" value="<?php if (isset($row_product)) {
-                                                                                                        echo $row_product['category'];
-                                                                                                    } ?>" readonly class="is-valid">
-                                            <label for="category">Category</label>
+                                            <label for="price_per_hour">Price Per Hour</label>
                                         </div>
                                     </div>
 
@@ -213,54 +197,21 @@ if (isset($_GET['repair-id'])) {
                                         <div class="input-container description">
                                             <div class="description-body">
                                                 <h3>Description</h3>
-                                                <p id="description"><?php if (isset($row_product)) {
-                                                                        echo $row_product['description'];
+                                                <p id="description"><?php if (isset($row_repair)) {
+                                                                        echo $row_repair['description'];
                                                                     } ?></p>
                                             </div>
-
-
-                                            <!-- <input type="text" name="description" id="description" value="<?php if (isset($row_product)) {
-                                                                                                                    echo $row_product['description'];
-                                                                                                                } ?>" readonly class="is-valid">
-                                            <label for="description">Description</label> -->
                                         </div>
                                     </div>
 
-                                    <div class="form-container-part-inputs">
-                                        <div class="input-container">
-
-                                            <input type="text" name="age" id="age" value="<?php if (isset($row_product)) {
-                                                                                                echo $row_product['age'];
-                                                                                            } ?>" readonly class="is-valid">
-                                            <label for="age">Age</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-container-part-inputs">
-                                        <div class="input-container">
-                                            <input type="number" name="inventory" id="inventory" value="<?php if (isset($row_product)) {
-                                                                                                            echo $row_product['inventory'];
-                                                                                                        } ?>" readonly class="is-valid">
-                                            <label for="inventory">Inventory</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-container-part-inputs">
-                                        <div class="input-container">
-                                            <input type="number" name="sales_number" id="sales_number" value="<?php if (isset($row_product)) {
-                                                                                                                    echo $row_product['sales_number'];
-                                                                                                                } ?>" readonly class="is-valid">
-                                            <label for="sales_number">Sales Number</label>
-                                        </div>
-                                    </div>
                                     <!-- here to add upload file -->
                                     <div class="form-container-part-inputs">
                                         <div class="input-container product-image">
                                             <div class="image-body">
-                                                <h3>Product Image</h3>
+                                                <h3>Repair Image</h3>
                                                 <div id="product_image">
-                                                    <img src='../images/<?php if (isset($row_product)) {
-                                                                            echo $row_product['image'];
+                                                    <img src='../images/<?php if (isset($row_repair)) {
+                                                                            echo $row_repair['image'];
                                                                         } ?>'>
                                                 </div>
                                             </div>
