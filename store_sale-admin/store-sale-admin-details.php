@@ -6,6 +6,10 @@ include("../php/connection.php");
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
+
+if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'admin') {
+    header("Location: ../home-page/home-page.php");
+}
 $admin_id = $_SESSION['logged_id'];
 $query = "SELECT first_name, last_name FROM admins WHERE admin_id = $admin_id";
 $stmt = $connection->prepare($query);
