@@ -45,14 +45,14 @@ if (isset($_GET['repair-id'])) {
 
 <body onunload="myFunction()">
 
-    <!-- started popup message product updated -->
+    <!-- started popup message repair updated -->
     <div class="popup" id="repair-updated-confirmation">
         <img src="../images/tick.png" alt="">
         <h2>Repair Updated</h2>
         <p>The repair of ID "<?php if (isset($_GET['repair-id'])) {
                                     echo $_GET['repair-id'];
                                 } ?>" is updated successfully</p>
-        <button type="button" onclick="CloseProductUpdatedPopUp()">OK</button>
+        <button type="button" onclick="CloseRepairUpdatedPopUp()">OK</button>
     </div>
 
     <input type="checkbox" id="nav-toggle">
@@ -153,9 +153,9 @@ if (isset($_GET['repair-id'])) {
                             <h2>Repair Details</h2>
                         </div>
                         <div>
-                            <button id="edit-button" class="edit-button" title="Edit Product '<?php if (isset($row_repair)) {
+                            <button id="edit-button" class="edit-button" title="Edit Repair '<?php if (isset($row_repair)) {
                                                                                                     echo $row_repair['repair_type'];
-                                                                                                } ?>'" onclick="EditProduct()"><span class="las la-edit"></span> Edit Repair</button>
+                                                                                                } ?>'" onclick="EditRepair()"><span class="las la-edit"></span> Edit Repair</button>
                         </div>
                         <div class="form-container card-body">
 
@@ -209,7 +209,7 @@ if (isset($_GET['repair-id'])) {
                                         <div class="input-container product-image">
                                             <div class="image-body">
                                                 <h3>Repair Image</h3>
-                                                <div id="product_image">
+                                                <div id="repair_image">
                                                     <img src='../images/<?php if (isset($row_repair)) {
                                                                             echo $row_repair['image'];
                                                                         } ?>'>
@@ -218,7 +218,7 @@ if (isset($_GET['repair-id'])) {
                                         </div>
                                     </div>
                                     <div>
-                                        <button type="submit" id="edit-product-submit" class="edit-product-submit" style="visibility: hidden;"><span class="las la-share-square"></span> Apply Changes</button>
+                                        <button type="submit" id="edit-repair-submit" class="edit-product-submit" style="visibility: hidden;"><span class="las la-share-square"></span> Apply Changes</button>
                                     </div>
 
                                 </div>
