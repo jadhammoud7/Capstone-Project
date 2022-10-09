@@ -56,7 +56,7 @@ function ExitEditRepair() {
 }
 
 if (window.location.href.includes('repair-updated=1')) {
-    OpenProductUpdatedPopUp();
+    OpenRepairUpdatedPopUp();
 }
 
 function OpenRepairUpdatedPopUp() {
@@ -67,5 +67,5 @@ function OpenRepairUpdatedPopUp() {
 function CloseRepairUpdatedPopUp() {
     var repair_updated_popup = document.getElementById('repair-updated-confirmation');
     repair_updated_popup.classList.remove('open-popup');
-    window.location.href = 'repair-admin-details.php';
+    window.location.href = 'repairs-admin.php';
 }
