@@ -18,11 +18,57 @@ $results = $stmt->get_result();
 $row = $results->fetch_assoc();
 
 if (isset($_GET['repair-id'])) {
-    $stmt_get_repair = $connection->prepare("SELECT * FROM repairs WHERE repair_id = '" . $_GET['repair_id'] . "'");
+    $stmt_get_repair = $connection->prepare("SELECT * FROM repairs WHERE repair_id = '" . $_GET['repair-id'] . "'");
     $stmt_get_repair->execute();
     $result_repair = $stmt_get_repair->get_result();
     $row_repair = $result_repair->fetch_assoc();
 }
+
+$repair_id = 0;
+$repair_type = "";
+$price_per_hour = 0;
+$description = "";
+
+if (isset($_POST['repair_id'])) {
+    $repair_id = $_POST['repair_id'];
+}
+
+if (isset($_POST['repair_type'])) {
+    $repair_type = $_POST['repair_type'];
+}
+
+if (isset($_POST['price_per_hour'])) {
+    $price_per_hour = $_POST['price_per_hour'];
+}
+
+if (isset($_POST['description'])) {
+    $description = $_POST['description'];
+}
+
+if ($repair_id != 0 && $repair_type != "" && $price_per_hour != 0 && $description != "") {
+    if (!empty($_FILES['repair_image']['name'])) {
+        $target_dir = "../images/";
+        $filename = basename($_FILES['repair_image']['name']);
+        $target_file = $target_dir . $filename;
+        $fileType = pathinfo($target_file, PATHINFO_EXTENSION);
+        $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
+        if (in_array($fileType, $allowTypes)) {
+            if (move_uploaded_file($_FILES['repair_image']['tmp_name'], $target_file)) {
+                $repair_image = $filename;
+                $stmt_update_repair = $connection->prepare("UPDATE repairs SET repair_type = '" . $repair_type . "', price_per_hour = '" . $price_per_hour . "', description = '" . $description . "', image = '" . $repair_image . "' WHERE repair_id = '" . $repair_id . "'");
+                $stmt_update_repair->execute();
+                $stmt_update_repair->close();
+                header("Location: repair-admin-details.php?repair-id=$repair_id&repair-updated=1");
+            }
+        }
+    } else {
+        $stmt_update_repair = $connection->prepare("UPDATE repairs SET repair_type = '" . $repair_type . "', price_per_hour = '" . $price_per_hour . "', description = '" . $description . "' WHERE repair_id = '" . $repair_id . "'");
+        $stmt_update_repair->execute();
+        $stmt_update_repair->close();
+        header("Location: repair-admin-details.php?repair-id=$repair_id&repair-updated=1");
+    }
+}
+
 
 ?>
 
@@ -159,7 +205,7 @@ if (isset($_GET['repair-id'])) {
                         </div>
                         <div class="form-container card-body">
 
-                            <form action="../php/edit_product.php" method="POST" enctype="multipart/form-data">
+                            <form action="repair-admin-details.php" method="POST" enctype="multipart/form-data">
                                 <div class="form-container-part">
 
                                     <div>
@@ -170,8 +216,8 @@ if (isset($_GET['repair-id'])) {
                                     <div class="form-container-part-inputs">
                                         <div class="input-container">
                                             <input type="number" name="repair_id" id="repair_id" value="<?php if (isset($row_repair)) {
-                                                                                                                echo $row_repair['repair_id'];
-                                                                                                            } ?>" readonly class="is-valid">
+                                                                                                            echo $row_repair['repair_id'];
+                                                                                                        } ?>" readonly class="is-valid">
                                             <label for="repair_id">Repair ID</label>
                                         </div>
 
@@ -187,8 +233,8 @@ if (isset($_GET['repair-id'])) {
                                     <div class="form-container-part-inputs">
                                         <div class="input-container">
                                             <input type="number" name="price_per_hour" id="price_per_hour" value="<?php if (isset($row_repair)) {
-                                                                                                    echo $row_repair['price_per_hour'];
-                                                                                                } ?>" readonly class="is-valid">
+                                                                                                                        echo $row_repair['price_per_hour'];
+                                                                                                                    } ?>" readonly class="is-valid">
                                             <label for="price_per_hour">Price Per Hour</label>
                                         </div>
                                     </div>
@@ -242,6 +288,6 @@ if (isset($_GET['repair-id'])) {
     <!-- ended return to top button -->
 </body>
 <script src="../admin-main/admin-main.js"></script>
-<script src="product-details.js"></script>
+<script src="repair-admin-details.js"></script>
 
 </html>

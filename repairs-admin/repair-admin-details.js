@@ -24,7 +24,7 @@ function EditRepair() {
     edit_repair_submit.style.visibility = 'visible';
 
     const edit_button = document.getElementById('edit-button');
-    edit_button.innerHTML = '<span class="las la-times-circle"></span> Exit Edit Product';
+    edit_button.innerHTML = '<span class="las la-times-circle"></span> Exit Edit Repair';
     edit_button.style.backgroundColor = 'red';
     edit_button.title = 'Exit Editting Repair';
     edit_button.setAttribute('onclick', 'ExitEditRepair()');
