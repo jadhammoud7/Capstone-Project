@@ -252,7 +252,7 @@ if ($repair_id != 0 && $repair_type != "" && $price_per_hour != 0 && $descriptio
 
                                     <!-- here to add upload file -->
                                     <div class="form-container-part-inputs">
-                                        <div class="input-container product-image">
+                                        <div class="input-container repair-image">
                                             <div class="image-body">
                                                 <h3>Repair Image</h3>
                                                 <div id="repair_image">
@@ -264,7 +264,7 @@ if ($repair_id != 0 && $repair_type != "" && $price_per_hour != 0 && $descriptio
                                         </div>
                                     </div>
                                     <div>
-                                        <button type="submit" id="edit-repair-submit" class="edit-product-submit" style="visibility: hidden;"><span class="las la-share-square"></span> Apply Changes</button>
+                                        <button type="submit" id="edit-repair-submit" class="edit-repair-submit" style="visibility: hidden;"><span class="las la-share-square"></span> Apply Changes</button>
                                     </div>
 
                                 </div>
@@ -273,7 +273,7 @@ if ($repair_id != 0 && $repair_type != "" && $price_per_hour != 0 && $descriptio
                     </div>
                 </div>
 
-                <div class="product-details-buttons">
+                <div class="repair-details-buttons">
                     <button class="back" onclick="history.back();" title="Return to Previous Page"><span class="las la-arrow-left" style="font-size: 1.4rem;"></span>Return to
                         Previous Page</button>
                 </div>

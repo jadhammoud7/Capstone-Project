@@ -1,4 +1,3 @@
-.billing-details,
 .details {
     display: flex;
     flex-direction: column;
@@ -98,69 +97,6 @@ input.is-valid+label {
     flex-direction: row;
 }
 
-#order-products {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-#order-products td,
-#order-products th {
-    border: 1px solid #ddd;
-    padding: 15px;
-}
-
-#order-products tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-#order-products tr:hover {
-    background-color: #ddd;
-}
-
-#order-products th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #63A7E4;
-    color: white;
-}
-
-#order-totals {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-#order-totals td {
-    border: 1px solid #ddd;
-    padding: 15px;
-    font-weight: 700;
-}
-
-#order-totals th {
-    border: 1px solid #ddd;
-    padding: 15px;
-    font-weight: 700;
-    width: 20%;
-}
-
-#order-totals tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-#order-totals tr:hover {
-    background-color: #ddd;
-}
-
-#order-totals th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #63A7E4;
-    color: white;
-}
-
 .edit-button {
     background-color: royalblue;
     color: white;
@@ -174,7 +110,7 @@ input.is-valid+label {
     border-radius: 20px;
 }
 
-.edit-product-submit {
+.edit-repair-submit {
     background-color: royalblue;
     color: white;
     padding: 14px 20px;
@@ -192,7 +128,7 @@ input.is-valid+label {
 }
 
 .description,
-.product-image {
+.repair-image {
     width: 100%;
     height: 70%;
 }
@@ -215,7 +151,7 @@ input.is-valid+label {
     height: 70%;
 }
 
-.product-details-buttons {
+.repair-details-buttons {
     display: block;
     text-align: center;
     text-align: center;
@@ -254,7 +190,7 @@ option {
     color: #fefefe;
 }
 
-.product-details-buttons button {
+.repair-details-buttons button {
     margin: 30px;
     font-size: large;
     font-weight: 700;

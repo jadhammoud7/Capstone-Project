@@ -214,10 +214,10 @@ function store_sales_products_connection($product_name, $quantity, $price)
 
             <!-- started with checkout form -->
             <div>
-                <div class="billing-details">
+                <div class="sales-details">
                     <div class="card">
                         <div class="card-header">
-                            <h2>Billing Details</h2>
+                            <h2>Sales Details</h2>
                         </div>
                         <div class="form-container card-body">
                             <form>
@@ -314,7 +314,7 @@ function store_sales_products_connection($product_name, $quantity, $price)
                     </tr>
                 </table>
             </div>
-            <div class="checkout-details-buttons">
+            <div class="sales-details-buttons">
 
                 <button class="back" onclick="history.back();" title="Return to previous page"><span class="las la-arrow-left"></span>Return to
                     Previous Page</button>

@@ -1,4 +1,4 @@
-.billing-details {
+.sales-details {
     display: flex;
     flex-direction: column;
     margin: 30px;
@@ -185,7 +185,7 @@ input.is-valid+label {
     color: black;
 }
 
-.checkout-details-buttons button {
+.sales-details-buttons button {
     margin: 30px;
     font-size: large;
     font-weight: 700;
