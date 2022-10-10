@@ -22,6 +22,9 @@ if (isset($_GET['product_id'])) {
     $stmt_get_product->execute();
     $result_product = $stmt_get_product->get_result();
     $row_product = $result_product->fetch_assoc();
+    $stmt_select_product_dates = $connection->prepare("SELECT price, date FROM history_product_prices WHERE product_id = '" . $_GET['product_id'] . "'");
+    $stmt_select_product_dates->execute();
+    $result_product_dates = $stmt_select_product_dates->get_result();
 }
 
 $product_id = 0;
@@ -82,6 +85,12 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
                 $stmt_update_product = $connection->prepare("UPDATE products SET name='" . $product_name . "', price= '" . $product_price . "', type='" . $product_type . "', category='" . $product_category . "', description='" . $product_description . "', age='" . $product_age . "', image='" . $product_image . "', inventory='" . $product_inventory . "', sales_number='" . $product_sales . "' WHERE product_id='" . $product_id . "'");
                 $stmt_update_product->execute();
                 $stmt_update_product->close();
+                $currentDate = new DateTime();
+                $date = $currentDate->format('Y-m-d');
+                $stmt_add_product_price_history = $connection->prepare("INSERT INTO history_product_prices(product_id, price, date) VALUES (?,?,?)");
+                $stmt_add_product_price_history->bind_param("iis", $product_id, $product_price, $date);
+                $stmt_add_product_price_history->execute();
+                $stmt_add_product_price_history->close();
                 header("Location: product-details.php?product-id=$product_id&product-updated=1");
             }
         }
@@ -90,11 +99,15 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
         $stmt_update_product = $connection->prepare("UPDATE products SET name='" . $product_name . "', price= '" . $product_price . "', type='" . $product_type . "', category='" . $product_category . "', description='" . $product_description . "', age='" . $product_age . "', inventory='" . $product_inventory . "', sales_number='" . $product_sales . "' WHERE product_id='" . $product_id . "'");
         $stmt_update_product->execute();
         $stmt_update_product->close();
+        $currentDate = new DateTime();
+        $date = $currentDate->format('Y-m-d');
+        $stmt_add_product_price_history = $connection->prepare("INSERT INTO history_product_prices(product_id, price, date) VALUES (?,?,?)");
+        $stmt_add_product_price_history->bind_param("iis", $product_id, $product_price, $date);
+        $stmt_add_product_price_history->execute();
+        $stmt_add_product_price_history->close();
         header("Location: product-details.php?product-id=$product_id&product-updated=1");
     }
 }
-
-
 ?>
 
 
@@ -216,6 +229,9 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
         </header>
 
         <main>
+            <div style="margin-top: 30px;">
+                <canvas id="myLine" style="width:100%;max-width:700px;"></canvas>
+            </div>
             <!-- started with checkout form -->
             <div>
                 <div class="details">
@@ -363,5 +379,54 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
 </body>
 <script src="../admin-main/admin-main.js"></script>
 <script src="product-details.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+<script>
+    var array_product_dates = [];
+    var array_product_prices = [];
+    <?php
+    if (isset($result_product_dates)) {
+        while ($row_product_dates = $result_product_dates->fetch_assoc()) {
+    ?>
+            array_product_dates.push("<?php
+                                        echo $row_product_dates['date'];
+                                        ?>");
+            array_product_prices.push("<?php
+                                        echo $row_product_dates['price'];
+                                        ?>");
+    <?php
+        }
+    } ?>;
+
+    var xArray = array_product_dates;
+    var yArray = array_product_prices;
+
+    new Chart("myLine", {
+        type: "line",
+        data: {
+            labels: xArray,
+            datasets: [{
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(0,0,255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
+                data: yArray
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: 1000
+                    }
+                }]
+            }
+        }
+    });
+</script>
 
 </html>
