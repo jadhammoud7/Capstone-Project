@@ -118,7 +118,7 @@ function get_all_admins_connection($admin_id, $admin_first_name, $admin_last_nam
         <td>$phone_number</td>
         <td>
             <a>
-                <button class=\"remove_cust\" onclick=\"OpenRemoveAdminPopUp($admin_id, `$admin_first_name`, `$admin_last_name`)\" title=\"Remove admin '$admin_first_name $admin_last_name'?\">Remove</button>
+                <button class=\"remove_cust\" onclick=\"OpenRemoveAdminPopUp($admin_id, `$admin_first_name`, `$admin_last_name`)\" title=\"Remove admin '$admin_first_name $admin_last_name'?\"><span class=\"las la-trash-alt\"></span> Remove</button>
             </a>
         </td>
     </tr>";

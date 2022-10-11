@@ -32,10 +32,6 @@
   color: red;
 }
 
-
-
-
-
 /* new form */
 input {
   border-radius: 30px;
@@ -106,9 +102,10 @@ button:hover {
 }
 
 .signupbtn {
-  width: 45%;
+  width: 100%;
   border-radius: 20px;
-  color: black;
+  color: #fefefe;
+  font-size: 1.2rem;
 }
 
 /* Set a style for all buttons */
@@ -207,30 +204,12 @@ hr {
   margin: 20px auto;
 }
 
-#first_name_error {
-  display: none;
-}
-
-#last_name_error {
-  display: none;
-}
-
-#email_error {
-  display: none;
-}
-
-#phone_number_error {
-  display: none;
-}
-
-#address_error {
-  display: none;
-}
-
-#username_error {
-  display: none;
-}
-
+#first_name_error,
+#last_name_error,
+#email_error,
+#phone_number_error,
+#address_error,
+#username_error,
 #password_error {
   display: none;
 }
