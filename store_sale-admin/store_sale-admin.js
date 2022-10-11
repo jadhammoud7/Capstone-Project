@@ -182,6 +182,32 @@ total_price_column.addEventListener('click', function SetSorting() {
     }
 });
 
+const date_column = document.getElementById('date-column');
+date_column.addEventListener('click', function SetSorting() {
+    var date_column_innerHTML = date_column.innerHTML;
+    if (date_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        date_column.innerHTML = "Date <span class=\"las la-sort-up\"></span>";
+        sortTable(5, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Store Sales from most to least recent';
+        date_column.title = 'Sort Store Sales from least to most recent';
+    }
+    if (date_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        date_column.innerHTML = "Date <span class=\"las la-sort-down\"></span>";
+        sortTable(5, "asc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Store Sales from least to most recent';
+        date_column.title = 'Sort Store Sales from most to least recent';
+    }
+    if (date_column_innerHTML == "Date") {
+        date_column.innerHTML = "Date <span class=\"las la-sort-up\"></span>";
+        sortTable(5, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Store Sales from most to least recent';
+        date_column.title = 'Sort Store Sales from least to most recent';
+    }
+});
+
 
 
 function sortTable(n, dir) {

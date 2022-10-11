@@ -49,16 +49,12 @@
 
     //get all customer purchases from store
     require_once("../php/admin_page_php.php");
-    $query_store_sales = "SELECT store_sales_id, customer_name, email, total_products, total_quantity, total_price FROM store_sales";
+    $query_store_sales = "SELECT * FROM store_sales";
     $stmt_store_sales = $connection->prepare($query_store_sales);
     $stmt_store_sales->execute();
     $results_store_sales = $stmt_store_sales->get_result();
 
-
-
-
     //the add sales form
-
     if (isset($_POST['save'])) {
         $stmt_select_all_store_sales = $connection->prepare("SELECT * FROM store_sales");
         $stmt_select_all_store_sales->execute();
@@ -76,19 +72,19 @@
         }
         $product_name = [];
         $quantity = [];
-        if (isset($_POST['customer_name']) && $_POST["customer_name"] != "") {
+        if (isset($_POST['customer_name'])) {
             $customer_name = $_POST['customer_name'];
         }
-        if (isset($_POST['username']) && $_POST["username"] != "") {
+        if (isset($_POST['username'])) {
             $username = $_POST['username'];
         }
-        if (isset($_POST['email']) && $_POST["email"] != "") {
+        if (isset($_POST['email'])) {
             $email = $_POST['email'];
         }
-        if (isset($_POST['product_name']) && $_POST["product_name"] != "") {
+        if (isset($_POST['product_name'])) {
             $product_name = $_POST['product_name'];
         }
-        if (isset($_POST['quantity']) && $_POST["quantity"] != "") {
+        if (isset($_POST['quantity'])) {
             $quantity = $_POST['quantity'];
         }
 
@@ -120,6 +116,7 @@
                     $total_sales_price = $total_sales_price + $total_product_price;
                     //update sales quantity by increasing product quantity
                     $total_sales_quantity = $total_sales_quantity + $quantity[$x];
+
                     //insert product info to table sales_products
                     $stmt_insert_store_sales = $connection->prepare("INSERT INTO sales_products(sales_id, product_name, quantity, price) VALUES (?,?,?,?)");
                     $stmt_insert_store_sales->bind_param("issi", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_price);
@@ -153,10 +150,13 @@
                 }
             }
         }
-        $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, total_products, total_quantity, total_price) VALUES (?,?,?,?,?,?,?)");
-        $stmt_insert_store_sales->bind_param("isssiii", $store_sales_id, $customer_name, $username, $email, $total_sales_products, $total_sales_quantity, $total_sales_price);
+        date_default_timezone_set('Asia/Beirut');
+        $date = date('Y-m-d h:i:s');
+        $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, total_products, total_quantity, total_price, date) VALUES (?,?,?,?,?,?,?,?)");
+        $stmt_insert_store_sales->bind_param("isssiiis", $store_sales_id, $customer_name, $username, $email, $total_sales_products, $total_sales_quantity, $total_sales_price, $date);
         $stmt_insert_store_sales->execute();
         $stmt_insert_store_sales->close();
+        header("Location: store_sale-admin.php");
     }
 
     require_once("../php/checkout-store_sales.php");
@@ -164,11 +164,6 @@
     $stmt_get_all_products = $connection->prepare($query_get_all_products);
     $stmt_get_all_products->execute();
     $results_get_all_products = $stmt_get_all_products->get_result();
-
-
-
-
-
 
     //select count of all customers purchasing via website
     $query_count_website = "SELECT COUNT(*) as website FROM checkouts";
@@ -386,6 +381,7 @@
                                                 <td id="total-products-column" title="Sort Store Sales from most to least products containing">Total Products</td>
                                                 <td id="total-quantity-column" title="Sort Store Sales from most to least quantities containing">Total Quantity</td>
                                                 <td id="total-price-column" title="Sort Store Sales from most to least money gained">Total Price</td>
+                                                <td id="date-column" title="Sort Store Sales from most to least recent">Date</td>
                                                 <td>View Order</td>
                                             </tr>
                                         </thead>
@@ -398,7 +394,8 @@
                                                     $row_store_sales['email'],
                                                     $row_store_sales['total_products'],
                                                     $row_store_sales['total_quantity'],
-                                                    $row_store_sales['total_price']
+                                                    $row_store_sales['total_price'],
+                                                    $row_store_sales['date']
                                                 );
                                             }
                                             ?>
@@ -413,7 +410,7 @@
                 <!-- adding form -->
                 <div id="id01" class="modal">
                     <span onclick="CloseAddCheckout()" class="close" title="Close Modal">&times;</span>
-                    <form class="modal-content" action="../store_sale-admin/store_sale-admin.php" method="POST" enctype="multipart/form-data">
+                    <form class="modal-content" action="store_sale-admin.php" method="POST" enctype="multipart/form-data">
                         <div id="survey_options">
                             <h1 class="title">Add customer sales via store</h1>
                             <p class="title">Please fill in this form to add a new Sales.</p>
