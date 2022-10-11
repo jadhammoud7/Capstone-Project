@@ -103,10 +103,22 @@ if ($product_name != "" && $product_price != 0 && $product_type != "" && $produc
         if (move_uploaded_file($_FILES['product_image']['tmp_name'], $target_file)) {
             $sales_number = 0;
             $product_image = $filename;
-            $stmt_add_new_product = $connection->prepare("INSERT INTO products(name, price, type, category, description, age, image, inventory, sales_number) VALUES (?,?,?,?,?,?,?,?,?)");
-            $stmt_add_new_product->bind_param("sisssssii", $product_name, $product_price, $product_type, $product_category, $product_desciption, $product_age, $product_image, $product_inventory, $sales_number);
+            date_default_timezone_set('Asia/Beirut');
+            $modified_on = date('Y-m-d h:i:s');
+            $modified_by = $row['first_name'] . ' ' . $row['last_name'];
+            $stmt_add_new_product = $connection->prepare("INSERT INTO products(name, price, type, category, description, age, image, inventory, sales_number, last_modified_by, last_modified_on) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+            $stmt_add_new_product->bind_param("sisssssiiss", $product_name, $product_price, $product_type, $product_category, $product_desciption, $product_age, $product_image, $product_inventory, $sales_number, $modified_by, $modified_on);
             $stmt_add_new_product->execute();
             $stmt_add_new_product->close();
+            $select_last_product_id = $connection->prepare("SELECT product_id FROM products ORDER BY product_id DESC LIMIT 1");
+            $select_last_product_id->execute();
+            $result_last_product_id = $select_last_product_id->get_result();
+            $row_last_product_id = $result_last_product_id->fetch_assoc();
+            $product_id = $row_last_product_id['product_id'];
+            $stmt_add_product_price_history = $connection->prepare("INSERT INTO history_product_prices(product_id, price, modified_by, modified_on) VALUES (?,?,?,?)");
+            $stmt_add_product_price_history->bind_param("iiss", $product_id, $product_price, $modified_by, $modified_on);
+            $stmt_add_product_price_history->execute();
+            $stmt_add_product_price_history->close();
             header("Location: product-admin.php?product-added=1");
         }
     }
