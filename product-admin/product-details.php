@@ -25,6 +25,10 @@ if (isset($_GET['product_id'])) {
     $stmt_select_product_dates = $connection->prepare("SELECT price, date FROM history_product_prices WHERE product_id = '" . $_GET['product_id'] . "'");
     $stmt_select_product_dates->execute();
     $result_product_dates = $stmt_select_product_dates->get_result();
+    $stmt_select_max_hist_price = $connection->prepare("SELECT MAX(price) as max_price FROM history_product_prices WHERE product_id = '" . $_GET['product_id'] . "'");
+    $stmt_select_max_hist_price->execute();
+    $result_max_price = $stmt_select_max_hist_price->get_result();
+    $row_max_price = $result_max_price->fetch_assoc();
 }
 
 $product_id = 0;
@@ -384,6 +388,7 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
 <script>
     var array_product_dates = [];
     var array_product_prices = [];
+    const max_price = $row_max_price['max_price'];
     <?php
     if (isset($result_product_dates)) {
         while ($row_product_dates = $result_product_dates->fetch_assoc()) {
@@ -421,7 +426,7 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
                 yAxes: [{
                     ticks: {
                         min: 0,
-                        max: 1000
+                        max: max_price
                     }
                 }]
             }
