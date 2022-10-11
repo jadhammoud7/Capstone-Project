@@ -22,13 +22,24 @@ if (isset($_GET['product_id'])) {
     $stmt_get_product->execute();
     $result_product = $stmt_get_product->get_result();
     $row_product = $result_product->fetch_assoc();
+
     $stmt_select_product_dates = $connection->prepare("SELECT * FROM history_product_prices WHERE product_id = '" . $_GET['product_id'] . "'");
     $stmt_select_product_dates->execute();
     $result_product_dates = $stmt_select_product_dates->get_result();
+
     $stmt_select_max_hist_price = $connection->prepare("SELECT MAX(price) as max_price FROM history_product_prices WHERE product_id = '" . $_GET['product_id'] . "'");
     $stmt_select_max_hist_price->execute();
     $result_max_price = $stmt_select_max_hist_price->get_result();
     $row_max_price = $result_max_price->fetch_assoc();
+
+    $stmt_select_product_sales = $connection->prepare("SELECT * FROM history_product_sales WHERE product_id = '" . $_GET['product_id'] . "'");
+    $stmt_select_product_sales->execute();
+    $result_product_sales = $stmt_select_product_sales->get_result();
+
+    $stmt_select_max_hist_sales = $connection->prepare("SELECT MAX(sales_number) as max_sales FROM history_product_sales WHERE product_id = '" . $_GET['product_id'] . "'");
+    $stmt_select_max_hist_sales->execute();
+    $result_max_sales = $stmt_select_max_hist_sales->get_result();
+    $row_max_sales = $result_max_sales->fetch_assoc();
 }
 
 $product_id = 0;
@@ -235,7 +246,14 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
 
         <main>
             <div style="margin-top: 30px;">
+                <div>
+                    <h3>Price History of Product "<?php echo $row_product['name']; ?>"</h3>
+                </div>
                 <canvas id="myLine" style="width:100%;max-width:700px;"></canvas>
+                <div>
+                    <h3>Sales History of Product "<?php echo $row_product['name']; ?>"</h3>
+                </div>
+                <canvas id="myLine2" style="width:100%;max-width:700px;"></canvas>
             </div>
             <!-- started with checkout form -->
             <div>
@@ -309,12 +327,6 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
                                                                         echo $row_product['description'];
                                                                     } ?></p>
                                             </div>
-
-
-                                            <!-- <input type="text" name="description" id="description" value="<?php if (isset($row_product)) {
-                                                                                                                    echo $row_product['description'];
-                                                                                                                } ?>" readonly class="is-valid">
-                                            <label for="description">Description</label> -->
                                         </div>
                                     </div>
 
@@ -343,6 +355,21 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
                                                                                                                     echo $row_product['sales_number'];
                                                                                                                 } ?>" readonly class="is-valid">
                                             <label for="sales_number">Sales Number</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-container-part-inputs">
+                                        <div class="input-container">
+                                            <input type="text" name="last_modified_by" id="last_modified_by" value="<?php if (isset($row_product)) {
+                                                                                                                        echo $row_product['last_modified_by'];
+                                                                                                                    } ?>" readonly class="is-valid">
+                                            <label for="last_modified_by">Last Modified By</label>
+                                        </div>
+                                        <div class="input-container">
+                                            <input type="text" name="last_modified_on" id="last_modified_on" value="<?php if (isset($row_product)) {
+                                                                                                                        echo $row_product['last_modified_on'];
+                                                                                                                    } ?>" readonly class="is-valid">
+                                            <label for="last_modified_on">Last Modified On</label>
                                         </div>
                                     </div>
                                     <!-- here to add upload file -->
@@ -387,52 +414,104 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
 <script>
-    var array_product_dates = [];
-    var array_product_prices = [];
-    const max_price = $row_max_price['max_price'];
     <?php
-    if (isset($result_product_dates)) {
-        while ($row_product_dates = $result_product_dates->fetch_assoc()) {
+    if (isset($_GET['product_id'])) {
     ?>
-            array_product_dates.push("<?php
-                                        echo $row_product_dates['date'];
-                                        ?>");
-            array_product_prices.push("<?php
-                                        echo $row_product_dates['price'];
-                                        ?>");
-    <?php
-        }
-    } ?>;
+        var array_product_dates = [];
+        var array_product_prices = [];
+        const max_price = <?php echo $row_max_price['max_price']; ?>;
+        <?php
+        if (isset($result_product_dates)) {
+            while ($row_product_dates = $result_product_dates->fetch_assoc()) {
+        ?>
+                array_product_dates.push("<?php
+                                            echo $row_product_dates['modified_on'];
+                                            ?>");
+                array_product_prices.push("<?php
+                                            echo $row_product_dates['price'];
+                                            ?>");
+        <?php
+            }
+        } ?>;
 
-    var xArray = array_product_dates;
-    var yArray = array_product_prices;
+        var xArray = array_product_dates;
+        var yArray = array_product_prices;
 
-    new Chart("myLine", {
-        type: "line",
-        data: {
-            labels: xArray,
-            datasets: [{
-                fill: false,
-                lineTension: 0,
-                backgroundColor: "rgba(0,0,255,1.0)",
-                borderColor: "rgba(0,0,255,0.1)",
-                data: yArray
-            }]
-        },
-        options: {
-            legend: {
-                display: false
-            },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        min: 0,
-                        max: max_price
-                    }
+        new Chart("myLine", {
+            type: "line",
+            data: {
+                labels: xArray,
+                datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgba(0,0,255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    data: yArray
                 }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            max: max_price
+                        }
+                    }]
+                }
+            }
+        });
+
+        var array_product_sales_dates = [];
+        var array_product_sales = [];
+        const max_sales = <?php echo $row_max_sales['max_sales']; ?>;
+        <?php
+        if (isset($result_product_sales)) {
+            while ($row_product_sales = $result_product_sales->fetch_assoc()) {
+        ?>
+                array_product_sales_dates.push("<?php
+                                                echo $row_product_sales['date'];
+                                                ?>");
+                array_product_sales.push("<?php
+                                            echo $row_product_sales['sales_number'];
+                                            ?>");
+        <?php
             }
         }
-    });
+        ?>;
+        var xArray2 = array_product_sales_dates;
+        var yArray2 = array_product_sales;
+
+        new Chart("myLine2", {
+            type: "line",
+            data: {
+                labels: xArray2,
+                datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgba(0,0,255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    data: yArray2
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            max: max_sales
+                        }
+                    }]
+                }
+            }
+        });
+    <?php
+    } ?>
 </script>
 
 </html>
