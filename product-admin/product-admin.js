@@ -226,6 +226,60 @@ product_sales_column.addEventListener('click', function SetSorting() {
     }
 });
 
+const product_last_modified_by_column = document.getElementById('product-last-modified-by-column');
+product_last_modified_by_column.addEventListener('click', function SetSorting() {
+    var product_last_modified_by_column_innerHTML = product_last_modified_by_column.innerHTML;
+    if (product_last_modified_by_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        product_last_modified_by_column.innerHTML = "Last Modified By <span class=\"las la-sort-up\"></span>";
+        sortTable(6, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Products by descending order of Last Modified By';
+        product_last_modified_by_column.title = 'Sort Last Modified By by ascending';
+    }
+    if (product_last_modified_by_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        product_last_modified_by_column.innerHTML = "Last Modified By <span class=\"las la-sort-down\"></span>";
+        sortTable(6, "asc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Products by ascending order of Last Modified By';
+        product_last_modified_by_column.title = 'Sort Last Modified By by descending';
+    }
+    if (product_last_modified_by_column_innerHTML == "Last Modified By") {
+        product_last_modified_by_column.innerHTML = "Last Modified By <span class=\"las la-sort-up\"></span>";
+        sortTable(6, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Products by descending order of Last Modified By';
+        product_last_modified_by_column.title = 'Sort Last Modified By by ascending';
+    }
+});
+
+const product_last_modified_on_column = document.getElementById('product-last-modified-on-column');
+product_last_modified_on_column.addEventListener('click', function SetSorting() {
+    var product_last_modified_on_column_innerHTML = product_last_modified_on_column.innerHTML;
+    if (product_last_modified_on_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        product_last_modified_on_column.innerHTML = "Last Modified On <span class=\"las la-sort-up\"></span>";
+        sortTable(7, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Products by descending order of Last Modified On';
+        product_last_modified_on_column.title = 'Sort Last Modified On by ascending';
+    }
+    if (product_last_modified_on_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        product_last_modified_on_column.innerHTML = "Last Modified On <span class=\"las la-sort-down\"></span>";
+        sortTable(7, "asc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Products by ascending order of Last Modified On';
+        product_last_modified_on_column.title = 'Sort Last Modified On by descending';
+    }
+    if (product_last_modified_on_column_innerHTML == "Last Modified On") {
+        product_last_modified_on_column.innerHTML = "Last Modified On <span class=\"las la-sort-up\"></span>";
+        sortTable(7, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Products by descending order of Last Modified On';
+        product_last_modified_on_column.title = 'Sort Last Modified On by ascending';
+    }
+});
+
+
+
 
 function sortTable(n, dir) {
     var table, rows, switching, i, x, y, shouldSwitch, switchcount = 0;

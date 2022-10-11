@@ -156,7 +156,7 @@ function get_all_checkouts_connection($checkout_id, $customer_id, $first_name, $
 
     echo $element;
 }
-function get_all_products($product_id, $name, $price, $type, $category, $inventory, $sales_number)
+function get_all_products($product_id, $name, $price, $type, $category, $inventory, $sales_number, $last_modified_by, $last_modified_on)
 {
     $element = "
     <tr class=\"hello\">
@@ -170,6 +170,8 @@ function get_all_products($product_id, $name, $price, $type, $category, $invento
         <td>$category</td>
         <td>$inventory</td>
         <td>$sales_number</td>
+        <td>$last_modified_by</td>
+        <td>$last_modified_on</td>
     </tr>
     ";
     echo $element;
