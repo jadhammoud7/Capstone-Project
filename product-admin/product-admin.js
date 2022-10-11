@@ -278,9 +278,6 @@ product_last_modified_on_column.addEventListener('click', function SetSorting() 
     }
 });
 
-
-
-
 function sortTable(n, dir) {
     var table, rows, switching, i, x, y, shouldSwitch, switchcount = 0;
     table = document.getElementById('products_table');

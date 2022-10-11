@@ -22,7 +22,7 @@ if (isset($_GET['product_id'])) {
     $stmt_get_product->execute();
     $result_product = $stmt_get_product->get_result();
     $row_product = $result_product->fetch_assoc();
-    $stmt_select_product_dates = $connection->prepare("SELECT price, date FROM history_product_prices WHERE product_id = '" . $_GET['product_id'] . "'");
+    $stmt_select_product_dates = $connection->prepare("SELECT * FROM history_product_prices WHERE product_id = '" . $_GET['product_id'] . "'");
     $stmt_select_product_dates->execute();
     $result_product_dates = $stmt_select_product_dates->get_result();
     $stmt_select_max_hist_price = $connection->prepare("SELECT MAX(price) as max_price FROM history_product_prices WHERE product_id = '" . $_GET['product_id'] . "'");
@@ -86,27 +86,28 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
         if (in_array($fileType, $allowTypes)) {
             if (move_uploaded_file($_FILES['product_image']['tmp_name'], $target_file)) {
                 $product_image = $filename;
-                $stmt_update_product = $connection->prepare("UPDATE products SET name='" . $product_name . "', price= '" . $product_price . "', type='" . $product_type . "', category='" . $product_category . "', description='" . $product_description . "', age='" . $product_age . "', image='" . $product_image . "', inventory='" . $product_inventory . "', sales_number='" . $product_sales . "' WHERE product_id='" . $product_id . "'");
+                date_default_timezone_set('Asia/Beirut');
+                $modified_on = date('Y-m-d h:i:s');
+                $modified_by = $row['first_name'] . ' ' . $row['last_name'];
+                $stmt_update_product = $connection->prepare("UPDATE products SET name='" . $product_name . "', price= '" . $product_price . "', type='" . $product_type . "', category='" . $product_category . "', description='" . $product_description . "', age='" . $product_age . "', image='" . $product_image . "', inventory='" . $product_inventory . "', sales_number='" . $product_sales . "', last_modified_by = '" . $modified_by . "', last_modified_on = '" . $modified_on . "' WHERE product_id='" . $product_id . "'");
                 $stmt_update_product->execute();
                 $stmt_update_product->close();
-                $currentDate = new DateTime();
-                $date = $currentDate->format('Y-m-d');
-                $stmt_add_product_price_history = $connection->prepare("INSERT INTO history_product_prices(product_id, price, date) VALUES (?,?,?)");
-                $stmt_add_product_price_history->bind_param("iis", $product_id, $product_price, $date);
+                $stmt_add_product_price_history = $connection->prepare("INSERT INTO history_product_prices(product_id, price, modified_by, modified_on) VALUES (?,?,?,?)");
+                $stmt_add_product_price_history->bind_param("iiss", $product_id, $product_price, $modified_by, $modified_on);
                 $stmt_add_product_price_history->execute();
                 $stmt_add_product_price_history->close();
                 header("Location: product-details.php?product-id=$product_id&product-updated=1");
             }
         }
     } else {
-        // echo $product_sales;
-        $stmt_update_product = $connection->prepare("UPDATE products SET name='" . $product_name . "', price= '" . $product_price . "', type='" . $product_type . "', category='" . $product_category . "', description='" . $product_description . "', age='" . $product_age . "', inventory='" . $product_inventory . "', sales_number='" . $product_sales . "' WHERE product_id='" . $product_id . "'");
+        date_default_timezone_set('Asia/Beirut');
+        $modified_on = date('Y-m-d h:i:s');
+        $modified_by = $row['first_name'] . ' ' . $row['last_name'];
+        $stmt_update_product = $connection->prepare("UPDATE products SET name='" . $product_name . "', price= '" . $product_price . "', type='" . $product_type . "', category='" . $product_category . "', description='" . $product_description . "', age='" . $product_age . "', inventory='" . $product_inventory . "', sales_number='" . $product_sales . "', last_modified_by = '" . $modified_by . "', last_modified_on = '" . $modified_on . "' WHERE product_id='" . $product_id . "'");
         $stmt_update_product->execute();
         $stmt_update_product->close();
-        $currentDate = new DateTime();
-        $date = $currentDate->format('Y-m-d');
-        $stmt_add_product_price_history = $connection->prepare("INSERT INTO history_product_prices(product_id, price, date) VALUES (?,?,?)");
-        $stmt_add_product_price_history->bind_param("iis", $product_id, $product_price, $date);
+        $stmt_add_product_price_history = $connection->prepare("INSERT INTO history_product_prices(product_id, price, modified_by, modified_on) VALUES (?,?,?,?)");
+        $stmt_add_product_price_history->bind_param("iiss", $product_id, $product_price, $modified_by, $modified_on);
         $stmt_add_product_price_history->execute();
         $stmt_add_product_price_history->close();
         header("Location: product-details.php?product-id=$product_id&product-updated=1");
