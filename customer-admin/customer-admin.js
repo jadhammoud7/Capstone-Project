@@ -205,29 +205,29 @@ city_column.addEventListener('click', function SetSorting() {
     }
 });
 
-const address_column = document.getElementById('address-column');
-address_column.addEventListener('click', function SetSorting() {
-    var address_column_innerHTML = address_column.innerHTML;
-    if (address_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
-        address_column.innerHTML = "Address <span class=\"las la-sort-up\"></span>";
+const loyalty_points_column = document.getElementById('loyalty-points-column');
+loyalty_points_column.addEventListener('click', function SetSorting() {
+    var loyalty_points_column_innerHTML = loyalty_points_column.innerHTML;
+    if (loyalty_points_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        loyalty_points_column.innerHTML = "Loyalty Points <span class=\"las la-sort-up\"></span>";
         sortTable(5, "desc");
         filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'Address by descending';
-        address_column.title = 'Sort Address by ascending';
+        table_sort.innerHTML = 'Customers by most to least loyal';
+        loyalty_points_column.title = 'Sort Loyalty Points by ascending';
     }
-    if (address_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
-        address_column.innerHTML = "Address <span class=\"las la-sort-down\"></span>";
+    if (loyalty_points_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        loyalty_points_column.innerHTML = "Loyalty Points <span class=\"las la-sort-down\"></span>";
         sortTable(5, "asc");
         filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'Address by ascending';
-        address_column.title = 'Sort Address by descending';
+        table_sort.innerHTML = 'Customers by least to most loyal';
+        loyalty_points_column.title = 'Sort Loyalty Points by descending';
     }
-    if (address_column_innerHTML == "Address") {
-        address_column.innerHTML = "Address <span class=\"las la-sort-up\"></span>";
+    if (loyalty_points_column_innerHTML == "Loyalty Points") {
+        loyalty_points_column.innerHTML = "Loyalty Points <span class=\"las la-sort-up\"></span>";
         sortTable(5, "desc");
         filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'Address by descending';
-        address_column.title = 'Sort Address by ascending';
+        table_sort.innerHTML = 'Customers by most to least loyal';
+        loyalty_points_column.title = 'Sort Loyalty Points by ascending';
     }
 });
 

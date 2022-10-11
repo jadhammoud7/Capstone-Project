@@ -88,20 +88,20 @@ function get_comments_connection($username, $comment)
     echo $element;
 }
 
-function get_all_customer_connection($customer_id, $first_name, $last_name, $username, $email, $phone_number, $city, $address, $date_of_birth)
+function get_all_customer_connection($customer_id, $first_name, $last_name, $username, $email, $phone_number, $city, $loyalty_points, $date_of_birth)
 {
     $element = "
     <tr>
         <td><a href='../customer-admin/customer-details.php?customer_id=$customer_id' class=\"customer_link\" title=\"See details about '$first_name $last_name'\">$first_name $last_name</a></td>
-        <td>$username</td>
-        <td>$email</td>
-        <td>$phone_number</td>
-        <td>$city</td>
-        <td>$address</td>
-        <td>$date_of_birth</td>
+        <td title=\"$username\">$username</td>
+        <td title=\"$email\">$email</td>
+        <td title=\"$phone_number\">$phone_number</td>
+        <td title=\"$city\">$city</td>
+        <td title=\"$loyalty_points\">$loyalty_points</td>
+        <td title=\"$date_of_birth\">$date_of_birth</td>
         <td>
         <a>
-            <button class=\"remove_cust\" onclick=\"OpenRemoveCustomerPopUp($customer_id, `$first_name`, `$last_name`)\" title=\"Remove customer '$first_name $last_name'?\">Remove</button>
+            <button class=\"remove_cust\" onclick=\"OpenRemoveCustomerPopUp($customer_id, `$first_name`, `$last_name`)\" title=\"Remove customer '$first_name $last_name'?\"><span class=\"las la-trash-alt\"></span> Remove</button>
         </a>
     </tr>
     ";

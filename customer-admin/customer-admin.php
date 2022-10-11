@@ -49,7 +49,7 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 //get all customer
 require_once("../php/admin_page_php.php");
-$query_customer = "SELECT customer_id, first_name, last_name, username, phone_number, email, date_of_birth, city, address FROM customers";
+$query_customer = "SELECT * FROM customers";
 $stmt_customer = $connection->prepare($query_customer);
 $stmt_customer->execute();
 $results_customer = $stmt_customer->get_result();
@@ -244,17 +244,10 @@ $results_location = $stmt_location->get_result();
             <div style="margin-top: 30px;">
                 <canvas id="myChart1" style="width:100%;max-width:600px; float:left;"></canvas>
                 <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-
-
             </div>
             <div class="recent-grid" style="display: block !important;">
 
                 <div class="projects">
-                    <div class="card">
-                        <div class="card-header">
-
-                        </div>
-                    </div>
                     <div class="card">
                         <div class="card-header">
                             <h3>Customers List</h3>
@@ -276,7 +269,7 @@ $results_location = $stmt_location->get_result();
                                             <td id="email-column" title="Sort Email by descending">Email</td>
                                             <td id="phone-number-column" title="Sort Phone Number by descending">Phone Number</td>
                                             <td id="city-column" title="Sort City by descending">City</td>
-                                            <td id="address-column" title="Sort Address by descending">Address</td>
+                                            <td id="loyalty-points-column" title="Sort Loyalty Points by descending">Loyalty Points</td>
                                             <td id="date-of-birth-column" title="Sort Date Of Birth by descending">Date of Birth</td>
                                             <td>Remove Customer</td>
                                         </tr>
@@ -292,7 +285,7 @@ $results_location = $stmt_location->get_result();
                                                 $row_customer['email'],
                                                 $row_customer['phone_number'],
                                                 $row_customer['city'],
-                                                $row_customer['address'],
+                                                $row_customer['loyalty_points'],
                                                 $row_customer['date_of_birth']
                                             );
                                         }
@@ -411,7 +404,7 @@ $results_location = $stmt_location->get_result();
             },
             title: {
                 display: true,
-                text: "Loaylty Customers"
+                text: "Loyalty Customers"
             }
         }
     });

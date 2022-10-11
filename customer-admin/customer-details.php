@@ -366,7 +366,7 @@ if (isset($_GET['customer_id'])) {
                                     </div>
 
                                     <div class="form-container-part-inputs">
-                                        <div class="input-container">
+                                        <div class="input-container" style="width: 100%;">
 
                                             <input type="text" name="address" id="address" value="<?php if (isset($row_customer)) {
                                                                                                         echo $row_customer['address'];
@@ -376,12 +376,19 @@ if (isset($_GET['customer_id'])) {
                                     </div>
 
                                     <div class="form-container-part-inputs">
-                                        <div class="input-container" style="width: 100%;">
+                                        <div class="input-container">
 
                                             <input type="text" name="username" id="username" value="<?php if (isset($row_customer)) {
                                                                                                         echo $row_customer['username'];
                                                                                                     } ?>" readonly class="is-valid">
                                             <label for="username">Username</label>
+                                        </div>
+                                        <div class="input-container">
+
+                                            <input type="text" name="loyalty_points" id="loyalty_points" value="<?php if (isset($row_customer)) {
+                                                                                                        echo $row_customer['loyalty_points'];
+                                                                                                    } ?>" readonly class="is-valid">
+                                            <label for="loyalty_points">Loyalty Points</label>
                                         </div>
                                     </div>
                                 </div>
