@@ -143,9 +143,16 @@ $stmt_top_products = $connection->prepare($query_top_products);
 $stmt_top_products->execute();
 $results_top_products = $stmt_top_products->get_result();
 
-
-// echo "<script>window.location='../product-admin/product-admin.php';</script>";
-
+//display history price for chosen product
+if (isset($_GET['product-id']) && isset($_GET['price-history'])) {
+    $stmt_select_product_prices_history = $connection->prepare("SELECT * FROM history_product_prices WHERE product_id = '" . $_GET['product-id'] . "'");
+    $stmt_select_product_prices_history->execute();
+    $result_history_product_prices = $stmt_select_product_prices_history->get_result();
+    $stmt_get_product = $connection->prepare("SELECT * FROM products WHERE product_id = '" . $_GET['product-id'] . "' ");
+    $stmt_get_product->execute();
+    $result_get_product = $stmt_get_product->get_result();
+    $row_get_product = $result_get_product->fetch_assoc();
+}
 ?>
 
 <!DOCTYPE html>
@@ -437,6 +444,44 @@ $results_top_products = $stmt_top_products->get_result();
                         <div class="clearfix">
                             <button type="submit" class="addproductbtn" title="Add new product"><strong>Add Product</strong></button>
                         </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- form of price history for product -->
+            <div id="price-history" class="modal">
+                <span onclick="CloseProductHistoryPrices()" class="close" title="Close Modal">&times;</span>
+                <form class="modal-content">
+                    <div class="container">
+                        <h1 class="title">Product Prices History</h1>
+                        <p class="title">Showing Prices History for product <?php echo $row_get_product['name']; ?></p>
+                        <br>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table width="100%" id="product_prices_history_table">
+                                    <thead>
+                                        <tr>
+                                            <td id="product-price-column" title="Sort Price by descending">Price</td>
+                                            <td id="product-last-modified-by-column" title="Sort Last Modified By by descending">Modified By</td>
+                                            <td id="product-last-modified-on-column" title="Sort Last Modified On by descending">Modified On</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        while ($row_product_prices_history = $result_history_product_prices->fetch_assoc()) {
+                                            get_all_product_history_prices(
+                                                $row_product_prices_history['price'],
+                                                $row_product_prices_history['modified_by'],
+                                                $row_product_prices_history['modified_on']
+                                            );
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
                 </form>
             </div>

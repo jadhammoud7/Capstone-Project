@@ -165,11 +165,26 @@ function get_all_products($product_id, $name, $price, $type, $category, $invento
                 $name
             </a>
         </td>
-        <td>$price</td>
+        <td>
+            <a href='product-admin.php?product-id=$product_id&price-history=1' class=\"customer_link\" title=\"See price history about '$name'\">
+            $price
+        </td>
         <td>$type</td>
         <td>$category</td>
         <td>$inventory</td>
         <td>$sales_number</td>
+        <td>$last_modified_by</td>
+        <td>$last_modified_on</td>
+    </tr>
+    ";
+    echo $element;
+}
+
+function get_all_product_history_prices($price, $last_modified_by, $last_modified_on)
+{
+    $element = "
+    <tr>
+        <td>$price</td>
         <td>$last_modified_by</td>
         <td>$last_modified_on</td>
     </tr>
