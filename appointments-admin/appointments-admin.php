@@ -11,101 +11,65 @@ if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'admin') {
 }
 $admin_id = $_SESSION['logged_id'];
 $query = "SELECT first_name, last_name FROM admins WHERE admin_id = $admin_id";
-if (strpos($query, "1=1") !== false) {
-    die("error, someone is trying to mess with us");
-} else {
-    $stmt = $connection->prepare($query);
-    $stmt->execute();
-    $results = $stmt->get_result();
-    $row = $results->fetch_assoc();
-}
+$stmt = $connection->prepare($query);
+$stmt->execute();
+$results = $stmt->get_result();
+$row = $results->fetch_assoc();
 
 
 //sum of all customers in appointments
 $query_total_customers_in_appointments = "SELECT DISTINCT customer_id FROM appointments";
-if (strpos($query_total_customers_in_appointments, "1=1") !== false) {
-    die("error, someone is trying to mess with us");
-} else {
-    $stmt_total_customers_in_appointments = $connection->prepare($query_total_customers_in_appointments);
-    $stmt_total_customers_in_appointments->execute();
-    $results_total_customers_in_appointments = $stmt_total_customers_in_appointments->get_result();
-}
-
+$stmt_total_customers_in_appointments = $connection->prepare($query_total_customers_in_appointments);
+$stmt_total_customers_in_appointments->execute();
+$results_total_customers_in_appointments = $stmt_total_customers_in_appointments->get_result();
 
 //count of all appointments
 $query_total_appointments = "SELECT COUNT(appointment_id) as total_appointments FROM appointments";
-if (strpos($query_total_appointments, "1=1") !== false) {
-    die("error, someone is trying to mess with us");
-} else {
-    $stmt_total_appointments = $connection->prepare($query_total_appointments);
-    $stmt_total_appointments->execute();
-    $results_total_appointments = $stmt_total_appointments->get_result();
-    $row_total_appointments = $results_total_appointments->fetch_assoc();
-}
-
+$stmt_total_appointments = $connection->prepare($query_total_appointments);
+$stmt_total_appointments->execute();
+$results_total_appointments = $stmt_total_appointments->get_result();
+$row_total_appointments = $results_total_appointments->fetch_assoc();
 
 //sum of all appointments price per hour
 $query_total_appointments_prices = "SELECT SUM(price_per_hour) as total_appointments_prices FROM appointments";
-if (strpos($query_total_appointments_prices, "1=1") !== false) {
-    die("error, someone is trying to mess with us");
-} else {
-    $stmt_total_appointments_prices = $connection->prepare($query_total_appointments_prices);
-    $stmt_total_appointments_prices->execute();
-    $results_total_appointments_prices = $stmt_total_appointments_prices->get_result();
-    $row_total_appointments_prices = $results_total_appointments_prices->fetch_assoc();
-}
-
+$stmt_total_appointments_prices = $connection->prepare($query_total_appointments_prices);
+$stmt_total_appointments_prices->execute();
+$results_total_appointments_prices = $stmt_total_appointments_prices->get_result();
+$row_total_appointments_prices = $results_total_appointments_prices->fetch_assoc();
 
 //get total appointments today
 $currentDate = new DateTime();
 $query_total_appointments_today = "SELECT COUNT(*) as total_appointments_today FROM appointments WHERE date LIKE '" . $currentDate->format('Y-m-d') . "'";
-if (strpos($query_total_appointments_today, "1=1") !== false) {
-    die("error, someone is trying to mess with us");
-} else {
-    $stmt_total_appointments_today = $connection->prepare($query_total_appointments_today);
-    $stmt_total_appointments_today->execute();
-    $results_total_appointments_today = $stmt_total_appointments_today->get_result();
-    $row_total_appointments_today = $results_total_appointments_today->fetch_assoc();
-}
+$stmt_total_appointments_today = $connection->prepare($query_total_appointments_today);
+$stmt_total_appointments_today->execute();
+$results_total_appointments_today = $stmt_total_appointments_today->get_result();
+$row_total_appointments_today = $results_total_appointments_today->fetch_assoc();
+
 
 //get all appointments
 require_once("../php/admin_page_php.php");
 $query_appointments = "SELECT appointment_id, customer_id, appointment_name, price_per_hour, date, hour, status FROM appointments";
-if (strpos($query_appointments, "1=1") !== false) {
-    die("error, someone is trying to mess with us");
-} else {
-    $stmt_appointments = $connection->prepare($query_appointments);
-    $stmt_appointments->execute();
-    $results_appointments = $stmt_appointments->get_result();
-}
-
+$stmt_appointments = $connection->prepare($query_appointments);
+$stmt_appointments->execute();
+$results_appointments = $stmt_appointments->get_result();
 
 //get count of appointments pending
 $status = "Pending";
 $query_get_pending_appointments = "SELECT COUNT(*) as total_pending_appointments FROM appointments WHERE status=?";
-if (strpos($query_get_pending_appointments, "1=1") !== false) {
-    die("error, someone is trying to mess with us");
-} else {
-    $stmt_get_pending_appointments = $connection->prepare($query_get_pending_appointments);
-    $stmt_get_pending_appointments->bind_param("s", $status);
-    $stmt_get_pending_appointments->execute();
-    $results_get_pending_appointments = $stmt_get_pending_appointments->get_result();
-    $row_get_pending_appointments = $results_get_pending_appointments->fetch_assoc();
-}
+$stmt_get_pending_appointments = $connection->prepare($query_get_pending_appointments);
+$stmt_get_pending_appointments->bind_param("s", $status);
+$stmt_get_pending_appointments->execute();
+$results_get_pending_appointments = $stmt_get_pending_appointments->get_result();
+$row_get_pending_appointments = $results_get_pending_appointments->fetch_assoc();
 
 //get count of appointments done work
 $status = "Done Work";
 $query_get_done_appointments = "SELECT COUNT(*) as total_done_appointments FROM appointments WHERE status=?";
-if (strpos($query_get_done_appointments, "1=1") !== false) {
-    die("error, someone is trying to mess with us");
-} else {
-    $stmt_get_done_appointments = $connection->prepare($query_get_done_appointments);
-    $stmt_get_done_appointments->bind_param("s", $status);
-    $stmt_get_done_appointments->execute();
-    $results_get_done_appointments = $stmt_get_done_appointments->get_result();
-    $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
-}
-
+$stmt_get_done_appointments = $connection->prepare($query_get_done_appointments);
+$stmt_get_done_appointments->bind_param("s", $status);
+$stmt_get_done_appointments->execute();
+$results_get_done_appointments = $stmt_get_done_appointments->get_result();
+$row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
 
 //updating working status from buttons
 if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
@@ -128,13 +92,9 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
 }
 //get all types of repairs
 $query_type_of_repairs = "SELECT repair_type as repair_type FROM repairs";
-if (strpos($query_type_of_repairs, "1=1") !== false) {
-    die("error, someone is trying to mess with us");
-} else {
-    $stmt_type_of_repairs = $connection->prepare($query_type_of_repairs);
-    $stmt_type_of_repairs->execute();
-    $results_type_of_repairs = $stmt_type_of_repairs->get_result();
-}
+$stmt_type_of_repairs = $connection->prepare($query_type_of_repairs);
+$stmt_type_of_repairs->execute();
+$results_type_of_repairs = $stmt_type_of_repairs->get_result();
 
 ?>
 
@@ -327,24 +287,20 @@ if (strpos($query_type_of_repairs, "1=1") !== false) {
                                         <?php
                                         while ($row_appointments = $results_appointments->fetch_assoc()) {
                                             $query_get_user = "SELECT first_name, last_name FROM customers WHERE customer_id = '" . $row_appointments['customer_id'] . "' ";
-                                            if (strpos($query_get_user, "1=1") !== false) {
-                                                die("error, someone is trying to mess with us");
-                                            } else {
-                                                $stmt_get_user = $connection->prepare($query_get_user);
-                                                $stmt_get_user->execute();
-                                                $results_get_user = $stmt_get_user->get_result();
-                                                $row_get_user = $results_get_user->fetch_assoc();
+                                            $stmt_get_user = $connection->prepare($query_get_user);
+                                            $stmt_get_user->execute();
+                                            $results_get_user = $stmt_get_user->get_result();
+                                            $row_get_user = $results_get_user->fetch_assoc();
 
-                                                echo get_appointment_in_admin_page_for_table_connection(
-                                                    $row_appointments['appointment_id'],
-                                                    $row_get_user['first_name'] . ' ' . $row_get_user['last_name'],
-                                                    $row_appointments['appointment_name'],
-                                                    $row_appointments['price_per_hour'],
-                                                    $row_appointments['date'],
-                                                    $row_appointments['hour'],
-                                                    $row_appointments['status'],
-                                                );
-                                            }
+                                            echo get_appointment_in_admin_page_for_table_connection(
+                                                $row_appointments['appointment_id'],
+                                                $row_get_user['first_name'] . ' ' . $row_get_user['last_name'],
+                                                $row_appointments['appointment_name'],
+                                                $row_appointments['price_per_hour'],
+                                                $row_appointments['date'],
+                                                $row_appointments['hour'],
+                                                $row_appointments['status'],
+                                            );
                                         }
                                         ?>
                                     </tbody>
@@ -401,20 +357,16 @@ if (strpos($query_type_of_repairs, "1=1") !== false) {
                                 ?>");
             <?php
             $query_repair_count = "SELECT COUNT(appointment_name) as repair_count FROM appointments WHERE appointment_name='" . $row_type_of_repairs['repair_type'] . "'";
-            if (strpos($query_repair_count, "1=1") !== false) {
-                die("error, someone is trying to mess with us");
-            } else {
-                $stmt_repair_count = $connection->prepare($query_repair_count);
-                $stmt_repair_count->execute();
-                $results_repair_count = $stmt_repair_count->get_result();
-                $row_repair_count = $results_repair_count->fetch_assoc();
+            $stmt_repair_count = $connection->prepare($query_repair_count);
+            $stmt_repair_count->execute();
+            $results_repair_count = $stmt_repair_count->get_result();
+            $row_repair_count = $results_repair_count->fetch_assoc();
             ?>
 
-                array_repair_count.push("<?php
-                                            echo $row_repair_count['repair_count'];
-                                            ?>");
+            array_repair_count.push("<?php
+                                        echo $row_repair_count['repair_count'];
+                                        ?>");
     <?php }
-        }
     }
     ?>;
     var xValues = type_array;

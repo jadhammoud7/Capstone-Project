@@ -12,170 +12,137 @@ if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'admin') {
 }
 $admin_id = $_SESSION['logged_id'];
 $query = "SELECT first_name, last_name FROM admins WHERE admin_id = '" . $admin_id . "' ";
-if (strpos($query, "1=1") !== false) {
-    die("error, someone is trying to mess with us");
-} else {
-    $stmt = $connection->prepare($query);
-    $stmt->execute();
-    $results = $stmt->get_result();
-    $row = $results->fetch_assoc();
-}
-
+$stmt = $connection->prepare($query);
+$stmt->execute();
+$results = $stmt->get_result();
+$row = $results->fetch_assoc();
 
 //sum of all customers
 $query_total_customers = "SELECT COUNT(customer_id) as count FROM customers";
-if (strpos($query_total_customers, "1=1") !== false) {
-    die("error, someone is trying to mess with us");
-} else {
-    $stmt_total_customers = $connection->prepare($query_total_customers);
-    $stmt_total_customers->execute();
-    $results_total_customers = $stmt_total_customers->get_result();
-    $row_total_customers = $results_total_customers->fetch_assoc();
-}
+$stmt_total_customers = $connection->prepare($query_total_customers);
+$stmt_total_customers->execute();
+$results_total_customers = $stmt_total_customers->get_result();
+$row_total_customers = $results_total_customers->fetch_assoc();
 
 //count of all appointments
 $query_total_appointments = "SELECT COUNT(appointment_id) as total_appointments FROM appointments";
-if (strpos($query_total_appointments, "1=1") !== false) {
-    die("error, someone is trying to mess with us");
-} else {
-    $stmt_total_appointments = $connection->prepare($query_total_appointments);
-    $stmt_total_appointments->execute();
-    $results_total_appointments = $stmt_total_appointments->get_result();
-    $row_total_appointments = $results_total_appointments->fetch_assoc();
-}
+$stmt_total_appointments = $connection->prepare($query_total_appointments);
+$stmt_total_appointments->execute();
+$results_total_appointments = $stmt_total_appointments->get_result();
+$row_total_appointments = $results_total_appointments->fetch_assoc();
 
 //sum of all appointments
 $query_total_profit = "SELECT SUM(total_price_including_tax) as total_profit FROM checkouts";
-if (strpos($query_total_profit, "1=1") !== false) {
-    die("error, someone is trying to mess with us");
-} else {
-    $stmt_total_profit = $connection->prepare($query_total_profit);
-    $stmt_total_profit->execute();
-    $results_total_profit = $stmt_total_profit->get_result();
-    $row_total_profit = $results_total_profit->fetch_assoc();
-}
+$stmt_total_profit = $connection->prepare($query_total_profit);
+$stmt_total_profit->execute();
+$results_total_profit = $stmt_total_profit->get_result();
+$row_total_profit = $results_total_profit->fetch_assoc();
 
 //get total checkouts made
 $query_total_checkouts = "SELECT COUNT(checkout_id) as total_checkout FROM checkouts";
-if (strpos($query_total_checkouts, "1=1") !== false) {
-    die("error, someone is trying to mess with us");
-} else {
-    $stmt_total_checkouts = $connection->prepare($query_total_checkouts);
-    $stmt_total_checkouts->execute();
-    $results_total_checkouts = $stmt_total_checkouts->get_result();
-    $row_total_checkouts = $results_total_checkouts->fetch_assoc();
-}
+$stmt_total_checkouts = $connection->prepare($query_total_checkouts);
+$stmt_total_checkouts->execute();
+$results_total_checkouts = $stmt_total_checkouts->get_result();
+$row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 //get all customer
 require_once("../php/admin_page_php.php");
 $query_admins = "SELECT admin_id, first_name, last_name, email_address, phone_number, username, password FROM admins";
-if (strpos($query_total_checkouts, "1=1") !== false) {
-    die("error, someone is trying to mess with us");
-} else {
-    $stmt_admins = $connection->prepare($query_admins);
-    $stmt_admins->execute();
-    $results_admins = $stmt_admins->get_result();
+$stmt_admins = $connection->prepare($query_admins);
+$stmt_admins->execute();
+$results_admins = $stmt_admins->get_result();
 
-    if (isset($_POST["first_name"]) && $_POST["first_name"] != "") {
-        $first_name = $_POST["first_name"];
-        $_SESSION['first_name'] = $first_name;
-        for ($i = 0; $i < strlen($first_name); $i++) {
-            if (is_numeric($first_name[$i])) {
-                $_SESSION['first_name_error'] = "First Name should not contain numbers";
-                header("Location: admin-admin.php?open_add_user=true");
-                die("WRONG first name");
-            }
-        }
-    }
-    if (isset($_POST["last_name"]) && $_POST["last_name"] != "") {
-        $last_name = $_POST["last_name"];
-        $_SESSION['last_name'] = $last_name;
-        for ($i = 0; $i < strlen($last_name); $i++) {
-            if (is_numeric($last_name[$i])) {
-                $_SESSION['last_name_error'] = "Last Name should not contain numbers";
-                header("Location: ../admin-admin/admin-admin.php?open_add_user=true");
-                die("WRONG last name");
-            }
-        }
-    }
-
-    if (isset($_POST["email"]) && $_POST["email"] != "") {
-        $email = $_POST["email"];
-        $_SESSION['email'] = $email;
-        if (!str_contains($email, ".com") && !str_contains($email, "@")) {
-            $_SESSION['email_error'] = "Email is invalid";
+if (isset($_POST["first_name"]) && $_POST["first_name"] != "") {
+    $first_name = $_POST["first_name"];
+    $_SESSION['first_name'] = $first_name;
+    for ($i = 0; $i < strlen($first_name); $i++) {
+        if (is_numeric($first_name[$i])) {
+            $_SESSION['first_name_error'] = "First Name should not contain numbers";
             header("Location: admin-admin.php?open_add_user=true");
-            die("WRONG email");
+            die("WRONG first name");
         }
     }
-
-    if (isset($_POST["phone_number"]) && $_POST["phone_number"] != "") {
-        $phone_number = $_POST["phone_number"];
-        $_SESSION['phone_number'] = $phone_number;
-        for ($j = 0; $j < strlen($phone_number); $j++) {
-            if (!is_numeric($phone_number[$j])) {
-                $_SESSION['phone_number_error'] = "Phone number should not contain any characters other than numbers";
-                header("Location: admin-admin.php?open_add_user=true");
-                die("WRONG Phone Number");
-            }
-        }
-    }
-
-    if (isset($_POST["username"]) && $_POST["username"] != "") {
-        $username = $_POST["username"];
-        $_SESSION['username'] = $username;
-        $select_check_username = $connection->prepare("SELECT * FROM admins WHERE username = '" . $username . "'");
-        if (strpos($select_check_username, "1=1") !== false) {
-            die("error, someone is trying to mess with us");
-        } else {
-            $select_check_username->execute();
-            $results_check_username = $select_check_username->get_result();
-            $data_check_username = $results_check_username->fetch_assoc();
-
-            if (!empty($data_check_username)) {
-                $_SESSION['username_error'] = "Username is already taken. Try another one.";
-                header("Location: admin-admin.php?open_add_user=true");
-                die("WRONG username");
-            }
-            if (strlen($username) < 5) {
-                $_SESSION['username_error'] = "Username should be of length 5 minimum";
-                header("Location: admin-admin.php?open_add_user=true");
-                die("WRONG username");
-            }
-        }
-    }
-
-    if (isset($_POST["password"]) && $_POST["password"] != "") {
-        $password_text = $_POST["password"];
-        $_SESSION['password'] = $password_text;
-        if (strlen($password_text) < 8) {
-            $_SESSION['password_error'] = "Password should be of length 8 minimum";
-            header("Location: admin-admin.php?open_add_user=true");
-            die("WRONG password");
-        }
-        if (is_numeric($password_text)) {
-            $_SESSION['password_error'] = "Password should not be numeric, should contain characters";
-            header("Location: admin-admin.php?open_add_user=true");
-            die("WRONG password");
-        }
-        $password = hash("sha256", $password_text);
-    }
-
-    $stmt_add_new_admin = $connection->prepare("INSERT INTO admins(first_name, last_name, email_address, phone_number, username, password) VALUES (?,?,?,?,?,?)");
-    $stmt_add_new_admin->bind_param("ssssss", $first_name, $last_name, $email, $phone_number, $username, $password);
-    $stmt_add_new_admin->execute();
-    $stmt_add_new_admin->close();
 }
+if (isset($_POST["last_name"]) && $_POST["last_name"] != "") {
+    $last_name = $_POST["last_name"];
+    $_SESSION['last_name'] = $last_name;
+    for ($i = 0; $i < strlen($last_name); $i++) {
+        if (is_numeric($last_name[$i])) {
+            $_SESSION['last_name_error'] = "Last Name should not contain numbers";
+            header("Location: ../admin-admin/admin-admin.php?open_add_user=true");
+            die("WRONG last name");
+        }
+    }
+}
+
+if (isset($_POST["email"]) && $_POST["email"] != "") {
+    $email = $_POST["email"];
+    $_SESSION['email'] = $email;
+    if (!str_contains($email, ".com") && !str_contains($email, "@")) {
+        $_SESSION['email_error'] = "Email is invalid";
+        header("Location: admin-admin.php?open_add_user=true");
+        die("WRONG email");
+    }
+}
+
+if (isset($_POST["phone_number"]) && $_POST["phone_number"] != "") {
+    $phone_number = $_POST["phone_number"];
+    $_SESSION['phone_number'] = $phone_number;
+    for ($j = 0; $j < strlen($phone_number); $j++) {
+        if (!is_numeric($phone_number[$j])) {
+            $_SESSION['phone_number_error'] = "Phone number should not contain any characters other than numbers";
+            header("Location: admin-admin.php?open_add_user=true");
+            die("WRONG Phone Number");
+        }
+    }
+}
+
+if (isset($_POST["username"]) && $_POST["username"] != "") {
+    $username = $_POST["username"];
+    $_SESSION['username'] = $username;
+    $select_check_username = $connection->prepare("SELECT * FROM admins WHERE username = '" . $username . "'");
+    $select_check_username->execute();
+    $results_check_username = $select_check_username->get_result();
+    $data_check_username = $results_check_username->fetch_assoc();
+
+    if (!empty($data_check_username)) {
+        $_SESSION['username_error'] = "Username is already taken. Try another one.";
+        header("Location: admin-admin.php?open_add_user=true");
+        die("WRONG username");
+    }
+    if (strlen($username) < 5) {
+        $_SESSION['username_error'] = "Username should be of length 5 minimum";
+        header("Location: admin-admin.php?open_add_user=true");
+        die("WRONG username");
+    }
+}
+
+if (isset($_POST["password"]) && $_POST["password"] != "") {
+    $password_text = $_POST["password"];
+    $_SESSION['password'] = $password_text;
+    if (strlen($password_text) < 8) {
+        $_SESSION['password_error'] = "Password should be of length 8 minimum";
+        header("Location: admin-admin.php?open_add_user=true");
+        die("WRONG password");
+    }
+    if (is_numeric($password_text)) {
+        $_SESSION['password_error'] = "Password should not be numeric, should contain characters";
+        header("Location: admin-admin.php?open_add_user=true");
+        die("WRONG password");
+    }
+    $password = hash("sha256", $password_text);
+}
+
+$stmt_add_new_admin = $connection->prepare("INSERT INTO admins(first_name, last_name, email_address, phone_number, username, password) VALUES (?,?,?,?,?,?)");
+$stmt_add_new_admin->bind_param("ssssss", $first_name, $last_name, $email, $phone_number, $username, $password);
+$stmt_add_new_admin->execute();
+$stmt_add_new_admin->close();
 
 //delete customer
 if (isset($_GET['getAdminIDtoRemove'])) {
     $remove_admin_id = $_GET['getAdminIDtoRemove'];
     $stmt_delete_admin = $connection->prepare("DELETE FROM admins WHERE admin_id='" . $remove_admin_id . "' ");
-    if (strpos($stmt_delete_admin, "1=1") !== false) {
-        die("error, someone is trying to mess with us");
-    } else {
-        $stmt_delete_admin->execute();
-    }
+    $stmt_delete_admin->execute();
 }
 
 ?>
