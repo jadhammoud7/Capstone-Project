@@ -147,6 +147,18 @@
                     $stmt_insert_store_sales->bind_param("issi", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_price);
                     $stmt_insert_store_sales->execute();
                     $stmt_insert_store_sales->close();
+
+                    $stmt_select_product = $connection->prepare("SELECT product_id FROM products WHERE name = '" . $product_name[$x] . "'");
+                    $stmt_select_product->execute();
+                    $result_product_id = $stmt_select_product->get_result();
+                    $row_product_id = $result_product_id->fetch_assoc();
+
+                    $product_id = $row_product_id['product_id'];
+                    date_default_timezone_set('Asia/Beirut');
+                    $date = date('Y-m-d h:i:s');
+                    $stmt_insert_product_sales_history = $connection->prepare("INSERT INTO history_product_sales(product_id, sales_number, date) VALUES (?,?,?)");
+                    $stmt_insert_product_sales_history->bind_param("iis", $product_id, $quantity, $date);
+                    $stmt_insert_product_sales_history->execute();
                 }
             }
         }
