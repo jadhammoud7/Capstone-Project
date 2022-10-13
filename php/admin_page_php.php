@@ -171,7 +171,10 @@ function get_all_products($product_id, $name, $price, $type, $category, $invento
         </td>
         <td>$type</td>
         <td>$category</td>
-        <td>$inventory</td>
+        <td>
+            <a href='product-admin.php?product-id=$product_id&inventory-history=1' class=\"customer_link\" title=\"See inventory history about '$name'\">
+            $inventory
+        </td>
         <td>$sales_number</td>
         <td>$last_modified_by</td>
         <td>$last_modified_on</td>
@@ -180,13 +183,25 @@ function get_all_products($product_id, $name, $price, $type, $category, $invento
     echo $element;
 }
 
-function get_all_product_history_prices($price, $last_modified_by, $last_modified_on)
+function get_all_product_history_prices($price, $modified_by, $modified_on)
 {
     $element = "
     <tr>
         <td>$price</td>
-        <td>$last_modified_by</td>
-        <td>$last_modified_on</td>
+        <td>$modified_by</td>
+        <td>$modified_on</td>
+    </tr>
+    ";
+    echo $element;
+}
+
+function get_all_product_history_inventory($inventory, $modified_by, $modified_on)
+{
+    $element = "
+    <tr>
+        <td>$inventory</td>
+        <td>$modified_by</td>
+        <td>$modified_on</td>
     </tr>
     ";
     echo $element;

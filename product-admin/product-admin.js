@@ -27,19 +27,34 @@ function CloseAddProduct() {
     gift_div.style.display = "none";
 }
 
-if(window.location.href.includes('price-history')){
+if (window.location.href.includes('price-history')) {
     OpenProductHistoryPrices();
 }
 
-function OpenProductHistoryPrices(){
+function OpenProductHistoryPrices() {
     const product_history_prices = document.getElementById('price-history');
     product_history_prices.style.display = "block";
 }
 
-function CloseProductHistoryPrices(){
+function CloseProductHistoryPrices() {
     window.location.href = 'product-admin.php';
     const product_history_prices = document.getElementById('price-history');
     product_history_prices.style.display = "none";
+}
+
+if (window.location.href.includes('inventory-history')) {
+    OpenProductHistoryInventory();
+}
+
+function OpenProductHistoryInventory() {
+    const product_history_inventory = document.getElementById('inventory-history');
+    product_history_inventory.style.display = 'block';
+}
+
+function CloseProductHistoryInventory() {
+    window.location.href = 'product-admin.php';
+    const product_history_inventory = document.getElementById('inventory-history');
+    product_history_inventory.style.display = 'none';
 }
 
 var admin_id;

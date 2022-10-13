@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 11, 2022 at 12:41 PM
+-- Generation Time: Oct 13, 2022 at 11:39 PM
 -- Server version: 8.0.23
 -- PHP Version: 8.0.2
 
@@ -223,6 +223,26 @@ CREATE TABLE `favorites_customer_product` (
 
 INSERT INTO `favorites_customer_product` (`customer_id`, `product_id`) VALUES
 (4, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `history_product_inventory`
+--
+
+CREATE TABLE `history_product_inventory` (
+  `product_id` int NOT NULL,
+  `inventory` int NOT NULL,
+  `modified_by` varchar(50) NOT NULL,
+  `modified_on` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `history_product_inventory`
+--
+
+INSERT INTO `history_product_inventory` (`product_id`, `inventory`, `modified_by`, `modified_on`) VALUES
+(1, 98, '', '');
 
 -- --------------------------------------------------------
 

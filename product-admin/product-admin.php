@@ -148,6 +148,19 @@ if (isset($_GET['product-id']) && isset($_GET['price-history'])) {
     $stmt_select_product_prices_history = $connection->prepare("SELECT * FROM history_product_prices WHERE product_id = '" . $_GET['product-id'] . "'");
     $stmt_select_product_prices_history->execute();
     $result_history_product_prices = $stmt_select_product_prices_history->get_result();
+
+    $stmt_get_product = $connection->prepare("SELECT * FROM products WHERE product_id = '" . $_GET['product-id'] . "' ");
+    $stmt_get_product->execute();
+    $result_get_product = $stmt_get_product->get_result();
+    $row_get_product = $result_get_product->fetch_assoc();
+}
+
+//display history inventory for chosen product
+if (isset($_GET['product-id']) && isset($_GET['inventory-history'])) {
+    $stmt_select_product_inventory_history = $connection->prepare("SELECT * FROM history_product_inventory WHERE product_id = '" . $_GET['product-id'] . "'");
+    $stmt_select_product_inventory_history->execute();
+    $result_product_history_inventory = $stmt_select_product_inventory_history->get_result();
+
     $stmt_get_product = $connection->prepare("SELECT * FROM products WHERE product_id = '" . $_GET['product-id'] . "' ");
     $stmt_get_product->execute();
     $result_get_product = $stmt_get_product->get_result();
@@ -474,6 +487,44 @@ if (isset($_GET['product-id']) && isset($_GET['price-history'])) {
                                                 $row_product_prices_history['price'],
                                                 $row_product_prices_history['modified_by'],
                                                 $row_product_prices_history['modified_on']
+                                            );
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+            <!-- form of inventory history for product -->
+            <div id="inventory-history" class="modal">
+                <span onclick="CloseProductHistoryInventory()" class="close" title="Close Modal">&times;</span>
+                <form class="modal-content">
+                    <div class="container">
+                        <h1 class="title">Product Inventory History</h1>
+                        <p class="title">Showing Inventory History for product <?php echo $row_get_product['name']; ?></p>
+                        <br>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table width="100%" id="product_prices_history_table">
+                                    <thead>
+                                        <tr>
+                                            <td id="product-price-column" title="Sort Inventory by descending">Inventory</td>
+                                            <td id="product-last-modified-by-column" title="Sort Last Modified By by descending">Modified By</td>
+                                            <td id="product-last-modified-on-column" title="Sort Last Modified On by descending">Modified On</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        while ($row_product_inventory_history = $result_product_history_inventory->fetch_assoc()) {
+                                            get_all_product_history_inventory(
+                                                $row_product_inventory_history['inventory'],
+                                                $row_product_inventory_history['modified_by'],
+                                                $row_product_inventory_history['modified_on']
                                             );
                                         }
                                         ?>
