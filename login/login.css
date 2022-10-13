@@ -150,10 +150,6 @@ input[type="button"] {
   margin: 20px auto;
 }
 
-#username_error {
-  display: none;
-}
-
-#password_error {
+#login_error {
   display: none;
 }
