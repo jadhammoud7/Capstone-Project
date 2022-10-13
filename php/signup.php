@@ -61,7 +61,7 @@ if (isset($_POST["address"]) && $_POST["address"] != "") {
         die("WRONG address");
     }
     if (strlen($address) < 10) {
-        $_SESSION['address_error'] = "Address should be of lenght 10 minimum";
+        $_SESSION['address_error'] = "Address should be of length 10 minimum, be specific";
         header("Location: ../signup/signup.php");
         die("WRONG address");
     }
@@ -69,9 +69,9 @@ if (isset($_POST["address"]) && $_POST["address"] != "") {
 
 if (isset($_POST["city"]) && $_POST["city"] != "") {
     $city = $_POST["city"];
-    $city1="";
+    $city1 = "";
     $_SESSION['city'] = $city;
-    $city1=strtolower($city);
+    $city1 = strtolower($city);
     if (is_numeric($city)) {
         $_SESSION['city_error'] = "City should not be numeric";
         header("Location: ../signup/signup.php");
@@ -113,24 +113,26 @@ if (isset($_POST["password"]) && $_POST["password"] != "") {
         header("Location: ../signup/signup.php");
         die("WRONG password");
     }
+    if (!str_contains($password_text, '@') && !str_contains($password_text, '_') && !str_contains($password_text, "-") && !str_contains($password_text, ".")) {
+        $_SESSION['password_error'] = 'Password should contain special characters such as "@", "_", "-", or "."';
+        header("Location: ../signup/signup.php");
+        die("WRONG password");
+    }
     $password = hash("sha256", $password_text);
 }
 
-$mysql = $connection->prepare("INSERT INTO customers(first_name, last_name, email, date_of_birth, phone_number, address,city, username, password) VALUES (?,?,?,?,?,?,?,?,?)");
-$mysql->bind_param("sssssssss", $first_name, $last_name, $email, $date_of_birth, $phone_number, $address,$city1, $username, $password);
-$mysql->execute();
-$mysql->close();
+$stmt_add_new_customer = $connection->prepare("INSERT INTO customers(first_name, last_name, email, date_of_birth, phone_number, address,city, username, password) VALUES (?,?,?,?,?,?,?,?,?)");
+$stmt_add_new_customer->bind_param("sssssssss", $first_name, $last_name, $email, $date_of_birth, $phone_number, $address, $city1, $username, $password);
+$stmt_add_new_customer->execute();
+$stmt_add_new_customer->close();
 // header("Location:../home-page/home-page.php");
 
 //getting the id of this user to that when he/she has signed up there id will be saved
-$statement1 = $connection->prepare("SELECT customer_id FROM customers WHERE username = '" . $username . "' ");
-$statement1->execute();
-$statement_result1 = $statement1->get_result();
-$data1 = $statement_result1->fetch_assoc();
+$stmt_select_customer_id = $connection->prepare("SELECT customer_id FROM customers WHERE username = '" . $username . "' ");
+$stmt_select_customer_id->execute();
+$result_customer_id = $stmt_select_customer_id->get_result();
+$row_customer_id = $result_customer_id->fetch_assoc();
 
-$logged_id1 = $data1['customer_id'];
+$logged_id1 = $row_customer_id['customer_id'];
 $_SESSION['logged_id'] = $logged_id1;
 echo "<script>window.location='../signup/signup.php?account_created=true';</script>";
-
-// echo "the id of the logged user is :", $_SESSION['logged_id'];
-//saving which user is logged in
