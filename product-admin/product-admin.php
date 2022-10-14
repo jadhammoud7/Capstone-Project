@@ -93,6 +93,10 @@ if (isset($_POST['product_inventory'])) {
     $product_inventory = $_POST['product_inventory'];
 }
 
+if (isset($_POST['product_sales'])) {
+    $product_sales_number = $_POST['product_sales'];
+}
+
 if ($product_name != "" && $product_price != 0 && $product_type != "" && $product_category != "" && $product_desciption != "" && $product_age != "" && $product_inventory != 0) {
     $target_dir = "../images/";
     $filename = basename($_FILES['product_image']['name']);
@@ -101,24 +105,45 @@ if ($product_name != "" && $product_price != 0 && $product_type != "" && $produc
     $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
     if (in_array($fileType, $allowTypes)) {
         if (move_uploaded_file($_FILES['product_image']['tmp_name'], $target_file)) {
-            $sales_number = 0;
             $product_image = $filename;
             date_default_timezone_set('Asia/Beirut');
             $modified_on = date('Y-m-d h:i:s');
             $modified_by = $row['first_name'] . ' ' . $row['last_name'];
+
+            //insert into table products
             $stmt_add_new_product = $connection->prepare("INSERT INTO products(name, price, type, category, description, age, image, inventory, sales_number, last_modified_by, last_modified_on) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-            $stmt_add_new_product->bind_param("sisssssiiss", $product_name, $product_price, $product_type, $product_category, $product_desciption, $product_age, $product_image, $product_inventory, $sales_number, $modified_by, $modified_on);
+            $stmt_add_new_product->bind_param("sisssssiiss", $product_name, $product_price, $product_type, $product_category, $product_desciption, $product_age, $product_image, $product_inventory, $product_sales_number, $modified_by, $modified_on);
             $stmt_add_new_product->execute();
             $stmt_add_new_product->close();
+
+            //select last product id
             $select_last_product_id = $connection->prepare("SELECT product_id FROM products ORDER BY product_id DESC LIMIT 1");
             $select_last_product_id->execute();
             $result_last_product_id = $select_last_product_id->get_result();
             $row_last_product_id = $result_last_product_id->fetch_assoc();
             $product_id = $row_last_product_id['product_id'];
-            $stmt_add_product_price_history = $connection->prepare("INSERT INTO history_product_prices(product_id, price, modified_by, modified_on) VALUES (?,?,?,?)");
-            $stmt_add_product_price_history->bind_param("iiss", $product_id, $product_price, $modified_by, $modified_on);
+
+            //insert into history prices current price
+            $price_change = '0';
+            $stmt_add_product_price_history = $connection->prepare("INSERT INTO history_product_prices(product_id, price, price_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
+            $stmt_add_product_price_history->bind_param("iisss", $product_id, $product_price, $price_change, $modified_by, $modified_on);
             $stmt_add_product_price_history->execute();
             $stmt_add_product_price_history->close();
+
+            //insert into history inventory current inventory
+            $inventory_change = '0';
+            $stmt_add_product_inventory_history = $connection->prepare("INSERT INTO history_product_inventory(product_id, inventory, inventory_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
+            $stmt_add_product_inventory_history->bind_param("iisss", $product_id, $product_inventory, $inventory_change, $modified_by, $modified_on);
+            $stmt_add_product_inventory_history->execute();
+            $stmt_add_product_inventory_history->close();
+
+            //insert into histoy sales current sales 0
+            $sales_change = '0';
+            $stmt_add_product_sales_history = $connection->prepare("INSERT INTO history_product_sales(product_id, sales_number, sales_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
+            $stmt_add_product_sales_history->bind_param("iisss", $product_id, $product_sales_number, $sales_change, $modified_by, $modified_on);
+            $stmt_add_product_sales_history->execute();
+            $stmt_add_product_sales_history->close();
+
             header("Location: product-admin.php?product-added=1");
         }
     }
@@ -440,18 +465,23 @@ if (isset($_GET['product_id']) && isset($_GET['inventory_history'])) {
                         <br><br>
 
                         <label for="product_desciption"><b>Desciption</b></label>
-                        <input type="text" placeholder="Enter product's desciption" name="product_desciption" id="product_desciption" value="" required>
+                        <input type="text" title="Enter product's desciption" placeholder="Enter product's desciption" name="product_desciption" id="product_desciption" value="" required>
 
                         <label for="product_age"><b>Age Restriction</b></label>
-                        <input type="text" placeholder="Enter product's age restriction" name="product_age" id="product_age" value="" required>
+                        <input type="text" title="Enter product's age restriction" placeholder="Enter product's age restriction" name="product_age" id="product_age" value="" required>
 
                         <label for="product_inventory"><b>Current Inventory:</b></label><br>
-                        <input type="number" placeholder="Enter product's current inventory in stock" name="product_inventory" id="product_inventory" style="height: 35px;" value="" required>
+                        <input type="number" title="Enter product's current inventory in stock" placeholder="Enter product's current inventory in stock" name="product_inventory" id="product_inventory" style="height: 35px;" value="" required>
+
+                        <br><br>
+
+                        <label for="product_sales"><b>Current Sales Number:</b></label><br>
+                        <input type="number" title="Enter product's current sales number (if any, else 0)" placeholder="Enter product's current sales number (if any, else 0)" name="product_sales" id="product_sales" style="height: 35px;" value="" required>
 
                         <br><br>
 
                         <label><b>Upload Product Image:</b></label>
-                        <input type="file" name="product_image" id="product_image" value="" required>
+                        <input type="file" title="Choose from your files an image for the product" name="product_image" id="product_image" value="" required>
                         <br>
 
                         <div class="clearfix">
