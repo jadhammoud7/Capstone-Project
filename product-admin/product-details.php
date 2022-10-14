@@ -23,23 +23,38 @@ if (isset($_GET['product_id'])) {
     $result_product = $stmt_get_product->get_result();
     $row_product = $result_product->fetch_assoc();
 
+    //select history prices for product
     $stmt_select_product_dates = $connection->prepare("SELECT * FROM history_product_prices WHERE product_id = '" . $_GET['product_id'] . "'");
     $stmt_select_product_dates->execute();
     $result_product_dates = $stmt_select_product_dates->get_result();
 
+    //select max history price for product
     $stmt_select_max_hist_price = $connection->prepare("SELECT MAX(price) as max_price FROM history_product_prices WHERE product_id = '" . $_GET['product_id'] . "'");
     $stmt_select_max_hist_price->execute();
     $result_max_price = $stmt_select_max_hist_price->get_result();
     $row_max_price = $result_max_price->fetch_assoc();
 
+    //select history sales for product
     $stmt_select_product_sales = $connection->prepare("SELECT * FROM history_product_sales WHERE product_id = '" . $_GET['product_id'] . "'");
     $stmt_select_product_sales->execute();
     $result_product_sales = $stmt_select_product_sales->get_result();
 
+    //select max history sales for product
     $stmt_select_max_hist_sales = $connection->prepare("SELECT MAX(sales_number) as max_sales FROM history_product_sales WHERE product_id = '" . $_GET['product_id'] . "'");
     $stmt_select_max_hist_sales->execute();
     $result_max_sales = $stmt_select_max_hist_sales->get_result();
     $row_max_sales = $result_max_sales->fetch_assoc();
+
+    //select history inventory for product
+    $stmt_select_product_inventory = $connection->prepare("SELECT * FROM history_product_inventory WHERE product_id = '" . $_GET['product_id'] . "'");
+    $stmt_select_product_inventory->execute();
+    $result_product_inventories = $stmt_select_product_inventory->get_result();
+
+    //select max history inventory for product
+    $stmt_select_max_hist_inventory = $connection->prepare("SELECT MAX(inventory) as max_inventory FROM history_product_inventory WHERE product_id = '" . $_GET['product_id'] . "'");
+    $stmt_select_max_hist_inventory->execute();
+    $result_max_inventory = $stmt_select_max_hist_inventory->get_result();
+    $row_max_inventory = $result_max_inventory->fetch_assoc();
 }
 
 $product_id = 0;
@@ -246,14 +261,9 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
 
         <main>
             <div style="margin-top: 30px;">
-                <div>
-                    <h3>Price History of Product "<?php echo $row_product['name']; ?>"</h3>
-                </div>
                 <canvas id="myLine" style="width:100%;max-width:700px;"></canvas>
-                <div>
-                    <h3>Sales History of Product "<?php echo $row_product['name']; ?>"</h3>
-                </div>
                 <canvas id="myLine2" style="width:100%;max-width:700px;"></canvas>
+                <canvas id="myLine3" style="width:100%;max-width:700px;"></canvas>
             </div>
             <!-- started with checkout form -->
             <div>
@@ -453,6 +463,10 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
                 legend: {
                     display: false
                 },
+                title: {
+                    display: true,
+                    text: "Price History of Product '<?php echo $row_product['name']; ?>'"
+                },
                 scales: {
                     yAxes: [{
                         ticks: {
@@ -472,7 +486,7 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
             while ($row_product_sales = $result_product_sales->fetch_assoc()) {
         ?>
                 array_product_sales_dates.push("<?php
-                                                echo $row_product_sales['date'];
+                                                echo $row_product_sales['modified_on'];
                                                 ?>");
                 array_product_sales.push("<?php
                                             echo $row_product_sales['sales_number'];
@@ -500,6 +514,10 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
                 legend: {
                     display: false
                 },
+                title: {
+                    display: true,
+                    text: "Sales History of Product '<?php echo $row_product['name']; ?>'"
+                },
                 scales: {
                     yAxes: [{
                         ticks: {
@@ -510,6 +528,60 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
                 }
             }
         });
+
+        var array_product_inventory_dates = [];
+        var array_product_inventories = [];
+        const max_inventory = <?php echo $row_max_inventory['max_inventory']; ?>;
+        <?php
+        if (isset($result_product_inventories)) {
+            while ($row_product_inventories = $result_product_inventories->fetch_assoc()) {
+        ?>
+                array_product_inventory_dates.push("<?php
+                                                    echo $row_product_inventories['modified_on'];
+                                                    ?>");
+
+                array_product_inventories.push("<?php
+                                                echo $row_product_inventories['inventory'];
+                                                ?>");
+        <?php
+            }
+        } ?>;
+
+        var xArray3 = array_product_inventory_dates;
+        var yArray3 = array_product_inventories;
+
+        new Chart("myLine3", {
+            type: "line",
+            data: {
+                labels: xArray3,
+                datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgba(0,0,255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    data: yArray3
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: "Inventory History of Product <?php echo $row_product['name']; ?>"
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            max: max_inventory
+                        }
+                    }]
+                }
+            }
+        })
+
+
     <?php
     } ?>
 </script>
