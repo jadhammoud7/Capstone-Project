@@ -144,24 +144,24 @@ $stmt_top_products->execute();
 $results_top_products = $stmt_top_products->get_result();
 
 //display history price for chosen product
-if (isset($_GET['product-id']) && isset($_GET['price-history'])) {
-    $stmt_select_product_prices_history = $connection->prepare("SELECT * FROM history_product_prices WHERE product_id = '" . $_GET['product-id'] . "'");
+if (isset($_GET['product_id']) && isset($_GET['price_history'])) {
+    $stmt_select_product_prices_history = $connection->prepare("SELECT * FROM history_product_prices WHERE product_id = '" . $_GET['product_id'] . "'");
     $stmt_select_product_prices_history->execute();
     $result_history_product_prices = $stmt_select_product_prices_history->get_result();
 
-    $stmt_get_product = $connection->prepare("SELECT * FROM products WHERE product_id = '" . $_GET['product-id'] . "' ");
+    $stmt_get_product = $connection->prepare("SELECT * FROM products WHERE product_id = '" . $_GET['product_id'] . "' ");
     $stmt_get_product->execute();
     $result_get_product = $stmt_get_product->get_result();
     $row_get_product = $result_get_product->fetch_assoc();
 }
 
 //display history inventory for chosen product
-if (isset($_GET['product-id']) && isset($_GET['inventory-history'])) {
-    $stmt_select_product_inventory_history = $connection->prepare("SELECT * FROM history_product_inventory WHERE product_id = '" . $_GET['product-id'] . "'");
+if (isset($_GET['product_id']) && isset($_GET['inventory_history'])) {
+    $stmt_select_product_inventory_history = $connection->prepare("SELECT * FROM history_product_inventory WHERE product_id = '" . $_GET['product_id'] . "'");
     $stmt_select_product_inventory_history->execute();
     $result_product_history_inventory = $stmt_select_product_inventory_history->get_result();
 
-    $stmt_get_product = $connection->prepare("SELECT * FROM products WHERE product_id = '" . $_GET['product-id'] . "' ");
+    $stmt_get_product = $connection->prepare("SELECT * FROM products WHERE product_id = '" . $_GET['product_id'] . "' ");
     $stmt_get_product->execute();
     $result_get_product = $stmt_get_product->get_result();
     $row_get_product = $result_get_product->fetch_assoc();
@@ -482,12 +482,14 @@ if (isset($_GET['product-id']) && isset($_GET['inventory-history'])) {
                                     </thead>
                                     <tbody>
                                         <?php
-                                        while ($row_product_prices_history = $result_history_product_prices->fetch_assoc()) {
-                                            get_all_product_history_prices(
-                                                $row_product_prices_history['price'],
-                                                $row_product_prices_history['modified_by'],
-                                                $row_product_prices_history['modified_on']
-                                            );
+                                        if (isset($_GET['product_id']) && isset($_GET['price_history'])) {
+                                            while ($row_product_prices_history = $result_history_product_prices->fetch_assoc()) {
+                                                get_all_product_history_prices(
+                                                    $row_product_prices_history['price'],
+                                                    $row_product_prices_history['modified_by'],
+                                                    $row_product_prices_history['modified_on']
+                                                );
+                                            }
                                         }
                                         ?>
                                     </tbody>
@@ -510,7 +512,7 @@ if (isset($_GET['product-id']) && isset($_GET['inventory-history'])) {
 
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table width="100%" id="product_prices_history_table">
+                                <table width="100%" id="product_inventory_history_table">
                                     <thead>
                                         <tr>
                                             <td id="product-price-column" title="Sort Inventory by descending">Inventory</td>
@@ -520,12 +522,14 @@ if (isset($_GET['product-id']) && isset($_GET['inventory-history'])) {
                                     </thead>
                                     <tbody>
                                         <?php
-                                        while ($row_product_inventory_history = $result_product_history_inventory->fetch_assoc()) {
-                                            get_all_product_history_inventory(
-                                                $row_product_inventory_history['inventory'],
-                                                $row_product_inventory_history['modified_by'],
-                                                $row_product_inventory_history['modified_on']
-                                            );
+                                        if (isset($_GET['product_id']) && isset($_GET['inventory_history'])) {
+                                            while ($row_product_inventory_history = $result_product_history_inventory->fetch_assoc()) {
+                                                get_all_product_history_inventory(
+                                                    $row_product_inventory_history['inventory'],
+                                                    $row_product_inventory_history['modified_by'],
+                                                    $row_product_inventory_history['modified_on']
+                                                );
+                                            }
                                         }
                                         ?>
                                     </tbody>
@@ -544,8 +548,8 @@ if (isset($_GET['product-id']) && isset($_GET['inventory-history'])) {
     <!-- ended return to top button -->
 
 </body>
-<script src="../product-admin/product-admin.js"></script>
 
+<script src="product-admin.js"></script>
 <script src="../admin-main/admin-main.js"></script>
 <script>
     const array_products = [];

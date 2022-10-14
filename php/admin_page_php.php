@@ -159,21 +159,23 @@ function get_all_checkouts_connection($checkout_id, $customer_id, $first_name, $
 function get_all_products($product_id, $name, $price, $type, $category, $inventory, $sales_number, $last_modified_by, $last_modified_on)
 {
     $element = "
-    <tr class=\"hello\">
+    <tr>
         <td>
             <a href='product-details.php?product_id=$product_id'>
                 $name
             </a>
         </td>
         <td>
-            <a href='product-admin.php?product-id=$product_id&price-history=1' class=\"customer_link\" title=\"See price history about '$name'\">
-            $price
+            <a href='product-admin.php?product_id=$product_id&price_history=1' class=\"customer_link\" title=\"See price history about '$name'\">
+                $price
+            </a>
         </td>
         <td>$type</td>
         <td>$category</td>
         <td>
-            <a href='product-admin.php?product-id=$product_id&inventory-history=1' class=\"customer_link\" title=\"See inventory history about '$name'\">
-            $inventory
+            <a href='product-admin.php?product_id=$product_id&inventory_history=1' class=\"customer_link\" title=\"See inventory history about '$name'\">
+                $inventory
+            </a>
         </td>
         <td>$sales_number</td>
         <td>$last_modified_by</td>
