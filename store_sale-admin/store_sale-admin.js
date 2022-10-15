@@ -262,8 +262,9 @@ add_more_fields.onclick = function () {
     var newField1 = document.createElement('input');
     var newField2 = document.createElement('input');
     var label1 = document.createElement('label');
-    label1.setAttribute("for", "products");
+    label1.setAttribute("for", "choose-product");
     label1.innerHTML = "Choose a product";
+    survey_options.appendChild(label1);
 
     label1.appendChild(clone);
     label1.setAttribute('id', 'products');
