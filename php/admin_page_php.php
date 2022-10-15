@@ -1,12 +1,16 @@
 <?php
 include("connection.php");
 
-function get_appointment_in_admin_page_for_table_connection($appointment_id, $customer_name, $appointment_name, $price_per_hour, $date, $hour, $status)
+function get_appointment_in_admin_page_for_table_connection($appointment_id, $customer_name, $customer_id, $appointment_name, $price_per_hour, $date, $hour, $status)
 {
     $element = "
     <tr>
         <td>$appointment_name</td>
-        <td>$customer_name</td>
+        <td>
+            <a href='../customer-admin/customer-details.php?customer_id=$customer_id' title=\"See info about customer '$customer_name'\">
+                $customer_name
+            </a>
+        </td>
         <td>$price_per_hour</td>
         <td>$date</td>
         <td>$hour</td>
@@ -130,7 +134,11 @@ function get_all_checkouts_connection($checkout_id, $customer_id, $first_name, $
 {
     $element = "
     <tr>
-        <td>$first_name $last_name</td>
+        <td>
+            <a href='../customer-admin/customer-details.php?customer_id=$customer_id' title=\"See info about customer '$first_name $last_name'\">
+                $first_name $last_name
+            </a>
+        </td>
         <td>$email</td>
         <td>$phone_number</td>
         <td>$total_price</td>

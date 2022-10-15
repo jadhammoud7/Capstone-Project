@@ -17,6 +17,7 @@ function OpenDoneCheckoutPopUp() {
 function CloseDoneCheckoutPopUp() {
     var done_checkout_popup = document.getElementById('done-checkout-confirmation');
     done_checkout_popup.classList.remove('open-popup');
+    window.location.href = window.location.href.split('&change-status=1')[0];
 }
 
 if (window.location.href.includes('checkout-error')) {

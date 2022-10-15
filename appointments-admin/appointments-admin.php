@@ -295,6 +295,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                                             echo get_appointment_in_admin_page_for_table_connection(
                                                 $row_appointments['appointment_id'],
                                                 $row_get_user['first_name'] . ' ' . $row_get_user['last_name'],
+                                                $row_appointments['customer_id'],
                                                 $row_appointments['appointment_name'],
                                                 $row_appointments['price_per_hour'],
                                                 $row_appointments['date'],
