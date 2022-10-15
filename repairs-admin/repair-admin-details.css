@@ -182,7 +182,7 @@ option {
 
 .back {
     background-color: #F44336;
-    color: black;
+    color: #fefefe;
 }
 
 .add-new-product {
@@ -193,10 +193,10 @@ option {
 .repair-details-buttons button {
     margin: 30px;
     font-size: large;
-    font-weight: 700;
-    border-radius: 10px;
+    font-weight: 600;
+    border-radius: 20px;
     padding: 15px;
-    color: black;
+    color: #fefefe;
     cursor: pointer;
 }
 

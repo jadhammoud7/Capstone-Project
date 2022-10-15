@@ -382,16 +382,18 @@ if ($repair_type != "" && $price_per_hour != 0 && $description != "") {
         array_repairs_count.push("<?php
                                     echo $row_repairs_count['total_appointments_count'];
                                     ?>");
-    <?php } ?>;
+    <?php
+    }
+    ?>;
     var xValues = array_repairs;
     var yValues = array_repairs_count;
     var random_colors = [];
 
-    const size = array_repairs.length;
+    var size = array_repairs.length;
 
     function getNewColor(start) {
         for (var i = start; i < size; i++) {
-            const random = "#" + Math.floor(Math.random() * (255 + 1));
+            var random = "#" + Math.floor(Math.random() * (255 + 1));
             if (random_colors.values != random) {
                 random_colors.push(random);
             } else {
@@ -413,7 +415,7 @@ if ($repair_type != "" && $price_per_hour != 0 && $description != "") {
         },
         options: {
             legend: {
-                diplay: false
+                display: false
             },
             title: {
                 display: true,

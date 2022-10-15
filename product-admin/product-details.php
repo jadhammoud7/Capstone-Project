@@ -237,9 +237,23 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
     }
 }
 
+//delete product after pressing delete button
 if (isset($_GET['ProductIDToRemove'])) {
     $stmt_delete_product = $connection->prepare("DELETE FROM products WHERE product_id = '" . $_GET['ProductIDToRemove'] . "'");
     $stmt_delete_product->execute();
+
+    //delete history prices for product
+    $stmt_delete_product_prices_history = $connection->prepare("DELETE FROM history_product_prices WHERE product_id = '" . $_GET['ProductIDToRemove'] . "'");
+    $stmt_delete_product_prices_history->execute();
+
+    //delete history inventory for product
+    $stmt_delete_product_inventory_history = $connection->prepare("DELETE FROM history_product_inventory WHERE product_id = '" . $_GET['ProductIDToRemove'] . "'");
+    $stmt_delete_product_inventory_history->execute();
+
+    //delete history sales for product
+    $stmt_delete_product_sales_history = $connection->prepare("DELETE FROM history_product_sales WHERE product_id = '" . $_GET['ProductIDToRemove'] . "'");
+    $stmt_delete_product_sales_history->execute();
+
     header("Location: product-admin.php?product-deleted=1");
 }
 ?>

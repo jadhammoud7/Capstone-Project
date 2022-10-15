@@ -269,12 +269,12 @@ function get_all_repairs($repair_id, $repair_type, $price_per_hour)
             <td title=\"$price_per_hour\">$price_per_hour</td>
             <td>
                 <a>
-                    <button class=\"btn_view_repair\" onclick=\"window.location.href = 'repair-admin-details.php?repair-id=$repair_id';\" title=\"View details for this repair\">View Detials</button>
+                    <button class=\"btn_view_repair\" onclick=\"window.location.href = 'repair-admin-details.php?repair-id=$repair_id';\" title=\"View details for '$repair_type'\"><span class=\"las la-info-circle\"></span>View Details</button>
                 </a>
             </td>
             <td>
                 <a>
-                    <button class=\"btn_remove_repair\" onclick=\"OpenRemoveRepairPopUp($repair_id, '$repair_type');\" title=\"Remove this repair\">Remove Repair</button>
+                    <button class=\"btn_remove_repair\" onclick=\"OpenRemoveRepairPopUp($repair_id, '$repair_type');\" title=\"Remove repair '$repair_type'?\"><span class=\"las la-trash\"></span> Remove Repair</button>
                 </a>
             </td>
         </tr>
