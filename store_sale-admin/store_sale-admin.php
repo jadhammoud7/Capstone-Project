@@ -431,15 +431,14 @@ $row_count_store = $results_count_store->fetch_assoc();
                         <input type="text" name="customer_name" class="survey_options" size="50" placeholder="customer name.." required>
                         <input type="text" name="username" class="survey_options" size="50" placeholder="username if any..">
                         <input type="text" name="email" class="survey_options" size="50" placeholder="email.." required>
-                        <label for="products" id="choose-product">Choose a product:
-                            <select id="products" name="product_name[]" size="5" required>
-                                <?php
-                                while ($row_get_all_products = $results_get_all_products->fetch_assoc()) {
-                                    store_sales_connection($row_get_all_products['name']);
-                                }
-                                ?>
-                            </select>
-                        </label>
+                        <label for="products" id="choose-product">Choose a product:</label>
+                        <select id="products" name="product_name[]" size="5" required>
+                            <?php
+                            while ($row_get_all_products = $results_get_all_products->fetch_assoc()) {
+                                store_sales_connection($row_get_all_products['name']);
+                            }
+                            ?>
+                        </select>
 
                         <input type="number" name="quantity[]" class="survey_options" size="50" placeholder="quantity..." required>
                     </div>

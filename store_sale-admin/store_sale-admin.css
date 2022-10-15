@@ -373,3 +373,11 @@ h1 {
 #save:hover{
   opacity: 0.8;
 }
+#choose-product{
+  border-radius: 15px;
+  background-color: royalblue;
+}
+#products{
+  padding: 10px;
+  margin: 10px auto;  
+}
