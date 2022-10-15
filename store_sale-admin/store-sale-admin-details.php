@@ -261,8 +261,8 @@ function store_sales_products_connection($product_name, $quantity, $price)
                                     </div>
                                     <div class="form-container-part-inputs">
                                         <div class="input-container">
-                                            <input type="text" name="date" value="<?php if (isset($row_checkout)) {
-                                                                                        echo $row_checkout['date'];
+                                            <input type="text" name="date" value="<?php if (isset($row_store_sale)) {
+                                                                                        echo $row_store_sale['date'];
                                                                                     } ?>" readonly class="is-valid">
                                             <label for="date">Date</label>
                                         </div>

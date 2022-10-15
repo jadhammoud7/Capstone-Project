@@ -18,33 +18,33 @@
 
 
     //sum of all customers
-    $query_total_customers = "SELECT COUNT(customer_id) as count FROM customers";
+    $query_total_customers = "SELECT COUNT(DISTINCT(customer_name)) as count FROM store_sales";
     $stmt_total_customers = $connection->prepare($query_total_customers);
     $stmt_total_customers->execute();
     $results_total_customers = $stmt_total_customers->get_result();
     $row_total_customers = $results_total_customers->fetch_assoc();
 
 
-    //count of all appointments
-    $query_total_appointments = "SELECT COUNT(appointment_id) as total_appointments FROM appointments";
-    $stmt_total_appointments = $connection->prepare($query_total_appointments);
-    $stmt_total_appointments->execute();
-    $results_total_appointments = $stmt_total_appointments->get_result();
-    $row_total_appointments = $results_total_appointments->fetch_assoc();
+    //count of all quantities
+    $query_total_quantities = "SELECT SUM(total_quantity) as total_quantity FROM store_sales";
+    $stmt_total_quantities  = $connection->prepare($query_total_quantities);
+    $stmt_total_quantities->execute();
+    $results_total_quantities = $stmt_total_quantities->get_result();
+    $row_total_quantities = $results_total_quantities->fetch_assoc();
 
-    //sum of all appointments
-    $query_total_profit = "SELECT SUM(total_price_including_tax) as total_profit FROM checkouts";
+    //sum of all prices
+    $query_total_profit = "SELECT SUM(total_price) as total_profit FROM store_sales";
     $stmt_total_profit = $connection->prepare($query_total_profit);
     $stmt_total_profit->execute();
     $results_total_profit = $stmt_total_profit->get_result();
     $row_total_profit = $results_total_profit->fetch_assoc();
 
-    //get total checkouts made
-    $query_total_checkouts = "SELECT COUNT(checkout_id) as total_checkout FROM checkouts";
-    $stmt_total_checkouts = $connection->prepare($query_total_checkouts);
-    $stmt_total_checkouts->execute();
-    $results_total_checkouts = $stmt_total_checkouts->get_result();
-    $row_total_checkouts = $results_total_checkouts->fetch_assoc();
+    //get total store sales made
+    $query_total_store_sales = "SELECT COUNT(*) as total_store_sales FROM store_sales";
+    $stmt_total_store_sales = $connection->prepare($query_total_store_sales);
+    $stmt_total_store_sales->execute();
+    $results_total_store_sales = $stmt_total_store_sales->get_result();
+    $row_total_store_sales = $results_total_store_sales->fetch_assoc();
 
 
     //get all customer purchases from store
@@ -117,6 +117,38 @@
                     //update sales quantity by increasing product quantity
                     $total_sales_quantity = $total_sales_quantity + $quantity[$x];
 
+                    //insert into sales products
+                    $stmt_insert_store_sales = $connection->prepare("INSERT INTO sales_products(sales_id, product_name, quantity, price) VALUES (?,?,?,?)");
+                    $stmt_insert_store_sales->bind_param("issi", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_price);
+                    $stmt_insert_store_sales->execute();
+                    $stmt_insert_store_sales->close();
+
+                    //select product id
+                    $stmt_select_product = $connection->prepare("SELECT * FROM products WHERE name = '" . $product_name[$x] . "'");
+                    $stmt_select_product->execute();
+                    $result_product = $stmt_select_product->get_result();
+                    $row_product = $result_product->fetch_assoc();
+
+                    //insert into history sales of the product
+                    $product_id = $row_product['product_id'];
+                    $sales_change = '+ ' . $quantity[$x];
+                    date_default_timezone_set('Asia/Beirut');
+                    $modified_by = 'Store Sales';
+                    $modified_on = date('Y-m-d h:i:s');
+                    $stmt_insert_product_sales_history = $connection->prepare("INSERT INTO history_product_sales(product_id, sales_number, sales_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
+                    $stmt_insert_product_sales_history->bind_param("iisss", $product_id, $quantity[$x], $sales_change, $modified_by, $modified_on);
+                    $stmt_insert_product_sales_history->execute();
+
+                    //update inventory for current product
+                    $new_inventory = $row_product['inventory'] - $quantity[$x];
+                    $inventory_change = '- ' . $quantity[$x];
+
+                    //update product inventory and sales number
+                    $sales_number = $row_product['sales_number'] + $quantity[$x];
+                    $stmt_update_product = $connection->prepare("UPDATE products SET inventory = ?, sales_number = ?, last_modified_by = ?, last_modified_on = ? WHERE product_id = '" . $product_id . "'");
+                    $stmt_update_product->bind_param("iiss", $new_inventory, $sales_number, $modified_by, $modified_on);
+                    $stmt_update_product->execute();
+
                     //insert product info to table sales_products
                     $stmt_insert_store_sales = $connection->prepare("INSERT INTO sales_products(sales_id, product_name, quantity, price) VALUES (?,?,?,?)");
                     $stmt_insert_store_sales->bind_param("issi", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_price);
@@ -143,22 +175,42 @@
                     $total_sales_products = $total_sales_products + 1;
                     $total_sales_price = $total_sales_price + $total_product_price;
                     $total_sales_quantity = $total_sales_quantity + $quantity[$x];
+
+                    //insert into sales products
                     $stmt_insert_store_sales = $connection->prepare("INSERT INTO sales_products(sales_id, product_name, quantity, price) VALUES (?,?,?,?)");
                     $stmt_insert_store_sales->bind_param("issi", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_price);
                     $stmt_insert_store_sales->execute();
                     $stmt_insert_store_sales->close();
 
-                    $stmt_select_product = $connection->prepare("SELECT product_id FROM products WHERE name = '" . $product_name[$x] . "'");
+                    //select product id
+                    $stmt_select_product = $connection->prepare("SELECT * FROM products WHERE name = '" . $product_name[$x] . "'");
                     $stmt_select_product->execute();
-                    $result_product_id = $stmt_select_product->get_result();
-                    $row_product_id = $result_product_id->fetch_assoc();
+                    $result_product = $stmt_select_product->get_result();
+                    $row_product = $result_product->fetch_assoc();
 
-                    $product_id = $row_product_id['product_id'];
+                    //insert into history sales of the product
+                    $product_id = $row_product['product_id'];
+                    $sales_change = '+ ' . $quantity[$x];
                     date_default_timezone_set('Asia/Beirut');
-                    $date = date('Y-m-d h:i:s');
-                    $stmt_insert_product_sales_history = $connection->prepare("INSERT INTO history_product_sales(product_id, sales_number, date) VALUES (?,?,?)");
-                    $stmt_insert_product_sales_history->bind_param("iis", $product_id, $quantity, $date);
+                    $modified_by = 'Store Sales';
+                    $modified_on = date('Y-m-d h:i:s');
+                    $stmt_insert_product_sales_history = $connection->prepare("INSERT INTO history_product_sales(product_id, sales_number, sales_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
+                    $stmt_insert_product_sales_history->bind_param("iisss", $product_id, $quantity[$x], $sales_change, $modified_by, $modified_on);
                     $stmt_insert_product_sales_history->execute();
+
+                    //update inventory for current product
+                    $new_inventory = $row_product['inventory'] - $quantity[$x];
+                    $inventory_change = '- ' . $quantity[$x];
+
+                    //update product inventory and sales number
+                    $sales_number = $row_product['sales_number'] + $quantity[$x];
+                    $stmt_update_product = $connection->prepare("UPDATE products SET inventory = ?, sales_number = ?, last_modified_by = ?, last_modified_on = ? WHERE product_id = '" . $product_id . "'");
+                    $stmt_update_product->bind_param("iiss", $new_inventory, $sales_number, $modified_by, $modified_on);
+                    $stmt_update_product->execute();
+
+                    $stmt_insert_product_inventory_history = $connection->prepare("INSERT INTO history_product_inventory(product_id, inventory, inventory_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
+                    $stmt_insert_product_inventory_history->bind_param("iisss", $product_id, $new_inventory, $inventory_change, $modified_by, $modified_on);
+                    $stmt_insert_product_inventory_history->execute();
                 }
             }
         }
@@ -333,8 +385,8 @@
                     </div>
                     <div class="card-single">
                         <div>
-                            <h1><?php echo $row_total_appointments['total_appointments'] ?></h1>
-                            <span>Appointments</span>
+                            <h1><?php echo $row_total_quantities['total_quantity'] ?></h1>
+                            <span>Total Quantities Sold</span>
                         </div>
                         <div>
                             <span class="las la-clipboard"></span>
@@ -342,11 +394,11 @@
                     </div>
                     <div class="card-single">
                         <div>
-                            <h1><?php echo $row_total_checkouts['total_checkout'] ?></h1>
-                            <span>Chekouts</span>
+                            <h1><?php echo $row_total_store_sales['total_store_sales'] ?></h1>
+                            <span>Total Store Sales</span>
                         </div>
                         <div>
-                            <span class="las la-shopping-bag"></span>
+                            <span class="las la-file-invoice-dollar"></span>
                         </div>
                     </div>
                     <div class="card-single">
@@ -355,7 +407,7 @@
                             <span>Profit</span>
                         </div>
                         <div>
-                            <span class="las la-google-wallet"></span>
+                            <span class="las la-wallet"></span>
                         </div>
                     </div>
                 </div>
