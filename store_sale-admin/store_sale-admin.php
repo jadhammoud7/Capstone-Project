@@ -477,21 +477,25 @@
                     <form class="modal-content" action="store_sale-admin.php" method="POST" enctype="multipart/form-data">
                         <div id="survey_options">
                             <h1 class="title">Add customer sales via store</h1>
+                            <br>
                             <p class="title">Please fill in this form to add a new Sales.</p>
                             <br>
 
                             <input type="text" name="customer_name" class="survey_options" size="50" placeholder="customer name.." required>
                             <input type="text" name="username" class="survey_options" size="50" placeholder="username if any..">
                             <input type="text" name="email" class="survey_options" size="50" placeholder="email.." required>
-                            <label for="products" id="choose-product">Choose a product:
-                                <select id="products" name="product_name[]" size="5" required>
-                                    <?php
-                                    while ($row_get_all_products = $results_get_all_products->fetch_assoc()) {
-                                        store_sales_connection($row_get_all_products['name']);
-                                    }
-                                    ?>
-                                </select>
-                            </label>
+                            <div class="dropdown">
+                                <!-- <label for="products" id="choose-product">Choose a product: -->
+                                    <h4 style="font-size: 15px; margin-bottom:10px;">Choose a product:</h4>
+                                    <select id="products" name="product_name[]" required>
+                                        <?php
+                                        while ($row_get_all_products = $results_get_all_products->fetch_assoc()) {
+                                            store_sales_connection($row_get_all_products['name']);
+                                        }
+                                        ?>
+                                    </select>
+                            </div>
+
 
                             <input type="number" name="quantity[]" class="survey_options" size="50" placeholder="quantity..." required>
                         </div>

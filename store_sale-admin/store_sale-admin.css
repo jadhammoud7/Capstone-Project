@@ -286,6 +286,21 @@ input[type="number"] {
   width: 350px;
   color: black;
 }
+.dropdown{
+  width: 370px;
+  margin: 40px auto;
+  padding: 10px;
+  border-radius: 5px;
+}
+.dropdown{
+  margin-top:-12px ;
+}
+.dropdown{
+  margin-bottom:-12px ;
+}
+.dropbtn{
+  border-radius: 15px;
+}
 
 input[type="number"]:focus {
   outline: none;
@@ -305,6 +320,9 @@ input[type="text"],
 
 input[type="text"]:focus {
   outline: none;
+}
+input{
+  border-radius: 15px;
 }
 
 select {
@@ -358,7 +376,7 @@ h1 {
 } */
 
 #save {
-  background-color: transparent;
+
   font-size: 14px;
   padding: 10px 20px;
   font-weight: 300;
@@ -366,20 +384,89 @@ h1 {
   background-color: royalblue;
   margin-bottom: 20px;
   border-radius: 20px;
+  border: 1px solid royalblue;
+
+}
+#save:hover{
+  opacity: 0.8;
 }
 
-#save:hover,
+/* #save:hover,
 button#add-button:hover {
   cursor: pointer;
   background-color: royalblue;
   -webkit-box-shadow: 10px 10px 99px 6px royalblue;
   -moz-box-shadow: 10px 10px 99px 6px royalblue;
   box-shadow: 10px 10px 99px 6px royalblue;
-}
+} */
 
-button#remove-button:hover {
+/* button#remove-button:hover {
   background-color: #f44336;
   -webkit-box-shadow: 10px 10px 99px 6px #f44336;
   -moz-box-shadow: 10px 10px 99px 6px #f44336;
   box-shadow: 10px 10px 99px 6px #f44336;
+} */
+
+
+
+/* 
+css for the dropdown list */
+/* .dropbtn {
+  background-color: royalblue;
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+
+.dropdown-content {
+  display: none;
+
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: royalblue;
+} */
+.dropdown{
+  width: 370px;
+  margin-left: 40px auto;
+  margin-right: 40px auto;
+  padding: 10px;
+  border-radius: 5px;
+  /* background: white;
+  box-shadow: 0px 10px 40px 0px rgba(47, 47, 47, .1); */
+}
+.dropbtn{
+  margin-top: -20px;
+}
+.dropbtn{
+  margin-bottom: -10px;
+}
+#products{
+  padding: 10px;
+  background-color: royalblue;
+  border-radius: 15px;
+  border: 1px solid royalblue;
+}
+#products option{
+  background-color: white;
+  padding: 10px;
 }
