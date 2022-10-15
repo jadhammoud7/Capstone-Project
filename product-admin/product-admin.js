@@ -17,8 +17,7 @@ function OpenProductAddedPopUp() {
 }
 
 function CloseProductAddedPopUp() {
-    const product_added_popup = document.getElementById('product-added-confirmation');
-    product_added_popup.classList.remove('open-popup');
+    window.location.href = 'product-admin.php';
 }
 
 function CloseAddProduct() {
@@ -53,6 +52,19 @@ function CloseProductHistoryInventory() {
     window.location.href = 'product-admin.php';
 }
 
+if (window.location.href.includes('sales_history')) {
+    OpenProductHistorySales();
+}
+
+function OpenProductHistorySales() {
+    const product_history_sales = document.getElementById('sales-history');
+    product_history_sales.style.display = 'block';
+}
+
+function CloseProductHistorySales() {
+    window.location.href = 'product-admin.php';
+}
+
 var admin_id;
 var first_name;
 var last_name;
@@ -73,10 +85,6 @@ function CloseRemoveAdminPopUp() {
     remove_admin_popup.classList.remove('open-popup');
 }
 
-// function DeleteAdmin(){
-//     window.location.href = 'product-admin.php?getAdminIDtoRemove' + admin_id;
-//     CloseRemoveAdminPopUp();
-// }
 const asc_desc1 = document.getElementById("asc_desc");
 function asc_desc() {
     if (asc_desc1.textContent == "Get In Descending") {

@@ -161,7 +161,7 @@ function get_all_products($product_id, $name, $price, $type, $category, $invento
     $element = "
     <tr>
         <td>
-            <a href='product-details.php?product_id=$product_id'>
+            <a href='product-details.php?product_id=$product_id' title=\"See details about product '$name'\">
                 $name
             </a>
         </td>
