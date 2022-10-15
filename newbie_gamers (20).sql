@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2022 at 11:39 PM
+-- Generation Time: Oct 15, 2022 at 02:01 AM
 -- Server version: 8.0.23
 -- PHP Version: 8.0.2
 
@@ -233,6 +233,7 @@ INSERT INTO `favorites_customer_product` (`customer_id`, `product_id`) VALUES
 CREATE TABLE `history_product_inventory` (
   `product_id` int NOT NULL,
   `inventory` int NOT NULL,
+  `inventory_change` varchar(5) NOT NULL,
   `modified_by` varchar(50) NOT NULL,
   `modified_on` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -241,8 +242,8 @@ CREATE TABLE `history_product_inventory` (
 -- Dumping data for table `history_product_inventory`
 --
 
-INSERT INTO `history_product_inventory` (`product_id`, `inventory`, `modified_by`, `modified_on`) VALUES
-(1, 98, '', '');
+INSERT INTO `history_product_inventory` (`product_id`, `inventory`, `inventory_change`, `modified_by`, `modified_on`) VALUES
+(1, 98, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -253,6 +254,7 @@ INSERT INTO `history_product_inventory` (`product_id`, `inventory`, `modified_by
 CREATE TABLE `history_product_prices` (
   `product_id` int NOT NULL,
   `price` int NOT NULL,
+  `price_change` varchar(5) NOT NULL,
   `modified_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `modified_on` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -261,15 +263,15 @@ CREATE TABLE `history_product_prices` (
 -- Dumping data for table `history_product_prices`
 --
 
-INSERT INTO `history_product_prices` (`product_id`, `price`, `modified_by`, `modified_on`) VALUES
-(1, 225, '', ''),
-(1, 300, '', ''),
-(1, 350, '', ''),
-(1, 200, 'Mohamad Nabaa', '2022-10-11 12:29:36'),
-(1, 250, 'Mohamad Nabaa', '2022-10-11 12:32:14'),
-(1, 300, 'Mohamad Nabaa', '2022-10-11 12:33:33'),
-(1, 200, 'Mohamad Nabaa', '2022-10-11 12:38:22'),
-(1, 300, 'Mohamad Nabaa', '2022-10-11 12:39:35');
+INSERT INTO `history_product_prices` (`product_id`, `price`, `price_change`, `modified_by`, `modified_on`) VALUES
+(1, 225, '', '', ''),
+(1, 300, '', '', ''),
+(1, 350, '', '', ''),
+(1, 200, '', 'Mohamad Nabaa', '2022-10-11 12:29:36'),
+(1, 250, '', 'Mohamad Nabaa', '2022-10-11 12:32:14'),
+(1, 300, '', 'Mohamad Nabaa', '2022-10-11 12:33:33'),
+(1, 200, '', 'Mohamad Nabaa', '2022-10-11 12:38:22'),
+(1, 300, '', 'Mohamad Nabaa', '2022-10-11 12:39:35');
 
 -- --------------------------------------------------------
 
@@ -280,15 +282,17 @@ INSERT INTO `history_product_prices` (`product_id`, `price`, `modified_by`, `mod
 CREATE TABLE `history_product_sales` (
   `product_id` int NOT NULL,
   `sales_number` int NOT NULL,
-  `date` date NOT NULL
+  `sales_change` varchar(5) NOT NULL,
+  `modified_by` varchar(50) NOT NULL,
+  `modified_on` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `history_product_sales`
 --
 
-INSERT INTO `history_product_sales` (`product_id`, `sales_number`, `date`) VALUES
-(1, 5, '2022-10-11');
+INSERT INTO `history_product_sales` (`product_id`, `sales_number`, `sales_change`, `modified_by`, `modified_on`) VALUES
+(1, 5, '', '', '2022-10-11');
 
 -- --------------------------------------------------------
 

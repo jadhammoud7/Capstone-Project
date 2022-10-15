@@ -52,26 +52,26 @@ function ExitEditProduct() {
     product_name.classList.add('is-valid');
 
     const product_price = document.getElementById('price');
-    product_name.setAttribute('readonly', true);
+    product_price.setAttribute('readonly', true);
     product_price.classList.add('is-valid');
 
     const product_type = document.getElementById('type');
-    product_name.setAttribute('readonly', true);
+    product_type.setAttribute('readonly', true);
     product_type.classList.add('is-valid');
 
     const product_category = document.getElementById('category');
-    product_name.setAttribute('readonly', true);
+    product_category.setAttribute('readonly', true);
     product_category.classList.add('is-valid');
 
     const product_description = document.getElementById('description');
     product_description.innerHTML = Description;
 
     const product_age = document.getElementById('age');
-    product_name.setAttribute('readonly', true);
+    product_age.setAttribute('readonly', true);
     product_age.classList.add('is-valid');
 
     const product_inventory = document.getElementById('inventory');
-    product_name.setAttribute('readonly', true);
+    product_inventory.setAttribute('readonly', true);
     product_inventory.classList.add('is-valid');
 
     const product_image = document.getElementById('product_image');

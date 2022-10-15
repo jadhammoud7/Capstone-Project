@@ -112,16 +112,60 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
         if (in_array($fileType, $allowTypes)) {
             if (move_uploaded_file($_FILES['product_image']['tmp_name'], $target_file)) {
                 $product_image = $filename;
+
+                //get current time and name of admin modified
                 date_default_timezone_set('Asia/Beirut');
                 $modified_on = date('Y-m-d h:i:s');
                 $modified_by = $row['first_name'] . ' ' . $row['last_name'];
+
+                //select the current price of the product before updating
+                $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE product_id = '" . $product_id . "'");
+                $stmt_select_product_price->execute();
+                $result_product_price = $stmt_select_product_price->get_result();
+                $row_product_price = $result_product_price->fetch_assoc();
+
+                //insert into history prices of this product
+                $prices_change = '';
+                if ($row_product_price['price'] < $product_price) {
+                    $price_change = $product_price - $row_product_price['price'];
+                    $prices_change = '+ ' . $price_change;
+                } else if ($row_product_price['price'] > $product_price) {
+                    $price_change = $row_product_price['price'] - $product_price;
+                    $prices_change = '- ' . $price_change;
+                }
+                if ($prices_change != '') {
+                    $stmt_add_product_price_history = $connection->prepare("INSERT INTO history_product_prices(product_id, price, price_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
+                    $stmt_add_product_price_history->bind_param("iisss", $product_id, $product_price, $prices_change, $modified_by, $modified_on);
+                    $stmt_add_product_price_history->execute();
+                    $stmt_add_product_price_history->close();
+                }
+
+                //select the current inventory of the product before updating
+                $stmt_select_product_inventory = $connection->prepare("SELECT inventory FROM products WHERE product_id = '" . $product_id . "'");
+                $stmt_select_product_inventory->execute();
+                $result_product_inventory = $stmt_select_product_inventory->get_result();
+                $row_product_inventory = $result_product_inventory->fetch_assoc();
+
+                //insert into history inventory of this product
+                $inventories_change = '';
+                if ($row_product_inventory['inventory'] < $product_inventory) {
+                    $inventory_change = $product_inventory - $row_product_inventory['inventory'];
+                    $inventories_change = '+ ' . $inventory_change;
+                } else if ($row_product_inventory['inventory'] > $product_inventory) {
+                    $inventory_change = $row_product_inventory['inventory'] - $product_inventory;
+                    $inventories_change = '- ' . $inventory_change;
+                }
+                if ($inventories_change != '') {
+                    $stmt_add_product_inventory_history = $connection->prepare("INSERT INTO history_product_inventory(product_id, inventory, inventory_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
+                    $stmt_add_product_inventory_history->bind_param("iisss", $product_id, $product_inventory, $inventories_change, $modified_by, $modified_on);
+                    $stmt_add_product_inventory_history->execute();
+                    $stmt_add_product_inventory_history->close();
+                }
+
+                //update products info
                 $stmt_update_product = $connection->prepare("UPDATE products SET name='" . $product_name . "', price= '" . $product_price . "', type='" . $product_type . "', category='" . $product_category . "', description='" . $product_description . "', age='" . $product_age . "', image='" . $product_image . "', inventory='" . $product_inventory . "', sales_number='" . $product_sales . "', last_modified_by = '" . $modified_by . "', last_modified_on = '" . $modified_on . "' WHERE product_id='" . $product_id . "'");
                 $stmt_update_product->execute();
                 $stmt_update_product->close();
-                $stmt_add_product_price_history = $connection->prepare("INSERT INTO history_product_prices(product_id, price, modified_by, modified_on) VALUES (?,?,?,?)");
-                $stmt_add_product_price_history->bind_param("iiss", $product_id, $product_price, $modified_by, $modified_on);
-                $stmt_add_product_price_history->execute();
-                $stmt_add_product_price_history->close();
                 header("Location: product-details.php?product-id=$product_id&product-updated=1");
             }
         }
@@ -568,7 +612,7 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
                 },
                 title: {
                     display: true,
-                    text: "Inventory History of Product <?php echo $row_product['name']; ?>"
+                    text: "Inventory History of Product '<?php echo $row_product['name']; ?>'"
                 },
                 scales: {
                     yAxes: [{
