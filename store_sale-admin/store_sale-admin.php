@@ -481,7 +481,8 @@
                             <p class="title">Please fill in this form to add a new Sales.</p>
                             <br>
 
-                            <input type="text" name="customer_name" class="survey_options" size="50" placeholder="customer name.." required>
+                            
+                            <input type="text" name="customer_name"  class="form__field" class="survey_options" size="50" placeholder="customer name.." required>
                             <input type="text" name="username" class="survey_options" size="50" placeholder="username if any..">
                             <input type="text" name="email" class="survey_options" size="50" placeholder="email.." required>
                             <div class="dropdown">
