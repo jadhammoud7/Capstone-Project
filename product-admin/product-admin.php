@@ -241,6 +241,15 @@ if (isset($_GET['product_id']) && isset($_GET['sales_history'])) {
         <button type="button" onclick="CloseProductAddedPopUp()">OK</button>
     </div>
 
+
+    <!-- started popup product deleted -->
+    <div class="popup" id="product-deleted-confirmation">
+        <img src="../images/tick.png" alt="">
+        <h2>Product Was Removed</h2>
+        <p>The product was removed successfully</p>
+        <button type="button" onclick="CloseProductRemovedPopUp()">OK</button>
+    </div>
+
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
         <div class="sidebar-brand">

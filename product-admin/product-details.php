@@ -236,6 +236,12 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
         header("Location: product-details.php?product-id=$product_id&product-updated=1");
     }
 }
+
+if (isset($_GET['ProductIDToRemove'])) {
+    $stmt_delete_product = $connection->prepare("DELETE FROM products WHERE product_id = '" . $_GET['ProductIDToRemove'] . "'");
+    $stmt_delete_product->execute();
+    header("Location: product-admin.php?product-deleted=1");
+}
 ?>
 
 
@@ -265,6 +271,17 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
                                     echo $_GET['product-id'];
                                 } ?>" is updated successfully</p>
         <button type="button" onclick="CloseProductUpdatedPopUp()">OK</button>
+    </div>
+
+    <!-- started popup message product delete -->
+    <div class="popup" id="product-delete-confirmation">
+        <img src="../images/question-mark.png" alt="">
+        <h2>Delete Product?</h2>
+        <p>Are you sure that you want to delete product "<?php if (isset($_GET['product_id'])) {
+                                                                echo $row_product['name'];
+                                                            } ?>"?</p>
+        <button type="button" onclick="DeleteProduct()">YES</button>
+        <button type="button" onclick="CloseProductDeletePopUp()">NO</button>
     </div>
 
     <input type="checkbox" id="nav-toggle">
@@ -370,6 +387,10 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
                             <h2>Product Details</h2>
                         </div>
                         <div>
+
+                            <button id="delete-product" title="Remove Product '<?php if (isset($row_product)) {
+                                                                                    echo $row_product['name'];
+                                                                                } ?>'?" onclick="ShowDeleteProductPopUp(<?php echo $_GET['product_id']; ?>)"><span class="las la-trash"></span> Delete Product</button>
                             <button id="edit-button" class="edit-button" title="Edit Product '<?php if (isset($row_product)) {
                                                                                                     echo $row_product['name'];
                                                                                                 } ?>'" onclick="EditProduct()"><span class="las la-edit"></span> Edit Product</button>
@@ -492,6 +513,7 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
                                             </div>
                                         </div>
                                     </div>
+
                                     <div>
                                         <button type="submit" id="edit-product-submit" class="edit-product-submit" style="visibility: hidden;"><span class="las la-share-square"></span> Apply Changes</button>
                                     </div>

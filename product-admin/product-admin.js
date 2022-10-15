@@ -65,6 +65,21 @@ function CloseProductHistorySales() {
     window.location.href = 'product-admin.php';
 }
 
+if (window.location.href.includes('product-deleted')) {
+    OpenProductDeletedPopUp();
+}
+
+function OpenProductDeletedPopUp() {
+    const product_deleted_popup = document.getElementById('product-deleted-confirmation');
+    product_deleted_popup.classList.add('open-popup');
+}
+
+function CloseProductRemovedPopUp() {
+    const product_deleted_popup = document.getElementById('product-deleted-confirmation');
+    product_deleted_popup.classList.remove('open-popup');
+    window.location.href = 'product-admin.php';
+}
+
 var admin_id;
 var first_name;
 var last_name;

@@ -174,7 +174,7 @@ input.is-valid+label {
     border-radius: 20px;
 }
 
-.edit-product-submit {
+#edit-product-submit {
     background-color: royalblue;
     color: white;
     padding: 14px 20px;
@@ -187,7 +187,20 @@ input.is-valid+label {
     border-radius: 20px;
 }
 
-.edit-button:hover {
+#delete-product {
+    background-color: #F44336;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 15px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    font-size: 1.2rem;
+    border-radius: 20px;
+}
+
+#edit-button:hover {
     background-color: #63A7E4;
 }
 
