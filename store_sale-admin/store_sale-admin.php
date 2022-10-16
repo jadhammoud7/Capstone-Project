@@ -436,21 +436,18 @@ $row_count_store = $results_count_store->fetch_assoc();
                         <label for="survey_options"><b>Survey Options</b></label>
                         <input type="text" name="email" class="survey_options" size="50" placeholder="email.." required>
 
-                        <label for="products" style="font-weight: bold;margin-bottom:10px;">Choose a product: </label><br>
-                        <select id="products" name="product_name[]" size="" required>
-                            <?php
-                            while ($row_get_all_products = $results_get_all_products->fetch_assoc()) {
-                                store_sales_connection($row_get_all_products['name']);
-                            }
-                            ?>
-                        </select>
-
-
-
-
+                        <label for="products" style="font-weight: bold; margin-bottom:10px;">Choose a product: <br>
+                            <select id="products" name="product_name[]" size="" required>
+                                <?php
+                                while ($row_get_all_products = $results_get_all_products->fetch_assoc()) {
+                                    store_sales_connection($row_get_all_products['name']);
+                                }
+                                ?>
+                            </select>
+                        </label>
                         <br>
                         <label for="survey_options"><b>Quantity</b></label>
-                        <input type="number" name="quantity[]" class="survey_options" size="50" placeholder="quantity..." required>
+                        <input type="number" name="quantity[]" class="survey_options" placeholder="quantity..." required>
                     </div>
                     <div class="controls">
                         <a href="#survey_options" id="add_more_fields">
