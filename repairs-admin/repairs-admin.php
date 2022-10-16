@@ -324,7 +324,7 @@ if ($repair_type != "" && $price_per_hour != 0 && $description != "") {
                 <span onclick="CloseAddRepair()" class="close" title="Close Modal">&times;</span>
                 <form class="modal-content" action="repairs-admin.php" method="POST" enctype="multipart/form-data">
                     <div class="container">
-                        <h1 class="title">Add New Repair</h1>
+                        <h1 class="title">Add New Repair</h1> <br>
                         <p class="title">Please fill in this form to add a new repair.</p>
                         <br>
 
