@@ -27,6 +27,7 @@ input {
 /* Full-width input fields */
 input[type=text],
 input[type=password],
+input[type=number],
 input[type=file] {
   width: 100%;
   padding: 15px;
@@ -39,6 +40,7 @@ input[type=file] {
 /* Add a background color when the inputs get focus */
 input[type=text]:focus,
 input[type=password]:focus,
+input[type=number]:focus,
 input[type=date]:focus {
   background-color: white;
   outline: none;
@@ -48,6 +50,7 @@ input[type=date]:focus {
 
 input[type=text]:hover,
 input[type=password]:hover,
+input[type=number]:hover,
 input[type=date]:hover {
   background-color: #ddd;
   outline: none;

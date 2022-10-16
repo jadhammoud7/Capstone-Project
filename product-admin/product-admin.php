@@ -444,7 +444,7 @@ if (isset($_GET['product_id']) && isset($_GET['sales_history'])) {
                 <span onclick="CloseAddProduct()" class="close" title="Close Modal">&times;</span>
                 <form class="modal-content" action="product-admin.php" method="POST" enctype="multipart/form-data">
                     <div class="container">
-                        <h1 class="title">Add New Product</h1>
+                        <h1 class="title">Add New Product</h1> <br>
                         <p class="title">Please fill in this form to add a new product.</p>
                         <br>
 
