@@ -428,13 +428,13 @@ $row_count_store = $results_count_store->fetch_assoc();
                         <p class="title">Please fill in this form to add a new Sales.</p>
                         <br>
                         <label for="customer_name"><b>Customer Name</b></label>
-                        <input type="text" name="customer_name" class="survey_options" size="50" placeholder="customer name.." required>
+                        <input type="text" name="customer_name" class="survey_options" size="50" placeholder="Customer Name.." required>
 
                         <label for="username"><b>Username</b></label>
-                        <input type="text" name="username" class="survey_options" size="50" placeholder="username if any(not required)..">
+                        <input type="text" name="username" class="survey_options" size="50" placeholder="Username if any (optional)..">
 
                         <label for="survey_options"><b>Survey Options</b></label>
-                        <input type="text" name="email" class="survey_options" size="50" placeholder="email.." required>
+                        <input type="text" name="email" class="survey_options" size="50" placeholder="Email.." required>
 
                         <label for="products" style="font-weight: bold; margin-bottom:10px;">Choose a product: <br>
                             <select id="products" name="product_name[]" size="" required>
@@ -451,18 +451,18 @@ $row_count_store = $results_count_store->fetch_assoc();
                     </div>
                     <div class="controls">
                         <a href="#survey_options" id="add_more_fields">
-                            <button id="add-button">
+                            <button id="add-button" title="Add more products to the sale form">
                                 <span class="las la-plus"></span> Add More Products
                             </button>
                         </a>
                         <a href="#survey_options" id="remove_fields">
-                            <button id="remove-button">
+                            <button id="remove-button" title="Remove last product from the sales form">
                                 <span class="las la-minus"></span> Remove Products
                             </button>
                         </a>
                     </div>
                     <center>
-                        <input class="btn btn-success" type="submit" name="save" id="save" value="Save Data">
+                        <input class="btn btn-success" type="submit" name="save" id="save" value="Submit" title="Submit or add the sales form">
                     </center>
                 </form>
             </div>

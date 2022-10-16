@@ -117,7 +117,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
     }
 }
 //get all comments
-$query_comment = "SELECT username,comment FROM comments";
+$query_comment = "SELECT * FROM comments";
 $stmt_comment = $connection->prepare($query_comment);
 $stmt_comment->execute();
 $results_comment = $stmt_comment->get_result();
@@ -402,7 +402,6 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                     <div class="card">
                         <div class="card-header">
                             <h3>Comments added by customers</h3>
-                            <!-- <button>See all <span class="las la-arrow-right"></span></button> -->
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -416,7 +415,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                                     <tbody>
                                         <?php
                                         while ($row_comment = $results_comment->fetch_assoc()) {
-                                            get_comments_connection($row_comment['username'], $row_comment['comment']);
+                                            get_comments_connection($row_comment['customer_id'], $row_comment['username'], $row_comment['comment']);
                                         }
                                         ?>
                                     </tbody>

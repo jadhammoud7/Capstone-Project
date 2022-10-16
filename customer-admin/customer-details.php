@@ -141,7 +141,7 @@ if (isset($_GET['customer_id'])) {
     }
 
     //get all comments from this customer
-    $query_get_customer_comments = "SELECT comment FROM comments WHERE customer_id = '" . $_GET['customer_id'] . "'";
+    $query_get_customer_comments = "SELECT * FROM comments WHERE customer_id = '" . $_GET['customer_id'] . "'";
     $stmt_get_customer_comments = $connection->prepare($query_get_customer_comments);
     $stmt_get_customer_comments->execute();
     $results_get_customer_comments = $stmt_get_customer_comments->get_result();
@@ -533,6 +533,7 @@ if (isset($_GET['customer_id'])) {
                                                 <?php
                                                 while ($row_get_comments = $results_get_customer_comments->fetch_assoc()) {
                                                     echo get_comments_connection(
+                                                        $row_customer['customer_id'],
                                                         $row_customer['first_name'] . ' ' . $row_customer['last_name'],
                                                         $row_get_comments['comment']
                                                     );

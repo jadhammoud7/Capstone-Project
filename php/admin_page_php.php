@@ -94,13 +94,17 @@ function latest_admins_connection($first_name, $last_name, $email_address)
     echo $element;
 }
 
-function get_comments_connection($username, $comment)
+function get_comments_connection($customer_id, $username, $comment)
 {
     $element = "
-    <tr class=\"hello\">
-    <td>$username</td>
-    <td>$comment</td>
-</tr>
+    <tr>
+        <td>
+            <a href='../customer-admin/customer-details.php?customer_id=$customer_id' title=\"See info about customer '$username'\">
+                $username
+            </a>
+        </td>
+        <td>$comment</td>
+    </tr>
     ";
     echo $element;
 }
