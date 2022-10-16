@@ -427,20 +427,29 @@ $row_count_store = $results_count_store->fetch_assoc();
                         <h1 class="title">Add customer sales via store</h1>
                         <p class="title">Please fill in this form to add a new Sales.</p>
                         <br>
-
+                        <label for="customer_name"><b>Customer Name</b></label>
                         <input type="text" name="customer_name" class="survey_options" size="50" placeholder="customer name.." required>
-                        <input type="text" name="username" class="survey_options" size="50" placeholder="username if any..">
-                        <input type="text" name="email" class="survey_options" size="50" placeholder="email.." required>
-                        <label for="products" id="choose-product">Choose a product:
-                            <select id="products" name="product_name[]" size="5" required>
-                                <?php
-                                while ($row_get_all_products = $results_get_all_products->fetch_assoc()) {
-                                    store_sales_connection($row_get_all_products['name']);
-                                }
-                                ?>
-                            </select>
-                        </label>
 
+                        <label for="username"><b>Username</b></label>
+                        <input type="text" name="username" class="survey_options" size="50" placeholder="username if any(not required)..">
+
+                        <label for="survey_options"><b>Survey Options</b></label>
+                        <input type="text" name="email" class="survey_options" size="50" placeholder="email.." required>
+
+                        <label for="products" style="font-weight: bold;margin-bottom:10px;">Choose a product: </label><br>
+                        <select id="products" name="product_name[]" size="" required>
+                            <?php
+                            while ($row_get_all_products = $results_get_all_products->fetch_assoc()) {
+                                store_sales_connection($row_get_all_products['name']);
+                            }
+                            ?>
+                        </select>
+
+
+
+
+                        <br>
+                        <label for="survey_options"><b>Quantity</b></label>
                         <input type="number" name="quantity[]" class="survey_options" size="50" placeholder="quantity..." required>
                     </div>
                     <div class="controls">

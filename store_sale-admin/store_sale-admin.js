@@ -262,9 +262,11 @@ add_more_fields.onclick = function () {
     var newField1 = document.createElement('input');
     var newField2 = document.createElement('input');
     var label1 = document.createElement('label');
+    var label2 = document.createElement('label');
     label1.setAttribute("id", "choose-product");
-    label1.innerHTML = "Choose a product";
-    survey_options.appendChild(label1);
+    label1.innerHTML = "Choose a product<br>";
+    label1.style.fontWeight="bold";
+    // survey_options.appendChild(label1);
 
     label1.appendChild(clone);
     label1.setAttribute('for', 'products');
@@ -272,6 +274,10 @@ add_more_fields.onclick = function () {
     survey_options.appendChild(label1);
 
 
+
+    label2.innerHTML = "<br>Quantity<br>";
+    label2.style.fontWeight="bold";
+    survey_options.appendChild(label2);
     newField2.setAttribute('type', 'number');
     newField2.setAttribute('name', 'quantity[]');
     newField2.setAttribute('class', 'survey_options');
@@ -283,11 +289,11 @@ add_more_fields.onclick = function () {
 
 remove_fields.onclick = function () {
     var input_tags = survey_options.getElementsByTagName('input');
-    var label2 = survey_options.getElementsByTagName('label');
+    var label3 = survey_options.getElementsByTagName('label');
 
-    if (input_tags.length > 4 && label2.length > 1) {
+    if (input_tags.length > 4 && label3.length >4) {
         survey_options.removeChild(input_tags[(input_tags.length) - 1]);
-        survey_options.removeChild(label2[(label2.length) - 1]);
+        survey_options.removeChild(label3[(label3.length) - 1]);
 
     }
 }

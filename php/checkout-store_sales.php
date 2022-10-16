@@ -7,7 +7,8 @@ function store_sales_connection($name)
 {
 
     $element = "
-    <option value=\"$name\">$name</option>
+        <option value=\"$name\">$name</option>
+
 
     ";
     echo $element;
