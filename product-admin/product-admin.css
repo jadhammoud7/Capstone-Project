@@ -228,16 +228,11 @@ hr {
 }
 
 select {
-  background-color: royalblue;
-  border: none;
-  color: #fefefe;
-  font-size: 15px;
-  width: 400px;
-}
-
-select:hover {
-  background-color: rgb(200, 192, 192);
-  color: royalblue;
+background-color: royalblue;
+color: white;
+border-radius: 15px;
+width: 20%;
+padding: 10px;
 }
 
 option {
@@ -245,6 +240,8 @@ option {
   padding: 15px 15px 15px;
   min-height: 2em;
   font-size: large;
+  background-color: white;
+  color: black;
 }
 
 

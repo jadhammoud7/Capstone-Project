@@ -456,33 +456,33 @@ if (isset($_GET['product_id']) && isset($_GET['sales_history'])) {
                         <input style="height: 35px;" type="number" placeholder="Enter product's price" name="product_price" id="product_price" value="" required>
                         <br><br>
 
-                        <label for="product_type"><b>Product Type</b><br>
-                            <select name="product_type" id="product_type">
-                                <option value="cds">CDs</option>
-                                <option value="consoles">Consoles</option>
-                                <option value="accessories">Accessories</option>
-                                <option value="phones">Phones</option>
-                                <option value="cards">Online cards</option>
-                                <option value="electronics">Electronics</option>
-                            </select>
-                        </label>
+                        <label for="product_type"><b>Product Type</b></label> <br>
+                        <select name="product_type" id="product_type">
+                            <option value="cds">CDs</option>
+                            <option value="consoles">Consoles</option>
+                            <option value="accessories">Accessories</option>
+                            <option value="phones">Phones</option>
+                            <option value="cards">Online cards</option>
+                            <option value="electronics">Electronics</option>
+                        </select>
+
                         <br><br>
 
-                        <label for="product_category"><b>Product Category</b><br>
-                            <select name="product_category" id="product_category">
-                                <option value="action">Action</option>
-                                <option value="gaming">Gaming</option>
-                                <option value="strategy">Strategy</option>
-                                <option value="PS2">PS2</option>
-                                <option value="PS3">PS3</option>
-                                <option value="PS4">PS4</option>
-                                <option value="PS5">PS5</option>
-                                <option value="XBox">XBox</option>
-                                <option value="iphone">IPhone</option>
-                                <option value="Samsung">Samsung</option>
-                                <option value="PsPlus">PS Plus</option>
-                            </select>
-                        </label>
+                        <label for="product_category"><b>Product Category</b></label><br>
+                        <select name="product_category" id="product_category">
+                            <option value="action">Action</option>
+                            <option value="gaming">Gaming</option>
+                            <option value="strategy">Strategy</option>
+                            <option value="PS2">PS2</option>
+                            <option value="PS3">PS3</option>
+                            <option value="PS4">PS4</option>
+                            <option value="PS5">PS5</option>
+                            <option value="XBox">XBox</option>
+                            <option value="iphone">IPhone</option>
+                            <option value="Samsung">Samsung</option>
+                            <option value="PsPlus">PS Plus</option>
+                        </select>
+
                         <br><br>
 
                         <label for="product_desciption"><b>Desciption</b></label>
