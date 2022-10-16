@@ -87,7 +87,7 @@ if ($repair_type != "" && $price_per_hour != 0 && $description != "") {
         if (move_uploaded_file($_FILES['repair_image']['tmp_name'], $target_file)) {
             $repair_image = $filename;
             $stmt_add_new_repair = $connection->prepare("INSERT INTO repairs(repair_type, price_per_hour, description, image) VALUES (?,?,?,?)");
-            $stmt_add_new_repair->bind_param("sisi", $repair_type, $price_per_hour, $description, $repair_image);
+            $stmt_add_new_repair->bind_param("siss", $repair_type, $price_per_hour, $description, $repair_image);
             $stmt_add_new_repair->execute();
             $stmt_add_new_repair->close();
             header("Location: repairs-admin.php?repair-added=1");

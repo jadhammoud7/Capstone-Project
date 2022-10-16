@@ -3,9 +3,22 @@ include("connection.php");
 
 function get_appointment_in_admin_page_for_table_connection($appointment_id, $customer_name, $customer_id, $appointment_name, $price_per_hour, $date, $hour, $status)
 {
+    include("connection.php");
+
+    $stmt_select_repair = $connection->prepare("SELECT repair_id FROM repairs WHERE repair_type = '" . $appointment_name . "' ");
+    $stmt_select_repair->execute();
+    $result_repair = $stmt_select_repair->get_result();
+    $row_repair = $result_repair->fetch_assoc();
+
+    $repair_id = $row_repair['repair_id'];
+
     $element = "
     <tr>
-        <td>$appointment_name</td>
+        <td>
+            <a href='../repairs-admin/repair-admin-details.php?repair-id=$repair_id' title=\"See info about repair '$appointment_name'\">
+                $appointment_name
+            </a>
+        </td>
         <td>
             <a href='../customer-admin/customer-details.php?customer_id=$customer_id' title=\"See info about customer '$customer_name'\">
                 $customer_name

@@ -340,15 +340,16 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                                         <?php
                                         while ($row_get_appointments = $results_get_appointments->fetch_assoc()) {
 
-                                            $query_getuser = "SELECT username FROM customers WHERE customer_id ='" . $row_get_appointments['customer_id'] . "'";
+                                            $query_getuser = "SELECT username, customer_id FROM customers WHERE customer_id ='" . $row_get_appointments['customer_id'] . "'";
                                             $stmt_getuser = $connection->prepare($query_getuser);
                                             $stmt_getuser->execute();
                                             $results_getuser = $stmt_getuser->get_result();
                                             $row_getuser = $results_getuser->fetch_assoc();
 
-                                            echo get_appointment_in_admin_page_for_table_connection(
+                                            get_appointment_in_admin_page_for_table_connection(
                                                 $row_get_appointments['appointment_id'],
                                                 $row_getuser['username'],
+                                                $row_getuser['customer_id'],
                                                 $row_get_appointments['appointment_name'],
                                                 $row_get_appointments['price_per_hour'],
                                                 $row_get_appointments['date'],
