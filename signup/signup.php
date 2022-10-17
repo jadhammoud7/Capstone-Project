@@ -24,7 +24,7 @@
     <a href="../home-page/home-page.php">
       <span class="close" title="Return to log in">&times;</span>
     </a>
-    <form class="modal-content" action="../php/signup.php" method="post">
+    <form class="modal-content" action="../php/signup.php" method="POST" enctype="multipart/form-data">
       <div class="container">
         <h1 class="title">Sign Up</h1>
         <p class="title">Please fill in this form to create an account.</p>
@@ -111,8 +111,8 @@
         </p>
         <label for="city"><b>City</b></label>
         <input type="text" placeholder="Enter city" name="city" id="city" value="<?php if (isset($_SESSION['city'])) {
-                                                                                            echo $_SESSION['city'];
-                                                                                          } ?>" required>
+                                                                                    echo $_SESSION['city'];
+                                                                                  } ?>" required>
 
         <p class="error" id="username_error">
           <?php
@@ -126,6 +126,11 @@
         <input type="text" placeholder="Enter username of your own" name="username" id="username" value="<?php if (isset($_SESSION['username'])) {
                                                                                                             echo $_SESSION['username'];
                                                                                                           } ?>" required>
+
+        <label><b>Upload Profile Image:</b></label>
+        <br>
+        <input type="file" title="Choose from your files an image for your profile" name="customer_image" id="customer_image" value="" required>
+        <br>
 
         <p class="error" id="password_error">
           <?php
