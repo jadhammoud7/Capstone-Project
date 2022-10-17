@@ -21,7 +21,7 @@ $results = $stmt->get_result();
 
 //get all products(some of them )
 require_once("../php/shop_product_connection.php");
-$query_allproducts = "SELECT product_id,name, price FROM products ORDER BY RAND() LIMIT 8;";
+$query_allproducts = "SELECT product_id, name, price, image FROM products ORDER BY RAND() LIMIT 8;";
 $stmt_allproducts = $connection->prepare($query_allproducts);
 $stmt_allproducts->execute();
 $results_allproducts = $stmt_allproducts->get_result();
@@ -209,16 +209,14 @@ $results_products = $stmt_products->get_result();
                             <tbody>
                                 <?php
                                 while ($row_products = $results_products->fetch_assoc()) {
-                                    get_all_products(
+                                    get_all_products_customer_home(
                                         $row_products['product_id'],
                                         $row_products['name'],
                                         $row_products['price'],
                                         $row_products['category'],
                                         $row_products['type'],
                                         $row_products['inventory'],
-                                        $row_products['sales_number'],
-                                        $row_products['last_modified_by'],
-                                        $row_products['last_modified_on']
+                                        $row_products['sales_number']
                                     );
                                 }
                                 ?>
@@ -302,12 +300,22 @@ $results_products = $stmt_products->get_result();
         <div class="shop-products reveal-by-y">
             <?php
             while ($row_allproducts = $results_allproducts->fetch_assoc()) {
-                shop_connection($row_allproducts["product_id"], $row_allproducts["name"], $row_allproducts["price"]);
+                shop_connection(
+                    $row_allproducts['product_id'],
+                    $row_allproducts['name'],
+                    $row_allproducts['price'],
+                    $row_allproducts['image']
+                );
             }
 
 
             while ($row_allproducts = $results_allproducts->fetch_assoc()) {
-                shop_connection($row_allproducts["product_id"], $row_allproducts["name"], $row_allproducts["price"]);
+                shop_connection(
+                    $row_allproducts['product_id'],
+                    $row_allproducts['name'],
+                    $row_allproducts['price'],
+                    $row_allproducts['image']
+                );
             }
             ?>
             <button class="shop-page-button" onclick="window.location.href='../shop/shop.php';" title="Go to Shop Page to View all Our Products"><i class="fa fa-shopping-cart"></i>Go To Shop Page</button>

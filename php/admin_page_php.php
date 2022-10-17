@@ -214,6 +214,37 @@ function get_all_products($product_id, $name, $price, $type, $category, $invento
     echo $element;
 }
 
+function get_all_products_customer_home($product_id, $name, $price, $type, $category, $inventory, $sales_number)
+{
+    $element = "
+    <tr>
+        <td>
+            <a href='product-details.php?product_id=$product_id' title=\"See details about product '$name'\">
+                $name
+            </a>
+        </td>
+        <td>
+            <a href='product-admin.php?product_id=$product_id&price_history=1' class=\"customer_link\" title=\"See price history about '$name'\">
+                $price
+            </a>
+        </td>
+        <td>$type</td>
+        <td>$category</td>
+        <td>
+            <a href='product-admin.php?product_id=$product_id&inventory_history=1' class=\"customer_link\" title=\"See inventory history about '$name'\">
+                $inventory
+            </a>
+        </td>
+        <td>
+            <a href='product-admin.php?product_id=$product_id&sales_history=1' class=\"customer_link\" title=\"See sales history about '$name'\">
+                $sales_number
+            </a>
+        </td>
+    </tr>
+    ";
+    echo $element;
+}
+
 function get_all_product_history_prices($price, $price_change, $modified_by, $modified_on)
 {
     $element = "

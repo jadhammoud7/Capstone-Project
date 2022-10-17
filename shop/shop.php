@@ -13,7 +13,7 @@ require_once('../php/shop_product_connection.php');
 
 //if no get request of type was sent meaning starter
 if (!isset($_GET['type'])) {
-    $query = "SELECT product_id, name, price FROM products";
+    $query = "SELECT * FROM products";
     $type = 'cds'; //display cds as a starter
     $_SESSION['title'] = $type; //for the title of the div 
     if (!isset($_GET['category'])) { //if no category filter was set
@@ -35,7 +35,7 @@ if (!isset($_GET['type'])) {
 
 //if selected button to view products by type only not filter
 if (isset($_GET['type']) && !isset($_GET['category']) && !isset($_GET['sortby'])) {
-    $query = "SELECT product_id, name, price FROM products";
+    $query = "SELECT * FROM products";
     $type = $_GET['type']; //display cds as a starter
     $_SESSION['title'] = $type; //for the title of the div 
     $query = $query . " WHERE type= '" . $type . "' ";
@@ -45,7 +45,7 @@ if (isset($_GET['type']) && !isset($_GET['category']) && !isset($_GET['sortby'])
 }
 //if a get request of type was sent
 if (isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) {
-    $query = "SELECT product_id, name, price FROM products";
+    $query = "SELECT * FROM products";
     $type = $_GET['type'];
     $category = $_GET['category'];
     $sortby = $_GET['sortby'];
@@ -116,13 +116,13 @@ function UpdateSortSelect($sort_current)
 }
 
 //for filters cd
-$query_filter_cd = "SELECT product_id,name, price FROM products WHERE category='XBOX Cd' or category='PS3 Cd' or category='PS4 Cd' or category='PS5 Cd' ";
+$query_filter_cd = "SELECT * FROM products WHERE category='XBOX Cd' or category='PS3 Cd' or category='PS4 Cd' or category='PS5 Cd' ";
 $stmt_filter_cd = $connection->prepare($query_filter_cd);
 $stmt_filter_cd->execute();
 $results_filter_cd = $stmt_filter_cd->get_result();
 
 //for consoles filter
-$query_console_filter = "SELECT product_id,name, price FROM products WHERE category='PS3' or category='PS4' or category='PS5'";
+$query_console_filter = "SELECT * FROM products WHERE category='PS3' or category='PS4' or category='PS5'";
 $stmt_console_filter = $connection->prepare($query_console_filter);
 $stmt_console_filter->execute();
 $results_console_filter = $stmt_console_filter->get_result();
@@ -474,7 +474,12 @@ while ($row_customers = $results_customers->fetch_assoc()) {
                 <?php
                 if ((isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) || isset($_GET['type']) || !isset($_GET['type'])) {
                     while ($row = $results_shop->fetch_assoc()) {
-                        shop_connection($row["product_id"], $row["name"], $row["price"]);
+                        shop_connection(
+                            $row["product_id"],
+                            $row["name"],
+                            $row["price"],
+                            $row['image']
+                        );
                     }
                 }
                 ?>

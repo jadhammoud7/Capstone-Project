@@ -2,14 +2,14 @@
 
 include("connection.php");
 
-function shop_connection($product_id, $name, $price)
+function shop_connection($product_id, $name, $price, $image)
 {
 
     $element = "
     <div class=\"product1\" id=\"product\">
         <div class=\"product_info\" onclick=\"document.getElementById('attributes_section').style.transform = 'rotateY(180deg);'\">
             <div class=\"img_section\">
-                <img src=\"../images/console.png\" alt=\"product 1\">
+                <img src=\"../images/$image\" alt=\"product image\">
             </div>
             <div class=\"attributes_section\" id=\"attributes_section\">
                 <h1><i>$name</i></h1>

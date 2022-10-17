@@ -3,13 +3,13 @@
 include("connection.php");
 
 //for basket
-function basket_product_connection($product_id, $name, $price, $quantity)
+function basket_product_connection($product_id, $name, $price, $quantity, $image)
 {
 
     $element = "<tr class=\"product-container\">
                     <td>
                         <div class=\"cart-info\">
-                            <img src=\"../images/Gaming-Wallpaper.png\" alt=\"\">
+                            <img src=\"../images/$image\" alt=\"\">
                             <div class=\"info_of_product\">
                                 <p>$name</p>
                                 <small >price: $price$</small>

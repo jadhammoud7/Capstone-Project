@@ -132,11 +132,17 @@ $_SESSION['total_price_including_tax'] = $total_inc_tax;
                 </tr>
                 <?php
                 while ($row_add_to_basket = $results_basket->fetch_assoc()) {
-                    $stmt_get_product = $connection->prepare("SELECT product_id, name FROM products WHERE product_id = '" . $row_add_to_basket["product_id"] . "' ");
+                    $stmt_get_product = $connection->prepare("SELECT product_id, name, image FROM products WHERE product_id = '" . $row_add_to_basket["product_id"] . "' ");
                     $stmt_get_product->execute();
                     $results_get_product = $stmt_get_product->get_result();
                     $row_get_product = $results_get_product->fetch_assoc();
-                    basket_product_connection($row_get_product["product_id"], $row_get_product["name"], $row_add_to_basket["price"], $row_add_to_basket["quantity"]);
+                    basket_product_connection(
+                        $row_get_product["product_id"],
+                        $row_get_product["name"],
+                        $row_add_to_basket["price"],
+                        $row_add_to_basket["quantity"],
+                        $row_get_product['image']
+                    );
                 }
 
                 ?>
