@@ -93,6 +93,7 @@ function ChangeProfile() {
     const phonenumber = document.querySelector(".phone_number_editprofile");
     const address = document.querySelector(".address_editprofile");
     const city = document.querySelector(".city_editprofile");
+    const profile_image = document.querySelector(".customer_image");
 
     console.log("edit profile btn clicked");
 
@@ -105,6 +106,7 @@ function ChangeProfile() {
         phonenumber.style.display = 'block';
         address.style.display = 'block';
         city.style.display = 'block';
+        profile_image.style.display = 'block';
     } else {
         btn_div.innerHTML = " <button onclick=\"ChangeProfile()\" class=\"edit_profile_btn\" title=\"Edit your profile\" style=\"color: black; \"><i class=\"fa fa-edit\"></i>Edit Profile</button>";
         // 👇️ this HIDES the form
@@ -114,6 +116,7 @@ function ChangeProfile() {
         phonenumber.style.display = 'none';
         address.style.display = 'none';
         city.style.display = 'none';
+        profile_image.style.display = 'none';
     }
 }
 
@@ -192,7 +195,7 @@ function RemoveEditProfilePopUp() {
 var checkoutID;
 function OpenRemoveCheckoutPopUp(checkout_id) {
     let checkout_delete_popup = document.getElementById('delete-checkout-confirmation');
-    checkoutID = checkout_id; 
+    checkoutID = checkout_id;
     checkout_delete_popup.classList.add('open-popup');
 }
 
@@ -202,7 +205,7 @@ function CloseRemoveCheckoutPopUp() {
 }
 
 function RemoveCheckout() {
-    window.location = '../profile/profile.php?delete_checkout_id=' + checkoutID; 
+    window.location = '../profile/profile.php?delete_checkout_id=' + checkoutID;
     CloseRemoveCheckoutPopUp();
 }
 

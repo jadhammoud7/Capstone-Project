@@ -3,14 +3,14 @@
 include("connection.php");
 
 //for basket
-function repair_products_connection($repair_type, $price_per_hour, $description)
+function repair_products_connection($repair_type, $price_per_hour, $description, $image)
 {
 
     $element = "
     <div class=\"appointment-item\">
     <h2>$repair_type</h2>
     <div class=\"appointment-item-info\">
-        <img src=\"../images/laptop_repair.png\" alt=\"\">
+        <img src=\"../images/$image\" alt=\"\">
         <div class=\"appointment-item-info-part\">
             <h3 id=\"repair_type\">$repair_type</h3>
             <p>1 hour | $price_per_hour$</p>

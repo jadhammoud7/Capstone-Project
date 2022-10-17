@@ -199,35 +199,51 @@ if (isset($_GET['delete_checkout_id'])) {
                 <h3 id="attribute">First Name: </h3>
                 <h3><?php echo $row["first_name"] ?></h3>
             </div>
-            <form action="../php/editprofile.php" method="post">
+            <form action="../php/editprofile.php" method="POST" enctype="multipart/form-data">
                 <input type="text" name="firstname_editprofile" id="" placeholder="new first name.." class="first_name_editprofile" style="display: none;">
+
                 <div class="profile-part">
                     <h3 id="attribute">Last Name: </h3>
                     <h3><?php echo $row["last_name"] ?></h3>
                 </div>
+
                 <input type="text" name="lastname_editprofile" id="" placeholder="new last name.." class="last_name_editprofile" style="display: none;">
+
 
                 <div class="profile-part">
                     <h3 id="attribute">Email Address: </h3>
                     <h3><?php echo $row["email"] ?></h3>
                 </div>
+
                 <input type="text" name="email_editprofile" id="" placeholder="new email.." class="email_editprofile" style="display: none;">
+
                 <div class="profile-part">
                     <h3 id="attribute">Phone Number: </h3>
                     <h3><?php echo $row["phone_number"] ?></h3>
                 </div>
+
                 <input type="text" name="phonenumber_editprofile" id="" placeholder="new phone number.." class="phone_number_editprofile" style="display: none;">
+
                 <div class="profile-part">
                     <h3 id="attribute">Home Address: </h3>
                     <h3><?php echo $row["address"] ?></h3>
                 </div>
+
                 <input type="text" name="address_editprofile" id="" placeholder="new address.." class="address_editprofile" style="display: none;">
 
                 <div class="profile-part">
                     <h3 id="attribute">City: </h3>
                     <h3><?php echo $row["city"] ?></h3>
                 </div>
+
                 <input type="text" name="city_editprofile" id="" placeholder="new city.." class="city_editprofile" style="display: none;">
+
+
+                <label class="customer_image" style="display: none;"><b>Upload Profile Image:</b>
+                    <br>
+                    <input type="file" title="Choose from your files an image for your profile" name="customer_image" id="customer_image" value="">
+                    <br>
+                </label>
 
                 <div class="edit_save_btn">
                     <button onclick="ChangeProfile()" class="edit_profile_btn" title="Edit your profile"> <i class="fa fa-edit"></i><strong>Edit
@@ -247,11 +263,18 @@ if (isset($_GET['delete_checkout_id'])) {
             </div>
             <?php
             while ($row_basket = $results_basket->fetch_assoc()) {
-                $stmt_get_product = $connection->prepare("SELECT product_id, category, name, price FROM products WHERE product_id = '" . $row_basket["product_id"] . "' ");
+                $stmt_get_product = $connection->prepare("SELECT product_id, category, name, price, image FROM products WHERE product_id = '" . $row_basket["product_id"] . "' ");
                 $stmt_get_product->execute();
                 $results_get_product = $stmt_get_product->get_result();
                 $row_get_product = $results_get_product->fetch_assoc();
-                basket_connection($row_get_product["product_id"], $row_get_product["name"], $row_get_product["category"], $row_basket["price"], $row_basket["quantity"]);
+                basket_connection(
+                    $row_get_product['product_id'],
+                    $row_get_product['name'],
+                    $row_get_product['category'],
+                    $row_basket['price'],
+                    $row_basket['quantity'],
+                    $row_get_product['image']
+                );
             }
 
             ?>
@@ -278,11 +301,17 @@ if (isset($_GET['delete_checkout_id'])) {
             </div>
             <?php
             while ($row_add_to_favorites = $results_add_to_favorites->fetch_assoc()) {
-                $stmt_get_product = $connection->prepare("SELECT product_id, name, category, price FROM products WHERE product_id = '" . $row_add_to_favorites["product_id"] . "' ");
+                $stmt_get_product = $connection->prepare("SELECT product_id, name, category, price, image FROM products WHERE product_id = '" . $row_add_to_favorites["product_id"] . "' ");
                 $stmt_get_product->execute();
                 $results_get_product = $stmt_get_product->get_result();
                 $row_get_product = $results_get_product->fetch_assoc();
-                favorites_list_connection($row_get_product['product_id'], $row_get_product['name'], $row_get_product['category'], $row_get_product['price']);
+                favorites_list_connection(
+                    $row_get_product['product_id'],
+                    $row_get_product['name'],
+                    $row_get_product['category'],
+                    $row_get_product['price'],
+                    $row_get_product['image']
+                );
             }
             ?>
             <div class="gotoshoppage_profile">
@@ -299,7 +328,19 @@ if (isset($_GET['delete_checkout_id'])) {
                 <p>Total: <?php echo mysqli_num_rows($results_app) ?></p>
                 <?php
                 while ($row_app = $results_app->fetch_assoc()) {
-                    appointments_list_connection($row_app["appointment_id"], $row_app["appointment_name"], $row_app["date"], $row_app["hour"], $row_app["status"]);
+                    $stmt_select_repair = $connection->prepare("SELECT image FROM repairs WHERE repair_type = '" . $row_app['appointment_name'] . "'");
+                    $stmt_select_repair->execute();
+                    $results_repair = $stmt_select_repair->get_result();
+                    $row_repair = $results_repair->fetch_assoc();
+
+                    appointments_list_connection(
+                        $row_app["appointment_id"],
+                        $row_app["appointment_name"],
+                        $row_app["date"],
+                        $row_app["hour"],
+                        $row_app["status"],
+                        $row_repair['image']
+                    );
                 }
                 ?>
 
@@ -318,7 +359,14 @@ if (isset($_GET['delete_checkout_id'])) {
                 <p>Total: <?php echo mysqli_num_rows($results_checkouts) ?></p>
                 <?php
                 while ($row_checkouts = $results_checkouts->fetch_assoc()) {
-                    checkouts_list_connection($row_checkouts['checkout_id'], $row_checkouts['shipping_location'], $row_checkouts['status'], $row_checkouts['total_price'], $row_checkouts['tax_price'], $row_checkouts['total_price_including_tax']);
+                    checkouts_list_connection(
+                        $row_checkouts['checkout_id'],
+                        $row_checkouts['shipping_location'],
+                        $row_checkouts['status'],
+                        $row_checkouts['total_price'],
+                        $row_checkouts['tax_price'],
+                        $row_checkouts['total_price_including_tax']
+                    );
                 }
                 ?>
             </div>

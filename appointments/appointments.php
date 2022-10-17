@@ -13,7 +13,7 @@ if (!isset($_SESSION['logged_bool'])) {
 
 require_once('../php/repair.php');
 //select all repair services
-$query = "SELECT * FROM repair";
+$query = "SELECT * FROM repairs";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
@@ -156,7 +156,12 @@ $results_gift = $stmt_gift->get_result();
     <div class="appointments-div fade">
         <?php
         while ($row = $results->fetch_assoc()) {
-            repair_products_connection($row["repair_type"], $row["price_per_hour"], $row["description"]);
+            repair_products_connection(
+                $row["repair_type"],
+                $row["price_per_hour"],
+                $row["description"],
+                $row['image']
+            );
         }
         ?>
     </div>
