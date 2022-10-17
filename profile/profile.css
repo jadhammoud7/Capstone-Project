@@ -138,7 +138,8 @@
     border-radius: 15px;
 }
 
-.appointments-div, .checkouts-div {
+.appointments-div,
+.checkouts-div {
     display: flex;
     flex-direction: row;
     /* box-shadow: 10px 10px 15px 1px rgba(21, 100, 219, 0.486); */
@@ -438,9 +439,16 @@ input[type="date"]:hover {
     cursor: pointer;
 }
 
-.order-summary h2{
+.order-summary h2 {
     color: royalblue;
     margin-left: 10px;
+}
+
+
+.profile-sidebar img {
+    height: 150px;
+    width: 150px;
+    margin: 10px;
 }
 
 /* start of making profile container responsive */

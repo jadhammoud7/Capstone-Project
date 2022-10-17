@@ -13,7 +13,7 @@ if (!isset($_SESSION['logged_bool'])) {
 
 $customerid = $_SESSION['logged_id'];
 
-$query = "SELECT first_name, last_name, email, phone_number, username, address,city from customers WHERE customer_id = $customerid";
+$query = "SELECT * FROM customers WHERE customer_id = $customerid";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
@@ -134,7 +134,7 @@ if (isset($_GET['delete_checkout_id'])) {
     <!-- started with profile body -->
     <div class="profile-container">
         <div class="profile-sidebar">
-            <img src="../images/info.png" alt="">
+            <img src="../images/<?php echo $row['customer_image']; ?>" alt="">
             <ol class="profile-sidebar-user">
                 <li id="customer-name" title="My Username"><span><?php echo $row["username"]; ?></span></li>
                 <!-- <li id="customer" title="My Status"><span>Customer</span></li> -->

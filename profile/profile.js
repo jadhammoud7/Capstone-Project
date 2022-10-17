@@ -83,7 +83,7 @@ function ShowCheckouts() {
     checkouts_button.style.fontWeight = 800;
 }
 
-const btn = document.querySelector(".edit_profile_btn");
+const edit_btn = document.querySelector(".edit_profile_btn");
 const btn_div = document.querySelector(".edit_save_btn");
 
 function ChangeProfile() {
