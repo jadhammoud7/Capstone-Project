@@ -258,29 +258,28 @@ date_of_birth_column.addEventListener('click', function SetSorting() {
 });
 
 function FilterTable() {
-    var input, filter, table, tr, td, i, j, txtValue;
+    var input, filter, table, td, i, j, textValue;
     input = document.getElementById("SearchInput");
     filter = input.value.toUpperCase();
     table = document.getElementById("customers_table");
 
-    tr = table.tBodies[0].rows;
-    for (i = 0; i < (tr.length - 1); i++) {
-        for (j = 0; j < (tr[i].getElementsByTagName("td").length - 1); j++) {
+    var tr = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+    for (i = 0; i < tr.length; i++) {
+        var td = [];
+        var display = 'none';
+        for (j = 0; j < tr[i].getElementsByTagName("td").length; j++) {
             if (j == 0) {
-                td = tr[i].getElementsByTagName("td")[j].getElementsByTagName("a")[0];
+                td[j] = tr[i].getElementsByTagName("td")[j].getElementsByTagName("a")[0];
+                textValue = td[j].textContent;
             }
             else {
-                td = tr[i].getElementsByTagName("td")[j];
+                td[j] = tr[i].getElementsByTagName("td")[j];
+                textValue = td[j].textContent;
             }
-            if (td) {
-                txtValue = td.innerHTML;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = '';
-                }
-                else {
-                    tr[i].style.display = 'none';
-                }
+            if (textValue.toUpperCase().indexOf(filter) > -1) {
+                display = '';
             }
         }
+        tr[i].style.display = display;
     }
 }
