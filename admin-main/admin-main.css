@@ -276,32 +276,32 @@ td .status_checkout {
     background: red;
 }
 
-input {
+#SearchInput {
     border-radius: 30px;
 }
 
 /* Full-width input fields */
-input[type=text],
-input[type=number] {
+#SearchInput {
     width: 100%;
-    padding: 0;
-    margin: 5px 0 5px 0;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin: 0px 0 0px 0;
     display: inline-block;
     border: none;
     background: #f1f1f1;
 }
 
 /* Add a background color when the inputs get focus */
-input[type=text]:focus,
-input[type=number]:focus {
+#SearchInput:focus,
+#SearchInput:focus {
     background-color: white;
     outline: none;
     border: 2px solid black;
     color: black
 }
 
-input[type=text]:hover,
-input[type=number]:hover {
+#SearchInput:hover,
+#SearchInput:hover {
     background-color: #ddd;
     outline: none;
 }

@@ -277,6 +277,37 @@ hr {
   box-shadow: 0px 10px 40px 0px rgba(47, 47, 47, .1);
 }
 
+
+input {
+  border-radius: 30px;
+}
+
+/* Full-width input fields */
+input[type=text],
+input[type=number] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* Add a background color when the inputs get focus */
+input[type=text]:focus,
+input[type=number]:focus {
+  background-color: white;
+  outline: none;
+  border: 2px solid black;
+  color: black
+}
+
+input[type=text]:hover,
+input[type=number]:hover {
+  background-color: #ddd;
+  outline: none;
+}
+
 /* input[type="number"] {
   padding: 10px;
   margin: 10px auto;

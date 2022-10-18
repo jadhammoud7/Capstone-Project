@@ -329,6 +329,10 @@ if (isset($_GET['getAdminIDtoRemove'])) {
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
+                                <div class="div-search">
+                                    <span class="las la-search" style="font-size: 1.8rem; color: royalblue;"></span>
+                                    <input type="text" id="SearchInput" onkeyup="FilterTable()" placeholder="Search in table Admins...">
+                                </div>
                                 <table width="100%" id="admins_table">
                                     <thead>
                                         <tr>

@@ -184,3 +184,24 @@ phone_number_column.addEventListener('click', function SetSorting() {
         phone_number_column.title = 'Sort Phone Number by ascending';
     }
 });
+
+function FilterTable() {
+    var input, filter, table, td, i, j, textValue;
+    input = document.getElementById("SearchInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("admins_table");
+
+    var tr = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+    for (i = 0; i < tr.length; i++) {
+        var td = [];
+        var display = 'none';
+        for (j = 0; j < tr[i].getElementsByTagName("td").length - 1; j++) {
+            td[j] = tr[i].getElementsByTagName("td")[j];
+            textValue = td[j].textContent;
+            if (textValue.toUpperCase().indexOf(filter) > -1) {
+                display = '';
+            }
+            tr[i].style.display = display;
+        }
+    }
+}

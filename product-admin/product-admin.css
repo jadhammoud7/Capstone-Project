@@ -19,6 +19,11 @@
   color: red;
 }
 
+#SearchInput{
+  margin: 0 0 0 0;
+  padding: 0;
+  padding-left: 20px;
+}
 /* new form */
 input {
   border-radius: 30px;
