@@ -256,3 +256,31 @@ date_of_birth_column.addEventListener('click', function SetSorting() {
         date_of_birth_column.title = 'Sort Date of Birth by ascending';
     }
 });
+
+function FilterTable() {
+    var input, filter, table, tr, td, i, j, txtValue;
+    input = document.getElementById("SearchInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("customers_table");
+
+    tr = table.tBodies[0].rows;
+    for (i = 0; i < (tr.length - 1); i++) {
+        for (j = 0; j < (tr[i].getElementsByTagName("td").length - 1); j++) {
+            if (j == 0) {
+                td = tr[i].getElementsByTagName("td")[j].getElementsByTagName("a")[0];
+            }
+            else {
+                td = tr[i].getElementsByTagName("td")[j];
+            }
+            if (td) {
+                txtValue = td.innerHTML;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = '';
+                }
+                else {
+                    tr[i].style.display = 'none';
+                }
+            }
+        }
+    }
+}

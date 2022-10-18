@@ -1,0 +1,25 @@
+.div-search {
+    display: flex;
+    flex-direction: row;
+    /* Do not repeat the icon image */
+    width: 100%;
+    /* Full-width */
+    font-size: 16px;
+    /* Increase font-size */
+    padding: 0px 20px 0px 20px;
+    /* Add some padding */
+    border: 3px solid royalblue;
+    border-radius: 20px;
+    /* Add a grey border */
+    margin-bottom: 12px;
+    /* Add some space below the input */
+}
+
+#SearchInput {
+    top: 0;
+    width: 100%;
+    border: none;
+    padding-left: 20px;
+    font-size: 20px;
+    color: royalblue;
+}
