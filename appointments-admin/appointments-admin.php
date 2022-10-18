@@ -273,7 +273,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                             <div class="table-responsive">
                                 <div class="div-search">
                                     <span class="las la-search" style="font-size: 1.8rem; color: royalblue;"></span>
-                                    <input type="text" id="SearchInput" onkeyup="FilterTable()" placeholder="Search in table Customers...">
+                                    <input type="text" id="SearchInput" onkeyup="FilterTable()" placeholder="Search in table Appointments...">
                                 </div>
                                 <table width="100%" id="appointments_table">
                                     <thead>

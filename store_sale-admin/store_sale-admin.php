@@ -385,6 +385,10 @@ $row_count_store = $results_count_store->fetch_assoc();
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
+                                <div class="div-search">
+                                    <span class="las la-search" style="font-size: 1.8rem; color: royalblue;"></span>
+                                    <input type="text" id="SearchInput" onkeyup="FilterTable()" placeholder="Search in table Store Sales...">
+                                </div>
                                 <table width="100%" id="store_sales_table">
                                     <thead>
                                         <tr>

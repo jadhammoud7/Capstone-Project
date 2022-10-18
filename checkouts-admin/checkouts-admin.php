@@ -377,6 +377,10 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
+                                <div class="div-search">
+                                    <span class="las la-search" style="font-size: 1.8rem; color: royalblue;"></span>
+                                    <input type="text" id="SearchInput" onkeyup="FilterTable()" placeholder="Search in table Checkouts...">
+                                </div>
                                 <table width="100%" id="checkouts_table">
                                     <thead>
                                         <tr>

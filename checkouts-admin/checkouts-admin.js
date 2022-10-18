@@ -310,3 +310,30 @@ function sortTable(n, dir) {
     }
 }
 
+function FilterTable() {
+    var input, filter, table, td, i, j, textValue;
+    input = document.getElementById("SearchInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("checkouts_table");
+
+    var tr = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+    for (i = 0; i < tr.length; i++) {
+        var td = [];
+        var display = 'none';
+        for (j = 0; j < tr[i].getElementsByTagName("td").length - 2; j++) {
+            if (j == 0 || j == 6) {
+                td[j] = tr[i].getElementsByTagName("td")[j].getElementsByTagName("a")[0];
+                textValue = td[j].textContent;
+            }
+            else {
+                td[j] = tr[i].getElementsByTagName("td")[j];
+                textValue = td[j].textContent;
+            }
+            if (textValue.toUpperCase().indexOf(filter) > -1) {
+                display = '';
+            }
+        }
+        tr[i].style.display = display;
+    }
+}
+
