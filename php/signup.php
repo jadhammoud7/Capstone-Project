@@ -122,7 +122,8 @@ if (isset($_POST["password"]) && $_POST["password"] != "") {
 }
 
 if ($first_name != "" && $last_name != "" && $email != "" && $date_of_birth != "" && $phone_number != "" && $address != "" && $city != "" && $username != "" && $password != "") {
-    $target_dir = "../images/";
+    mkdir('../images/' . $username);
+    $target_dir = '../images/' . $username . '/';
     $filename = basename($_FILES['customer_image']['name']);
     $target_file = $target_dir . $filename;
     $fileType = pathinfo($target_file, PATHINFO_EXTENSION);

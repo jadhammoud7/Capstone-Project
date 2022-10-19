@@ -98,7 +98,8 @@ if (isset($_POST['product_sales'])) {
 }
 
 if ($product_name != "" && $product_price != 0 && $product_type != "" && $product_category != "" && $product_description != "" && $product_age != "" && $product_inventory != 0) {
-    $target_dir = "../images/";
+    mkdir('../images/' . $product_name);
+    $target_dir = "../images/Products/$product_name/";
     $filename = basename($_FILES['product_image']['name']);
     $target_file = $target_dir . $filename;
     $fileType = pathinfo($target_file, PATHINFO_EXTENSION);

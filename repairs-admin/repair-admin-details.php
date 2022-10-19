@@ -47,7 +47,7 @@ if (isset($_POST['description'])) {
 
 if ($repair_id != 0 && $repair_type != "" && $price_per_hour != 0 && $description != "") {
     if (!empty($_FILES['repair_image']['name'])) {
-        $target_dir = "../images/";
+        $target_dir = "../images/Repairs/$repair_type/";
         $filename = basename($_FILES['repair_image']['name']);
         $target_file = $target_dir . $filename;
         $fileType = pathinfo($target_file, PATHINFO_EXTENSION);
@@ -256,9 +256,11 @@ if ($repair_id != 0 && $repair_type != "" && $price_per_hour != 0 && $descriptio
                                             <div class="image-body">
                                                 <h3>Repair Image</h3>
                                                 <div id="repair_image">
-                                                    <img src='../images/<?php if (isset($row_repair)) {
-                                                                            echo $row_repair['image'];
-                                                                        } ?>'>
+                                                    <img src='../images/Repairs/<?php if (isset($row_repair)) {
+                                                                                    echo $row_repair['repair_type'];
+                                                                                } ?>/<?php if (isset($row_repair)) {
+                                                                                    echo $row_repair['image'];
+                                                                                } ?>'>
                                                 </div>
                                             </div>
                                         </div>

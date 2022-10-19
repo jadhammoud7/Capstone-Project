@@ -75,7 +75,12 @@ if ($city1 != "") {
 
 
 if ($_FILES['customer_image']['name'] != "") {
-    $target_dir = "../images/";
+    $stmt_select_username = $connection->prepare("SELECT username FROM customers WHERE customer_id = '" . $customer_id . "'");
+    $stmt_select_username->execute();
+    $result_username = $stmt_select_username->get_result();
+    $row_username = $result_username->fetch_assoc();
+
+    $target_dir = '../images/' . $row_username['username'] . '/';
     $filename = basename($_FILES['customer_image']['name']);
     $target_file = $target_dir . $filename;
     $fileType = pathinfo($target_file, PATHINFO_EXTENSION);

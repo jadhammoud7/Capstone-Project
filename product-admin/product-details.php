@@ -104,7 +104,7 @@ if (isset($_POST['sales_number'])) {
 
 if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_type != "" && $product_category != "" && $product_description != "" && $product_age != "") {
     if (!empty($_FILES['product_image']['name'])) {
-        $target_dir = "../images/";
+        $target_dir = "../images/Products/" . $product_name . '/';
         $filename = basename($_FILES['product_image']['name']);
         $target_file = $target_dir . $filename;
         $fileType = pathinfo($target_file, PATHINFO_EXTENSION);
@@ -520,9 +520,11 @@ if (isset($_GET['ProductIDToRemove'])) {
                                             <div class="image-body">
                                                 <h3>Product Image</h3>
                                                 <div id="product_image">
-                                                    <img src='../images/<?php if (isset($row_product)) {
-                                                                            echo $row_product['image'];
-                                                                        } ?>'>
+                                                    <img src='../images/Products/<?php if (isset($row_product)) {
+                                                                            echo $row_product['name'];
+                                                                        }; ?>/<?php if (isset($row_product)) {
+                                                                                    echo $row_product['image'];
+                                                                                } ?>'>
                                                 </div>
                                             </div>
                                         </div>

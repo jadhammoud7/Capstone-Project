@@ -78,7 +78,8 @@ if (isset($_POST['description'])) {
 }
 
 if ($repair_type != "" && $price_per_hour != 0 && $description != "") {
-    $target_dir = "../images/";
+    mkdir('../images/Repairs' . $repair_type);
+    $target_dir = "../images/Repairs/$repair_type/";
     $filename = basename($_FILES['repair_image']['name']);
     $target_file = $target_dir . $filename;
     $fileType = pathinfo($target_file, PATHINFO_EXTENSION);
