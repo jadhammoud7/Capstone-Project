@@ -212,12 +212,12 @@ if (isset($_POST['type'])) {
     $type = $_POST['type'];
 
     //check if this type is found
-    $stmt_get_product_type = $connection->prepare("SELECT * FROM product_types WHERE type = $type");
+    $stmt_get_product_type = $connection->prepare("SELECT * FROM product_types WHERE type = '" .  $type . "' ");
     $stmt_get_product_type->execute();
     $result_product_type = $stmt_get_product_type->get_result();
     $row_product_type = $result_product_type->fetch_assoc();
 
-    if (empty($row_product_type)) {
+    if (!empty($row_product_type)) {
         $_SESSION['type'] = $type;
         $_SESSION['type_error'] = "This type is already found";
         header("Location: product-admin.php?open_add_type=true");
@@ -244,7 +244,7 @@ if (isset($_POST['category'])) {
     $result_product_category = $stmt_get_product_category->get_result();
     $row_product_category = $result_product_category->fetch_assoc();
 
-    if (empty($row_product_category)) {
+    if (!empty($row_product_category)) {
         $_SESSION['category'] = $category;
         $_SESSION['category_error'] = "This category is already found";
         header("Location: product-admin.php?open_add_category=true");
@@ -475,23 +475,23 @@ if (isset($_POST['category'])) {
                         </div>
                         <div class="card-header">
                             <h3>
-                                <p style="text-decoration: underline; color: royalblue;" id="filter-text"></p>
+                                <p style="text-decoration: underline; color: royalblue;" id="type-filter-text"></p>
                                 <br>
-                                <p id="table-sort"></p>
+                                <p id="type-table-sort"></p>
                             </h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <div class="div-search">
                                     <span class="las la-search" style="font-size: 1.8rem; color: royalblue;"></span>
-                                    <input type="text" id="SearchInput" onkeyup="FilterTable()" placeholder="Search in table Products...">
+                                    <input type="text" id="SearchInputType" onkeyup="FilterTableTypes()" placeholder="Search in table Product Types...">
                                 </div>
                                 <table width="100%" id="product_types_table">
                                     <thead>
                                         <tr>
-                                            <td id="product-type-column" title="Sort Product Type by descending">Product Type</td>
-                                            <td id="product-added-by-column" title="Sort Added By by descending">Added By</td>
-                                            <td id="product-modified-on-column" title="Sort Modified On by descending">Modified On</td>
+                                            <td id="type-column" title="Sort Product Type by descending">Product Type</td>
+                                            <td id="type-added-by-column" title="Sort Added By by descending">Added By</td>
+                                            <td id="type-modified-on-column" title="Sort Modified On by descending">Modified On</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -542,14 +542,14 @@ if (isset($_POST['category'])) {
                             <div class="table-responsive">
                                 <div class="div-search">
                                     <span class="las la-search" style="font-size: 1.8rem; color: royalblue;"></span>
-                                    <input type="text" id="SearchInput" onkeyup="FilterTable()" placeholder="Search in table Products...">
+                                    <input type="text" id="SearchInputCategory" onkeyup="FilterTableCategories()" placeholder="Search in table Product Categories...">
                                 </div>
                                 <table width="100%" id="product_categories_table">
                                     <thead>
                                         <tr>
-                                            <td id="product-category-column" title="Sort Product Category by descending">Product Category</td>
-                                            <td id="product-added-by-column" title="Sort Added By by descending">Added By</td>
-                                            <td id="product-modified-on-column" title="Sort Modified On by descending">Modified On</td>
+                                            <td id="category-column" title="Sort Product Category by descending">Product Category</td>
+                                            <td id="category-added-by-column" title="Sort Added By by descending">Added By</td>
+                                            <td id="category-modified-on-column" title="Sort Modified On by descending">Modified On</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -645,7 +645,6 @@ if (isset($_POST['category'])) {
                         <br>
                         <p class="error" id="type_error">
                             <?php
-                            session_start();
                             if (isset($_SESSION['type_error'])) {
                                 echo "<script>document.getElementById('type_error').style.display='block';</script>";
                                 echo $_SESSION['type_error'];
@@ -670,7 +669,7 @@ if (isset($_POST['category'])) {
             </div>
 
             <!-- adding new product category form -->
-            <div id="add_type_form" class="modal">
+            <div id="add_category_form" class="modal">
                 <span onclick="CloseAddCategory()" class="close" title="Close Modal">&times;</span>
                 <form class="modal-content" action="product-admin.php" method="POST">
                     <div class="container">
@@ -678,11 +677,20 @@ if (isset($_POST['category'])) {
                         <br>
                         <p class="title">Please fill in this form to add a new product category</p>
                         <br>
-
+                        <p class="error" id="category_error">
+                            <?php
+                            if (isset($_SESSION['category_error'])) {
+                                echo "<script>document.getElementById('category_error').style.display='block';</script>";
+                                echo $_SESSION['category_error'];
+                                unset($_SESSION['category_error']);
+                            } ?>
+                        </p>
                         <label for="category">
                             <b>Product Category</b>
                         </label>
-                        <input type="text" placeholder="Enter new product category" name="category" id="category" value="" required />
+                        <input type="text" placeholder="Enter new product category" name="category" id="category" value="<?php if (isset($_SESSION['category'])) {
+                                                                                                                                echo $_SESSION['category'];
+                                                                                                                            } ?>" required />
                         <br>
 
                         <div class="clearfix">

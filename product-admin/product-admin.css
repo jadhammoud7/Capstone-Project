@@ -1,8 +1,8 @@
 .add_product,
 .add_type,
 .add_category {
-  background-color: var(--main-color);
-  border: solid 1px royalblue;
+  background-color: white;
+  border: solid 1px white;
   border-radius: 10px;
   color: white;
   font-weight: 100;
@@ -266,7 +266,8 @@ option {
   margin: 20px auto;
 }
 
-#type_error {
+#type_error,
+#category_error {
   display: none;
 }
 

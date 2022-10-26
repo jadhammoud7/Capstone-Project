@@ -25,6 +25,7 @@ if (window.location.href.includes('open_add_category=true')) {
     add_category_form.style.display = 'block';
 }
 
+//for product added popup
 if (window.location.href.includes('product-added=1')) {
     OpenProductAddedPopUp();
 }
@@ -35,6 +36,34 @@ function OpenProductAddedPopUp() {
 }
 
 function CloseProductAddedPopUp() {
+    window.location.href = 'product-admin.php';
+}
+
+//for product type added popup
+if (window.location.href.includes('product-type-added=1')) {
+    OpenProductTypeAddedPopUp();
+}
+
+function OpenProductTypeAddedPopUp() {
+    const product_type_added_popup = document.getElementById('product-type-added-confirmation');
+    product_type_added_popup.classList.add('open-popup');
+}
+
+function CloseProductTypeAddedPopUp() {
+    window.location.href = 'product-admin.php';
+}
+
+//for product category added popup
+if (window.location.href.includes('product-category-added=1')) {
+    OpenProductCategoryAddedPopUp();
+}
+
+function OpenProductCategoryAddedPopUp() {
+    const product_category_added_popup = document.getElementById('product-category-added-confirmation');
+    product_category_added_popup.classList.add('open-popup');
+}
+
+function CloseProductCategoryAddedPopUp() {
     window.location.href = 'product-admin.php';
 }
 
@@ -357,6 +386,36 @@ product_last_modified_on_column.addEventListener('click', function SetSorting() 
     }
 });
 
+//start sorting table product types
+const type_table_sort = document.getElementById('type-table-sort');
+const type_filter_text = document.getElementById('type-filter-text');
+
+const type_column = document.getElementById('type-column');
+type_column.addEventListener('click', function SetSorting() {
+    var type_column_innerHTML = type_column.innerHTML;
+    if (type_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        type_column.innerHTML = "Product Type <span class=\"las la-sort-up\"></span>";
+        sortTableTypes(0, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Products by descending order of Last Modified On';
+        type_column.title = 'Sort Last Modified On by ascending';
+    }
+    if (type_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        type_column.innerHTML = "Last Modified On <span class=\"las la-sort-down\"></span>";
+        sortTableTypes(0, "asc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Products by ascending order of Last Modified On';
+        type_column.title = 'Sort Last Modified On by descending';
+    }
+    if (type_column_innerHTML == "Last Modified On") {
+        type_column.innerHTML = "Last Modified On <span class=\"las la-sort-up\"></span>";
+        sortTableTypes(0, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Products by descending order of Last Modified On';
+        type_column.title = 'Sort Last Modified On by ascending';
+    }
+});
+
 function sortTable(n, dir) {
     var table, rows, switching, i, x, y, shouldSwitch, switchcount = 0;
     table = document.getElementById('products_table');
@@ -374,6 +433,82 @@ function sortTable(n, dir) {
                 x = rows[i].getElementsByTagName("td")[n];
                 y = rows[i + 1].getElementsByTagName("td")[n];
             }
+            if (dir == "asc") {
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            else if (dir == "desc") {
+                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount++;
+        }
+        else {
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
+    }
+}
+
+function sortTableTypes(n, dir) {
+    var table, rows, switching, i, x, y, shouldSwitch, switchcount = 0;
+    table = document.getElementById('product_types_table');
+    switching = true;
+    while (switching) {
+        switching = false;
+        rows = table.tBodies[0].rows;
+        for (i = 0; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("td")[n];
+            y = rows[i + 1].getElementsByTagName("td")[n];
+            if (dir == "asc") {
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            else if (dir == "desc") {
+                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount++;
+        }
+        else {
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
+    }
+}
+
+function sortTableCategories(n, dir) {
+    var table, rows, switching, i, x, y, shouldSwitch, switchcount = 0;
+    table = document.getElementById('product_categories_table');
+    switching = true;
+    while (switching) {
+        switching = false;
+        rows = table.tBodies[0].rows;
+        for (i = 0; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("td")[n];
+            y = rows[i + 1].getElementsByTagName("td")[n];
             if (dir == "asc") {
                 if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
                     shouldSwitch = true;
@@ -420,6 +555,48 @@ function FilterTable() {
                 td[j] = tr[i].getElementsByTagName("td")[j];
                 textValue = td[j].textContent;
             }
+            if (textValue.toUpperCase().indexOf(filter) > -1) {
+                display = '';
+            }
+        }
+        tr[i].style.display = display;
+    }
+}
+
+function FilterTableTypes() {
+    var input, filter, table, td, i, j, textValue;
+    input = document.getElementById('SearchInputType');
+    filter = input.value.toUpperCase();
+    table = document.getElementById('product_types_table');
+
+    var tr = table.getElementsByTagName('body')[0].getElementsByTagName('tr');
+    for (i = 0; i < tr.length; i++) {
+        var td = [];
+        var display = 'none';
+        for (j = 0; j < tr[i].getElementsByTagName('td').length; j++) {
+            td[j] = tr[i].getElementsByTagName('td')[j];
+            textValue = td[j].textContent;
+            if (textValue.toUpperCase().indexOf(filter) > -1) {
+                display = '';
+            }
+        }
+        tr[i].style.display = display;
+    }
+}
+
+function FilterTableCategories() {
+    var input, filter, table, td, i, j, textValue;
+    input = document.getElementById('SearchInputCategory');
+    filter = input.value.toUpperCase();
+    table = document.getElementById('product_categories_table');
+
+    var tr = table.getElementsByTagName('body')[0].getElementsByTagName('tr');
+    for (i = 0; i < tr.length; i++) {
+        var td = [];
+        var display = 'none';
+        for (j = 0; j < tr[i].getElementsByTagName('td').length; j++) {
+            td[j] = tr[i].getElementsByTagName('td')[j];
+            textValue = td[j].textContent;
             if (textValue.toUpperCase().indexOf(filter) > -1) {
                 display = '';
             }
