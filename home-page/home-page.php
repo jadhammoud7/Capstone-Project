@@ -48,6 +48,7 @@ $results_products = $stmt_products->get_result();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../home-page/home-page.css">
     <link rel="stylesheet" href="../main/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
     <title>Home - Newbies Gamers</title>
 </head>
 
@@ -100,22 +101,23 @@ $results_products = $stmt_products->get_result();
     </div>
 
     <!-- start slideshow -->
-    <div class="slideshow-container reveal-by-y">
+    <!-- <div class="slideshow-container reveal-by-y">
         <div class="mySlides fade" title="Welcome to Newbies Gamers. We sell manu consoles and electronics for your games and more">
             <div class="numbertext">1 / 3</div>
             <img src="../images/game-store.jpg" class="home-img" title="Game Store Image">
             <div class="text">
-                <h3>Welcome To Newbies Gamers</h3>
-                <p>We sell many consoles and electronics for your games and more</p>
+                 <h3><strong>To Newbies Gamers</strong> </h3> -->
+    <!-- <p><strong>We sell many consoles and electronics for your games and more</strong> </p>
             </div>
+
             <div class="dot-div">
                 <span class="dot-current"></span>
                 <span class="dot"></span>
                 <span class="dot"></span>
             </div>
-        </div>
+        </div>  -->
 
-        <div class="mySlides fade" title="We offer phones and many accessories related to them such as charges and more.">
+    <!-- <div class="mySlides fade" title="We offer phones and many accessories related to them such as charges and more.">
             <div class="numbertext">2 / 3</div>
             <img src="../images/image2.jpg" class="home-img" title="Phone Accessories Image">
             <div class="text">
@@ -127,9 +129,9 @@ $results_products = $stmt_products->get_result();
                 <span class="dot-current"></span>
                 <span class="dot"></span>
             </div>
-        </div>
+        </div> -->
 
-        <div class="mySlides fade" title="Enjoy playing your games by buying all online playing requirements such as PS Plus">
+    <!-- <div class="mySlides fade" title="Enjoy playing your games by buying all online playing requirements such as PS Plus">
             <div class="numbertext">3 / 3</div>
             <img src="../images/image3.jpg" class="home-img" title="Online playing cards image">
             <div class="text">
@@ -141,6 +143,24 @@ $results_products = $stmt_products->get_result();
                 <span class="dot"></span>
                 <span class="dot-current"></span>
             </div>
+        </div> -->
+    <!-- </div> -->
+    <div class="container">
+        <div class="swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide"><img src="../images/image3.jpg" alt=""></div>
+                <div class="swiper-slide"><img src="../images/console.png" alt=""></div>
+                <div class="swiper-slide"><img src="../images/cpu_cleaning.jpg" alt=""></div>
+
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
     </div>
     <br>
@@ -483,6 +503,27 @@ $results_products = $stmt_products->get_result();
         <!-- ended with footer -->
         <script src="../home-page/home-page.js"></script>
         <script src="../main/main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+        <script>
+            const swiper = new Swiper('.swiper', {
+                autoplay:{
+                    delay:3000,
+                    disableOnInteraction:false,
+                },
+                loop: true,
+
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable:true,
+                },
+
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+
+            });
+        </script>
 </body>
 
 </html>

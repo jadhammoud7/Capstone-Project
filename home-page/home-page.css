@@ -9,12 +9,15 @@
 }
 
 .slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  border: rgba(65, 105, 225, 0.8) solid 2px;
+  width: 100%;
+  /* max-width: 1000px; */
+  /* position: relative; */
+  /* border: rgba(65, 105, 225, 0.8) solid 2px; */
   border-radius: 20px;
-  margin: auto;
-  padding: auto;
+  /* margin: auto;
+  padding: auto; */
+  position: absolute;
+  top: -34px;
 }
 
 .mySlides {
@@ -56,14 +59,18 @@
 
 .text {
   color: #f2f2f2;
-  font-size: 15px;
+  font-size: 25px;
   font-weight: 600;
-  padding: 20px 14px;
+  padding: 20px 24px;
   position: absolute;
-  bottom: 100px;
-  width: 100%;
+  /* bottom: 61px; */
+  top: 90px;
+  width: 30%;
   text-align: center;
-  background-color: rgba(65, 105, 225, 0.7);
+  /* background-color: rgba(65, 105, 225, 0.425); */
+}
+.text h3{
+  font-size: 50px;
 }
 
 .numbertext {
@@ -976,4 +983,28 @@ tbody tr:hover {
   background-color: rgba(38, 143, 241, 0.644);
 }
 
+/* .container{
 
+  width: 100%;
+  height:600px;
+  background-color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+} */
+
+.swiper {
+  width: 100%;
+  height: auto;
+}
+.swiper-slide img{
+width: 100%;
+height: 600px;
+}
+.swiper .swiper-button-prev,swiper-button-next{
+  color: #fff;
+}
+.swiper .swiper-pagination-bullet-active{
+  background-color: #fff;
+}
