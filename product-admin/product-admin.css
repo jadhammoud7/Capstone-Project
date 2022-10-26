@@ -65,8 +65,8 @@ input[type=date]:hover {
 
 /* Set a style for all buttons */
 button.add_product,
-button .add_admin,
-button .add_type {
+button.add_admin,
+button.add_type {
   background-color: royalblue;
   color: white;
   padding: 14px 20px;

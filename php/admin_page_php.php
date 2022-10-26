@@ -338,6 +338,19 @@ function get_all_repairs($repair_id, $repair_type, $price_per_hour)
     echo $element;
 }
 
+function get_all_product_types($product_type, $added_by, $modified_on)
+{
+    $element = "
+    <tr>
+        <td title=\"$product_type\">$product_type</td>
+        <td title=\"$added_by\">$added_by</td>
+        <td title=\"$modified_on\">$modified_on</td>
+    </tr>
+    ";
+
+    echo $element;
+}
+
 function get_all_product_types_for_add_product_form($product_type)
 {
     $element = "

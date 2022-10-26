@@ -389,14 +389,18 @@ if (isset($_GET['product_id']) && isset($_GET['sales_history'])) {
 
             <!-- list of all product types -->
             <div class="card-single add_admin">
-                <button class="add_type" id="add_user1" onclick="OpenAddProduct()" title="Add a new product"><span class="las la-plus"></span>Add Product</button>
+                <button class="add_type" id="add_user1" onclick="OpenAddType()" title="Add a new product type">
+                    <span class="las la-plus">
+                    </span>
+                    Add Product Type
+                </button>
             </div>
 
             <div class="recent-grid" style="display: block !important;">
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Products List</h3>
+                            <h3>Product Types List</h3>
                         </div>
                         <div class="card-header">
                             <h3>
@@ -411,32 +415,83 @@ if (isset($_GET['product_id']) && isset($_GET['sales_history'])) {
                                     <span class="las la-search" style="font-size: 1.8rem; color: royalblue;"></span>
                                     <input type="text" id="SearchInput" onkeyup="FilterTable()" placeholder="Search in table Products...">
                                 </div>
-                                <table width="100%" id="products_table">
+                                <table width="100%" id="product_types_table">
                                     <thead>
                                         <tr>
-                                            <td id="product-name-column" title="Sort Product Name by descending">Product Name</td>
-                                            <td id="product-price-column" title="Sort Price by descending">Price</td>
-                                            <td id="product-type-column" title="Sort Type by descending">Type</td>
-                                            <td id="product-category-column" title="Sort Category by descending">Category</td>
-                                            <td id="product-inventory-column" title="Sort Inventory by descending">Inventory</td>
-                                            <td id="product-sales-column" title="Sort Sales Number by descending">Sales Number</td>
-                                            <td id="product-last-modified-by-column" title="Sort Last Modified By by descending">Last Modified By</td>
-                                            <td id="product-last-modified-on-column" title="Sort Last Modified On by descending">Last Modified On</td>
+                                            <td id="product-type-column" title="Sort Product Type by descending">Product Type</td>
+                                            <td id="product-added-by-column" title="Sort Added By by descending">Added By</td>
+                                            <td id="product-modified-on-column" title="Sort Modified On by descending">Modified On</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        while ($row_products = $results_products->fetch_assoc()) {
-                                            get_all_products(
-                                                $row_products['product_id'],
-                                                $row_products['name'],
-                                                $row_products['price'],
-                                                $row_products['category'],
-                                                $row_products['type'],
-                                                $row_products['inventory'],
-                                                $row_products['sales_number'],
-                                                $row_products['last_modified_by'],
-                                                $row_products['last_modified_on']
+                                        $stmt_select_product_types = $connection->prepare("SELECT * FROM product_types");
+                                        $stmt_select_product_types->execute();
+                                        $result_product_types = $stmt_select_product_types->get_result();
+
+                                        while ($row_product_types = $result_product_types->fetch_assoc()) {
+                                            get_all_product_types(
+                                                $row_product_types['product_type'],
+                                                $row_product_types['added_by'],
+                                                $row_product_types['modified_on']
+                                            );
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- list of all product categories -->
+            <div class="card-single add_admin">
+                <button class="add_type" id="add_user1" onclick="OpenAddType()" title="Add a new product type">
+                    <span class="las la-plus">
+                    </span>
+                    Add Product Type
+                </button>
+            </div>
+
+            <div class="recent-grid" style="display: block !important;">
+                <div class="projects">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Product Types List</h3>
+                        </div>
+                        <div class="card-header">
+                            <h3>
+                                <p style="text-decoration: underline; color: royalblue;" id="filter-text"></p>
+                                <br>
+                                <p id="table-sort"></p>
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div class="div-search">
+                                    <span class="las la-search" style="font-size: 1.8rem; color: royalblue;"></span>
+                                    <input type="text" id="SearchInput" onkeyup="FilterTable()" placeholder="Search in table Products...">
+                                </div>
+                                <table width="100%" id="product_types_table">
+                                    <thead>
+                                        <tr>
+                                            <td id="product-type-column" title="Sort Product Type by descending">Product Type</td>
+                                            <td id="product-added-by-column" title="Sort Added By by descending">Added By</td>
+                                            <td id="product-modified-on-column" title="Sort Modified On by descending">Modified On</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $stmt_select_product_types = $connection->prepare("SELECT * FROM product_types");
+                                        $stmt_select_product_types->execute();
+                                        $result_product_types = $stmt_select_product_types->get_result();
+
+                                        while ($row_product_types = $result_product_types->fetch_assoc()) {
+                                            get_all_product_types(
+                                                $row_product_types['product_type'],
+                                                $row_product_types['added_by'],
+                                                $row_product_types['modified_on']
                                             );
                                         }
                                         ?>
