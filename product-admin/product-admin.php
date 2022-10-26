@@ -206,6 +206,61 @@ if (isset($_GET['product_id']) && isset($_GET['sales_history'])) {
     $result_get_product = $stmt_get_product->get_result();
     $row_get_product = $result_get_product->fetch_assoc();
 }
+
+//if received input to add new product type
+if (isset($_POST['type'])) {
+    $type = $_POST['type'];
+
+    //check if this type is found
+    $stmt_get_product_type = $connection->prepare("SELECT * FROM product_types WHERE type = $type");
+    $stmt_get_product_type->execute();
+    $result_product_type = $stmt_get_product_type->get_result();
+    $row_product_type = $result_product_type->fetch_assoc();
+
+    if (empty($row_product_type)) {
+        $_SESSION['type'] = $type;
+        $_SESSION['type_error'] = "This type is already found";
+        header("Location: product-admin.php?open_add_type=true");
+        die("WRONG product type");
+    } else {
+        //set timezone to beirut
+        date_default_timezone_set('Asia/Beirut');
+        $modified_on = date('Y-m-d h:i:s');
+        $added_by = $row['first_name'] . ' ' . $row['last_name'];
+
+        $stmt_add_product_type = $connection->prepare("INSERT INTO product_types(type, added_by, modified_on) VALUES (?,?,?)");
+        $stmt_add_product_type->bind_param("sss", $type, $added_by, $modified_on);
+        $stmt_add_product_type->execute();
+        header("Location: product-admin.php?product-type-added=1");
+    }
+}
+//if received input to add new product category
+if (isset($_POST['category'])) {
+    $category = $_POST['category'];
+
+    //check if this category is found
+    $stmt_get_product_category = $connection->prepare("SELECT * FROM product_categories WHERE category = $category");
+    $stmt_get_product_category->execute();
+    $result_product_category = $stmt_get_product_category->get_result();
+    $row_product_category = $result_product_category->fetch_assoc();
+
+    if (empty($row_product_category)) {
+        $_SESSION['category'] = $category;
+        $_SESSION['category_error'] = "This category is already found";
+        header("Location: product-admin.php?open_add_category=true");
+        die("WRONG product category");
+    } else {
+        //set timezone to beirut
+        date_default_timezone_set('Asia/Beirut');
+        $modified_on = date('Y-m-d h:i:s');
+        $added_by = $row['first_name'] . ' ' . $row['last_name'];
+
+        $stmt_add_product_category = $connection->prepare("INSERT INTO product_categories(category, added_by, modified_on) VALUES (?,?,?)");
+        $stmt_add_product_category->bind_param("sss", $category, $added_by, $modified_on);
+        $stmt_add_product_category->execute();
+        header("Location: product-admin.php?product-category-added=1");
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -242,6 +297,22 @@ if (isset($_GET['product_id']) && isset($_GET['sales_history'])) {
         <h2>Product Added Confirmation</h2>
         <p>A new product was added successfully</p>
         <button type="button" onclick="CloseProductAddedPopUp()">OK</button>
+    </div>
+
+    <!-- started popup message logout type added -->
+    <div class="popup" id="product-type-added-confirmation">
+        <img src="../images/tick.png" alt="">
+        <h2>Product Type Added Confirmation</h2>
+        <p>A new product type was added successfully</p>
+        <button type="button" onclick="CloseProductTypeAddedPopUp()">OK</button>
+    </div>
+
+    <!-- started popup message logout category added -->
+    <div class="popup" id="product-type-category-confirmation">
+        <img src="../images/tick.png" alt="">
+        <h2>Product Category Added Confirmation</h2>
+        <p>A new product category was added successfully</p>
+        <button type="button" onclick="CloseProductCategoryAddedPopUp()">OK</button>
     </div>
 
 
@@ -388,8 +459,8 @@ if (isset($_GET['product_id']) && isset($_GET['sales_history'])) {
             </div>
 
             <!-- list of all product types -->
-            <div class="card-single add_admin">
-                <button class="add_type" id="add_user1" onclick="OpenAddType()" title="Add a new product type">
+            <div class="card-single add_type">
+                <button class="add_type" id="add_type" onclick="OpenAddType()" title="Add a new product type">
                     <span class="las la-plus">
                     </span>
                     Add Product Type
@@ -431,7 +502,7 @@ if (isset($_GET['product_id']) && isset($_GET['sales_history'])) {
 
                                         while ($row_product_types = $result_product_types->fetch_assoc()) {
                                             get_all_product_types(
-                                                $row_product_types['product_type'],
+                                                $row_product_types['type'],
                                                 $row_product_types['added_by'],
                                                 $row_product_types['modified_on']
                                             );
@@ -446,11 +517,11 @@ if (isset($_GET['product_id']) && isset($_GET['sales_history'])) {
             </div>
 
             <!-- list of all product categories -->
-            <div class="card-single add_admin">
-                <button class="add_type" id="add_user1" onclick="OpenAddType()" title="Add a new product type">
+            <div class="card-single add_category">
+                <button class="add_category" id="add_category" onclick="OpenAddCategory()" title="Add a new product category">
                     <span class="las la-plus">
                     </span>
-                    Add Product Type
+                    Add Product Category
                 </button>
             </div>
 
@@ -458,7 +529,7 @@ if (isset($_GET['product_id']) && isset($_GET['sales_history'])) {
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Product Types List</h3>
+                            <h3>Product Categories List</h3>
                         </div>
                         <div class="card-header">
                             <h3>
@@ -473,25 +544,25 @@ if (isset($_GET['product_id']) && isset($_GET['sales_history'])) {
                                     <span class="las la-search" style="font-size: 1.8rem; color: royalblue;"></span>
                                     <input type="text" id="SearchInput" onkeyup="FilterTable()" placeholder="Search in table Products...">
                                 </div>
-                                <table width="100%" id="product_types_table">
+                                <table width="100%" id="product_categories_table">
                                     <thead>
                                         <tr>
-                                            <td id="product-type-column" title="Sort Product Type by descending">Product Type</td>
+                                            <td id="product-category-column" title="Sort Product Category by descending">Product Category</td>
                                             <td id="product-added-by-column" title="Sort Added By by descending">Added By</td>
                                             <td id="product-modified-on-column" title="Sort Modified On by descending">Modified On</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $stmt_select_product_types = $connection->prepare("SELECT * FROM product_types");
-                                        $stmt_select_product_types->execute();
-                                        $result_product_types = $stmt_select_product_types->get_result();
+                                        $stmt_select_product_categories = $connection->prepare("SELECT * FROM product_categories");
+                                        $stmt_select_product_categories->execute();
+                                        $result_product_categories = $stmt_select_product_categories->get_result();
 
-                                        while ($row_product_types = $result_product_types->fetch_assoc()) {
-                                            get_all_product_types(
-                                                $row_product_types['product_type'],
-                                                $row_product_types['added_by'],
-                                                $row_product_types['modified_on']
+                                        while ($row_product_categories = $result_product_categories->fetch_assoc()) {
+                                            get_all_product_categories(
+                                                $row_product_categories['category'],
+                                                $row_product_categories['added_by'],
+                                                $row_product_categories['modified_on']
                                             );
                                         }
                                         ?>
@@ -504,7 +575,7 @@ if (isset($_GET['product_id']) && isset($_GET['sales_history'])) {
             </div>
 
             <!-- list of all products -->
-            <div class="card-single add_admin">
+            <div class="card-single add_product">
                 <button class="add_product" id="add_user1" onclick="OpenAddProduct()" title="Add a new product"><span class="las la-plus"></span>Add Product</button>
             </div>
             <div class="recent-grid" style="display: block !important;">
@@ -572,16 +643,51 @@ if (isset($_GET['product_id']) && isset($_GET['sales_history'])) {
                         <br>
                         <p class="title">Please fill in this form to add a new product type</p>
                         <br>
-
+                        <p class="error" id="type_error">
+                            <?php
+                            session_start();
+                            if (isset($_SESSION['type_error'])) {
+                                echo "<script>document.getElementById('type_error').style.display='block';</script>";
+                                echo $_SESSION['type_error'];
+                                unset($_SESSION['type_error']);
+                            } ?>
+                        </p>
                         <label for="type">
                             <b>Product Type</b>
                         </label>
-                        <input type="text" placeholder="Enter new product type" name="type" id="type" value="" required />
+                        <input type="text" placeholder="Enter new product type" name="type" id="type" value="<?php if (isset($_SESSION['type'])) {
+                                                                                                                    echo $_SESSION['type'];
+                                                                                                                } ?>" required />
                         <br>
 
                         <div class="clearfix">
                             <button type="submit" class="addtypebtn" title="Add new product type">
                                 <strong>Add Product Type</strong>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- adding new product category form -->
+            <div id="add_type_form" class="modal">
+                <span onclick="CloseAddCategory()" class="close" title="Close Modal">&times;</span>
+                <form class="modal-content" action="product-admin.php" method="POST">
+                    <div class="container">
+                        <h1 class="title">Add New Category</h1>
+                        <br>
+                        <p class="title">Please fill in this form to add a new product category</p>
+                        <br>
+
+                        <label for="category">
+                            <b>Product Category</b>
+                        </label>
+                        <input type="text" placeholder="Enter new product category" name="category" id="category" value="" required />
+                        <br>
+
+                        <div class="clearfix">
+                            <button type="submit" class="addcategorybtn" title="Add new product category">
+                                <strong>Add Product Category</strong>
                             </button>
                         </div>
                     </div>

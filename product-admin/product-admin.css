@@ -1,5 +1,6 @@
 .add_product,
-.add_type {
+.add_type,
+.add_category {
   background-color: var(--main-color);
   border: solid 1px royalblue;
   border-radius: 10px;
@@ -20,11 +21,12 @@
   color: red;
 }
 
-#SearchInput{
+#SearchInput {
   margin: 0 0 0 0;
   padding: 0;
   padding-left: 20px;
 }
+
 /* new form */
 input {
   border-radius: 30px;
@@ -65,7 +67,7 @@ input[type=date]:hover {
 
 /* Set a style for all buttons */
 button.add_product,
-button.add_admin,
+button.add_category,
 button.add_type {
   background-color: royalblue;
   color: white;
@@ -81,7 +83,9 @@ button:hover {
   opacity: 1;
 }
 
-.add_admin {
+.add_product,
+.add_type,
+.add_category {
   margin-top: 50px;
 }
 
@@ -100,7 +104,8 @@ button:hover {
 }
 
 .addproductbtn,
-.addtypebtn {
+.addtypebtn,
+.addcategorybtn {
   width: 45%;
   border-radius: 20px;
   color: black;
@@ -236,11 +241,11 @@ hr {
 }
 
 select {
-background-color: royalblue;
-color: white;
-border-radius: 15px;
-width: 20%;
-padding: 10px;
+  background-color: royalblue;
+  color: white;
+  border-radius: 15px;
+  width: 20%;
+  padding: 10px;
 }
 
 option {
@@ -252,6 +257,18 @@ option {
   color: black;
 }
 
+.error {
+  background: #f2dede;
+  color: #a94442 !important;
+  padding: 10px;
+  width: 95%;
+  border-radius: 5px;
+  margin: 20px auto;
+}
+
+#type_error {
+  display: none;
+}
 
 
 /* Change styles for cancel button and signup button on extra small screens */
@@ -259,7 +276,8 @@ option {
 
   .cancelbtn,
   .addproductbtn,
-  .addtypebtn {
+  .addtypebtn,
+  .addcategorybtn {
     width: 100%;
   }
 }

@@ -6,6 +6,10 @@ function OpenAddType() {
     window.location.href = window.location.href + '?open_add_type=true';
 }
 
+function OpenAddCategory() {
+    window.location.href = window.location.href + '?open_add_category=true';
+}
+
 if (window.location.href.includes('open_add_product=true')) {
     const add_product_form = document.getElementById('add_product_form');
     add_product_form.style.display = 'block';
@@ -14,6 +18,11 @@ if (window.location.href.includes('open_add_product=true')) {
 if (window.location.href.includes('open_add_type=true')) {
     const add_type_form = document.getElementById('add_type_form');
     add_type_form.style.display = 'block';
+}
+
+if (window.location.href.includes('open_add_category=true')) {
+    const add_category_form = document.getElementById('add_category_form');
+    add_category_form.style.display = 'block';
 }
 
 if (window.location.href.includes('product-added=1')) {
@@ -39,6 +48,12 @@ function CloseAddType() {
     window.location.href = 'product-admin.php';
     const add_type_form = document.getElementById('add_type_form');
     add_type_form.style.display = 'none';
+}
+
+function CloseAddCategory() {
+    window.location.href = 'product-admin.php';
+    const add_category_form = document.getElementById('add_category_form');
+    add_category_form.style.display = 'none';
 }
 
 if (window.location.href.includes('price_history')) {

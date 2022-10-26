@@ -359,6 +359,19 @@ function get_all_product_types_for_add_product_form($product_type)
     echo $element;
 }
 
+function get_all_product_categories($product_category, $added_by, $modified_on)
+{
+    $element = "
+    <tr>
+        <td title=\"$product_category\">$product_category</td>
+        <td title=\"$added_by\">$added_by</td>
+        <td title=\"$modified_on\">$modified_on</td>
+    </tr>
+    ";
+
+    echo $element;
+}
+
 function get_all_product_categories_for_add_product_form($product_category)
 {
     $element = "
