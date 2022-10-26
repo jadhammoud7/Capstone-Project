@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2022 at 11:41 PM
+-- Generation Time: Oct 26, 2022 at 11:56 PM
 -- Server version: 8.0.23
 -- PHP Version: 8.0.2
 
@@ -211,7 +211,10 @@ INSERT INTO `customers` (`customer_id`, `first_name`, `last_name`, `email`, `dat
 (16, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '2001-07-18', '96171123805', 'Aramoun next to chamsine third floor', 'beirut', 'Mohamad Nabaa', '', '578835a5afad634f5716badf3d801e8910dec33e73ec5c9e86b8d409f229263d', 0),
 (17, 'Omar ', 'Atieh', 'omar4Atieh@hotmail.com', '2022-09-21', '878887878788', 'Bshamoun , al wadi street Al nader building block B second floor', 'bshamoun', 'omar1234567', '', '75523907535270f2f12668aea07b507433e81ed0e625b9455bdb8554855687e0', 0),
 (21, 'Ahmad', 'Serhan', 'ahmadserhan@gmail.com', '2022-08-30', '45657888878', 'Bshamoun , al wadi street Al nader building block B second floor', 'beirut', 'ahmad1231234', '', '68a8b4c8464fa9bc797ce97b47bff6807ba10d8ddb061fce39b28842389888fa', 0),
-(22, 'Mohamad', 'Nabaa', 'mnabaa53@gmail.com', '2001-07-18', '71123805', 'Aramoun, Lebanon', 'aramoun, lebanon', 'MNabaa53', 'addfav.png', '92f359bda0cfecfc2a5ff9f2da08d91d02a4366f33021df0477bfcee609be9b2', 0);
+(22, 'Mohamad', 'Nabaa', 'mnabaa53@gmail.com', '2001-07-18', '71123805', 'Aramoun, Lebanon', 'aramoun, lebanon', 'MNabaa53', 'addfav.png', '92f359bda0cfecfc2a5ff9f2da08d91d02a4366f33021df0477bfcee609be9b2', 0),
+(23, 'Omar', 'Nabaa', 'omarnabaa318@gmail.com', '2004-10-18', '76625990', 'Sanawbar Building, 5th floor', 'beirut', 'OmarNabaa', 'addfav.png', '372a3b6c6980c77daaac003c1e9daa454218aeb55d110cecc9b077a8acfda37d', 0),
+(24, 'Omar', 'Nabaa', 'omarnabaa318@gmail.com', '2004-10-18', '76625990', 'Sanawbar Building, 5th floor', 'beirut', 'OmarNabaa11', 'contact-us.jpg', '372a3b6c6980c77daaac003c1e9daa454218aeb55d110cecc9b077a8acfda37d', 0),
+(25, 'Omar', 'Nabaa', 'ahmad@goodies.com.lb', '2022-10-04', '71640625', 'Aramoun, Shebaa street', 'beirut', 'mhmd2001', '287E3F52-10FC-4FCD-BC8F-B28BF7C012ED (1).png', '92f359bda0cfecfc2a5ff9f2da08d91d02a4366f33021df0477bfcee609be9b2', 0);
 
 -- --------------------------------------------------------
 
@@ -260,7 +263,8 @@ INSERT INTO `history_product_inventory` (`product_id`, `inventory`, `inventory_c
 (20, 10, '+ 5', 'Mohamad Nabaa', '2022-10-15 02:08:08'),
 (1, 86, '- 10', 'Store Sales', '2022-10-15 05:02:30'),
 (1, 81, '- 5', 'Store Sales', '2022-10-15 05:03:27'),
-(1, 80, '- 1', 'Store Sales', '2022-10-15 05:05:34');
+(1, 80, '- 1', 'Store Sales', '2022-10-15 05:05:34'),
+(1, 100, '+ 20', 'Mohamad Nabaa', '2022-10-26 10:23:38');
 
 -- --------------------------------------------------------
 
@@ -349,7 +353,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `name`, `price`, `type`, `category`, `description`, `age`, `image`, `inventory`, `sales_number`, `last_modified_by`, `last_modified_on`) VALUES
-(1, 'Doom Eternal', 300, 'cds', 'XBOX Cd', 'Hell’s armies have invaded Earth. Become the Slayer in an epic single-player campaign to conquer demons across dimensions and stop the final destruction of humanity. The only thing they fear... is you.', '15+', '', 80, 5, 'Store Sales', '2022-10-15 05:05:34'),
+(1, 'Doom Eternal', 300, 'cds', 'XBOX Cd', 'Hell’s armies have invaded Earth. Become the Slayer in an epic single-player campaign to conquer demons across dimensions and stop the final destruction of humanity. The only thing they fear... is you.', '15+', '', 100, 5, 'Mohamad Nabaa', '2022-10-26 10:23:38'),
 (2, 'Gears 5', 46, 'cds', 'XBOX Cd', 'Gears 5 follows the story of Kait Diaz, who is on a journey to find out the origin of the Locust Horde, the main antagonistic faction of the Gears of War series.', '16+', '', 0, 0, '', ''),
 (3, 'Watch Dogs: Legion', 50, 'cds', 'XBOX Cd', 'Gameplay in the Watch Dogs games focuses on an open world where the player can complete missions to progress an overall story, as well as engage in various side activities.', '12+', '', 0, 0, '', ''),
 (4, 'Battletoads', 50, 'cds', 'XBOX Cd', 'After being locked up in a fantasy simulator bunker for 26 years, the Battletoads are no longer intergalactic heroes and have fallen into modern day obscurity. Unable to settle down for a quiet, simple life, they set out to once again defeat their old longtime nemesis, The Dark Queen, to regain their lost fame. But when they confront the Queen they find out she had been in a similar predicament as them, having also been trapped and losing her powers. In the end they decide to team up with her to take down an evil alien race called the Topians, who were responsible for trapping all of them and are now the current rulers of the galaxy.', '12+', '', 0, 0, '', ''),
@@ -360,6 +364,46 @@ INSERT INTO `products` (`product_id`, `name`, `price`, `type`, `category`, `desc
 (9, 'PlayStation 3', 300, 'console', 'PS3', 'The PlayStation 3 (PS3) is a home video game console developed by Sony Computer Entertainment. The successor to the PlayStation 2, it is part of the PlayStation brand of consoles. It was first released on November 11, 2006, in Japan, November 17, 2006, in North America, and March 23, 2007, in Europe and Australia. The PlayStation 3 competed primarily against Microsoft\'s Xbox 360 and Nintendo\'s Wii as part of the seventh generation of video game consoles.', 'Any', '', 0, 0, '', ''),
 (10, 'PlayStation 4', 550, 'console', 'PS4', 'The PlayStation 4 (PS4) is a home video game console developed by Sony Computer Entertainment. Announced as the successor to the PlayStation 3 in February 2013, it was launched on November 15, 2013, in North America, November 29, 2013 in Europe, South America and Australia, and on February 22, 2014 in Japan. A console of the eighth generation, it competes with Microsoft\'s Xbox One and Nintendo\'s Wii U and Switch.', 'Any', '', 0, 0, '', ''),
 (20, 'GTA 5', 25, 'cds', 'strategy', 'Grand Theft Auto V is a 2013 action-adventure game developed by Rockstar North and published by Rockstar Games. It is the seventh main entry in the Grand Theft Auto series, following 2008\'s Grand Theft Auto IV, and the fifteenth instalment overall', '16+', 'GTA5.jpg', 10, 0, 'Mohamad Nabaa', '2022-10-15 02:08:08');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_categories`
+--
+
+CREATE TABLE `product_categories` (
+  `category` varchar(100) NOT NULL,
+  `added_by` varchar(50) NOT NULL,
+  `modified_on` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `product_categories`
+--
+
+INSERT INTO `product_categories` (`category`, `added_by`, `modified_on`) VALUES
+('Action', 'Mohamad Nabaa', '2022-10-27 12:51:06');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_types`
+--
+
+CREATE TABLE `product_types` (
+  `type` varchar(100) NOT NULL,
+  `added_by` varchar(50) NOT NULL,
+  `modified_on` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `product_types`
+--
+
+INSERT INTO `product_types` (`type`, `added_by`, `modified_on`) VALUES
+('Phone', 'Mohamad Nabaa', '2022-10-27 12:19:29'),
+('CDs', 'Mohamad Nabaa', '2022-10-27 12:20:02'),
+('Consoles', 'Mohamad Nabaa', '2022-10-27 12:20:16');
 
 -- --------------------------------------------------------
 
@@ -530,7 +574,7 @@ ALTER TABLE `repairs`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customer_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `customer_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `products`
