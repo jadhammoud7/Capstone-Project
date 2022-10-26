@@ -1,4 +1,5 @@
-.add_product {
+.add_product,
+.add_type {
   background-color: var(--main-color);
   border: solid 1px royalblue;
   border-radius: 10px;
@@ -64,7 +65,8 @@ input[type=date]:hover {
 
 /* Set a style for all buttons */
 button.add_product,
-button .add_admin {
+button .add_admin,
+button .add_type {
   background-color: royalblue;
   color: white;
   padding: 14px 20px;
@@ -97,7 +99,8 @@ button:hover {
   width: 45%;
 }
 
-.addproductbtn {
+.addproductbtn,
+.addtypebtn {
   width: 45%;
   border-radius: 20px;
   color: black;
@@ -255,7 +258,8 @@ option {
 @media screen and (max-width: 300px) {
 
   .cancelbtn,
-  .addproductbtn {
+  .addproductbtn,
+  .addtypebtn {
     width: 100%;
   }
 }

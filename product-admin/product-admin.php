@@ -387,6 +387,68 @@ if (isset($_GET['product_id']) && isset($_GET['sales_history'])) {
 
             </div>
 
+            <!-- list of all product types -->
+            <div class="card-single add_admin">
+                <button class="add_type" id="add_user1" onclick="OpenAddProduct()" title="Add a new product"><span class="las la-plus"></span>Add Product</button>
+            </div>
+
+            <div class="recent-grid" style="display: block !important;">
+                <div class="projects">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Products List</h3>
+                        </div>
+                        <div class="card-header">
+                            <h3>
+                                <p style="text-decoration: underline; color: royalblue;" id="filter-text"></p>
+                                <br>
+                                <p id="table-sort"></p>
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div class="div-search">
+                                    <span class="las la-search" style="font-size: 1.8rem; color: royalblue;"></span>
+                                    <input type="text" id="SearchInput" onkeyup="FilterTable()" placeholder="Search in table Products...">
+                                </div>
+                                <table width="100%" id="products_table">
+                                    <thead>
+                                        <tr>
+                                            <td id="product-name-column" title="Sort Product Name by descending">Product Name</td>
+                                            <td id="product-price-column" title="Sort Price by descending">Price</td>
+                                            <td id="product-type-column" title="Sort Type by descending">Type</td>
+                                            <td id="product-category-column" title="Sort Category by descending">Category</td>
+                                            <td id="product-inventory-column" title="Sort Inventory by descending">Inventory</td>
+                                            <td id="product-sales-column" title="Sort Sales Number by descending">Sales Number</td>
+                                            <td id="product-last-modified-by-column" title="Sort Last Modified By by descending">Last Modified By</td>
+                                            <td id="product-last-modified-on-column" title="Sort Last Modified On by descending">Last Modified On</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        while ($row_products = $results_products->fetch_assoc()) {
+                                            get_all_products(
+                                                $row_products['product_id'],
+                                                $row_products['name'],
+                                                $row_products['price'],
+                                                $row_products['category'],
+                                                $row_products['type'],
+                                                $row_products['inventory'],
+                                                $row_products['sales_number'],
+                                                $row_products['last_modified_by'],
+                                                $row_products['last_modified_on']
+                                            );
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- list of all products -->
             <div class="card-single add_admin">
                 <button class="add_product" id="add_user1" onclick="OpenAddProduct()" title="Add a new product"><span class="las la-plus"></span>Add Product</button>
             </div>
@@ -446,78 +508,137 @@ if (isset($_GET['product_id']) && isset($_GET['sales_history'])) {
                 </div>
             </div>
 
-            <!-- adding form -->
-            <div id="id01" class="modal">
+            <!-- adding new product type form -->
+            <div id="add_type_form" class="modal">
+                <span onclick="CloseAddType()" class="close" title="Close Modal">&times;</span>
+                <form class="modal-content" action="product-admin.php" method="POST">
+                    <div class="container">
+                        <h1 class="title">Add New Type</h1>
+                        <br>
+                        <p class="title">Please fill in this form to add a new product type</p>
+                        <br>
+
+                        <label for="type">
+                            <b>Product Type</b>
+                        </label>
+                        <input type="text" placeholder="Enter new product type" name="type" id="type" value="" required />
+                        <br>
+
+                        <div class="clearfix">
+                            <button type="submit" class="addtypebtn" title="Add new product type">
+                                <strong>Add Product Type</strong>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- adding new product form -->
+            <div id="add_product_form" class="modal">
                 <span onclick="CloseAddProduct()" class="close" title="Close Modal">&times;</span>
                 <form class="modal-content" action="product-admin.php" method="POST" enctype="multipart/form-data">
                     <div class="container">
-                        <h1 class="title">Add New Product</h1> <br>
-                        <p class="title">Please fill in this form to add a new product.</p>
+                        <h1 class="title">Add New Product</h1>
+                        <br>
+                        <p class="title">Please fill in this form to add a new product</p>
                         <br>
 
                         <label for="product_name"><b>Product Name</b></label>
                         <input type="text" placeholder="Enter product's name" name="product_name" id="product_name" value="" required />
 
 
-                        <label for="product_price"><b>Product Price</b></label><br>
+                        <label for="product_price">
+                            <b>Product Price</b>
+                        </label>
+                        <br>
                         <input style="height: 35px;" type="number" placeholder="Enter product's price" name="product_price" id="product_price" value="" required>
                         <br><br>
 
-                        <label for="product_type"><b>Product Type</b></label> <br>
+                        <label for="product_type">
+                            <b>Product Type</b>
+                        </label>
+                        <br>
+
                         <select name="product_type" id="product_type">
-                            <option value="cds">CDs</option>
-                            <option value="consoles">Consoles</option>
-                            <option value="accessories">Accessories</option>
-                            <option value="phones">Phones</option>
-                            <option value="cards">Online cards</option>
-                            <option value="electronics">Electronics</option>
+                            <?php
+                            $stmt_select_product_types = $connection->prepare("SELECT * FROM product_types");
+                            $stmt_select_product_types->execute();
+                            $result_product_types = $stmt_select_product_types->get_result();
+
+                            while ($row_product_types = $result_product_types->fetch_assoc()) {
+                                get_all_product_types_for_add_product_form($row_product_types['type']);
+                            }
+                            ?>
                         </select>
 
-                        <br><br>
+                        <br>
+                        <br>
 
-                        <label for="product_category"><b>Product Category</b></label><br>
+                        <label for="product_category">
+                            <b>Product Category</b>
+                        </label>
+                        <br>
+
                         <select name="product_category" id="product_category">
-                            <option value="action">Action</option>
-                            <option value="gaming">Gaming</option>
-                            <option value="strategy">Strategy</option>
-                            <option value="PS2">PS2</option>
-                            <option value="PS3">PS3</option>
-                            <option value="PS4">PS4</option>
-                            <option value="PS5">PS5</option>
-                            <option value="XBox">XBox</option>
-                            <option value="iphone">IPhone</option>
-                            <option value="Samsung">Samsung</option>
-                            <option value="PsPlus">PS Plus</option>
+                            <?php
+                            $stmt_select_product_categories = $connection->prepare("SELECT * FROM product_categories");
+                            $stmt_select_product_categories->execute();
+                            $result_product_categories = $stmt_select_product_categories->get_result();
+
+                            while ($row_product_categories = $result_product_categories->fetch_assoc()) {
+                                get_all_product_categories_for_add_product_form($row_product_categories['category']);
+                            }
+                            ?>
                         </select>
 
-                        <br><br>
+                        <br>
+                        <br>
 
-                        <label for="product_desciption"><b>Desciption</b></label>
+                        <label for="product_desciption">
+                            <b>Desciption</b>
+                        </label>
                         <input type="text" title="Enter product's desciption" placeholder="Enter product's desciption" name="product_desciption" id="product_desciption" value="" required>
 
-                        <label for="product_age"><b>Age Restriction</b></label>
+                        <label for="product_age">
+                            <b>Age Restriction</b>
+                        </label>
                         <input type="text" title="Enter product's age restriction" placeholder="Enter product's age restriction" name="product_age" id="product_age" value="" required>
 
-                        <label for="product_inventory"><b>Current Inventory:</b></label><br>
+                        <label for="product_inventory">
+                            <b>Current Inventory:</b>
+                        </label>
+                        <br>
                         <input type="number" title="Enter product's current inventory in stock" placeholder="Enter product's current inventory in stock" name="product_inventory" id="product_inventory" style="height: 35px;" value="" required>
 
-                        <br><br>
+                        <br>
+                        <br>
 
-                        <label for="product_sales"><b>Current Sales Number:</b></label><br>
+                        <label for="product_sales">
+                            <b>Current Sales Number:</b>
+                        </label>
+                        <br>
+
                         <input type="number" title="Enter product's current sales number (if any, else 0)" placeholder="Enter product's current sales number (if any, else 0)" name="product_sales" id="product_sales" style="height: 35px;" value="" required>
 
-                        <br><br>
+                        <br>
+                        <br>
 
-                        <label><b>Upload Product Image:</b></label>
+                        <label>
+                            <b>Upload Product Image:</b>
+                        </label>
                         <input type="file" title="Choose from your files an image for the product" name="product_image" id="product_image" value="" required>
                         <br>
 
                         <div class="clearfix">
-                            <button type="submit" class="addproductbtn" title="Add new product"><strong>Add Product</strong></button>
+                            <button type="submit" class="addproductbtn" title="Add new product">
+                                <strong>Add Product</strong>
+                            </button>
                         </div>
                     </div>
                 </form>
             </div>
+
+
 
             <!-- form of price history for product -->
             <div id="price-history" class="modal">

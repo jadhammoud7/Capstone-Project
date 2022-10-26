@@ -337,3 +337,19 @@ function get_all_repairs($repair_id, $repair_type, $price_per_hour)
     ";
     echo $element;
 }
+
+function get_all_product_types_for_add_product_form($product_type)
+{
+    $element = "
+        <option value='$product_type'>$product_type</option>
+    ";
+    echo $element;
+}
+
+function get_all_product_categories_for_add_product_form($product_category)
+{
+    $element = "
+        <option value='$product_category'>$product_category</option>
+    ";
+    echo $element;
+}

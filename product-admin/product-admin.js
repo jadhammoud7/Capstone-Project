@@ -2,9 +2,18 @@ function OpenAddProduct() {
     window.location.href = window.location.href + '?open_add_product=true';
 }
 
+function OpenAddType() {
+    window.location.href = window.location.href + '?open_add_type=true';
+}
+
 if (window.location.href.includes('open_add_product=true')) {
-    const gift_div = document.getElementById("id01");
-    gift_div.style.display = "block";
+    const add_product_form = document.getElementById('add_product_form');
+    add_product_form.style.display = 'block';
+}
+
+if (window.location.href.includes('open_add_type=true')) {
+    const add_type_form = document.getElementById('add_type_form');
+    add_type_form.style.display = 'block';
 }
 
 if (window.location.href.includes('product-added=1')) {
@@ -22,8 +31,14 @@ function CloseProductAddedPopUp() {
 
 function CloseAddProduct() {
     window.location.href = 'product-admin.php';
-    const gift_div = document.getElementById("id01");
-    gift_div.style.display = "none";
+    const add_product_form = document.getElementById('add_product_form');
+    add_product_form.style.display = 'none';
+}
+
+function CloseAddType() {
+    window.location.href = 'product-admin.php';
+    const add_type_form = document.getElementById('add_type_form');
+    add_type_form.style.display = 'none';
 }
 
 if (window.location.href.includes('price_history')) {

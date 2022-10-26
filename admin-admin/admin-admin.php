@@ -89,6 +89,7 @@ if (isset($_POST["phone_number"]) && $_POST["phone_number"] != "") {
     $phone_number = $_POST["phone_number"];
     $_SESSION['phone_number'] = $phone_number;
     for ($j = 0; $j < strlen($phone_number); $j++) {
+        //phone number should be fully numeric
         if (!is_numeric($phone_number[$j])) {
             $_SESSION['phone_number_error'] = "Phone number should not contain any characters other than numbers";
             header("Location: admin-admin.php?open_add_user=true");
@@ -100,16 +101,19 @@ if (isset($_POST["phone_number"]) && $_POST["phone_number"] != "") {
 if (isset($_POST["username"]) && $_POST["username"] != "") {
     $username = $_POST["username"];
     $_SESSION['username'] = $username;
+    //select all admins of same username
     $select_check_username = $connection->prepare("SELECT * FROM admins WHERE username = '" . $username . "'");
     $select_check_username->execute();
     $results_check_username = $select_check_username->get_result();
     $data_check_username = $results_check_username->fetch_assoc();
 
+    //if there is an admin of same username, then error
     if (!empty($data_check_username)) {
         $_SESSION['username_error'] = "Username is already taken. Try another one.";
         header("Location: admin-admin.php?open_add_user=true");
         die("WRONG username");
     }
+    //if username has size less than 5, then error
     if (strlen($username) < 5) {
         $_SESSION['username_error'] = "Username should be of length 5 minimum";
         header("Location: admin-admin.php?open_add_user=true");
@@ -120,19 +124,28 @@ if (isset($_POST["username"]) && $_POST["username"] != "") {
 if (isset($_POST["password"]) && $_POST["password"] != "") {
     $password_text = $_POST["password"];
     $_SESSION['password'] = $password_text;
+    //password should have size of at least 8
     if (strlen($password_text) < 8) {
         $_SESSION['password_error'] = "Password should be of length 8 minimum";
         header("Location: admin-admin.php?open_add_user=true");
         die("WRONG password");
     }
+    //password should not be fully numeric
     if (is_numeric($password_text)) {
         $_SESSION['password_error'] = "Password should not be numeric, should contain characters";
         header("Location: admin-admin.php?open_add_user=true");
         die("WRONG password");
     }
+    //check if password has special characters
+    if (!str_contains($password_text, '@') && !str_contains($password_text, '_') && !str_contains($password_text, "-") && !str_contains($password_text, ".")) {
+        $_SESSION['password_error'] = 'Password should contain special characters such as "@", "_", "-", or "."';
+        header("Location: ../signup/signup.php");
+        die("WRONG password");
+    }
     $password = hash("sha256", $password_text);
 }
 
+//all inputs are valid and no errors, then insert new admin
 $stmt_add_new_admin = $connection->prepare("INSERT INTO admins(first_name, last_name, email_address, phone_number, username, password) VALUES (?,?,?,?,?,?)");
 $stmt_add_new_admin->bind_param("ssssss", $first_name, $last_name, $email, $phone_number, $username, $password);
 $stmt_add_new_admin->execute();

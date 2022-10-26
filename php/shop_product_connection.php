@@ -12,7 +12,7 @@ function shop_connection($product_id, $name, $price, $image)
                 <img src=\"../images/Products/$image\" alt=\"product image\">
             </div>
             <div class=\"attributes_section\" id=\"attributes_section\">
-                <h1><i>$name</i></h1>
+                <h3><i>$name</i></h3>
                 <h3><i>$price$</i></h3>
                 <a href=\"../product_info/product_info.php?productID=$product_id\">
                     <img class=\"info\" src=\"../images/info.png\" title=\"Read More Information\" alt=\"read more info\">
