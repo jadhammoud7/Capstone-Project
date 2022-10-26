@@ -396,23 +396,157 @@ type_column.addEventListener('click', function SetSorting() {
     if (type_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
         type_column.innerHTML = "Product Type <span class=\"las la-sort-up\"></span>";
         sortTableTypes(0, "desc");
-        filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'Products by descending order of Last Modified On';
-        type_column.title = 'Sort Last Modified On by ascending';
+        type_filter_text.innerHTML = 'Filter';
+        type_table_sort.innerHTML = 'Product Types by descending order';
+        type_column.title = 'Sort Product Types by ascending';
     }
     if (type_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
-        type_column.innerHTML = "Last Modified On <span class=\"las la-sort-down\"></span>";
+        type_column.innerHTML = "Product Type <span class=\"las la-sort-down\"></span>";
         sortTableTypes(0, "asc");
-        filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'Products by ascending order of Last Modified On';
-        type_column.title = 'Sort Last Modified On by descending';
+        type_filter_text.innerHTML = 'Filter';
+        type_table_sort.innerHTML = 'Product Types by ascending order';
+        type_column.title = 'Sort Product Types by descending';
     }
-    if (type_column_innerHTML == "Last Modified On") {
-        type_column.innerHTML = "Last Modified On <span class=\"las la-sort-up\"></span>";
+    if (type_column_innerHTML == "Product Type") {
+        type_column.innerHTML = "Product Type <span class=\"las la-sort-up\"></span>";
         sortTableTypes(0, "desc");
-        filter_text.innerHTML = 'Filter';
-        table_sort.innerHTML = 'Products by descending order of Last Modified On';
-        type_column.title = 'Sort Last Modified On by ascending';
+        type_filter_text.innerHTML = 'Filter';
+        type_table_sort.innerHTML = 'Product Types by descending order';
+        type_column.title = 'Sort Product Types by ascending';
+    }
+});
+
+const type_added_by_column = document.getElementById('type-added-by-column');
+type_added_by_column.addEventListener('click', function SetSorting() {
+    var type_added_by_column_innerHTML = type_added_by_column.innerHTML;
+    if (type_added_by_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        type_added_by_column.innerHTML = "Added By <span class=\"las la-sort-up\"></span>";
+        sortTableTypes(1, "desc");
+        type_filter_text.innerHTML = 'Filter';
+        type_table_sort.innerHTML = 'Product Types by descending order of Added By';
+        type_added_by_column.title = 'Sort Product Types by ascending of Added By';
+    }
+    if (type_added_by_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        type_added_by_column.innerHTML = "Added By <span class=\"las la-sort-down\"></span>";
+        sortTableTypes(1, "asc");
+        type_filter_text.innerHTML = 'Filter';
+        type_table_sort.innerHTML = 'Product Types by ascending order of Added By';
+        type_added_by_column.title = 'Sort Product Types by descending of Added By';
+    }
+    if (type_added_by_column_innerHTML == "Added By") {
+        type_added_by_column.innerHTML = "Added By <span class=\"las la-sort-up\"></span>";
+        sortTableTypes(1, "desc");
+        type_filter_text.innerHTML = 'Filter';
+        type_table_sort.innerHTML = 'Product Types by descending order of Added By';
+        type_added_by_column.title = 'Sort Product Types by ascending order of Added By';
+    }
+});
+
+const type_modified_on_column = document.getElementById('type-modified-on-column');
+type_modified_on_column.addEventListener('click', function SetSorting() {
+    var type_modified_on_column_innerHTML = type_modified_on_column.innerHTML;
+    if (type_modified_on_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        type_modified_on_column.innerHTML = "Modified On <span class=\"las la-sort-up\"></span>";
+        sortTableTypes(2, "desc");
+        type_filter_text.innerHTML = 'Filter';
+        type_table_sort.innerHTML = 'Product Types by descending order of Modified On';
+        type_modified_on_column.title = 'Sort Product Types by ascending of Modified On';
+    }
+    if (type_modified_on_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        type_modified_on_column.innerHTML = "Modified On <span class=\"las la-sort-down\"></span>";
+        sortTableTypes(2, "asc");
+        type_filter_text.innerHTML = 'Filter';
+        type_table_sort.innerHTML = 'Product Types by ascending order of Modified On';
+        type_modified_on_column.title = 'Sort Product Types by descending of Modified On';
+    }
+    if (type_modified_on_column_innerHTML == "Modified On") {
+        type_modified_on_column.innerHTML = "Modified On <span class=\"las la-sort-up\"></span>";
+        sortTableTypes(2, "desc");
+        type_filter_text.innerHTML = 'Filter';
+        type_table_sort.innerHTML = 'Product Types by descending order of Modified On';
+        type_modified_on_column.title = 'Sort Product Types by ascending order of Modified On';
+    }
+});
+
+//start sorting table product categories
+const category_table_sort = document.getElementById('category-table-sort');
+const category_filter_text = document.getElementById('category-filter-text');
+
+const category_column = document.getElementById('category-column');
+category_column.addEventListener('click', function SetSorting() {
+    var category_column_innerHTML = category_column.innerHTML;
+    if (category_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        category_column.innerHTML = "Product Category <span class=\"las la-sort-up\"></span>";
+        sortTableCategories(0, "desc");
+        category_filter_text.innerHTML = 'Filter';
+        category_table_sort.innerHTML = 'Product Categories by descending order';
+        category_column.title = 'Sort Product Categories by ascending';
+    }
+    if (category_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        category_column.innerHTML = "Product Category <span class=\"las la-sort-down\"></span>";
+        sortTableCategories(0, "asc");
+        category_filter_text.innerHTML = 'Filter';
+        category_table_sort.innerHTML = 'Product Categories by ascending order';
+        category_column.title = 'Sort Product Categories by descending';
+    }
+    if (category_column_innerHTML == "Product Category") {
+        category_column.innerHTML = "Product Category <span class=\"las la-sort-up\"></span>";
+        sortTableCategories(0, "desc");
+        category_filter_text.innerHTML = 'Filter';
+        category_table_sort.innerHTML = 'Product Categories by descending order';
+        category_column.title = 'Sort Product Categories by ascending';
+    }
+});
+
+const category_added_by_column = document.getElementById('category-added-by-column');
+category_added_by_column.addEventListener('click', function SetSorting() {
+    var category_added_by_column_innerHTML = category_added_by_column.innerHTML;
+    if (category_added_by_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        category_added_by_column.innerHTML = "Added By <span class=\"las la-sort-up\"></span>";
+        sortTableCategories(1, "desc");
+        category_filter_text.innerHTML = 'Filter';
+        category_table_sort.innerHTML = 'Product Categories by descending order of Added By';
+        category_added_by_column.title = 'Sort Product Categories by ascending of Added By';
+    }
+    if (category_added_by_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        category_added_by_column.innerHTML = "Added By <span class=\"las la-sort-down\"></span>";
+        sortTableCategories(1, "asc");
+        category_filter_text.innerHTML = 'Filter';
+        category_table_sort.innerHTML = 'Product Categories by ascending order of Added By';
+        category_added_by_column.title = 'Sort Product Categories by descending of Added By';
+    }
+    if (category_added_by_column_innerHTML == "Added By") {
+        category_added_by_column.innerHTML = "Added By <span class=\"las la-sort-up\"></span>";
+        sortTableCategories(1, "desc");
+        category_filter_text.innerHTML = 'Filter';
+        category_table_sort.innerHTML = 'Product Categories by descending order of Added By';
+        category_added_by_column.title = 'Sort Product Categories by ascending order of Added By';
+    }
+});
+
+const category_modified_on_column = document.getElementById('category-modified-on-column');
+category_modified_on_column.addEventListener('click', function SetSorting() {
+    var category_modified_on_column_innerHTML = category_modified_on_column.innerHTML;
+    if (category_modified_on_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        category_modified_on_column.innerHTML = "Modified On <span class=\"las la-sort-up\"></span>";
+        sortTableCategories(2, "desc");
+        category_filter_text.innerHTML = 'Filter';
+        category_table_sort.innerHTML = 'Product Categories by descending order of Modified On';
+        category_modified_on_column.title = 'Sort Product Categories by ascending of Modified On';
+    }
+    if (category_modified_on_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        category_modified_on_column.innerHTML = "Modified On <span class=\"las la-sort-down\"></span>";
+        sortTableCategories(2, "asc");
+        category_filter_text.innerHTML = 'Filter';
+        category_table_sort.innerHTML = 'Product Categories by ascending order of Modified On';
+        category_modified_on_column.title = 'Sort Product Categories by descending of Modified On';
+    }
+    if (category_modified_on_column_innerHTML == "Modified On") {
+        category_modified_on_column.innerHTML = "Modified On <span class=\"las la-sort-up\"></span>";
+        sortTableCategories(2, "desc");
+        category_filter_text.innerHTML = 'Filter';
+        category_table_sort.innerHTML = 'Product Categories by descending order of Modified On';
+        category_modified_on_column.title = 'Sort Product Categories by ascending order of Modified On';
     }
 });
 
@@ -569,7 +703,7 @@ function FilterTableTypes() {
     filter = input.value.toUpperCase();
     table = document.getElementById('product_types_table');
 
-    var tr = table.getElementsByTagName('body')[0].getElementsByTagName('tr');
+    var tr = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
     for (i = 0; i < tr.length; i++) {
         var td = [];
         var display = 'none';
@@ -590,7 +724,7 @@ function FilterTableCategories() {
     filter = input.value.toUpperCase();
     table = document.getElementById('product_categories_table');
 
-    var tr = table.getElementsByTagName('body')[0].getElementsByTagName('tr');
+    var tr = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
     for (i = 0; i < tr.length; i++) {
         var td = [];
         var display = 'none';

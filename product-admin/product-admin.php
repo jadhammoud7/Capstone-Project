@@ -239,7 +239,7 @@ if (isset($_POST['category'])) {
     $category = $_POST['category'];
 
     //check if this category is found
-    $stmt_get_product_category = $connection->prepare("SELECT * FROM product_categories WHERE category = $category");
+    $stmt_get_product_category = $connection->prepare("SELECT * FROM product_categories WHERE category = '" . $category . "'");
     $stmt_get_product_category->execute();
     $result_product_category = $stmt_get_product_category->get_result();
     $row_product_category = $result_product_category->fetch_assoc();
@@ -308,7 +308,7 @@ if (isset($_POST['category'])) {
     </div>
 
     <!-- started popup message logout category added -->
-    <div class="popup" id="product-type-category-confirmation">
+    <div class="popup" id="product-category-added-confirmation">
         <img src="../images/tick.png" alt="">
         <h2>Product Category Added Confirmation</h2>
         <p>A new product category was added successfully</p>
@@ -533,9 +533,9 @@ if (isset($_POST['category'])) {
                         </div>
                         <div class="card-header">
                             <h3>
-                                <p style="text-decoration: underline; color: royalblue;" id="filter-text"></p>
+                                <p style="text-decoration: underline; color: royalblue;" id="category-filter-text"></p>
                                 <br>
-                                <p id="table-sort"></p>
+                                <p id="category-table-sort"></p>
                             </h3>
                         </div>
                         <div class="card-body">

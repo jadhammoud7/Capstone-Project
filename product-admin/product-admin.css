@@ -21,7 +21,9 @@
   color: red;
 }
 
-#SearchInput {
+#SearchInput,
+#SearchInputType,
+#SearchInputCategory {
   margin: 0 0 0 0;
   padding: 0;
   padding-left: 20px;
