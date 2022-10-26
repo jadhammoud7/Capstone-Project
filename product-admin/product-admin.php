@@ -98,7 +98,8 @@ if (isset($_POST['product_sales'])) {
 }
 
 if ($product_name != "" && $product_price != 0 && $product_type != "" && $product_category != "" && $product_description != "" && $product_age != "" && $product_inventory != 0) {
-    mkdir('../images/' . $product_name);
+    //make directory in images/Products that have same name as product
+    mkdir('../images/Products/' . $product_name);
     $target_dir = "../images/Products/$product_name/";
     $filename = basename($_FILES['product_image']['name']);
     $target_file = $target_dir . $filename;
@@ -107,6 +108,7 @@ if ($product_name != "" && $product_price != 0 && $product_type != "" && $produc
     if (in_array($fileType, $allowTypes)) {
         if (move_uploaded_file($_FILES['product_image']['tmp_name'], $target_file)) {
             $product_image = $filename;
+            //set timezone to beirut
             date_default_timezone_set('Asia/Beirut');
             $modified_on = date('Y-m-d h:i:s');
             $modified_by = $row['first_name'] . ' ' . $row['last_name'];

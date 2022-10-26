@@ -47,6 +47,9 @@ if (isset($_POST['description'])) {
 
 if ($repair_id != 0 && $repair_type != "" && $price_per_hour != 0 && $description != "") {
     if (!empty($_FILES['repair_image']['name'])) {
+        //update repair with image
+        rmdir('../images/Repairs/' + $repair_type + '/');
+        mkdir('../images/Repairs/' + $repair_type + '/');
         $target_dir = "../images/Repairs/$repair_type/";
         $filename = basename($_FILES['repair_image']['name']);
         $target_file = $target_dir . $filename;
@@ -62,6 +65,7 @@ if ($repair_id != 0 && $repair_type != "" && $price_per_hour != 0 && $descriptio
             }
         }
     } else {
+        //update repair without image
         $stmt_update_repair = $connection->prepare("UPDATE repairs SET repair_type = '" . $repair_type . "', price_per_hour = '" . $price_per_hour . "', description = '" . $description . "' WHERE repair_id = '" . $repair_id . "'");
         $stmt_update_repair->execute();
         $stmt_update_repair->close();

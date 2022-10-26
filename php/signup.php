@@ -122,30 +122,31 @@ if (isset($_POST["password"]) && $_POST["password"] != "") {
 }
 
 if ($first_name != "" && $last_name != "" && $email != "" && $date_of_birth != "" && $phone_number != "" && $address != "" && $city != "" && $username != "" && $password != "") {
-    mkdir('../images/' . $username);
-    $target_dir = '../images/' . $username . '/';
+    //make directory of folder same as username and child of images/Customers
+    mkdir('../images/Customers/' . $username);
+
+    $target_dir = '../images/Customers/' . $username . '/';
+    //name of image file same as username
     $filename = basename($_FILES['customer_image']['name']);
+
+    //target is images/Customers
     $target_file = $target_dir . $filename;
+
     $fileType = pathinfo($target_file, PATHINFO_EXTENSION);
     $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
     if (in_array($fileType, $allowTypes)) {
+
+        //uploaded file will have same name as customer username
         if (move_uploaded_file($_FILES['customer_image']['tmp_name'], $target_file)) {
             $customer_image = $filename;
             $loyalty_points = 0;
+            //insert into table customers
             $stmt_add_new_customer = $connection->prepare("INSERT INTO customers(first_name, last_name, email, date_of_birth, phone_number, address, city, username, customer_image, password, loyalty_points) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
             $stmt_add_new_customer->bind_param("ssssssssssi", $first_name, $last_name, $email, $date_of_birth, $phone_number, $address, $city1, $username, $customer_image, $password, $loyalty_points);
             $stmt_add_new_customer->execute();
             $stmt_add_new_customer->close();
 
-
-            //getting the id of this user to that when he/she has signed up there id will be saved
-            $stmt_select_customer_id = $connection->prepare("SELECT customer_id FROM customers WHERE username = '" . $username . "' ");
-            $stmt_select_customer_id->execute();
-            $result_customer_id = $stmt_select_customer_id->get_result();
-            $row_customer_id = $result_customer_id->fetch_assoc();
-
-            $logged_id1 = $row_customer_id['customer_id'];
-            $_SESSION['logged_id'] = $logged_id1;
+            //go to sign up page
             echo "<script>window.location='../signup/signup.php?account_created=true';</script>";
         }
     }

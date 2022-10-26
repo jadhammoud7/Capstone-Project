@@ -7,7 +7,7 @@ function favorites_list_connection($product_id, $name, $category, $price, $image
     $element = "<div class=\"favorites-products\">
                 <div class=\"favorites-product-info\">
                     <div class=\"favorites-product-img\">
-                        <img src=\"../images/$image\" alt=\"favorites product\" style=\"width: 50%;\">
+                        <img src=\"../images/Products/$image\" alt=\"favorites product\" style=\"width: 50%;\">
                     </div>
                     <div class=\"favorites-product-part\">
                         <h3>$name</h3>
@@ -40,7 +40,7 @@ function appointments_list_connection($appointment_id, $appointment_name, $date,
         <div class=\"appointments-list\">
             <div class=\"appointments-div\">
                 <div class=\"appointments-img\">
-                    <img src=\"../images/$image\" alt=\"basket product\" style=\"width: 50%;\">
+                    <img src=\"../images/Repairs/$image\" alt=\"basket product\" style=\"width: 50%;\">
                 </div>
                 <div class=\"appointments-part\">
                     <h3>Appointment Name</h3>

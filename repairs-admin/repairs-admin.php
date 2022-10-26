@@ -78,7 +78,8 @@ if (isset($_POST['description'])) {
 }
 
 if ($repair_type != "" && $price_per_hour != 0 && $description != "") {
-    mkdir('../images/Repairs' . $repair_type);
+    //make new dir of same name as repair type
+    mkdir('../images/Repairs/' + $repair_type);
     $target_dir = "../images/Repairs/$repair_type/";
     $filename = basename($_FILES['repair_image']['name']);
     $target_file = $target_dir . $filename;
@@ -87,6 +88,7 @@ if ($repair_type != "" && $price_per_hour != 0 && $description != "") {
     if (in_array($fileType, $allowTypes)) {
         if (move_uploaded_file($_FILES['repair_image']['tmp_name'], $target_file)) {
             $repair_image = $filename;
+            //create new repair in table repairs
             $stmt_add_new_repair = $connection->prepare("INSERT INTO repairs(repair_type, price_per_hour, description, image) VALUES (?,?,?,?)");
             $stmt_add_new_repair->bind_param("siss", $repair_type, $price_per_hour, $description, $repair_image);
             $stmt_add_new_repair->execute();

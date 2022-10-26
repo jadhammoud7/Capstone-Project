@@ -134,7 +134,7 @@ if (isset($_GET['delete_checkout_id'])) {
     <!-- started with profile body -->
     <div class="profile-container">
         <div class="profile-sidebar">
-            <img src="../images/<?php echo $row['username']; ?>/<?php echo $row['customer_image']; ?>" alt="">
+            <img src="../images/Customers/<?php echo $row['username']; ?>/<?php echo $row['customer_image']; ?>" alt="">
             <ol class="profile-sidebar-user">
                 <li id="customer-name" title="My Username"><span><?php echo $row["username"]; ?></span></li>
                 <!-- <li id="customer" title="My Status"><span>Customer</span></li> -->

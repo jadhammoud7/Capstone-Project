@@ -10,7 +10,7 @@ function repair_products_connection($repair_type, $price_per_hour, $description,
     <div class=\"appointment-item\">
     <h2>$repair_type</h2>
     <div class=\"appointment-item-info\">
-        <img src=\"../images/$image\" alt=\"\">
+        <img src=\"../images/Repairs/$image\" alt=\"\">
         <div class=\"appointment-item-info-part\">
             <h3 id=\"repair_type\">$repair_type</h3>
             <p>1 hour | $price_per_hour$</p>
@@ -30,7 +30,7 @@ function free_gift_connection($name)
 {
     $element = "
     <div class=\"appointment-item-info\">
-        <img src=\"../images/free-game.gif\" alt=\"\">
+        <img src=\"../images/Repairs/free-game.gif\" alt=\"\">
         <div class=\"appointment-item-info-part\">
             <h3>Try Free Game</h3>
             <p>1 hour | $name</p>
@@ -48,13 +48,13 @@ function free_gift_connection($name)
 
 
 // book now for each one
-function book_now_for_each_repair_connection($repair_type)
+function book_now_for_each_repair_connection($repair_type, $image)
 {
 
     $element = "
         <h2 style=\"margin-top:50px;\">$repair_type</h2>
         <div class=\"appointment-item-info-schedule\">
-            <img src=\"../images/ps_repair.jpg\" alt=\"\">
+            <img src=\"../images/Repairs/$image\" alt=\"\">
             <div class=\"appointment-item-info-schedule-part\">
             <input type=\"radio\" id=\"app1\" name=\"appointments_time\" value=\"8:00-9:30 AM\">
             <label for=\"app1\">8:00-9:30 AM</label><br>
