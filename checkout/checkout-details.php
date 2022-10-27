@@ -62,7 +62,11 @@ function checkout_products_connection($name, $quantity, $price)
     <!-- started with the menu bar -->
     <header>
         <nav class="nav-bar">
-            <a href="" class="nav-branding">Newbie Gamers.</a>
+            <!-- <a href="" class="nav-branding">Newbie Gamers.</a> -->
+            <div class="content">
+                <!-- <h2>Newbie Gamers.</h2> -->
+                <h2>Newbie Gamers.</h2>
+            </div>
             <ul class="nav-menu">
                 <li>
                     <a href="../home-page/home-page.php" class="home_menu nav-link" title="Home Page">Home</a>

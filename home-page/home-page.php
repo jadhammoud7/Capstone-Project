@@ -56,7 +56,25 @@ $results_products = $stmt_products->get_result();
     <!-- started with the menu bar -->
     <header>
         <nav class="nav-bar">
-            <a href="" class="nav-branding">Newbie Gamers.</a>
+            <!-- <a href="" class="nav-branding">Newbie Gamers.</a> -->
+            <div class="content">
+                <!-- <h2>Newbie Gamers.</h2> -->
+                <h2>Newbie Gamers.</h2>
+            </div>
+            <!-- <div class="waviy">
+                <span style="--i:1">N</span>
+                <span style="--i:2">E</span>
+                <span style="--i:3">W</span>
+                <span style="--i:4">B</span>
+                <span style="--i:5">I</span>
+                <span style="--i:6">E</span>
+                <span style="--i:7">G</span>
+                <span style="--i:8">A</span>
+                <span style="--i:9">M</span>
+                <span style="--i:10">E</span>
+                <span style="--i:11">R</span> -->
+
+            </div>
             <ul class="nav-menu">
                 <li>
                     <a href="../home-page/home-page.php" id="home-page-nav" class="home_menu nav-link" title="Home Page">Home</a>
@@ -506,15 +524,15 @@ $results_products = $stmt_products->get_result();
         <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
         <script>
             const swiper = new Swiper('.swiper', {
-                autoplay:{
-                    delay:3000,
-                    disableOnInteraction:false,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
                 },
                 loop: true,
 
                 pagination: {
                     el: '.swiper-pagination',
-                    clickable:true,
+                    clickable: true,
                 },
 
                 navigation: {
