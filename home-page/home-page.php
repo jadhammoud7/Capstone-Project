@@ -168,9 +168,29 @@ $results_products = $stmt_products->get_result();
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
                 <!-- Slides -->
-                <div class="swiper-slide"><img src="../images/image3.jpg" alt=""></div>
-                <div class="swiper-slide"><img src="../images/console.png" alt=""></div>
-                <div class="swiper-slide"><img src="../images/cpu_cleaning.jpg" alt=""></div>
+                <div class="swiper-slide"><img src="../images/Custom-Photo-Wallpaper-For-Walls-3D-Stereoscopic-Golden-Tree-Leaves-Living-Room-TV-Background-Wall-Mural.webp" alt="">
+                    <div class="text1">
+                        <h3>Welcome to Newbie Gamers.</h3>
+                        <!-- <button>Know More About Us</button> -->
+                        <div class="button" id="button-6">
+                            <div id="spin"></div>
+                            <button>Know More About us</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide"><img src="../images/featured-image-types-of-paint.jpeg.jpg" alt="">
+                    <div class="text1">
+                        <h3>Welcome to Newbie Gamers.</h3>
+                    </div>
+                </div>
+
+                <div class="swiper-slide"><img src="../images/morgan-stanley-on-asian-paints.jpg" alt="">
+                    <div class="text1">
+                        <h3 class="welcome">Welcome to Newbie Gamers.</h3>
+                    </div>
+                </div>
+
 
             </div>
             <!-- If we need pagination -->
@@ -181,6 +201,7 @@ $results_products = $stmt_products->get_result();
             <div class="swiper-button-next"></div>
         </div>
     </div>
+
     <br>
 
     <!-- end slideshow -->

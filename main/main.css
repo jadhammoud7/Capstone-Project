@@ -542,6 +542,62 @@ footer a:hover {
   /* position: absolute; */
   margin-bottom: 30px;
 }
+@media screen and (max-width:1172px){
+    .content h2{
+        margin-bottom: 30px;
+        font-size:40px;
+    }
+}
+@media screen and (max-width:1099px){
+    .content h2{
+        margin-bottom: 30px;
+        font-size:38px;
+    }
+}
+@media screen and (max-width:1088px){
+    .content h2{
+        margin-bottom: 25px;
+        font-size:36px;
+    }
+}
+@media screen and (max-width:1065px){
+    .content h2{
+        margin-bottom: 25px;
+        font-size:30px;
+    }
+}
+
+@media screen and (max-width:1016px){
+    .content h2{
+        margin-bottom: 15px;
+        font-size:29px;
+    }
+}
+@media screen and (max-width:1007px){
+    .content h2{
+        margin-bottom: 15px;
+        font-size:24px;
+    }
+}
+@media screen and (max-width:967px){
+    .content h2{
+        margin-bottom: 15px;
+        font-size:22px;
+    }
+}
+@media screen and (max-width:305px){
+    .content h2{
+        margin-bottom: 15px;
+        font-size:20px;
+    }
+}
+@media screen and (max-width:285px){
+    .content h2{
+        margin-bottom: 15px;
+        font-size:17px;
+    }
+}
+
 
 .content h2:nth-child(2) {
   color: transparent;
@@ -549,7 +605,7 @@ footer a:hover {
 }
 
 .content h2:nth-child(1) {
-  color: #03a9f4;
+  color: royalblue;
   animation: animate 4s ease-in-out infinite;
 }
 
