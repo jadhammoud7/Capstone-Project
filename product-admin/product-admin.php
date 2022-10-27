@@ -159,12 +159,6 @@ $stmt_nbofsales->execute();
 $results_nbofsales = $stmt_nbofsales->get_result();
 
 
-//get lowest products 
-$query_lowest_products = "SELECT name,sales_number FROM products ORDER BY sales_number ASC LIMIT 5;";
-$stmt_lowest_products = $connection->prepare($query_lowest_products);
-$stmt_lowest_products->execute();
-$results_lowest_products = $stmt_lowest_products->get_result();
-
 //get top products 
 $query_top_products = "SELECT name,sales_number FROM products ORDER BY sales_number DESC LIMIT 5;";
 $stmt_top_products = $connection->prepare($query_top_products);
@@ -452,13 +446,9 @@ if (isset($_POST['category'])) {
                     </div>
                 </div>
             </div>
-            <div style="margin-top: 30px;">
-                <div id="myPlot" style="width:100%;max-width:700px;float:right"></div>
-                <div id="myPlot1" style="width:100%;max-width:700px"></div>
-
-            </div>
 
             <!-- list of all product types -->
+
             <div class="card-single add_type">
                 <button class="add_type" id="add_type" onclick="OpenAddType()" title="Add a new product type">
                     <span class="las la-plus">
@@ -473,6 +463,8 @@ if (isset($_POST['category'])) {
                         <div class="card-header">
                             <h3>Product Types List</h3>
                         </div>
+
+                        <canvas id="TypeChart" style="width:100%;max-width:600px"></canvas>
                         <div class="card-header">
                             <h3>
                                 <p style="text-decoration: underline; color: royalblue;" id="type-filter-text"></p>
@@ -531,6 +523,9 @@ if (isset($_POST['category'])) {
                         <div class="card-header">
                             <h3>Product Categories List</h3>
                         </div>
+
+                        <canvas id="CategoryChart" style="width:100%;max-width:600px"></canvas>
+
                         <div class="card-header">
                             <h3>
                                 <p style="text-decoration: underline; color: royalblue;" id="category-filter-text"></p>
@@ -581,9 +576,14 @@ if (isset($_POST['category'])) {
             <div class="recent-grid" style="display: block !important;">
                 <div class="projects">
                     <div class="card">
+
                         <div class="card-header">
                             <h3>Products List</h3>
                         </div>
+
+                        <div id="myPlot" style="width:100%;max-width:700px;"></div>
+                        <div id="myPlot2" style="width:100%;max-width:700px;"></div>
+
                         <div class="card-header">
                             <h3>
                                 <p style="text-decoration: underline; color: royalblue;" id="filter-text"></p>
@@ -949,36 +949,70 @@ if (isset($_POST['category'])) {
     const array_products = [];
     const array_products_count = [];
     <?php
-    if (isset($results_lowest_products)) {
-        while ($row_lowest_products = $results_lowest_products->fetch_assoc()) {
+    //get lowest products 
+    $query_lowest_selling_products = "SELECT name, sales_number FROM products ORDER BY sales_number ASC LIMIT 5;";
+    $stmt_lowest_selling_products = $connection->prepare($query_lowest_selling_products);
+    $stmt_lowest_selling_products->execute();
+    $results_lowest_selling_products = $stmt_lowest_selling_products->get_result();
+    while ($row_lowest_selling_products = $results_lowest_selling_products->fetch_assoc()) {
     ?>
-            array_products.push("<?php
-                                    echo $row_lowest_products['name'];
+        array_products.push("<?php
+                                echo $row_lowest_selling_products['name'];
+                                ?>");
+        array_products_count.push("<?php
+                                    echo $row_lowest_selling_products['sales_number'];
                                     ?>");
-            array_products_count.push("<?php
-                                        echo $row_lowest_products['sales_number'];
-                                        ?>");
     <?php }
-    }
     ?>;
-    var xArray = array_products_count;
-    var yArray = array_products;
+    var xArray = array_products;
+    var yArray = array_products_count;
 
     var data = [{
         x: xArray,
         y: yArray,
-        type: "bar",
-        orientation: "h",
-        marker: {
-            color: "red"
-        }
+        type: "bar"
     }];
 
     var layout = {
-        title: "Lowest products being sold"
+        title: "Lowest Selling Products"
     };
 
     Plotly.newPlot("myPlot", data, layout);
+
+    const array_products2 = [];
+    const array_products_count2 = [];
+    <?php
+    //get lowest products 
+    $query_highest_selling_products = "SELECT name, sales_number FROM products ORDER BY sales_number DESC LIMIT 5";
+    $stmt_highest_selling_products = $connection->prepare($query_highest_selling_products);
+    $stmt_highest_selling_products->execute();
+    $results_highest_selling_products = $stmt_highest_selling_products->get_result();
+    while ($row_highest_selling_products = $results_highest_selling_products->fetch_assoc()) {
+    ?>
+        array_products2.push("<?php
+                                echo $row_highest_selling_products['name'];
+                                ?>");
+        array_products_count2.push("<?php
+                                    echo $row_highest_selling_products['sales_number'];
+                                    ?>");
+    <?php }
+    ?>;
+    var xArray2 = array_products2;
+    var yArray2 = array_products_count2;
+
+    var data2 = [{
+        x: xArray2,
+        y: yArray2,
+        type: "bar"
+    }];
+
+    var layout2 = {
+        title: "Highest Selling Products"
+    };
+
+    Plotly.newPlot("myPlot2", data2, layout2);
+
+    //for type bar chart
 
     const array_products_top = [];
     const array_products_count_top = [];
@@ -1012,11 +1046,139 @@ if (isset($_POST['category'])) {
         title: "Top products being sold"
     };
 
-    Plotly.newPlot("myPlot1", data, layout);
-
-
-
     //second chart which is the lowest
+
+    //pie chart of Type
+    const array_types = [];
+    const array_types_count = [];
+    <?php
+    //get all product types
+    $stmt_get_all_product_types = $connection->prepare("SELECT * FROM product_types");
+    $stmt_get_all_product_types->execute();
+    $result_product_types = $stmt_get_all_product_types->get_result();
+    while ($row_product_types = $result_product_types->fetch_assoc()) {
+    ?>
+        array_types.push("<?php
+                            echo $row_product_types['type'];
+                            ?>");
+        <?php
+        //check all products who have type "type"
+        $query_product_types_count = "SELECT COUNT(*) as products_same_type_count FROM products WHERE type = '" . $row_product_types['type'] . "'";
+        $stmt_product_types_count = $connection->prepare($query_product_types_count);
+        $stmt_product_types_count->execute();
+        $results_product_types_count = $stmt_product_types_count->get_result();
+        $row_product_types_count = $results_product_types_count->fetch_assoc();
+
+        ?>;
+        array_types_count.push("<?php
+                                echo $row_product_types_count['products_same_type_count'];
+                                ?>");
+    <?php }
+    ?>;
+    var xValues = array_types;
+    var yValues = array_types_count;
+    var random_colors = [];
+
+    const size = array_types.length;
+
+    function getNewColor(start) {
+        for (var i = start; i < size; i++) {
+            const random = "#" + Math.floor(Math.random() * (255 + 1));
+            if (random_colors.values != random) {
+                random_colors.push(random);
+            } else {
+                getNewColor(i);
+            }
+        }
+    }
+    getNewColor(0);
+
+    var barColors = random_colors;
+    new Chart("TypeChart", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            title: {
+                display: true,
+                text: "Distribution of Products by Type"
+            }
+        }
+    });
+
+    //pie chart of Category
+    const array_categories = [];
+    const array_categories_count = [];
+    <?php
+    //get all product types
+    $stmt_get_all_product_categories = $connection->prepare("SELECT * FROM product_categories");
+    $stmt_get_all_product_categories->execute();
+    $result_product_categories = $stmt_get_all_product_categories->get_result();
+    while ($row_product_categories = $result_product_categories->fetch_assoc()) {
+    ?>
+        array_categories.push("<?php
+                                echo $row_product_categories['category'];
+                                ?>");
+        <?php
+        //check all products who have category "category"
+        $query_product_categories_count = "SELECT COUNT(*) as products_same_category_count FROM products WHERE category = '" . $row_product_categories['category'] . "'";
+        $stmt_product_categories_count = $connection->prepare($query_product_categories_count);
+        $stmt_product_categories_count->execute();
+        $results_product_categories_count = $stmt_product_categories_count->get_result();
+        $row_product_categories_count = $results_product_categories_count->fetch_assoc();
+
+        ?>;
+        array_categories_count.push("<?php
+                                        echo $row_product_types_count['products_same_type_count'];
+                                        ?>");
+    <?php }
+    ?>;
+    var xValues2 = array_categories;
+    var yValues2 = array_categories_count;
+    var random_colors = [];
+
+    const size2 = array_categories.length;
+
+    function getNewColor2(start) {
+        for (var i = start; i < size2; i++) {
+            const random = "#" + Math.floor(Math.random() * (255 + 1));
+            if (random_colors.values != random) {
+                random_colors.push(random);
+            } else {
+                getNewColor2(i);
+            }
+        }
+    }
+    getNewColor2(0);
+
+    var barColors = random_colors;
+    new Chart("CategoryChart", {
+        type: "bar",
+        data: {
+            labels: xValues2,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues2
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            title: {
+                display: true,
+                text: "Distribution of Products by Category"
+            }
+        }
+    });
 </script>
 
 </html>
