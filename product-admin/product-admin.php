@@ -255,6 +255,19 @@ if (isset($_POST['category'])) {
         header("Location: product-admin.php?product-category-added=1");
     }
 }
+
+//delete category 
+if (isset($_GET['getCategorytoRemove'])) {
+    //remove category
+    $stmt_delete_category = $connection->prepare("DELETE FROM product_categories WHERE category = '" . $_GET['getCategorytoRemove'] . "'");
+    $stmt_delete_category->execute();
+
+    //remove all products of this category
+    $stmt_delete_products_of_category = $connection->prepare("DELETE FROM products WHERE category = '" . $_GET['getCategorytoRemove'] . "'");
+    $stmt_delete_products_of_category->execute();
+
+    header("Location: product-admin.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -316,6 +329,25 @@ if (isset($_POST['category'])) {
         <h2>Product Was Removed</h2>
         <p>The product was removed successfully</p>
         <button type="button" onclick="CloseProductRemovedPopUp()">OK</button>
+    </div>
+
+    <!-- started popup message remove category -->
+    <div class="popup" id="remove-category-confirmation">
+        <img src="../images/question-mark.png" alt="remove confirmation">
+        <h2>Delete Confirmation</h2>
+        <p id="remove-category-confirmation-text"></p>
+        <button type="button" onclick="DeleteCategory()">YES</button>
+        <button type="button" onclick="CloseRemoveCategoryPopUp()">NO</button>
+    </div>
+
+
+    <!-- started popup message remove type -->
+    <div class="popup" id="remove-type-confirmation">
+        <img src="../images/question-mark.png" alt="remove confirmation">
+        <h2>Delete Confirmation</h2>
+        <p id="remove-type-confirmation-text"></p>
+        <button type="button" onclick="DeleteType()">YES</button>
+        <button type="button" onclick="CloseRemoveTypePopUp()">NO</button>
     </div>
 
     <input type="checkbox" id="nav-toggle">
@@ -545,6 +577,7 @@ if (isset($_POST['category'])) {
                                             <td id="category-column" title="Sort Product Category by descending">Product Category</td>
                                             <td id="category-added-by-column" title="Sort Added By by descending">Added By</td>
                                             <td id="category-modified-on-column" title="Sort Modified On by descending">Modified On</td>
+                                            <td>Remove</td>
                                         </tr>
                                     </thead>
                                     <tbody>

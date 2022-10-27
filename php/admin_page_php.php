@@ -330,7 +330,10 @@ function get_all_repairs($repair_id, $repair_type, $price_per_hour)
             </td>
             <td>
                 <a>
-                    <button class=\"btn_remove_repair\" onclick=\"OpenRemoveRepairPopUp($repair_id, '$repair_type');\" title=\"Remove repair '$repair_type'?\"><span class=\"las la-trash\"></span> Remove Repair</button>
+                    <button class=\"btn_remove_repair\" onclick=\"OpenRemoveRepairPopUp($repair_id, '$repair_type');\" title=\"Remove repair '$repair_type'?\">
+                        <span class=\"las la-trash\"></span> 
+                        Remove Repair
+                    </button>
                 </a>
             </td>
         </tr>
@@ -366,6 +369,14 @@ function get_all_product_categories($product_category, $added_by, $modified_on)
         <td title=\"$product_category\">$product_category</td>
         <td title=\"$added_by\">$added_by</td>
         <td title=\"$modified_on\">$modified_on</td>
+        <td>
+            <a>
+                <button class=\"btn_remove_category\" onclick=\"OpenRemoveCategoryPopUp('$product_category');\" title=\"Remove category '$product_category'?\">
+                    <span class=\"las la-trash\"></span> 
+                    Remove Category
+                </button>
+            </a>
+        </td>
     </tr>
     ";
 

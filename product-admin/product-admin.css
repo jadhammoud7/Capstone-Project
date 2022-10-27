@@ -190,6 +190,20 @@ hr {
   cursor: pointer;
 }
 
+.btn_remove_type,
+.btn_remove_category {
+  color: #fefefe;
+  background-color: #F44336;
+  border-radius: 15px;
+  padding: 10px 8px;
+  border: none;
+}
+
+.btn_remove_type:hover,
+.btn_remove_category:hover {
+  cursor: pointer;
+}
+
 .clearfix {
   padding-bottom: 30px;
 }

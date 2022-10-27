@@ -738,3 +738,43 @@ function FilterTableCategories() {
         tr[i].style.display = display;
     }
 }
+
+var type;
+
+function OpenRemoveTypePopUp(Type) {
+    var remove_type_popup = document.getElementById('remove-type-confirmation');
+    remove_type_popup.classList.add('open-popup');
+    type = Type;
+    var remove_type_confirmation_text = document.getElementById('remove-type-confirmation-text');
+    remove_type_confirmation_text.innerHTML = 'Remove "' + type + '" from types list? Doing this will REMOVE ALL PRODUCTS of this type.';
+}
+
+function CloseRemoveTypePopUp() {
+    var remove_type_popup = document.getElementById('remove-type-confirmation');
+    remove_type_popup.classList.remove('open-popup');
+}
+
+function DeleteType() {
+    window.location.href = 'product-admin.php?getTypetoRemove=' + type;
+    CloseRemoveTypePopUp();
+}
+
+var category;
+
+function OpenRemoveCategoryPopUp(Category) {
+    var remove_category_popup = document.getElementById('remove-category-confirmation');
+    remove_category_popup.classList.add('open-popup');
+    category = Category;
+    var remove_category_confirmation_text = document.getElementById('remove-category-confirmation-text');
+    remove_category_confirmation_text.innerHTML = 'Remove "' + category + '" from categories list? Doing this will REMOVE ALL PRODUCTS of this category.';
+}
+
+function CloseRemoveCategoryPopUp() {
+    var remove_category_popup = document.getElementById('remove-category-confirmation');
+    remove_category_popup.classList.remove('open-popup');
+}
+
+function DeleteCategory() {
+    window.location.href = 'product-admin.php?getCategorytoRemove=' + category;
+    CloseRemoveCategoryPopUp();
+}
