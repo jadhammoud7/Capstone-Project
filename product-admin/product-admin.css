@@ -191,7 +191,8 @@ hr {
 }
 
 .btn_remove_type,
-.btn_remove_category {
+.btn_remove_category,
+.btn_remove_product {
   color: #fefefe;
   background-color: #F44336;
   border-radius: 15px;
@@ -200,7 +201,8 @@ hr {
 }
 
 .btn_remove_type:hover,
-.btn_remove_category:hover {
+.btn_remove_category:hover,
+.btn_remove_product:hover {
   cursor: pointer;
 }
 

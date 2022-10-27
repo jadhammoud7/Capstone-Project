@@ -281,6 +281,30 @@ if (isset($_GET['getTypetoRemove'])) {
 
     header("Location: product-admin.php");
 }
+
+if (isset($_GET['getProducttoRemove'])) {
+    //remove product
+    $stmt_delete_product = $connection->prepare("DELETE FROM products WHERE product_id = '" . $_GET['getProducttoRemove'] . "'");
+    $stmt_delete_product->execute();
+
+    //remove history inventory for product
+    $stmt_delete_product_history_inventory = $connection->prepare("DELETE FROM history_product_inventory WHERE product_id = '" . $_GET['getProducttoRemove'] . "'");
+    $stmt_delete_product_history_inventory->execute();
+
+    //remove history prices for product
+    $stmt_delete_product_history_prices = $connection->prepare("DELETE FROM history_product_prices WHERE product_id = '" . $_GET['getProducttoRemove'] . "'");
+    $stmt_delete_product_history_prices->execute();
+
+    //remove history sales for product
+    $stmt_delete_product_history_sales = $connection->prepare("DELETE FROM history_product_sales WHERE product_id = '" . $_GET['getProducttoRemove'] . "'");
+    $stmt_delete_product_history_sales->execute();
+
+    //remove product in favorites lists
+    $stmt_delete_product_favorites = $connection->prepare("DELETE FROM favorites_customer_product WHERE product_id = '" . $_GET['getProducttoRemove'] . "'");
+    $stmt_delete_product_favorites->execute();
+
+    header("Location: product-admin.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -361,6 +385,15 @@ if (isset($_GET['getTypetoRemove'])) {
         <p id="remove-type-confirmation-text"></p>
         <button type="button" onclick="DeleteType()">YES</button>
         <button type="button" onclick="CloseRemoveTypePopUp()">NO</button>
+    </div>
+
+    <!-- started popup message remove product -->
+    <div class="popup" id="remove-product-confirmation">
+        <img src="../images/question-mark.png" alt="remove confirmation">
+        <h2>Delete Confirmation</h2>
+        <p id="remove-product-confirmation-text"></p>
+        <button type="button" onclick="DeleteProduct()">YES</button>
+        <button type="button" onclick="CloseRemoveProductPopUp()">NO</button>
     </div>
 
     <input type="checkbox" id="nav-toggle">
@@ -655,6 +688,7 @@ if (isset($_GET['getTypetoRemove'])) {
                                             <td id="product-sales-column" title="Sort Sales Number by descending">Sales Number</td>
                                             <td id="product-last-modified-by-column" title="Sort Last Modified By by descending">Last Modified By</td>
                                             <td id="product-last-modified-on-column" title="Sort Last Modified On by descending">Last Modified On</td>
+                                            <td>Remove</td>
                                         </tr>
                                     </thead>
                                     <tbody>

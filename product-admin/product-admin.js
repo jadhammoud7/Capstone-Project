@@ -739,6 +739,7 @@ function FilterTableCategories() {
     }
 }
 
+//for remove type popup
 var type;
 
 function OpenRemoveTypePopUp(Type) {
@@ -759,6 +760,7 @@ function DeleteType() {
     CloseRemoveTypePopUp();
 }
 
+//for remove category popup
 var category;
 
 function OpenRemoveCategoryPopUp(Category) {
@@ -777,4 +779,25 @@ function CloseRemoveCategoryPopUp() {
 function DeleteCategory() {
     window.location.href = 'product-admin.php?getCategorytoRemove=' + category;
     CloseRemoveCategoryPopUp();
+}
+
+//for remove product popup
+var product_id;
+
+function OpenRemoveProductPopUp(Name, ID) {
+    var remove_product_popup = document.getElementById('remove-product-confirmation');
+    remove_product_popup.classList.add('open-popup');
+    product_id = ID;
+    var remove_product_confirmation_text = document.getElementById('remove-product-confirmation-text');
+    remove_product_confirmation_text.innerHTML = 'Remove "' + Name + '" from products list?';
+}
+
+function CloseRemoveProductPopUp() {
+    var remove_product_popup = document.getElementById('remove-product-confirmation');
+    remove_product_popup.classList.remove('open-popup');
+}
+
+function DeleteProduct() {
+    window.location.href = 'product-admin.php?getProducttoRemove=' + product_id;
+    CloseRemoveTypePopUp();
 }

@@ -209,6 +209,14 @@ function get_all_products($product_id, $name, $price, $type, $category, $invento
         </td>
         <td>$last_modified_by</td>
         <td>$last_modified_on</td>
+        <td>
+            <a>
+                <button class=\"btn_remove_product\" onclick=\"OpenRemoveProductPopUp('$name', $product_id);\" title=\"Remove product '$name'?\">
+                    <span class=\"las la-trash\"></span> 
+                    Remove Product
+                </button>
+            </a>
+        </td>
     </tr>
     ";
     echo $element;
