@@ -348,6 +348,14 @@ function get_all_product_types($product_type, $added_by, $modified_on)
         <td title=\"$product_type\">$product_type</td>
         <td title=\"$added_by\">$added_by</td>
         <td title=\"$modified_on\">$modified_on</td>
+        <td>
+            <a>
+                <button class=\"btn_remove_type\" onclick=\"OpenRemoveTypePopUp('$product_type');\" title=\"Remove type '$product_type'?\">
+                    <span class=\"las la-trash\"></span> 
+                    Remove Type
+                </button>
+            </a>
+        </td>
     </tr>
     ";
 

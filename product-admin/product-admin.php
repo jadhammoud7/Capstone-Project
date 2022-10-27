@@ -268,6 +268,19 @@ if (isset($_GET['getCategorytoRemove'])) {
 
     header("Location: product-admin.php");
 }
+
+//delete type
+if (isset($_GET['getTypetoRemove'])) {
+    //remove type
+    $stmt_delete_type = $connection->prepare("DELETE FROM product_types WHERE type = '" . $_GET['getTypetoRemove'] . "'");
+    $stmt_delete_type->execute();
+
+    //remove all products of this category
+    $stmt_delete_products_of_type = $connection->prepare("DELETE FROM products WHERE type = '" . $_GET['getTypetoRemove'] . "'");
+    $stmt_delete_products_of_type->execute();
+
+    header("Location: product-admin.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -516,6 +529,7 @@ if (isset($_GET['getCategorytoRemove'])) {
                                             <td id="type-column" title="Sort Product Type by descending">Product Type</td>
                                             <td id="type-added-by-column" title="Sort Added By by descending">Added By</td>
                                             <td id="type-modified-on-column" title="Sort Modified On by descending">Modified On</td>
+                                            <td>Remove</td>
                                         </tr>
                                     </thead>
                                     <tbody>
