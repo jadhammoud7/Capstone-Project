@@ -372,9 +372,7 @@ function get_all_product_types($product_type, $added_by, $modified_on)
 
 function get_all_product_types_for_add_product_form($product_type)
 {
-    $element = "
-        <option value='$product_type'>$product_type</option>
-    ";
+    $element = "<option value='$product_type'>$product_type</option>";
     echo $element;
 }
 

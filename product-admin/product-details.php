@@ -256,6 +256,11 @@ if (isset($_GET['ProductIDToRemove'])) {
     $stmt_delete_product_sales_history = $connection->prepare("DELETE FROM history_product_sales WHERE product_id = '" . $_GET['ProductIDToRemove'] . "'");
     $stmt_delete_product_sales_history->execute();
 
+    //remove product in favorites lists
+    $stmt_delete_product_favorites = $connection->prepare("DELETE FROM favorites_customer_product WHERE product_id = '" . $_GET['getProducttoRemove'] . "'");
+    $stmt_delete_product_favorites->execute();
+
+
     header("Location: product-admin.php?product-deleted=1");
 }
 ?>
@@ -523,10 +528,10 @@ if (isset($_GET['ProductIDToRemove'])) {
                                                 <h3>Product Image</h3>
                                                 <div id="product_image">
                                                     <img src='../images/Products/<?php if (isset($row_product)) {
-                                                                            echo $row_product['name'];
-                                                                        }; ?>/<?php if (isset($row_product)) {
-                                                                                    echo $row_product['image'];
-                                                                                } ?>'>
+                                                                                        echo $row_product['name'];
+                                                                                    }; ?>/<?php if (isset($row_product)) {
+                                                                                                echo $row_product['image'];
+                                                                                            } ?>'>
                                                 </div>
                                             </div>
                                         </div>
@@ -561,12 +566,29 @@ if (isset($_GET['ProductIDToRemove'])) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
 <script>
+    function EditProduct() {
+        let string = "<?php $stmt_select_product_types = $connection->prepare("SELECT * FROM product_types");
+                        $stmt_select_product_types->execute();
+                        $result_product_types = $stmt_select_product_types->get_result();
+                        while ($row_product_types = $result_product_types->fetch_assoc()) {
+                            get_all_product_types_for_add_product_form($row_product_types['type']);
+                        } ?>";
+        var product_type = document.getElementById('type');
+        product_type.innerHTML = "<select name=\"product_type\" id=\"product_type\">";
+        product_type.innerHTML += string;
+        product_type.innerHTML += "</select>";
+        document.getElementById('type').replaceWith(product_type);
+    }
     <?php
     if (isset($_GET['product_id'])) {
     ?>
         var array_product_dates = [];
         var array_product_prices = [];
-        const max_price = <?php echo $row_max_price['max_price']; ?>;
+        const max_price = <?php if (isset($row_max_price['max_price'])) {
+                                echo $row_max_price['max_price'];
+                            } else {
+                                echo 0;
+                            } ?>;
         <?php
         if (isset($result_product_dates)) {
             while ($row_product_dates = $result_product_dates->fetch_assoc()) {
@@ -617,7 +639,12 @@ if (isset($_GET['ProductIDToRemove'])) {
 
         var array_product_sales_dates = [];
         var array_product_sales = [];
-        const max_sales = <?php echo $row_max_sales['max_sales']; ?>;
+        const max_sales = <?php
+                            if (isset($row_max_sales['max_sales'])) {
+                                echo $row_max_sales['max_sales'];
+                            } else {
+                                echo 0;
+                            } ?>;
         <?php
         if (isset($result_product_sales)) {
             while ($row_product_sales = $result_product_sales->fetch_assoc()) {
@@ -668,7 +695,11 @@ if (isset($_GET['ProductIDToRemove'])) {
 
         var array_product_inventory_dates = [];
         var array_product_inventories = [];
-        const max_inventory = <?php echo $row_max_inventory['max_inventory']; ?>;
+        const max_inventory = <?php if (isset($row_max_inventory['max_inventory'])) {
+                                    echo $row_max_inventory['max_inventory'];
+                                } else {
+                                    echo 0;
+                                } ?>;
         <?php
         if (isset($result_product_inventories)) {
             while ($row_product_inventories = $result_product_inventories->fetch_assoc()) {

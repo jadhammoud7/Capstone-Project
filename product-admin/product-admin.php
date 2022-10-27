@@ -527,14 +527,6 @@ if (isset($_GET['getProducttoRemove'])) {
 
             <!-- list of all product types -->
 
-            <div class="card-single add_type">
-                <button class="add_type" id="add_type" onclick="OpenAddType()" title="Add a new product type">
-                    <span class="las la-plus">
-                    </span>
-                    Add Product Type
-                </button>
-            </div>
-
             <div class="recent-grid" style="display: block !important;">
                 <div class="projects">
                     <div class="card">
@@ -543,6 +535,13 @@ if (isset($_GET['getProducttoRemove'])) {
                         </div>
 
                         <canvas id="TypeChart" style="width:100%;max-width:600px"></canvas>
+                        <div class="card-single add_type">
+                            <button class="add_type" id="add_type" onclick="OpenAddType()" title="Add a new product type">
+                                <span class="las la-plus">
+                                </span>
+                                Add Product Type
+                            </button>
+                        </div>
                         <div class="card-header">
                             <h3>
                                 <p style="text-decoration: underline; color: royalblue;" id="type-filter-text"></p>
@@ -588,13 +587,6 @@ if (isset($_GET['getProducttoRemove'])) {
             </div>
 
             <!-- list of all product categories -->
-            <div class="card-single add_category">
-                <button class="add_category" id="add_category" onclick="OpenAddCategory()" title="Add a new product category">
-                    <span class="las la-plus">
-                    </span>
-                    Add Product Category
-                </button>
-            </div>
 
             <div class="recent-grid" style="display: block !important;">
                 <div class="projects">
@@ -604,6 +596,14 @@ if (isset($_GET['getProducttoRemove'])) {
                         </div>
 
                         <canvas id="CategoryChart" style="width:100%;max-width:600px"></canvas>
+
+                        <div class="card-single add_category">
+                            <button class="add_category" id="add_category" onclick="OpenAddCategory()" title="Add a new product category">
+                                <span class="las la-plus">
+                                </span>
+                                Add Product Category
+                            </button>
+                        </div>
 
                         <div class="card-header">
                             <h3>
@@ -650,9 +650,7 @@ if (isset($_GET['getProducttoRemove'])) {
             </div>
 
             <!-- list of all products -->
-            <div class="card-single add_product">
-                <button class="add_product" id="add_user1" onclick="OpenAddProduct()" title="Add a new product"><span class="las la-plus"></span>Add Product</button>
-            </div>
+
             <div class="recent-grid" style="display: block !important;">
                 <div class="projects">
                     <div class="card">
@@ -663,6 +661,10 @@ if (isset($_GET['getProducttoRemove'])) {
 
                         <div id="myPlot" style="width:100%;max-width:700px;"></div>
                         <div id="myPlot2" style="width:100%;max-width:700px;"></div>
+
+                        <div class="card-single add_product">
+                            <button class="add_product" id="add_user1" onclick="OpenAddProduct()" title="Add a new product"><span class="las la-plus"></span>Add Product</button>
+                        </div>
 
                         <div class="card-header">
                             <h3>

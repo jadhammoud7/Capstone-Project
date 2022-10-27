@@ -1,7 +1,9 @@
 var Description;
 var ProductImage;
+var ProductTypeInnerHtml;
+var ProductCategoryInnerHtml;
 
-function EditProduct() {
+function EditProduct1() {
     const product_name = document.getElementById('product_name');
     product_name.removeAttribute('readonly');
     product_name.classList.remove('is-valid');
@@ -10,9 +12,10 @@ function EditProduct() {
     product_price.removeAttribute('readonly');
     product_price.classList.remove('is-valid');
 
-    const product_type = document.getElementById('type');
-    product_type.removeAttribute('readonly');
-    product_type.classList.remove('is-valid');
+
+    // const product_type = document.getElementById('type');
+    // product_type.removeAttribute('readonly');
+    // product_type.classList.remove('is-valid');
 
     const product_category = document.getElementById('category');
     product_category.removeAttribute('readonly');
