@@ -104,6 +104,8 @@ if ($repair_type != "" && $price_per_hour != 0 && $description != "") {
 <html lang="en">
 
 <head>
+<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     </meta>

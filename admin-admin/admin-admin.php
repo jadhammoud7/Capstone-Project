@@ -164,6 +164,8 @@ if (isset($_GET['getAdminIDtoRemove'])) {
 <html lang="en">
 
 <head>
+<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     </meta>

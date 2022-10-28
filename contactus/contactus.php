@@ -13,6 +13,8 @@ if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'customer') {
 ?>
 
 <head>
+<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     </meta>

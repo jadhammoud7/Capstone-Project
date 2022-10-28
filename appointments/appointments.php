@@ -26,6 +26,8 @@ $results_gift = $stmt_gift->get_result();
 ?>
 
 <head>
+<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     </meta>
