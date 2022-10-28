@@ -455,7 +455,7 @@ if (isset($_GET['ProductIDToRemove'])) {
                                             <input type="text" name="type" id="type" value="<?php if (isset($row_product)) {
                                                                                                 echo $row_product['type'];
                                                                                             } ?>" readonly class="is-valid">
-                                            <label for="type">Type</label>
+                                            <label for="type" id="label_type">Type</label>
                                         </div>
                                     </div>
 
@@ -573,11 +573,12 @@ if (isset($_GET['ProductIDToRemove'])) {
                         while ($row_product_types = $result_product_types->fetch_assoc()) {
                             get_all_product_types_for_add_product_form($row_product_types['type']);
                         } ?>";
-        var product_type = document.getElementById('type');
-        product_type.innerHTML = "<select name=\"product_type\" id=\"product_type\">";
-        product_type.innerHTML += string;
-        product_type.innerHTML += "</select>";
+        var product_type = document.createElement('select');
+        product_type.setAttribute('name', 'type');
+        product_type.setAttribute('id', 'type');
+        product_type.innerHTML = string;
         document.getElementById('type').replaceWith(product_type);
+        var type_label = document.getElementById('type_label');     
     }
     <?php
     if (isset($_GET['product_id'])) {

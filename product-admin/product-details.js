@@ -12,7 +12,6 @@ function EditProduct1() {
     product_price.removeAttribute('readonly');
     product_price.classList.remove('is-valid');
 
-
     // const product_type = document.getElementById('type');
     // product_type.removeAttribute('readonly');
     // product_type.classList.remove('is-valid');
