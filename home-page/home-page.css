@@ -89,6 +89,118 @@
   font-size: 35px;
   margin-bottom: -10px;
 }
+@media screen and (max-width:1130px){
+    #btn1{
+      top: 270px;
+      left: -10px;
+    } 
+}
+@media screen and (max-width:769px){
+  #btn2{
+    top: 250px;
+  }
+  }
+@media screen and (max-width:696px){
+  #btn1{
+    top: 320px;
+    left: -10px;
+  } 
+}
+@media screen and (max-width:696px){
+  #btn2{
+    top: 320px;
+    left: -10px;
+  } 
+}
+@media screen and (max-width:696px){
+  #btn3{
+    top: 300px;
+    left: -10px;
+  } 
+}
+
+@media screen and (max-width:540px){
+  .text1,.text2{
+    font-size: 30px;
+  } 
+  .text2{
+    width: 40%;
+  }
+  .text3 p{
+    font-size: 30px;
+  }
+  #btn1{
+    top: 250px;
+    padding: 10px;
+  }
+  #btn2{
+    top: 250px;
+    padding: 10px;
+  }
+  #btn3{
+    top: 250px;
+    padding: 10px;
+  }
+}
+@media screen and (max-width:439px){
+.text2{
+  font-size: 27px;
+}
+  #btn1{
+    top: 270px;
+    width: 100%;
+  }
+  #btn2{
+    top: 270px;
+    width: 100%;
+  }
+  #btn3{
+    top: 270px;
+    width: 100%;
+  }
+}
+@media screen and (max-width:412px){
+  #btn1{
+    font-size: 15px;
+  }
+
+  }
+@media screen and (max-width:401px){
+  #btn2{
+    top: 290px;
+  }
+  .text3 p{
+    font-size: 25px;
+  }
+  }
+  @media screen and (max-width:399px){
+    #btn2{
+      font-size: 15px;
+      padding: 10px;
+
+    }
+    #btn1{
+      font-size: 15px;
+      padding: 10px;
+    }
+    #btn3{
+      font-size: 15px;
+      padding: 10px;
+    }
+
+    }
+    @media screen and (max-width:280px){
+      .text2 p{
+        font-size: 25px;
+      }
+      #btn1{
+        font-size: 12px;
+        padding: 10px;
+      }
+      }
+
+
+
 .text3{
   color: black;
   font-weight: bolder;

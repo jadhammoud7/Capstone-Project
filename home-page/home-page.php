@@ -175,9 +175,9 @@ $results_products = $stmt_products->get_result();
                         <!-- <button>Know More About Us</button> -->
                         <div class="button" id="button-6">
                             <div id="spin"></div>
-                            <a href="../shop/shop.php">
+                            <a href="../aboutus/aboutus.php">
                                 <!-- <button>Know More About us</button> -->
-                                <button class="grow_skew_forward">Know more about us &rarr;</button>
+                                <button class="grow_skew_forward" id="btn1">Know more about us</button>
                             </a>
                         </div>
                     </div>
@@ -190,7 +190,7 @@ $results_products = $stmt_products->get_result();
                             <div id="spin"></div>
                             <a href="../shop/shop.php">
                                 <!-- <button>Know More About us</button> -->
-                                <button class="grow_skew_forward">Know more about us &rarr;</button>
+                                <button class="grow_skew_forward" id="btn2">Shop Now!</button>
                             </a>
                         </div>
                     </div>
@@ -202,9 +202,9 @@ $results_products = $stmt_products->get_result();
                         <p>Repair your valuable items at our shop</p>
                         <div class="button" id="button-6">
                             <div id="spin"></div>
-                            <a href="../shop/shop.php">
+                            <a href="../appointments/appointments.php">
                                 <!-- <button>Know More About us</button> -->
-                                <button class="grow_skew_forward">Know more about us &rarr;</button>
+                                <button class="grow_skew_forward" id="btn3">Book Now!</button>
                             </a>
                         </div>
                     </div>
