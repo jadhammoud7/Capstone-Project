@@ -175,20 +175,38 @@ $results_products = $stmt_products->get_result();
                         <!-- <button>Know More About Us</button> -->
                         <div class="button" id="button-6">
                             <div id="spin"></div>
-                            <button>Know More About us</button>
+                            <a href="../shop/shop.php">
+                                <!-- <button>Know More About us</button> -->
+                                <button class="grow_skew_forward">Know more about us &rarr;</button>
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <div class="swiper-slide"><img src="../images/featured-image-types-of-paint.jpeg.jpg" alt="">
-                    <div class="text1">
-                        <h3>Welcome to Newbie Gamers.</h3>
+                    <div class="text2">
+                        <p>Get your best offers here in Newbie Gamers</p>
+                        <div class="button" id="button-6">
+                            <div id="spin"></div>
+                            <a href="../shop/shop.php">
+                                <!-- <button>Know More About us</button> -->
+                                <button class="grow_skew_forward">Know more about us &rarr;</button>
+                            </a>
+                        </div>
                     </div>
+
                 </div>
 
                 <div class="swiper-slide"><img src="../images/morgan-stanley-on-asian-paints.jpg" alt="">
-                    <div class="text1">
-                        <h3 class="welcome">Welcome to Newbie Gamers.</h3>
+                    <div class="text3">
+                        <p>Repair your valuable items at our shop</p>
+                        <div class="button" id="button-6">
+                            <div id="spin"></div>
+                            <a href="../shop/shop.php">
+                                <!-- <button>Know More About us</button> -->
+                                <button class="grow_skew_forward">Know more about us &rarr;</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -246,48 +264,7 @@ $results_products = $stmt_products->get_result();
     <!-- ended features here -->
 
 
-    <!-- start of asc and desc table-->
-    <div class="recent-grid" style="display: block !important;">
-        <div class="projects">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Products List</h3>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table width="100%" id="products_table">
-                            <thead>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>Price</td>
-                                    <td>Type</td>
-                                    <td>Category</td>
-                                    <td id="product-inventory-column" title="Sort Inventory by descending">Inventory</td>
-                                    <td id="product-sales-column" title="Sort Sales Number by descending">Sales Number</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                while ($row_products = $results_products->fetch_assoc()) {
-                                    get_all_products_customer_home(
-                                        $row_products['product_id'],
-                                        $row_products['name'],
-                                        $row_products['price'],
-                                        $row_products['category'],
-                                        $row_products['type'],
-                                        $row_products['inventory'],
-                                        $row_products['sales_number']
-                                    );
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end of asc and desc products -->
+
 
 
     <!-- starting about us here -->

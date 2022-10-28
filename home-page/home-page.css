@@ -79,7 +79,26 @@
   left: 50px;
   font-size: 40px;
 }
-.text1 button{
+.text2{
+  color: black;
+  font-weight: bolder;
+  width: 35%;
+  position: absolute;
+  top: 70px;
+  left: 50px;
+  font-size: 35px;
+  margin-bottom: -10px;
+}
+.text3{
+  color: black;
+  font-weight: bolder;
+  width: 35%;
+  position: absolute;
+  top: 70px;
+  left: 50px;
+  font-size: 35px;
+}
+/* .text1 button{
 
   margin-top: -40px;
   border-radius: 15px;
@@ -90,13 +109,13 @@
 .text1 button:hover{
   background-color: royalblue;
   opacity: 0.9;
-}
-@media screen and(max-width:331px){   
-  /* hone */
+} */
+/* @media screen and(max-width:331px){   
+  hone
 .button .button{
   margin-left: -100px;
 }
-}
+} */
 
 
 
@@ -1028,10 +1047,130 @@ tbody tr:hover {
 .swiper-slide img{
 width: 100%;
 height: 600px;
+opacity: 0.7;
 }
 .swiper .swiper-button-prev,swiper-button-next{
   color: #fff;
 }
 .swiper .swiper-pagination-bullet-active{
   background-color: #fff;
+}
+
+
+.button button {
+  font-size: 20px;
+  background: black;
+  color: #fff;
+  padding: 0.85em 0.75em;
+  margin: 1rem;
+  position: absolute;
+  border-radius: 15px;
+  top: 210px;
+  overflow: hidden;
+
+}
+.button button:hover {
+  color: white;
+  font-weight: 900;
+}
+.button button::after {
+  content: "";
+  background: rgba(65, 105, 225, 0.63);
+  color: white;
+  position: absolute;
+  top: 100px;
+  padding: 0.85em 0.75em;
+  display: block;
+}
+.button button[class^="slide"]::after {
+  transition: all 0.35s;
+}
+.button button[class^="slide"]:hover::after {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transition: all 0.35s;
+}
+.button button.slide_from_left::after {
+  top: 0;
+  bottom: 0;
+  left: -100%;
+  right: 100%;
+}
+.button button.slide_from_right::after {
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  right: -100%;
+}
+.button button.slide_from_top::after {
+  left: 0;
+  right: 0;
+  top: -100%;
+  bottom: 100%;
+}
+.button button.slide_from_bottom::after {
+  left: 0;
+  right: 0;
+  top: 100%;
+  bottom: -100%;
+}
+.button button[class^="grow"]::after {
+  transition: all 0.3s ease;
+}
+.button button[class^="grow"]:hover::after {
+  transition: all 0.3s ease-out;
+}
+.button button.grow_box::after {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transform: scale(0, 0);
+}
+.button button.grow_box:hover::after {
+  transform: scale(1, 1);
+}
+.button button.grow_ellipse::after {
+  border-radius: 50%;
+  left: -50%;
+  right: -50%;
+  top: -150%;
+  bottom: -150%;
+  line-height: 8.34em;
+  transform: scale(0, 0);
+}
+.button button.grow_ellipse:hover::after {
+  transform: scale(1, 1);
+}
+.button button.grow_skew_forward::after {
+  left: -20%;
+  right: -20%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(-45deg) scale(0, 1);
+}
+.button button.grow_skew_forward:hover::after {
+  transform: skewX(-45deg) scale(1, 1);
+}
+.button button.grow_skew_backward::after {
+  left: -20%;
+  right: -20%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(45deg) scale(0, 1);
+}
+.button button.grow_skew_backward:hover::after {
+  transform: skewX(45deg) scale(1, 1);
+}
+.buttonbutton.grow_spin::after {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transform: scale(0, 0) rotate(-180deg);
+}
+.button button.grow_spin:hover::after {
+  transform: scale(1, 1) rotate(0deg);
 }
