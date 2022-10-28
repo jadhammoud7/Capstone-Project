@@ -170,7 +170,7 @@ $results_products = $stmt_products->get_result();
             <div class="swiper-wrapper">
                 <!-- Slides -->
                 <div class="swiper-slide">
-                    <img src="../images/Custom-Photo-Wallpaper-For-Walls-3D-Stereoscopic-Golden-Tree-Leaves-Living-Room-TV-Background-Wall-Mural.webp" alt="" style="opacity: 0.5;">
+                    <img src="../images/Newbie Gamers-logos.jpeg">
                     <div class="text1">
                         <h3>Welcome to Newbie Gamers.</h3>
                         <!-- <button>Know More About Us</button> -->
