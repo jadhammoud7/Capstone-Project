@@ -104,8 +104,8 @@ if (isset($_POST['sales_number'])) {
 
 if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_type != "" && $product_category != "" && $product_description != "" && $product_age != "") {
     if (!empty($_FILES['product_image']['name'])) {
-        rmdir('../images/Products/' + $product_name + '/');
-        mkdir('../images/Products/' + $product_name + '/');
+        rmdir('../images/Products/' . $product_name . '/');
+        mkdir('../images/Products/' . $product_name . '/');
         $target_dir = "../images/Products/" . $product_name . '/';
         $filename = basename($_FILES['product_image']['name']);
         $target_file = $target_dir . $filename;

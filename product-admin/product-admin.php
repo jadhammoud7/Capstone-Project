@@ -1222,7 +1222,7 @@ if (isset($_GET['getProducttoRemove'])) {
 
         ?>;
         array_categories_count.push("<?php
-                                        echo $row_product_types_count['products_same_type_count'];
+                                        echo $row_product_categories_count['products_same_category_count'];
                                         ?>");
     <?php }
     ?>;
