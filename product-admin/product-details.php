@@ -271,7 +271,7 @@ if (isset($_GET['ProductIDToRemove'])) {
 
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -452,7 +452,7 @@ if (isset($_GET['ProductIDToRemove'])) {
                                                                                                 } ?>" readonly class="is-valid">
                                             <label for="price">Price</label>
                                         </div>
-                                        <div class="input-container">
+                                        <div class="input-container" id="type_div">
 
                                             <input type="text" name="type" id="type" value="<?php if (isset($row_product)) {
                                                                                                 echo $row_product['type'];
@@ -462,11 +462,11 @@ if (isset($_GET['ProductIDToRemove'])) {
                                     </div>
 
                                     <div class="form-container-part-inputs">
-                                        <div class="input-container">
+                                        <div class="input-container" id="category_div">
                                             <input type="text" name="category" id="category" value="<?php if (isset($row_product)) {
                                                                                                         echo $row_product['category'];
                                                                                                     } ?>" readonly class="is-valid">
-                                            <label for="category">Category</label>
+                                            <label for="category" id="label_category">Category</label>
                                         </div>
                                     </div>
 
@@ -568,19 +568,152 @@ if (isset($_GET['ProductIDToRemove'])) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
 <script>
+    var type_input;
+    var category_input;
+
     function EditProduct() {
-        let string = "<?php $stmt_select_product_types = $connection->prepare("SELECT * FROM product_types");
-                        $stmt_select_product_types->execute();
-                        $result_product_types = $stmt_select_product_types->get_result();
-                        while ($row_product_types = $result_product_types->fetch_assoc()) {
-                            get_all_product_types_for_add_product_form($row_product_types['type']);
-                        } ?>";
+        //for product name
+        const product_name = document.getElementById('product_name');
+        product_name.removeAttribute('readonly');
+        product_name.classList.remove('is-valid');
+
+        //for product price
+        const product_price = document.getElementById('price');
+        product_price.removeAttribute('readonly');
+        product_price.classList.remove('is-valid');
+
+        //for product types
+        //select all types for dropdown
+        let string_types = "<?php $stmt_select_product_types = $connection->prepare("SELECT * FROM product_types");
+                            $stmt_select_product_types->execute();
+                            $result_product_types = $stmt_select_product_types->get_result();
+                            while ($row_product_types = $result_product_types->fetch_assoc()) {
+                                get_all_product_types_for_add_product_form($row_product_types['type']);
+                            } ?>";
+        //create new element select, of name type and id type and inner html of type options
+        //select the input type
+        type_input = document.getElementById('type').value;
         var product_type = document.createElement('select');
         product_type.setAttribute('name', 'type');
         product_type.setAttribute('id', 'type');
-        product_type.innerHTML = string;
+        product_type.innerHTML = string_types;
+
+        //replace the input type with the select dropdown
         document.getElementById('type').replaceWith(product_type);
-        var type_label = document.getElementById('type_label');     
+        var type_div = document.getElementById('type_div');
+        type_div.appendChild(document.getElementById('type'));
+
+        //for product categories
+        //select all categories for dropdown
+        let string_categories = "<?php $stmt_select_product_categories = $connection->prepare("SELECT * FROM product_categories");
+                                    $stmt_select_product_categories->execute();
+                                    $result_product_categories = $stmt_select_product_categories->get_result();
+                                    while ($row_product_categories = $result_product_categories->fetch_assoc()) {
+                                        get_all_product_categories_for_add_product_form($row_product_categories['category']);
+                                    } ?>";
+        //create new element select, of name category and id category and inner html of category options
+
+        //select the input category
+        category_input = document.getElementById('category').value;
+        var product_category = document.createElement('select');
+        product_category.setAttribute('name', 'category');
+        product_category.setAttribute('id', 'category');
+        product_category.innerHTML = string_categories;
+
+        //replace the input category with the select dropdown
+        document.getElementById('category').replaceWith(product_category);
+        var category_div = document.getElementById('category_div');
+        category_div.appendChild(document.getElementById('category'));
+
+        const product_description = document.getElementById('description');
+        const description_text = product_description.innerHTML;
+        Description = description_text;
+        product_description.innerHTML = "<textarea name=\"description\" id=\"description-textarea\" cols=\"50\" rows=\"10\" placeholder=\"Write brief product description\" value=\"\"></textarea>";
+        document.getElementById('description-textarea').value = description_text;
+
+        const product_age = document.getElementById('age');
+        product_age.removeAttribute('readonly');
+        product_age.classList.remove('is-valid');
+
+        const product_inventory = document.getElementById('inventory');
+        product_inventory.removeAttribute('readonly');
+        product_inventory.classList.remove('is-valid');
+
+        const product_image = document.getElementById('product_image');
+        ProductImage = product_image.innerHTML;
+        product_image.innerHTML = "<input type=\"file\" name=\"product_image\" id=\"product_image\" value=\"\">";
+
+        const edit_product_submit = document.getElementById('edit-product-submit');
+        edit_product_submit.style.visibility = 'visible';
+
+        const edit_button = document.getElementById('edit-button');
+        edit_button.innerHTML = '<span class="las la-times-circle"></span> Exit Edit Product';
+        edit_button.style.backgroundColor = 'red';
+        edit_button.title = 'Exit Editting Product';
+        edit_button.setAttribute('onclick', 'ExitEditProduct()');
+    }
+
+    function ExitEditProduct() {
+        const product_name = document.getElementById('product_name');
+        product_name.setAttribute('readonly', true);
+        product_name.classList.add('is-valid');
+
+        const product_price = document.getElementById('price');
+        product_price.setAttribute('readonly', true);
+        product_price.classList.add('is-valid');
+
+        const product_type = document.createElement('input');
+        product_type.setAttribute('name', 'type');
+        product_type.setAttribute('id', 'type');
+        product_type.setAttribute('readonly', true);
+        product_type.classList.add('is-valid');
+        product_type.setAttribute('value', type_input);
+
+        document.getElementById('type').replaceWith(product_type);
+
+        var type_div = document.getElementById('type_div');
+        var label_type = document.getElementById('label_type');
+        type_div.removeChild(label_type);
+        type_div.appendChild(document.getElementById('type'));
+        type_div.appendChild(label_type);
+
+        const product_category = document.createElement('input');
+        product_category.setAttribute('name', 'category');
+        product_category.setAttribute('id', 'category');
+        product_category.setAttribute('readonly', true);
+        product_category.classList.add('is-valid');
+        product_category.setAttribute('value', category_input);
+
+        document.getElementById('category').replaceWith(product_category);
+
+        var category_div = document.getElementById('category_div');
+        var label_category = document.getElementById('label_category');
+        category_div.removeChild(label_category);
+        category_div.appendChild(document.getElementById('category'));
+        category_div.appendChild(label_category);
+
+        const product_description = document.getElementById('description');
+        product_description.innerHTML = Description;
+
+        const product_age = document.getElementById('age');
+        product_age.setAttribute('readonly', true);
+        product_age.classList.add('is-valid');
+
+        const product_inventory = document.getElementById('inventory');
+        product_inventory.setAttribute('readonly', true);
+        product_inventory.classList.add('is-valid');
+
+        const product_image = document.getElementById('product_image');
+        product_image.innerHTML = ProductImage;
+
+        const edit_product_submit = document.getElementById('edit-product-submit');
+        edit_product_submit.style.visibility = 'hidden';
+
+        const edit_button = document.getElementById('edit-button');
+        edit_button.innerHTML = '<span class="las la-edit"></span> Edit Product';
+        edit_button.style.backgroundColor = 'royalblue';
+        edit_button.title = 'Edit Product';
+        edit_button.setAttribute('onclick', 'EditProduct()');
     }
     <?php
     if (isset($_GET['product_id'])) {

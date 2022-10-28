@@ -399,8 +399,6 @@ function get_all_product_categories($product_category, $added_by, $modified_on)
 
 function get_all_product_categories_for_add_product_form($product_category)
 {
-    $element = "
-        <option value='$product_category'>$product_category</option>
-    ";
+    $element = "<option value='$product_category'>$product_category</option>";
     echo $element;
 }

@@ -237,6 +237,8 @@ input.is-valid+label {
 }
 
 select {
+    position: absolute;
+    top: 75%;
     background-color: royalblue;
     border: none;
     color: #fefefe;
