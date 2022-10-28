@@ -58,7 +58,7 @@ if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
 <html lang="en">
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -157,10 +157,18 @@ if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
         <div class="appointment-item-schedule">
             <?php
             if (isset($_GET['repair_type'])) {
-                book_now_for_each_repair_connection($_GET["repair_type"]);
+                $stmt_select_repair_image = $connection->prepare("SELECT image FROM repairs WHERE repair_type = '" . $_GET['repair_type'] . "'");
+                $stmt_select_repair_image->execute();
+                $result_repair_image = $stmt_select_repair_image->get_result();
+                $row_repair_image = $result_repair_image->fetch_assoc();
+                book_now_for_each_repair_connection($_GET['repair_type'], $row_repair_image['image']);
             }
             if (isset($_GET['cd_name'])) {
-                book_now_for_each_repair_connection($_GET["cd_name"]);
+                $stmt_select_repair_image = $connection->prepare("SELECT image FROM repairs WHERE repair_type = '" . $_GET['repair_type'] . "'");
+                $stmt_select_repair_image->execute();
+                $result_repair_image = $stmt_select_repair_image->get_result();
+                $row_repair_image = $result_repair_image->fetch_assoc();
+                book_now_for_each_repair_connection($_GET['cd_name'], $row_repair_image['image']);
             }
             ?>
         </div>

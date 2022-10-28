@@ -27,7 +27,7 @@ if (isset($_POST['search'])) {
 <html lang="en">
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -110,7 +110,7 @@ if (isset($_POST['search'])) {
         <?php
         if (isset($results_search)) {
             while ($row_search = $results_search->fetch_assoc()) {
-                shop_connection($row_search['product_id'], $row_search['name'], $row_search['price']);
+                shop_connection($row_search['product_id'], $row_search['name'], $row_search['price'], $row_search['image']);
             }
         }
         if ($results_search->num_rows == 0) {
