@@ -103,30 +103,6 @@ if (isset($_POST['save'])) {
 
             //if the customer does not exist in table customers
             if (empty($row_check_username)) {
-                //select product price
-                $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE name = '" . $product_name[$x] . "'");
-                $stmt_select_product_price->execute();
-                $result_product_price = $stmt_select_product_price->get_result();
-                $row_product_price = $result_product_price->fetch_assoc();
-
-                //let product price be unit price * quantity
-                $total_product_price = $row_product_price['price'] * $quantity[$x];
-                //update product sales by quantity
-                $total_sales_products = $total_sales_products + $quantity[$x];
-                //update sales price by increasing total product price
-                $total_sales_price = $total_sales_price + $total_product_price;
-                //update sales quantity by increasing product quantity
-                $total_sales_quantity = $total_sales_quantity + $quantity[$x];
-
-                //insert product info to table sales_products
-                $stmt_insert_store_sales = $connection->prepare("INSERT INTO sales_products(sales_id, product_name, quantity, price) VALUES (?,?,?,?)");
-                $stmt_insert_store_sales->bind_param("issi", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_price);
-                $stmt_insert_store_sales->execute();
-                $stmt_insert_store_sales->close();
-            } else {
-                //if customer exists in table customers
-                //addinf quantity of all products needed
-
                 //first check if the quantity ordered of the product is available
                 $stmt_select_product_inventory = $connection->prepare("SELECT inventory FROM products WHERE name = '" . $product_name[$x] . "'");
                 $stmt_select_product_inventory->execute();
@@ -135,12 +111,19 @@ if (isset($_POST['save'])) {
 
                 //if no stock available for this product
                 if ($row_product_inventory['inventory'] < $quantity[$x]) {
-                    header("Location: store_sale-admin.php?open_add_checkout=true&out_of_stock=true&name=" . $product_name[$x] . '&inventory=' . $row_product_inventory['inventory'] . '&quantity_needed=' . $quantity[$x]);
+                    header("Location: store_sale-admin.php?out_of_stock=true&name=" . $product_name[$x] . '&inventory=' . $row_product_inventory['inventory'] . '&quantity_needed=' . $quantity[$x]);
+                    die("NO STOCK AVAILABLE");
                 } else {
                     $new_inventory = $row_product_inventory['inventory'] - $quantity[$x];
                     //update product inventory
                     $stmt_update_product_inventory = $connection->prepare("UPDATE products SET inventory = '" . $new_inventory . "' WHERE name = '" . $product_name[$x] . "'");
                     $stmt_update_product_inventory->execute();
+
+                    //select product id
+                    $stmt_select_product = $connection->prepare("SELECT product_id FROM products WHERE name = '" . $product_name[$x] . "'");
+                    $stmt_select_product->execute();
+                    $result_product_id = $stmt_select_product->get_result();
+                    $row_product_id = $result_product_id->fetch_assoc();
 
                     $product_id = $row_product_id['product_id'];
                     date_default_timezone_set('Asia/Beirut');
@@ -153,34 +136,26 @@ if (isset($_POST['save'])) {
                     $stmt_insert_product_inventory_history->bind_param("iisss", $product_id, $new_inventory, $inventory_change, $modified_by, $modified_on);
                     $stmt_insert_product_inventory_history->execute();
 
-                    //update customer loyalty points
-                    $add_result = $row_check_username['loyalty_points'] + $quantity[$x];
-                    $stmt_update_loyalty = $connection->prepare("UPDATE customers SET loyalty_points=? WHERE customer_id='" . $row_check_username['customer_id'] . "'");
-                    $stmt_update_loyalty->bind_param("i", $add_result);
-                    $stmt_update_loyalty->execute();
-                    $stmt_update_loyalty->close();
-
                     //select price and add to sales products, same as above condition
                     $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE name = '" . $product_name[$x] . "'");
                     $stmt_select_product_price->execute();
                     $result_product_price = $stmt_select_product_price->get_result();
                     $row_product_price = $result_product_price->fetch_assoc();
 
+                    //let product price be unit price * quantity
                     $total_product_price = $row_product_price['price'] * $quantity[$x];
+                    //update product sales by quantity
                     $total_sales_products = $total_sales_products + $quantity[$x];
+                    //update sales price by increasing total product price
                     $total_sales_price = $total_sales_price + $total_product_price;
+                    //update sales quantity by increasing product quantity
                     $total_sales_quantity = $total_sales_quantity + $quantity[$x];
+
                     //insert into table sales products
                     $stmt_insert_store_sales = $connection->prepare("INSERT INTO sales_products(sales_id, product_name, quantity, price) VALUES (?,?,?,?)");
                     $stmt_insert_store_sales->bind_param("issi", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_price);
                     $stmt_insert_store_sales->execute();
                     $stmt_insert_store_sales->close();
-
-                    //select product id
-                    $stmt_select_product = $connection->prepare("SELECT product_id FROM products WHERE name = '" . $product_name[$x] . "'");
-                    $stmt_select_product->execute();
-                    $result_product_id = $stmt_select_product->get_result();
-                    $row_product_id = $result_product_id->fetch_assoc();
 
                     //select sales number of product
                     $stmt_select_product_sales = $connection->prepare("SELECT sales_number FROM products WHERE name = '" . $product_name[$x] . "'");
@@ -194,6 +169,84 @@ if (isset($_POST['save'])) {
                     $stmt_insert_product_sales_history = $connection->prepare("INSERT INTO history_product_sales(product_id, sales_number, sales_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
                     $stmt_insert_product_sales_history->bind_param("iisss", $product_id, $quantity, $new_sales, $change_sales, $modified_by, $modified_on);
                     $stmt_insert_product_sales_history->execute();
+                }
+            } else {
+                //if customer exists in table customers
+                //addinf quantity of all products needed
+
+                //first check if the quantity ordered of the product is available
+                $stmt_select_product_inventory = $connection->prepare("SELECT inventory FROM products WHERE name = '" . $product_name[$x] . "'");
+                $stmt_select_product_inventory->execute();
+                $result_product_inventory = $stmt_select_product_inventory->get_result();
+                $row_product_inventory = $result_product_inventory->fetch_assoc();
+
+                //if no stock available for this product
+                if ($row_product_inventory['inventory'] < $quantity[$x]) {
+                    header("Location: store_sale-admin.php?out_of_stock=true&name=" . $product_name[$x] . '&inventory=' . $row_product_inventory['inventory'] . '&quantity_needed=' . $quantity[$x]);
+                    die("NO STOCK AVAILABLE");
+                } else {
+                    $new_inventory = $row_product_inventory['inventory'] - $quantity[$x];
+                    //update product inventory
+                    $stmt_update_product_inventory = $connection->prepare("UPDATE products SET inventory = '" . $new_inventory . "' WHERE name = '" . $product_name[$x] . "'");
+                    $stmt_update_product_inventory->execute();
+
+                    //select product id
+                    $stmt_select_product = $connection->prepare("SELECT product_id FROM products WHERE name = '" . $product_name[$x] . "'");
+                    $stmt_select_product->execute();
+                    $result_product_id = $stmt_select_product->get_result();
+                    $row_product_id = $result_product_id->fetch_assoc();
+
+                    $product_id = $row_product_id['product_id'];
+                    date_default_timezone_set('Asia/Beirut');
+                    $modified_on = date('Y-m-d h:i:s');
+                    $modified_by = $row['first_name'] . ' ' . $row['last_name'];
+
+                    //insert into history inventory
+                    $inventory_change = '-' . $quantity[$x];
+                    $stmt_insert_product_inventory_history = $connection->prepare("INSERT INTO history_product_inventory(product_id, inventory, inventory_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
+                    $stmt_insert_product_inventory_history->bind_param("iisss", $product_id, $new_inventory, $inventory_change, $modified_by, $modified_on);
+                    $stmt_insert_product_inventory_history->execute();
+
+                    //select price and add to sales products, same as above condition
+                    $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE name = '" . $product_name[$x] . "'");
+                    $stmt_select_product_price->execute();
+                    $result_product_price = $stmt_select_product_price->get_result();
+                    $row_product_price = $result_product_price->fetch_assoc();
+
+                    //let product price be unit price * quantity
+                    $total_product_price = $row_product_price['price'] * $quantity[$x];
+                    //update product sales by quantity
+                    $total_sales_products = $total_sales_products + $quantity[$x];
+                    //update sales price by increasing total product price
+                    $total_sales_price = $total_sales_price + $total_product_price;
+                    //update sales quantity by increasing product quantity
+                    $total_sales_quantity = $total_sales_quantity + $quantity[$x];
+
+                    //insert into table sales products
+                    $stmt_insert_store_sales = $connection->prepare("INSERT INTO sales_products(sales_id, product_name, quantity, price) VALUES (?,?,?,?)");
+                    $stmt_insert_store_sales->bind_param("issi", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_price);
+                    $stmt_insert_store_sales->execute();
+                    $stmt_insert_store_sales->close();
+
+                    //select sales number of product
+                    $stmt_select_product_sales = $connection->prepare("SELECT sales_number FROM products WHERE name = '" . $product_name[$x] . "'");
+                    $stmt_select_product_sales->execute();
+                    $results_product_sales = $stmt_select_product_sales->get_result();
+                    $row_product_sales = $results_product_sales->fetch_assoc();
+
+                    //add to product history sales
+                    $new_sales = $row_product_sales['sales_number'] + $quantity[$x];
+                    $change_sales = '+' . $quantity[$x];
+                    $stmt_insert_product_sales_history = $connection->prepare("INSERT INTO history_product_sales(product_id, sales_number, sales_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
+                    $stmt_insert_product_sales_history->bind_param("iisss", $product_id, $quantity, $new_sales, $change_sales, $modified_by, $modified_on);
+                    $stmt_insert_product_sales_history->execute();
+
+                    //update customer loyalty points
+                    $add_result = $row_check_username['loyalty_points'] + $quantity[$x];
+                    $stmt_update_loyalty = $connection->prepare("UPDATE customers SET loyalty_points=? WHERE customer_id='" . $row_check_username['customer_id'] . "'");
+                    $stmt_update_loyalty->bind_param("i", $add_result);
+                    $stmt_update_loyalty->execute();
+                    $stmt_update_loyalty->close();
                 }
             }
         }
@@ -234,7 +287,6 @@ $row_count_store = $results_count_store->fetch_assoc();
 
 <head>
     <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     </meta>
@@ -266,6 +318,16 @@ $row_count_store = $results_count_store->fetch_assoc();
         <h2>Product Added Confirmation</h2>
         <p>A new product was added successfully</p>
         <button type="button" onclick="CloseCheckoutAddedPopUp()">OK</button>
+    </div>
+
+    <!-- started popup message inventory not available -->
+    <div class="popup" id="out-of-stock-confirmation">
+        <img src="../images/info.png" alt="">
+        <h2>No Stock Available</h2>
+        <?php if (isset($_GET['out_of_stock']) && isset($_GET['name']) && isset($_GET['inventory']) && isset($_GET['quantity_needed'])) { ?>
+            <p>Store Sales cannot be done. The product "<?php echo $_GET['name']; ?>" requires quantity of <?php echo $_GET['quantity_needed']; ?> while only <?php echo $_GET['inventory']; ?> are present in stock</p>
+        <?php } ?>
+        <button type="button" onclick="CloseNoStockPopUp()">OK</button>
     </div>
 
     <input type="checkbox" id="nav-toggle">

@@ -319,3 +319,18 @@ function FilterTable() {
         tr[i].style.display = display;
     }
 }
+
+if (window.location.href.includes('out_of_stock') && window.location.href.includes('quantity_needed')) {
+    OpenNoStockPopUp();
+}
+
+function OpenNoStockPopUp() {
+    var out_of_stock_popup = document.getElementById('out-of-stock-confirmation');
+    out_of_stock_popup.classList.add('open-popup');
+}
+
+function CloseNoStockPopUp() {
+    var out_of_stock_popup = document.getElementById('out-of-stock-confirmation');
+    out_of_stock_popup.classList.remove('open-popup');
+    window.location.href = 'store_sale-admin.php?out_of_stock=true';
+}
