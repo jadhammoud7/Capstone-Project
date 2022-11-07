@@ -14,7 +14,12 @@ require_once('../php/shop_product_connection.php');
 //if no get request of type was sent meaning starter
 if (!isset($_GET['type'])) {
     $query = "SELECT * FROM products";
-    $type = 'cds'; //display cds as a starter
+    $stmt_select_first_product_type = $connection->prepare("SELECT type FROM product_types LIMIT 1");
+    $stmt_select_first_product_type->execute();
+    $result_first_product_type = $stmt_select_first_product_type->get_result();
+    $row_first_product_type = $result_first_product_type->fetch_assoc();
+
+    $type = $row_first_product_type['type']; //display first type as a starter
     $_SESSION['title'] = $type; //for the title of the div 
     if (!isset($_GET['category'])) { //if no category filter was set
         if (!isset($_GET['newness'])) {
@@ -22,7 +27,6 @@ if (!isset($_GET['type'])) {
         } else {
             $newness = $_GET['newness'];
             $query = $query . " WHERE type='" . $type . "' AND category = '" . $newness . "'"; //check all products to type equals to cds and category category
-
         }
     } else { //if a category filter was sent while no filter for type was sent
         $category = $_GET['category'];
@@ -35,30 +39,30 @@ if (!isset($_GET['type'])) {
 
 //if selected button to view products by type only not filter
 if (isset($_GET['type']) && !isset($_GET['category']) && !isset($_GET['sortby'])) {
-    $query = "SELECT * FROM products";
+    $query_select_products = "SELECT * FROM products";
     $type = $_GET['type']; //display cds as a starter
     $_SESSION['title'] = $type; //for the title of the div 
-    $query = $query . " WHERE type= '" . $type . "' ";
-    $stmt = $connection->prepare($query);
-    $stmt->execute();
-    $results_shop = $stmt->get_result();
+    $query_select_products = $query_select_products . " WHERE type= '" . $type . "' ";
+    $stmt_select_products = $connection->prepare($query_select_products);
+    $stmt_select_products->execute();
+    $results_shop = $stmt_select_products->get_result();
 }
 //if a get request of type was sent
 if (isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) {
-    $query = "SELECT * FROM products";
+    $query_select_products = "SELECT * FROM products";
     $type = $_GET['type'];
     $category = $_GET['category'];
     $sortby = $_GET['sortby'];
     $_SESSION['title'] = $type;
     if ($type == "all") { //if type chosen is all then choose all products without conditions on products
         if ($category != 'any') {
-            $query = $query . " WHERE category = '" . $category . "'"; //check all products to type equals to cds and category category
+            $query_select_products = $query_select_products . " WHERE category = '" . $category . "'"; //check all products to type equals to cds and category category
         } //check all products to type equals to cds and category category
     } else { //chose products of type type
         if ($category == 'any') {
-            $query = $query . " WHERE type='" . $type . "' "; //check all products to type equals to cds
+            $query_select_products = $query_select_products . " WHERE type='" . $type . "' "; //check all products to type equals to cds
         } else {
-            $query = $query . " WHERE type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
+            $query_select_products = $query_select_products . " WHERE type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
         }
     }
     if ($sortby == 'newest') {
@@ -278,7 +282,7 @@ while ($row_customers = $results_customers->fetch_assoc()) {
         $result_types = $stmt_select_types->get_result();
         while ($row_types = $result_types->fetch_assoc()) {
             $type = $row_types['type']; ?>
-            <button id="<?php echo $type; ?>-btn" data-cont=".<?php echo $type; ?>" onclick="window.location = '?type=<?php echo $type; ?>" title="Select all <?php echo $type; ?> products"><?php echo $type; ?></button>
+            <button id="<?php echo $type; ?>-btn" data-cont=".<?php echo $type; ?>" onclick="window.location = '?type=<?php echo $type; ?>';" title="Select all <?php echo $type; ?> products"><?php echo $type; ?></button>
         <?php
         } ?>
         <button id="offers-btn" data-cont=".offers" onclick="window.location ='?type=offers';" title="Select all offers">Offers</button>
@@ -314,14 +318,16 @@ while ($row_customers = $results_customers->fetch_assoc()) {
                             $stmt_select_types = $connection->prepare("SELECT type FROM product_types");
                             $stmt_select_types->execute();
                             $result_types = $stmt_select_types->get_result();
-                            while ($result_types->fetch_assoc()) {
-                                $type = $result_types['type']; ?>
-                                <option value="<?php echo $type; ?>"> <?php
-                                                                        UpdateTypeSelect($type);
+                            while ($row_types = $result_types->fetch_assoc()) {
+                                $type = $row_types['type']; ?>
+                                <option value="<?php echo $type; ?>" <?php
+                                                                        UpdateTypeSelect('"' . $type . '"');
 
                                                                         if (isset($_SESSION[$type . '_selected'])) {
                                                                             echo $_SESSION[$type . '_selected'];
-                                                                        } ?>><?php echo $type; ?></option>
+                                                                        } ?>>
+                                    <?php echo $type; ?>
+                                </option>
                             <?php
                             } ?>
                         </select>
@@ -338,61 +344,23 @@ while ($row_customers = $results_customers->fetch_assoc()) {
                                                 if (isset($_SESSION['any_selected'])) { //check for session all selected, if isset then value is selected, so that the option value for that remains first in the dropdown list so user can know the last filter used
                                                     echo $_SESSION['any_selected'];
                                                 } ?>>All</option>
-                            <option value="action" <?php
-                                                    UpdateCategorySelect('action'); //set the session to check which filter was set last
-                                                    if (isset($_SESSION['action_selected'])) { //if there is session, then its value will be selected so that the last selected filter is shown in the dropdown list first
-                                                        echo $_SESSION['action_selected'];
-                                                    } ?>>Action</option>
-                            <option value="gaming" <?php
-                                                    UpdateCategorySelect('gaming');
-                                                    if (isset($_SESSION['gaming_selected'])) {
-                                                        echo $_SESSION['gaming_selected'];
-                                                    } ?>>Gaming</option>
-                            <option value="strategy" <?php
-                                                        UpdateCategorySelect('strategy');
-                                                        if (isset($_SESSION['strategy_selected'])) {
-                                                            echo $_SESSION['strategy_selected'];
-                                                        } ?>>Strategy</option>
-                            <option value="PS2" <?php
-                                                UpdateCategorySelect('PS2');
-                                                if (isset($_SESSION['PS2_selected'])) {
-                                                    echo $_SESSION['PS2_selected'];
-                                                } ?>>PS2</option>
-                            <option value="PS3" <?php
-                                                UpdateCategorySelect('PS3');
-                                                if (isset($_SESSION['PS3_selected'])) {
-                                                    echo $_SESSION['PS3_selected'];
-                                                } ?>>PS3</option>
-                            <option value="PS4" <?php
-                                                UpdateCategorySelect('PS4');
-                                                if (isset($_SESSION['PS4_selected'])) {
-                                                    echo $_SESSION['PS4_selected'];
-                                                } ?>>PS4</option>
-                            <option value="PS5" <?php
-                                                UpdateCategorySelect('PS5');
-                                                if (isset($_SESSION['PS5_selected'])) {
-                                                    echo $_SESSION['PS5_selected'];
-                                                } ?>>PS5</option>
-                            <option value="XBox" <?php
-                                                    UpdateCategorySelect('XBox');
-                                                    if (isset($_SESSION['XBox_selected'])) {
-                                                        echo $_SESSION['XBox_selected'];
-                                                    } ?>>XBox</option>
-                            <option value="iphone" <?php
-                                                    UpdateCategorySelect('iphone');
-                                                    if (isset($_SESSION['iphone_selected'])) {
-                                                        echo $_SESSION['iphone_selected'];
-                                                    } ?>>IPhone</option>
-                            <option value="Samsung" <?php
-                                                    UpdateCategorySelect('Samsung');
-                                                    if (isset($_SESSION['Samsung_selected'])) {
-                                                        echo $_SESSION['Samsung_selected'];
-                                                    } ?>>Samsung</option>
-                            <option value="PsPlus" <?php
-                                                    UpdateCategorySelect('PsPlus');
-                                                    if (isset($_SESSION['PsPlus_selected'])) {
-                                                        echo $_SESSION['PsPlus_selected'];
-                                                    } ?>>PS Plus</option>
+                            <?php
+                            $stmt_select_product_categories = $connection->prepare("SELECT category FROM product_categories LIMIT 3");
+                            $stmt_select_product_categories->execute();
+                            $result_product_categories = $stmt_select_product_categories->get_result();
+                            while ($row_product_categories = $result_product_categories->fetch_assoc()) {
+                                $category = $row_product_categories['category'];
+                            ?>
+                                <option value="<?php echo $category; ?>" <?php
+                                                                            UpdateCategorySelect('"' . $category . '"');
+
+                                                                            if (isset($_SESSION[$category . '_selected'])) {
+                                                                                echo $_SESSION[$category . '_selected'];
+                                                                            } ?>>
+                                    <?php echo $category; ?>
+                                </option>
+                            <?php
+                            } ?>
                         </select>
                     </button>
                 </label>
@@ -625,5 +593,64 @@ while ($row_customers = $results_customers->fetch_assoc()) {
     <script src="../shop/shop.js"></script>
     <script src="../main/main.js"></script>
 </body>
+
+<script>
+    <?php
+    $stmt_select_product_types = $connection->prepare("SELECT type FROM product_types LIMIT 3");
+    $stmt_select_product_types->execute();
+    $result_product_types = $stmt_select_product_types->get_result();
+    ?>
+    var first_type = '<?php if ($row_product_types = $result_product_types->fetch_assoc()) {
+                            echo $row_product_types['type'];
+                        } ?>';
+    var second_type = '<?php if ($row_product_types = $result_product_types->fetch_assoc()) {
+                            echo $row_product_types['type'];
+                        } ?>';
+    var third_type = '<?php if ($row_product_types = $result_product_types->fetch_assoc()) {
+                            echo $row_product_types['type'];
+                        } ?>';
+
+    var first_type_button = document.getElementById(first_type + '-btn');
+    var second_type_button = document.getElementById(second_type + '-btn');
+    var third_type_button = document.getElementById(third_type + '-btn');
+    var offers_button = document.getElementById('offers-btn');
+    var others_button = document.getElementById('others-btn');
+
+    if (window.location.href.includes(first_type)) {
+        first_type_button.classList.add('active');
+        second_type_button.classList.remove('active');
+        third_type_button.classList.remove('active');
+        offers_button.classList.remove('active');
+        others_button.classList.remove('active');
+    }
+    if (window.location.href.includes(second_type)) {
+        first_type_button.classList.remove('active');
+        second_type_button.classList.add('active');
+        third_type_button.classList.remove('active');
+        offers_button.classList.remove('active');
+        others_button.classList.remove('active');
+    }
+    if (window.location.href.includes(third_type)) {
+        first_type_button.classList.remove('active');
+        second_type_button.classList.remove('active');
+        third_type_button.classList.add('active');
+        offers_button.classList.remove('active');
+        others_button.classList.remove('active');
+    }
+    if (window.location.href.includes('offers')) {
+        first_type_button.classList.remove('active');
+        second_type_button.classList.remove('active');
+        third_type_button.classList.remove('active');
+        offers_button.classList.add('active');
+        others_button.classList.remove('active');
+    }
+    if (window.location.href.includes('others')) {
+        first_type_button.classList.remove('active');
+        second_type_button.classList.remove('active');
+        third_type_button.classList.remove('active');
+        offers_button.classList.remove('active');
+        others_button.classList.add('active');
+    }
+</script>
 
 </php>
