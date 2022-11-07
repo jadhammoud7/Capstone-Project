@@ -66,20 +66,20 @@ if (isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) 
         }
     }
     if ($sortby == 'newest') {
-        $query = $query . " ORDER BY date_added DESC";
+        $query_select_products = $query_select_products . " ORDER BY date_added DESC";
     }
     if ($sortby == 'highest-price') {
-        $query = $query . " ORDER BY price DESC";
+        $query_select_products = $query_select_products . " ORDER BY price DESC";
     }
     if ($sortby == 'lowest-price') {
-        $query = $query . " ORDER BY price ASC";
+        $query_select_products = $query_select_products . " ORDER BY price ASC";
     }
     if ($sortby == 'popularity') {
-        $query = $query . " ORDER BY sales DESC";
+        $query_select_products = $query_select_products . " ORDER BY sales DESC";
     }
-    $stmt = $connection->prepare($query);
-    $stmt->execute();
-    $results_shop = $stmt->get_result();
+    $stmt_select_products = $connection->prepare($query_select_products);
+    $stmt_select_products->execute();
+    $results_shop = $stmt_select_products->get_result();
 }
 
 function UpdateTypeSelect($type_current) //this function is called to keep the current filter selected in the dropdown select of type
