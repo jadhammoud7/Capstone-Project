@@ -310,42 +310,20 @@ while ($row_customers = $results_customers->fetch_assoc()) {
                                                 if (isset($_SESSION['all_selected'])) { //check for session all selected, if isset then value is selected, so that the option value for that remains first in the dropdown list so user can know the last filter used
                                                     echo $_SESSION['all_selected'];
                                                 } ?>>All</option>
-                            <option value="cds" <?php
-                                                UpdateTypeSelect('cds');
+                            <?php
+                            $stmt_select_types = $connection->prepare("SELECT type FROM product_types");
+                            $stmt_select_types->execute();
+                            $result_types = $stmt_select_types->get_result();
+                            while ($result_types->fetch_assoc()) {
+                                $type = $result_types['type']; ?>
+                                <option value="<?php echo $type; ?>"> <?php
+                                                                        UpdateTypeSelect($type);
 
-                                                if (isset($_SESSION['cds_selected'])) {
-                                                    echo $_SESSION['cds_selected'];
-                                                } ?>>CDs</option>
-                            <option value="consoles" <?php
-                                                        UpdateTypeSelect('consoles');
-
-                                                        if (isset($_SESSION['consoles_selected'])) {
-                                                            echo $_SESSION['consoles_selected'];
-                                                        } ?>>Consoles</option>
-                            <option value="accessories" <?php
-                                                        UpdateTypeSelect('accessories');
-
-                                                        if (isset($_SESSION['accessories_selected'])) {
-                                                            echo $_SESSION['accessories_selected'];
-                                                        } ?>>Accessories</option>
-                            <option value="phones" <?php
-                                                    UpdateTypeSelect('phones');
-
-                                                    if (isset($_SESSION['phones_selected'])) {
-                                                        echo $_SESSION['phones_selected'];
-                                                    } ?>>Phones</option>
-                            <option value="cards" <?php
-                                                    UpdateTypeSelect('cards');
-
-                                                    if (isset($_SESSION['cards_selected'])) {
-                                                        echo $_SESSION['cards_selected'];
-                                                    } ?>>Online cards</option>
-                            <option value="electronics" <?php
-                                                        UpdateTypeSelect('electronics');
-
-                                                        if (isset($_SESSION['electronics_selected'])) {
-                                                            echo $_SESSION['electronics_selected'];
-                                                        } ?>>Electronics</option>
+                                                                        if (isset($_SESSION[$type . '_selected'])) {
+                                                                            echo $_SESSION[$type . '_selected'];
+                                                                        } ?>><?php echo $type; ?></option>
+                            <?php
+                            } ?>
                         </select>
                     </label>
                 </button>
