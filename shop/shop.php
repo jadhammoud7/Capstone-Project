@@ -166,7 +166,7 @@ while ($row_customers = $results_customers->fetch_assoc()) {
 <html lang="en">
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -272,11 +272,17 @@ while ($row_customers = $results_customers->fetch_assoc()) {
 
     <!-- started with products options -->
     <div class="tabs">
-        <button id="cds-btn" data-cont=".cd" class="active" onclick="window.location = '?type=cds'; SetCDActive();" title="Select all CDs products">CD's</button>
-        <button id="consoles-btn" data-cont=".consoles" onclick="window.location = '?type=consoles'; SetConsolesActive();" title="Select all consoles products">consoles</button>
-        <button id="phones-btn" data-cont=".cellphones" onclick="window.location = '?type=phones'; SetPhonesActive();" title="Select all cell phones products">CellPhones</button>
-        <button id="offers-btn" data-cont=".offers" onclick="window.location ='?type=offers'; SetOffersActive();" title="Select all offers">Offers</button>
-        <button id="others-btn" data-cont=".others" onclick="window.location='?type=others'; SetOthersActive();" title="Select other products">Others</button>
+        <?php
+        $stmt_select_types = $connection->prepare("SELECT type FROM product_types LIMIT 3");
+        $stmt_select_types->execute();
+        $result_types = $stmt_select_types->get_result();
+        while ($row_types = $result_types->fetch_assoc()) {
+            $type = $row_types['type']; ?>
+            <button id="<?php echo $type; ?>-btn" data-cont=".<?php echo $type; ?>" onclick="window.location = '?type=<?php echo $type; ?>" title="Select all <?php echo $type; ?> products"><?php echo $type; ?></button>
+        <?php
+        } ?>
+        <button id="offers-btn" data-cont=".offers" onclick="window.location ='?type=offers';" title="Select all offers">Offers</button>
+        <button id="others-btn" data-cont=".others" onclick="window.location='?type=others';" title="Select other products">Others</button>
     </div>
 
     <!-- start search button -->
