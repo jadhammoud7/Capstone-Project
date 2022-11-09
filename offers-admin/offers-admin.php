@@ -46,14 +46,6 @@ $stmt_total_checkouts->execute();
 $results_total_checkouts = $stmt_total_checkouts->get_result();
 $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
-
-//get all products
-require_once("../php/admin_page_php.php");
-$query_products = "SELECT * FROM products";
-$stmt_products = $connection->prepare($query_products);
-$stmt_products->execute();
-$results_products = $stmt_products->get_result();
-
 //form of adding new product
 $product_name = "";
 $product_price = 0;
@@ -248,7 +240,7 @@ if (isset($_GET['getTypetoRemove'])) {
 <html lang="en">
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -258,7 +250,7 @@ if (isset($_GET['getTypetoRemove'])) {
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="../admin-main/admin-main.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <link rel="stylesheet" href="product-admin.css">
+    <link rel="stylesheet" href="offers-admin.css">
     <title>Admin | Offers - Newbies Gamers</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
@@ -418,7 +410,7 @@ if (isset($_GET['getTypetoRemove'])) {
                 <label for="nav-toggle">
                     <span><i class="las la-bars"></i></span>
                 </label>
-                Products List
+                Offers List
             </h2>
 
             <div class="user-wrapper">
@@ -470,145 +462,24 @@ if (isset($_GET['getTypetoRemove'])) {
                 </div>
             </div>
 
-            <!-- list of all product types -->
-
-            <div class="recent-grid" style="display: block !important;">
-                <div class="projects">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Product Types List</h3>
-                        </div>
-
-                        <canvas id="TypeChart" style="width:100%;max-width:600px"></canvas>
-                        <div class="card-single add_type">
-                            <button class="add_type" id="add_type" onclick="OpenAddType()" title="Add a new product type">
-                                <span class="las la-plus">
-                                </span>
-                                Add Product Type
-                            </button>
-                        </div>
-                        <div class="card-header">
-                            <h3>
-                                <p style="text-decoration: underline; color: royalblue;" id="type-filter-text"></p>
-                                <br>
-                                <p id="type-table-sort"></p>
-                            </h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <div class="div-search">
-                                    <span class="las la-search" style="font-size: 1.8rem; color: royalblue;"></span>
-                                    <input type="text" id="SearchInputType" onkeyup="FilterTableTypes()" placeholder="Search in table Product Types...">
-                                </div>
-                                <table width="100%" id="product_types_table">
-                                    <thead>
-                                        <tr>
-                                            <td id="type-column" title="Sort Product Type by descending">Product Type</td>
-                                            <td id="type-added-by-column" title="Sort Added By by descending">Added By</td>
-                                            <td id="type-modified-on-column" title="Sort Modified On by descending">Modified On</td>
-                                            <td>Remove</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $stmt_select_product_types = $connection->prepare("SELECT * FROM product_types");
-                                        $stmt_select_product_types->execute();
-                                        $result_product_types = $stmt_select_product_types->get_result();
-
-                                        while ($row_product_types = $result_product_types->fetch_assoc()) {
-                                            get_all_product_types(
-                                                $row_product_types['type'],
-                                                $row_product_types['added_by'],
-                                                $row_product_types['modified_on']
-                                            );
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- list of all product categories -->
-
-            <div class="recent-grid" style="display: block !important;">
-                <div class="projects">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Product Categories List</h3>
-                        </div>
-
-                        <canvas id="CategoryChart" style="width:100%;max-width:600px"></canvas>
-
-                        <div class="card-single add_category">
-                            <button class="add_category" id="add_category" onclick="OpenAddCategory()" title="Add a new product category">
-                                <span class="las la-plus">
-                                </span>
-                                Add Product Category
-                            </button>
-                        </div>
-
-                        <div class="card-header">
-                            <h3>
-                                <p style="text-decoration: underline; color: royalblue;" id="category-filter-text"></p>
-                                <br>
-                                <p id="category-table-sort"></p>
-                            </h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <div class="div-search">
-                                    <span class="las la-search" style="font-size: 1.8rem; color: royalblue;"></span>
-                                    <input type="text" id="SearchInputCategory" onkeyup="FilterTableCategories()" placeholder="Search in table Product Categories...">
-                                </div>
-                                <table width="100%" id="product_categories_table">
-                                    <thead>
-                                        <tr>
-                                            <td id="category-column" title="Sort Product Category by descending">Product Category</td>
-                                            <td id="category-added-by-column" title="Sort Added By by descending">Added By</td>
-                                            <td id="category-modified-on-column" title="Sort Modified On by descending">Modified On</td>
-                                            <td>Remove</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $stmt_select_product_categories = $connection->prepare("SELECT * FROM product_categories");
-                                        $stmt_select_product_categories->execute();
-                                        $result_product_categories = $stmt_select_product_categories->get_result();
-
-                                        while ($row_product_categories = $result_product_categories->fetch_assoc()) {
-                                            get_all_product_categories(
-                                                $row_product_categories['category'],
-                                                $row_product_categories['added_by'],
-                                                $row_product_categories['modified_on']
-                                            );
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- list of all products -->
+            <!-- list of all products offers -->
 
             <div class="recent-grid" style="display: block !important;">
                 <div class="projects">
                     <div class="card">
 
                         <div class="card-header">
-                            <h3>Products List</h3>
+                            <h3>Products Offers List</h3>
                         </div>
 
                         <div id="myPlot" style="width:100%;max-width:700px;"></div>
                         <div id="myPlot2" style="width:100%;max-width:700px;"></div>
 
                         <div class="card-single add_product">
-                            <button class="add_product" id="add_user1" onclick="OpenAddProduct()" title="Add a new product"><span class="las la-plus"></span>Add Product</button>
+                            <button class="add_product_offer" id="add_product_offer" onclick="OpenAddProductOffer()" title="Add a new product offer">
+                                <span class="las la-plus"></span>
+                                Add Product Offer
+                            </button>
                         </div>
 
                         <div class="card-header">
@@ -622,17 +493,16 @@ if (isset($_GET['getTypetoRemove'])) {
                             <div class="table-responsive">
                                 <div class="div-search">
                                     <span class="las la-search" style="font-size: 1.8rem; color: royalblue;"></span>
-                                    <input type="text" id="SearchInput" onkeyup="FilterTable()" placeholder="Search in table Products...">
+                                    <input type="text" id="SearchInput" onkeyup="FilterTable()" placeholder="Search in table Products Offers...">
                                 </div>
-                                <table width="100%" id="products_table">
+                                <table width="100%" id="products_offers_table">
                                     <thead>
                                         <tr>
                                             <td id="product-name-column" title="Sort Product Name by descending">Product Name</td>
-                                            <td id="product-price-column" title="Sort Price by descending">Price</td>
-                                            <td id="product-type-column" title="Sort Type by descending">Type</td>
-                                            <td id="product-category-column" title="Sort Category by descending">Category</td>
-                                            <td id="product-inventory-column" title="Sort Inventory by descending">Inventory</td>
-                                            <td id="product-sales-column" title="Sort Sales Number by descending">Sales Number</td>
+                                            <td id="old-price-column" title="Sort Old Price by descending">Old Price</td>
+                                            <td id="new-price-column" title="Sort New Price by descending">New Price</td>
+                                            <td id="offer-begin-date-column" title="Sort Offer Begin Date by descending">Offer Begin Date</td>
+                                            <td id="offer-end-date-column" title="Sort Offer End Date by descending">Offer End Date</td>
                                             <td id="product-last-modified-by-column" title="Sort Last Modified By by descending">Last Modified By</td>
                                             <td id="product-last-modified-on-column" title="Sort Last Modified On by descending">Last Modified On</td>
                                             <td>Remove</td>
@@ -640,17 +510,24 @@ if (isset($_GET['getTypetoRemove'])) {
                                     </thead>
                                     <tbody>
                                         <?php
-                                        while ($row_products = $results_products->fetch_assoc()) {
-                                            get_all_products(
-                                                $row_products['product_id'],
-                                                $row_products['name'],
-                                                $row_products['price'],
-                                                $row_products['category'],
-                                                $row_products['type'],
-                                                $row_products['inventory'],
-                                                $row_products['sales_number'],
-                                                $row_products['last_modified_by'],
-                                                $row_products['last_modified_on']
+                                        $stmt_select_all_products_offers = $connection->prepare("SELECT * FROM products_offers");
+                                        $stmt_select_all_products_offers->execute();
+                                        $result_products_offers = $stmt_select_all_products_offers->get_result();
+                                        while ($row_products_offers = $result_products_offers->fetch_assoc()) {
+                                            $stmt_select_product_name = $connection->prepare("SELECT name FROM products WHERE product_id = '" . $row_products_offers['product_id'] . "'");
+                                            $stmt_select_product_name->execute();
+                                            $result_product_name = $stmt_select_product_name->get_result();
+                                            $row_product_name = $result_product_name->fetch_assoc();
+                                            get_all_products_offers(
+                                                $row_products_offers['product_id'],
+                                                $row_product_name['name'],
+                                                $row_products_offers['old_price'],
+                                                $row_products_offers['new_price'],
+                                                $row_products_offers['offer_percentage'],
+                                                $row_products_offers['offer_begin_date'],
+                                                $row_products_offers['offer_end_date'],
+                                                $row_products_offers['last_modified_by'],
+                                                $row_products_offers['last_modified_on']
                                             );
                                         }
                                         ?>
@@ -971,7 +848,7 @@ if (isset($_GET['getTypetoRemove'])) {
 
 </body>
 
-<script src="product-admin.js"></script>
+<script src="offers-admin.js"></script>
 <script src="../admin-main/admin-main.js"></script>
 <script>
     const array_products = [];

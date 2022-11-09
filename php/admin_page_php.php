@@ -402,3 +402,32 @@ function get_all_product_categories_for_add_product_form($product_category)
     $element = "<option value='$product_category'>$product_category</option>";
     echo $element;
 }
+
+function get_all_products_offers($product_id, $name, $old_price, $new_price, $offer_percentage, $offer_begin_date, $offer_end_date, $last_modified_by, $last_modified_on)
+{
+    $element = "
+    <tr>
+        <td>
+            <a href='product-details.php?product_id=$product_id' title=\"See details about product '$name'\">
+                $name
+            </a>
+        </td>
+        <td>$old_price</td>
+        <td>$new_price</td>
+        <td>$offer_percentage</td>
+        <td>$offer_begin_date</td>
+        <td>$offer_end_date</td>
+        <td>$last_modified_by</td>
+        <td>$last_modified_on</td>
+        <td>
+            <a>
+                <button class=\"btn_remove_product\" onclick=\"OpenRemoveProductPopUp('$name', $product_id);\" title=\"Remove offer on product '$name'?\">
+                    <span class=\"las la-trash\"></span> 
+                    Remove Product Offer
+                </button>
+            </a>
+        </td>
+    </tr>
+    ";
+    echo $element;
+}

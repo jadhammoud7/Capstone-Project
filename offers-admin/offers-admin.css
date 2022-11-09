@@ -1,6 +1,4 @@
-.add_product,
-.add_type,
-.add_category {
+.add_product_offer {
   background-color: white;
   border: solid 1px white;
   border-radius: 10px;
@@ -21,9 +19,7 @@
   color: red;
 }
 
-#SearchInput,
-#SearchInputType,
-#SearchInputCategory {
+#SearchInput {
   margin: 0 0 0 0;
   padding: 0;
   padding-left: 20px;
@@ -68,9 +64,7 @@ input[type=date]:hover {
 
 
 /* Set a style for all buttons */
-button.add_product,
-button.add_category,
-button.add_type {
+button.add_product_offer {
   background-color: royalblue;
   color: white;
   padding: 14px 20px;
@@ -85,9 +79,7 @@ button:hover {
   opacity: 1;
 }
 
-.add_product,
-.add_type,
-.add_category {
+.add_product_offer {
   margin-top: 50px;
 }
 
@@ -105,9 +97,7 @@ button:hover {
   width: 45%;
 }
 
-.addproductbtn,
-.addtypebtn,
-.addcategorybtn {
+.addproductbtn {
   width: 45%;
   border-radius: 20px;
   color: black;
@@ -190,8 +180,6 @@ hr {
   cursor: pointer;
 }
 
-.btn_remove_type,
-.btn_remove_category,
 .btn_remove_product {
   color: #fefefe;
   background-color: #F44336;
@@ -200,8 +188,6 @@ hr {
   border: none;
 }
 
-.btn_remove_type:hover,
-.btn_remove_category:hover,
 .btn_remove_product:hover {
   cursor: pointer;
 }
