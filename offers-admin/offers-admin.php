@@ -144,6 +144,14 @@ if ($product_name != "" && $product_price != 0 && $product_type != "" && $produc
     }
 }
 
+//remove product offer
+if (isset($_GET['getProducttoRemove'])) {
+    $product_id = $_GET['getProducttoRemove'];
+    $stmt_delete_product_offer = $connection->prepare("DELETE FROM products_offers WHERE product_id = '" . $product_id . "'");
+    $stmt_delete_product_offer->execute();
+    header("Location: offers-admin.php?product_offer_deleted=1");
+}
+
 //get products in ascending 
 $query_nbofsales = "SELECT name,inventory,sales_number FROM products ORDER BY sales_number ASC;";
 $stmt_nbofsales = $connection->prepare($query_nbofsales);
@@ -156,83 +164,6 @@ $query_top_products = "SELECT name,sales_number FROM products ORDER BY sales_num
 $stmt_top_products = $connection->prepare($query_top_products);
 $stmt_top_products->execute();
 $results_top_products = $stmt_top_products->get_result();
-
-//display history price for chosen product
-if (isset($_GET['product_id']) && isset($_GET['price_history'])) {
-    $stmt_select_product_prices_history = $connection->prepare("SELECT * FROM history_product_prices WHERE product_id = '" . $_GET['product_id'] . "'");
-    $stmt_select_product_prices_history->execute();
-    $result_history_product_prices = $stmt_select_product_prices_history->get_result();
-
-    $stmt_get_product = $connection->prepare("SELECT * FROM products WHERE product_id = '" . $_GET['product_id'] . "' ");
-    $stmt_get_product->execute();
-    $result_get_product = $stmt_get_product->get_result();
-    $row_get_product = $result_get_product->fetch_assoc();
-}
-
-//display history inventory for chosen product
-if (isset($_GET['product_id']) && isset($_GET['inventory_history'])) {
-    $stmt_select_product_inventory_history = $connection->prepare("SELECT * FROM history_product_inventory WHERE product_id = '" . $_GET['product_id'] . "'");
-    $stmt_select_product_inventory_history->execute();
-    $result_product_history_inventory = $stmt_select_product_inventory_history->get_result();
-
-    $stmt_get_product = $connection->prepare("SELECT * FROM products WHERE product_id = '" . $_GET['product_id'] . "' ");
-    $stmt_get_product->execute();
-    $result_get_product = $stmt_get_product->get_result();
-    $row_get_product = $result_get_product->fetch_assoc();
-}
-
-//display history sales for chosen product
-if (isset($_GET['product_id']) && isset($_GET['sales_history'])) {
-    $stmt_select_product_sales_history = $connection->prepare("SELECT * FROM history_product_sales WHERE product_id = '" . $_GET['product_id'] . "'");
-    $stmt_select_product_sales_history->execute();
-    $result_product_history_sales = $stmt_select_product_sales_history->get_result();
-
-    $stmt_get_product = $connection->prepare("SELECT * FROM products WHERE product_id = '" . $_GET['product_id'] . "'");
-    $stmt_get_product->execute();
-    $result_get_product = $stmt_get_product->get_result();
-    $row_get_product = $result_get_product->fetch_assoc();
-}
-
-//if received input to add new product type
-if (isset($_POST['type'])) {
-    $type = $_POST['type'];
-
-    //check if this type is found
-    $stmt_get_product_type = $connection->prepare("SELECT * FROM product_types WHERE type = '" .  $type . "' ");
-    $stmt_get_product_type->execute();
-    $result_product_type = $stmt_get_product_type->get_result();
-    $row_product_type = $result_product_type->fetch_assoc();
-
-    if (!empty($row_product_type)) {
-        $_SESSION['type'] = $type;
-        $_SESSION['type_error'] = "This type is already found";
-        header("Location: product-admin.php?open_add_type=true");
-        die("WRONG product type");
-    } else {
-        //set timezone to beirut
-        date_default_timezone_set('Asia/Beirut');
-        $modified_on = date('Y-m-d h:i:s');
-        $added_by = $row['first_name'] . ' ' . $row['last_name'];
-
-        $stmt_add_product_type = $connection->prepare("INSERT INTO product_types(type, added_by, modified_on) VALUES (?,?,?)");
-        $stmt_add_product_type->bind_param("sss", $type, $added_by, $modified_on);
-        $stmt_add_product_type->execute();
-        header("Location: product-admin.php?product-type-added=1");
-    }
-}
-
-//delete type
-if (isset($_GET['getTypetoRemove'])) {
-    //remove type
-    $stmt_delete_type = $connection->prepare("DELETE FROM product_types WHERE type = '" . $_GET['getTypetoRemove'] . "'");
-    $stmt_delete_type->execute();
-
-    //remove all products of this category
-    $stmt_delete_products_of_type = $connection->prepare("DELETE FROM products WHERE type = '" . $_GET['getTypetoRemove'] . "'");
-    $stmt_delete_products_of_type->execute();
-
-    header("Location: product-admin.php");
-}
 
 ?>
 
@@ -267,64 +198,28 @@ if (isset($_GET['getTypetoRemove'])) {
     </div>
 
     <!-- started popup message logout -->
-    <div class="popup" id="product-added-confirmation">
+    <div class="popup" id="product-offer-added-confirmation">
         <img src="../images/tick.png" alt="">
-        <h2>Product Added Confirmation</h2>
-        <p>A new product was added successfully</p>
-        <button type="button" onclick="CloseProductAddedPopUp()">OK</button>
+        <h2>Product Offer Added Confirmation</h2>
+        <p>A new product offer was added successfully</p>
+        <button type="button" onclick="CloseProductOfferAddedPopUp()">OK</button>
     </div>
 
-    <!-- started popup message logout type added -->
-    <div class="popup" id="product-type-added-confirmation">
+    <!-- started popup product offer deleted -->
+    <div class="popup" id="product-offer-deleted-confirmation">
         <img src="../images/tick.png" alt="">
-        <h2>Product Type Added Confirmation</h2>
-        <p>A new product type was added successfully</p>
-        <button type="button" onclick="CloseProductTypeAddedPopUp()">OK</button>
-    </div>
-
-    <!-- started popup message logout category added -->
-    <div class="popup" id="product-category-added-confirmation">
-        <img src="../images/tick.png" alt="">
-        <h2>Product Category Added Confirmation</h2>
-        <p>A new product category was added successfully</p>
-        <button type="button" onclick="CloseProductCategoryAddedPopUp()">OK</button>
-    </div>
-
-
-    <!-- started popup product deleted -->
-    <div class="popup" id="product-deleted-confirmation">
-        <img src="../images/tick.png" alt="">
-        <h2>Product Was Removed</h2>
-        <p>The product was removed successfully</p>
-        <button type="button" onclick="CloseProductRemovedPopUp()">OK</button>
-    </div>
-
-    <!-- started popup message remove category -->
-    <div class="popup" id="remove-category-confirmation">
-        <img src="../images/question-mark.png" alt="remove confirmation">
-        <h2>Delete Confirmation</h2>
-        <p id="remove-category-confirmation-text"></p>
-        <button type="button" onclick="DeleteCategory()">YES</button>
-        <button type="button" onclick="CloseRemoveCategoryPopUp()">NO</button>
-    </div>
-
-
-    <!-- started popup message remove type -->
-    <div class="popup" id="remove-type-confirmation">
-        <img src="../images/question-mark.png" alt="remove confirmation">
-        <h2>Delete Confirmation</h2>
-        <p id="remove-type-confirmation-text"></p>
-        <button type="button" onclick="DeleteType()">YES</button>
-        <button type="button" onclick="CloseRemoveTypePopUp()">NO</button>
+        <h2>Product Offer Was Removed</h2>
+        <p>The offer on the product was removed successfully</p>
+        <button type="button" onclick="CloseProductOfferDeletedPopUp()">OK</button>
     </div>
 
     <!-- started popup message remove product -->
-    <div class="popup" id="remove-product-confirmation">
+    <div class="popup" id="remove-product-offer-confirmation">
         <img src="../images/question-mark.png" alt="remove confirmation">
         <h2>Delete Confirmation</h2>
-        <p id="remove-product-confirmation-text"></p>
-        <button type="button" onclick="DeleteProduct()">YES</button>
-        <button type="button" onclick="CloseRemoveProductPopUp()">NO</button>
+        <p id="remove-product-offer-confirmation-text"></p>
+        <button type="button" onclick="DeleteProductOffer()">YES</button>
+        <button type="button" onclick="CloseRemoveProductOfferPopUp()">NO</button>
     </div>
 
     <input type="checkbox" id="nav-toggle">
@@ -501,6 +396,7 @@ if (isset($_GET['getTypetoRemove'])) {
                                             <td id="product-name-column" title="Sort Product Name by descending">Product Name</td>
                                             <td id="old-price-column" title="Sort Old Price by descending">Old Price</td>
                                             <td id="new-price-column" title="Sort New Price by descending">New Price</td>
+                                            <td id="offer-percentage-column" title="Sort Offer Percentage by descending">Offer Percentage</td>
                                             <td id="offer-begin-date-column" title="Sort Offer Begin Date by descending">Offer Begin Date</td>
                                             <td id="offer-end-date-column" title="Sort Offer End Date by descending">Offer End Date</td>
                                             <td id="product-last-modified-by-column" title="Sort Last Modified By by descending">Last Modified By</td>
@@ -539,87 +435,26 @@ if (isset($_GET['getTypetoRemove'])) {
                 </div>
             </div>
 
-            <!-- adding new product type form -->
-            <div id="add_type_form" class="modal">
-                <span onclick="CloseAddType()" class="close" title="Close Modal">&times;</span>
-                <form class="modal-content" action="product-admin.php" method="POST">
+            <!-- adding new product offer form -->
+            <div id="add_product_offer_form" class="modal">
+                <span onclick="CloseAddProductOffer()" class="close" title="Close Modal">&times;</span>
+                <form class="modal-content" action="offers-admin.php" method="POST" enctype="multipart/form-data">
                     <div class="container">
-                        <h1 class="title">Add New Type</h1>
+                        <h1 class="title">Add New Product Offer</h1>
                         <br>
-                        <p class="title">Please fill in this form to add a new product type</p>
+                        <p class="title">Please fill in this form to add a new product offer</p>
                         <br>
-                        <p class="error" id="type_error">
+
+                        <select name="product_name" id="product_name">
                             <?php
-                            if (isset($_SESSION['type_error'])) {
-                                echo "<script>document.getElementById('type_error').style.display='block';</script>";
-                                echo $_SESSION['type_error'];
-                                unset($_SESSION['type_error']);
-                            } ?>
-                        </p>
-                        <label for="type">
-                            <b>Product Type</b>
-                        </label>
-                        <input type="text" placeholder="Enter new product type" name="type" id="type" value="<?php if (isset($_SESSION['type'])) {
-                                                                                                                    echo $_SESSION['type'];
-                                                                                                                } ?>" required />
-                        <br>
-
-                        <div class="clearfix">
-                            <button type="submit" class="addtypebtn" title="Add new product type">
-                                <strong>Add Product Type</strong>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <!-- adding new product category form -->
-            <div id="add_category_form" class="modal">
-                <span onclick="CloseAddCategory()" class="close" title="Close Modal">&times;</span>
-                <form class="modal-content" action="product-admin.php" method="POST">
-                    <div class="container">
-                        <h1 class="title">Add New Category</h1>
-                        <br>
-                        <p class="title">Please fill in this form to add a new product category</p>
-                        <br>
-                        <p class="error" id="category_error">
-                            <?php
-                            if (isset($_SESSION['category_error'])) {
-                                echo "<script>document.getElementById('category_error').style.display='block';</script>";
-                                echo $_SESSION['category_error'];
-                                unset($_SESSION['category_error']);
-                            } ?>
-                        </p>
-                        <label for="category">
-                            <b>Product Category</b>
-                        </label>
-                        <input type="text" placeholder="Enter new product category" name="category" id="category" value="<?php if (isset($_SESSION['category'])) {
-                                                                                                                                echo $_SESSION['category'];
-                                                                                                                            } ?>" required />
-                        <br>
-
-                        <div class="clearfix">
-                            <button type="submit" class="addcategorybtn" title="Add new product category">
-                                <strong>Add Product Category</strong>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <!-- adding new product form -->
-            <div id="add_product_form" class="modal">
-                <span onclick="CloseAddProduct()" class="close" title="Close Modal">&times;</span>
-                <form class="modal-content" action="product-admin.php" method="POST" enctype="multipart/form-data">
-                    <div class="container">
-                        <h1 class="title">Add New Product</h1>
-                        <br>
-                        <p class="title">Please fill in this form to add a new product</p>
-                        <br>
-
-                        <label for="product_name"><b>Product Name</b></label>
-                        <input type="text" placeholder="Enter product's name" name="product_name" id="product_name" value="" required />
-
+                            $stmt_select_products_names = $connection->prepare("SELECT name FROM products");
+                            $stmt_select_products_names->execute();
+                            $results_products_names = $stmt_select_products_names->get_result();
+                            while ($row_products_names = $results_products_names->fetch_assoc()) {
+                                get_all_products_names_for_add_product_offer_form($row_products_names['name']);
+                            }
+                            ?>
+                        </select>
 
                         <label for="product_price">
                             <b>Product Price</b>
@@ -633,39 +468,9 @@ if (isset($_GET['getTypetoRemove'])) {
                         </label>
                         <br>
 
-                        <select name="product_type" id="product_type">
-                            <?php
-                            $stmt_select_product_types = $connection->prepare("SELECT * FROM product_types");
-                            $stmt_select_product_types->execute();
-                            $result_product_types = $stmt_select_product_types->get_result();
-
-                            while ($row_product_types = $result_product_types->fetch_assoc()) {
-                                get_all_product_types_for_add_product_form($row_product_types['type']);
-                            }
-                            ?>
-                        </select>
-
-                        <br>
-                        <br>
-
                         <label for="product_category">
                             <b>Product Category</b>
                         </label>
-                        <br>
-
-                        <select name="product_category" id="product_category">
-                            <?php
-                            $stmt_select_product_categories = $connection->prepare("SELECT * FROM product_categories");
-                            $stmt_select_product_categories->execute();
-                            $result_product_categories = $stmt_select_product_categories->get_result();
-
-                            while ($row_product_categories = $result_product_categories->fetch_assoc()) {
-                                get_all_product_categories_for_add_product_form($row_product_categories['category']);
-                            }
-                            ?>
-                        </select>
-
-                        <br>
                         <br>
 
                         <label for="product_desciption">

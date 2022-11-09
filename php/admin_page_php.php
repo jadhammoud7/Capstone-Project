@@ -376,6 +376,12 @@ function get_all_product_types_for_add_product_form($product_type)
     echo $element;
 }
 
+function get_all_products_names_for_add_product_offer_form($product_name)
+{
+    $element = "<option value='$product_name'>$product_name</option>";
+    echo $element;
+}
+
 function get_all_product_categories($product_category, $added_by, $modified_on)
 {
     $element = "
@@ -421,7 +427,7 @@ function get_all_products_offers($product_id, $name, $old_price, $new_price, $of
         <td>$last_modified_on</td>
         <td>
             <a>
-                <button class=\"btn_remove_product\" onclick=\"OpenRemoveProductPopUp('$name', $product_id);\" title=\"Remove offer on product '$name'?\">
+                <button class=\"btn_remove_product\" onclick=\"OpenRemoveProductOfferPopUp('$name', $product_id);\" title=\"Remove offer on product '$name'?\">
                     <span class=\"las la-trash\"></span> 
                     Remove Product Offer
                 </button>
