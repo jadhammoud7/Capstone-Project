@@ -152,7 +152,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
 <html lang="en">
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -229,6 +229,18 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                     <a href="../product-admin/product-admin.php" id="products-link">
                         <span class="las la-box"></span>
                         <span>Products</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../offers-admin/offers-admin.php" id="products-link">
+                        <span class="las la-percent"></span>
+                        <span>Offers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../offers-admin/offers-admin.php" id="products-link">
+                        <span class="las la-percent"></span>
+                        <span>Offers</span>
                     </a>
                 </li>
                 <li>
