@@ -40,6 +40,7 @@ const appointments_link = document.getElementById('appointments-link');
 const checkouts_link = document.getElementById('checkouts-link');
 const store_sale_link = document.getElementById('store_sale-link');
 const products_link = document.getElementById('products-link');
+const offers_link = document.getElementById('offers-link');
 const repairs_link = document.getElementById('repairs-link');
 const admins_link = document.getElementById('admins-link');
 
@@ -118,6 +119,21 @@ else {
     products_link.style.borderRadius = '0px';
     products_link.style.paddingTop = '0px';
     products_link.style.paddingBottom = '0px';
+}
+
+if (window.location.href.includes('offers-admin')) {
+    offers_link.style.backgroundColor = '#fff';
+    offers_link.style.color = 'var(--main-color)';
+    offers_link.style.borderRadius = '20px';
+    offers_link.style.paddingTop = '10px';
+    offers_link.style.paddingBottom = '10px';
+}
+else {
+    offers_link.style.backgroundColor = 'var(--main-color)';
+    offers_link.style.color = '#fff';
+    offers_link.style.borderRadius = '0px';
+    offers_link.style.paddingTop = '0px';
+    offers_link.style.paddingBottom = '0px';
 }
 
 if (window.location.href.includes('checkouts-admin')) {

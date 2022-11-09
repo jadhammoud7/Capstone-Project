@@ -130,11 +130,12 @@ function store_sales_products_connection($product_name, $quantity, $price)
                     </a>
                 </li>
                 <li>
-                    <a href="../offers-admin/offers-admin.php" id="products-link">
+                    <a href="../offers-admin/offers-admin.php" id="offers-link">
                         <span class="las la-percent"></span>
                         <span>Offers</span>
                     </a>
                 </li>
+             
                 <li>
                     <a href="../repairs-admin/repairs-admin.php" id="repairs-link">
                         <span class="las la-tools"></span>

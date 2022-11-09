@@ -154,11 +154,12 @@ if ($repair_id != 0 && $repair_type != "" && $price_per_hour != 0 && $descriptio
                     </a>
                 </li>
                 <li>
-                    <a href="../offers-admin/offers-admin.php" id="products-link">
+                    <a href="../offers-admin/offers-admin.php" id="offers-link">
                         <span class="las la-percent"></span>
                         <span>Offers</span>
                     </a>
                 </li>
+             
                 <li>
                     <a href="../repairs-admin/repairs-admin.php" id="repairs-link">
                         <span class="las la-tools"></span>
