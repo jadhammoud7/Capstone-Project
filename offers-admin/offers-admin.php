@@ -445,8 +445,13 @@ $results_top_products = $stmt_top_products->get_result();
                         <p class="title">Please fill in this form to add a new product offer</p>
                         <br>
 
-                        <select name="product_name" id="product_name">
+                        <label for="product_name">
+                            <b>Product Name</b>
+                        </label>
+                        <br>
+                        <select name="product_name" id="product_name" onchange="SetOldPrice()">
                             <?php
+                            require('../php/admin_page_php.php');
                             $stmt_select_products_names = $connection->prepare("SELECT name FROM products");
                             $stmt_select_products_names->execute();
                             $results_products_names = $stmt_select_products_names->get_result();
@@ -455,192 +460,46 @@ $results_top_products = $stmt_top_products->get_result();
                             }
                             ?>
                         </select>
-
-                        <label for="product_price">
-                            <b>Product Price</b>
-                        </label>
-                        <br>
-                        <input style="height: 35px;" type="number" placeholder="Enter product's price" name="product_price" id="product_price" value="" required>
                         <br><br>
 
-                        <label for="product_type">
-                            <b>Product Type</b>
+                        <label for="product_old_price">
+                            <b>Product Old Price</b>
                         </label>
                         <br>
+                        <input style="height: 35px;" type="number" name="product_old_price" id="product_old_price" value="">
+                        <br><br>
 
-                        <label for="product_category">
-                            <b>Product Category</b>
+                        <label for="product_new_price">
+                            <b>Product New Price</b>
                         </label>
                         <br>
+                        <input type="number" style="height: 35px;" name="product_new_price" id="product_new_price" value="" onchange="SetOfferPercentage()" required>
 
-                        <label for="product_desciption">
-                            <b>Desciption</b>
-                        </label>
-                        <input type="text" title="Enter product's desciption" placeholder="Enter product's desciption" name="product_desciption" id="product_desciption" value="" required>
+                        <br><br>
 
-                        <label for="product_age">
-                            <b>Age Restriction</b>
-                        </label>
-                        <input type="text" title="Enter product's age restriction" placeholder="Enter product's age restriction" name="product_age" id="product_age" value="" required>
-
-                        <label for="product_inventory">
-                            <b>Current Inventory:</b>
+                        <label for="offer_percentage">
+                            <b>Offer Percentage</b>
                         </label>
                         <br>
-                        <input type="number" title="Enter product's current inventory in stock" placeholder="Enter product's current inventory in stock" name="product_inventory" id="product_inventory" style="height: 35px;" value="" required>
+                        <input type="number" style="height: 35px;" name="offer_percentage" id="offer_percentage" value="" readonly class="is-valid">
 
-                        <br>
-                        <br>
-
-                        <label for="product_sales">
-                            <b>Current Sales Number:</b>
+                        <label for="offer_begin_date">
+                            <b>Offer Begin Date</b>
                         </label>
                         <br>
-
-                        <input type="number" title="Enter product's current sales number (if any, else 0)" placeholder="Enter product's current sales number (if any, else 0)" name="product_sales" id="product_sales" style="height: 35px;" value="" required>
-
+                        <input type="date" title="Enter offer's begin date" placeholder="Enter offer's begin date" name="offer_begin_date" id="offer_begin_date" value="" required>
                         <br>
-                        <br>
-
-                        <label>
-                            <b>Upload Product Image:</b>
+                        <label for="offer_end_date">
+                            <b>Offer End Date</b>
                         </label>
-                        <input type="file" title="Choose from your files an image for the product" name="product_image" id="product_image" value="" required>
                         <br>
-
+                        <input type="date" title="Enter offer's end date" placeholder="Enter offer's end date" name="offer_end_date" id="offer_end_date" value="" required>
+                        <br>
                         <div class="clearfix">
-                            <button type="submit" class="addproductbtn" title="Add new product">
-                                <strong>Add Product</strong>
+                            <button type="submit" class="addproductbtn" title="Add new product offer">
+                                <strong>Add Product Offer</strong>
                             </button>
                         </div>
-                    </div>
-                </form>
-            </div>
-
-
-
-            <!-- form of price history for product -->
-            <div id="price-history" class="modal">
-                <span onclick="CloseProductHistoryPrices()" class="close" title="Close Modal">&times;</span>
-                <form class="modal-content">
-                    <div class="container">
-                        <h1 class="title">Product Prices History</h1>
-                        <p class="title">Showing Prices History for product <?php echo $row_get_product['name']; ?></p>
-                        <br>
-
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table width="100%" id="product_prices_history_table">
-                                    <thead>
-                                        <tr>
-                                            <td id="product-price-column" title="Sort Price by descending">Price</td>
-                                            <td id="product-price-change-column" title="Sort Price Change by descending">Price Change</td>
-                                            <td id="product-last-modified-by-column" title="Sort Last Modified By by descending">Modified By</td>
-                                            <td id="product-last-modified-on-column" title="Sort Last Modified On by descending">Modified On</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        if (isset($_GET['product_id']) && isset($_GET['price_history'])) {
-                                            while ($row_product_prices_history = $result_history_product_prices->fetch_assoc()) {
-                                                get_all_product_history_prices(
-                                                    $row_product_prices_history['price'],
-                                                    $row_product_prices_history['price_change'],
-                                                    $row_product_prices_history['modified_by'],
-                                                    $row_product_prices_history['modified_on']
-                                                );
-                                            }
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-                </form>
-            </div>
-
-            <!-- form of inventory history for product -->
-            <div id="inventory-history" class="modal">
-                <span onclick="CloseProductHistoryInventory()" class="close" title="Close Modal">&times;</span>
-                <form class="modal-content">
-                    <div class="container">
-                        <h1 class="title">Product Inventory History</h1>
-                        <p class="title">Showing Inventory History for product <?php echo $row_get_product['name']; ?></p>
-                        <br>
-
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table width="100%" id="product_inventory_history_table">
-                                    <thead>
-                                        <tr>
-                                            <td id="product-inventory-column" title="Sort Inventory by descending">Inventory</td>
-                                            <td id="product-inventory-change-column" title="Sort Inventory Change by descending">Inventory Change</td>
-                                            <td id="product-last-modified-by-column" title="Sort Last Modified By by descending">Modified By</td>
-                                            <td id="product-last-modified-on-column" title="Sort Last Modified On by descending">Modified On</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        if (isset($_GET['product_id']) && isset($_GET['inventory_history'])) {
-                                            while ($row_product_inventory_history = $result_product_history_inventory->fetch_assoc()) {
-                                                get_all_product_history_inventory(
-                                                    $row_product_inventory_history['inventory'],
-                                                    $row_product_inventory_history['inventory_change'],
-                                                    $row_product_inventory_history['modified_by'],
-                                                    $row_product_inventory_history['modified_on']
-                                                );
-                                            }
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
-                </form>
-            </div>
-
-            <!-- form of sales history for product -->
-            <div id="sales-history" class="modal">
-                <span onclick="CloseProductHistorySales()" class="close" title="Close Modal">&times;</span>
-                <form class="modal-content">
-                    <div class="container">
-                        <h1 class="title">Product Sales History</h1>
-                        <p class="title">Showing Sales History for product <?php echo $row_get_product['name']; ?></p>
-                        <br>
-
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table width="100%" id="product_sales_history_table">
-                                    <thead>
-                                        <tr>
-                                            <td id="product-sales-column" title="Sort Sales by descending">Sales</td>
-                                            <td id="product-sales-change-column" title="Sort Sales Change by descending">Sales Change</td>
-                                            <td id="product-last-modified-by-column" title="Sort Last Modified By by descending">Modified By</td>
-                                            <td id="product-last-modified-on-column" title="Sort Last Modified On by descending">Modified On</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        if (isset($_GET['product_id']) && isset($_GET['sales_history'])) {
-                                            while ($row_product_sales_history = $result_product_history_sales->fetch_assoc()) {
-                                                get_all_product_history_sales(
-                                                    $row_product_sales_history['sales_number'],
-                                                    $row_product_sales_history['sales_change'],
-                                                    $row_product_sales_history['modified_by'],
-                                                    $row_product_sales_history['modified_on']
-                                                );
-                                            }
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
                     </div>
                 </form>
             </div>
@@ -656,239 +515,21 @@ $results_top_products = $stmt_top_products->get_result();
 <script src="offers-admin.js"></script>
 <script src="../admin-main/admin-main.js"></script>
 <script>
-    const array_products = [];
-    const array_products_count = [];
-    <?php
-    //get lowest products 
-    $query_lowest_selling_products = "SELECT name, sales_number FROM products ORDER BY sales_number ASC LIMIT 5;";
-    $stmt_lowest_selling_products = $connection->prepare($query_lowest_selling_products);
-    $stmt_lowest_selling_products->execute();
-    $results_lowest_selling_products = $stmt_lowest_selling_products->get_result();
-    while ($row_lowest_selling_products = $results_lowest_selling_products->fetch_assoc()) {
-    ?>
-        array_products.push("<?php
-                                echo $row_lowest_selling_products['name'];
-                                ?>");
-        array_products_count.push("<?php
-                                    echo $row_lowest_selling_products['sales_number'];
-                                    ?>");
-    <?php }
-    ?>;
-    var xArray = array_products;
-    var yArray = array_products_count;
+    //fill old price
+    function SetOldPrice() {
+        const array_product_prices = [];
 
-    var data = [{
-        x: xArray,
-        y: yArray,
-        type: "bar"
-    }];
-
-    var layout = {
-        title: "Lowest Selling Products"
-    };
-
-    Plotly.newPlot("myPlot", data, layout);
-
-    const array_products2 = [];
-    const array_products_count2 = [];
-    <?php
-    //get lowest products 
-    $query_highest_selling_products = "SELECT name, sales_number FROM products ORDER BY sales_number DESC LIMIT 5";
-    $stmt_highest_selling_products = $connection->prepare($query_highest_selling_products);
-    $stmt_highest_selling_products->execute();
-    $results_highest_selling_products = $stmt_highest_selling_products->get_result();
-    while ($row_highest_selling_products = $results_highest_selling_products->fetch_assoc()) {
-    ?>
-        array_products2.push("<?php
-                                echo $row_highest_selling_products['name'];
-                                ?>");
-        array_products_count2.push("<?php
-                                    echo $row_highest_selling_products['sales_number'];
-                                    ?>");
-    <?php }
-    ?>;
-    var xArray2 = array_products2;
-    var yArray2 = array_products_count2;
-
-    var data2 = [{
-        x: xArray2,
-        y: yArray2,
-        type: "bar"
-    }];
-
-    var layout2 = {
-        title: "Highest Selling Products"
-    };
-
-    Plotly.newPlot("myPlot2", data2, layout2);
-
-    //for type bar chart
-
-    const array_products_top = [];
-    const array_products_count_top = [];
-    <?php
-    if (isset($results_top_products)) {
-        while ($row_top_products = $results_top_products->fetch_assoc()) {
-    ?>
-            array_products_top.push("<?php
-                                        echo $row_top_products['name'];
-                                        ?>");
-            array_products_count_top.push("<?php
-                                            echo $row_top_products['sales_number'];
-                                            ?>");
-    <?php }
-    }
-    ?>;
-    var xArray = array_products_count_top;
-    var yArray = array_products_top;
-
-    var data = [{
-        x: xArray,
-        y: yArray,
-        type: "bar",
-        orientation: "h",
-        marker: {
-            color: "green"
-        }
-    }];
-
-    var layout = {
-        title: "Top products being sold"
-    };
-
-    //second chart which is the lowest
-
-    //pie chart of Type
-    const array_types = [];
-    const array_types_count = [];
-    <?php
-    //get all product types
-    $stmt_get_all_product_types = $connection->prepare("SELECT * FROM product_types");
-    $stmt_get_all_product_types->execute();
-    $result_product_types = $stmt_get_all_product_types->get_result();
-    while ($row_product_types = $result_product_types->fetch_assoc()) {
-    ?>
-        array_types.push("<?php
-                            echo $row_product_types['type'];
-                            ?>");
         <?php
-        //check all products who have type "type"
-        $query_product_types_count = "SELECT COUNT(*) as products_same_type_count FROM products WHERE type = '" . $row_product_types['type'] . "'";
-        $stmt_product_types_count = $connection->prepare($query_product_types_count);
-        $stmt_product_types_count->execute();
-        $results_product_types_count = $stmt_product_types_count->get_result();
-        $row_product_types_count = $results_product_types_count->fetch_assoc();
-
-        ?>;
-        array_types_count.push("<?php
-                                echo $row_product_types_count['products_same_type_count'];
-                                ?>");
-    <?php }
-    ?>;
-    var xValues = array_types;
-    var yValues = array_types_count;
-    var random_colors = [];
-
-    const size = array_types.length;
-
-    function getNewColor(start) {
-        for (var i = start; i < size; i++) {
-            const random = "#" + Math.floor(Math.random() * (255 + 1));
-            if (random_colors.values != random) {
-                random_colors.push(random);
-            } else {
-                getNewColor(i);
-            }
-        }
+        $stmt_get_product_price = $connection->prepare("SELECT price FROM products");
+        $stmt_get_product_price->execute();
+        $result_product_price = $stmt_get_product_price->get_result();
+        while ($row_product_price = $result_product_price->fetch_assoc()) { ?>
+            array_product_prices.push(<?php echo $row_product_price['price']; ?>);
+        <?php }
+        ?>
+        var new_price = array_product_prices[document.getElementById('product_name').selectedIndex];
+        document.getElementById('product_old_price').value = new_price;
     }
-    getNewColor(0);
-
-    var barColors = random_colors;
-    new Chart("TypeChart", {
-        type: "bar",
-        data: {
-            labels: xValues,
-            datasets: [{
-                backgroundColor: barColors,
-                data: yValues
-            }]
-        },
-        options: {
-            legend: {
-                display: false
-            },
-            title: {
-                display: true,
-                text: "Distribution of Products by Type"
-            }
-        }
-    });
-
-    //pie chart of Category
-    const array_categories = [];
-    const array_categories_count = [];
-    <?php
-    //get all product types
-    $stmt_get_all_product_categories = $connection->prepare("SELECT * FROM product_categories");
-    $stmt_get_all_product_categories->execute();
-    $result_product_categories = $stmt_get_all_product_categories->get_result();
-    while ($row_product_categories = $result_product_categories->fetch_assoc()) {
-    ?>
-        array_categories.push("<?php
-                                echo $row_product_categories['category'];
-                                ?>");
-        <?php
-        //check all products who have category "category"
-        $query_product_categories_count = "SELECT COUNT(*) as products_same_category_count FROM products WHERE category = '" . $row_product_categories['category'] . "'";
-        $stmt_product_categories_count = $connection->prepare($query_product_categories_count);
-        $stmt_product_categories_count->execute();
-        $results_product_categories_count = $stmt_product_categories_count->get_result();
-        $row_product_categories_count = $results_product_categories_count->fetch_assoc();
-
-        ?>;
-        array_categories_count.push("<?php
-                                        echo $row_product_categories_count['products_same_category_count'];
-                                        ?>");
-    <?php }
-    ?>;
-    var xValues2 = array_categories;
-    var yValues2 = array_categories_count;
-    var random_colors = [];
-
-    const size2 = array_categories.length;
-
-    function getNewColor2(start) {
-        for (var i = start; i < size2; i++) {
-            const random = "#" + Math.floor(Math.random() * (255 + 1));
-            if (random_colors.values != random) {
-                random_colors.push(random);
-            } else {
-                getNewColor2(i);
-            }
-        }
-    }
-    getNewColor2(0);
-
-    var barColors = random_colors;
-    new Chart("CategoryChart", {
-        type: "bar",
-        data: {
-            labels: xValues2,
-            datasets: [{
-                backgroundColor: barColors,
-                data: yValues2
-            }]
-        },
-        options: {
-            legend: {
-                display: false
-            },
-            title: {
-                display: true,
-                text: "Distribution of Products by Category"
-            }
-        }
-    });
 </script>
 
 </html>

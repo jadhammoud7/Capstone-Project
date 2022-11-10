@@ -349,3 +349,10 @@ function DeleteProduct() {
 function CloseRemoveProductOfferDeletePopUp() {
     window.location = 'offers-admin.php';
 }
+
+//calculate offer percentage
+function SetOfferPercentage() {
+    var old_price = document.getElementById('product_old_price').value;
+    var new_price = document.getElementById('product_new_price').value;
+    document.getElementById('offer_percentage').value = (1 - new_price / old_price) * 100;
+}
