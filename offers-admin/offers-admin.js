@@ -1,5 +1,5 @@
 function OpenAddProductOffer() {
-    window.location.href = window.location.href + '?open_add_product_offer=true';
+    window.location = '?open_add_product_offer=true';
 }
 
 if (window.location.href.includes('open_add_product_offer=true')) {
@@ -341,13 +341,8 @@ function CloseRemoveProductOfferPopUp() {
     remove_product_offer_popup.classList.remove('open-popup');
 }
 
-function DeleteProduct() {
-    window.location.href = 'product-admin.php?getProducttoRemove=' + product_id;
-    CloseRemoveProductOfferDeletePopUp();
-}
-
-function CloseRemoveProductOfferDeletePopUp() {
-    window.location = 'offers-admin.php';
+function DeleteProductOffer() {
+    window.location.href = 'offers-admin.php?getProducttoRemove=' + product_id;
 }
 
 //calculate offer percentage

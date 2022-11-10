@@ -2,6 +2,7 @@
 
 session_start();
 include("../php/connection.php");
+require('../php/admin_page_php.php');
 
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
@@ -93,7 +94,7 @@ if ($product_name != "" && $product_old_price != 0 && $product_new_price != 0 &&
 
     //insert into table products offers
     $stmt_add_new_product_offer = $connection->prepare("INSERT INTO products_offers(product_id, old_price, new_price, offer_percentage, offer_begin_date, offer_end_date, last_modified_by, last_modified_on) VALUES (?,?,?,?,?,?,?,?)");
-    $stmt_add_new_product_offer->bind_param("iiiiddss", $product_id, $product_old_price, $product_new_price, $offer_percentage, $offer_begin_date, $offer_end_date, $modified_by, $modified_on);
+    $stmt_add_new_product_offer->bind_param("iiidssss", $product_id, $product_old_price, $product_new_price, $offer_percentage, $offer_begin_date, $offer_end_date, $modified_by, $modified_on);
     $stmt_add_new_product_offer->execute();
     $stmt_add_new_product_offer->close();
 
@@ -103,7 +104,7 @@ if ($product_name != "" && $product_old_price != 0 && $product_new_price != 0 &&
     $stmt_add_product_offer_history->execute();
     $stmt_add_product_offer_history->close();
 
-    header("Location: product-admin.php?product_offer_added=1");
+    header("Location: offers-admin.php?product_offer_added=1");
 }
 
 //remove product offer
@@ -181,7 +182,7 @@ $results_top_products = $stmt_top_products->get_result();
         <h2>Delete Confirmation</h2>
         <p id="remove-product-offer-confirmation-text"></p>
         <button type="button" onclick="DeleteProductOffer()">YES</button>
-        <button type="button" onclick="CloseRemoveProductOfferPopUp()">NO</button>
+        <button type="button" onclick="CloseRemoveProductOfferDeletePopUp()">NO</button>
     </div>
 
     <input type="checkbox" id="nav-toggle">
@@ -376,6 +377,7 @@ $results_top_products = $stmt_top_products->get_result();
                                             $stmt_select_product_name->execute();
                                             $result_product_name = $stmt_select_product_name->get_result();
                                             $row_product_name = $result_product_name->fetch_assoc();
+
                                             get_all_products_offers(
                                                 $row_products_offers['product_id'],
                                                 $row_product_name['name'],
@@ -413,7 +415,6 @@ $results_top_products = $stmt_top_products->get_result();
                         <br>
                         <select name="product_name" id="product_name" onchange="SetOldPrice()">
                             <?php
-                            require('../php/admin_page_php.php');
                             $stmt_select_products_names = $connection->prepare("SELECT name FROM products");
                             $stmt_select_products_names->execute();
                             $results_products_names = $stmt_select_products_names->get_result();
