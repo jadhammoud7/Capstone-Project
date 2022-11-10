@@ -131,10 +131,22 @@ if (isset($_POST['save'])) {
                     $modified_by = $row['first_name'] . ' ' . $row['last_name'];
 
                     //insert into history inventory
-                    $inventory_change = '-' . $quantity[$x];
+                    $inventory_change = -$quantity[$x];
                     $stmt_insert_product_inventory_history = $connection->prepare("INSERT INTO history_product_inventory(product_id, inventory, inventory_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
-                    $stmt_insert_product_inventory_history->bind_param("iisss", $product_id, $new_inventory, $inventory_change, $modified_by, $modified_on);
+                    $stmt_insert_product_inventory_history->bind_param("iiiss", $product_id, $new_inventory, $inventory_change, $modified_by, $modified_on);
                     $stmt_insert_product_inventory_history->execute();
+
+
+                    //select inventory histor from product inventory sales
+                    $stmt_select_product_inventory_history = $connection->prepare("SELECT inventory_history FROM products_inventory_sales WHERE product_id = '" . $product_id . "'");
+                    $stmt_select_product_inventory_history->execute();
+                    $result_product_inventory_history = $stmt_select_product_inventory_history->get_result();
+                    $row_product_inventory_history = $result_product_inventory_history->fetch_assoc();
+
+                    $new_inventory_history = $row_product_inventory_history['inventory_history'] + ($inventory_change);
+                    //add inventory change
+                    $update_product_inventory_sales = $connection->prepare("UPDATE products_inventory_sales SET inventory_history = '" . $new_inventory_history . "'");
+                    $update_product_inventory_sales->execute();
 
                     //select price and add to sales products, same as above condition
                     $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE name = '" . $product_name[$x] . "'");
@@ -165,10 +177,21 @@ if (isset($_POST['save'])) {
 
                     //add to product history sales
                     $new_sales = $row_product_sales['sales_number'] + $quantity[$x];
-                    $change_sales = '+' . $quantity[$x];
+                    $change_sales = $quantity[$x];
                     $stmt_insert_product_sales_history = $connection->prepare("INSERT INTO history_product_sales(product_id, sales_number, sales_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
-                    $stmt_insert_product_sales_history->bind_param("iisss", $product_id, $quantity, $new_sales, $change_sales, $modified_by, $modified_on);
+                    $stmt_insert_product_sales_history->bind_param("iiiss", $product_id, $quantity, $new_sales, $change_sales, $modified_by, $modified_on);
                     $stmt_insert_product_sales_history->execute();
+
+                    //select product sales from product inventory sales
+                    $stmt_select_product_sales_history = $connection->prepare("SELECT sales_history FROM products_inventory_sales WHERE product_id = '" . $product_id . "'");
+                    $stmt_select_product_sales_history->execute();
+                    $result_product_sales_history = $stmt_select_product_sales_history->get_result();
+                    $row_product_sales_history = $result_product_sales_history->fetch_assoc();
+
+                    $new_sales_history = $row_product_sales_history['sales_history'] + $change_sales;
+                    //add inventory change
+                    $update_product_inventory_sales = $connection->prepare("UPDATE products_inventory_sales SET sales_history = '" . $new_sales_history . "'");
+                    $update_product_inventory_sales->execute();
                 }
             } else {
                 //if customer exists in table customers
@@ -202,9 +225,9 @@ if (isset($_POST['save'])) {
                     $modified_by = $row['first_name'] . ' ' . $row['last_name'];
 
                     //insert into history inventory
-                    $inventory_change = '-' . $quantity[$x];
+                    $inventory_change = -$quantity[$x];
                     $stmt_insert_product_inventory_history = $connection->prepare("INSERT INTO history_product_inventory(product_id, inventory, inventory_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
-                    $stmt_insert_product_inventory_history->bind_param("iisss", $product_id, $new_inventory, $inventory_change, $modified_by, $modified_on);
+                    $stmt_insert_product_inventory_history->bind_param("iiiss", $product_id, $new_inventory, $inventory_change, $modified_by, $modified_on);
                     $stmt_insert_product_inventory_history->execute();
 
                     //select price and add to sales products, same as above condition
@@ -236,10 +259,21 @@ if (isset($_POST['save'])) {
 
                     //add to product history sales
                     $new_sales = $row_product_sales['sales_number'] + $quantity[$x];
-                    $change_sales = '+' . $quantity[$x];
+                    $change_sales = $quantity[$x];
                     $stmt_insert_product_sales_history = $connection->prepare("INSERT INTO history_product_sales(product_id, sales_number, sales_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
                     $stmt_insert_product_sales_history->bind_param("iisss", $product_id, $quantity, $new_sales, $change_sales, $modified_by, $modified_on);
                     $stmt_insert_product_sales_history->execute();
+
+                    //select product sales from product inventory sales
+                    $stmt_select_product_sales_history = $connection->prepare("SELECT sales_history FROM products_inventory_sales WHERE product_id = '" . $product_id . "'");
+                    $stmt_select_product_sales_history->execute();
+                    $result_product_sales_history = $stmt_select_product_sales_history->get_result();
+                    $row_product_sales_history = $result_product_sales_history->fetch_assoc();
+
+                    $new_sales_history = $row_product_sales_history['sales_history'] + $change_sales;
+                    //add inventory change
+                    $update_product_inventory_sales = $connection->prepare("UPDATE products_inventory_sales SET sales_history = '" . $new_sales_history . "'");
+                    $update_product_inventory_sales->execute();
 
                     //update customer loyalty points
                     $add_result = $row_check_username['loyalty_points'] + $quantity[$x];
@@ -382,7 +416,7 @@ $row_count_store = $results_count_store->fetch_assoc();
                         <span>Offers</span>
                     </a>
                 </li>
-             
+
                 <li>
                     <a href="../repairs-admin/repairs-admin.php" id="repairs-link">
                         <span class="las la-tools"></span>

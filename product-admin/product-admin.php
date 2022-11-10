@@ -127,25 +127,32 @@ if ($product_name != "" && $product_price != 0 && $product_type != "" && $produc
             $product_id = $row_last_product_id['product_id'];
 
             //insert into history prices current price
-            $price_change = '0';
+            $price_change = 0;
             $stmt_add_product_price_history = $connection->prepare("INSERT INTO history_product_prices(product_id, price, price_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
-            $stmt_add_product_price_history->bind_param("iisss", $product_id, $product_price, $price_change, $modified_by, $modified_on);
+            $stmt_add_product_price_history->bind_param("iiiss", $product_id, $product_price, $price_change, $modified_by, $modified_on);
             $stmt_add_product_price_history->execute();
             $stmt_add_product_price_history->close();
 
             //insert into history inventory current inventory
-            $inventory_change = '0';
+            $inventory_change = $product_inventory;
             $stmt_add_product_inventory_history = $connection->prepare("INSERT INTO history_product_inventory(product_id, inventory, inventory_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
-            $stmt_add_product_inventory_history->bind_param("iisss", $product_id, $product_inventory, $inventory_change, $modified_by, $modified_on);
+            $stmt_add_product_inventory_history->bind_param("iiiss", $product_id, $product_inventory, $inventory_change, $modified_by, $modified_on);
             $stmt_add_product_inventory_history->execute();
             $stmt_add_product_inventory_history->close();
 
             //insert into histoy sales current sales 0
-            $sales_change = '0';
+            $sales_change = 0;
             $stmt_add_product_sales_history = $connection->prepare("INSERT INTO history_product_sales(product_id, sales_number, sales_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
-            $stmt_add_product_sales_history->bind_param("iisss", $product_id, $product_sales_number, $sales_change, $modified_by, $modified_on);
+            $stmt_add_product_sales_history->bind_param("iiiss", $product_id, $product_sales_number, $sales_change, $modified_by, $modified_on);
             $stmt_add_product_sales_history->execute();
             $stmt_add_product_sales_history->close();
+
+            //add to table inventory sales that is used for offers recommendations
+            $inventory_sales_ratio = ($sales_change / $inventory_change) * 100;
+            $stmt_add_product_inventory_sales = $connection->prepare("INSERT INTO products_inventory_sales(product_id, inventory_history, sales_history, inventory_sales_ratio) VALUES (?,?,?,?)");
+            $stmt_add_product_inventory_sales->bind_param("iiii", $product_id, $inventory_change, $sales_change, $inventory_sales_ratio);
+            $stmt_add_product_inventory_sales->execute();
+            $stmt_add_product_inventory_sales->close();
 
             header("Location: product-admin.php?product-added=1");
         }
@@ -299,6 +306,10 @@ if (isset($_GET['getProducttoRemove'])) {
     $stmt_delete_product_history_sales = $connection->prepare("DELETE FROM history_product_sales WHERE product_id = '" . $_GET['getProducttoRemove'] . "'");
     $stmt_delete_product_history_sales->execute();
 
+    //remove history inventory sales for product
+    $stmt_delete_product_inventory_sales = $connection->prepare("DELETE FROM products_inventory_sales WHERE product_id = '" . $_GET['getProducttoRemove'] . "'");
+    $stmt_delete_product_inventory_sales->execute();
+
     //remove product in favorites lists
     $stmt_delete_product_favorites = $connection->prepare("DELETE FROM favorites_customer_product WHERE product_id = '" . $_GET['getProducttoRemove'] . "'");
     $stmt_delete_product_favorites->execute();
@@ -311,7 +322,7 @@ if (isset($_GET['getProducttoRemove'])) {
 <html lang="en">
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -450,7 +461,7 @@ if (isset($_GET['getProducttoRemove'])) {
                         <span>Offers</span>
                     </a>
                 </li>
-             
+
                 <li>
                     <a href="../repairs-admin/repairs-admin.php" id="repairs-link">
                         <span class="las la-tools"></span>

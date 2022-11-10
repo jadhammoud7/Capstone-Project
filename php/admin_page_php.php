@@ -437,3 +437,20 @@ function get_all_products_offers($product_id, $name, $old_price, $new_price, $of
     ";
     echo $element;
 }
+
+function get_all_products_offers_recommendations($product_id, $product_name, $product_price, $product_inventory_history, $product_sales_history, $product_inventory_sales_ration)
+{
+    $element = "
+    <tr>
+        <td>
+            <a href='product-details.php?product_id=$product_id' title=\"See details about '$product_name'\">
+                $product_name
+            </a>
+        </td>
+        <td>$product_price</td>
+        <td>$product_inventory_history</td>
+        <td>$product_sales_history</td>
+        <td>$product_inventory_sales_ration</td>
+    </tr>";
+    echo $element;
+}

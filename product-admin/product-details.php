@@ -127,17 +127,17 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
                 $row_product_price = $result_product_price->fetch_assoc();
 
                 //insert into history prices of this product
-                $prices_change = '';
+                $prices_change = 0;
                 if ($row_product_price['price'] < $product_price) {
                     $price_change = $product_price - $row_product_price['price'];
-                    $prices_change = '+ ' . $price_change;
+                    $prices_change = $price_change;
                 } else if ($row_product_price['price'] > $product_price) {
                     $price_change = $row_product_price['price'] - $product_price;
-                    $prices_change = '- ' . $price_change;
+                    $prices_change = -$price_change;
                 }
-                if ($prices_change != '') {
+                if ($prices_change != 0) {
                     $stmt_add_product_price_history = $connection->prepare("INSERT INTO history_product_prices(product_id, price, price_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
-                    $stmt_add_product_price_history->bind_param("iisss", $product_id, $product_price, $prices_change, $modified_by, $modified_on);
+                    $stmt_add_product_price_history->bind_param("iiiss", $product_id, $product_price, $prices_change, $modified_by, $modified_on);
                     $stmt_add_product_price_history->execute();
                     $stmt_add_product_price_history->close();
                 }
@@ -149,19 +149,30 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
                 $row_product_inventory = $result_product_inventory->fetch_assoc();
 
                 //insert into history inventory of this product
-                $inventories_change = '';
+                $inventories_change = 0;
                 if ($row_product_inventory['inventory'] < $product_inventory) {
                     $inventory_change = $product_inventory - $row_product_inventory['inventory'];
-                    $inventories_change = '+ ' . $inventory_change;
+                    $inventories_change = $inventory_change;
                 } else if ($row_product_inventory['inventory'] > $product_inventory) {
                     $inventory_change = $row_product_inventory['inventory'] - $product_inventory;
-                    $inventories_change = '- ' . $inventory_change;
+                    $inventories_change = -$inventory_change;
                 }
-                if ($inventories_change != '') {
+                if ($inventories_change != 0) {
                     $stmt_add_product_inventory_history = $connection->prepare("INSERT INTO history_product_inventory(product_id, inventory, inventory_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
-                    $stmt_add_product_inventory_history->bind_param("iisss", $product_id, $product_inventory, $inventories_change, $modified_by, $modified_on);
+                    $stmt_add_product_inventory_history->bind_param("iiiss", $product_id, $product_inventory, $inventories_change, $modified_by, $modified_on);
                     $stmt_add_product_inventory_history->execute();
                     $stmt_add_product_inventory_history->close();
+
+                    //select inventory histor from product inventory sales
+                    $stmt_select_product_inventory_history = $connection->prepare("SELECT inventory_history FROM products_inventory_sales WHERE product_id = '" . $product_id . "'");
+                    $stmt_select_product_inventory_history->execute();
+                    $result_product_inventory_history = $stmt_select_product_inventory_history->get_result();
+                    $row_product_inventory_history = $result_product_inventory_history->fetch_assoc();
+
+                    $new_inventory_history = $row_product_inventory_history['inventory_history'] + ($inventories_change);
+                    //add inventory change
+                    $update_product_inventory_sales = $connection->prepare("UPDATE products_inventory_sales SET inventory_history = '" . $new_inventory_history . "'");
+                    $update_product_inventory_sales->execute();
                 }
 
                 //update products info
@@ -185,15 +196,15 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
         $row_product_price = $result_product_price->fetch_assoc();
 
         //insert into history prices of this product
-        $prices_change = '';
+        $prices_change = 0;
         if ($row_product_price['price'] < $product_price) {
             $price_change = $product_price - $row_product_price['price'];
-            $prices_change = '+ ' . $price_change;
+            $prices_change = $price_change;
         } else if ($row_product_price['price'] > $product_price) {
             $price_change = $row_product_price['price'] - $product_price;
-            $prices_change = '- ' . $price_change;
+            $prices_change = -$price_change;
         }
-        if ($prices_change != '') {
+        if ($prices_change != 0) {
             $stmt_add_product_price_history = $connection->prepare("INSERT INTO history_product_prices(product_id, price, price_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
             $stmt_add_product_price_history->bind_param("iisss", $product_id, $product_price, $prices_change, $modified_by, $modified_on);
             $stmt_add_product_price_history->execute();
@@ -207,19 +218,30 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
         $row_product_inventory = $result_product_inventory->fetch_assoc();
 
         //insert into history inventory of this product
-        $inventories_change = '';
+        $inventories_change = 0;
         if ($row_product_inventory['inventory'] < $product_inventory) {
             $inventory_change = $product_inventory - $row_product_inventory['inventory'];
-            $inventories_change = '+ ' . $inventory_change;
+            $inventories_change = $inventory_change;
         } else if ($row_product_inventory['inventory'] > $product_inventory) {
             $inventory_change = $row_product_inventory['inventory'] - $product_inventory;
-            $inventories_change = '- ' . $inventory_change;
+            $inventories_change = -$inventory_change;
         }
-        if ($inventories_change != '') {
+        if ($inventories_change != 0) {
             $stmt_add_product_inventory_history = $connection->prepare("INSERT INTO history_product_inventory(product_id, inventory, inventory_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
-            $stmt_add_product_inventory_history->bind_param("iisss", $product_id, $product_inventory, $inventories_change, $modified_by, $modified_on);
+            $stmt_add_product_inventory_history->bind_param("iiiss", $product_id, $product_inventory, $inventories_change, $modified_by, $modified_on);
             $stmt_add_product_inventory_history->execute();
             $stmt_add_product_inventory_history->close();
+
+            //select inventory histor from product inventory sales
+            $stmt_select_product_inventory_history = $connection->prepare("SELECT inventory_history FROM products_inventory_sales WHERE product_id = '" . $product_id . "'");
+            $stmt_select_product_inventory_history->execute();
+            $result_product_inventory_history = $stmt_select_product_inventory_history->get_result();
+            $row_product_inventory_history = $result_product_inventory_history->fetch_assoc();
+
+            $new_inventory_history = $row_product_inventory_history['inventory_history'] + ($inventories_change);
+            //add inventory change
+            $update_product_inventory_sales = $connection->prepare("UPDATE products_inventory_sales SET inventory_history = '" . $new_inventory_history . "'");
+            $update_product_inventory_sales->execute();
         }
 
         //select product image name
@@ -359,7 +381,7 @@ if (isset($_GET['ProductIDToRemove'])) {
                         <span>Offers</span>
                     </a>
                 </li>
-             
+
                 <li>
                     <a href="../repairs-admin/repairs-admin.php" id="repairs-link">
                         <span class="las la-tools"></span>

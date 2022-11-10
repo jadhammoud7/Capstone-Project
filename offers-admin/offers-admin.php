@@ -130,7 +130,7 @@ if ($product_name != "" && $product_old_price != 0 && $product_new_price != 0 &&
 
     //insert into table history products offers
     $stmt_add_product_offer_history = $connection->prepare("INSERT INTO history_product_offers(product_id, old_price, new_price, offer_percentage, offer_begin_date, offer_end_date, last_modified_by, last_modified_on) VALUES (?,?,?,?,?,?,?,?)");
-    $stmt_add_product_offer_history->bind_param("iiiiddss", $product_id, $product_old_price, $product_new_price, $offer_percentage, $offer_begin_date, $offer_end_date, $modified_by, $modified_on);
+    $stmt_add_product_offer_history->bind_param("iiiddss", $product_id, $product_old_price, $product_new_price, $offer_percentage, $offer_begin_date, $offer_end_date, $modified_by, $modified_on);
     $stmt_add_product_offer_history->execute();
     $stmt_add_product_offer_history->close();
 
@@ -349,6 +349,75 @@ $results_top_products = $stmt_top_products->get_result();
                     </div>
                 </div>
             </div>
+
+            <!-- list of all products of recommended offers -->
+
+            <div class="recent-grid" style="display: block !important;">
+                <div class="projects">
+                    <div class="card">
+
+                        <div class="card-header">
+                            <h3>Recommended Products Offers List</h3>
+                        </div>
+
+                        <canvas id=""></canvas>
+
+                        <div class="card-header">
+                            <h3>
+                                <p style="text-decoration: underline; color: royalblue;" id="filter-text"></p>
+                                <br>
+                                <p id="table-sort"></p>
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div class="div-search">
+                                    <span class="las la-search" style="font-size: 1.8rem; color: royalblue;"></span>
+                                    <input type="text" id="SearchInput" onkeyup="FilterTable()" placeholder="Search in table Products Offers...">
+                                </div>
+                                <table width="100%" id="products_recommendation_offers_table">
+                                    <thead>
+                                        <tr>
+                                            <td id="product-name-column" title="Sort Product Name by descending">Product Name</td>
+                                            <td id="product-price-column" title="Sort Old Price by descending">Old Price</td>
+                                            <td id="product-inventory-history-column" title="Sort New Price by descending">New Price</td>
+                                            <td id="product-sales-history-column" title="Sort Offer Percentage by descending">Offer Percentage</td>
+                                            <td id="product-inventory-sales-ratio-column" title="Sort Offer Begin Date by descending">Offer Begin Date</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        
+                                       
+                                        
+
+                                        while ($row_products_offers = $result_products_offers->fetch_assoc()) {
+                                            $stmt_select_product_name = $connection->prepare("SELECT name FROM products WHERE product_id = '" . $row_products_offers['product_id'] . "'");
+                                            $stmt_select_product_name->execute();
+                                            $result_product_name = $stmt_select_product_name->get_result();
+                                            $row_product_name = $result_product_name->fetch_assoc();
+
+                                            get_all_products_offers(
+                                                $row_products_offers['product_id'],
+                                                $row_product_name['name'],
+                                                $row_products_offers['old_price'],
+                                                $row_products_offers['new_price'],
+                                                $row_products_offers['offer_percentage'],
+                                                $row_products_offers['offer_begin_date'],
+                                                $row_products_offers['offer_end_date'],
+                                                $row_products_offers['last_modified_by'],
+                                                $row_products_offers['last_modified_on']
+                                            );
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <!-- list of all products offers -->
 
