@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2022 at 11:56 PM
+-- Generation Time: Nov 10, 2022 at 01:52 AM
 -- Server version: 8.0.23
 -- PHP Version: 8.0.2
 
@@ -264,7 +264,23 @@ INSERT INTO `history_product_inventory` (`product_id`, `inventory`, `inventory_c
 (1, 86, '- 10', 'Store Sales', '2022-10-15 05:02:30'),
 (1, 81, '- 5', 'Store Sales', '2022-10-15 05:03:27'),
 (1, 80, '- 1', 'Store Sales', '2022-10-15 05:05:34'),
-(1, 100, '+ 20', 'Mohamad Nabaa', '2022-10-26 10:23:38');
+(1, 100, '+ 20', 'Mohamad Nabaa', '2022-10-26 10:23:38'),
+(21, 5, '0', 'Mohamad Nabaa', '2022-10-29 01:03:35'),
+(2, 5, '+ 5', 'Mohamad Nabaa', '2022-10-29 01:13:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `history_product_offers`
+--
+
+CREATE TABLE `history_product_offers` (
+  `product_id` int NOT NULL,
+  `old_price` int NOT NULL,
+  `new_price` int NOT NULL,
+  `offer_begin_date` date NOT NULL,
+  `offer_end_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -298,7 +314,9 @@ INSERT INTO `history_product_prices` (`product_id`, `price`, `price_change`, `mo
 (20, 30, '0', 'Mohamad Nabaa', '2022-10-15 01:53:23'),
 (20, 25, '- 5', 'Mohamad Nabaa', '2022-10-15 01:57:55'),
 (20, 25, '- 5', 'Mohamad Nabaa', '2022-10-15 02:03:18'),
-(20, 25, '- 5', 'Mohamad Nabaa', '2022-10-15 02:08:08');
+(20, 25, '- 5', 'Mohamad Nabaa', '2022-10-15 02:08:08'),
+(21, 500, '0', 'Mohamad Nabaa', '2022-10-29 01:03:35'),
+(2, 45, '- 1', 'Mohamad Nabaa', '2022-10-29 01:13:18');
 
 -- --------------------------------------------------------
 
@@ -325,7 +343,8 @@ INSERT INTO `history_product_sales` (`product_id`, `sales_number`, `sales_change
 (20, 0, '0', 'Mohamad Nabaa', '2022-10-15 01:53:23'),
 (1, 1, '+ 10', 'Store Sales', '2022-10-15 05:02:30'),
 (1, 5, '+ 5', 'Store Sales', '2022-10-15 05:03:27'),
-(1, 1, '+ 1', 'Store Sales', '2022-10-15 05:05:34');
+(1, 1, '+ 1', 'Store Sales', '2022-10-15 05:05:34'),
+(21, 0, '0', 'Mohamad Nabaa', '2022-10-29 01:03:35');
 
 -- --------------------------------------------------------
 
@@ -353,17 +372,34 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `name`, `price`, `type`, `category`, `description`, `age`, `image`, `inventory`, `sales_number`, `last_modified_by`, `last_modified_on`) VALUES
-(1, 'Doom Eternal', 300, 'cds', 'XBOX Cd', 'Hell’s armies have invaded Earth. Become the Slayer in an epic single-player campaign to conquer demons across dimensions and stop the final destruction of humanity. The only thing they fear... is you.', '15+', '', 100, 5, 'Mohamad Nabaa', '2022-10-26 10:23:38'),
-(2, 'Gears 5', 46, 'cds', 'XBOX Cd', 'Gears 5 follows the story of Kait Diaz, who is on a journey to find out the origin of the Locust Horde, the main antagonistic faction of the Gears of War series.', '16+', '', 0, 0, '', ''),
+(1, 'Doom Eternal', 300, 'cds', 'XBOX Cd', 'Hell’s armies have invaded Earth. Become the Slayer in an epic single-player campaign to conquer demons across dimensions and stop the final destruction of humanity. The only thing they fear... is you.', '15+', '', 0, 5, 'Mohamad Nabaa', '2022-10-26 10:23:38'),
+(2, 'Gears 5', 45, 'Phone', 'Action', 'Gears 5 follows the story of Kait Diaz, who is on a journey to find out the origin of the Locust Horde, the main antagonistic faction of the Gears of War series.', '16+', 'circuit1.jpg', 5, 0, 'Mohamad Nabaa', '2022-11-07 09:55:27'),
 (3, 'Watch Dogs: Legion', 50, 'cds', 'XBOX Cd', 'Gameplay in the Watch Dogs games focuses on an open world where the player can complete missions to progress an overall story, as well as engage in various side activities.', '12+', '', 0, 0, '', ''),
 (4, 'Battletoads', 50, 'cds', 'XBOX Cd', 'After being locked up in a fantasy simulator bunker for 26 years, the Battletoads are no longer intergalactic heroes and have fallen into modern day obscurity. Unable to settle down for a quiet, simple life, they set out to once again defeat their old longtime nemesis, The Dark Queen, to regain their lost fame. But when they confront the Queen they find out she had been in a similar predicament as them, having also been trapped and losing her powers. In the end they decide to team up with her to take down an evil alien race called the Topians, who were responsible for trapping all of them and are now the current rulers of the galaxy.', '12+', '', 0, 0, '', ''),
 (5, 'Iphone x', 350, 'phones', 'Cellphone', 'The iPhone X is a smartphone designed, developed and marketed by Apple Inc. The 11th generation of the iPhone, it was available to pre-order on October 27, 2017, and was released on November 3, 2017. The naming of the iPhone X (skipping the iPhone 9) is to mark the 10th anniversary of the iPhone .The iPhone X used a glass and stainless-steel form factor and \"bezel-less\" design, shrinking the bezels while not having a \"chin\", unlike many Android phones', 'Any', '', 0, 0, '', ''),
 (6, 'Iphone 11', 500, 'phone', 'Cellphone', 'The iPhone 11 is a smartphone designed, developed, and marketed by Apple Inc. It is the 13th generation of iPhone, succeeding the iPhone XR, and was unveiled on September 10, 2019 alongside the iPhone 11 Pro at the Steve Jobs Theater in Apple Park, Cupertino, by Apple CEO Tim Cook. Preorders began on September 13, 2019, and the phone was officially released on September 20, 2019, one day after the official public release of iOS 13.', 'Any', '', 0, 0, '', ''),
 (7, 'Galaxy Z Fold2', 990, 'phones', 'Cellphone', 'The Samsung Galaxy Z Fold 2 (stylized as Samsung Galaxy Z Fold2, sold as Samsung Galaxy Fold 2 in certain territories) is an Android-based foldable smartphone developed by Samsung Electronics for its Samsung Galaxy Z series, succeeding the Samsung Galaxy Z Fold. It was announced on 5 August 2020 alongside the Samsung Galaxy Note 20, the Samsung Galaxy Tab S7, the Galaxy Buds Live, and the Galaxy Watch 3. Samsung later revealed pricing and availability details on 1 September.\r\n\r\n', 'Any', '', 0, 0, '', ''),
-(8, 'Sonic', 46, 'cds', 'PS3 Cd', 'Sonic the Hedgehog CD is a 1993 platform game for the Sega CD developed and published by Sega. The story follows Sonic the Hedgehog as he attempts to save an extraterrestrial body, Little Planet, from Doctor Robotnik. Like other Sonic games, Sonic runs and jumps through several themed levels while collecting rings and defeating robots. Sonic CD is distinguished by its time travel feature, a key aspect to the story and gameplay. By traveling through time, players can access different versions of stages, featuring alternative layouts, music, and graphics.', '9+', '', 0, 0, '', ''),
 (9, 'PlayStation 3', 300, 'console', 'PS3', 'The PlayStation 3 (PS3) is a home video game console developed by Sony Computer Entertainment. The successor to the PlayStation 2, it is part of the PlayStation brand of consoles. It was first released on November 11, 2006, in Japan, November 17, 2006, in North America, and March 23, 2007, in Europe and Australia. The PlayStation 3 competed primarily against Microsoft\'s Xbox 360 and Nintendo\'s Wii as part of the seventh generation of video game consoles.', 'Any', '', 0, 0, '', ''),
 (10, 'PlayStation 4', 550, 'console', 'PS4', 'The PlayStation 4 (PS4) is a home video game console developed by Sony Computer Entertainment. Announced as the successor to the PlayStation 3 in February 2013, it was launched on November 15, 2013, in North America, November 29, 2013 in Europe, South America and Australia, and on February 22, 2014 in Japan. A console of the eighth generation, it competes with Microsoft\'s Xbox One and Nintendo\'s Wii U and Switch.', 'Any', '', 0, 0, '', ''),
-(20, 'GTA 5', 25, 'cds', 'strategy', 'Grand Theft Auto V is a 2013 action-adventure game developed by Rockstar North and published by Rockstar Games. It is the seventh main entry in the Grand Theft Auto series, following 2008\'s Grand Theft Auto IV, and the fifteenth instalment overall', '16+', 'GTA5.jpg', 10, 0, 'Mohamad Nabaa', '2022-10-15 02:08:08');
+(20, 'GTA 5', 25, 'Phone', 'Action', 'Grand Theft Auto V is a 2013 action-adventure game developed by Rockstar North and published by Rockstar Games. It is the seventh main entry in the Grand Theft Auto series, following 2008\'s Grand Theft Auto IV, and the fifteenth instalment overall', '16+', 'GTA5.jpg', 10, 0, 'Mohamad Nabaa', '2022-10-29 12:55:10'),
+(21, 'Nintendo Switch', 500, 'Consoles', 'Nintendo', 'The Nintendo Switch is a video game console developed by Nintendo and released worldwide in most regions on March 3, 2017. The console itself is a tablet that can either be docked for use as a h…', '12+ age', 'nintendoswitch.jpeg', 5, 0, 'Mohamad Nabaa', '2022-10-29 01:10:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products_offers`
+--
+
+CREATE TABLE `products_offers` (
+  `product_id` int NOT NULL,
+  `old_price` int NOT NULL,
+  `new_price` int NOT NULL,
+  `offer_percentage` decimal(5,0) NOT NULL,
+  `offer_begin_date` date NOT NULL,
+  `offer_end_date` date NOT NULL,
+  `last_modified_by` varchar(50) NOT NULL,
+  `last_modified_on` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -382,7 +418,10 @@ CREATE TABLE `product_categories` (
 --
 
 INSERT INTO `product_categories` (`category`, `added_by`, `modified_on`) VALUES
-('Action', 'Mohamad Nabaa', '2022-10-27 12:51:06');
+('Action', 'Mohamad Nabaa', '2022-10-27 12:51:06'),
+('Strategy', 'Mohamad Nabaa', '2022-10-27 03:55:12'),
+('Nintendo', 'Mohamad Nabaa', '2022-10-29 12:56:24'),
+('XBOX One', 'Mohamad Nabaa', '2022-10-29 01:13:59');
 
 -- --------------------------------------------------------
 
@@ -403,7 +442,9 @@ CREATE TABLE `product_types` (
 INSERT INTO `product_types` (`type`, `added_by`, `modified_on`) VALUES
 ('Phone', 'Mohamad Nabaa', '2022-10-27 12:19:29'),
 ('CDs', 'Mohamad Nabaa', '2022-10-27 12:20:02'),
-('Consoles', 'Mohamad Nabaa', '2022-10-27 12:20:16');
+('Consoles', 'Mohamad Nabaa', '2022-10-27 12:20:16'),
+('Computers', 'Mohamad Nabaa', '2022-10-27 03:25:25'),
+('Phone Accessories', 'Mohamad Nabaa', '2022-10-27 03:25:42');
 
 -- --------------------------------------------------------
 
@@ -471,7 +512,8 @@ INSERT INTO `sales_products` (`sales_id`, `product_name`, `quantity`, `price`) V
 (25, 'Doom Eternal', 10, 3000),
 (26, 'Doom Eternal', 10, 3000),
 (27, 'Doom Eternal', 5, 1500),
-(28, 'Doom Eternal', 1, 300);
+(28, 'Doom Eternal', 1, 300),
+(30, 'Doom Eternal', 100, 30000);
 
 -- --------------------------------------------------------
 
@@ -524,7 +566,13 @@ INSERT INTO `store_sales` (`store_sales_id`, `customer_name`, `username`, `email
 (25, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 1, 10, 3000, '2022-10-15 04:58:50'),
 (26, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 1, 10, 3000, '2022-10-15 05:02:30'),
 (27, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 1, 5, 1500, '2022-10-15 05:03:28'),
-(28, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 1, 1, 300, '2022-10-15 05:05:34');
+(28, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 1, 1, 300, '2022-10-15 05:05:34'),
+(29, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0, '2022-10-29 11:38:39'),
+(30, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0, '2022-10-29 11:41:09'),
+(31, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0, '2022-10-29 11:42:08'),
+(32, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0, '2022-10-29 11:44:09'),
+(33, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0, '2022-10-29 11:45:37'),
+(34, 'Mohamad Nabaa', 'Mohamad Nabaa', 'mnabaa53@gmail.com', 0, 0, 0, '2022-10-29 11:51:01');
 
 --
 -- Indexes for dumped tables
@@ -580,7 +628,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `product_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `repairs`
