@@ -212,31 +212,9 @@ hr {
   margin: 20px auto;
 }
 
-#first_name_error {
-  display: none;
-}
-
-#last_name_error {
-  display: none;
-}
-
-#email_error {
-  display: none;
-}
-
-#phone_number_error {
-  display: none;
-}
-
-#address_error {
-  display: none;
-}
-
-#username_error {
-  display: none;
-}
-
-#password_error {
+#product_name_error,
+#new_price_error,
+#end_date_error {
   display: none;
 }
 

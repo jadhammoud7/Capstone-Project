@@ -57,6 +57,24 @@ $offer_end_date = "";
 
 if (isset($_POST["product_name"])) {
     $product_name = $_POST["product_name"];
+
+    $stmt_select_product_id = $connection->prepare("SELECT product_id FROM products WHERE name = '" . $product_name . "'");
+    $stmt_select_product_id->execute();
+    $result_product_id = $stmt_select_product_id->get_result();
+    $row_product_id = $result_product_id->fetch_assoc();
+
+    $product_id = $row_product_id['product_id'];
+
+    $stmt_select_product_from_offers = $connection->prepare("SELECT * FROM products_offers WHERE product_id = '" . $product_id . "'");
+    $stmt_select_product_from_offers->execute();
+    $result_product_offers = $stmt_select_product_from_offers->get_result();
+    $row_product_offers = $result_product_offers->fetch_assoc();
+
+    if (!empty($row_product_offers)) {
+        $_SESSION['product_name_error'] = "Product Name already has an offer!";
+        header("Location: offers-admin.php?open_add_product_offer=true");
+        exit("Product Name Error");
+    }
 }
 
 if (isset($_POST["product_old_price"])) {
@@ -65,6 +83,12 @@ if (isset($_POST["product_old_price"])) {
 
 if (isset($_POST["product_new_price"])) {
     $product_new_price = $_POST["product_new_price"];
+
+    if ($product_new_price >= $product_old_price) {
+        $_SESSION['new_price_error'] = "New price should be less than the old price";
+        header("Location: offers-admin.php?open_add_product_offer=true");
+        exit("New Price Error");
+    }
 }
 
 if (isset($_POST["offer_percentage"])) {
@@ -77,6 +101,12 @@ if (isset($_POST["offer_begin_date"])) {
 
 if (isset($_POST["offer_end_date"])) {
     $offer_end_date = $_POST["offer_end_date"];
+
+    if ($offer_end_date < $offer_begin_date) {
+        $_SESSION['end_date_error'] = "Offer end date should be after begin date";
+        header("Location: offers-admin.php?open_add_product_offer=true");
+        exit("End Date Error");
+    }
 }
 
 if ($product_name != "" && $product_old_price != 0 && $product_new_price != 0 && $offer_percentage != 0 && $offer_begin_date != "" && $offer_end_date != "") {
@@ -408,6 +438,13 @@ $results_top_products = $stmt_top_products->get_result();
                         <br>
                         <p class="title">Please fill in this form to add a new product offer</p>
                         <br>
+                        <p class="error" id="product_name_error">
+                            <?php if (isset($_SESSION['product_name_error'])) {
+                                echo "<script>document.getElementById('product_name_error').style.display='block';</script>";
+                                echo $_SESSION['product_name_error'];
+                                unset($_SESSION['product_name_error']);
+                            } ?>
+                        </p>
 
                         <label for="product_name">
                             <b>Product Name</b>
@@ -432,6 +469,13 @@ $results_top_products = $stmt_top_products->get_result();
                         <input style="height: 35px;" type="number" name="product_old_price" id="product_old_price" value="">
                         <br><br>
 
+                        <p class="error" id="new_price_error">
+                            <?php if (isset($_SESSION['new_price_error'])) {
+                                echo "<script>document.getElementById('new_price_error').style.display='block';</script>";
+                                echo $_SESSION['new_price_error'];
+                                unset($_SESSION['new_price_error']);
+                            } ?>
+                        </p>
                         <label for="product_new_price">
                             <b>Product New Price</b>
                         </label>
@@ -451,6 +495,14 @@ $results_top_products = $stmt_top_products->get_result();
                         </label>
                         <input type="date" title="Enter offer's begin date" placeholder="Enter offer's begin date" name="offer_begin_date" id="offer_begin_date" value="" required>
                         <br><br>
+
+                        <p class="error" id="end_date_error">
+                            <?php if (isset($_SESSION['end_date_error'])) {
+                                echo "<script>document.getElementById('end_date_error').style.display='block';</script>";
+                                echo $_SESSION['end_date_error'];
+                                unset($_SESSION['end_date_error']);
+                            } ?>
+                        </p>
                         <label for="offer_end_date">
                             <b>Offer End Date</b>
                         </label>
