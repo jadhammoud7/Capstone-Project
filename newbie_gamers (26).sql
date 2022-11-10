@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2022 at 01:52 AM
+-- Generation Time: Nov 11, 2022 at 12:32 AM
 -- Server version: 8.0.23
 -- PHP Version: 8.0.2
 
@@ -244,7 +244,7 @@ INSERT INTO `favorites_customer_product` (`customer_id`, `product_id`) VALUES
 CREATE TABLE `history_product_inventory` (
   `product_id` int NOT NULL,
   `inventory` int NOT NULL,
-  `inventory_change` varchar(5) NOT NULL,
+  `inventory_change` int NOT NULL,
   `modified_by` varchar(50) NOT NULL,
   `modified_on` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -254,19 +254,19 @@ CREATE TABLE `history_product_inventory` (
 --
 
 INSERT INTO `history_product_inventory` (`product_id`, `inventory`, `inventory_change`, `modified_by`, `modified_on`) VALUES
-(1, 98, '', '', ''),
-(19, 5, '0', 'Mohamad Nabaa', '2022-10-15 01:39:22'),
-(19, 5, '0', 'Mohamad Nabaa', '2022-10-15 01:47:26'),
-(20, 5, '0', 'Mohamad Nabaa', '2022-10-15 01:53:23'),
-(20, 10, '+ 5', 'Mohamad Nabaa', '2022-10-15 01:57:55'),
-(20, 10, '+ 5', 'Mohamad Nabaa', '2022-10-15 02:03:18'),
-(20, 10, '+ 5', 'Mohamad Nabaa', '2022-10-15 02:08:08'),
-(1, 86, '- 10', 'Store Sales', '2022-10-15 05:02:30'),
-(1, 81, '- 5', 'Store Sales', '2022-10-15 05:03:27'),
-(1, 80, '- 1', 'Store Sales', '2022-10-15 05:05:34'),
-(1, 100, '+ 20', 'Mohamad Nabaa', '2022-10-26 10:23:38'),
-(21, 5, '0', 'Mohamad Nabaa', '2022-10-29 01:03:35'),
-(2, 5, '+ 5', 'Mohamad Nabaa', '2022-10-29 01:13:18');
+(1, 98, 1, '', ''),
+(19, 5, 1, 'Mohamad Nabaa', '2022-10-15 01:39:22'),
+(19, 5, 1, 'Mohamad Nabaa', '2022-10-15 01:47:26'),
+(20, 5, -10, 'Mohamad Nabaa', '2022-10-15 01:53:23'),
+(20, 10, -10, 'Mohamad Nabaa', '2022-10-15 01:57:55'),
+(20, 10, -10, 'Mohamad Nabaa', '2022-10-15 02:03:18'),
+(20, 10, -10, 'Mohamad Nabaa', '2022-10-15 02:08:08'),
+(1, 86, 1, 'Store Sales', '2022-10-15 05:02:30'),
+(1, 81, 1, 'Store Sales', '2022-10-15 05:03:27'),
+(1, 80, 1, 'Store Sales', '2022-10-15 05:05:34'),
+(1, 100, 1, 'Mohamad Nabaa', '2022-10-26 10:23:38'),
+(21, 5, 1, 'Mohamad Nabaa', '2022-10-29 01:03:35'),
+(2, 5, 1, 'Mohamad Nabaa', '2022-10-29 01:13:18');
 
 -- --------------------------------------------------------
 
@@ -278,8 +278,11 @@ CREATE TABLE `history_product_offers` (
   `product_id` int NOT NULL,
   `old_price` int NOT NULL,
   `new_price` int NOT NULL,
+  `offer_percentage` decimal(5,0) NOT NULL,
   `offer_begin_date` date NOT NULL,
-  `offer_end_date` date NOT NULL
+  `offer_end_date` date NOT NULL,
+  `last_modified_by` varchar(50) NOT NULL,
+  `last_modified_on` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -327,7 +330,7 @@ INSERT INTO `history_product_prices` (`product_id`, `price`, `price_change`, `mo
 CREATE TABLE `history_product_sales` (
   `product_id` int NOT NULL,
   `sales_number` int NOT NULL,
-  `sales_change` varchar(5) NOT NULL,
+  `sales_change` int NOT NULL,
   `modified_by` varchar(50) NOT NULL,
   `modified_on` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -337,14 +340,14 @@ CREATE TABLE `history_product_sales` (
 --
 
 INSERT INTO `history_product_sales` (`product_id`, `sales_number`, `sales_change`, `modified_by`, `modified_on`) VALUES
-(1, 5, '', '', '2022-10-11'),
-(19, 0, '0', 'Mohamad Nabaa', '2022-10-15 01:39:22'),
-(19, -3, '0', 'Mohamad Nabaa', '2022-10-15 01:47:26'),
-(20, 0, '0', 'Mohamad Nabaa', '2022-10-15 01:53:23'),
-(1, 1, '+ 10', 'Store Sales', '2022-10-15 05:02:30'),
-(1, 5, '+ 5', 'Store Sales', '2022-10-15 05:03:27'),
-(1, 1, '+ 1', 'Store Sales', '2022-10-15 05:05:34'),
-(21, 0, '0', 'Mohamad Nabaa', '2022-10-29 01:03:35');
+(1, 5, 0, '', '2022-10-11'),
+(19, 0, 0, 'Mohamad Nabaa', '2022-10-15 01:39:22'),
+(19, -3, 0, 'Mohamad Nabaa', '2022-10-15 01:47:26'),
+(20, 0, 0, 'Mohamad Nabaa', '2022-10-15 01:53:23'),
+(1, 1, 0, 'Store Sales', '2022-10-15 05:02:30'),
+(1, 5, 0, 'Store Sales', '2022-10-15 05:03:27'),
+(1, 1, 0, 'Store Sales', '2022-10-15 05:05:34'),
+(21, 0, 0, 'Mohamad Nabaa', '2022-10-29 01:03:35');
 
 -- --------------------------------------------------------
 
@@ -387,6 +390,19 @@ INSERT INTO `products` (`product_id`, `name`, `price`, `type`, `category`, `desc
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `products_inventory_sales`
+--
+
+CREATE TABLE `products_inventory_sales` (
+  `product_id` int NOT NULL,
+  `inventory_history` int NOT NULL,
+  `sales_history` int NOT NULL,
+  `inventory_sales_ratio` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products_offers`
 --
 
@@ -400,6 +416,13 @@ CREATE TABLE `products_offers` (
   `last_modified_by` varchar(50) NOT NULL,
   `last_modified_on` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `products_offers`
+--
+
+INSERT INTO `products_offers` (`product_id`, `old_price`, `new_price`, `offer_percentage`, `offer_begin_date`, `offer_end_date`, `last_modified_by`, `last_modified_on`) VALUES
+(3, 50, 40, '20', '2022-11-10', '2022-11-24', 'Mohamad Nabaa', '2022-11-10 06:56:26');
 
 -- --------------------------------------------------------
 
