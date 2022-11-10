@@ -97,10 +97,10 @@ button:hover {
   width: 45%;
 }
 
-.addproductbtn {
-  width: 45%;
+.addproductofferbtn {
+  width: 100%;
   border-radius: 20px;
-  color: black;
+  color: #fefefe;
 }
 
 /* Set a style for all buttons */

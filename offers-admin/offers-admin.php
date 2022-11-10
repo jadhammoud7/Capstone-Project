@@ -46,102 +46,64 @@ $stmt_total_checkouts->execute();
 $results_total_checkouts = $stmt_total_checkouts->get_result();
 $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
-//form of adding new product
+//form of adding new product offer
 $product_name = "";
-$product_price = 0;
-$product_type = "";
-$product_category = "";
-$product_description = "";
-$product_age = "";
-$product_image = "";
-$product_inventory = 0;
-$product_sales_number = 0;
+$product_old_price = 0;
+$product_new_price = 0;
+$offer_percentage = "";
+$offer_begin_date = "";
+$offer_end_date = "";
 
 if (isset($_POST["product_name"])) {
     $product_name = $_POST["product_name"];
 }
 
-if (isset($_POST["product_price"])) {
-    $product_price = $_POST["product_price"];
+if (isset($_POST["product_old_price"])) {
+    $product_old_price = $_POST["product_old_price"];
 }
 
-if (isset($_POST["product_type"])) {
-    $product_type = $_POST["product_type"];
+if (isset($_POST["product_new_price"])) {
+    $product_new_price = $_POST["product_new_price"];
 }
 
-if (isset($_POST["product_category"])) {
-    $product_category = $_POST["product_category"];
+if (isset($_POST["offer_percentage"])) {
+    $offer_percentage = $_POST["offer_percentage"];
 }
 
-if (isset($_POST["product_desciption"])) {
-    $product_description = $_POST["product_desciption"];
+if (isset($_POST["offer_begin_date"])) {
+    $offer_begin_date = $_POST["offer_begin_date"];
 }
 
-if (isset($_POST["product_age"])) {
-    $product_age = $_POST["product_age"];
+if (isset($_POST["offer_end_date"])) {
+    $offer_end_date = $_POST["offer_end_date"];
 }
 
-if (isset($_POST['product_inventory'])) {
-    $product_inventory = $_POST['product_inventory'];
-}
+if ($product_name != "" && $product_old_price != 0 && $product_new_price != 0 && $offer_percentage != 0 && $offer_begin_date != "" && $offer_end_date != "") {
+    //set timezone to beirut
+    date_default_timezone_set('Asia/Beirut');
+    $modified_on = date('Y-m-d h:i:s');
+    $modified_by = $row['first_name'] . ' ' . $row['last_name'];
 
-if (isset($_POST['product_sales'])) {
-    $product_sales_number = $_POST['product_sales'];
-}
+    $stmt_select_product_id = $connection->prepare("SELECT product_id FROM products WHERE name = '" . $product_name . "'");
+    $stmt_select_product_id->execute();
+    $result_product_id = $stmt_select_product_id->get_result();
+    $row_product_id = $result_product_id->fetch_assoc();
 
-if ($product_name != "" && $product_price != 0 && $product_type != "" && $product_category != "" && $product_description != "" && $product_age != "" && $product_inventory != 0) {
-    //make directory in images/Products that have same name as product
-    mkdir('../images/Products/' . $product_name);
-    $target_dir = "../images/Products/$product_name/";
-    $filename = basename($_FILES['product_image']['name']);
-    $target_file = $target_dir . $filename;
-    $fileType = pathinfo($target_file, PATHINFO_EXTENSION);
-    $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
-    if (in_array($fileType, $allowTypes)) {
-        if (move_uploaded_file($_FILES['product_image']['tmp_name'], $target_file)) {
-            $product_image = $filename;
-            //set timezone to beirut
-            date_default_timezone_set('Asia/Beirut');
-            $modified_on = date('Y-m-d h:i:s');
-            $modified_by = $row['first_name'] . ' ' . $row['last_name'];
+    $product_id = $row_product_id['product_id'];
 
-            //insert into table products
-            $stmt_add_new_product = $connection->prepare("INSERT INTO products(name, price, type, category, description, age, image, inventory, sales_number, last_modified_by, last_modified_on) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-            $stmt_add_new_product->bind_param("sisssssiiss", $product_name, $product_price, $product_type, $product_category, $product_description, $product_age, $product_image, $product_inventory, $product_sales_number, $modified_by, $modified_on);
-            $stmt_add_new_product->execute();
-            $stmt_add_new_product->close();
+    //insert into table products offers
+    $stmt_add_new_product_offer = $connection->prepare("INSERT INTO products_offers(product_id, old_price, new_price, offer_percentage, offer_begin_date, offer_end_date, last_modified_by, last_modified_on) VALUES (?,?,?,?,?,?,?,?)");
+    $stmt_add_new_product_offer->bind_param("iiiiddss", $product_id, $product_old_price, $product_new_price, $offer_percentage, $offer_begin_date, $offer_end_date, $modified_by, $modified_on);
+    $stmt_add_new_product_offer->execute();
+    $stmt_add_new_product_offer->close();
 
-            //select last product id
-            $select_last_product_id = $connection->prepare("SELECT product_id FROM products ORDER BY product_id DESC LIMIT 1");
-            $select_last_product_id->execute();
-            $result_last_product_id = $select_last_product_id->get_result();
-            $row_last_product_id = $result_last_product_id->fetch_assoc();
-            $product_id = $row_last_product_id['product_id'];
+    //insert into table history products offers
+    $stmt_add_product_offer_history = $connection->prepare("INSERT INTO history_product_offers(product_id, old_price, new_price, offer_percentage, offer_begin_date, offer_end_date, last_modified_by, last_modified_on) VALUES (?,?,?,?,?,?,?,?)");
+    $stmt_add_product_offer_history->bind_param("iiiiddss", $product_id, $product_old_price, $product_new_price, $offer_percentage, $offer_begin_date, $offer_end_date, $modified_by, $modified_on);
+    $stmt_add_product_offer_history->execute();
+    $stmt_add_product_offer_history->close();
 
-            //insert into history prices current price
-            $price_change = '0';
-            $stmt_add_product_price_history = $connection->prepare("INSERT INTO history_product_prices(product_id, price, price_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
-            $stmt_add_product_price_history->bind_param("iisss", $product_id, $product_price, $price_change, $modified_by, $modified_on);
-            $stmt_add_product_price_history->execute();
-            $stmt_add_product_price_history->close();
-
-            //insert into history inventory current inventory
-            $inventory_change = '0';
-            $stmt_add_product_inventory_history = $connection->prepare("INSERT INTO history_product_inventory(product_id, inventory, inventory_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
-            $stmt_add_product_inventory_history->bind_param("iisss", $product_id, $product_inventory, $inventory_change, $modified_by, $modified_on);
-            $stmt_add_product_inventory_history->execute();
-            $stmt_add_product_inventory_history->close();
-
-            //insert into histoy sales current sales 0
-            $sales_change = '0';
-            $stmt_add_product_sales_history = $connection->prepare("INSERT INTO history_product_sales(product_id, sales_number, sales_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
-            $stmt_add_product_sales_history->bind_param("iisss", $product_id, $product_sales_number, $sales_change, $modified_by, $modified_on);
-            $stmt_add_product_sales_history->execute();
-            $stmt_add_product_sales_history->close();
-
-            header("Location: product-admin.php?product-added=1");
-        }
-    }
+    header("Location: product-admin.php?product_offer_added=1");
 }
 
 //remove product offer
@@ -486,17 +448,15 @@ $results_top_products = $stmt_top_products->get_result();
                         <label for="offer_begin_date">
                             <b>Offer Begin Date</b>
                         </label>
-                        <br>
                         <input type="date" title="Enter offer's begin date" placeholder="Enter offer's begin date" name="offer_begin_date" id="offer_begin_date" value="" required>
-                        <br>
+                        <br><br>
                         <label for="offer_end_date">
                             <b>Offer End Date</b>
                         </label>
-                        <br>
                         <input type="date" title="Enter offer's end date" placeholder="Enter offer's end date" name="offer_end_date" id="offer_end_date" value="" required>
                         <br>
                         <div class="clearfix">
-                            <button type="submit" class="addproductbtn" title="Add new product offer">
+                            <button type="submit" class="addproductofferbtn" title="Add new product offer">
                                 <strong>Add Product Offer</strong>
                             </button>
                         </div>
