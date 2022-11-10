@@ -360,7 +360,10 @@ $results_top_products = $stmt_top_products->get_result();
                             <h3>Recommended Products Offers List</h3>
                         </div>
 
-                        <canvas id=""></canvas>
+                        <div>
+                            <canvas id="myChart" style="width:100%;max-width:600px;float:left"></canvas>
+                            <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
+                        </div>
 
                         <div class="card-header">
                             <h3>
@@ -387,26 +390,23 @@ $results_top_products = $stmt_top_products->get_result();
                                     </thead>
                                     <tbody>
                                         <?php
-                                        
-                                       
-                                        
+                                        $stmt_select_products_inventory_sales = $connection->prepare("SELECT * FROM products_inventory_sales ORDER BY inventory_sales_ratio DESC LIMIT 5");
+                                        $stmt_select_products_inventory_sales->execute();
+                                        $result_product_inventory_sales = $stmt_select_products_inventory_sales->get_result();
 
-                                        while ($row_products_offers = $result_products_offers->fetch_assoc()) {
-                                            $stmt_select_product_name = $connection->prepare("SELECT name FROM products WHERE product_id = '" . $row_products_offers['product_id'] . "'");
-                                            $stmt_select_product_name->execute();
-                                            $result_product_name = $stmt_select_product_name->get_result();
-                                            $row_product_name = $result_product_name->fetch_assoc();
+                                        while ($row_product_inventory_sales = $result_product_inventory_sales->fetch_assoc()) {
+                                            $stmt_select_product = $connection->prepare("SELECT name, price FROM products WHERE product_id = '" . $row_product_inventory_sales['product_id'] . "'");
+                                            $stmt_select_product->execute();
+                                            $result_product = $stmt_select_product->get_result();
+                                            $row_product = $result_product->fetch_assoc();
 
-                                            get_all_products_offers(
-                                                $row_products_offers['product_id'],
-                                                $row_product_name['name'],
-                                                $row_products_offers['old_price'],
-                                                $row_products_offers['new_price'],
-                                                $row_products_offers['offer_percentage'],
-                                                $row_products_offers['offer_begin_date'],
-                                                $row_products_offers['offer_end_date'],
-                                                $row_products_offers['last_modified_by'],
-                                                $row_products_offers['last_modified_on']
+                                            get_all_products_offers_recommendations(
+                                                $row_product_inventory_sales['product_id'],
+                                                $row_product['name'],
+                                                $row_product['price'],
+                                                $row_product_inventory_sales['inventory_history'],
+                                                $row_product_inventory_sales['sales_history'],
+                                                $row_product_inventory_sales['inventory_sales_ratio']
                                             );
                                         }
                                         ?>
@@ -612,6 +612,70 @@ $results_top_products = $stmt_top_products->get_result();
         var new_price = array_product_prices[document.getElementById('product_name').selectedIndex];
         document.getElementById('product_old_price').value = new_price;
     }
+
+    var array_products = [];
+    var array_products_inventories = [];
+    <?php
+    $stmt_select_all_products = $connection->prepare("SELECT repair_type FROM repairs");
+    $stmt_select_all_repairs->execute();
+    $results_all_repairs = $stmt_select_all_repairs->get_result();
+    while ($row_all_repairs = $results_all_repairs->fetch_assoc()) {
+    ?>
+        array_repairs.push("<?php
+                            echo $row_all_repairs['repair_type'];
+                            ?>");
+        <?php
+        $query_repairs_count = "SELECT COUNT(*) as total_appointments_count FROM appointments WHERE appointment_name ='" . $row_all_repairs['repair_type'] . "'";
+        $stmt_repairs_count = $connection->prepare($query_repairs_count);
+        $stmt_repairs_count->execute();
+        $results_repairs_count = $stmt_repairs_count->get_result();
+        $row_repairs_count = $results_repairs_count->fetch_assoc();
+        ?>
+
+        array_repairs_count.push("<?php
+                                    echo $row_repairs_count['total_appointments_count'];
+                                    ?>");
+    <?php
+    }
+    ?>;
+    var xValues = array_repairs;
+    var yValues = array_repairs_count;
+    var random_colors = [];
+
+    var size = array_repairs.length;
+
+    function getNewColor(start) {
+        for (var i = start; i < size; i++) {
+            var random = "#" + Math.floor(Math.random() * (255 + 1));
+            if (random_colors.values != random) {
+                random_colors.push(random);
+            } else {
+                getNewColor(i);
+            }
+        }
+    }
+    getNewColor(0);
+
+    var barColors = random_colors;
+    new Chart("myChart1", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            title: {
+                display: true,
+                text: "Repairs by Total Appointments"
+            }
+        }
+    });
 </script>
 
 </html>
