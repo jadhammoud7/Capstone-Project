@@ -150,8 +150,8 @@ if (isset($_POST['save'])) {
                     $new_inventory_history = $row_product_inventory_history['inventory_history'] + ($inventory_change);
                     $new_inventory_sales_ratio = ($row_product_inventory_history['sales_history'] / $new_inventory_history) * 100;
                     //add inventory change
-                    $update_product_inventory_sales = $connection->prepare("UPDATE products_inventory_sales SET inventory_history = ?, inventory_sales_ratio = ?");
-                    $update_product_inventory_sales->bind_param("ii", $new_inventory_history, $new_inventory_sales_ratio);
+                    $update_product_inventory_sales = $connection->prepare("UPDATE products_inventory_sales SET inventory_history = ?, inventory_sales_ratio = ? WHERE product_id = ?");
+                    $update_product_inventory_sales->bind_param("iii", $new_inventory_history, $new_inventory_sales_ratio, $product_id);
                     $update_product_inventory_sales->execute();
 
                     //select price and add to sales products, same as above condition
