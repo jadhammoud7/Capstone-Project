@@ -261,7 +261,7 @@ if (isset($_POST['save'])) {
                     $new_sales = $row_product_sales['sales_number'] + $quantity[$x];
                     $change_sales = $quantity[$x];
                     $stmt_insert_product_sales_history = $connection->prepare("INSERT INTO history_product_sales(product_id, sales_number, sales_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
-                    $stmt_insert_product_sales_history->bind_param("iisss", $product_id, $quantity, $new_sales, $change_sales, $modified_by, $modified_on);
+                    $stmt_insert_product_sales_history->bind_param("iiiss", $product_id, $new_sales, $change_sales, $modified_by, $modified_on);
                     $stmt_insert_product_sales_history->execute();
 
                     //select product sales from product inventory sales

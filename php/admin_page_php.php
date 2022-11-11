@@ -443,7 +443,7 @@ function get_all_products_offers_recommendations($product_id, $product_name, $pr
     $element = "
     <tr>
         <td>
-            <a href='product-details.php?product_id=$product_id' title=\"See details about '$product_name'\">
+            <a href='../product-admin/product-details.php?product_id=$product_id' title=\"See details about '$product_name'\">
                 $product_name
             </a>
         </td>

@@ -360,6 +360,10 @@ $results_top_products = $stmt_top_products->get_result();
                             <h3>Recommended Products Offers List</h3>
                         </div>
 
+                        <div class="card-header">
+                            <h4>Products of Lowest Sales / Inventory Ratio</h4>
+                        </div>
+
                         <div>
                             <canvas id="myChart" style="width:100%;max-width:600px;float:left"></canvas>
                             <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
@@ -382,10 +386,10 @@ $results_top_products = $stmt_top_products->get_result();
                                     <thead>
                                         <tr>
                                             <td id="product-name-column" title="Sort Product Name by descending">Product Name</td>
-                                            <td id="product-price-column" title="Sort Old Price by descending">Old Price</td>
-                                            <td id="product-inventory-history-column" title="Sort New Price by descending">New Price</td>
-                                            <td id="product-sales-history-column" title="Sort Offer Percentage by descending">Offer Percentage</td>
-                                            <td id="product-inventory-sales-ratio-column" title="Sort Offer Begin Date by descending">Offer Begin Date</td>
+                                            <td id="product-price-column" title="Sort Old Price by descending">Product Price</td>
+                                            <td id="product-inventory-history-column" title="Sort New Price by descending">Inventory History</td>
+                                            <td id="product-sales-history-column" title="Sort Offer Percentage by descending">Sales History</td>
+                                            <td id="product-inventory-sales-ratio-column" title="Sort Offer Begin Date by descending">Inventory Sales Ratio</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -613,36 +617,36 @@ $results_top_products = $stmt_top_products->get_result();
         document.getElementById('product_old_price').value = new_price;
     }
 
+    //for inventory history of products in products inventory sales table
     var array_products = [];
     var array_products_inventories = [];
     <?php
-    $stmt_select_all_products = $connection->prepare("SELECT repair_type FROM repairs");
-    $stmt_select_all_repairs->execute();
-    $results_all_repairs = $stmt_select_all_repairs->get_result();
-    while ($row_all_repairs = $results_all_repairs->fetch_assoc()) {
-    ?>
-        array_repairs.push("<?php
-                            echo $row_all_repairs['repair_type'];
-                            ?>");
-        <?php
-        $query_repairs_count = "SELECT COUNT(*) as total_appointments_count FROM appointments WHERE appointment_name ='" . $row_all_repairs['repair_type'] . "'";
-        $stmt_repairs_count = $connection->prepare($query_repairs_count);
-        $stmt_repairs_count->execute();
-        $results_repairs_count = $stmt_repairs_count->get_result();
-        $row_repairs_count = $results_repairs_count->fetch_assoc();
-        ?>
+    $stmt_select_product_inventory_sales = $connection->prepare("SELECT product_id, inventory_history FROM products_inventory_sales ORDER BY inventory_sales_ratio DESC LIMIT 5");
+    $stmt_select_product_inventory_sales->execute();
+    $result_product_inventory_sales = $stmt_select_product_inventory_sales->get_result();
 
-        array_repairs_count.push("<?php
-                                    echo $row_repairs_count['total_appointments_count'];
-                                    ?>");
+    while ($row_product_inventory_sales = $result_product_inventory_sales->fetch_assoc()) {
+        //get product name
+        $stmt_select_product_name = $connection->prepare("SELECT name FROM products WHERE product_id = '" . $row_product_inventory_sales['product_id'] . "'");
+        $stmt_select_product_name->execute();
+        $result_product_name = $stmt_select_product_name->get_result();
+        $row_product_name = $result_product_name->fetch_assoc();
+    ?>
+        array_products.push("<?php
+                                echo $row_product_name['name'];
+                                ?>");
+
+        array_products_inventories.push("<?php
+                                            echo $row_product_inventory_sales['inventory_history'];
+                                            ?>");
     <?php
     }
     ?>;
-    var xValues = array_repairs;
-    var yValues = array_repairs_count;
+    var xValues = array_products;
+    var yValues = array_products_inventories;
     var random_colors = [];
 
-    var size = array_repairs.length;
+    var size = array_products.length;
 
     function getNewColor(start) {
         for (var i = start; i < size; i++) {
@@ -657,7 +661,7 @@ $results_top_products = $stmt_top_products->get_result();
     getNewColor(0);
 
     var barColors = random_colors;
-    new Chart("myChart1", {
+    new Chart("myChart", {
         type: "bar",
         data: {
             labels: xValues,
@@ -672,7 +676,70 @@ $results_top_products = $stmt_top_products->get_result();
             },
             title: {
                 display: true,
-                text: "Repairs by Total Appointments"
+                text: "Total Inventory History For Products"
+            }
+        }
+    });
+
+    //for sales history of products with less inventory sales ratio
+    var array_products2 = [];
+    var array_products_sales = [];
+    <?php
+    $stmt_select_product_inventory_sales = $connection->prepare("SELECT product_id, sales_history FROM products_inventory_sales ORDER BY inventory_sales_ratio DESC LIMIT 5");
+    $stmt_select_product_inventory_sales->execute();
+    $result_product_inventory_sales = $stmt_select_product_inventory_sales->get_result();
+
+    while ($row_product_inventory_sales = $result_product_inventory_sales->fetch_assoc()) {
+        //get product name
+        $stmt_select_product_name = $connection->prepare("SELECT name FROM products WHERE product_id = '" . $row_product_inventory_sales['product_id'] . "'");
+        $stmt_select_product_name->execute();
+        $result_product_name = $stmt_select_product_name->get_result();
+        $row_product_name = $result_product_name->fetch_assoc();
+    ?>
+        array_products2.push("<?php
+                                echo $row_product_name['name'];
+                                ?>");
+        array_products_sales.push("<?php
+                                    echo $row_product_inventory_sales['sales_history'];
+                                    ?>");
+    <?php
+    }
+    ?>;
+    var xValues2 = array_products2;
+    var yValues2 = array_products_sales;
+    var random_colors2 = [];
+
+    var size2 = array_products2.length;
+
+    function getNewColor2(start) {
+        for (var i = start; i < size; i++) {
+            var random2 = "#" + Math.floor(Math.random() * (255 + 1));
+            if (random_colors2.values != random2) {
+                random_colors2.push(random2);
+            } else {
+                getNewColor2(i);
+            }
+        }
+    }
+    getNewColor2(0);
+
+    var barColors2 = random_colors2;
+    new Chart("myChart2", {
+        type: "bar",
+        data: {
+            labels: xValues2,
+            datasets: [{
+                backgroundColor: barColors2,
+                data: yValues2
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            title: {
+                display: true,
+                text: "Total Inventory Sales For Products"
             }
         }
     });
