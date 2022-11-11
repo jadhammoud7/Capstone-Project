@@ -138,12 +138,13 @@ if (isset($_POST['save'])) {
 
 
                     //select inventory histor from product inventory sales
-                    $stmt_select_product_inventory_history = $connection->prepare("SELECT inventory_history FROM products_inventory_sales WHERE product_id = '" . $product_id . "'");
+                    $stmt_select_product_inventory_history = $connection->prepare("SELECT inventory_history, sales_inventory FROM products_inventory_sales WHERE product_id = '" . $product_id . "'");
                     $stmt_select_product_inventory_history->execute();
                     $result_product_inventory_history = $stmt_select_product_inventory_history->get_result();
                     $row_product_inventory_history = $result_product_inventory_history->fetch_assoc();
 
                     $new_inventory_history = $row_product_inventory_history['inventory_history'] + ($inventory_change);
+                    $new_inventory_sales_ratio = ($row_product_inventory_history['sales_history'] / $new_inventory_history) * 100;
                     //add inventory change
                     $update_product_inventory_sales = $connection->prepare("UPDATE products_inventory_sales SET inventory_history = '" . $new_inventory_history . "'");
                     $update_product_inventory_sales->execute();
@@ -265,14 +266,15 @@ if (isset($_POST['save'])) {
                     $stmt_insert_product_sales_history->execute();
 
                     //select product sales from product inventory sales
-                    $stmt_select_product_sales_history = $connection->prepare("SELECT sales_history FROM products_inventory_sales WHERE product_id = '" . $product_id . "'");
+                    $stmt_select_product_sales_history = $connection->prepare("SELECT sales_history, inventory_history FROM products_inventory_sales WHERE product_id = '" . $product_id . "'");
                     $stmt_select_product_sales_history->execute();
                     $result_product_sales_history = $stmt_select_product_sales_history->get_result();
                     $row_product_sales_history = $result_product_sales_history->fetch_assoc();
 
                     $new_sales_history = $row_product_sales_history['sales_history'] + $change_sales;
+                    $new_inventory_sales_ratio = ($new_sales_history / $row_product_sales_history['inventory_history']) * 100;
                     //add inventory change
-                    $update_product_inventory_sales = $connection->prepare("UPDATE products_inventory_sales SET sales_history = '" . $new_sales_history . "'");
+                    $update_product_inventory_sales = $connection->prepare("UPDATE products_inventory_sales SET sales_history = '" . $new_sales_history . "' AND inventory_sales_ratio = '" . $new_inventory_sales_ratio . "'");
                     $update_product_inventory_sales->execute();
 
                     //update customer loyalty points
