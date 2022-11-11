@@ -116,7 +116,8 @@ if (isset($_POST['save'])) {
                 } else {
                     $new_inventory = $row_product_inventory['inventory'] - $quantity[$x];
                     //update product inventory
-                    $stmt_update_product_inventory = $connection->prepare("UPDATE products SET inventory = '" . $new_inventory . "' WHERE name = '" . $product_name[$x] . "'");
+                    $stmt_update_product_inventory = $connection->prepare("UPDATE products SET inventory = ? WHERE name = ?");
+                    $stmt_update_product_inventory->bind_param("is", $new_inventory, $product_name[$x]);
                     $stmt_update_product_inventory->execute();
 
                     //select product id
@@ -126,6 +127,7 @@ if (isset($_POST['save'])) {
                     $row_product_id = $result_product_id->fetch_assoc();
 
                     $product_id = $row_product_id['product_id'];
+
                     date_default_timezone_set('Asia/Beirut');
                     $modified_on = date('Y-m-d h:i:s');
                     $modified_by = $row['first_name'] . ' ' . $row['last_name'];
@@ -137,66 +139,82 @@ if (isset($_POST['save'])) {
                     $stmt_insert_product_inventory_history->execute();
 
 
-                    //select inventory histor from product inventory sales
-                    $stmt_select_product_inventory_history = $connection->prepare("SELECT inventory_history, sales_inventory FROM products_inventory_sales WHERE product_id = '" . $product_id . "'");
+                    //select inventory history and sales history from product inventory sales
+                    $stmt_select_product_inventory_history = $connection->prepare("SELECT inventory_history, sales_history FROM products_inventory_sales WHERE product_id = ?");
+                    $stmt_select_product_inventory_history->bind_param("i", $product_id);
                     $stmt_select_product_inventory_history->execute();
                     $result_product_inventory_history = $stmt_select_product_inventory_history->get_result();
                     $row_product_inventory_history = $result_product_inventory_history->fetch_assoc();
 
+                    //update inventory history
                     $new_inventory_history = $row_product_inventory_history['inventory_history'] + ($inventory_change);
                     $new_inventory_sales_ratio = ($row_product_inventory_history['sales_history'] / $new_inventory_history) * 100;
                     //add inventory change
-                    $update_product_inventory_sales = $connection->prepare("UPDATE products_inventory_sales SET inventory_history = '" . $new_inventory_history . "'");
+                    $update_product_inventory_sales = $connection->prepare("UPDATE products_inventory_sales SET inventory_history = ?, inventory_sales_ratio = ?");
+                    $update_product_inventory_sales->bind_param("ii", $new_inventory_history, $new_inventory_sales_ratio);
                     $update_product_inventory_sales->execute();
 
                     //select price and add to sales products, same as above condition
-                    $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE name = '" . $product_name[$x] . "'");
+                    $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE name = ?");
+                    $stmt_select_product_price->bind_param("s", $product_name[$x]);
                     $stmt_select_product_price->execute();
                     $result_product_price = $stmt_select_product_price->get_result();
                     $row_product_price = $result_product_price->fetch_assoc();
 
                     //let product price be unit price * quantity
                     $total_product_price = $row_product_price['price'] * $quantity[$x];
+
                     //update product sales by quantity
                     $total_sales_products = $total_sales_products + $quantity[$x];
+
                     //update sales price by increasing total product price
                     $total_sales_price = $total_sales_price + $total_product_price;
+
                     //update sales quantity by increasing product quantity
                     $total_sales_quantity = $total_sales_quantity + $quantity[$x];
 
                     //insert into table sales products
                     $stmt_insert_store_sales = $connection->prepare("INSERT INTO sales_products(sales_id, product_name, quantity, price) VALUES (?,?,?,?)");
-                    $stmt_insert_store_sales->bind_param("issi", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_price);
+                    $stmt_insert_store_sales->bind_param("isii", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_price);
                     $stmt_insert_store_sales->execute();
                     $stmt_insert_store_sales->close();
 
                     //select sales number of product
-                    $stmt_select_product_sales = $connection->prepare("SELECT sales_number FROM products WHERE name = '" . $product_name[$x] . "'");
+                    $stmt_select_product_sales = $connection->prepare("SELECT sales_number FROM products WHERE product_id = ?");
+                    $stmt_select_product_sales->bind_param("i", $product_id);
                     $stmt_select_product_sales->execute();
                     $results_product_sales = $stmt_select_product_sales->get_result();
                     $row_product_sales = $results_product_sales->fetch_assoc();
 
                     //add to product history sales
                     $new_sales = $row_product_sales['sales_number'] + $quantity[$x];
+
+                    //update product sales
+                    $stmt_update_product_sales = $connection->prepare("UPDATE products SET sales_number = ? WHERE product_id = ?");
+                    $stmt_update_product_sales->bind_param("ii", $new_sales, $product_id);
+
                     $change_sales = $quantity[$x];
                     $stmt_insert_product_sales_history = $connection->prepare("INSERT INTO history_product_sales(product_id, sales_number, sales_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
                     $stmt_insert_product_sales_history->bind_param("iiiss", $product_id, $quantity, $new_sales, $change_sales, $modified_by, $modified_on);
                     $stmt_insert_product_sales_history->execute();
 
                     //select product sales from product inventory sales
-                    $stmt_select_product_sales_history = $connection->prepare("SELECT sales_history FROM products_inventory_sales WHERE product_id = '" . $product_id . "'");
+                    $stmt_select_product_sales_history = $connection->prepare("SELECT sales_history, inventory_history FROM products_inventory_sales WHERE product_id = ?");
+                    $stmt_select_product_sales_history->bind_param("i", $product_id);
                     $stmt_select_product_sales_history->execute();
                     $result_product_sales_history = $stmt_select_product_sales_history->get_result();
                     $row_product_sales_history = $result_product_sales_history->fetch_assoc();
 
                     $new_sales_history = $row_product_sales_history['sales_history'] + $change_sales;
+                    $new_inventory_sales_ratio = ($new_sales_history / $row_product_sales_history['inventory_history']) * 100;
                     //add inventory change
-                    $update_product_inventory_sales = $connection->prepare("UPDATE products_inventory_sales SET sales_history = '" . $new_sales_history . "'");
+                    $update_product_inventory_sales = $connection->prepare("UPDATE products_inventory_sales SET sales_history = ?, inventory_sales_ratio = ? WHERE product_id = ?");
+                    $update_product_inventory_sales->bind_param("iii", $new_sales_history, $new_inventory_sales_ratio, $product_id);
                     $update_product_inventory_sales->execute();
                 }
             } else {
                 //if customer exists in table customers
-                //addinf quantity of all products needed
+                //adding quantity of all products needed
 
                 //first check if the quantity ordered of the product is available
                 $stmt_select_product_inventory = $connection->prepare("SELECT inventory FROM products WHERE name = '" . $product_name[$x] . "'");
@@ -211,16 +229,19 @@ if (isset($_POST['save'])) {
                 } else {
                     $new_inventory = $row_product_inventory['inventory'] - $quantity[$x];
                     //update product inventory
-                    $stmt_update_product_inventory = $connection->prepare("UPDATE products SET inventory = '" . $new_inventory . "' WHERE name = '" . $product_name[$x] . "'");
+                    $stmt_update_product_inventory = $connection->prepare("UPDATE products SET inventory = ? WHERE name = ?");
+                    $stmt_update_product_inventory->bind_param("is", $new_inventory, $product_name[$x]);
                     $stmt_update_product_inventory->execute();
 
                     //select product id
-                    $stmt_select_product = $connection->prepare("SELECT product_id FROM products WHERE name = '" . $product_name[$x] . "'");
+                    $stmt_select_product = $connection->prepare("SELECT product_id FROM products WHERE name = ?");
+                    $stmt_select_product->bind_param("s", $product_name[$x]);
                     $stmt_select_product->execute();
                     $result_product_id = $stmt_select_product->get_result();
                     $row_product_id = $result_product_id->fetch_assoc();
 
                     $product_id = $row_product_id['product_id'];
+
                     date_default_timezone_set('Asia/Beirut');
                     $modified_on = date('Y-m-d h:i:s');
                     $modified_by = $row['first_name'] . ' ' . $row['last_name'];
@@ -232,55 +253,68 @@ if (isset($_POST['save'])) {
                     $stmt_insert_product_inventory_history->execute();
 
                     //select price and add to sales products, same as above condition
-                    $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE name = '" . $product_name[$x] . "'");
+                    $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE product_id = ?");
+                    $stmt_select_product_price->bind_param("i", $product_id);
                     $stmt_select_product_price->execute();
                     $result_product_price = $stmt_select_product_price->get_result();
                     $row_product_price = $result_product_price->fetch_assoc();
 
                     //let product price be unit price * quantity
                     $total_product_price = $row_product_price['price'] * $quantity[$x];
+
                     //update product sales by quantity
                     $total_sales_products = $total_sales_products + $quantity[$x];
+
                     //update sales price by increasing total product price
                     $total_sales_price = $total_sales_price + $total_product_price;
+
                     //update sales quantity by increasing product quantity
                     $total_sales_quantity = $total_sales_quantity + $quantity[$x];
 
                     //insert into table sales products
                     $stmt_insert_store_sales = $connection->prepare("INSERT INTO sales_products(sales_id, product_name, quantity, price) VALUES (?,?,?,?)");
-                    $stmt_insert_store_sales->bind_param("issi", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_price);
+                    $stmt_insert_store_sales->bind_param("isii", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_price);
                     $stmt_insert_store_sales->execute();
                     $stmt_insert_store_sales->close();
 
                     //select sales number of product
-                    $stmt_select_product_sales = $connection->prepare("SELECT sales_number FROM products WHERE name = '" . $product_name[$x] . "'");
+                    $stmt_select_product_sales = $connection->prepare("SELECT sales_number FROM products WHERE product_id = ?");
+                    $stmt_select_product_sales->bind_param("i", $product_id);
                     $stmt_select_product_sales->execute();
                     $results_product_sales = $stmt_select_product_sales->get_result();
                     $row_product_sales = $results_product_sales->fetch_assoc();
 
                     //add to product history sales
                     $new_sales = $row_product_sales['sales_number'] + $quantity[$x];
+
+                    //update product sales number
+                    $stmt_update_product_sales_number = $connection->prepare("UPDATE products SET sales_number = ? WHERE product_id = ?");
+                    $stmt_update_product_sales_number->bind_param("ii", $new_sales, $product_id);
+                    $stmt_update_product_sales_number->execute();
+
                     $change_sales = $quantity[$x];
                     $stmt_insert_product_sales_history = $connection->prepare("INSERT INTO history_product_sales(product_id, sales_number, sales_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
                     $stmt_insert_product_sales_history->bind_param("iiiss", $product_id, $new_sales, $change_sales, $modified_by, $modified_on);
                     $stmt_insert_product_sales_history->execute();
 
                     //select product sales from product inventory sales
-                    $stmt_select_product_sales_history = $connection->prepare("SELECT sales_history, inventory_history FROM products_inventory_sales WHERE product_id = '" . $product_id . "'");
+                    $stmt_select_product_sales_history = $connection->prepare("SELECT sales_history, inventory_history FROM products_inventory_sales WHERE product_id = ?");
+                    $stmt_select_product_sales_history->bind_param("i", $product_id);
                     $stmt_select_product_sales_history->execute();
                     $result_product_sales_history = $stmt_select_product_sales_history->get_result();
                     $row_product_sales_history = $result_product_sales_history->fetch_assoc();
 
                     $new_sales_history = $row_product_sales_history['sales_history'] + $change_sales;
                     $new_inventory_sales_ratio = ($new_sales_history / $row_product_sales_history['inventory_history']) * 100;
-                    //add inventory change
-                    $update_product_inventory_sales = $connection->prepare("UPDATE products_inventory_sales SET sales_history = '" . $new_sales_history . "' AND inventory_sales_ratio = '" . $new_inventory_sales_ratio . "'");
+                    //add inventory sales change
+                    $update_product_inventory_sales = $connection->prepare("UPDATE products_inventory_sales SET sales_history = ?, inventory_sales_ratio = ? WHERE product_id = ?");
+                    $update_product_inventory_sales->bind_param("iii", $new_sales_history, $new_inventory_sales_ratio, $product_id);
                     $update_product_inventory_sales->execute();
 
                     //update customer loyalty points
                     $add_result = $row_check_username['loyalty_points'] + $quantity[$x];
-                    $stmt_update_loyalty = $connection->prepare("UPDATE customers SET loyalty_points=? WHERE customer_id='" . $row_check_username['customer_id'] . "'");
-                    $stmt_update_loyalty->bind_param("i", $add_result);
+                    $stmt_update_loyalty = $connection->prepare("UPDATE customers SET loyalty_points = ? WHERE customer_id = ?");
+                    $stmt_update_loyalty->bind_param("ii", $add_result, $row_check_username['customer_id']);
                     $stmt_update_loyalty->execute();
                     $stmt_update_loyalty->close();
                 }
