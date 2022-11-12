@@ -382,16 +382,16 @@ $results_top_products = $stmt_top_products->get_result();
                             <div class="table-responsive">
                                 <div class="div-search">
                                     <span class="las la-search" style="font-size: 1.8rem; color: royalblue;"></span>
-                                    <input type="text" id="SearchInput" onkeyup="FilterTable()" placeholder="Search in table Products Offers...">
+                                    <input type="text" id="SearchInput2" onkeyup="FilterTableRecommendation()" placeholder="Search in table Products Offers Recommendations...">
                                 </div>
                                 <table width="100%" id="products_recommendation_offers_table">
                                     <thead>
                                         <tr>
-                                            <td id="product-name-column" title="Sort Product Name by descending">Product Name</td>
-                                            <td id="product-price-column" title="Sort Old Price by descending">Product Price</td>
-                                            <td id="product-inventory-history-column" title="Sort New Price by descending">Inventory History</td>
-                                            <td id="product-sales-history-column" title="Sort Offer Percentage by descending">Sales History</td>
-                                            <td id="product-inventory-sales-ratio-column" title="Sort Offer Begin Date by descending">Inventory Sales Ratio</td>
+                                            <td id="product-name-column" title="Product Name">Product Name</td>
+                                            <td id="product-price-column" title="Product Price">Product Price</td>
+                                            <td id="product-inventory-history-column" title="The all time inventory of the products">Inventory History</td>
+                                            <td id="product-sales-history-column" title="The all time sales number of the product">Sales History</td>
+                                            <td id="product-inventory-sales-ratio-column" title="The ratio of the sales history to the inventory history">Inventory Sales Ratio</td>
                                         </tr>
                                     </thead>
                                     <tbody>
