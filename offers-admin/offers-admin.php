@@ -17,36 +17,6 @@ $stmt->execute();
 $results = $stmt->get_result();
 $row = $results->fetch_assoc();
 
-
-//sum of all customers
-$query_total_customers = "SELECT COUNT(customer_id) as count FROM customers";
-$stmt_total_customers = $connection->prepare($query_total_customers);
-$stmt_total_customers->execute();
-$results_total_customers = $stmt_total_customers->get_result();
-$row_total_customers = $results_total_customers->fetch_assoc();
-
-
-//count of all appointments
-$query_total_appointments = "SELECT COUNT(appointment_id) as total_appointments FROM appointments";
-$stmt_total_appointments = $connection->prepare($query_total_appointments);
-$stmt_total_appointments->execute();
-$results_total_appointments = $stmt_total_appointments->get_result();
-$row_total_appointments = $results_total_appointments->fetch_assoc();
-
-//sum of all appointments
-$query_total_profit = "SELECT SUM(total_price_including_tax) as total_profit FROM checkouts";
-$stmt_total_profit = $connection->prepare($query_total_profit);
-$stmt_total_profit->execute();
-$results_total_profit = $stmt_total_profit->get_result();
-$row_total_profit = $results_total_profit->fetch_assoc();
-
-//get total checkouts made
-$query_total_checkouts = "SELECT COUNT(checkout_id) as total_checkout FROM checkouts";
-$stmt_total_checkouts = $connection->prepare($query_total_checkouts);
-$stmt_total_checkouts->execute();
-$results_total_checkouts = $stmt_total_checkouts->get_result();
-$row_total_checkouts = $results_total_checkouts->fetch_assoc();
-
 //form of adding new product offer
 $product_name = "";
 $product_old_price = 0;
@@ -314,38 +284,70 @@ $results_top_products = $stmt_top_products->get_result();
             <div class="cards">
                 <div class="card-single">
                     <div>
-                        <h1><?php echo  $row_total_customers['count']; ?></h1>
-                        <span>Customers</span>
+                        <h1><?php
+                            $stmt_select_total_products = $connection->prepare("SELECT COUNT(*) as total_products FROM products");
+                            $stmt_select_total_products->execute();
+                            $result_total_products = $stmt_select_total_products->get_result();
+                            $row_total_products = $result_total_products->fetch_assoc();
+                            echo $row_total_products['total_products'];
+                            ?></h1>
+                        <span>Total Products</span>
                     </div>
                     <div>
-                        <span class="las la-users"></span>
-                    </div>
-                </div>
-                <div class="card-single">
-                    <div>
-                        <h1><?php echo $row_total_appointments['total_appointments'] ?></h1>
-                        <span>Appointments</span>
-                    </div>
-                    <div>
-                        <span class="las la-clipboard"></span>
+                        <span class="las la-boxes"></span>
                     </div>
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1><?php echo $row_total_checkouts['total_checkout'] ?></h1>
-                        <span>Chekouts</span>
+                        <h1><?php
+                            $stmt_select_total_products_offers = $connection->prepare("SELECT COUNT(*) as total_products_offers FROM products_offers");
+                            $stmt_select_total_products_offers->execute();
+                            $result_total_products_offers = $stmt_select_total_products_offers->get_result();
+                            $row_total_products_offers = $result_total_products_offers->fetch_assoc();
+                            echo $row_total_products_offers['total_products_offers'];
+                            ?></h1>
+                        <span>Total Products On Offers</span>
                     </div>
                     <div>
-                        <span class="las la-shopping-bag"></span>
+                        <span class="las la-tags"></span>
                     </div>
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>$<?php echo $row_total_profit['total_profit'] ?></h1>
-                        <span>Profit</span>
+                        <h1><?php
+                            $stmt_select_total_offer_percentage = $connection->prepare("SELECT SUM(offer_percentage) as total_offer_percentage FROM products_offers");
+                            $stmt_select_total_offer_percentage->execute();
+                            $result_total_offer_percentage = $stmt_select_total_offer_percentage->get_result();
+                            $row_total_offer_percentage = $result_total_offer_percentage->fetch_assoc();
+                            echo $row_total_offer_percentage['total_offer_percentage'];
+                            ?></h1>
+                        <span>Total Offers Percentage</span>
                     </div>
                     <div>
-                        <span class="las la-google-wallet"></span>
+                        <span class="las la-percentage"></span>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div>
+                        <h1>$<?php
+                                $total_sales_during_offer = 0;
+                                $stmt_select_products_offers = $connection->prepare("SELECT product_id, new_price, offer_begin_date, offer_end_date FROM products_offers");
+                                $stmt_select_products_offers->execute();
+                                $result_products_offers = $stmt_select_products_offers->get_result();
+                                while ($row_products_offers = $result_products_offers->fetch_assoc()) {
+                                    $stmt_select_sales_during_offer = $connection->prepare("SELECT SUM(sales_change) as total_sales FROM history_product_sales WHERE product_id = ? AND modified_on BETWEEN ? AND ?");
+                                    $stmt_select_sales_during_offer->bind_param("idd", $row_products_offers['product_id'], $row_products_offers['offer_begin_date'], $row_products_offers['offer_end_date']);
+                                    $stmt_select_sales_during_offer->execute();
+                                    $result_sales_during_offer = $stmt_select_sales_during_offer->get_result();
+                                    $row_sales_during_offer = $result_sales_during_offer->fetch_assoc();
+                                    $total_sales_during_offer = $total_sales_during_offer + $row_sales_during_offer['total_sales'] * $row_products_offers['new_price'];
+                                }
+                                echo $total_sales_during_offer;
+                                ?></h1>
+                        <span>Total Offers Profits</span>
+                    </div>
+                    <div>
+                        <span class="las la-wallet"></span>
                     </div>
                 </div>
             </div>
