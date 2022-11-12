@@ -130,7 +130,7 @@ if ($product_name != "" && $product_old_price != 0 && $product_new_price != 0 &&
 
     //insert into table history products offers
     $stmt_add_product_offer_history = $connection->prepare("INSERT INTO history_product_offers(product_id, old_price, new_price, offer_percentage, offer_begin_date, offer_end_date, last_modified_by, last_modified_on) VALUES (?,?,?,?,?,?,?,?)");
-    $stmt_add_product_offer_history->bind_param("iiiddss", $product_id, $product_old_price, $product_new_price, $offer_percentage, $offer_begin_date, $offer_end_date, $modified_by, $modified_on);
+    $stmt_add_product_offer_history->bind_param("iiiiddss", $product_id, $product_old_price, $product_new_price, $offer_percentage, $offer_begin_date, $offer_end_date, $modified_by, $modified_on);
     $stmt_add_product_offer_history->execute();
     $stmt_add_product_offer_history->close();
 
@@ -433,8 +433,9 @@ $results_top_products = $stmt_top_products->get_result();
                             <h3>Products Offers List</h3>
                         </div>
 
-                        <div id="myPlot" style="width:100%;max-width:700px;"></div>
-                        <div id="myPlot2" style="width:100%;max-width:700px;"></div>
+                        <div>
+                            <canvas id="myChart3" style="width:100%;max-width:600px;"></canvas>
+                        </div>
 
                         <div class="card-single add_product">
                             <button class="add_product_offer" id="add_product_offer" onclick="OpenAddProductOffer()" title="Add a new product offer">
@@ -740,6 +741,81 @@ $results_top_products = $stmt_top_products->get_result();
             title: {
                 display: true,
                 text: "Total Inventory Sales For Products"
+            }
+        }
+    });
+
+    var array_products3 = [];
+    var array_products_sales_offers = [];
+
+    <?php
+    //select all products ids of offers
+    $stmt_select_all_products_offers = $connection->prepare("SELECT product_id, offer_begin_date, offer_end_date FROM products_offers");
+    $stmt_select_all_products_offers->execute();
+    $result_products_offers = $stmt_select_all_products_offers->get_result();
+
+    while ($row_products_offers = $result_products_offers->fetch_assoc()) {
+        //get product name
+        $stmt_select_product_name = $connection->prepare("SELECT name FROM products WHERE product_id = ?");
+        $stmt_select_product_name->bind_param("i", $row_products_offers['product_id']);
+        $stmt_select_product_name->execute();
+        $result_product_name = $stmt_select_product_name->get_result();
+        $row_product_name = $result_product_name->fetch_assoc();
+    ?>
+        array_products3.push("<?php
+                                echo $row_product_name['name'];
+                                ?>");
+
+        <?php
+        $stmt_select_product_sales_during_offer = $connection->prepare("SELECT SUM(sales_change) as total_sales FROM history_product_sales WHERE product_id = ? AND modified_on BETWEEN ? AND ?");
+        $stmt_select_product_sales_during_offer->bind_param("idd", $row_products_offers['product_id'], $row_products_offers['offer_begin_date'], $row_products_offers['offer_end_date']);
+        $stmt_select_product_sales_during_offer->execute();
+        $result_product_sales = $stmt_select_product_sales_during_offer->get_result();
+        $row_product_sales = $result_product_sales->fetch_assoc();
+        ?>
+
+        array_products_sales_offers.push("<?php
+                                            echo $row_product_sales['total_sales'];
+                                            ?>");
+    <?php
+    }
+    ?>;
+
+    var xValues3 = array_products3;
+    var yValues3 = array_products_sales_offers;
+    var random_colors3 = [];
+
+    var size3 = array_products3.length;
+
+    function getNewColor3(start) {
+        for (var i = start; i < size; i++) {
+            var random3 = "#" + Math.floor(Math.random() * (255 + 1));
+            if (random_colors3.values != random3) {
+                random_colors3.push(random3);
+            } else {
+                getNewColor3(i);
+            }
+        }
+    }
+    getNewColor3(0);
+
+    var barColors3 = random_colors3;
+    new Chart("myChart3", {
+        type: "bar",
+        data: {
+            labels: xValues3,
+            datasets: [{
+                backgroundColor: barColors3,
+                data: yValues3
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            title: {
+                display: true,
+                text: "Total Sales Number of Products During Offer Time"
             }
         }
     });

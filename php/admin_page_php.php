@@ -414,7 +414,7 @@ function get_all_products_offers($product_id, $name, $old_price, $new_price, $of
     $element = "
     <tr>
         <td>
-            <a href='product-details.php?product_id=$product_id' title=\"See details about product '$name'\">
+            <a href='../product-admin/product-details.php?product_id=$product_id' title=\"See details about product '$name'\">
                 $name
             </a>
         </td>
