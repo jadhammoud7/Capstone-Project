@@ -42,7 +42,12 @@ if (isset($_GET['type']) && !isset($_GET['category']) && !isset($_GET['sortby'])
     $query_select_products = "SELECT * FROM products";
     $type = $_GET['type']; //display cds as a starter
     $_SESSION['title'] = $type; //for the title of the div 
-    $query_select_products = $query_select_products . " WHERE type= '" . $type . "' ";
+    //if offers button is selected
+    if ($type == 'offers') {
+        $query_select_products = "SELECT * FROM products_offers";
+    } else {
+        $query_select_products = $query_select_products . " WHERE type= '" . $type . "' ";
+    }
     $stmt_select_products = $connection->prepare($query_select_products);
     $stmt_select_products->execute();
     $results_shop = $stmt_select_products->get_result();
@@ -432,12 +437,26 @@ while ($row_customers = $results_customers->fetch_assoc()) {
                 <?php
                 if ((isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) || isset($_GET['type']) || !isset($_GET['type'])) {
                     while ($row = $results_shop->fetch_assoc()) {
-                        shop_connection(
-                            $row["product_id"],
-                            $row["name"],
-                            $row["price"],
-                            $row['image']
-                        );
+                        if ($_GET['type'] = 'offers') {
+                            $select_product = $connection->prepare("SELECT name, image FROM products WHERE product_id = '" . $row['product_id'] . "'");
+                            $select_product->execute();
+                            $result_product = $select_product->get_result();
+                            $row_product = $result_product->fetch_assoc();
+                            shop_offers_connection(
+                                $row['product_id'],
+                                $row_product['name'],
+                                $row['old_price'],
+                                $row['new_price'],
+                                $row_product['image']
+                            );
+                        } else {
+                            shop_connection(
+                                $row['product_id'],
+                                $row['name'],
+                                $row['price'],
+                                $row['image']
+                            );
+                        }
                     }
                 }
                 ?>
