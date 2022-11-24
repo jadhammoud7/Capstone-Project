@@ -114,8 +114,9 @@ if ($product_name != "" && $product_price != 0 && $product_type != "" && $produc
             $modified_by = $row['first_name'] . ' ' . $row['last_name'];
 
             //insert into table products
-            $stmt_add_new_product = $connection->prepare("INSERT INTO products(name, price, type, category, description, age, image, inventory, sales_number, last_modified_by, last_modified_on) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-            $stmt_add_new_product->bind_param("sisssssiiss", $product_name, $product_price, $product_type, $product_category, $product_description, $product_age, $product_image, $product_inventory, $product_sales_number, $modified_by, $modified_on);
+            $has_offer = 'NO';
+            $stmt_add_new_product = $connection->prepare("INSERT INTO products(name, price, type, category, description, age, image, inventory, sales_number, has_offer, last_modified_by, last_modified_on) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+            $stmt_add_new_product->bind_param("sisssssiisss", $product_name, $product_price, $product_type, $product_category, $product_description, $product_age, $product_image, $product_inventory, $product_sales_number, $has_offer, $modified_by, $modified_on);
             $stmt_add_new_product->execute();
             $stmt_add_new_product->close();
 

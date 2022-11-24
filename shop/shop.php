@@ -14,27 +14,27 @@ require_once('../php/shop_product_connection.php');
 //if no get request of type was sent meaning starter
 if (!isset($_GET['type'])) {
     $query = "SELECT * FROM products";
-    $stmt_select_first_product_type = $connection->prepare("SELECT type FROM product_types LIMIT 1");
-    $stmt_select_first_product_type->execute();
-    $result_first_product_type = $stmt_select_first_product_type->get_result();
-    $row_first_product_type = $result_first_product_type->fetch_assoc();
+    date_default_timezone_set('Asia/Beirut');
+    $currentDate = (new DateTime())->format('Y-m-d');
+    $stmt_select_products_offers = $connection->prepare("SELECT * FROM products_offers WHERE '" . $currentDate . "' BETWEEN offer_begin_date AND offer_end_date");
+    $stmt_select_products_offers->execute();
+    $result_products_offers = $stmt_select_products_offers->get_result();
 
-    $type = $row_first_product_type['type']; //display first type as a starter
-    $_SESSION['title'] = $type; //for the title of the div 
+    $_SESSION['title'] = 'All'; //for the title of the div 
     if (!isset($_GET['category'])) { //if no category filter was set
         if (!isset($_GET['newness'])) {
-            $query = $query . " WHERE type='" . $type . "' "; //check all products to type equals to cds
+            $query = $query . " WHERE has_offer = 'NO' "; //check all products to type equals to cds
         } else {
             $newness = $_GET['newness'];
-            $query = $query . " WHERE type='" . $type . "' AND category = '" . $newness . "'"; //check all products to type equals to cds and category category
+            $query = $query . " WHERE has_offer = 'NO' AND category = '" . $newness . "'"; //check all products to type equals to cds and category category
         }
     } else { //if a category filter was sent while no filter for type was sent
         $category = $_GET['category'];
-        $query = $query . " WHERE type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
+        $query = $query . " WHERE has_offer = 'NO' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
     }
-    $stmt = $connection->prepare($query);
-    $stmt->execute();
-    $results_shop = $stmt->get_result();
+    $stmt_select_products = $connection->prepare($query);
+    $stmt_select_products->execute();
+    $results_shop = $stmt_select_products->get_result();
 }
 
 //if selected button to view products by type only not filter
@@ -44,6 +44,7 @@ if (isset($_GET['type']) && !isset($_GET['category']) && !isset($_GET['sortby'])
     $_SESSION['title'] = $type; //for the title of the div 
     //if offers button is selected
     if ($type == 'offers') {
+        date_default_timezone_set('Asia/Beirut');
         $currentDate = (new DateTime())->format('Y-m-d');
         $query_select_products = "SELECT * FROM products_offers WHERE '" . $currentDate . "' BETWEEN offer_begin_date AND offer_end_date";
     } else {
@@ -60,17 +61,26 @@ if (isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) 
     $category = $_GET['category'];
     $sortby = $_GET['sortby'];
     $_SESSION['title'] = $type;
-    if ($type == "all") { //if type chosen is all then choose all products without conditions on products
-        if ($category != 'any') {
-            $query_select_products = $query_select_products . " WHERE category = '" . $category . "'"; //check all products to type equals to cds and category category
-        } //check all products to type equals to cds and category category
-    } else { //chose products of type type
+    //if offers button is selected
+    if ($type == 'offers') {
+        date_default_timezone_set('Asia/Beirut');
+        $currentDate = (new DateTime())->format('Y-m-d');
+        //loop products check has offer then get from offers or not
+        $query_select_products_offers = "SELECT * FROM products_offers WHERE '" . $currentDate . "' BETWEEN offer_begin_date AND offer_end_date";
         if ($category == 'any') {
-            $query_select_products = $query_select_products . " WHERE type='" . $type . "' "; //check all products to type equals to cds
+            $query_select_products_offers = $query_select_products_offers . " WHERE type='" . $type . "' "; //check all products to type equals to cds
         } else {
-            $query_select_products = $query_select_products . " WHERE type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
+            $query_select_products_offers = $query_select_products_offers . " WHERE type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
         }
+    } else {
+        $query_select_products = $query_select_products . " WHERE type= '" . $type . "' ";
     }
+
+    if ($category == 'any') {
+    } else {
+        $query_select_products = $query_select_products . " WHERE type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
+    }
+
     if ($sortby == 'newest') {
         $query_select_products = $query_select_products . " ORDER BY date_added DESC";
     }
@@ -82,6 +92,10 @@ if (isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) 
     }
     if ($sortby == 'popularity') {
         $query_select_products = $query_select_products . " ORDER BY sales DESC";
+    }
+    if ($type == 'offers') {
+        $stmt_select_products_offers->execute();
+        $result_products_offers = $stmt_select_products_offers->get_result();
     }
     $stmt_select_products = $connection->prepare($query_select_products);
     $stmt_select_products->execute();
@@ -436,28 +450,29 @@ while ($row_customers = $results_customers->fetch_assoc()) {
                     <h1><?php echo $_SESSION['title']; ?></h1>
                 </div>
                 <?php
-                if ((isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) || isset($_GET['type']) || !isset($_GET['type'])) {
+                if (!empty($result_products_offers)) {
+                    while ($row_offers = $result_products_offers->fetch_assoc()) {
+                        $select_product = $connection->prepare("SELECT name, image FROM products WHERE product_id = '" . $row_offers['product_id'] . "'");
+                        $select_product->execute();
+                        $result_product = $select_product->get_result();
+                        $row_product = $result_product->fetch_assoc();
+                        shop_offers_connection(
+                            $row_offers['product_id'],
+                            $row_product['name'],
+                            $row_offers['old_price'],
+                            $row_offers['new_price'],
+                            $row_product['image']
+                        );
+                    }
+                }
+                if (!empty($results_shop)) {
                     while ($row = $results_shop->fetch_assoc()) {
-                        if (isset($_GET['type']) && $_GET['type'] == 'offers') {
-                            $select_product = $connection->prepare("SELECT name, image FROM products WHERE product_id = '" . $row['product_id'] . "'");
-                            $select_product->execute();
-                            $result_product = $select_product->get_result();
-                            $row_product = $result_product->fetch_assoc();
-                            shop_offers_connection(
-                                $row['product_id'],
-                                $row_product['name'],
-                                $row['old_price'],
-                                $row['new_price'],
-                                $row_product['image']
-                            );
-                        } else {
-                            shop_connection(
-                                $row['product_id'],
-                                $row['name'],
-                                $row['price'],
-                                $row['image']
-                            );
-                        }
+                        shop_connection(
+                            $row['product_id'],
+                            $row['name'],
+                            $row['price'],
+                            $row['image']
+                        );
                     }
                 }
                 ?>

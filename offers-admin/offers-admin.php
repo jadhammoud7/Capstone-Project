@@ -98,6 +98,10 @@ if ($product_name != "" && $product_old_price != 0 && $product_new_price != 0 &&
     $stmt_add_new_product_offer->execute();
     $stmt_add_new_product_offer->close();
 
+    //update has_offer of product
+    $stmt_update_product_has_offer = $connection->prepare("UPDATE products SET has_offer = 'YES' WHERE product_id = '" . $product_id . "'");
+    $stmt_update_product_has_offer->execute();
+
     //insert into table history products offers
     $stmt_add_product_offer_history = $connection->prepare("INSERT INTO history_product_offers(product_id, old_price, new_price, offer_percentage, offer_begin_date, offer_end_date, last_modified_by, last_modified_on) VALUES (?,?,?,?,?,?,?,?)");
     $stmt_add_product_offer_history->bind_param("iiiiddss", $product_id, $product_old_price, $product_new_price, $offer_percentage, $offer_begin_date, $offer_end_date, $modified_by, $modified_on);
