@@ -26,12 +26,28 @@ if (isset($product_id)) {
         if (isset($_GET['quantities'])) {
             $quantity = $_GET['quantities'];
         }
-        $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE product_id = '" . $product_id . "' ");
-        $stmt_select_product_price->execute();
-        $result_select_product_price = $stmt_select_product_price->get_result();
-        $row_select_product_price = $result_select_product_price->fetch_assoc();
+        //check if product is in offer
+        $currentDate = (new DateTime())->format('Y-m-d');
+        $stmt_select_product_offer = $connection->prepare("SELECT * FROM products_offers WHERE product_id = '" . $product_id . "' AND '" . $currentDate . "' BETWEEN offer_begin_date AND offer_end_date");
+        $stmt_select_product_offer->execute();
+        $result_select_product_offer = $stmt_select_product_offer->get_result();
+        $row_select_product_offer = $result_select_product_offer->fetch_assoc();
+
+        $price = 0;
+
+        //if product not in offer, then select current price
+        if (empty($row_select_product_offer)) {
+            $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE product_id = '" . $product_id . "' ");
+            $stmt_select_product_price->execute();
+            $result_select_product_price = $stmt_select_product_price->get_result();
+            $row_select_product_price = $result_select_product_price->fetch_assoc();
+            $price = $row_select_product_price['price'];
+        } else {
+            //select new price in offer
+            $price = $row_select_product_offer['new_price'];
+        }
         $stmt = $connection->prepare("INSERT INTO baskets_customer_product(customer_id, product_id, quantity, price) VALUES (?,?,?,?)");
-        $stmt->bind_param("iiii", $customer_id, $product_id, $quantity, $row_select_product_price['price']);
+        $stmt->bind_param("iiii", $customer_id, $product_id, $quantity, $price);
         $stmt->execute();
         $stmt->close();
         echo "<script>window.location = '../shop/shop.php?add_to_basket=true';</script>";

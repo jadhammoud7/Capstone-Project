@@ -44,7 +44,8 @@ if (isset($_GET['type']) && !isset($_GET['category']) && !isset($_GET['sortby'])
     $_SESSION['title'] = $type; //for the title of the div 
     //if offers button is selected
     if ($type == 'offers') {
-        $query_select_products = "SELECT * FROM products_offers";
+        $currentDate = (new DateTime())->format('Y-m-d');
+        $query_select_products = "SELECT * FROM products_offers WHERE '" . $currentDate . "' BETWEEN offer_begin_date AND offer_end_date";
     } else {
         $query_select_products = $query_select_products . " WHERE type= '" . $type . "' ";
     }
@@ -437,7 +438,7 @@ while ($row_customers = $results_customers->fetch_assoc()) {
                 <?php
                 if ((isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) || isset($_GET['type']) || !isset($_GET['type'])) {
                     while ($row = $results_shop->fetch_assoc()) {
-                        if ($_GET['type'] = 'offers') {
+                        if (isset($_GET['type']) && $_GET['type'] == 'offers') {
                             $select_product = $connection->prepare("SELECT name, image FROM products WHERE product_id = '" . $row['product_id'] . "'");
                             $select_product->execute();
                             $result_product = $select_product->get_result();

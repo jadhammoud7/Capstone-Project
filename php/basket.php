@@ -29,11 +29,27 @@ while ($select_products_row = $select_products_results->fetch_assoc()) {
         $stmt_update_quantity->bind_param("i", $quantity);
         $stmt_update_quantity->execute();
         //update price
-        $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE product_id = '" . $product_id . "'");
-        $stmt_select_product_price->execute();
-        $result_select_product_price = $stmt_select_product_price->get_result();
-        $row_select_product_price = $result_select_product_price->fetch_assoc();
-        $price = $row_select_product_price['price'];
+        //check if product is in offer
+        $currentDate = (new DateTime())->format('Y-m-d');
+        $stmt_select_product_offer = $connection->prepare("SELECT * FROM products_offers WHERE product_id = '" . $product_id . "' AND '" . $currentDate . "' BETWEEN offer_begin_date AND offer_end_date");
+        $stmt_select_product_offer->execute();
+        $result_select_product_offer = $stmt_select_product_offer->get_result();
+        $row_select_product_offer = $result_select_product_offer->fetch_assoc();
+
+        $price = 0;
+
+        //if product not in offer, then select current price
+        if (empty($row_select_product_offer)) {
+            $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE product_id = '" . $product_id . "' ");
+            $stmt_select_product_price->execute();
+            $result_select_product_price = $stmt_select_product_price->get_result();
+            $row_select_product_price = $result_select_product_price->fetch_assoc();
+            $price = $row_select_product_price['price'];
+        } else {
+            //select new price in offer
+            $price = $row_select_product_offer['new_price'];
+        }
+
         $stmt_update_price = $connection->prepare("UPDATE baskets_customer_product SET price = ? WHERE product_id = '" . $product_id . "' AND customer_id = '" . $customer_id . "' ");
         $new_price = $price * $quantity;
         $stmt_update_price->bind_param("i", $new_price);

@@ -40,7 +40,7 @@ function shop_offers_connection($product_id, $name, $old_price, $new_price, $ima
     <div class=\"product2\" id=\"product\">
         <div class=\"product_info\" onclick=\"document.getElementById('attributes_section').style.transform = 'rotateY(180deg);'\">
             <div class=\"img_section\">
-                <img src=\"../images/Products/$image\" alt=\"product image\">
+                <img src=\"../images/Products/$name/$image\" alt=\"product image\">
             </div>
             <div class=\"offer_img_section\">
                 <img src=\"../images/new-offer.png\" alt=\"offer image\">
