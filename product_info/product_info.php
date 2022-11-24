@@ -15,7 +15,7 @@ include("../php/shop_product_connection.php");
 
 if (isset($_GET['productID'])) {
     $id = $_GET['productID'];
-    $select_product_query = "SELECT product_id, name, price, category, description, age FROM products WHERE product_id = '" . $id . "'";
+    $select_product_query = "SELECT product_id, name, price, category, description, age, image FROM products WHERE product_id = '" . $id . "'";
     $stmt_select_product = $connection->prepare($select_product_query);
     $stmt_select_product->execute();
     $results_select_product = $stmt_select_product->get_result();
@@ -91,7 +91,7 @@ if (isset($_GET['productID'])) {
     require_once("../php/product_info_connection.php");
     if (isset($_GET['productID'])) {
         if ($row_info = $results_select_product->fetch_assoc()) {
-            product_info_connection($row_info["product_id"], $row_info["name"], $row_info["price"], $row_info["category"], $row_info["description"], $row_info["age"]);
+            product_info_connection($row_info["product_id"], $row_info["name"], $row_info["price"], $row_info["category"], $row_info["description"], $row_info["age"], $row_info['image']);
         }
     } else {
         echo '<h3>There is no valid product info</h3>

@@ -1,6 +1,6 @@
 <?php
 
-function product_info_connection($product_id, $name, $price, $category, $description, $age)
+function product_info_connection($product_id, $name, $price, $category, $description, $age, $image)
 {
     $element = "
     <title>$name - Newbies Gamers</title>
@@ -11,7 +11,7 @@ function product_info_connection($product_id, $name, $price, $category, $descrip
     </div>
     <!-- ended with title page -->
     <div class=\"product_info_page\">
-        <img src=\"../images/Gaming-Wallpaper.png\" alt=\"Product Name\" class=\"product_image reveal-by-x\">
+        <img src=\"../images/Products/$name/$image\" alt=\"Product Name\" class=\"product_image reveal-by-x\">
         <div class=\"product_right_part reveal-by-y\">
             <h1><i>$name</i>
             </h1>
