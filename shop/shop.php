@@ -39,48 +39,48 @@ if (!isset($_GET['type'])) {
 
 //if selected button to view products by type only not filter
 if (isset($_GET['type']) && !isset($_GET['category']) && !isset($_GET['sortby'])) {
-    $query_select_products = "SELECT * FROM products";
     $type = $_GET['type']; //display cds as a starter
     $_SESSION['title'] = $type; //for the title of the div 
-    //if offers button is selected
-    if ($type == 'offers') {
-        date_default_timezone_set('Asia/Beirut');
-        $currentDate = (new DateTime())->format('Y-m-d');
-        $query_select_products = "SELECT * FROM products_offers WHERE '" . $currentDate . "' BETWEEN offer_begin_date AND offer_end_date";
-    } else {
-        $query_select_products = $query_select_products . " WHERE type= '" . $type . "' ";
-    }
+
+    date_default_timezone_set('Asia/Beirut');
+    $currentDate = (new DateTime())->format('Y-m-d');
+    //select all offers of type and category
+    $query_select_products = "SELECT * FROM products WHERE has_offer='NO' AND type = '" . $type . "'";
+    $query_select_products_offers = "SELECT * FROM products_offers WHERE type = '" . $type . "' AND '" . $currentDate . "' BETWEEN offer_begin_date AND offer_end_date";
+
+    $stmt_select_products_offers = $connection->prepare($query_select_products_offers);
+    $stmt_select_products_offers->execute();
+    $result_products_offers = $stmt_select_products_offers->get_result();
+
     $stmt_select_products = $connection->prepare($query_select_products);
     $stmt_select_products->execute();
     $results_shop = $stmt_select_products->get_result();
 }
 //if a get request of type was sent
 if (isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) {
-    $query_select_products = "SELECT * FROM products";
     $type = $_GET['type'];
     $category = $_GET['category'];
     $sortby = $_GET['sortby'];
     $_SESSION['title'] = $type;
     //if offers button is selected
-    if ($type == 'offers') {
-        date_default_timezone_set('Asia/Beirut');
-        $currentDate = (new DateTime())->format('Y-m-d');
-        //loop products check has offer then get from offers or not
-        $query_select_products_offers = "SELECT * FROM products_offers WHERE '" . $currentDate . "' BETWEEN offer_begin_date AND offer_end_date";
-        if ($category == 'any') {
-            $query_select_products_offers = $query_select_products_offers . " WHERE type='" . $type . "' "; //check all products to type equals to cds
-        } else {
-            $query_select_products_offers = $query_select_products_offers . " WHERE type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
-        }
-    } else {
-        $query_select_products = $query_select_products . " WHERE type= '" . $type . "' ";
-    }
 
+    date_default_timezone_set('Asia/Beirut');
+    $currentDate = (new DateTime())->format('Y-m-d');
+    //select all offers of type and category
+    $query_select_products = "SELECT * FROM products WHERE has_offer='NO'";
+    $query_select_products_offers = "SELECT * FROM products_offers";
     if ($category == 'any') {
+        $query_select_products = $query_select_products . " AND type= '" . $type . "' ";
+        $query_select_products_offers = $query_select_products_offers . " WHERE type='" . $type . "'  AND '" . $currentDate . "' BETWEEN offer_begin_date AND offer_end_date"; //check all products to type equals to cds
     } else {
-        $query_select_products = $query_select_products . " WHERE type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
+        $query_select_products = $query_select_products . " AND type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
+        $query_select_products_offers = $query_select_products_offers . " AND type='" . $type . "' AND category = '" . $category . "'  AND '" . $currentDate . "' BETWEEN offer_begin_date AND offer_end_date"; //check all products to type equals to cds and category category
     }
+    $stmt_select_products_offers = $connection->prepare($query_select_products_offers);
+    $stmt_select_products_offers->execute();
+    $result_products_offers = $stmt_select_products_offers->get_result();
 
+    //now select all products without offers of type and category
     if ($sortby == 'newest') {
         $query_select_products = $query_select_products . " ORDER BY date_added DESC";
     }
@@ -93,10 +93,7 @@ if (isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) 
     if ($sortby == 'popularity') {
         $query_select_products = $query_select_products . " ORDER BY sales DESC";
     }
-    if ($type == 'offers') {
-        $stmt_select_products_offers->execute();
-        $result_products_offers = $stmt_select_products_offers->get_result();
-    }
+
     $stmt_select_products = $connection->prepare($query_select_products);
     $stmt_select_products->execute();
     $results_shop = $stmt_select_products->get_result();

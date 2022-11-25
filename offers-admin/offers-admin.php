@@ -85,16 +85,18 @@ if ($product_name != "" && $product_old_price != 0 && $product_new_price != 0 &&
     $modified_on = date('Y-m-d h:i:s');
     $modified_by = $row['first_name'] . ' ' . $row['last_name'];
 
-    $stmt_select_product_id = $connection->prepare("SELECT product_id FROM products WHERE name = '" . $product_name . "'");
-    $stmt_select_product_id->execute();
-    $result_product_id = $stmt_select_product_id->get_result();
-    $row_product_id = $result_product_id->fetch_assoc();
+    $stmt_select_product = $connection->prepare("SELECT product_id, type, category FROM products WHERE name = '" . $product_name . "'");
+    $stmt_select_product->execute();
+    $result_product = $stmt_select_product->get_result();
+    $row_product = $result_product->fetch_assoc();
 
-    $product_id = $row_product_id['product_id'];
+    $product_id = $row_product['product_id'];
+    $type = $row_product['type'];
+    $category = $row_product['category'];
 
     //insert into table products offers
-    $stmt_add_new_product_offer = $connection->prepare("INSERT INTO products_offers(product_id, old_price, new_price, offer_percentage, offer_begin_date, offer_end_date, last_modified_by, last_modified_on) VALUES (?,?,?,?,?,?,?,?)");
-    $stmt_add_new_product_offer->bind_param("iiidssss", $product_id, $product_old_price, $product_new_price, $offer_percentage, $offer_begin_date, $offer_end_date, $modified_by, $modified_on);
+    $stmt_add_new_product_offer = $connection->prepare("INSERT INTO products_offers(product_id, type, category, old_price, new_price, offer_percentage, offer_begin_date, offer_end_date, last_modified_by, last_modified_on) VALUES (?,?,?,?,?,?,?,?,?,?)");
+    $stmt_add_new_product_offer->bind_param("issiidssss", $product_id, $type, $category, $product_old_price, $product_new_price, $offer_percentage, $offer_begin_date, $offer_end_date, $modified_by, $modified_on);
     $stmt_add_new_product_offer->execute();
     $stmt_add_new_product_offer->close();
 
@@ -116,6 +118,9 @@ if (isset($_GET['getProducttoRemove'])) {
     $product_id = $_GET['getProducttoRemove'];
     $stmt_delete_product_offer = $connection->prepare("DELETE FROM products_offers WHERE product_id = '" . $product_id . "'");
     $stmt_delete_product_offer->execute();
+
+    $stmt_update_product = $connection->prepare("UPDATE products SET has_offer='NO' WHERE product_id = '" . $product_id . "'");
+    $stmt_update_product->execute();
     header("Location: offers-admin.php?product_offer_deleted=1");
 }
 

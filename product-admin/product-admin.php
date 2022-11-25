@@ -111,12 +111,13 @@ if ($product_name != "" && $product_price != 0 && $product_type != "" && $produc
             //set timezone to beirut
             date_default_timezone_set('Asia/Beirut');
             $modified_on = date('Y-m-d h:i:s');
+            $date_added = date('Y-m-d');
             $modified_by = $row['first_name'] . ' ' . $row['last_name'];
 
             //insert into table products
             $has_offer = 'NO';
-            $stmt_add_new_product = $connection->prepare("INSERT INTO products(name, price, type, category, description, age, image, inventory, sales_number, has_offer, last_modified_by, last_modified_on) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-            $stmt_add_new_product->bind_param("sisssssiisss", $product_name, $product_price, $product_type, $product_category, $product_description, $product_age, $product_image, $product_inventory, $product_sales_number, $has_offer, $modified_by, $modified_on);
+            $stmt_add_new_product = $connection->prepare("INSERT INTO products(name, price, type, category, description, age, image, inventory, sales_number, has_offer, date_added, last_modified_by, last_modified_on) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            $stmt_add_new_product->bind_param("sisssssiissss", $product_name, $product_price, $product_type, $product_category, $product_description, $product_age, $product_image, $product_inventory, $product_sales_number, $has_offer, $date_added, $modified_by, $modified_on);
             $stmt_add_new_product->execute();
             $stmt_add_new_product->close();
 

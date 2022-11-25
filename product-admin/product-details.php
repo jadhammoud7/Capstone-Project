@@ -257,6 +257,11 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
         $stmt_update_product->execute();
         $stmt_update_product->close();
 
+        $stmt_update_product_offer = $connection->prepare("UPDATE products_offers SET type = ?, category = ?, last_modified_by = ?, last_modified_on = ? WHERE product_id = '" . $product_id . "'");
+        $stmt_update_product_offer->bind_param("ssss", $product_type, $product_category, $modified_by, $modified_on);
+        $stmt_update_product_offer->execute();
+        $stmt_update_product_offer->close();
+
         header("Location: product-details.php?product-id=$product_id&product-updated=1");
     }
 }

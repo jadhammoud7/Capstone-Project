@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   background-repeat: no-repeat;
+  background-image: url(../images/Newbie\ Gamers-logos.jpeg);
   background-size: 100% 100%;
   height: 100vh;
   overflow: hidden;
