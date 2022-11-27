@@ -22,12 +22,7 @@ $results = $stmt->get_result();
 //get all products(some of them )
 require_once("../php/shop_product_connection.php");
 
-$query_allproducts = "SELECT product_id, name, price, image FROM products ORDER BY RAND() LIMIT 8;";
-$stmt_allproducts = $connection->prepare($query_allproducts);
-$stmt_allproducts->execute();
-$results_allproducts = $stmt_allproducts->get_result();
-
-$query_allproducts = "SELECT product_id, name, price, image FROM products ORDER BY RAND() LIMIT 8;";
+$query_allproducts = "SELECT product_id, name, price, image FROM products WHERE has_offer='No' ORDER BY RAND() LIMIT 8";
 $stmt_allproducts = $connection->prepare($query_allproducts);
 $stmt_allproducts->execute();
 $results_allproducts = $stmt_allproducts->get_result();
@@ -375,6 +370,7 @@ $results_products = $stmt_products->get_result();
                 }
             }
             ?>
+            <br>
             <button class="shop-page-button" onclick="window.location.href='../shop/shop.php';" title="Go to Shop Page to View all Our Products"><i class="fa fa-shopping-cart"></i>Go To Shop Page</button>
         </div>
         <!-- end of products -->
