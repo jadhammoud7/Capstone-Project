@@ -1,6 +1,6 @@
 <?php
 
-function product_info_connection($product_id, $name, $price, $category, $description, $age, $image)
+function product_info_connection($product_id, $name, $price, $category, $description, $age, $date, $image)
 {
     $element = "
     <title>$name - Newbies Gamers</title>
@@ -30,6 +30,10 @@ function product_info_connection($product_id, $name, $price, $category, $descrip
             <div class=\"product-info-part\">
                 <h3 style=\"color: royalblue;\"><i>Age Group:</i></h3>
                 <h3>$age</h3>
+            </div>
+            <div class=\"product-info-part\">
+                <h3 style=\"color: royalblue;\"><i>Release Date:</i></h3>
+                <h3>$date</h3>
             </div>
             <!-- <label for=\"points\">Quantity:</label> -->
             <form action=\"../php/add_to_basket.php\" method=\"GET\">

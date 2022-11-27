@@ -20,7 +20,7 @@ if (isset($product_id)) {
     $select_results = $select_stmt->get_result();
     $row_select = $select_results->fetch_assoc();
 
-    if (empty($row_select['product_id'])) {
+    if (empty($row_select)) {
         $quantity = 1;
         //if selected quantity in product info
         if (isset($_GET['quantities'])) {
@@ -41,10 +41,10 @@ if (isset($product_id)) {
             $stmt_select_product_price->execute();
             $result_select_product_price = $stmt_select_product_price->get_result();
             $row_select_product_price = $result_select_product_price->fetch_assoc();
-            $price = $row_select_product_price['price'];
+            $price = $row_select_product_price['price'] * $quantity;
         } else {
             //select new price in offer
-            $price = $row_select_product_offer['new_price'];
+            $price = $row_select_product_offer['new_price'] * $quantity;
         }
         $stmt = $connection->prepare("INSERT INTO baskets_customer_product(customer_id, product_id, quantity, price) VALUES (?,?,?,?)");
         $stmt->bind_param("iiii", $customer_id, $product_id, $quantity, $price);
