@@ -16,7 +16,7 @@ if (isset($_GET['productRemoveID'])) {
   echo "<script>window.location = '../profile/profile.php';</script>";
 }
 
-if (isset($_GET['productID']) && $_GET['productID'] != "") {
+if (isset($_GET['productID'])) {
   $product_id = $_GET['productID'];
   $select_stmt = $connection->prepare("SELECT product_id FROM favorites_customer_product WHERE product_id = '" . $product_id . "' ");
   $select_stmt->execute();
@@ -24,11 +24,11 @@ if (isset($_GET['productID']) && $_GET['productID'] != "") {
   $row_select = $select_results->fetch_assoc();
 
   //check if product added to favorites list before
-  if (empty($row_select['product_id'])) {
-    $stmt = $connection->prepare("INSERT INTO favorites_customer_product(customer_id, product_id) VALUES (?,?)");
-    $stmt->bind_param("ii", $customer_id, $product_id);
-    $stmt->execute();
-    $stmt->close();
+  if (empty($row_select)) {
+    $stmt_add_to_favorites = $connection->prepare("INSERT INTO favorites_customer_product(customer_id, product_id) VALUES (?,?)");
+    $stmt_add_to_favorites->bind_param("ii", $customer_id, $product_id);
+    $stmt_add_to_favorites->execute();
+    $stmt_add_to_favorites->close();
     echo "<script>window.location = '../shop/shop.php?added_to_favorites=true';</script>";
   } else {
     echo "<script>window.location = '../shop/shop.php?found_in_favorites=true';</script>";

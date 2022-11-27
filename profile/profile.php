@@ -11,9 +11,9 @@ if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
 
-$customerid = $_SESSION['logged_id'];
+$customer_id = $_SESSION['logged_id'];
 
-$query = "SELECT * FROM customers WHERE customer_id = $customerid";
+$query = "SELECT * FROM customers WHERE customer_id = $customer_id";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
@@ -22,12 +22,6 @@ $row = $results->fetch_assoc();
 include('../php/shop_product_connection.php');
 include('../php/basket_product_connection.php');
 include('../php/products_lists.php');
-
-$customer_id = $_SESSION['logged_id'];
-$query_add_to_favorites = "SELECT product_id FROM favorites_customer_product WHERE customer_id = '" . $customer_id . "' ";
-$stmt_add_to_favorites = $connection->prepare($query_add_to_favorites);
-$stmt_add_to_favorites->execute();
-$results_add_to_favorites = $stmt_add_to_favorites->get_result();
 
 $query_basket = "SELECT product_id, quantity, price FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ";
 $stmt_basket = $connection->prepare($query_basket);
@@ -309,19 +303,40 @@ if (isset($_GET['delete_checkout_id'])) {
         <div class="favorites fade" style="display: none;">
             <div>
                 <h2>Favorites List</h2>
-                <h3>You have a total of <?php echo mysqli_num_rows(mysqli_query($connection, "SELECT * FROM favorites_customer_product WHERE customer_id = '" . $customer_id . "' ")); ?> items in favorites list</h3>
+                <h3>You have a total of <?php
+                                        $customer_id = $_SESSION['logged_id'];
+                                        $stmt_select_count_basket = $connection->prepare("SELECT COUNT(*) as basket_count FROM favorites_customer_product WHERE customer_id = '" . $customer_id . "' ");
+                                        $stmt_select_count_basket->execute();
+                                        $result_count_basket = $stmt_select_count_basket->get_result();
+                                        $row_count_basket = $result_count_basket->fetch_assoc();
+                                        echo $row_count_basket['basket_count']; ?> items in favorites list</h3>
             </div>
             <?php
+            $query_add_to_favorites = "SELECT product_id FROM favorites_customer_product WHERE customer_id = '" . $customer_id . "' ";
+            $stmt_add_to_favorites = $connection->prepare($query_add_to_favorites);
+            $stmt_add_to_favorites->execute();
+            $results_add_to_favorites = $stmt_add_to_favorites->get_result();
+
             while ($row_add_to_favorites = $results_add_to_favorites->fetch_assoc()) {
-                $stmt_get_product = $connection->prepare("SELECT product_id, name, category, price, image FROM products WHERE product_id = '" . $row_add_to_favorites["product_id"] . "' ");
+                $stmt_get_product = $connection->prepare("SELECT product_id, name, category, price, image, has_offer FROM products WHERE product_id = '" . $row_add_to_favorites['product_id'] . "' ");
                 $stmt_get_product->execute();
                 $results_get_product = $stmt_get_product->get_result();
                 $row_get_product = $results_get_product->fetch_assoc();
+
+                if ($row_get_product['has_offer'] == 'YES') {
+                    $stmt_select_product_offer_price = $connection->prepare("SELECT new_price FROM products_offers WHERE product_id = '" . $row_add_to_favorites['product_id'] . "'");
+                    $stmt_select_product_offer_price->execute();
+                    $result_offer_price = $stmt_select_product_offer_price->get_result();
+                    $row_offer_price = $result_offer_price->fetch_assoc();
+                    $price = $row_offer_price['new_price'];
+                } else {
+                    $price = $row_get_product['price'];
+                }
                 favorites_list_connection(
                     $row_get_product['product_id'],
                     $row_get_product['name'],
                     $row_get_product['category'],
-                    $row_get_product['price'],
+                    $price,
                     $row_get_product['image']
                 );
             }

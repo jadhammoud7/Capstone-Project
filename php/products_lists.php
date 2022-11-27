@@ -5,28 +5,28 @@ function favorites_list_connection($product_id, $name, $category, $price, $image
 {
 
     $element = "<div class=\"favorites-products\">
-                <div class=\"favorites-product-info\">
-                    <div class=\"favorites-product-img\">
-                        <img src=\"../images/Products/$image\" alt=\"favorites product\" style=\"width: 50%;\">
+                    <div class=\"favorites-product-info\">
+                        <div class=\"favorites-product-img\">
+                            <img src=\"../images/Products/$name/$image\" alt=\"favorites product\" style=\"width: 100%;\">
+                        </div>
+                        <div class=\"favorites-product-part\">
+                            <h3>$name</h3>
+                            <h4>$category</h4>
+                        </div>
+                        <div class=\"favorites-product-part\">
+                            <h3>Price</h3>
+                            <h4>$price$</h4>
+                        </div>
                     </div>
-                    <div class=\"favorites-product-part\">
-                        <h3>$name</h3>
-                        <h4>$category</h4>
+                    <div class=\"favorites-product-buttons\">
+                        <div>
+                            <button class=\"btn\" onclick=\"window.location.href = '../product_info/product_info.php?productID=$product_id';\" title=\"Check more information about this product\"><i class=\"fa fa-info-circle\"></i><strong>Check Info</strong></button>
+                        </div>
+                        <div>
+                            <button class=\"btn\" style=\"background-color: red;\" onclick=\"OpenRemoveFavoritesPopUp($product_id)\" title=\"Remove this product from your favorites list\"><i class=\"fa fa-trash\"></i><strong>Remove From Favorites</strong></button>
+                        </div>
                     </div>
-                    <div class=\"favorites-product-part\">
-                        <h3>Price</h3>
-                        <h4>$price$</h4>
-                    </div>
-                </div>
-                <div class=\"favorites-product-buttons\">
-                    <div>
-                        <button class=\"btn\" onclick=\"window.location.href = '../product_info/product_info.php?productID=$product_id';\" title=\"Check more information about this product\"><i class=\"fa fa-info-circle\"></i><strong>Check Info</strong></button>
-                    </div>
-                    <div>
-                        <button class=\"btn\" onclick=\"OpenRemoveFavoritesPopUp($product_id)\" title=\"Remove this product from your favorites list\"><i class=\"fa fa-trash\"></i><strong>Remove From Favorites</strong></button>
-                    </div>
-                </div>
-            </div>";
+                </div>";
 
     echo $element;
 }
@@ -40,7 +40,7 @@ function appointments_list_connection($appointment_id, $appointment_name, $date,
         <div class=\"appointments-list\">
             <div class=\"appointments-div\">
                 <div class=\"appointments-img\">
-                    <img src=\"../images/Repairs/$appointment_name/$image\" alt=\"basket product\" style=\"width: 50%;\">
+                    <img src=\"../images/Repairs/$appointment_name/$image\" alt=\"basket product\" style=\"width: 100%;\">
                 </div>
                 <div class=\"appointments-part\">
                     <h3>Appointment Name</h3>
