@@ -157,10 +157,6 @@ if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['e
     $tax_price = $_SESSION['tax_price'];
     $total_price_including_tax = $_SESSION['total_price_including_tax'];
     $date = $_POST['date'];
-    $insert_checkouts = $connection->prepare("INSERT INTO checkouts(customer_id, first_name, last_name, email, phone_number, shipping_country, shipping_location, shipping_company, postcode, order_notes, total_price, tax_price, total_price_including_tax, status, date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $insert_checkouts->bind_param("isssssssssdddss", $customer_id, $first_name, $last_name, $email, $phone_number, $shipping_country, $shipping_location, $shipping_company, $postcode, $order_notes, $total_price, $tax_price, $total_price_including_tax, $status, $date);
-    $insert_checkouts->execute();
-    $insert_checkouts->close();
 
     //get last checkout id
     $stmt_get_checkout_id = $connection->prepare("SELECT checkout_id FROM checkouts ORDER BY checkout_id DESC LIMIT 1");
@@ -168,21 +164,26 @@ if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['e
     $results_get_checkout_id = $stmt_get_checkout_id->get_result();
 
     if ($row_get_checkout_id = $results_get_checkout_id->fetch_assoc()) {
-        $checkout_id = $row_get_checkout_id['checkout_id'];
+        $checkout_id = $row_get_checkout_id['checkout_id'] + 1;
 
         //get products in basket for current user
-        $query_basket = $connection->prepare("SELECT product_id, quantity, price FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ");
-        $query_basket->execute();
-        $query_basket_result = $query_basket->get_result();
+        $stmt_select_basket = $connection->prepare("SELECT product_id, quantity, price FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ");
+        $stmt_select_basket->execute();
+        $basket_result = $stmt_select_basket->get_result();
 
-
-        while ($row_basket = $query_basket_result->fetch_assoc()) {
+        while ($row_basket = $basket_result->fetch_assoc()) {
             //insert into table checkouts customers products
             $query_checkout = $connection->prepare("INSERT INTO checkouts_customers_products(checkout_id, product_id, quantity, total_price) VALUES (?,?,?,?)");
             $query_checkout->bind_param("iiii", $checkout_id, $row_basket['product_id'], $row_basket['quantity'], $row_basket['price']);
             $query_checkout->execute();
             $query_checkout->close();
         }
+
+        $stmt_insert_checkout = $connection->prepare("INSERT INTO checkouts(checkout_id, customer_id, first_name, last_name, email, phone_number, shipping_country, shipping_location, shipping_company, postcode, order_notes, total_price, tax_price, total_price_including_tax, status, date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $stmt_insert_checkout->bind_param("iisssssssssdddss", $checkout_id, $customer_id, $first_name, $last_name, $email, $phone_number, $shipping_country, $shipping_location, $shipping_company, $postcode, $order_notes, $total_price, $tax_price, $total_price_including_tax, $status, $date);
+        $stmt_insert_checkout->execute();
+        $stmt_insert_checkout->close();
+
         //display alert successful
         echo "<script>window.location='../checkout/checkout.php?checkout_form_submitted=true';</script>";
 
@@ -206,7 +207,7 @@ function checkout_products_connection($name, $quantity, $price)
 }
 
 //to display products in table summary
-$stmt_get_basket_products = $connection->prepare("SELECT product_id, quantity FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ");
+$stmt_get_basket_products = $connection->prepare("SELECT product_id, quantity, price FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ");
 $stmt_get_basket_products->execute();
 $results_get_basket_products = $stmt_get_basket_products->get_result();
 
@@ -481,11 +482,11 @@ $results_get_basket_products = $stmt_get_basket_products->get_result();
                 </tr>
                 <?php
                 while ($row_get_basket_products = $results_get_basket_products->fetch_assoc()) {
-                    $stmt_get_product = $connection->prepare("SELECT name, price FROM products WHERE product_id = '" . $row_get_basket_products["product_id"] . "' ");
+                    $stmt_get_product = $connection->prepare("SELECT name FROM products WHERE product_id = '" . $row_get_basket_products["product_id"] . "' ");
                     $stmt_get_product->execute();
                     $results_get_product = $stmt_get_product->get_result();
                     $row_get_product = $results_get_product->fetch_assoc();
-                    checkout_products_connection($row_get_product['name'], $row_get_basket_products['quantity'], $row_get_product['price']);
+                    checkout_products_connection($row_get_product['name'], $row_get_basket_products['quantity'], $row_get_basket_products['price']);
                 }
                 ?>
             </table>

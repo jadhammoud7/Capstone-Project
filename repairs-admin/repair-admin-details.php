@@ -48,8 +48,8 @@ if (isset($_POST['description'])) {
 if ($repair_id != 0 && $repair_type != "" && $price_per_hour != 0 && $description != "") {
     if (!empty($_FILES['repair_image']['name'])) {
         //update repair with image
-        rmdir('../images/Repairs/' + $repair_type + '/');
-        mkdir('../images/Repairs/' + $repair_type + '/');
+        rmdir('../images/Repairs/' . $repair_type . '/');
+        mkdir('../images/Repairs/' . $repair_type . '/');
         $target_dir = "../images/Repairs/$repair_type/";
         $filename = basename($_FILES['repair_image']['name']);
         $target_file = $target_dir . $filename;
@@ -82,7 +82,7 @@ if ($repair_id != 0 && $repair_type != "" && $price_per_hour != 0 && $descriptio
 
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -96,6 +96,15 @@ if ($repair_id != 0 && $repair_type != "" && $price_per_hour != 0 && $descriptio
 </head>
 
 <body onunload="myFunction()">
+
+    <!-- started popup message logout -->
+    <div class="popup" id="logout-confirmation">
+        <img src="../images/question-mark.png" alt="">
+        <h2>Log Out Confirmation</h2>
+        <p>Are you sure that you want to logout?</p>
+        <button type="button" onclick="GoToLogIn()">YES</button>
+        <button type="button" onclick="CloseLogOutPopUp()">NO</button>
+    </div>
 
     <!-- started popup message repair updated -->
     <div class="popup" id="repair-updated-confirmation">
@@ -159,7 +168,7 @@ if ($repair_id != 0 && $repair_type != "" && $price_per_hour != 0 && $descriptio
                         <span>Offers</span>
                     </a>
                 </li>
-             
+
                 <li>
                     <a href="../repairs-admin/repairs-admin.php" id="repairs-link">
                         <span class="las la-tools"></span>
@@ -272,8 +281,8 @@ if ($repair_id != 0 && $repair_type != "" && $price_per_hour != 0 && $descriptio
                                                     <img src='../images/Repairs/<?php if (isset($row_repair)) {
                                                                                     echo $row_repair['repair_type'];
                                                                                 } ?>/<?php if (isset($row_repair)) {
-                                                                                    echo $row_repair['image'];
-                                                                                } ?>'>
+                                                                                            echo $row_repair['image'];
+                                                                                        } ?>'>
                                                 </div>
                                             </div>
                                         </div>

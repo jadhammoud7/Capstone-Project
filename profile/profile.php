@@ -72,7 +72,7 @@ if (isset($_GET['delete_checkout_id'])) {
 <html lang="en">
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -286,9 +286,15 @@ if (isset($_GET['delete_checkout_id'])) {
             ?>
 
             <div>
-                <h3>Total Price: <?php if (isset($_SESSION['total_price'])) {
-                                        echo $_SESSION['total_price'];
-                                    } ?>$</h3>
+                <h3>Total Price: <?php
+                                    $stmt_select_total_price_basket = $connection->prepare("SELECT SUM(price) as total_price FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "'");
+                                    $stmt_select_total_price_basket->execute();
+                                    $result_total_basket_price = $stmt_select_total_price_basket->get_result();
+                                    $row_total_basket_price = $result_total_basket_price->fetch_assoc();
+                                    if (!empty($row_total_basket_price)) {
+                                        echo $row_total_basket_price['total_price'];
+                                    }
+                                    ?>$</h3>
             </div>
             <div class="gotoshoppage_profile">
                 <button title="Go to shopping basket to modify or submit your order" onclick="window.location.href='../basket/basket.php';"><strong>Go To Shopping

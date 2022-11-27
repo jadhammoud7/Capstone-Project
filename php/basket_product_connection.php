@@ -49,7 +49,7 @@ function basket_connection($product_id, $name, $category, $price, $quantity, $im
 
     $element =  "<div class=\"basket-product\">
                     <div class=\"basket-product-img\">
-                        <img src=\"../images/$image\" alt=\"basket product\" style=\"width: 50%;\">
+                        <img src=\"../images/Products/$name/$image\" alt=\"basket product\" style=\"width: 100%;\">
                     </div>
                     <div class=\"basket-product-part\">
                         <h3>Product Name</h3>

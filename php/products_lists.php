@@ -40,7 +40,7 @@ function appointments_list_connection($appointment_id, $appointment_name, $date,
         <div class=\"appointments-list\">
             <div class=\"appointments-div\">
                 <div class=\"appointments-img\">
-                    <img src=\"../images/Repairs/$image\" alt=\"basket product\" style=\"width: 50%;\">
+                    <img src=\"../images/Repairs/$appointment_name/$image\" alt=\"basket product\" style=\"width: 50%;\">
                 </div>
                 <div class=\"appointments-part\">
                     <h3>Appointment Name</h3>

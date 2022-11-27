@@ -29,7 +29,7 @@ if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
     $status = "Pending";
     if ($type != "") {
         //select appointment price
-        $stmt_select_repair_price = $connection->prepare("SELECT price_per_hour FROM repair WHERE repair_type ='" . $type . "'");
+        $stmt_select_repair_price = $connection->prepare("SELECT price_per_hour FROM repairs WHERE repair_type ='" . $type . "'");
         $stmt_select_repair_price->execute();
         $results_select_repair_price = $stmt_select_repair_price->get_result();
         $row_select_repair_price = $results_select_repair_price->fetch_assoc();
