@@ -21,6 +21,12 @@ $results = $stmt->get_result();
 
 //get all products(some of them )
 require_once("../php/shop_product_connection.php");
+
+$query_allproducts = "SELECT product_id, name, price, image FROM products ORDER BY RAND() LIMIT 8;";
+$stmt_allproducts = $connection->prepare($query_allproducts);
+$stmt_allproducts->execute();
+$results_allproducts = $stmt_allproducts->get_result();
+
 $query_allproducts = "SELECT product_id, name, price, image FROM products ORDER BY RAND() LIMIT 8;";
 $stmt_allproducts = $connection->prepare($query_allproducts);
 $stmt_allproducts->execute();
@@ -337,23 +343,36 @@ $results_products = $stmt_products->get_result();
         </div>
         <div class="shop-products reveal-by-y">
             <?php
-            while ($row_allproducts = $results_allproducts->fetch_assoc()) {
-                shop_connection(
-                    $row_allproducts['product_id'],
-                    $row_allproducts['name'],
-                    $row_allproducts['price'],
-                    $row_allproducts['image']
-                );
+            date_default_timezone_set('Asia/Beirut');
+            $currentDate = (new DateTime())->format('Y-m-d');
+            $stmt_select_products_offers = $connection->prepare("SELECT * FROM products_offers WHERE '" . $currentDate . "' BETWEEN offer_begin_date AND offer_end_date");
+            $stmt_select_products_offers->execute();
+            $result_products_offers = $stmt_select_products_offers->get_result();
+
+            if (!empty($result_products_offers)) {
+                while ($row_offers = $result_products_offers->fetch_assoc()) {
+                    $select_product = $connection->prepare("SELECT name, image FROM products WHERE product_id = '" . $row_offers['product_id'] . "'");
+                    $select_product->execute();
+                    $result_product = $select_product->get_result();
+                    $row_product = $result_product->fetch_assoc();
+                    shop_offers_connection(
+                        $row_offers['product_id'],
+                        $row_product['name'],
+                        $row_offers['old_price'],
+                        $row_offers['new_price'],
+                        $row_product['image']
+                    );
+                }
             }
-
-
-            while ($row_allproducts = $results_allproducts->fetch_assoc()) {
-                shop_connection(
-                    $row_allproducts['product_id'],
-                    $row_allproducts['name'],
-                    $row_allproducts['price'],
-                    $row_allproducts['image']
-                );
+            if (!empty($results_allproducts)) {
+                while ($row = $results_allproducts->fetch_assoc()) {
+                    shop_connection(
+                        $row['product_id'],
+                        $row['name'],
+                        $row['price'],
+                        $row['image']
+                    );
+                }
             }
             ?>
             <button class="shop-page-button" onclick="window.location.href='../shop/shop.php';" title="Go to Shop Page to View all Our Products"><i class="fa fa-shopping-cart"></i>Go To Shop Page</button>
