@@ -361,6 +361,86 @@ $results_top_products = $stmt_top_products->get_result();
                 </div>
             </div>
 
+            <!-- list of discount loyalty -->
+
+            <div class="recent-grid" style="display: block !important;">
+                <div class="projects">
+                    <div class="card">
+
+                        <div class="card-header">
+                            <h3>Loyalty Discount</h3>
+                        </div>
+
+                        <div>
+                            <canvas id="myChartLoyalty" style="width:100%;max-width:600px;"></canvas>
+                        </div>
+
+                        <div class="card-single add_product">
+                            <button class="add_product_offer" id="add_product_offer" onclick="OpenAddProductOffer()" title="Add a new product offer">
+                                <span class="las la-plus"></span>
+                                Add / Modify Loyalty Discount
+                            </button>
+                        </div>
+
+                        <div class="card-header">
+                            <h3>
+                                <p style="text-decoration: underline; color: royalblue;" id="filter-text"></p>
+                                <br>
+                                <p id="table-sort"></p>
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div class="div-search">
+                                    <span class="las la-search" style="font-size: 1.8rem; color: royalblue;"></span>
+                                    <input type="text" id="SearchInput" onkeyup="FilterTable()" placeholder="Search in table Products Offers...">
+                                </div>
+                                <table width="100%" id="products_offers_table">
+                                    <thead>
+                                        <tr>
+                                            <td id="product-name-column" title="Sort Product Name by descending">Product Name</td>
+                                            <td id="old-price-column" title="Sort Old Price by descending">Old Price</td>
+                                            <td id="new-price-column" title="Sort New Price by descending">New Price</td>
+                                            <td id="offer-percentage-column" title="Sort Offer Percentage by descending">Offer Percentage</td>
+                                            <td id="offer-begin-date-column" title="Sort Offer Begin Date by descending">Offer Begin Date</td>
+                                            <td id="offer-end-date-column" title="Sort Offer End Date by descending">Offer End Date</td>
+                                            <td id="product-last-modified-by-column" title="Sort Last Modified By by descending">Last Modified By</td>
+                                            <td id="product-last-modified-on-column" title="Sort Last Modified On by descending">Last Modified On</td>
+                                            <td>Remove</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $stmt_select_all_products_offers = $connection->prepare("SELECT * FROM products_offers");
+                                        $stmt_select_all_products_offers->execute();
+                                        $result_products_offers = $stmt_select_all_products_offers->get_result();
+                                        while ($row_products_offers = $result_products_offers->fetch_assoc()) {
+                                            $stmt_select_product_name = $connection->prepare("SELECT name FROM products WHERE product_id = '" . $row_products_offers['product_id'] . "'");
+                                            $stmt_select_product_name->execute();
+                                            $result_product_name = $stmt_select_product_name->get_result();
+                                            $row_product_name = $result_product_name->fetch_assoc();
+
+                                            get_all_products_offers(
+                                                $row_products_offers['product_id'],
+                                                $row_product_name['name'],
+                                                $row_products_offers['old_price'],
+                                                $row_products_offers['new_price'],
+                                                $row_products_offers['offer_percentage'],
+                                                $row_products_offers['offer_begin_date'],
+                                                $row_products_offers['offer_end_date'],
+                                                $row_products_offers['last_modified_by'],
+                                                $row_products_offers['last_modified_on']
+                                            );
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- list of all products of recommended offers -->
 
             <div class="recent-grid" style="display: block !important;">
