@@ -49,10 +49,6 @@ $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
 //get all customer purchases from store
 require_once("../php/admin_page_php.php");
-$query_store_sales = "SELECT * FROM store_sales";
-$stmt_store_sales = $connection->prepare($query_store_sales);
-$stmt_store_sales->execute();
-$results_store_sales = $stmt_store_sales->get_result();
 
 //the add sales form
 if (isset($_POST['save'])) {
@@ -91,6 +87,8 @@ if (isset($_POST['save'])) {
     $total_sales_products = 0;
     $total_sales_price = 0;
     $total_sales_quantity = 0;
+    $loyalty_discount_percentage = 0;
+    $total_price_after_discount = 0;
 
     for ($x = 0; $x < count($product_name); $x++) {
         if (!empty($username)) {
@@ -311,6 +309,20 @@ if (isset($_POST['save'])) {
                     $update_product_inventory_sales->bind_param("iii", $new_sales_history, $new_inventory_sales_ratio, $product_id);
                     $update_product_inventory_sales->execute();
 
+                    //check if customer will benefit from loyalty discount
+                    $stmt_select_loyalty_discount = $connection->prepare("SELECT * FROM loyalty_discounts");
+                    $stmt_select_loyalty_discount->execute();
+                    $result_loyalty_discount = $stmt_select_loyalty_discount->get_result();
+                    $row_loyalty_discount = $result_loyalty_discount->fetch_assoc();
+
+                    if ($row_check_username['loyalty_points'] >= $row_loyalty_discount['loyalty_point_required']) {
+                        $loyalty_discount_percentage = $row_loyalty_discount['discount_percentage'];
+                        $total_price_after_discount = $total_sales_price - ($total_sales_price * $loyalty_discount_percentage);
+                    } else {
+                        $loyalty_discount_percentage = 0;
+                        $total_price_after_discount = $total_sales_price;
+                    }
+
                     //update customer loyalty points
                     $add_result = $row_check_username['loyalty_points'] + $quantity[$x];
                     $stmt_update_loyalty = $connection->prepare("UPDATE customers SET loyalty_points = ? WHERE customer_id = ?");
@@ -323,8 +335,8 @@ if (isset($_POST['save'])) {
     }
     date_default_timezone_set('Asia/Beirut');
     $date = date('Y-m-d h:i:s');
-    $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, total_products, total_quantity, total_price, date) VALUES (?,?,?,?,?,?,?,?)");
-    $stmt_insert_store_sales->bind_param("isssiiis", $store_sales_id, $customer_name, $username, $email, $total_sales_products, $total_sales_quantity, $total_sales_price, $date);
+    $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, total_products, total_quantity, total_price, loyalty_discount_percentage, total_price_after_discount,date) VALUES (?,?,?,?,?,?,?,?,?,?)");
+    $stmt_insert_store_sales->bind_param("isssiiiiis", $store_sales_id, $customer_name, $username, $email, $total_sales_products, $total_sales_quantity, $total_sales_price, $loyalty_discount_percentage, $total_price_after_discount, $date);
     $stmt_insert_store_sales->execute();
     $stmt_insert_store_sales->close();
     header("Location: store_sale-admin.php");
@@ -574,12 +586,18 @@ $row_count_store = $results_count_store->fetch_assoc();
                                             <td id="total-products-column" title="Sort Store Sales from most to least products containing">Total Products</td>
                                             <td id="total-quantity-column" title="Sort Store Sales from most to least quantities containing">Total Quantity</td>
                                             <td id="total-price-column" title="Sort Store Sales from most to least money gained">Total Price</td>
+                                            <td id="loyalty-discount-percentage-column" title="">Loyalty Discount %</td>
+                                            <td id="total-price-after-discount" title="">Total Price After Discount</td>
                                             <td id="date-column" title="Sort Store Sales from most to least recent">Date</td>
                                             <td>View Order</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
+                                        $query_store_sales = "SELECT * FROM store_sales";
+                                        $stmt_store_sales = $connection->prepare($query_store_sales);
+                                        $stmt_store_sales->execute();
+                                        $results_store_sales = $stmt_store_sales->get_result();
                                         while ($row_store_sales = $results_store_sales->fetch_assoc()) {
                                             get_all_store_sales(
                                                 $row_store_sales['store_sales_id'],
@@ -588,6 +606,8 @@ $row_count_store = $results_count_store->fetch_assoc();
                                                 $row_store_sales['total_products'],
                                                 $row_store_sales['total_quantity'],
                                                 $row_store_sales['total_price'],
+                                                $row_store_sales['loyalty_discount_percentage'],
+                                                $row_store_sales['total_price_after_discount'],
                                                 $row_store_sales['date']
                                             );
                                         }
@@ -608,11 +628,12 @@ $row_count_store = $results_count_store->fetch_assoc();
                         <h1 class="title">Add customer sales via store</h1>
                         <p class="title">Please fill in this form to add a new Sales.</p>
                         <br>
+                        <br>
                         <label for="customer_name"><b>Customer Name</b></label>
                         <input type="text" name="customer_name" class="survey_options" size="50" placeholder="Customer Name.." required>
 
                         <label for="username"><b>Username</b></label>
-                        <input type="text" name="username" class="survey_options" size="50" placeholder="Username if any (optional)..">
+                        <input type="text" id="username" name="username" class="survey_options" size="50" placeholder="Username if any (optional)..">
 
                         <label for="survey_options"><b>Survey Options</b></label>
                         <input type="text" name="email" class="survey_options" size="50" placeholder="Email.." required>

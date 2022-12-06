@@ -305,7 +305,7 @@ function get_products_in_asc_desc($name, $inventory, $sales_number)
     echo $element;
 }
 
-function get_all_store_sales($store_sales_id, $customer_name, $email, $total_products, $total_quantity, $total_price, $date)
+function get_all_store_sales($store_sales_id, $customer_name, $email, $total_products, $total_quantity, $total_price, $loyalty_discount_percentage, $total_price_after_discount, $date)
 {
     $element = "
         <tr class=\"hello\">
@@ -314,6 +314,8 @@ function get_all_store_sales($store_sales_id, $customer_name, $email, $total_pro
             <td title=\"$total_products\">$total_products</td>
             <td title=\"$total_quantity\">$total_quantity</td>
             <td title=\"$total_price\">$total_price</td>
+            <td title=\"$loyalty_discount_percentage\">$loyalty_discount_percentage</td>
+            <td title=\"$total_price_after_discount\">$total_price_after_discount</td>
             <td title=\"$date\">$date</td>
             <td>
                 <a>
