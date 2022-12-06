@@ -2,9 +2,18 @@ function OpenAddProductOffer() {
     window.location = '?open_add_product_offer=true';
 }
 
+function OpenAddDiscountFacility() {
+    window.location = '?open_add_discount_facility=true';
+}
+
 if (window.location.href.includes('open_add_product_offer=true')) {
     const add_product_offer_form = document.getElementById('add_product_offer_form');
     add_product_offer_form.style.display = 'block';
+}
+
+if (window.location.href.includes('?open_add_discount_facility=true')) {
+    const add_discount_facility_form = document.getElementById('add_discount_facility_form');
+    add_discount_facility_form.style.display = 'block';
 }
 
 //for product added popup
@@ -12,12 +21,38 @@ if (window.location.href.includes('product_offer_added=1')) {
     OpenProductOfferAddedPopUp();
 }
 
+if (window.location.href.includes('loyalty_discount_added=1')) {
+    OpenLoyaltyDiscountAddedPopUp();
+}
+
+if (window.location.href.includes('loyalty_discount_modified=1')) {
+    OpenLoyaltyDiscountModifiedPopUp();
+}
+
 function OpenProductOfferAddedPopUp() {
     const product_offer_added_popup = document.getElementById('product-offer-added-confirmation');
     product_offer_added_popup.classList.add('open-popup');
 }
 
+function OpenLoyaltyDiscountAddedPopUp() {
+    const loyalty_discount_added_popup = document.getElementById('loyalty-discount-added-confirmation');
+    loyalty_discount_added_popup.classList.add('open-popup');
+}
+
+function OpenLoyaltyDiscountModifiedPopUp() {
+    const loyalty_discount_modified_popup = document.getElementById('loyalty-discount-modified-confirmation');
+    loyalty_discount_modified_popup.classList.add('open-popup');
+}
+
 function CloseProductOfferAddedPopUp() {
+    window.location.href = 'offers-admin.php';
+}
+
+function CloseLoyaltyDiscountAddedPopUp() {
+    window.location.href = 'offers-admin.php';
+}
+
+function CloseLoyaltyDiscountModifiedPopUp() {
     window.location.href = 'offers-admin.php';
 }
 
@@ -25,6 +60,12 @@ function CloseAddProductOffer() {
     window.location.href = 'offers-admin.php';
     const add_product_offer_form = document.getElementById('add_product_offer_form');
     add_product_offer_form.style.display = 'none';
+}
+
+function CloseAddDiscountFacility() {
+    window.location.href = 'offers-admin.php';
+    const add_discount_facility_form = document.getElementById('add_discount_facility_form');
+    add_discount_facility_form.style.display = 'none';
 }
 
 if (window.location.href.includes('product_offer_deleted=1')) {

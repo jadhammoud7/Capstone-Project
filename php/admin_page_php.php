@@ -409,6 +409,27 @@ function get_all_product_categories_for_add_product_form($product_category)
     echo $element;
 }
 
+function get_loyalty_discount($loyalty_point_required, $discount_percentage, $benefitted_customers, $last_modified_by, $last_modified_on)
+{
+    $element = "
+    <tr>
+        <td>$loyalty_point_required</td>
+        <td>$discount_percentage</td>
+        <td>$benefitted_customers</td>
+        <td>$last_modified_by</td>
+        <td>$last_modified_on</td>
+        <td>
+            <a>
+                <button class=\"btn_remove_product\" onclick=\"OpenRemoveLoyaltyDiscountPopUp();\" title=\"Remove loyalty discount?\">
+                    <span class=\"las la-trash\"></span> 
+                    Remove Loyalty Discount
+                </button>
+            </a>
+        </td>";
+
+    echo $element;
+}
+
 function get_all_products_offers($product_id, $name, $old_price, $new_price, $offer_percentage, $offer_begin_date, $offer_end_date, $last_modified_by, $last_modified_on)
 {
     $element = "

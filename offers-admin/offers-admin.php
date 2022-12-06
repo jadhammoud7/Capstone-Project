@@ -113,6 +113,71 @@ if ($product_name != "" && $product_old_price != 0 && $product_new_price != 0 &&
     header("Location: offers-admin.php?product_offer_added=1");
 }
 
+$loyalty_point_required = "";
+$discount_percentage = "";
+
+if (isset($_POST['loyalty_point_required'])) {
+    $loyalty_point_required = $_POST['loyalty_point_required'];
+}
+
+if (isset($_POST['discount_percentage'])) {
+    $discount_percentage = $_POST['discount_percentage'];
+
+    if ($discount_percentage < 1 || $discount_percentage >= 100) {
+        $_SESSION['discount_percentage_error'] = "Discount percentage should be between 1 and 99";
+        header("Location: offers-admin.php?open_add_discount_facility=true");
+        exit("End discount percentage");
+    }
+}
+
+if ($loyalty_point_required != "" && $discount_percentage != "") {
+    //select existing discount loyalty
+    $stmt_select_discount_facility = $connection->prepare("SELECT * FROM loyalty_discounts");
+    $stmt_select_discount_facility->execute();
+    $result_loyalty_discount = $stmt_select_discount_facility->get_result();
+    $row_loyalty_discount = $result_loyalty_discount->fetch_assoc();
+
+    //if no existing discount loyalty then insert new
+    if (empty($row_loyalty_discount)) {
+
+        //check all customers who have higher loyalty points than required
+        $stmt_select_all_benefitted_customers = $connection->prepare("SELECT COUNT(*) as total_benefitted_customers FROM customers loyalty_points > $loyalty_point_required");
+        $stmt_select_all_benefitted_customers->execute();
+        $result_customers_loyalty = $stmt_select_all_benefitted_customers->get_result();
+        $row_customers_benefitted = $result_customers_loyalty->fetch_assoc();
+
+        $benefitted_customers = $row_customers_benefitted['total_benefitted_customers'];
+        date_default_timezone_set('Asia/Beirut');
+        $modified_on = date('Y-m-d h:i:s');
+        $modified_by = $row['first_name'] . ' ' . $row['last_name'];
+
+        //insert new loyalty discount
+        $stmt_insert_new_loyalty_discount = $connection->prepare("INSERT INTO loyalty_discounts(loyalty_point_required, discount_percentage, benefitted_customers, last_modified_by, last_modified_on) VALUES (?,?,?,?,?)");
+        $stmt_insert_new_loyalty_discount->bind_param("iiiss", $loyalty_point_required, $discount_percentage, $benefitted_customers, $modified_by, $modified_on);
+        $stmt_insert_new_loyalty_discount->execute();
+
+        header("Location: offers-admin.php?loyalty_discount_added=1");
+    } else { //if a discount exists
+        //check all customers who have higher loyalty points than required
+        $stmt_select_all_benefitted_customers = $connection->prepare("SELECT COUNT(*) as total_benefitted_customers FROM customers loyalty_points > $loyalty_point_required");
+        $stmt_select_all_benefitted_customers->execute();
+        $result_customers_loyalty = $stmt_select_all_benefitted_customers->get_result();
+        $row_customers_benefitted = $result_customers_loyalty->fetch_assoc();
+
+        $benefitted_customers = $row_customers_benefitted['total_benefitted_customers'];
+        date_default_timezone_set('Asia/Beirut');
+        $modified_on = date('Y-m-d h:i:s');
+        $modified_by = $row['first_name'] . ' ' . $row['last_name'];
+
+        //update loyalty discount
+        $stmt_update_loyalty_discount = $connection->prepare("UPDATE loyalty_discounts SET loyalty_points_required = ?, discount_percentage = ?, benefitted_customers = ?, last_modified_by = ?, last_modified_on = ?");
+        $stmt_update_loyalty_discount->bind_param("iiiss", $loyalty_point_required, $discount_percentage, $benefitted_customers, $modified_by, $modified_on);
+        $stmt_update_loyalty_discount->execute();
+
+        header("Location: offers-admin.php?loyalty_discount_modified=1");
+    }
+}
+
 //remove product offer
 if (isset($_GET['getProducttoRemove'])) {
     $product_id = $_GET['getProducttoRemove'];
@@ -192,6 +257,22 @@ $results_top_products = $stmt_top_products->get_result();
         <p id="remove-product-offer-confirmation-text"></p>
         <button type="button" onclick="DeleteProductOffer()">YES</button>
         <button type="button" onclick="CloseRemoveProductOfferDeletePopUp()">NO</button>
+    </div>
+
+    <!-- started popup message loyalty discount added -->
+    <div class="popup" id="loyalty-discount-added-confirmation">
+        <img src="../images/tick.png" alt="">
+        <h2>Loyalty Discount Added</h2>
+        <p>Loyalty discount was added successfully. Now loyal customers will benefit from discounts.</p>
+        <button type="button" onclick="CloseLoyaltyDiscountAddedPopUp()">OK</button>
+    </div>
+
+    <!-- started popup message loyalty discount modified -->
+    <div class="popup" id="loyalty-discount-modified-confirmation">
+        <img src="../images/tick.png" alt="">
+        <h2>Loyalty Discount Modified</h2>
+        <p>Loyalty discount was modified successfully</p>
+        <button type="button" onclick="CloseLoyaltyDiscountModifiedPopUp()">OK</button>
     </div>
 
     <input type="checkbox" id="nav-toggle">
@@ -376,36 +457,22 @@ $results_top_products = $stmt_top_products->get_result();
                         </div>
 
                         <div class="card-single add_product">
-                            <button class="add_product_offer" id="add_product_offer" onclick="OpenAddProductOffer()" title="Add a new product offer">
+                            <button class="add_product_offer" id="add_product_offer" onclick="OpenAddDiscountFacility()" title="Add a new product offer">
                                 <span class="las la-plus"></span>
                                 Add / Modify Loyalty Discount
                             </button>
                         </div>
 
-                        <div class="card-header">
-                            <h3>
-                                <p style="text-decoration: underline; color: royalblue;" id="filter-text"></p>
-                                <br>
-                                <p id="table-sort"></p>
-                            </h3>
-                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <div class="div-search">
-                                    <span class="las la-search" style="font-size: 1.8rem; color: royalblue;"></span>
-                                    <input type="text" id="SearchInput" onkeyup="FilterTable()" placeholder="Search in table Products Offers...">
-                                </div>
                                 <table width="100%" id="products_offers_table">
                                     <thead>
                                         <tr>
-                                            <td id="product-name-column" title="Sort Product Name by descending">Product Name</td>
-                                            <td id="old-price-column" title="Sort Old Price by descending">Old Price</td>
-                                            <td id="new-price-column" title="Sort New Price by descending">New Price</td>
-                                            <td id="offer-percentage-column" title="Sort Offer Percentage by descending">Offer Percentage</td>
-                                            <td id="offer-begin-date-column" title="Sort Offer Begin Date by descending">Offer Begin Date</td>
-                                            <td id="offer-end-date-column" title="Sort Offer End Date by descending">Offer End Date</td>
-                                            <td id="product-last-modified-by-column" title="Sort Last Modified By by descending">Last Modified By</td>
-                                            <td id="product-last-modified-on-column" title="Sort Last Modified On by descending">Last Modified On</td>
+                                            <td id="loyalty-point-required-column">Loyalty Point Required</td>
+                                            <td id="discount-percetage">Discount Percentage</td>
+                                            <td id="benefittef-customers">Benefitted Customers</td>
+                                            <td id="product-last-modified-by-column">Last Modified By</td>
+                                            <td id="product-last-modified-on-column">Last Modified On</td>
                                             <td>Remove</td>
                                         </tr>
                                     </thead>
@@ -592,6 +659,48 @@ $results_top_products = $stmt_top_products->get_result();
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- adding or modifying discount facility form -->
+            <div id="add_discount_facility_form" class="modal">
+                <span onclick="CloseAddDiscountFacility()" class="close" title="Close Modal">&times;</span>
+                <form class="modal-content" action="offers-admin.php" method="POST" enctype="multipart/form-data">
+                    <div class="container">
+                        <h1 class="title">Add / Modify Loyalty Discount</h1>
+                        <br>
+                        <p class="title">Please fill in this form to add or modify discount facility</p>
+                        <br>
+
+                        <label for="loyalty_point_required">
+                            <b>Loyalty Point Required</b>
+                        </label>
+                        <br>
+                        <input type="number" name="loyalty_point_required" id="loyalty_point_required" value="" placeholder="Enter the required loyalty points for customers to benefit from discounts">
+                        <br><br>
+
+
+                        <p class="error" id="discount_percentage_error">
+                            <?php if (isset($_SESSION['discount_percentage_error'])) {
+                                echo "<script>document.getElementById('discount_percentage_error').style.display='block';</script>";
+                                echo $_SESSION['discount_percentage_error'];
+                                unset($_SESSION['discount_percentage_error']);
+                            } ?>
+                        </p>
+
+                        <br>
+                        <label for="discount_percentage">
+                            <b>Discount Percentage</b>
+                        </label>
+                        <br>
+                        <input type="number" name="discount_percentage" id="discount_percentage" value="" placeholder="Enter the discount percentage">
+                        <br><br>
+                        <div class="clearfix">
+                            <button type="submit" class="addloyaltydiscountbtn" title="Add / Modify Loyalty Discount">
+                                <strong>Add Loyalty Discount</strong>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
 
             <!-- adding new product offer form -->
