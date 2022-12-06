@@ -80,8 +80,13 @@ if ($_FILES['customer_image']['name'] != "") {
     $result_username = $stmt_select_username->get_result();
     $row_username = $result_username->fetch_assoc();
 
-    $target_dir = '../images/' . $row_username['username'] . '/';
+    rmdir('../images/Customers/' . $username);
+    mkdir('../images/Customers/' . $username);
+
+    $target_dir = '../images/Customers/' . $row_username['username'] . '/';
+
     $filename = basename($_FILES['customer_image']['name']);
+
     $target_file = $target_dir . $filename;
     $fileType = pathinfo($target_file, PATHINFO_EXTENSION);
     $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
