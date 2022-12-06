@@ -141,7 +141,7 @@ if ($loyalty_point_required != "" && $discount_percentage != "") {
     if (empty($row_loyalty_discount)) {
 
         //check all customers who have higher loyalty points than required
-        $stmt_select_all_benefitted_customers = $connection->prepare("SELECT COUNT(*) as total_benefitted_customers FROM customers loyalty_points > $loyalty_point_required");
+        $stmt_select_all_benefitted_customers = $connection->prepare("SELECT COUNT(*) as total_benefitted_customers FROM customers WHERE loyalty_points > $loyalty_point_required");
         $stmt_select_all_benefitted_customers->execute();
         $result_customers_loyalty = $stmt_select_all_benefitted_customers->get_result();
         $row_customers_benefitted = $result_customers_loyalty->fetch_assoc();
@@ -187,6 +187,14 @@ if (isset($_GET['getProducttoRemove'])) {
     $stmt_update_product = $connection->prepare("UPDATE products SET has_offer='NO' WHERE product_id = '" . $product_id . "'");
     $stmt_update_product->execute();
     header("Location: offers-admin.php?product_offer_deleted=1");
+}
+
+//remove loyalty discount
+if (isset($_GET['RemoveLoyaltyDiscount'])) {
+    $stmt_delete_loyalty_discount = $connection->prepare("DELETE FROM loyalty_discounts");
+    $stmt_delete_loyalty_discount->execute();
+
+    header("Location: offers-admin.php");
 }
 
 //get products in ascending 
@@ -257,6 +265,15 @@ $results_top_products = $stmt_top_products->get_result();
         <p id="remove-product-offer-confirmation-text"></p>
         <button type="button" onclick="DeleteProductOffer()">YES</button>
         <button type="button" onclick="CloseRemoveProductOfferDeletePopUp()">NO</button>
+    </div>
+
+    <!-- started popup message remove loyalty discount -->
+    <div class="popup" id="remove-loyalty-discount-confirmation">
+        <img src="../images/question-mark.png" alt="remove confirmation">
+        <h2>Delete Confirmation</h2>
+        <p>Are you sure you want to remove Loyalty Discount?</p>
+        <button type="button" onclick="DeleteLoyaltyDiscount()">YES</button>
+        <button type="button" onclick="CloseLoyaltyDiscountDeletePopUp()">NO</button>
     </div>
 
     <!-- started popup message loyalty discount added -->
@@ -478,25 +495,16 @@ $results_top_products = $stmt_top_products->get_result();
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $stmt_select_all_products_offers = $connection->prepare("SELECT * FROM products_offers");
-                                        $stmt_select_all_products_offers->execute();
-                                        $result_products_offers = $stmt_select_all_products_offers->get_result();
-                                        while ($row_products_offers = $result_products_offers->fetch_assoc()) {
-                                            $stmt_select_product_name = $connection->prepare("SELECT name FROM products WHERE product_id = '" . $row_products_offers['product_id'] . "'");
-                                            $stmt_select_product_name->execute();
-                                            $result_product_name = $stmt_select_product_name->get_result();
-                                            $row_product_name = $result_product_name->fetch_assoc();
-
-                                            get_all_products_offers(
-                                                $row_products_offers['product_id'],
-                                                $row_product_name['name'],
-                                                $row_products_offers['old_price'],
-                                                $row_products_offers['new_price'],
-                                                $row_products_offers['offer_percentage'],
-                                                $row_products_offers['offer_begin_date'],
-                                                $row_products_offers['offer_end_date'],
-                                                $row_products_offers['last_modified_by'],
-                                                $row_products_offers['last_modified_on']
+                                        $stmt_select_loyalty_discount = $connection->prepare("SELECT * FROM loyalty_discounts");
+                                        $stmt_select_loyalty_discount->execute();
+                                        $result_loyalty_discount = $stmt_select_loyalty_discount->get_result();
+                                        while ($row_loyalty_discount = $result_loyalty_discount->fetch_assoc()) {
+                                            get_loyalty_discount(
+                                                $row_loyalty_discount['loyalty_point_required'],
+                                                $row_loyalty_discount['discount_percentage'],
+                                                $row_loyalty_discount['benefitted_customers'],
+                                                $row_loyalty_discount['last_modified_by'],
+                                                $row_loyalty_discount['last_modified_on']
                                             );
                                         }
                                         ?>

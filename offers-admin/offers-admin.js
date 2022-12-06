@@ -403,13 +403,27 @@ function OpenRemoveProductOfferPopUp(Name, ID) {
     remove_product_offer_confirmation_text.innerHTML = 'Remove "' + Name + '" from products offers list?';
 }
 
+function OpenRemoveLoyaltyDiscountPopUp() {
+    var remove_loyalty_discount_popup = document.getElementById('remove-loyalty-discount-confirmation');
+    remove_loyalty_discount_popup.classList.add('open-popup');
+}
+
 function CloseRemoveProductOfferPopUp() {
     var remove_product_offer_popup = document.getElementById('remove-product-offer-confirmation');
     remove_product_offer_popup.classList.remove('open-popup');
 }
 
+function CloseLoyaltyDiscountDeletePopUp() {
+    var remove_loyalty_discount_popup = document.getElementById('remove-loyalty-discount-confirmation');
+    remove_loyalty_discount_popup.classList.remove('open-popup');
+}
+
 function DeleteProductOffer() {
     window.location.href = 'offers-admin.php?getProducttoRemove=' + product_id;
+}
+
+function DeleteLoyaltyDiscount() {
+    window.location.href = 'offers-admin.php?RemoveLoyaltyDiscount=1';
 }
 
 //calculate offer percentage
