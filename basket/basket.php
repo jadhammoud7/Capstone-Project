@@ -28,20 +28,44 @@ $total_price = 0;
 while ($row_select_prices = $select_prices_results->fetch_assoc()) {
     $total_price = $total_price + $row_select_prices['price'];
 }
-//tax is 10% total price
-$tax_price = $total_price * 0.1;
 
-$total_inc_tax = $total_price + $tax_price;
+//select loyalty points of customer
+$stmt_select_customer_loyalty = $connection->prepare("SELECT loyalty_points FROM customers WHERE customer_id = $customer_id");
+$stmt_select_customer_loyalty->execute();
+$result_customer_loyalty = $stmt_select_customer_loyalty->get_result();
+$row_customer_loyalty = $result_customer_loyalty->fetch_assoc();
 
+//select required loyalty points
+$stmt_select_discount_loyalty_required = $connection->prepare("SELECT loyalty_point_required, discount_percentage FROM loyalty_discounts");
+$stmt_select_discount_loyalty_required->execute();
+$result_loyalty_discount_required = $stmt_select_discount_loyalty_required->get_result();
+$row_loyalty_discount_required = $result_loyalty_discount_required->fetch_assoc();
+
+if ($row_customer_loyalty['loyalty_points'] >= $row_loyalty_discount_required['loyalty_point_required']) {
+    $loyalty_discount = $total_price * $row_loyalty_discount_required['discount_percentage'] / 100;
+    $_SESSION['loyalty_discount'] = $loyalty_discount;
+    $total_price_after_loyalty_discount = $total_price - $loyalty_discount;
+    $_SESSION['total_price_after_loyalty_discount'] = $total_price_after_loyalty_discount;
+}
 $_SESSION['total_price'] = $total_price;
-$_SESSION['tax_price'] = $tax_price;
+if (isset($_SESSION['total_price_after_loyalty_discount'])) {
+    //tax is 10% total price
+    $tax_price = $total_price_after_loyalty_discount * 0.1;
+    $total_inc_tax = $total_price_after_loyalty_discount + $tax_price;
+    $_SESSION['tax_price'] = $tax_price;
+} else {
+    $tax_price = $total_price * 0.1;
+    $_SESSION['tax_price'] = $tax_price;
+    $total_inc_tax = $total_price + $tax_price;
+}
 $_SESSION['total_price_including_tax'] = $total_inc_tax;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

@@ -159,7 +159,7 @@ if ($loyalty_point_required != "" && $discount_percentage != "") {
         header("Location: offers-admin.php?loyalty_discount_added=1");
     } else { //if a discount exists
         //check all customers who have higher loyalty points than required
-        $stmt_select_all_benefitted_customers = $connection->prepare("SELECT COUNT(*) as total_benefitted_customers FROM customers loyalty_points > $loyalty_point_required");
+        $stmt_select_all_benefitted_customers = $connection->prepare("SELECT COUNT(*) as total_benefitted_customers FROM customers WHERE loyalty_points > $loyalty_point_required");
         $stmt_select_all_benefitted_customers->execute();
         $result_customers_loyalty = $stmt_select_all_benefitted_customers->get_result();
         $row_customers_benefitted = $result_customers_loyalty->fetch_assoc();

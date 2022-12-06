@@ -495,6 +495,26 @@ $results_get_basket_products = $stmt_get_basket_products->get_result();
                     <th>Subtotal</th>
                     <td><?php echo $_SESSION['total_price']; ?>$</td>
                 </tr>
+                <?php
+                if (isset($_SESSION['loyalty_discount'])) {
+                ?>
+                    <tr>
+                        <th>Loyalty Discount</th>
+                        <th><?php echo $_SESSION['loyalty_discount']; ?>$</th>
+                    </tr>
+                <?php
+                }
+                ?>
+                <?php
+                if (isset($_SESSION['total_price_after_loyalty_discount'])) {
+                ?>
+                    <tr>
+                        <th>Total Price After Discount</th>
+                        <th><?php echo $_SESSION['total_price_after_loyalty_discount']; ?>$</th>
+                    </tr>
+                <?php
+                }
+                ?>
                 <tr>
                     <th>Taxes</th>
                     <td><?php echo $_SESSION['tax_price']; ?>$</td>
