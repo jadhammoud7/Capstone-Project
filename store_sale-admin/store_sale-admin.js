@@ -182,26 +182,78 @@ total_price_column.addEventListener('click', function SetSorting() {
     }
 });
 
+const loyalty_discount_percentage_column = document.getElementById('loyalty-discount-percentage-column');
+loyalty_discount_percentage_column.addEventListener('click', function SetSorting() {
+    var loyalty_discount_percentage_column_innerHTML = loyalty_discount_percentage_column.innerHTML;
+    if (loyalty_discount_percentage_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        loyalty_discount_percentage_column.innerHTML = "Loyalty Discount % <span class=\"las la-sort-up\"></span>";
+        sortTable(5, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Store Sales from most to least loyalty discount';
+        loyalty_discount_percentage_column.title = 'Sort Store Sales from least to most loyalty discount';
+    }
+    if (loyalty_discount_percentage_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        loyalty_discount_percentage_column.innerHTML = "Loyalty Discount % <span class=\"las la-sort-down\"></span>";
+        sortTable(5, "asc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Store Sales from least to most loyalty discount';
+        loyalty_discount_percentage_column.title = 'Sort Store Sales from most to least loyalty discount';
+    }
+    if (loyalty_discount_percentage_column_innerHTML == "Loyalty Discount %") {
+        loyalty_discount_percentage_column.innerHTML = "Loyalty Discount % <span class=\"las la-sort-up\"></span>";
+        sortTable(5, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Store Sales from most to least loyalty discount';
+        loyalty_discount_percentage_column.title = 'Sort Store Sales from least to most loyalty discount';
+    }
+});
+
+const total_price_after_discount_column = document.getElementById('total-price-after-discount-column');
+total_price_after_discount_column.addEventListener('click', function SetSorting() {
+    var total_price_after_discount_column_innerHTML = total_price_after_discount_column.innerHTML;
+    if (total_price_after_discount_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
+        total_price_after_discount_column.innerHTML = "Total Price After Discount <span class=\"las la-sort-up\"></span>";
+        sortTable(6, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Store Sales from most to least total price after discount';
+        total_price_after_discount_column.title = 'Sort Store Sales from least to most total price after discount';
+    }
+    if (total_price_after_discount_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
+        total_price_after_discount_column.innerHTML = "Total Price After Discount <span class=\"las la-sort-down\"></span>";
+        sortTable(6, "asc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Store Sales from least to most total price after discount';
+        total_price_after_discount_column.title = 'Sort Store Sales from most to least total price after discount';
+    }
+    if (total_price_after_discount_column_innerHTML == "Total Price After Discount") {
+        total_price_after_discount_column.innerHTML = "Total Price After Discount <span class=\"las la-sort-up\"></span>";
+        sortTable(6, "desc");
+        filter_text.innerHTML = 'Filter';
+        table_sort.innerHTML = 'Store Sales from most to least total price after discount';
+        total_price_after_discount_column.title = 'Sort Store Sales from least to most total price after discount';
+    }
+});
+
 const date_column = document.getElementById('date-column');
 date_column.addEventListener('click', function SetSorting() {
     var date_column_innerHTML = date_column.innerHTML;
     if (date_column_innerHTML.includes("<span class=\"las la-sort-down\"></span>")) {
         date_column.innerHTML = "Date <span class=\"las la-sort-up\"></span>";
-        sortTable(5, "desc");
+        sortTable(7, "desc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'Store Sales from most to least recent';
         date_column.title = 'Sort Store Sales from least to most recent';
     }
     if (date_column_innerHTML.includes("<span class=\"las la-sort-up\"></span>")) {
         date_column.innerHTML = "Date <span class=\"las la-sort-down\"></span>";
-        sortTable(5, "asc");
+        sortTable(7, "asc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'Store Sales from least to most recent';
         date_column.title = 'Sort Store Sales from most to least recent';
     }
     if (date_column_innerHTML == "Date") {
         date_column.innerHTML = "Date <span class=\"las la-sort-up\"></span>";
-        sortTable(5, "desc");
+        sortTable(7, "desc");
         filter_text.innerHTML = 'Filter';
         table_sort.innerHTML = 'Store Sales from most to least recent';
         date_column.title = 'Sort Store Sales from least to most recent';

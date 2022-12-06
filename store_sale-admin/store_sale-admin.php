@@ -586,8 +586,8 @@ $row_count_store = $results_count_store->fetch_assoc();
                                             <td id="total-products-column" title="Sort Store Sales from most to least products containing">Total Products</td>
                                             <td id="total-quantity-column" title="Sort Store Sales from most to least quantities containing">Total Quantity</td>
                                             <td id="total-price-column" title="Sort Store Sales from most to least money gained">Total Price</td>
-                                            <td id="loyalty-discount-percentage-column" title="">Loyalty Discount %</td>
-                                            <td id="total-price-after-discount" title="">Total Price After Discount</td>
+                                            <td id="loyalty-discount-percentage-column" title="Sort Store Sales from most to least loyalty discount">Loyalty Discount %</td>
+                                            <td id="total-price-after-discount-column" title="Sort Store Sales from most to least total price after discount">Total Price After Discount</td>
                                             <td id="date-column" title="Sort Store Sales from most to least recent">Date</td>
                                             <td>View Order</td>
                                         </tr>
@@ -637,6 +637,7 @@ $row_count_store = $results_count_store->fetch_assoc();
 
                         <label for="survey_options"><b>Survey Options</b></label>
                         <input type="text" name="email" class="survey_options" size="50" placeholder="Email.." required>
+
 
                         <label for="products" style="font-weight: bold; margin-bottom:10px;">Choose a product: <br>
                             <select id="products" name="product_name[]" size="" required>
