@@ -470,11 +470,11 @@ $results_top_products = $stmt_top_products->get_result();
                         </div>
 
                         <div>
-                            <canvas id="myChartLoyalty" style="width:100%;max-width:600px;"></canvas>
+                            <canvas id="myChartLoyalty" style="width:100%;max-width:700px;"></canvas>
                         </div>
 
                         <div class="card-single add_product">
-                            <button class="add_product_offer" id="add_product_offer" onclick="OpenAddDiscountFacility()" title="Add a new product offer">
+                            <button class="add_product_offer" id="add_product_offer" onclick="OpenAddDiscountFacility()" title="Add or modify loyalty discount">
                                 <span class="las la-plus"></span>
                                 Add / Modify Loyalty Discount
                             </button>
@@ -485,9 +485,9 @@ $results_top_products = $stmt_top_products->get_result();
                                 <table width="100%" id="products_offers_table">
                                     <thead>
                                         <tr>
-                                            <td id="loyalty-point-required-column">Loyalty Point Required</td>
-                                            <td id="discount-percetage">Discount Percentage</td>
-                                            <td id="benefittef-customers">Benefitted Customers</td>
+                                            <td id="loyalty-point-required-column" title="This is the loyalty points required from customers to benefit from discounts">Loyalty Point Required</td>
+                                            <td id="discount-percetage" title="This is the discount percentage for loyal customers">Discount Percentage</td>
+                                            <td id="benefittef-customers" title="This is the total number of customers benefitting from loyalty discounts">Benefitted Customers</td>
                                             <td id="product-last-modified-by-column">Last Modified By</td>
                                             <td id="product-last-modified-on-column">Last Modified On</td>
                                             <td>Remove</td>
@@ -1024,6 +1024,50 @@ $results_top_products = $stmt_top_products->get_result();
             title: {
                 display: true,
                 text: "Total Sales Number of Products During Offer Time"
+            }
+        }
+    });
+
+
+    <?php
+    $stmt_select_all_customers = $connection->prepare("SELECT COUNT(*) as total_customers FROM customers");
+    $stmt_select_all_customers->execute();
+    $result_all_customers = $stmt_select_all_customers->get_result();
+    $row_all_customers = $result_all_customers->fetch_assoc();
+
+    $stmt_select_benefitted_customers = $connection->prepare("SELECT benefitted_customers FROM loyalty_discounts");
+    $stmt_select_benefitted_customers->execute();
+    $result_benefitted_customers = $stmt_select_benefitted_customers->get_result();
+    $row_benefitted_customers = $result_benefitted_customers->fetch_assoc();
+
+    if (empty($row_benefitted_customers)) {
+        $benefitted_customers = 0;
+        $not_benefitted_customers = $row_all_customers['total_customers'];
+    } else {
+        $not_benefitted_customers = $row_all_customers['total_customers'] - $row_benefitted_customers['benefitted_customers'];
+        $benefitted_customers = $row_benefitted_customers['benefitted_customers'];
+    }
+    ?>
+    var xValues = ["Customers Benefitting From Loyalty Discounts", "Customers Not Benefitting From Loyalty Discounts"];
+    var yValues = [<?php echo $benefitted_customers; ?>, <?php echo $not_benefitted_customers; ?>];
+    var barColors = [
+        "#b91d47",
+        '#00aba9'
+    ]
+
+    new Chart("myChartLoyalty", {
+        type: "pie",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Distribution of Customers By Loyalty Discounts Benefit"
             }
         }
     });
