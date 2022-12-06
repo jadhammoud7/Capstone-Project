@@ -83,6 +83,9 @@ if (isset($_POST['save'])) {
     if (isset($_POST['quantity'])) {
         $quantity = $_POST['quantity'];
     }
+    if (isset($_POST['apply_loyalty_discount'])) {
+        $apply_loyalty_discount = $_POST['apply_loyalty_discount'];
+    }
 
     $total_sales_products = 0;
     $total_sales_price = 0;
@@ -332,6 +335,10 @@ if (isset($_POST['save'])) {
                 }
             }
         }
+    }
+    if ($apply_loyalty_discount == 'true') {
+        $loyalty_discount_percentage = $row_loyalty_discount['discount_percentage'];
+        $total_price_after_discount = $total_sales_price - ($total_sales_price * $loyalty_discount_percentage);
     }
     date_default_timezone_set('Asia/Beirut');
     $date = date('Y-m-d h:i:s');
@@ -638,7 +645,10 @@ $row_count_store = $results_count_store->fetch_assoc();
                         <label for="survey_options"><b>Survey Options</b></label>
                         <input type="text" name="email" class="survey_options" size="50" placeholder="Email.." required>
 
+                        <input type="checkbox" name="apply_loyalty_discount" id="apply_loyalty_discount" value="true">
+                        <label for="apply_loyalty_discount"> Apply Loyalty Discount? </label>
 
+                        <br><br>
                         <label for="products" style="font-weight: bold; margin-bottom:10px;">Choose a product: <br>
                             <select id="products" name="product_name[]" size="" required>
                                 <?php
