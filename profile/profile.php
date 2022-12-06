@@ -236,6 +236,11 @@ if (isset($_GET['delete_checkout_id'])) {
                     <h3><?php echo $row["city"] ?></h3>
                 </div>
 
+                <div class="profile-part">
+                    <h3 id="attribute">Loyalty Points: </h3>
+                    <h3><?php echo $row['loyalty_points']; ?></h3>
+                </div>
+
                 <input type="text" name="city_editprofile" id="" placeholder="new city.." class="city_editprofile" style="display: none;">
 
 

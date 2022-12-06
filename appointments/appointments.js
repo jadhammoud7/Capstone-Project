@@ -49,10 +49,22 @@ var Day;
 const renderCalender = () => {
     date.setDate(1);
     const monthDays = document.querySelector('.days');
-    const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+    var lastDay;
+    if (date.getMonth() == 12) {
+        lastDay = new Date(date.getFullYear() + 1, 1, 0).getDate();
+    }
+    else {
+        lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+    }
     const prevLastDay = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
     const firstDayIndex = date.getDay();
-    const lastDayIndex = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDay();
+    var lastDayIndex;
+    if (date.getMonth() == 12) {
+        lastDayIndex = new Date(date.getFullYear() + 1, 1, 0).getDay();
+    }
+    else {
+        lastDayIndex = new Date(date.getFullYear(), date.getMonth(), 0).getDay();
+    }
     const nextDays = 7 - lastDayIndex - 1;
     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     document.querySelector('.date h1').innerHTML = month[date.getMonth()];
@@ -69,7 +81,7 @@ const renderCalender = () => {
     for (let i = 1; i <= lastDay; i++) {
         if (i == new Date().getDate() && date.getMonth() == new Date().getMonth()) {
             days += `<div class="today" onclick="SetToCurrentDay(this)"> ${i} </div>`;
-            newDate.setMonth(new Date().getMonth() + 1);
+            newDate.setMonth((new Date().getMonth() + 1) % 13);
             newDate.setDate(new Date().getDate());
 
             if (newDate.getMonth() < 10) {
@@ -122,7 +134,7 @@ function SetToCurrentDay(element) {
     }
     thisDay.classList.remove('otherdays');
     thisDay.classList.add('today');
-    newDate.setMonth(date.getMonth() + 1);
+    newDate.setMonth((date.getMonth() + 1) % 13);
     newDate.setDate(thisDay.innerHTML);
     // const array = newDate.toDateString().split(" ");
     // const day = array[2];
