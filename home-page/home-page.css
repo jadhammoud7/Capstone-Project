@@ -999,7 +999,155 @@
     width: 20%;
   }
 }
+@media screen and (max-width: 728px) {
+.about-us-location{
+  margin-bottom: -3px;
+  margin-top: 26px;
+}
 
+}
+
+@media screen and (max-width: 615px) {
+
+.about-us-button{
+  padding: 5px;
+  font-size: small;
+}
+.about-us-location{
+  margin-bottom: 3px;
+  margin-top: 16px;
+  font-size: small;
+}
+.location-logo{
+  font-size: small;
+}
+}
+@media screen and (max-width: 598px) {
+.about-par{
+  font-size: small;
+}
+}
+@media screen and (max-width: 426px) {
+  .about-us-button{
+    padding: 4px;
+    font-size: 9px;
+  }
+  .about-us-location{
+    font-size: 9px;
+  }
+  .location-logo{
+    font-size:5px;
+    margin-top: -4px;
+  }
+  .about-par{
+    margin-bottom: 5px;
+  }
+}
+@media screen and (max-width: 420px) {
+.about-par{
+  margin-bottom: 5px;
+}
+}
+
+
+@media screen and (max-width: 361px) {
+  .about-par{
+    font-size: 11px;
+  }
+.about-us-button{
+  padding: 5px;
+  font-size: 9px;
+}
+.about-us-location{
+  font-size: 11px;
+}
+.location-logo{
+  font-size: 9px;
+}
+}
+
+@media screen and (max-width: 336px) {
+
+  .about-us-paragraph p{
+    font-size:11px;
+  }
+.location-logo{
+  font-size: 1px;
+}
+
+}
+
+@media screen and (max-width: 301px) {
+  .about-us-button{
+    padding: 5px;
+    font-size: 8px;
+  }
+  .about-us-paragraph p{
+    font-size: 10.5px;
+  }
+
+}
+@media screen and (max-width: 292px) {
+.about-us-paragraph{
+  width: 100%;
+}
+.about-us-paragraph  h3{
+  font-size: 22px;
+}
+
+.about-us-paragraph p{
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+}
+@media screen and (max-width: 279px) {
+  .about-us-paragraph{
+    width: 100%;
+  }
+.about-us-button{
+  font-size: 20px;
+  padding: 20px;
+}
+  }
+
+  @media screen and (max-width: 253px) {
+.about-us-paragraph p{
+  font-size: 10px;
+}
+.location-logo{
+  margin-top: -10px;
+  font-size: 5px;
+}
+.about-us-paragraph img{
+  height: 2px;
+}
+    }
+
+@media screen and (max-width: 281px) {
+
+  .about-us-paragraph{
+    font-size: 9px;
+  }
+.about-us-button{
+  padding: 5px;
+  font-size: 8px;
+}
+.about-us-location{
+  font-size: 7px;
+}
+.location-logo{
+  font-size:6.8px;
+}
+}
+
+
+
+
+@media screen and (max-width: 376px) {
+  .about-par{
+    font-size: 11px;
+  }
+}
 @media screen and (max-width: 372px) {
 
   .product1,
@@ -1012,17 +1160,6 @@
     font-size: 11px;
   }
 
-  .about-us-paragraph a {
-    font-size: 10px;
-  }
-
-  .about-us-paragraph p {
-    margin-top: -20px;
-  }
-
-  .about-us-paragraph h3 {
-    margin-bottom: 75px;
-  }
 
   .about-par {
     font-size: 12px;
@@ -1041,17 +1178,7 @@
     margin-left: 20px;
   }
 
-  .about-us-paragraph a {
-    font-size: 8px;
-  }
 
-  .about-us-paragraph p {
-    margin-top: -68px;
-  }
-
-  .about-us-paragraph h3 {
-    margin-bottom: 80px;
-  }
 
   .about-par {
     font-size: 11px;
@@ -1063,13 +1190,7 @@
 }
 
 @media screen and (max-width:280px) {
-  .about-us-paragraph a {
-    font-size: 6px;
-  }
 
-  .about-par {
-    font-size: 9px;
-  }
 
   .testimonial_cover {
     height: 290px;
