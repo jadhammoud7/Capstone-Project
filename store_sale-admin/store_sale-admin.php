@@ -244,6 +244,7 @@ if (isset($_POST['save'])) {
                     $product_id = $row_product_id['product_id'];
 
                     date_default_timezone_set('Asia/Beirut');
+                    $currentDate = new DateTime();
                     $modified_on = date('Y-m-d h:i:s');
                     $modified_by = $row['first_name'] . ' ' . $row['last_name'];
 
@@ -253,15 +254,26 @@ if (isset($_POST['save'])) {
                     $stmt_insert_product_inventory_history->bind_param("iiiss", $product_id, $new_inventory, $inventory_change, $modified_by, $modified_on);
                     $stmt_insert_product_inventory_history->execute();
 
-                    //select price and add to sales products, same as above condition
-                    $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE product_id = ?");
-                    $stmt_select_product_price->bind_param("i", $product_id);
-                    $stmt_select_product_price->execute();
-                    $result_product_price = $stmt_select_product_price->get_result();
-                    $row_product_price = $result_product_price->fetch_assoc();
+                    //check if product has an offer
+                    $stmt_select_product_offer = $connection->prepare("SELECT new_price FROM products_offers WHERE product_id = $product_id AND '" . $currentDate->format('Y-m-d') . "' BETWEEN offer_begin_date AND offer_end_date");
+                    $stmt_select_product_offer->execute();
+                    $result_product_offer = $stmt_select_product_offer->get_result();
+                    $row_product_offer = $result_product_offer->fetch_assoc();
+
+                    $price = 0;
+                    if (!empty($row_product_offer)) {
+                        $price = $row_product_offer['new_price'];
+                    } else {
+                        //select price and add to sales products, same as above condition
+                        $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE product_id = $product_id");
+                        $stmt_select_product_price->execute();
+                        $result_product_price = $stmt_select_product_price->get_result();
+                        $row_product_price = $result_product_price->fetch_assoc();
+                        $price = $row_product_price['price'];
+                    }
 
                     //let product price be unit price * quantity
-                    $total_product_price = $row_product_price['price'] * $quantity[$x];
+                    $total_product_price = $price * $quantity[$x];
 
                     //update product sales by quantity
                     $total_sales_products = $total_sales_products + $quantity[$x];

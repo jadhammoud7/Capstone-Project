@@ -296,6 +296,10 @@ if (isset($_GET['getProducttoRemove'])) {
     $stmt_delete_product = $connection->prepare("DELETE FROM products WHERE product_id = '" . $_GET['getProducttoRemove'] . "'");
     $stmt_delete_product->execute();
 
+    //remove products from offers
+    $stmt_delete_product_offer = $connection->prepare("DELETE FROM products_offers WHERE product_id = '" . $_GET['getProducttoRemove'] . "'");
+    $stmt_delete_product_offer->execute();
+
     //remove history inventory for product
     $stmt_delete_product_history_inventory = $connection->prepare("DELETE FROM history_product_inventory WHERE product_id = '" . $_GET['getProducttoRemove'] . "'");
     $stmt_delete_product_history_inventory->execute();

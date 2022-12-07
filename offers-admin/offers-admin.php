@@ -648,17 +648,20 @@ $results_top_products = $stmt_top_products->get_result();
                                             $result_product_name = $stmt_select_product_name->get_result();
                                             $row_product_name = $result_product_name->fetch_assoc();
 
-                                            get_all_products_offers(
-                                                $row_products_offers['product_id'],
-                                                $row_product_name['name'],
-                                                $row_products_offers['old_price'],
-                                                $row_products_offers['new_price'],
-                                                $row_products_offers['offer_percentage'],
-                                                $row_products_offers['offer_begin_date'],
-                                                $row_products_offers['offer_end_date'],
-                                                $row_products_offers['last_modified_by'],
-                                                $row_products_offers['last_modified_on']
-                                            );
+                                            if (!empty($row_product_name)) {
+
+                                                get_all_products_offers(
+                                                    $row_products_offers['product_id'],
+                                                    $row_product_name['name'],
+                                                    $row_products_offers['old_price'],
+                                                    $row_products_offers['new_price'],
+                                                    $row_products_offers['offer_percentage'],
+                                                    $row_products_offers['offer_begin_date'],
+                                                    $row_products_offers['offer_end_date'],
+                                                    $row_products_offers['last_modified_by'],
+                                                    $row_products_offers['last_modified_on']
+                                                );
+                                            }
                                         }
                                         ?>
                                     </tbody>
@@ -962,30 +965,32 @@ $results_top_products = $stmt_top_products->get_result();
     $stmt_select_all_products_offers->execute();
     $result_products_offers = $stmt_select_all_products_offers->get_result();
 
-    while ($row_products_offers = $result_products_offers->fetch_assoc()) {
-        //get product name
-        $stmt_select_product_name = $connection->prepare("SELECT name FROM products WHERE product_id = ?");
-        $stmt_select_product_name->bind_param("i", $row_products_offers['product_id']);
-        $stmt_select_product_name->execute();
-        $result_product_name = $stmt_select_product_name->get_result();
-        $row_product_name = $result_product_name->fetch_assoc();
+    if (!empty($result_product_offers)) {
+        while ($row_products_offers = $result_products_offers->fetch_assoc()) {
+            //get product name
+            $stmt_select_product_name = $connection->prepare("SELECT name FROM products WHERE product_id = ?");
+            $stmt_select_product_name->bind_param("i", $row_products_offers['product_id']);
+            $stmt_select_product_name->execute();
+            $result_product_name = $stmt_select_product_name->get_result();
+            $row_product_name = $result_product_name->fetch_assoc();
     ?>
-        array_products3.push("<?php
-                                echo $row_product_name['name'];
-                                ?>");
+            array_products3.push("<?php
+                                    echo $row_product_name['name'];
+                                    ?>");
 
-        <?php
-        $stmt_select_product_sales_during_offer = $connection->prepare("SELECT SUM(sales_change) as total_sales FROM history_product_sales WHERE product_id = ? AND modified_on BETWEEN ? AND ?");
-        $stmt_select_product_sales_during_offer->bind_param("idd", $row_products_offers['product_id'], $row_products_offers['offer_begin_date'], $row_products_offers['offer_end_date']);
-        $stmt_select_product_sales_during_offer->execute();
-        $result_product_sales = $stmt_select_product_sales_during_offer->get_result();
-        $row_product_sales = $result_product_sales->fetch_assoc();
-        ?>
+            <?php
+            $stmt_select_product_sales_during_offer = $connection->prepare("SELECT SUM(sales_change) as total_sales FROM history_product_sales WHERE product_id = ? AND modified_on BETWEEN ? AND ?");
+            $stmt_select_product_sales_during_offer->bind_param("idd", $row_products_offers['product_id'], $row_products_offers['offer_begin_date'], $row_products_offers['offer_end_date']);
+            $stmt_select_product_sales_during_offer->execute();
+            $result_product_sales = $stmt_select_product_sales_during_offer->get_result();
+            $row_product_sales = $result_product_sales->fetch_assoc();
+            ?>
 
-        array_products_sales_offers.push("<?php
-                                            echo $row_product_sales['total_sales'];
-                                            ?>");
+            array_products_sales_offers.push("<?php
+                                                echo $row_product_sales['total_sales'];
+                                                ?>");
     <?php
+        }
     }
     ?>;
 
