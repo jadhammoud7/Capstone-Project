@@ -53,14 +53,6 @@ $stmt_total_checkouts->execute();
 $results_total_checkouts = $stmt_total_checkouts->get_result();
 $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
-//getting appointments
-require_once("../php/admin_page_php.php");
-$query_get_appointments = "SELECT appointment_id, customer_id, appointment_name, price_per_hour, date, hour, status FROM appointments ORDER BY appointment_id DESC LIMIT 5";
-$stmt_get_appointments = $connection->prepare($query_get_appointments);
-$stmt_get_appointments->execute();
-$results_get_appointments = $stmt_get_appointments->get_result();
-
-
 //getting latest customers added to us
 require_once("../php/admin_page_php.php");
 $query_get_latest_customer = "SELECT username, email FROM customers ORDER BY customer_id DESC LIMIT 5";
@@ -346,6 +338,12 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                                     </thead>
                                     <tbody>
                                         <?php
+                                        //getting appointments
+                                        require_once("../php/admin_page_php.php");
+                                        $stmt_get_appointments = $connection->prepare("SELECT * FROM appointments ORDER BY appointment_id DESC LIMIT 5");
+                                        $stmt_get_appointments->execute();
+                                        $results_get_appointments = $stmt_get_appointments->get_result();
+
                                         while ($row_get_appointments = $results_get_appointments->fetch_assoc()) {
 
                                             $query_getuser = "SELECT username, customer_id FROM customers WHERE customer_id ='" . $row_get_appointments['customer_id'] . "'";
@@ -359,6 +357,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                                                 $row_getuser['username'],
                                                 $row_getuser['customer_id'],
                                                 $row_get_appointments['appointment_name'],
+                                                $row_get_appointments['appointment_type'],
                                                 $row_get_appointments['price_per_hour'],
                                                 $row_get_appointments['date'],
                                                 $row_get_appointments['hour'],

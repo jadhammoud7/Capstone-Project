@@ -1,44 +1,81 @@
 <?php
 include("connection.php");
 
-function get_appointment_in_admin_page_for_table_connection($appointment_id, $customer_name, $customer_id, $appointment_name, $price_per_hour, $date, $hour, $status)
+function get_appointment_in_admin_page_for_table_connection($appointment_id, $customer_name, $customer_id, $appointment_name, $appointment_type, $price_per_hour, $date, $hour, $status)
 {
     include("connection.php");
 
-    $stmt_select_repair = $connection->prepare("SELECT repair_id FROM repairs WHERE repair_type = '" . $appointment_name . "' ");
-    $stmt_select_repair->execute();
-    $result_repair = $stmt_select_repair->get_result();
-    $row_repair = $result_repair->fetch_assoc();
+    if ($appointment_type == 'Repair Service') {
+        $stmt_select_repair = $connection->prepare("SELECT repair_id FROM repairs WHERE repair_type = '" . $appointment_name . "' ");
+        $stmt_select_repair->execute();
+        $result_repair = $stmt_select_repair->get_result();
+        $row_repair = $result_repair->fetch_assoc();
 
-    $repair_id = $row_repair['repair_id'];
+        $repair_id = $row_repair['repair_id'];
 
-    $element = "
-    <tr>
-        <td>
-            <a href='../repairs-admin/repair-admin-details.php?repair-id=$repair_id' title=\"See info about repair '$appointment_name'\">
-                $appointment_name
-            </a>
-        </td>
-        <td>
-            <a href='../customer-admin/customer-details.php?customer_id=$customer_id' title=\"See info about customer '$customer_name'\">
-                $customer_name
-            </a>
-        </td>
-        <td>$price_per_hour</td>
-        <td>$date</td>
-        <td>$hour</td>
-        <td>
-            <span class=\"status red\"></span>
-            <a class=\"status_btn\">$status</a>
-        </td>
-        <td>
-            <a>
-                <button class=\"btn_done_work\" id=\"SetStatusButton\" onclick=\"SetAppointmentID($appointment_id);\"></button>
-            </a>
-        </td>
-    </tr>
-    ";
-    echo $element;
+        $element = "
+        <tr>
+            <td>
+                <a href='../repairs-admin/repair-admin-details.php?repair-id=$repair_id' title=\"See info about repair '$appointment_name'\">
+                    $appointment_type $appointment_name
+                </a>
+            </td>
+            <td>
+                <a href='../customer-admin/customer-details.php?customer_id=$customer_id' title=\"See info about customer '$customer_name'\">
+                    $customer_name
+                </a>
+            </td>
+            <td>$price_per_hour</td>
+            <td>$date</td>
+            <td>$hour</td>
+            <td>
+                <span class=\"status red\"></span>
+                <a class=\"status_btn\">$status</a>
+            </td>
+            <td>
+                <a>
+                    <button class=\"btn_done_work\" id=\"SetStatusButton\" onclick=\"SetAppointmentID($appointment_id);\"></button>
+                </a>
+            </td>
+        </tr>
+        ";
+        echo $element;
+    } else {
+        $stmt_select_product = $connection->prepare("SELECT product_id FROM products WHERE name = '" . $appointment_name . "' ");
+        $stmt_select_product->execute();
+        $result_product = $stmt_select_product->get_result();
+        $row_product = $result_product->fetch_assoc();
+
+        $product_id = $row_product['product_id'];
+
+        $element = "
+        <tr>
+            <td>
+                <a href='../product-admin/product-details.php?product_id=$product_id' title=\"See info about product '$appointment_name'\">
+                    $appointment_name
+                </a>
+            </td>
+            <td>
+                <a href='../customer-admin/customer-details.php?customer_id=$customer_id' title=\"See info about customer '$customer_name'\">
+                    $customer_name
+                </a>
+            </td>
+            <td>$price_per_hour</td>
+            <td>$date</td>
+            <td>$hour</td>
+            <td>
+                <span class=\"status red\"></span>
+                <a class=\"status_btn\">$status</a>
+            </td>
+            <td>
+                <a>
+                    <button class=\"btn_done_work\" id=\"SetStatusButton\" onclick=\"SetAppointmentID($appointment_id);\"></button>
+                </a>
+            </td>
+        </tr>
+        ";
+        echo $element;
+    }
 }
 
 function get_appointments_in_customer_details($appointment_id, $appointment_name, $date, $hour, $status)
