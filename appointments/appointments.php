@@ -18,15 +18,11 @@ $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
 
-//select random cd game for free gift appointment
-$query_gift = "SELECT name, description FROM products WHERE type='cds' ORDER BY RAND() LIMIT 1;";
-$stmt_gift = $connection->prepare($query_gift);
-$stmt_gift->execute();
-$results_gift = $stmt_gift->get_result();
+
 ?>
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -111,6 +107,12 @@ $results_gift = $stmt_gift->get_result();
         <div class="appointment-item appointment-free-game">
             <h2>Try Free Game</h2>
             <?php
+            //select random cd game for free gift appointment
+            $query_gift = "SELECT name, description FROM products WHERE type='cds' ORDER BY RAND() LIMIT 1;";
+            $stmt_gift = $connection->prepare($query_gift);
+            $stmt_gift->execute();
+            $results_gift = $stmt_gift->get_result();
+
             if (!isset($_SESSION['free_games'])) {
                 while ($row_gift = $results_gift->fetch_assoc()) {
                     $_SESSION['free_games'] = $row_gift["name"];

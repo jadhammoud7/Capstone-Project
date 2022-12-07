@@ -164,11 +164,11 @@ if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
                 book_now_for_each_repair_connection($_GET['repair_type'], $row_repair_image['image']);
             }
             if (isset($_GET['cd_name'])) {
-                $stmt_select_repair_image = $connection->prepare("SELECT image FROM repairs WHERE repair_type = '" . $_GET['repair_type'] . "'");
-                $stmt_select_repair_image->execute();
-                $result_repair_image = $stmt_select_repair_image->get_result();
-                $row_repair_image = $result_repair_image->fetch_assoc();
-                book_now_for_each_repair_connection($_GET['cd_name'], $row_repair_image['image']);
+                $stmt_select_product_image = $connection->prepare("SELECT image FROM products WHERE name = '" . $_GET['cd_name'] . "'");
+                $stmt_select_product_image->execute();
+                $result_product_image = $stmt_select_product_image->get_result();
+                $row_product_image = $result_product_image->fetch_assoc();
+                book_now_for_free_game_connection($_GET['cd_name'], $row_product_image['image']);
             }
             ?>
         </div>

@@ -49,29 +49,22 @@ var Day;
 const renderCalender = () => {
     date.setDate(1);
     const monthDays = document.querySelector('.days');
-    var lastDay;
-    if (date.getMonth() == 12) {
-        lastDay = new Date(date.getFullYear() + 1, 1, 0).getDate();
-    }
-    else {
-        lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-    }
+    const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
     const prevLastDay = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
     const firstDayIndex = date.getDay();
     var lastDayIndex;
-    if (date.getMonth() == 12) {
+    if (date.getMonth() == 11) {
         lastDayIndex = new Date(date.getFullYear() + 1, 1, 0).getDay();
     }
     else {
-        lastDayIndex = new Date(date.getFullYear(), date.getMonth(), 0).getDay();
+        lastDayIndex = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDay();
     }
+
     const nextDays = 7 - lastDayIndex - 1;
     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     document.querySelector('.date h1').innerHTML = month[date.getMonth()];
 
-
     document.querySelector('.date p').innerHTML = new Date().toDateString();
-
 
     let days = "";
 
@@ -81,14 +74,14 @@ const renderCalender = () => {
     for (let i = 1; i <= lastDay; i++) {
         if (i == new Date().getDate() && date.getMonth() == new Date().getMonth()) {
             days += `<div class="today" onclick="SetToCurrentDay(this)"> ${i} </div>`;
-            newDate.setMonth((new Date().getMonth() + 1) % 13);
+            newDate.setMonth(new Date().getMonth());
             newDate.setDate(new Date().getDate());
 
             if (newDate.getMonth() < 10) {
-                Month = "0" + newDate.getMonth();
+                Month = "0" + newDate.getMonth() + 1;
             }
             else {
-                Month = newDate.getMonth();
+                Month = newDate.getMonth() + 1;
             }
             if (newDate.getDate() < 10) {
                 Day = "0" + newDate.getDate();
@@ -134,17 +127,14 @@ function SetToCurrentDay(element) {
     }
     thisDay.classList.remove('otherdays');
     thisDay.classList.add('today');
-    newDate.setMonth((date.getMonth() + 1) % 13);
+    newDate.setMonth(date.getMonth());
     newDate.setDate(thisDay.innerHTML);
-    // const array = newDate.toDateString().split(" ");
-    // const day = array[2];
-    // const month = array[1];
-    // const year = array[3];
+
     if (newDate.getMonth() < 10) {
-        Month = "0" + newDate.getMonth();
+        Month = "0" + newDate.getMonth() + 1;
     }
     else {
-        Month = newDate.getMonth();
+        Month = newDate.getMonth() + 1;
     }
     if (newDate.getDate() < 10) {
         Day = "0" + newDate.getDate();
@@ -162,10 +152,7 @@ function SetToCurrentDay(element) {
             hour.disabled = false;
         }
     }
-    // console.log(day);
-    // console.log(month);
-    // console.log(year);
-    // window.location="../calendar/calendar.php?getday=day&getmonth=month&getyear=year";
+
     document.querySelector('.date p').innerHTML = newDate.toDateString();
 }
 
@@ -180,12 +167,22 @@ function SubmitAppointment() {
 }
 
 document.querySelector('.prev').addEventListener('click', () => {
-    date.setMonth(date.getMonth() - 1);
+    if (date.getMonth() == 0) {
+        date.setFullYear(date.getFullYear() - 1, 11);
+    }
+    else {
+        date.setMonth(date.getMonth() - 1);
+    }
     renderCalender();
 })
 
 document.querySelector('.next').addEventListener('click', () => {
-    date.setMonth(date.getMonth() + 1);
+    if (date.getMonth() == 11) {
+        date.setFullYear(date.getFullYear() + 1, 0);
+    }
+    else {
+        date.setMonth(date.getMonth() + 1);
+    }
     renderCalender();
 })
 renderCalender();
