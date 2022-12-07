@@ -82,6 +82,14 @@ function store_sales_products_connection($product_name, $quantity, $price)
 </head>
 
 <body>
+    <!-- started popup message logout -->
+    <div class="popup" id="logout-confirmation">
+        <img src="../images/question-mark.png" alt="">
+        <h2>Log Out Confirmation</h2>
+        <p>Are you sure that you want to logout?</p>
+        <button type="button" onclick="GoToLogIn()">YES</button>
+        <button type="button" onclick="CloseLogOutPopUp()">NO</button>
+    </div>
 
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">

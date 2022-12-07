@@ -3,6 +3,7 @@
 <?php
 
 session_start();
+include("../php/connection.php");
 
 if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'customer') {
     header("Location: ../home-admin/home-admin.php");
@@ -10,14 +11,8 @@ if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'customer') {
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
-
+$customer_id = $_SESSION['logged_id'];
 require_once('../php/repair.php');
-//select all repair services
-$query = "SELECT * FROM repairs";
-$stmt = $connection->prepare($query);
-$stmt->execute();
-$results = $stmt->get_result();
-
 
 ?>
 
@@ -88,19 +83,31 @@ $results = $stmt->get_result();
     <!-- ended with title page -->
 
     <!-- started with present -->
-    <div class="present" onclick="OpenGift()">
-        <div class="lid">
-            <span></span>
+    <?php
+    $free_game = 'Free Game Trial';
+    $stmt_check_free_game_appointment = $connection->prepare("SELECT * FROM appointments WHERE customer_id = $customer_id AND appointment_type = '" . $free_game . "'");
+    $stmt_check_free_game_appointment->execute();
+    $result_free_game_appointment = $stmt_check_free_game_appointment->get_result();
+    $row_free_game_appointment = $result_free_game_appointment->fetch_assoc();
+
+    if (empty($row_free_game_appointment)) {
+    ?>
+        <div class="present" onclick="OpenGift()">
+            <div class="lid">
+                <span></span>
+            </div>
+            <div class="promo">
+                <p>Try a new game for free</p>
+                <h2>Congratulations</h2>
+            </div>
+            <div class="box">
+                <span></span>
+                <span></span>
+            </div>
         </div>
-        <div class="promo">
-            <p>Try a new game for free</p>
-            <h2>Congratulations</h2>
-        </div>
-        <div class="box">
-            <span></span>
-            <span></span>
-        </div>
-    </div>
+    <?php
+    }
+    ?>
 
     <div id="id01" class="modal">
         <span onclick="CloseGift()" class="close" title="Close Modal">&times;</span>
@@ -163,12 +170,17 @@ $results = $stmt->get_result();
     <!-- started with  appointment contents -->
     <div class="appointments-div fade">
         <?php
-        while ($row = $results->fetch_assoc()) {
+        //select all repair services
+        $stmt_select_all_repairs = $connection->prepare("SELECT * FROM repairs");
+        $stmt_select_all_repairs->execute();
+        $results_all_repairs = $stmt_select_all_repairs->get_result();
+
+        while ($row_repairs = $results_all_repairs->fetch_assoc()) {
             repair_products_connection(
-                $row["repair_type"],
-                $row["price_per_hour"],
-                $row["description"],
-                $row['image']
+                $row_repairs['repair_type'],
+                $row_repairs['price_per_hour'],
+                $row_repairs['description'],
+                $row_repairs['image']
             );
         }
         ?>
