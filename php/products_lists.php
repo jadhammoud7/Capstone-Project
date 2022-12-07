@@ -39,25 +39,29 @@ function appointments_list_connection($appointment_id, $appointment_name, $appoi
     $element = "
         <div class=\"appointments-list\">
             <div class=\"appointments-div\">
-                <div class=\"appointments-img\">
-                    <img src=\"../images/Repairs/$appointment_name/$image\" alt=\"basket product\" style=\"width: 100%;\">
+                <div class=\"appointments-part\">
+                    <div class=\"appointments-img\">
+                        <img src=\"../images/Repairs/$appointment_name/$image\" alt=\"basket product\" style=\"width: 100%;\">
+                    </div>
                 </div>
                 <div class=\"appointments-part\">
                     <h3>Appointment</h3>
                     <h4>$appointment_type $appointment_name</h4>
+                    <div class=\"appointments-part\">
+                        <h3>Date</h3>
+                        <h4>$date</h4>
+                    </div>
                 </div>
-                <div class=\"appointments-part\">
-                    <h3>Date</h3>
-                    <h4>$date</h4>
-                </div>
+
                 <div class=\"appointments-part\">
                     <h3>Hour</h3>
                     <h4>$hour</h4>
+                    <div class=\"appointments-part\">
+                        <h3>Status</h3>
+                        <h4>$status</h4>
+                    </div>
                 </div>
-                <div class=\"appointments-part\">
-                    <h3>Status</h3>
-                    <h4>$status</h4>
-                </div>
+                
             </div>
             <div class=\"appointments-button\">
                 <button onclick=\"OpenDeleteAppointmentPopUp('" . $appointment_id . "', '" . $date . "', '" . $hour . "');\" class=\"remove_app\"><i class=\"fa fa-remove\"></i><strong>Delete Appointment</strong></button>
@@ -70,32 +74,36 @@ function appointments_free_gift_list_connection($appointment_id, $appointment_na
 {
 
     $element = "
-        <div class=\"appointments-list\">
-            <div class=\"appointments-div\">
+    <div class=\"appointments-list\">
+        <div class=\"appointments-div\">
+            <div class=\"appointments-part\">
                 <div class=\"appointments-img\">
                     <img src=\"../images/Products/$appointment_name/$image\" alt=\"basket product\" style=\"width: 100%;\">
                 </div>
-                <div class=\"appointments-part\">
-                    <h3>Appointment</h3>
-                    <h4>$appointment_type $appointment_name</h4>
-                </div>
+            </div>
+            <div class=\"appointments-part\">
+                <h3>Appointment</h3>
+                <h4>$appointment_type $appointment_name</h4>
                 <div class=\"appointments-part\">
                     <h3>Date</h3>
                     <h4>$date</h4>
                 </div>
-                <div class=\"appointments-part\">
-                    <h3>Hour</h3>
-                    <h4>$hour</h4>
-                </div>
+            </div>
+
+            <div class=\"appointments-part\">
+                <h3>Hour</h3>
+                <h4>$hour</h4>
                 <div class=\"appointments-part\">
                     <h3>Status</h3>
                     <h4>$status</h4>
                 </div>
             </div>
-            <div class=\"appointments-button\">
-                <button onclick=\"OpenDeleteAppointmentPopUp('" . $appointment_id . "', '" . $date . "', '" . $hour . "');\" class=\"remove_app\"><i class=\"fa fa-remove\"></i><strong>Delete Appointment</strong></button>
-            </div>
-        </div>";
+            
+        </div>
+        <div class=\"appointments-button\">
+            <button onclick=\"OpenDeleteAppointmentPopUp('" . $appointment_id . "', '" . $date . "', '" . $hour . "');\" class=\"remove_app\"><i class=\"fa fa-remove\"></i><strong>Delete Appointment</strong></button>
+        </div>
+    </div>";
     echo $element;
 }
 
