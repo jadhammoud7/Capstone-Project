@@ -467,6 +467,23 @@
     padding-bottom: 20px;
   }
 }
+@media screen and (max-width:768px) {
+
+
+  .container {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+  }
+}
+
+@media screen and (max-width:375px) {
+
+
+  .container {
+    margin-bottom: 340px;
+    padding-bottom: 0px;
+  }
+}
 
 @media screen and (max-width:1060px) {
   .box {
