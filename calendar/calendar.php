@@ -19,7 +19,7 @@ if (isset($_GET['repair_type'])) {
 }
 $cd_name = "";
 if (isset($_GET['cd_name'])) {
-    $cd_name = "Try a free game " . $_GET['cd_name'];
+    $cd_name = $_GET['cd_name'];
 }
 
 
@@ -35,9 +35,10 @@ if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
         $row_select_repair_price = $results_select_repair_price->fetch_assoc();
 
         $appointment_price_per_hour = $row_select_repair_price['price_per_hour'];
+        $appointment_type = "Repair Service";
         //inserting into table appointments
-        $appointments_insert = $connection->prepare("INSERT INTO appointments(customer_id, appointment_name, price_per_hour, date, hour, status) VALUES (?,?,?,?,?,?)");
-        $appointments_insert->bind_param("isisss", $customer_id, $type, $appointment_price_per_hour, $date, $appointment_time, $status);
+        $appointments_insert = $connection->prepare("INSERT INTO appointments(customer_id, appointment_name, appointment_type, price_per_hour, date, hour, status) VALUES (?,?,?,?,?,?,?)");
+        $appointments_insert->bind_param("ississs", $customer_id, $type, $appointment_type, $appointment_price_per_hour, $date, $appointment_time, $status);
         $appointments_insert->execute();
         $appointments_insert->close();
         echo "<script>window.location='../calendar/calendar.php?appointment_submitted=true';</script>";
@@ -45,8 +46,9 @@ if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
     if ($cd_name != "") {
         $appointment_price_per_hour = 0;
         //inserting into table appointments
-        $appointments_insert = $connection->prepare("INSERT INTO appointments(customer_id, appointment_name, price_per_hour, date, hour, status) VALUES (?,?,?,?,?,?)");
-        $appointments_insert->bind_param("isisss", $customer_id, $type, $appointment_price_per_hour, $date, $appointment_time, $status);
+        $appointment_type = "Free Game Trial";
+        $appointments_insert = $connection->prepare("INSERT INTO appointments(customer_id, appointment_name, appointment_type, price_per_hour, date, hour, status) VALUES (?,?,?,?,?,?,?)");
+        $appointments_insert->bind_param("ississs", $customer_id, $cd_name, $appointment_type, $appointment_price_per_hour, $date, $appointment_time, $status);
         $appointments_insert->execute();
         $appointments_insert->close();
         echo "<script>window.location='../calendar/calendar.php?appointment_submitted=true';</script>";

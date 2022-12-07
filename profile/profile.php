@@ -33,13 +33,6 @@ $stmt_checkouts = $connection->prepare($query_checkouts);
 $stmt_checkouts->execute();
 $results_checkouts = $stmt_checkouts->get_result();
 
-
-//for appointment list
-$query_app = "SELECT appointment_id, appointment_name, date, hour, status FROM appointments WHERE customer_id = '" . $customer_id . "' ";
-$stmt_app = $connection->prepare($query_app);
-$stmt_app->execute();
-$results_app = $stmt_app->get_result();
-
 //deleting app
 if (isset($_GET['deleteAPPid'])) {
     $get_app_id = $_GET['deleteAPPid'];
@@ -357,22 +350,52 @@ if (isset($_GET['delete_checkout_id'])) {
             <div>
                 <h2>Appointments List</h2>
                 <p>These are the list of appointments that you booked</p>
-                <p>Total: <?php echo mysqli_num_rows($results_app) ?></p>
+                <p>Total: <?php
+                            $stmt_select_count_appointments = $connection->prepare("SELECT COUNT(*) as total_appointments FROM appointments WHERE customer_id = '" . $customer_id . "'");
+                            $stmt_select_count_appointments->execute();
+                            $result_count_appointments = $stmt_select_count_appointments->get_result();
+                            $row_count_appointments = $result_count_appointments->fetch_assoc();
+                            echo $row_count_appointments['total_appointments'];
+                            ?></p>
                 <?php
-                while ($row_app = $results_app->fetch_assoc()) {
-                    $stmt_select_repair = $connection->prepare("SELECT image FROM repairs WHERE repair_type = '" . $row_app['appointment_name'] . "'");
-                    $stmt_select_repair->execute();
-                    $results_repair = $stmt_select_repair->get_result();
-                    $row_repair = $results_repair->fetch_assoc();
+                //for appointment list
+                $stmt_select_customer_appointments = $connection->prepare("SELECT * FROM appointments WHERE customer_id = '" . $customer_id . "' ");
+                $stmt_select_customer_appointments->execute();
+                $results_customer_appointments = $stmt_select_customer_appointments->get_result();
 
-                    appointments_list_connection(
-                        $row_app["appointment_id"],
-                        $row_app["appointment_name"],
-                        $row_app["date"],
-                        $row_app["hour"],
-                        $row_app["status"],
-                        $row_repair['image']
-                    );
+                while ($row_customer_appointments = $results_customer_appointments->fetch_assoc()) {
+                    //if this appointment is free game trial
+                    if ($row_customer_appointments['appointment_type'] == 'Free Game Trial') {
+                        $stmt_select_product_image = $connection->prepare("SELECT image FROM products WHERE name = '" . $row_customer_appointments['appointment_name'] . "'");
+                        $stmt_select_product_image->execute();
+                        $result_product_image = $stmt_select_product_image->get_result();
+                        $row_product_image = $result_product_image->fetch_assoc();
+
+                        appointments_free_gift_list_connection(
+                            $row_customer_appointments['appointment_id'],
+                            $row_customer_appointments['appointment_name'],
+                            $row_customer_appointments['appointment_type'],
+                            $row_customer_appointments['date'],
+                            $row_customer_appointments['hour'],
+                            $row_customer_appointments['status'],
+                            $row_product_image['image']
+                        );
+                    } else {
+                        $stmt_select_repair = $connection->prepare("SELECT image FROM repairs WHERE repair_type = '" . $row_customer_appointments['appointment_name'] . "'");
+                        $stmt_select_repair->execute();
+                        $results_repair = $stmt_select_repair->get_result();
+                        $row_repair = $results_repair->fetch_assoc();
+
+                        appointments_list_connection(
+                            $row_customer_appointments['appointment_id'],
+                            $row_customer_appointments['appointment_name'],
+                            $row_customer_appointments['appointment_type'],
+                            $row_customer_appointments['date'],
+                            $row_customer_appointments['hour'],
+                            $row_customer_appointments['status'],
+                            $row_repair['image']
+                        );
+                    }
                 }
                 ?>
 
