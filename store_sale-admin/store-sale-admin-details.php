@@ -31,7 +31,7 @@ if (isset($_GET['store_sale_id'])) {
     $row_total_quantity = $results_total_quantity->fetch_assoc();
 
     //select sales total price
-    $stmt_get_sales_total_price = $connection->prepare("SELECT total_price FROM store_sales WHERE store_sales_id = '" . $_GET['store_sale_id'] . "'");
+    $stmt_get_sales_total_price = $connection->prepare("SELECT total_price_after_discount FROM store_sales WHERE store_sales_id = '" . $_GET['store_sale_id'] . "'");
     $stmt_get_sales_total_price->execute();
     $results_total_price = $stmt_get_sales_total_price->get_result();
     $row_total_price = $results_total_price->fetch_assoc();
@@ -135,7 +135,7 @@ function store_sales_products_connection($product_name, $quantity, $price)
                         <span>Offers</span>
                     </a>
                 </li>
-             
+
                 <li>
                     <a href="../repairs-admin/repairs-admin.php" id="repairs-link">
                         <span class="las la-tools"></span>
@@ -210,7 +210,7 @@ function store_sales_products_connection($product_name, $quantity, $price)
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>$<?php echo $row_total_price['total_price'] ?></h1>
+                        <h1>$<?php echo $row_total_price['total_price_after_discount'] ?></h1>
                         <span>Total Price</span>
                     </div>
                     <div>
@@ -318,6 +318,14 @@ function store_sales_products_connection($product_name, $quantity, $price)
                     <tr>
                         <th>Total Price</th>
                         <td><?php echo $row_store_sale['total_price']; ?>$</td>
+                    </tr>
+                    <tr>
+                        <th>Loyalty Discount %</th>
+                        <td><?php echo $row_store_sale['loyalty_discount_percentage']; ?>%</td>
+                    </tr>
+                    <tr>
+                        <th>Total Price After Discount</th>
+                        <th><?php echo $row_store_sale['total_price_after_discount']; ?>$</th>
                     </tr>
                 </table>
             </div>

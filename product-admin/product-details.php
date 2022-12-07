@@ -157,13 +157,14 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
                     $inventory_change = $row_product_inventory['inventory'] - $product_inventory;
                     $inventories_change = -$inventory_change;
                 }
+                //if their is inventory change
                 if ($inventories_change != 0) {
                     $stmt_add_product_inventory_history = $connection->prepare("INSERT INTO history_product_inventory(product_id, inventory, inventory_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
                     $stmt_add_product_inventory_history->bind_param("iiiss", $product_id, $product_inventory, $inventories_change, $modified_by, $modified_on);
                     $stmt_add_product_inventory_history->execute();
                     $stmt_add_product_inventory_history->close();
 
-                    //select inventory histor from product inventory sales
+                    //select inventory history from product inventory sales
                     $stmt_select_product_inventory_history = $connection->prepare("SELECT inventory_history FROM products_inventory_sales WHERE product_id = '" . $product_id . "'");
                     $stmt_select_product_inventory_history->execute();
                     $result_product_inventory_history = $stmt_select_product_inventory_history->get_result();

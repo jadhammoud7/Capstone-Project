@@ -318,9 +318,10 @@ if (isset($_POST['save'])) {
                     $result_loyalty_discount = $stmt_select_loyalty_discount->get_result();
                     $row_loyalty_discount = $result_loyalty_discount->fetch_assoc();
 
+                    //if customer is loyal
                     if ($row_check_username['loyalty_points'] >= $row_loyalty_discount['loyalty_point_required']) {
                         $loyalty_discount_percentage = $row_loyalty_discount['discount_percentage'];
-                        $total_price_after_discount = $total_sales_price - ($total_sales_price * $loyalty_discount_percentage);
+                        $total_price_after_discount = $total_sales_price - ($total_sales_price * $loyalty_discount_percentage / 100);
                     } else {
                         $loyalty_discount_percentage = 0;
                         $total_price_after_discount = $total_sales_price;
@@ -338,7 +339,7 @@ if (isset($_POST['save'])) {
     }
     if ($apply_loyalty_discount == 'true') {
         $loyalty_discount_percentage = $row_loyalty_discount['discount_percentage'];
-        $total_price_after_discount = $total_sales_price - ($total_sales_price * $loyalty_discount_percentage);
+        $total_price_after_discount = $total_sales_price - ($total_sales_price * $loyalty_discount_percentage / 100);
     }
     date_default_timezone_set('Asia/Beirut');
     $date = date('Y-m-d h:i:s');
