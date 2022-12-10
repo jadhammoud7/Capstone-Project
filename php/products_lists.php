@@ -61,12 +61,16 @@ function appointments_list_connection($appointment_id, $appointment_name, $appoi
                         <h4>$status</h4>
                     </div>
                 </div>
-                
-            </div>
+            </div>";
+    if ($status != 'Done Work') {
+        $element = $element . "
             <div class=\"appointments-button\">
                 <button onclick=\"OpenDeleteAppointmentPopUp('" . $appointment_id . "', '" . $date . "', '" . $hour . "');\" class=\"remove_app\"><i class=\"fa fa-remove\"></i><strong>Delete Appointment</strong></button>
-            </div>
-        </div>";
+            </div>";
+    }
+
+    $element = $element . "
+    </div>";
     echo $element;
 }
 
@@ -99,10 +103,15 @@ function appointments_free_gift_list_connection($appointment_id, $appointment_na
                 </div>
             </div>
             
-        </div>
-        <div class=\"appointments-button\">
-            <button onclick=\"OpenDeleteAppointmentPopUp('" . $appointment_id . "', '" . $date . "', '" . $hour . "');\" class=\"remove_app\"><i class=\"fa fa-remove\"></i><strong>Delete Appointment</strong></button>
-        </div>
+        </div>";
+    if ($status != 'Done Work') {
+        $element = $element . "
+                <div class=\"appointments-button\">
+                    <button onclick=\"OpenDeleteAppointmentPopUp('" . $appointment_id . "', '" . $date . "', '" . $hour . "');\" class=\"remove_app\"><i class=\"fa fa-remove\"></i><strong>Delete Appointment</strong></button>
+                </div>";
+    }
+
+    $element = $element . "
     </div>";
     echo $element;
 }
@@ -141,9 +150,12 @@ function checkouts_list_connection($checkout_id, $shipping_location, $status, $t
                 </table>
             </div>     
             <div class=\"checkouts-div\">
-                <button style=\"border-radius: 20px;\" onclick=\"window.location.href = '../checkout/checkout-details.php?checkout_id=$checkout_id';\" title=\"See your checkout info including billing details and products buyed\"><i class=\"fa fa-info-circle\"></i>See Checkout Details</button>
-                <button style=\"margin-left: 10px; border-radius: 20px; background-color: red;\" onclick = \"OpenRemoveCheckoutPopUp($checkout_id)\" title=\"Delete your order\"><i class=\"fa fa-trash\"></i>Delete Order</button>
-            </div>   
+                <button style=\"border-radius: 20px;\" onclick=\"window.location.href = '../checkout/checkout-details.php?checkout_id=$checkout_id';\" title=\"See your checkout info including billing details and products buyed\"><i class=\"fa fa-info-circle\"></i>See Checkout Details</button>";
+    if ($status != 'Done Work') {
+        $element = $element . "
+                <button style=\"margin-left: 10px; border-radius: 20px; background-color: red;\" onclick = \"OpenRemoveCheckoutPopUp($checkout_id)\" title=\"Delete your order\"><i class=\"fa fa-trash\"></i>Delete Order</button>";
+    }
+    $element = $element . "</div>   
         </div>";
     echo $element;
 }
