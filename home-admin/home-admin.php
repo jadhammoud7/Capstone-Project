@@ -138,64 +138,6 @@ $stmt_get_done_appointments->execute();
 $results_get_done_appointments = $stmt_get_done_appointments->get_result();
 $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
 
-
-//handling post request for slideshow
-$slide1_text = "";
-$slide2_text = "";
-$slide3_text = "";
-
-$select_slideshow = $connection->prepare("SELECT * FROM slideshow_slides");
-$select_slideshow->execute();
-$result_slideshow = $select_slideshow->get_result();
-$row_slideshow = $result_slideshow->fetch_assoc();
-
-if (isset($_POST['slide1_text'])) {
-    $slide1_text = $_POST['slide1_text'];
-}
-
-if ($slide1_text != "" && !empty($row_slideshow)) {
-    $stmt_update_slide1_slideshow = $connection->prepare("UPDATE slideshow_slides SET slide1_text = '" . $slide1_text . "'");
-    $stmt_update_slide1_slideshow->execute();
-}
-
-if (isset($_POST['slide2_text'])) {
-    $slide2_text = $_POST['slide2_text'];
-}
-
-if ($slide2_text != "" && !empty($row_slideshow)) {
-    $stmt_update_slide2_slideshow = $connection->prepare("UPDATE slideshow_slides SET slide2_text = '" . $slide2_text . "'");
-    $stmt_update_slide2_slideshow->execute();
-}
-
-if (isset($_POST['slide3_text'])) {
-    $slide3_text = $_POST['slide3_text'];
-}
-
-if ($slide3_text != "" && !empty($row_slideshow)) {
-    $stmt_update_slide3_slideshow = $connection->prepare("UPDATE slideshow_slides SET slide3_text = '" . $slide3_text . "'");
-    $stmt_update_slide3_slideshow->execute();
-}
-
-if ($_FILES['slide1_image']['name'] != "") {
-    rmdir('../images/Slideshow/Slide1/');
-    mkdir('../images/Slideshow/Slide1/');
-
-    $target_dir = '../images/Slideshow/Slide1/';
-
-    $filename = basename($_FILES['slide1_image']['name']);
-
-    $target_file = $target_dir . $filename;
-    $fileType = pathinfo($target_file, PATHINFO_EXTENSION);
-    $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
-    if (in_array($fileType, $allowTypes)) {
-        if (move_uploaded_file($_FILES['slide1_image']['tmp_name'], $target_file)) {
-            $slide1_image = $filename;
-            $stmt_update_slide1_image_slideshow = $connection->prepare("UPDATE slideshow_slides SET slide1_image=?");
-            $stmt_update_slide1_image_slideshow->bind_param("s", $slide1_image);
-            $stmt_update_slide1_image_slideshow->execute();
-        }
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -597,7 +539,7 @@ if ($_FILES['slide1_image']['name'] != "") {
             <!-- adding or modifying slideshow form -->
             <div id="add_modify_slideshow_form" class="modal">
                 <span onclick="CloseAddModifySlideshow()" class="close" title="Close Modal">&times;</span>
-                <form class="modal-content" action="home-admin.php" method="POST" enctype="multipart/form-data">
+                <form class="modal-content" action="../php/edit_slideshow.php" method="POST" enctype="multipart/form-data">
                     <div class="container">
                         <h1 class="title">Add / Modify Slideshow</h1>
                         <br>
