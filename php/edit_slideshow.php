@@ -76,7 +76,7 @@ if ($_FILES['slide2_image']['name'] != "") {
     $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
     if (in_array($fileType, $allowTypes)) {
         if (move_uploaded_file($_FILES['slide2_image']['tmp_name'], $target_file)) {
-            $slide1_image = $filename;
+            $slide2_image = $filename;
             $stmt_update_slide2_image_slideshow = $connection->prepare("UPDATE slideshow_slides SET slide2_image=?");
             $stmt_update_slide2_image_slideshow->bind_param("s", $slide2_image);
             $stmt_update_slide2_image_slideshow->execute();
@@ -97,9 +97,9 @@ if ($_FILES['slide3_image']['name'] != "") {
     $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
     if (in_array($fileType, $allowTypes)) {
         if (move_uploaded_file($_FILES['slide3_image']['tmp_name'], $target_file)) {
-            $slide1_image = $filename;
+            $slide3_image = $filename;
             $stmt_update_slide3_image_slideshow = $connection->prepare("UPDATE slideshow_slides SET slide3_image=?");
-            $stmt_update_slide3_image_slideshow->bind_param("s", $slide2_image);
+            $stmt_update_slide3_image_slideshow->bind_param("s", $slide3_image);
             $stmt_update_slide3_image_slideshow->execute();
         }
     }

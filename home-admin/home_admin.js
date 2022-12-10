@@ -101,3 +101,12 @@ if (window.location.href.includes('open_add_modify_slideshow=1')) {
 function CloseAddModifySlideshow() {
     window.location = 'home-admin.php';
 }
+
+if (window.location.href.includes('slideshow_modified=1')) {
+    const slideshow_confirmation = document.getElementById('slideshow-confirmation');
+    slideshow_confirmation.classList.add('open-popup');
+}
+
+function RemoveSlideshowAddedPopUp() {
+    window.location = 'home-admin.php';
+}

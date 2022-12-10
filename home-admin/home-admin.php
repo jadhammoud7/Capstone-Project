@@ -177,6 +177,14 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
         <button type="button" onclick="CloseLogOutPopUp()">NO</button>
     </div>
 
+    <!-- started popup message slideshow -->
+    <div class="popup" id="slideshow-confirmation">
+        <img src="../images/tick.png" alt="">
+        <h2>Slideshow Confirmation</h2>
+        <p>Slideshow has been modified / added successfully</p>
+        <button type="button" onclick="RemoveSlideshowAddedPopUp()">OK</button>
+    </div>
+
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
         <div class="sidebar-brand">
