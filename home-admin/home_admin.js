@@ -88,3 +88,16 @@ function RemoveLogInPopUp() {
     let login_popup = document.getElementById('login-confirmation');
     login_popup.classList.remove('open-popup');
 }
+
+function OpenAddModifySlideshow() {
+    window.location = '?open_add_modify_slideshow=1';
+}
+
+if (window.location.href.includes('open_add_modify_slideshow=1')) {
+    const add_modify_slideshow_form = document.getElementById('add_modify_slideshow_form');
+    add_modify_slideshow_form.style.display = 'block';
+}
+
+function CloseAddModifySlideshow() {
+    window.location = 'home-admin.php';
+}
