@@ -8,20 +8,20 @@ function repair_products_connection($repair_type, $price_per_hour, $description,
 
     $element = "
     <div class=\"appointment-item\">
-    <h2>$repair_type</h2>
-    <div class=\"appointment-item-info\">
-        <img src=\"../images/Repairs/$repair_type/$image\" alt=\"\">
-        <div class=\"appointment-item-info-part\">
-            <h3 id=\"repair_type\">$repair_type</h3>
-            <p>1 hour | $price_per_hour$</p>
-            <p>$description</p>
+        <h2>$repair_type</h2>
+        <div class=\"appointment-item-info\">
+            <img src=\"../images/Repairs/$repair_type/$image\" alt=\"\">
+            <div class=\"appointment-item-info-part\">
+                <h3 id=\"repair_type\">$repair_type</h3>
+                <p>1 hour | $price_per_hour$</p>
+                <p>$description</p>
+            </div>
+        </div>
+        <div>
+            <button onclick=\"window.location.href='../calendar/calendar.php?repair_type=$repair_type';\" style=\"border-radius: 15px;color:black ;\"><strong>Book Now</strong></button>
         </div>
     </div>
-    <div>
-        <button onclick=\"window.location.href='../calendar/calendar.php?repair_type=$repair_type';\" style=\"border-radius: 15px;color:black ;\"><strong>Book Now</strong></button>
-    </div>
-</div>
-<hr size=\"8\" width=\"100%\" color=\"royalblue\">
+    <hr size=\"8\" width=\"100%\" color=\"royalblue\">
     ";
     echo $element;
 }

@@ -1,0 +1,25 @@
+.add_modify_slideshow {
+    margin-top: 50px;
+}
+
+.add_modify_slideshow {
+    background-color: white;
+    border: solid 1px white;
+    border-radius: 10px;
+    color: white;
+    font-weight: 100;
+    font-size: 1rem;
+    padding: .5rem;
+    margin-top: 10px;
+}
+
+button.add_modify_slideshow {
+    background-color: royalblue;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}

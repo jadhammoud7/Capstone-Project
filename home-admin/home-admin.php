@@ -483,6 +483,60 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
 
             </div>
 
+
+            <!-- slideshow management -->
+            <div class="recent-grid-complete">
+                <div class="projects">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Slideshow Management</h3>
+                        </div>
+
+                        <div class="card-single add_modify_slideshow">
+                            <button class="add_modify_slideshow" id="add_user1" onclick="OpenAddProduct()" title="Add or manage slideshow of customer home page">
+                                <span class="las la-plus"></span>
+                                Add / Modify Customer Home Slideshow
+                            </button>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <td>Slide 1 Image</td>
+                                            <td>Slide 1 Text</td>
+                                            <td>Slide 2 Image</td>
+                                            <td>Slide 2 Text</td>
+                                            <td>Slide 3 Image</td>
+                                            <td>Slide 3 Text</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $stmt_select_slideshow_info = $connection->prepare("SELECT * FROM slideshow_slides");
+                                        $stmt_select_slideshow_info->execute();
+                                        $result_slideshow_info = $stmt_select_slideshow_info->get_result();
+                                        while ($row_slideshow = $result_slideshow_info->fetch_assoc()) {
+                                            get_slideshow_connection(
+                                                $row_slideshow['slide1_image'],
+                                                $row_slideshow['slide1_text'],
+                                                $row_slideshow['slide2_image'],
+                                                $row_slideshow['slide2_text'],
+                                                $row_slideshow['slide3_image'],
+                                                $row_slideshow['slide3_text'],
+                                            );
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </main>
     </div>
 

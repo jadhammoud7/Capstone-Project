@@ -218,6 +218,29 @@ function get_all_checkouts_connection($checkout_id, $customer_id, $first_name, $
 
     echo $element;
 }
+
+function get_slideshow_connection($slide1_image, $slide1_text, $slide2_image, $slide2_text, $slide3_image, $slide3_text)
+{
+    $element = "
+    <tr>
+        <td>
+            <img src='../images/SlideShow/Slide1/$slide1_image' alt='Image of Slide1' width='100px'>
+        </td>
+        <td>$slide1_text</td>
+        <td>
+            <img src='../images/SlideShow/Slide2/$slide2_image' alt='Image of Slide2' width='100px'>
+        </td>
+        <td>$slide2_text</td>
+        <td>
+            <img src='../images/SlideShow/Slide3/$slide3_image' alt='Image of Slide3' width='100px'>
+        </td>
+        <td>$slide3_text</td>
+    </tr>    
+    ";
+
+    echo $element;
+}
+
 function get_all_products($product_id, $name, $price, $type, $category, $inventory, $sales_number, $last_modified_by, $last_modified_on)
 {
     $element = "
