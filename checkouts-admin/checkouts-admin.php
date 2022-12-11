@@ -122,6 +122,16 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
                 $stmt_update_product_inventory->bind_param("i", $new_inventory);
                 $stmt_update_product_inventory->execute();
 
+                //insert to product inventory history
+                $inventory_change = -$quantity;
+                date_default_timezone_set('Asia/Beirut');
+                $modified_on = date('Y-m-d h:i:s');
+                $modified_by = 'Checkout Order';
+                $stmt_add_product_inventory_history = $connection->prepare("INSERT INTO history_product_inventory(product_id, inventory, inventory_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
+                $stmt_add_product_inventory_history->bind_param("iiiss", $product_id, $new_inventory, $inventory_change, $modified_by, $modified_on);
+                $stmt_add_product_inventory_history->execute();
+                $stmt_add_product_inventory_history->close();
+
                 $stmt_select_product_sales = $connection->prepare("SELECT sales_number FROM products WHERE product_id = '" . $row_check_checkout_products['product_id'] . "'");
                 $stmt_select_product_sales->execute();
                 $results_select_product_sales = $stmt_select_product_sales->get_result();
@@ -134,6 +144,17 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
                 $stmt_update_product_sales = $connection->prepare("UPDATE products SET sales_number=? WHERE product_id = '" . $row_check_checkout_products['product_id'] . "'");
                 $stmt_update_product_sales->bind_param("i", $new_sales);
                 $stmt_update_product_sales->execute();
+
+                //insert to product inventory sales
+                $sales_change = $quantity;
+                date_default_timezone_set('Asia/Beirut');
+                $modified_on = date('Y-m-d h:i:s');
+                $modified_by = 'Checkout Order';
+                $stmt_add_product_inventory_sales = $connection->prepare("INSERT INTO history_product_sales(product_id, sales_number, sales_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
+                $stmt_add_product_inventory_sales->bind_param("iiiss", $product_id, $new_sales, $sales_change, $modified_by, $modified_on);
+                $stmt_add_product_inventory_sales->execute();
+                $stmt_add_product_inventory_sales->close();
+
 
                 //update loyalty point for customer
                 $stmt_get_customer = $connection->prepare("SELECT loyalty_points FROM customers WHERE customer_id = '" . $row_check_checkout_products['customer_id'] . "'");
@@ -185,7 +206,7 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
 <html lang="en">
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -284,7 +305,7 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
                         <span>Offers</span>
                     </a>
                 </li>
-             
+
                 <li>
                     <a href="../repairs-admin/repairs-admin.php" id="repairs-link">
                         <span class="las la-tools"></span>
