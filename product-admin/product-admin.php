@@ -57,6 +57,7 @@ $results_products = $stmt_products->get_result();
 //form of adding new product
 $product_name = "";
 $product_price = 0;
+$product_cost = 0;
 $product_type = "";
 $product_category = "";
 $product_description = "";
@@ -65,28 +66,32 @@ $product_image = "";
 $product_inventory = 0;
 $product_sales_number = 0;
 
-if (isset($_POST["product_name"])) {
-    $product_name = $_POST["product_name"];
+if (isset($_POST['product_name'])) {
+    $product_name = $_POST['product_name'];
 }
 
-if (isset($_POST["product_price"])) {
-    $product_price = $_POST["product_price"];
+if (isset($_POST['product_price'])) {
+    $product_price = $_POST['product_price'];
 }
 
-if (isset($_POST["product_type"])) {
-    $product_type = $_POST["product_type"];
+if (isset($_POST['product_cost'])) {
+    $product_cost = $_POST['product_cost'];
 }
 
-if (isset($_POST["product_category"])) {
-    $product_category = $_POST["product_category"];
+if (isset($_POST['product_type'])) {
+    $product_type = $_POST['product_type'];
 }
 
-if (isset($_POST["product_desciption"])) {
-    $product_description = $_POST["product_desciption"];
+if (isset($_POST['product_category'])) {
+    $product_category = $_POST['product_category'];
 }
 
-if (isset($_POST["product_age"])) {
-    $product_age = $_POST["product_age"];
+if (isset($_POST['product_desciption'])) {
+    $product_description = $_POST['product_desciption'];
+}
+
+if (isset($_POST['product_age'])) {
+    $product_age = $_POST['product_age'];
 }
 
 if (isset($_POST['product_inventory'])) {
@@ -97,7 +102,7 @@ if (isset($_POST['product_sales'])) {
     $product_sales_number = $_POST['product_sales'];
 }
 
-if ($product_name != "" && $product_price != 0 && $product_type != "" && $product_category != "" && $product_description != "" && $product_age != "" && $product_inventory != 0) {
+if ($product_name != "" && $product_price != 0 && $product_cost != 0 && $product_type != "" && $product_category != "" && $product_description != "" && $product_age != "" && $product_inventory != 0) {
     //make directory in images/Products that have same name as product
     mkdir('../images/Products/' . $product_name);
     $target_dir = "../images/Products/$product_name/";
@@ -116,8 +121,8 @@ if ($product_name != "" && $product_price != 0 && $product_type != "" && $produc
 
             //insert into table products
             $has_offer = 'NO';
-            $stmt_add_new_product = $connection->prepare("INSERT INTO products(name, price, type, category, description, age, image, inventory, sales_number, has_offer, date_added, last_modified_by, last_modified_on) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
-            $stmt_add_new_product->bind_param("sisssssiissss", $product_name, $product_price, $product_type, $product_category, $product_description, $product_age, $product_image, $product_inventory, $product_sales_number, $has_offer, $date_added, $modified_by, $modified_on);
+            $stmt_add_new_product = $connection->prepare("INSERT INTO products(name, unit_cost, unit_price, type, category, description, age, image, inventory, sales_number, has_offer, date_added, last_modified_by, last_modified_on) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            $stmt_add_new_product->bind_param("siisssssiissss", $product_name, $product_cost, $product_price, $product_type, $product_category, $product_description, $product_age, $product_image, $product_inventory, $product_sales_number, $has_offer, $date_added, $modified_by, $modified_on);
             $stmt_add_new_product->execute();
             $stmt_add_new_product->close();
 
@@ -824,9 +829,15 @@ if (isset($_GET['getProducttoRemove'])) {
                         <label for="product_name"><b>Product Name</b></label>
                         <input type="text" placeholder="Enter product's name" name="product_name" id="product_name" value="" required />
 
+                        <label for="product_cost">
+                            <b>Product Unit Cost</b>
+                        </label>
+                        <br>
+                        <input style="height: 35px;" type="number" placeholder="Enter product's cost" name="product_cost" id="product_cost" value="" required>
+                        <br><br>
 
                         <label for="product_price">
-                            <b>Product Price</b>
+                            <b>Product Unit Price</b>
                         </label>
                         <br>
                         <input style="height: 35px;" type="number" placeholder="Enter product's price" name="product_price" id="product_price" value="" required>
