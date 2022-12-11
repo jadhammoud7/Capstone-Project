@@ -62,11 +62,11 @@ for (let i = 0; i < btn_checkout.length; i++) {
     btn_checkout[i].addEventListener('click', function handleClick() {
         if (btn_checkout[i].innerHTML.includes("Done Work")) {
             // SetButtonToPending(btn[i]);
-            window.location = current_url + '&getCheckoutID=' + CheckoutID + '&set_to_done=true';
+            window.location = current_url + '&checkout_id=' + CheckoutID + '&set_to_done=true';
             //yaane heye pending w bade hawela la done
         } else {
             // SetButtonToDone(btn[i]);
-            window.location = current_url + '&getCheckoutID=' + CheckoutID + '&set_to_done=false';
+            window.location = current_url + '&checkout_id=' + CheckoutID + '&set_to_done=false';
             //yane heye done w bade hawela la pending
         }
     });

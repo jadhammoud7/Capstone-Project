@@ -121,9 +121,9 @@ if (isset($_GET['customer_id'])) {
     $row_get_done_checkouts = $results_get_done_checkouts->fetch_assoc();
 
     //updating working status from buttons
-    if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
+    if (isset($_GET['set_to_done']) && isset($_GET['checkout_id'])) {
         $working_status = $_GET['set_to_done'];
-        $checkoutID = $_GET['getCheckoutID'];
+        $checkoutID = $_GET['checkout_id'];
         $status = "";
         if ($working_status == "true") {
             $status = "Done Work";

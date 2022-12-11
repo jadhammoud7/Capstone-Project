@@ -90,9 +90,9 @@ if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
 
 
 //updating working status from buttons checkouts
-if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
+if (isset($_GET['set_to_done']) && isset($_GET['checkout_id'])) {
     $working_status = $_GET['set_to_done'];
-    $checkoutID = $_GET['getCheckoutID'];
+    $checkoutID = $_GET['checkout_id'];
     $status = "";
     if ($working_status == "true") {
         $status = "Done Work";

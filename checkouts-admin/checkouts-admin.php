@@ -70,9 +70,9 @@ $results_get_done_checkouts = $stmt_get_done_checkouts->get_result();
 $row_get_done_checkouts = $results_get_done_checkouts->fetch_assoc();
 
 //updating working status from buttons
-if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
+if (isset($_GET['set_to_done']) && isset($_GET['checkout_id'])) {
     $working_status = $_GET['set_to_done'];
-    $checkoutID = $_GET['getCheckoutID'];
+    $checkoutID = $_GET['checkout_id'];
     $status = "";
     if ($working_status == "true") {
         $status = "Done Work";
@@ -105,10 +105,19 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
             $stmt_check_checkout_products = $connection->prepare("SELECT product_id, quantity FROM checkouts_customers_products WHERE checkout_id = '" . $checkoutID . "'");
             $stmt_check_checkout_products->execute();
             $results_check_checkout_products = $stmt_check_checkout_products->get_result();
+            $total_products_quantities = 0;
+
+            //select customer id from checkout
+            $stmt_select_customer_of_checkout = $connection->prepare("SELECT customer_id FROM checkouts WHERE checkout_id = '" . $_GET['checkout_id'] . "'");
+            $stmt_select_customer_of_checkout->execute();
+            $result_customer_id = $stmt_select_customer_of_checkout->get_result();
+            $row_customer_id = $result_customer_id->fetch_assoc();
+
             //loop over all products in checkout
             while ($row_check_checkout_products = $results_check_checkout_products->fetch_assoc()) {
                 //quantity needed in checkout
                 $quantity = $row_check_checkout_products['quantity'];
+                $product_id = $row_check_checkout_products['product_id'];
                 //select product inventory
                 $stmt_select_product_inventory = $connection->prepare("SELECT inventory FROM products WHERE product_id = '" . $row_check_checkout_products['product_id'] . "'");
                 $stmt_select_product_inventory->execute();
@@ -157,13 +166,13 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
 
 
                 //update loyalty point for customer
-                $stmt_get_customer = $connection->prepare("SELECT loyalty_points FROM customers WHERE customer_id = '" . $row_check_checkout_products['customer_id'] . "'");
+                $stmt_get_customer = $connection->prepare("SELECT loyalty_points FROM customers WHERE customer_id = '" .  $row_customer_id['customer_id'] . "'");
                 $stmt_get_customer->execute();
                 $results_get_customer = $stmt_get_customer->get_result();
                 $row_get_customer = $results_get_customer->fetch_assoc();
 
                 $new_loyalty = $row_get_customer['loyalty_points'] + $quantity;
-                $stmt_update_customer_loyalty_points = $connection->prepare("UPDATE products SET loyalty_points=? WHERE customer_id = '" . $row_check_checkout_products['customer_id'] . "'");
+                $stmt_update_customer_loyalty_points = $connection->prepare("UPDATE customers SET loyalty_points=? WHERE customer_id = '" .  $row_customer_id['customer_id'] . "'");
                 $stmt_update_customer_loyalty_points->bind_param("i", $new_loyalty);
                 $stmt_update_customer_loyalty_points->execute();
             }

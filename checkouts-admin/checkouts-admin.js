@@ -2,7 +2,7 @@ var CheckoutID;
 
 function SetCheckoutID(checkout_id) {
     CheckoutID = checkout_id;
-    window.location.href = 'checkouts-admin.php?getCheckoutID=' + checkout_id + '&set_to_done=true';
+    window.location.href = 'checkouts-admin.php?checkout_id=' + checkout_id + '&set_to_done=true';
 }
 
 if (window.location.href.includes('change-status')) {
@@ -67,11 +67,11 @@ for (let i = 0; i < btn_checkout.length; i++) {
     // btn_checkout[i].addEventListener('click', function handleClick() {
     //     if (btn_checkout[i].innerHTML.includes("Done Work")) {
     //         // SetButtonToPending(btn[i]);
-    //         window.location = '../checkouts-admin/checkouts-admin.php?getCheckoutID=' + CheckoutID + '&set_to_done=true';
+    //         window.location = '../checkouts-admin/checkouts-admin.php?checkout_id=' + CheckoutID + '&set_to_done=true';
     //         //yaane heye pending w bade hawela la done
     //     } else {
     //         // SetButtonToDone(btn[i]);
-    //         window.location = '../checkouts-admin/checkouts-admin.php?getCheckoutID=' + CheckoutID + '&set_to_done=false';
+    //         window.location = '../checkouts-admin/checkouts-admin.php?checkout_id=' + CheckoutID + '&set_to_done=false';
     //         //yane heye done w bade hawela la pending
     //     }
     // });
