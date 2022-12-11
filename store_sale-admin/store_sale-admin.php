@@ -156,7 +156,7 @@ if (isset($_POST['save'])) {
                     $update_product_inventory_sales->execute();
 
                     //select price and add to sales products, same as above condition
-                    $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE name = ?");
+                    $stmt_select_product_price = $connection->prepare("SELECT unit_price FROM products WHERE name = ?");
                     $stmt_select_product_price->bind_param("s", $product_name[$x]);
                     $stmt_select_product_price->execute();
                     $result_product_price = $stmt_select_product_price->get_result();
@@ -265,7 +265,7 @@ if (isset($_POST['save'])) {
                         $price = $row_product_offer['new_price'];
                     } else {
                         //select price and add to sales products, same as above condition
-                        $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE product_id = $product_id");
+                        $stmt_select_product_price = $connection->prepare("SELECT unit_price FROM products WHERE product_id = $product_id");
                         $stmt_select_product_price->execute();
                         $result_product_price = $stmt_select_product_price->get_result();
                         $row_product_price = $result_product_price->fetch_assoc();

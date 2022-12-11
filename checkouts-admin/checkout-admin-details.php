@@ -453,7 +453,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
                     </tr>
                     <?php
                     while ($row_get_checkout_products = $results_get_checkout_products->fetch_assoc()) {
-                        $stmt_get_product = $connection->prepare("SELECT name, price, inventory FROM products WHERE product_id = '" . $row_get_checkout_products["product_id"] . "' ");
+                        $stmt_get_product = $connection->prepare("SELECT name, unit_price, inventory FROM products WHERE product_id = '" . $row_get_checkout_products["product_id"] . "' ");
                         $stmt_get_product->execute();
                         $results_get_product = $stmt_get_product->get_result();
                         $row_get_product = $results_get_product->fetch_assoc();

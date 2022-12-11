@@ -198,14 +198,14 @@ if (isset($_GET['RemoveLoyaltyDiscount'])) {
 }
 
 //get products in ascending 
-$query_nbofsales = "SELECT name,inventory,sales_number FROM products ORDER BY sales_number ASC;";
+$query_nbofsales = "SELECT name, inventory, sales_number FROM products ORDER BY sales_number ASC;";
 $stmt_nbofsales = $connection->prepare($query_nbofsales);
 $stmt_nbofsales->execute();
 $results_nbofsales = $stmt_nbofsales->get_result();
 
 
 //get top products 
-$query_top_products = "SELECT name,sales_number FROM products ORDER BY sales_number DESC LIMIT 5;";
+$query_top_products = "SELECT name, sales_number FROM products ORDER BY sales_number DESC LIMIT 5;";
 $stmt_top_products = $connection->prepare($query_top_products);
 $stmt_top_products->execute();
 $results_top_products = $stmt_top_products->get_result();
@@ -565,7 +565,7 @@ $results_top_products = $stmt_top_products->get_result();
                                         $result_product_inventory_sales = $stmt_select_products_inventory_sales->get_result();
 
                                         while ($row_product_inventory_sales = $result_product_inventory_sales->fetch_assoc()) {
-                                            $stmt_select_product = $connection->prepare("SELECT name, price FROM products WHERE product_id = '" . $row_product_inventory_sales['product_id'] . "'");
+                                            $stmt_select_product = $connection->prepare("SELECT name, unit_price FROM products WHERE product_id = '" . $row_product_inventory_sales['product_id'] . "'");
                                             $stmt_select_product->execute();
                                             $result_product = $stmt_select_product->get_result();
                                             $row_product = $result_product->fetch_assoc();
@@ -818,7 +818,7 @@ $results_top_products = $stmt_top_products->get_result();
         const array_product_prices = [];
 
         <?php
-        $stmt_get_product_price = $connection->prepare("SELECT price FROM products");
+        $stmt_get_product_price = $connection->prepare("SELECT unit_price FROM products");
         $stmt_get_product_price->execute();
         $result_product_price = $stmt_get_product_price->get_result();
         while ($row_product_price = $result_product_price->fetch_assoc()) { ?>

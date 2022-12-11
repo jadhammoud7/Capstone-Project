@@ -127,7 +127,7 @@ if ($product_id != 0 && $product_name != "" && $product_cost != 0 && $product_pr
                 $modified_by = $row['first_name'] . ' ' . $row['last_name'];
 
                 //select the current price of the product before updating
-                $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE product_id = '" . $product_id . "'");
+                $stmt_select_product_price = $connection->prepare("SELECT unit_price FROM products WHERE product_id = '" . $product_id . "'");
                 $stmt_select_product_price->execute();
                 $result_product_price = $stmt_select_product_price->get_result();
                 $row_product_price = $result_product_price->fetch_assoc();
@@ -197,7 +197,7 @@ if ($product_id != 0 && $product_name != "" && $product_cost != 0 && $product_pr
         $modified_by = $row['first_name'] . ' ' . $row['last_name'];
 
         //select the current price of the product before updating
-        $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE product_id = '" . $product_id . "'");
+        $stmt_select_product_price = $connection->prepare("SELECT unit_price FROM products WHERE product_id = '" . $product_id . "'");
         $stmt_select_product_price->execute();
         $result_product_price = $stmt_select_product_price->get_result();
         $row_product_price = $result_product_price->fetch_assoc();

@@ -15,7 +15,7 @@ include("../php/shop_product_connection.php");
 
 if (isset($_GET['productID'])) {
     $id = $_GET['productID'];
-    $select_product_query = "SELECT product_id, name, price, category, description, age, date_added, image FROM products WHERE product_id = '" . $id . "'";
+    $select_product_query = "SELECT product_id, name, unit_price, category, description, age, date_added, image FROM products WHERE product_id = '" . $id . "'";
     $stmt_select_product = $connection->prepare($select_product_query);
     $stmt_select_product->execute();
     $results_select_product = $stmt_select_product->get_result();

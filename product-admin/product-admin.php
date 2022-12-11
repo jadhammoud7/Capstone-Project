@@ -167,14 +167,14 @@ if ($product_name != "" && $product_price != 0 && $product_cost != 0 && $product
 }
 
 //get products in ascending 
-$query_nbofsales = "SELECT name,inventory,sales_number FROM products ORDER BY sales_number ASC;";
+$query_nbofsales = "SELECT name, inventory, sales_number FROM products ORDER BY sales_number ASC;";
 $stmt_nbofsales = $connection->prepare($query_nbofsales);
 $stmt_nbofsales->execute();
 $results_nbofsales = $stmt_nbofsales->get_result();
 
 
 //get top products 
-$query_top_products = "SELECT name,sales_number FROM products ORDER BY sales_number DESC LIMIT 5;";
+$query_top_products = "SELECT name, sales_number FROM products ORDER BY sales_number DESC LIMIT 5;";
 $stmt_top_products = $connection->prepare($query_top_products);
 $stmt_top_products->execute();
 $results_top_products = $stmt_top_products->get_result();

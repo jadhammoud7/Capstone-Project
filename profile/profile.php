@@ -261,7 +261,7 @@ if (isset($_GET['delete_checkout_id'])) {
             </div>
             <?php
             while ($row_basket = $results_basket->fetch_assoc()) {
-                $stmt_get_product = $connection->prepare("SELECT product_id, category, name, price, image FROM products WHERE product_id = '" . $row_basket["product_id"] . "' ");
+                $stmt_get_product = $connection->prepare("SELECT product_id, category, name, unit_price, image FROM products WHERE product_id = '" . $row_basket["product_id"] . "' ");
                 $stmt_get_product->execute();
                 $results_get_product = $stmt_get_product->get_result();
                 $row_get_product = $results_get_product->fetch_assoc();
@@ -316,7 +316,7 @@ if (isset($_GET['delete_checkout_id'])) {
             $results_add_to_favorites = $stmt_add_to_favorites->get_result();
 
             while ($row_add_to_favorites = $results_add_to_favorites->fetch_assoc()) {
-                $stmt_get_product = $connection->prepare("SELECT product_id, name, category, price, image, has_offer FROM products WHERE product_id = '" . $row_add_to_favorites['product_id'] . "' ");
+                $stmt_get_product = $connection->prepare("SELECT product_id, name, category, unit_price, image, has_offer FROM products WHERE product_id = '" . $row_add_to_favorites['product_id'] . "' ");
                 $stmt_get_product->execute();
                 $results_get_product = $stmt_get_product->get_result();
                 $row_get_product = $results_get_product->fetch_assoc();

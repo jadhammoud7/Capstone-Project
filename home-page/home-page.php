@@ -22,14 +22,14 @@ $results = $stmt->get_result();
 //get all products(some of them )
 require_once("../php/shop_product_connection.php");
 
-$query_allproducts = "SELECT product_id, name, price, image FROM products WHERE has_offer='No' ORDER BY RAND() LIMIT 8";
+$query_allproducts = "SELECT product_id, name, unit_price, image FROM products WHERE has_offer='No' ORDER BY RAND() LIMIT 8";
 $stmt_allproducts = $connection->prepare($query_allproducts);
 $stmt_allproducts->execute();
 $results_allproducts = $stmt_allproducts->get_result();
 
 //get all products
 require_once("../php/admin_page_php.php");
-$query_products = "SELECT product_id, name, price, type, category, description, age, inventory, sales_number,last_modified_by,last_modified_on FROM products";
+$query_products = "SELECT product_id, name, price, type, category, description, age, inventory, sales_number, last_modified_by, last_modified_on FROM products";
 $stmt_products = $connection->prepare($query_products);
 $stmt_products->execute();
 $results_products = $stmt_products->get_result();
