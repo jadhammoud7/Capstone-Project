@@ -60,6 +60,7 @@ if (isset($_GET['product_id'])) {
 $product_id = 0;
 $product_name = "";
 $product_price = 0;
+$product_cost = 0;
 $product_type = "";
 $product_category = "";
 $product_description = "";
@@ -70,8 +71,13 @@ $product_sales = 0;
 if (isset($_POST['product_id'])) {
     $product_id = $_POST['product_id'];
 }
+
 if (isset($_POST['product_name'])) {
     $product_name = $_POST['product_name'];
+}
+
+if (isset($_POST['cost'])) {
+    $product_cost = $_POST['cost'];
 }
 
 if (isset($_POST['price'])) {
@@ -102,7 +108,7 @@ if (isset($_POST['sales_number'])) {
     $product_sales = $_POST['sales_number'];
 }
 
-if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_type != "" && $product_category != "" && $product_description != "" && $product_age != "") {
+if ($product_id != 0 && $product_name != "" && $product_cost != 0 && $product_price != 0 && $product_type != "" && $product_category != "" && $product_description != "" && $product_age != "") {
     if (!empty($_FILES['product_image']['name'])) {
         rmdir('../images/Products/' . $product_name . '/');
         mkdir('../images/Products/' . $product_name . '/');
@@ -177,8 +183,8 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
                 }
 
                 //update products info
-                $stmt_update_product = $connection->prepare("UPDATE products SET name = ?, price = ?, type= ?, category = ?, description = ?, age = ?, image = ?, inventory = ?, sales_number = ?, last_modified_by = ?, last_modified_on = ? WHERE product_id = '" . $product_id . "'");
-                $stmt_update_product->bind_param("sisssssiiss", $product_name, $product_price, $product_type, $product_category, $product_description, $product_age, $product_image, $product_inventory, $product_sales, $modified_by, $modified_on);
+                $stmt_update_product = $connection->prepare("UPDATE products SET name = ?, unit_cost = ?, unit_price = ?, type= ?, category = ?, description = ?, age = ?, image = ?, inventory = ?, sales_number = ?, last_modified_by = ?, last_modified_on = ? WHERE product_id = '" . $product_id . "'");
+                $stmt_update_product->bind_param("siisssssiiss", $product_name, $product_cost, $product_price, $product_type, $product_category, $product_description, $product_age, $product_image, $product_inventory, $product_sales, $modified_by, $modified_on);
                 $stmt_update_product->execute();
                 $stmt_update_product->close();
                 header("Location: product-details.php?product-id=$product_id&product-updated=1");
@@ -253,8 +259,8 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
 
         $product_image = $row_product_image['image'];
 
-        $stmt_update_product = $connection->prepare("UPDATE products SET name = ?, price = ?, type= ?, category = ?, description = ?, age = ?, image = ?, inventory = ?, sales_number = ?, last_modified_by = ?, last_modified_on = ? WHERE product_id = '" . $product_id . "'");
-        $stmt_update_product->bind_param("sisssssiiss", $product_name, $product_price, $product_type, $product_category, $product_description, $product_age, $product_image, $product_inventory, $product_sales, $modified_by, $modified_on);
+        $stmt_update_product = $connection->prepare("UPDATE products SET name = ?, unit_cost = ?, unit_price = ?, type= ?, category = ?, description = ?, age = ?, image = ?, inventory = ?, sales_number = ?, last_modified_by = ?, last_modified_on = ? WHERE product_id = '" . $product_id . "'");
+        $stmt_update_product->bind_param("siisssssiiss", $product_name, $product_cost, $product_price, $product_type, $product_category, $product_description, $product_age, $product_image, $product_inventory, $product_sales, $modified_by, $modified_on);
         $stmt_update_product->execute();
         $stmt_update_product->close();
 
@@ -492,11 +498,21 @@ if (isset($_GET['ProductIDToRemove'])) {
 
                                     <div class="form-container-part-inputs">
                                         <div class="input-container">
+                                            <input type="number" name="cost" id="cost" value="<?php if (isset($row_product)) {
+                                                                                                    echo $row_product['cost'];
+                                                                                                } ?>" readonly class="is-valid">
+                                            <label for="cost">Unit Cost</label>
+                                        </div>
+                                        <div class="input-container">
                                             <input type="number" name="price" id="price" value="<?php if (isset($row_product)) {
                                                                                                     echo $row_product['price'];
                                                                                                 } ?>" readonly class="is-valid">
-                                            <label for="price">Price</label>
+                                            <label for="price">Unit Price</label>
                                         </div>
+
+                                    </div>
+
+                                    <div class="form-container-part-inputs">
                                         <div class="input-container" id="type_div">
 
                                             <input type="text" name="type" id="type" value="<?php if (isset($row_product)) {
@@ -504,9 +520,6 @@ if (isset($_GET['ProductIDToRemove'])) {
                                                                                             } ?>" readonly class="is-valid">
                                             <label for="type" id="label_type">Type</label>
                                         </div>
-                                    </div>
-
-                                    <div class="form-container-part-inputs">
                                         <div class="input-container" id="category_div">
                                             <input type="text" name="category" id="category" value="<?php if (isset($row_product)) {
                                                                                                         echo $row_product['category'];

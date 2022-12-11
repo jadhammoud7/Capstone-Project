@@ -11,11 +11,12 @@ if (isset($_GET['productID']) && isset($_SESSION['logged_id'])) {
     echo "<script>window.location.href = '../basket/basket.php?remove_product=true';</script>";
 }
 
-$stmt_select_all_prices = $connection->prepare("SELECT price FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ");
+$stmt_select_all_prices = $connection->prepare("SELECT cost, price FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ");
 $stmt_select_all_prices->execute();
 $select_prices_results = $stmt_select_all_prices->get_result();
 
 if ($select_prices_results == false) {
+    unset($_SESSION['total_cost']);
     unset($_SESSION['total_price']);
     unset($_SESSION['tax_price']);
     unset($_SESSION['total_price_including_tax']);
@@ -23,6 +24,7 @@ if ($select_prices_results == false) {
     //sum all prices in basket
     while ($row_select_prices = $select_prices_results->fetch_assoc()) {
         $total_price = $total_price + $row_select_prices['price'];
+        $total_cost = $total_cost + $row_select_prices['cost'];
     }
     //tax is 10% total price
     $tax_price = $total_price * 0.1;
@@ -30,6 +32,7 @@ if ($select_prices_results == false) {
     $total_inc_tax = $total_price + $tax_price;
 
     $_SESSION['total_price'] = $total_price;
+    $_SESSION['total_cost'] = $total_cost;
     $_SESSION['tax_price'] = $tax_price;
     $_SESSION['total_price_including_tax'] = $total_inc_tax;
 }

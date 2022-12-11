@@ -20,13 +20,16 @@ $stmt_basket = $connection->prepare($query_basket);
 $stmt_basket->execute();
 $results_basket = $stmt_basket->get_result();
 
-$stmt_select_all_prices = $connection->prepare("SELECT price FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ");
+$stmt_select_all_prices = $connection->prepare("SELECT cost, price FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ");
 $stmt_select_all_prices->execute();
 $select_prices_results = $stmt_select_all_prices->get_result();
 $total_price = 0;
+$total_cost = 0;
+
 //sum all prices in basket
 while ($row_select_prices = $select_prices_results->fetch_assoc()) {
     $total_price = $total_price + $row_select_prices['price'];
+    $total_cost = $total_cost + $row_select_prices['cost'];
 }
 
 //select loyalty points of customer
@@ -48,6 +51,7 @@ if ($row_customer_loyalty['loyalty_points'] >= $row_loyalty_discount_required['l
     $_SESSION['total_price_after_loyalty_discount'] = $total_price_after_loyalty_discount;
 }
 $_SESSION['total_price'] = $total_price;
+$_SESSION['total_cost'] = $total_cost;
 if (isset($_SESSION['total_price_after_loyalty_discount'])) {
     //tax is 10% total price
     $tax_price = $total_price_after_loyalty_discount * 0.1;
