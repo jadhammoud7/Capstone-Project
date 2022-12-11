@@ -7,18 +7,17 @@ if (window.location.href.includes('open_add_checkout=true')) {
     gift_div.style.display = "block";
 }
 
-if (window.location.href.includes('checkout-added=1')) {
-    OpenCheckoutAddedPopUp();
+if (window.location.href.includes('store_sales_added=1')) {
+    OpenStoreSalesAddedPopUp();
 }
 
-function OpenCheckoutAddedPopUp() {
-    const product_added_popup = document.getElementById('checkout-added-confirmation');
-    product_added_popup.classList.add('open-popup');
+function OpenStoreSalesAddedPopUp() {
+    const store_sales_added_popup = document.getElementById('store-sales-added-confirmation');
+    store_sales_added_popup.classList.add('open-popup');
 }
 
-function CloseCheckoutAddedPopUp() {
-    const product_added_popup = document.getElementById('checkout-added-confirmation');
-    product_added_popup.classList.remove('open-popup');
+function CloseStoreSalesPopUp() {
+    window.location = 'store_sale-admin.php';
 }
 
 function CloseAddCheckout() {

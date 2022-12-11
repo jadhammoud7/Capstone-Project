@@ -370,7 +370,7 @@ if (isset($_POST['save'])) {
     $stmt_insert_store_sales->bind_param("isssiiiiiis", $store_sales_id, $customer_name, $username, $email, $total_sales_products, $total_sales_quantity, $total_sales_cost, $total_sales_price, $loyalty_discount_percentage, $total_price_after_discount, $date);
     $stmt_insert_store_sales->execute();
     $stmt_insert_store_sales->close();
-    header("Location: store_sale-admin.php");
+    header("Location: store_sale-admin.php?store_sales_added=1&store_sales_id=$store_sales_id");
 }
 
 require_once("../php/checkout-store_sales.php");
@@ -425,12 +425,13 @@ $row_count_store = $results_count_store->fetch_assoc();
         <button type="button" onclick="CloseLogOutPopUp()">NO</button>
     </div>
 
-    <!-- started popup message logout -->
-    <div class="popup" id="checkout-added-confirmation">
+    <!-- started popup message store sales added-->
+    <div class="popup" id="store-sales-added-confirmation">
         <img src="../images/tick.png" alt="">
-        <h2>Product Added Confirmation</h2>
-        <p>A new product was added successfully</p>
-        <button type="button" onclick="CloseCheckoutAddedPopUp()">OK</button>
+        <h2>Store Sales Added Confirmation</h2>
+        <p>A new store sales was added successfully</p>
+        <button type="button" onclick="CloseStoreSalesAddedPopUp()">OK</button>
+        <button type="button" onclick="window.location.href = 'store-sale-admin-details.php?store_sale_id=<?php echo $_GET['store_sales_id']; ?>'">Go To Store Sales Order</button>
     </div>
 
     <!-- started popup message inventory not available -->
