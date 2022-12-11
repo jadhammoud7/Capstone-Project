@@ -89,6 +89,7 @@ if (isset($_POST['save'])) {
 
     $total_sales_products = 0;
     $total_sales_price = 0;
+    $total_sales_cost = 0;
     $total_sales_quantity = 0;
     $loyalty_discount_percentage = 0;
     $total_price_after_discount = 0;
@@ -156,27 +157,29 @@ if (isset($_POST['save'])) {
                     $update_product_inventory_sales->execute();
 
                     //select price and add to sales products, same as above condition
-                    $stmt_select_product_price = $connection->prepare("SELECT unit_price FROM products WHERE name = ?");
+                    $stmt_select_product_price = $connection->prepare("SELECT unit_price, unit_cost FROM products WHERE name = ?");
                     $stmt_select_product_price->bind_param("s", $product_name[$x]);
                     $stmt_select_product_price->execute();
                     $result_product_price = $stmt_select_product_price->get_result();
                     $row_product_price = $result_product_price->fetch_assoc();
 
                     //let product price be unit price * quantity
-                    $total_product_price = $row_product_price['price'] * $quantity[$x];
+                    $total_product_price = $row_product_price['unit_price'] * $quantity[$x];
+                    $total_product_cost = $row_product_price['unit_cost'] * $quantity[$x];
 
                     //update product sales by quantity
                     $total_sales_products = $total_sales_products + $quantity[$x];
 
                     //update sales price by increasing total product price
                     $total_sales_price = $total_sales_price + $total_product_price;
+                    $total_sales_cost = $total_sales_cost + $total_product_cost;
 
                     //update sales quantity by increasing product quantity
                     $total_sales_quantity = $total_sales_quantity + $quantity[$x];
 
                     //insert into table sales products
-                    $stmt_insert_store_sales = $connection->prepare("INSERT INTO sales_products(sales_id, product_name, quantity, price) VALUES (?,?,?,?)");
-                    $stmt_insert_store_sales->bind_param("isii", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_price);
+                    $stmt_insert_store_sales = $connection->prepare("INSERT INTO sales_products(sales_id, product_name, quantity, cost, price) VALUES (?,?,?,?,?)");
+                    $stmt_insert_store_sales->bind_param("isiii", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_cost, $total_product_price);
                     $stmt_insert_store_sales->execute();
                     $stmt_insert_store_sales->close();
 
@@ -262,31 +265,39 @@ if (isset($_POST['save'])) {
 
                     $price = 0;
                     if (!empty($row_product_offer)) {
+                        $stmt_select_product_cost = $connection->prepare("SELECT unit_cost FROM products WHERE product_id = $product_id");
+                        $stmt_select_product_cost->execute();
+                        $result_product_cost = $stmt_select_product_cost->get_result();
+                        $row_product_cost = $result_product_cost->fetch_assoc();
+                        $cost = $row_product_cost['unit_cost'];
                         $price = $row_product_offer['new_price'];
                     } else {
                         //select price and add to sales products, same as above condition
-                        $stmt_select_product_price = $connection->prepare("SELECT unit_price FROM products WHERE product_id = $product_id");
+                        $stmt_select_product_price = $connection->prepare("SELECT unit_cost, unit_price FROM products WHERE product_id = $product_id");
                         $stmt_select_product_price->execute();
                         $result_product_price = $stmt_select_product_price->get_result();
                         $row_product_price = $result_product_price->fetch_assoc();
-                        $price = $row_product_price['price'];
+                        $price = $row_product_price['unit_price'];
+                        $cost = $row_product_price['unit_cost'];
                     }
 
                     //let product price be unit price * quantity
                     $total_product_price = $price * $quantity[$x];
+                    $total_product_cost = $cost * $quantity[$x];
 
                     //update product sales by quantity
                     $total_sales_products = $total_sales_products + $quantity[$x];
 
                     //update sales price by increasing total product price
                     $total_sales_price = $total_sales_price + $total_product_price;
+                    $total_sales_cost = $total_sales_cost + $total_product_cost;
 
                     //update sales quantity by increasing product quantity
                     $total_sales_quantity = $total_sales_quantity + $quantity[$x];
 
                     //insert into table sales products
-                    $stmt_insert_store_sales = $connection->prepare("INSERT INTO sales_products(sales_id, product_name, quantity, price) VALUES (?,?,?,?)");
-                    $stmt_insert_store_sales->bind_param("isii", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_price);
+                    $stmt_insert_store_sales = $connection->prepare("INSERT INTO sales_products(sales_id, product_name, quantity, cost, price) VALUES (?,?,?,?,?)");
+                    $stmt_insert_store_sales->bind_param("isiii", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_cost, $total_product_price);
                     $stmt_insert_store_sales->execute();
                     $stmt_insert_store_sales->close();
 
@@ -355,8 +366,8 @@ if (isset($_POST['save'])) {
     }
     date_default_timezone_set('Asia/Beirut');
     $date = date('Y-m-d h:i:s');
-    $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, total_products, total_quantity, total_price, loyalty_discount_percentage, total_price_after_discount,date) VALUES (?,?,?,?,?,?,?,?,?,?)");
-    $stmt_insert_store_sales->bind_param("isssiiiiis", $store_sales_id, $customer_name, $username, $email, $total_sales_products, $total_sales_quantity, $total_sales_price, $loyalty_discount_percentage, $total_price_after_discount, $date);
+    $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, total_products, total_quantity, total_cost, total_price, loyalty_discount_percentage, total_price_after_discount, date) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+    $stmt_insert_store_sales->bind_param("isssiiiiiis", $store_sales_id, $customer_name, $username, $email, $total_sales_products, $total_sales_quantity, $total_sales_cost, $total_sales_price, $loyalty_discount_percentage, $total_price_after_discount, $date);
     $stmt_insert_store_sales->execute();
     $stmt_insert_store_sales->close();
     header("Location: store_sale-admin.php");

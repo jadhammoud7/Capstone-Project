@@ -36,6 +36,11 @@ if (isset($_GET['store_sale_id'])) {
     $results_total_price = $stmt_get_sales_total_price->get_result();
     $row_total_price = $results_total_price->fetch_assoc();
 
+    //select sales total cost
+    $stmt_get_sales_total_cost = $connection->prepare("SELECT total_cost FROM store_sales WHERE store_sales_id = '" . $_GET['store_sale_id'] . "'");
+    $stmt_get_sales_total_cost->execute();
+    $results_total_cost = $stmt_get_sales_total_cost->get_result();
+    $row_total_cost = $results_total_cost->fetch_assoc();
 
     $stmt_get_store_sale = $connection->prepare("SELECT * FROM store_sales WHERE store_sales_id = '" . $_GET['store_sale_id'] . "'");
     $stmt_get_store_sale->execute();
@@ -218,8 +223,8 @@ function store_sales_products_connection($product_name, $quantity, $price)
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>$<?php echo $row_total_price['total_price_after_discount'] ?></h1>
-                        <span>Total Price</span>
+                        <h1>$<?php echo $row_total_price['total_price_after_discount'] - $row_total_cost['total_cost'] ?></h1>
+                        <span>Total Proft</span>
                     </div>
                     <div>
                         <span class="las la-wallet"></span>
@@ -323,6 +328,10 @@ function store_sales_products_connection($product_name, $quantity, $price)
                     ?>
                 </table>
                 <table id="order-totals">
+                    <tr>
+                        <th>Total Cost</th>
+                        <td><?php echo $row_store_sale['total_cost']; ?>$</td>
+                    </tr>
                     <tr>
                         <th>Total Price</th>
                         <td><?php echo $row_store_sale['total_price']; ?>$</td>
