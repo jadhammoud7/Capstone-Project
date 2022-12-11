@@ -175,7 +175,7 @@ if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['e
         while ($row_basket = $basket_result->fetch_assoc()) {
             //insert into table checkouts customers products
             $stmt_insert_checkout_customer_products = $connection->prepare("INSERT INTO checkouts_customers_products(checkout_id, product_id, quantity, total_price, total_cost) VALUES (?,?,?,?,?)");
-            $stmt_insert_checkout_customer_products->bind_param("iiiii", $checkout_id, $row_basket['product_id'], $row_basket['quantity'], $row_basket['cost'], $row_basket['price']);
+            $stmt_insert_checkout_customer_products->bind_param("iiiii", $checkout_id, $row_basket['product_id'], $row_basket['quantity'], $row_basket['price'], $row_basket['cost']);
             $stmt_insert_checkout_customer_products->execute();
             $stmt_insert_checkout_customer_products->close();
         }

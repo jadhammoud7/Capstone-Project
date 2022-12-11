@@ -29,7 +29,7 @@ $results_allproducts = $stmt_allproducts->get_result();
 
 //get all products
 require_once("../php/admin_page_php.php");
-$query_products = "SELECT product_id, name, price, type, category, description, age, inventory, sales_number, last_modified_by, last_modified_on FROM products";
+$query_products = "SELECT * FROM products";
 $stmt_products = $connection->prepare($query_products);
 $stmt_products->execute();
 $results_products = $stmt_products->get_result();

@@ -47,7 +47,12 @@ if (isset($product_id)) {
         } else {
             //select new price in offer
             $price = $row_select_product_offer['new_price'] * $quantity;
-            $cost = $row_select_product_price['unit_cose'] * $quantity;
+
+            $stmt_select_product_price = $connection->prepare("SELECT unit_cost, unit_price FROM products WHERE product_id = '" . $product_id . "' ");
+            $stmt_select_product_price->execute();
+            $result_select_product_price = $stmt_select_product_price->get_result();
+            $row_select_product_price = $result_select_product_price->fetch_assoc();
+            $cost = $row_select_product_price['unit_cost'] * $quantity;
         }
 
         $stmt_insert_baskets_customer = $connection->prepare("INSERT INTO baskets_customer_product(customer_id, product_id, quantity, cost, price) VALUES (?,?,?,?,?)");

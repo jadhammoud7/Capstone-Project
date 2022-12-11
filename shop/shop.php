@@ -467,7 +467,7 @@ while ($row_customers = $results_customers->fetch_assoc()) {
                         shop_connection(
                             $row['product_id'],
                             $row['name'],
-                            $row['price'],
+                            $row['unit_price'],
                             $row['image']
                         );
                     }

@@ -730,7 +730,7 @@ if (isset($_GET['getProducttoRemove'])) {
                                             get_all_products(
                                                 $row_products['product_id'],
                                                 $row_products['name'],
-                                                $row_products['price'],
+                                                $row_products['unit_price'],
                                                 $row_products['category'],
                                                 $row_products['type'],
                                                 $row_products['inventory'],

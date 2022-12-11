@@ -158,7 +158,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
 
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -182,6 +182,15 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
         <button type="button" onclick="<?php if (isset($_GET['checkout_id'])) { ?>
             SetCheckoutID(<?php echo $_GET['checkout_id']; ?>);" <?php } ?>>YES</button>
         <button type="button" onclick="CloseDoneCheckoutPopUp()">NO</button>
+    </div>
+
+    <!-- started popup message logout -->
+    <div class="popup" id="logout-confirmation">
+        <img src="../images/question-mark.png" alt="">
+        <h2>Log Out Confirmation</h2>
+        <p>Are you sure that you want to logout?</p>
+        <button type="button" onclick="GoToLogIn()">YES</button>
+        <button type="button" onclick="CloseLogOutPopUp()">NO</button>
     </div>
 
 
@@ -246,7 +255,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
                         <span>Offers</span>
                     </a>
                 </li>
-             
+
                 <li>
                     <a href="../repairs-admin/repairs-admin.php" id="repairs-link">
                         <span class="las la-tools"></span>
@@ -462,6 +471,10 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
                     ?>
                 </table>
                 <table id="order-totals">
+                    <tr>
+                        <th>Total Cost</th>
+                        <td><?php echo $row_checkout['total_cost']; ?>$</td>
+                    </tr>
                     <tr>
                         <th>Subtotal</th>
                         <td><?php echo $row_checkout['total_price']; ?>$</td>

@@ -499,13 +499,13 @@ if (isset($_GET['ProductIDToRemove'])) {
                                     <div class="form-container-part-inputs">
                                         <div class="input-container">
                                             <input type="number" name="cost" id="cost" value="<?php if (isset($row_product)) {
-                                                                                                    echo $row_product['cost'];
+                                                                                                    echo $row_product['unit_cost'];
                                                                                                 } ?>" readonly class="is-valid">
                                             <label for="cost">Unit Cost</label>
                                         </div>
                                         <div class="input-container">
                                             <input type="number" name="price" id="price" value="<?php if (isset($row_product)) {
-                                                                                                    echo $row_product['price'];
+                                                                                                    echo $row_product['unit_price'];
                                                                                                 } ?>" readonly class="is-valid">
                                             <label for="price">Unit Price</label>
                                         </div>
@@ -634,6 +634,11 @@ if (isset($_GET['ProductIDToRemove'])) {
         const product_name = document.getElementById('product_name');
         product_name.removeAttribute('readonly');
         product_name.classList.remove('is-valid');
+
+        //for product cost
+        const product_cost = document.getElementById('cost');
+        product_cost.removeAttribute('readonly');
+        product_cost.classList.remove('is-valid');
 
         //for product price
         const product_price = document.getElementById('price');
