@@ -573,7 +573,7 @@ $results_top_products = $stmt_top_products->get_result();
                                             get_all_products_offers_recommendations(
                                                 $row_product_inventory_sales['product_id'],
                                                 $row_product['name'],
-                                                $row_product['price'],
+                                                $row_product['unit_price'],
                                                 $row_product_inventory_sales['inventory_history'],
                                                 $row_product_inventory_sales['sales_history'],
                                                 $row_product_inventory_sales['inventory_sales_ratio']
@@ -822,7 +822,7 @@ $results_top_products = $stmt_top_products->get_result();
         $stmt_get_product_price->execute();
         $result_product_price = $stmt_get_product_price->get_result();
         while ($row_product_price = $result_product_price->fetch_assoc()) { ?>
-            array_product_prices.push(<?php echo $row_product_price['price']; ?>);
+            array_product_prices.push(<?php echo $row_product_price['unit_price']; ?>);
         <?php }
         ?>
         var new_price = array_product_prices[document.getElementById('product_name').selectedIndex];

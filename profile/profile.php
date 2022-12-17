@@ -328,7 +328,7 @@ if (isset($_GET['delete_checkout_id'])) {
                     $row_offer_price = $result_offer_price->fetch_assoc();
                     $price = $row_offer_price['new_price'];
                 } else {
-                    $price = $row_get_product['price'];
+                    $price = $row_get_product['unit_price'];
                 }
                 favorites_list_connection(
                     $row_get_product['product_id'],

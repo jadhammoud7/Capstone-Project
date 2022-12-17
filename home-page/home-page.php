@@ -370,7 +370,7 @@ $row_slideshow_slides = $result_slideshow_slides->fetch_assoc();
                     shop_connection(
                         $row['product_id'],
                         $row['name'],
-                        $row['price'],
+                        $row['unit_price'],
                         $row['image']
                     );
                 }
