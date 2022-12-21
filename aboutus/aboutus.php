@@ -4,16 +4,29 @@
 
 session_start();
 
+include("../php/connection.php");
+
 if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'customer') {
     header("Location: ../home-admin/home-admin.php");
 }
 if (!isset($_SESSION['logged_bool'])) {
     header("Location: ../login/login.php");
 }
+
+$stmt_select_all_customers = $connection->prepare("SELECT COUNT(*) as total_customers FROM customers");
+$stmt_select_all_customers->execute();
+$result_all_customers = $stmt_select_all_customers->get_result();
+$row_all_customers = $result_all_customers->fetch_assoc();
+
+$stmt_select_all_sales = $connection->prepare("SELECT SUM(sales_number) as total_sales FROM products");
+$stmt_select_all_sales->execute();
+$result_all_sales = $stmt_select_all_sales->get_result();
+$row_all_sales = $result_all_sales->fetch_assoc();
+
 ?>
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -84,17 +97,17 @@ if (!isset($_SESSION['logged_bool'])) {
 
     <div class="row">
         <div class="nb_cutsomers_section reveal-by-x">
-            <i class="fa fa-car"></i>
-            <div class="counter" data-target="6000">0</div>
+            <i class="fa fa-smile-o"></i>
+            <div class="counter" data-target="<?php echo $row_all_customers['total_customers']; ?>">0</div>
             <h4>Happy Customers</h4>
         </div>
         <div class="nb_items_sold reveal-by-x">
-            <i class="fa fa-car"></i>
-            <div class="counter" data-target="12000">0</div>
+            <i class="fa fa-cubes"></i>
+            <div class="counter" data-target="<?php echo $row_all_sales['total_sales']; ?>">0</div>
             <h4>Items Sold</h4>
         </div>
         <div class="nb_history reveal-by-x">
-            <i class="fa fa-car"></i>
+            <i class="fa fa-calendar"></i>
             <div class="counter" data-target="15">0</div>
             <h4>Years</h4>
         </div>

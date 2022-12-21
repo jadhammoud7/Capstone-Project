@@ -1511,6 +1511,18 @@ swiper-button-next {
   transform: scale(1, 1);
 }
 
+.button button.grow_skew_forward::after {
+  left: -20%;
+  right: -20%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(-45deg) scale(0, 1);
+}
+
+.button button.grow_skew_forward:hover::after {
+  transform: skewX(-45deg) scale(1, 1);
+}
+
 .button button.grow_skew_backward::after {
   left: -20%;
   right: -20%;
