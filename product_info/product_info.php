@@ -13,13 +13,6 @@ if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'customer') {
 //for product info
 include("../php/shop_product_connection.php");
 
-if (isset($_GET['productID'])) {
-    $id = $_GET['productID'];
-    $select_product_query = "SELECT product_id, name, unit_price, category, description, age, date_added, image FROM products WHERE product_id = '" . $id . "'";
-    $stmt_select_product = $connection->prepare($select_product_query);
-    $stmt_select_product->execute();
-    $results_select_product = $stmt_select_product->get_result();
-}
 ?>
 
 <!DOCTYPE html>
@@ -89,22 +82,51 @@ if (isset($_GET['productID'])) {
     <!-- started with product info -->
     <?php
     require_once("../php/product_info_connection.php");
+
     if (isset($_GET['productID'])) {
-        if ($row_info = $results_select_product->fetch_assoc()) {
+
+        $id = $_GET['productID'];
+
+        $select_product_query = "SELECT * FROM products WHERE product_id = '" . $id . "'";
+        $stmt_select_product = $connection->prepare($select_product_query);
+        $stmt_select_product->execute();
+        $results_select_product = $stmt_select_product->get_result();
+        $row_select_product = $results_select_product->fetch_assoc();
+        $price = 0;
+        if (!empty($row_select_product)) {
+            if ($row_select_product['has_offer'] == 'YES') {
+                $currentDate = (new DateTime())->format('Y-m-d');
+                $stmt_select_product_offer = $connection->prepare("SELECT new_price FROM products_offers WHERE product_id = '" . $id . "' AND '" . $currentDate . "' BETWEEN offer_begin_date AND offer_end_date");
+                $stmt_select_product_offer->execute();
+                $result_product_offer = $stmt_select_product_offer->get_result();
+                $row_product_offer = $result_product_offer->fetch_assoc();
+                if (!empty($row_product_offer)) {
+                    $price = $row_product_offer['new_price'];
+                } else {
+                    $price = $row_select_product['unit_price'];
+                }
+            }
+            if ($row_select_product['inventory'] > 0) {
+                $stock_available = 'YES';
+            } else {
+                $stock_available = 'NO';
+            }
+
             product_info_connection(
-                $row_info['product_id'],
-                $row_info['name'],
-                $row_info['price'],
-                $row_info['category'],
-                $row_info['description'],
-                $row_info['age'],
-                $row_info['date_added'],
-                $row_info['image']
+                $row_select_product['product_id'],
+                $row_select_product['name'],
+                $price,
+                $row_select_product['category'],
+                $row_select_product['description'],
+                $row_select_product['age'],
+                $stock_available,
+                $row_select_product['date_added'],
+                $row_select_product['image']
             );
-        }
-    } else {
-        echo '<h3>There is no valid product info</h3>
+        } else {
+            echo '<h3>There is no valid product info</h3>
         <button onclick=\"window.location.href=\'../shop/shop.php\';\">Go To Shop Page</button>';
+        }
     }
     ?>
     <!-- ended with product info -->
