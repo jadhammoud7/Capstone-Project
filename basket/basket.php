@@ -182,7 +182,9 @@ $_SESSION['total_price_including_tax'] = $total_inc_tax;
                 ?>
 
             </table>
-            <button type="submit" class="update-cart-btn" title="Update your shopping basket"><i class="fa fa-update"></i>Update Basket</button>
+            <button type="submit" class="update-cart-btn" title="Update your shopping basket">
+                <span class="fa fa-pencil-square"></span>
+                Update Basket</button>
         </form>
 
         <!--start total price-->
@@ -212,6 +214,14 @@ $_SESSION['total_price_including_tax'] = $total_inc_tax;
     </div>
 
     <!--ended basket items selected-->
+    <div class="return-shop">
+        <a href="../shop/shop.php">
+            <button class="button" title="Go to Shopping Basket">
+                <span class="fa fa-arrow-left"></span>
+                Go To Shop Page
+            </button>
+        </a>
+    </div>
 
 
     <!-- started return to top button -->

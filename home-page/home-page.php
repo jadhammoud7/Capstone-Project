@@ -69,18 +69,6 @@ $row_slideshow_slides = $result_slideshow_slides->fetch_assoc();
                 <!-- <h2>Newbie Gamers.</h2> -->
                 <h2>Newbie Gamers.</h2>
             </div>
-            <!-- <div class="waviy">
-                <span style="--i:1">N</span>
-                <span style="--i:2">E</span>
-                <span style="--i:3">W</span>
-                <span style="--i:4">B</span>
-                <span style="--i:5">I</span>
-                <span style="--i:6">E</span>
-                <span style="--i:7">G</span>
-                <span style="--i:8">A</span>
-                <span style="--i:9">M</span>
-                <span style="--i:10">E</span>
-                <span style="--i:11">R</span> -->
 
             </div>
             <ul class="nav-menu">
@@ -126,51 +114,6 @@ $row_slideshow_slides = $result_slideshow_slides->fetch_assoc();
         <button type="button" onclick="RemoveLogInPopUp()">OK</button>
     </div>
 
-    <!-- start slideshow -->
-    <!-- <div class="slideshow-container reveal-by-y">
-        <div class="mySlides fade" title="Welcome to Newbies Gamers. We sell manu consoles and electronics for your games and more">
-            <div class="numbertext">1 / 3</div>
-            <img src="../images/game-store.jpg" class="home-img" title="Game Store Image">
-            <div class="text">
-                 <h3><strong>To Newbies Gamers</strong> </h3> -->
-    <!-- <p><strong>We sell many consoles and electronics for your games and more</strong> </p>
-            </div>
-
-            <div class="dot-div">
-                <span class="dot-current"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>
-        </div>  -->
-
-    <!-- <div class="mySlides fade" title="We offer phones and many accessories related to them such as charges and more.">
-            <div class="numbertext">2 / 3</div>
-            <img src="../images/image2.jpg" class="home-img" title="Phone Accessories Image">
-            <div class="text">
-                <h3>What We Sell?</h3>
-                <p>We offer phones and many accessories related to them such as chargers and more</p>
-            </div>
-            <div class="dot-div">
-                <span class="dot"></span>
-                <span class="dot-current"></span>
-                <span class="dot"></span>
-            </div>
-        </div> -->
-
-    <!-- <div class="mySlides fade" title="Enjoy playing your games by buying all online playing requirements such as PS Plus">
-            <div class="numbertext">3 / 3</div>
-            <img src="../images/image3.jpg" class="home-img" title="Online playing cards image">
-            <div class="text">
-                <h3>What we offer?</h3>
-                <p>Enjoy playing your games by buying all online playing requirements such as PS Plus</p>
-            </div>
-            <div class="dot-div">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot-current"></span>
-            </div>
-        </div> -->
-    <!-- </div> -->
     <div class="container">
         <div class="swiper">
             <!-- Additional required wrapper -->
@@ -232,8 +175,6 @@ $row_slideshow_slides = $result_slideshow_slides->fetch_assoc();
     <br>
 
     <!-- end slideshow -->
-
-
 
     <!-- starting features here -->
     <div class="features-title" id="features">

@@ -45,11 +45,11 @@ while ($select_products_row = $select_products_results->fetch_assoc()) {
 
             //if product not in offer, then select current price
             if (empty($row_select_product_offer)) {
-                $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE product_id = '" . $product_id . "' ");
+                $stmt_select_product_price = $connection->prepare("SELECT unit_price FROM products WHERE product_id = '" . $product_id . "' ");
                 $stmt_select_product_price->execute();
                 $result_select_product_price = $stmt_select_product_price->get_result();
                 $row_select_product_price = $result_select_product_price->fetch_assoc();
-                $price = $row_select_product_price['price'];
+                $price = $row_select_product_price['unit_price'];
             } else {
                 //select new price in offer
                 $price = $row_select_product_offer['new_price'];
