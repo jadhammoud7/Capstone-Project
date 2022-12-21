@@ -99,12 +99,12 @@ function get_appointments_in_customer_details($appointment_id, $appointment_name
 }
 
 
-function latest_customers_connection($username, $email)
+function latest_customers_connection($username, $email, $image)
 {
     $element = "
     <div class=\"customer\">
         <div class=\"info\">
-            <img src=\"../images/console.png\" alt=\"\" width=\"40px\" height=\"40px\">
+            <img src=\"../images/Customers/$username/$image\" alt=\"\" width=\"40px\" height=\"40px\">
             <div>
                 <h4>$username</h4>
                 <small>$email</small>

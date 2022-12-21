@@ -139,17 +139,35 @@ if (isset($_POST["password"]) && $_POST["password"] != "") {
     //check if password has special characters
     if (!str_contains($password_text, '@') && !str_contains($password_text, '_') && !str_contains($password_text, "-") && !str_contains($password_text, ".")) {
         $_SESSION['password_error'] = 'Password should contain special characters such as "@", "_", "-", or "."';
-        header("Location: ../signup/signup.php");
+        header("Location: admin-admin.php?open_add_user=true");
         die("WRONG password");
     }
     $password = hash("sha256", $password_text);
 }
 
-//all inputs are valid and no errors, then insert new admin
-$stmt_add_new_admin = $connection->prepare("INSERT INTO admins(first_name, last_name, email_address, phone_number, username, password) VALUES (?,?,?,?,?,?)");
-$stmt_add_new_admin->bind_param("ssssss", $first_name, $last_name, $email, $phone_number, $username, $password);
-$stmt_add_new_admin->execute();
-$stmt_add_new_admin->close();
+if ($first_name != "" && $last_name != "" && $email != "" && $phone_number != "" && $username != "" && $password != "") {
+    mkdir('../images/Admins/' . $username);
+
+    $target_dir = '../images/Admins/' . $username . '/';
+    $filename = basename($_FILES['admin_image']['name']);
+    $target_file = $target_dir . $filename;
+    $fileType = pathinfo($target_file, PATHINFO_EXTENSION);
+    $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
+    if (in_array($fileType, $allowTypes)) {
+
+        //uploaded file will have same name as customer username
+        if (move_uploaded_file($_FILES['admin_image']['tmp_name'], $target_file)) {
+            $admin_image = $filename;
+            //all inputs are valid and no errors, then insert new admin
+            $stmt_add_new_admin = $connection->prepare("INSERT INTO admins(first_name, last_name, email_address, phone_number, username, password, image) VALUES (?,?,?,?,?,?,?)");
+            $stmt_add_new_admin->bind_param("sssssss", $first_name, $last_name, $email, $phone_number, $username, $password, $admin_image);
+            $stmt_add_new_admin->execute();
+            $stmt_add_new_admin->close();
+
+            echo "<script>window.location='../admin-admin/admin-admin.php';</script>";
+        }
+    }
+}
 
 //delete customer
 if (isset($_GET['getAdminIDtoRemove'])) {
@@ -164,7 +182,7 @@ if (isset($_GET['getAdminIDtoRemove'])) {
 <html lang="en">
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -249,7 +267,7 @@ if (isset($_GET['getAdminIDtoRemove'])) {
                         <span>Offers</span>
                     </a>
                 </li>
-             
+
                 <li>
                     <a href="../repairs-admin/repairs-admin.php" id="repairs-link">
                         <span class="las la-tools"></span>
@@ -388,7 +406,7 @@ if (isset($_GET['getAdminIDtoRemove'])) {
 
             <div id="id01" class="modal">
                 <span onclick="CloseAddUser()" class="close" title="Close Modal">&times;</span>
-                <form class="modal-content" action="../admin-admin/admin-admin.php" method="POST">
+                <form class="modal-content" action="../admin-admin/admin-admin.php" method="POST" enctype="multipart/form-data">
                     <div class="container">
                         <h1 class="title">Create New Admin Account</h1>
                         <p class="title">Please fill in this form to create a new admin account.</p>
@@ -458,6 +476,11 @@ if (isset($_GET['getAdminIDtoRemove'])) {
                         <input type="text" placeholder="Enter username of your own" name="username" id="username" value="<?php if (isset($_SESSION['username'])) {
                                                                                                                                 echo $_SESSION['username'];
                                                                                                                             } ?>" required>
+
+                        <label><b>Upload Profile Image:</b></label>
+                        <br>
+                        <input type="file" title="Choose from your files an image for your profile" name="admin_image" id="admin_image" value="" required>
+                        <br>
 
                         <p class="error" id="password_error">
                             <?php

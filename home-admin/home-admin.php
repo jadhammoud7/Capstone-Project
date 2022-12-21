@@ -53,21 +53,6 @@ $stmt_total_checkouts->execute();
 $results_total_checkouts = $stmt_total_checkouts->get_result();
 $row_total_checkouts = $results_total_checkouts->fetch_assoc();
 
-//getting latest customers added to us
-require_once("../php/admin_page_php.php");
-$query_get_latest_customer = "SELECT username, email FROM customers ORDER BY customer_id DESC LIMIT 5";
-$stmt_get_latest_customer = $connection->prepare($query_get_latest_customer);
-$stmt_get_latest_customer->execute();
-$results_get_latest_customer = $stmt_get_latest_customer->get_result();
-
-//getting latest admins added to us
-require_once("../php/admin_page_php.php");
-$query_get_latest_admins = "SELECT first_name, last_name, email_address FROM admins ORDER BY admin_id DESC LIMIT 5";
-$stmt_get_latest_admins = $connection->prepare($query_get_latest_admins);
-$stmt_get_latest_admins->execute();
-$results_get_latest_admins = $stmt_get_latest_admins->get_result();
-
-
 //updating working status from buttons
 if (isset($_GET['set_to_done']) && isset($_GET['getAppointmentID'])) {
     $working_status = $_GET['set_to_done'];
@@ -392,8 +377,19 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                         </div>
                         <div class="card-body">
                             <?php
+                            //getting latest customers added to us
+                            require_once("../php/admin_page_php.php");
+                            $query_get_latest_customer = "SELECT username, email, customer_image FROM customers ORDER BY customer_id DESC LIMIT 5";
+                            $stmt_get_latest_customer = $connection->prepare($query_get_latest_customer);
+                            $stmt_get_latest_customer->execute();
+                            $results_get_latest_customer = $stmt_get_latest_customer->get_result();
+
                             while ($row_get_latest_customer = $results_get_latest_customer->fetch_assoc()) {
-                                latest_customers_connection($row_get_latest_customer['username'], $row_get_latest_customer['email']);
+                                latest_customers_connection(
+                                    $row_get_latest_customer['username'],
+                                    $row_get_latest_customer['email'],
+                                    $row_get_latest_customer['customer_image']
+                                );
                             }
                             ?>
                         </div>
@@ -403,8 +399,20 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                         </div>
                         <div class="card-body">
                             <?php
+
+                            //getting latest admins added to us
+                            require_once("../php/admin_page_php.php");
+                            $query_get_latest_admins = "SELECT first_name, last_name, email_address FROM admins ORDER BY admin_id DESC LIMIT 5";
+                            $stmt_get_latest_admins = $connection->prepare($query_get_latest_admins);
+                            $stmt_get_latest_admins->execute();
+                            $results_get_latest_admins = $stmt_get_latest_admins->get_result();
+
                             while ($row_get_latest_admins = $results_get_latest_admins->fetch_assoc()) {
-                                latest_admins_connection($row_get_latest_admins['first_name'], $row_get_latest_admins['last_name'], $row_get_latest_admins['email_address']);
+                                latest_admins_connection(
+                                    $row_get_latest_admins['first_name'],
+                                    $row_get_latest_admins['last_name'],
+                                    $row_get_latest_admins['email_address']
+                                );
                             }
                             ?>
                         </div>
