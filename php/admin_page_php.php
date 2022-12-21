@@ -115,12 +115,12 @@ function latest_customers_connection($username, $email, $image)
     echo $element;
 }
 
-function latest_admins_connection($first_name, $last_name, $email_address)
+function latest_admins_connection($first_name, $last_name, $username, $email_address, $image)
 {
     $element = "
     <div class=\"customer\">
         <div class=\"info\">
-            <img src=\"../images/console.png\" alt=\"\" width=\"40px\" height=\"40px\">
+            <img src=\"../images/Admins/$username/$image\" alt=\"\" width=\"40px\" height=\"40px\">
             <div>
                 <h4>$first_name $last_name</h4>
                 <small>$email_address</small>

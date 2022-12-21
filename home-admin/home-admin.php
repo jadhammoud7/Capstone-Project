@@ -10,7 +10,7 @@ if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'admin') {
     header("Location: ../home-page/home-page.php");
 }
 $admin_id = $_SESSION['logged_id'];
-$query = "SELECT first_name, last_name  from admins WHERE admin_id =  '" . $admin_id . "' ";
+$query = "SELECT first_name, last_name, username, image from admins WHERE admin_id =  '" . $admin_id . "' ";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
@@ -258,7 +258,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
             </h2>
 
             <div class="user-wrapper">
-                <img src="../images/info.png" width="40px" height="40px" alt="">
+                <img src="../images/Admins/<?php echo $row['username']; ?>/<?php echo $row['image']; ?>" width="40px" height="40px" alt="">
                 <div>
                     <h4> <?php echo $row["first_name"], " ", $row['last_name']; ?></h4>
                     <small>Admin</small>
@@ -402,7 +402,7 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
 
                             //getting latest admins added to us
                             require_once("../php/admin_page_php.php");
-                            $query_get_latest_admins = "SELECT first_name, last_name, email_address FROM admins ORDER BY admin_id DESC LIMIT 5";
+                            $query_get_latest_admins = "SELECT first_name, last_name, username, email_address, image FROM admins ORDER BY admin_id DESC LIMIT 5";
                             $stmt_get_latest_admins = $connection->prepare($query_get_latest_admins);
                             $stmt_get_latest_admins->execute();
                             $results_get_latest_admins = $stmt_get_latest_admins->get_result();
@@ -411,7 +411,9 @@ $row_get_done_appointments = $results_get_done_appointments->fetch_assoc();
                                 latest_admins_connection(
                                     $row_get_latest_admins['first_name'],
                                     $row_get_latest_admins['last_name'],
-                                    $row_get_latest_admins['email_address']
+                                    $row_get_latest_admins['username'],
+                                    $row_get_latest_admins['email_address'],
+                                    $row_get_latest_admins['image']
                                 );
                             }
                             ?>
