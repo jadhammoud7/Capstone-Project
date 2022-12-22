@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2022 at 11:15 PM
+-- Generation Time: Dec 22, 2022 at 02:12 AM
 -- Server version: 8.0.23
 -- PHP Version: 8.0.2
 
@@ -34,18 +34,18 @@ CREATE TABLE `admins` (
   `email_address` varchar(225) NOT NULL,
   `phone_number` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
+  `password` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`admin_id`, `first_name`, `last_name`, `email_address`, `phone_number`, `username`, `password`) VALUES
-(2, 'mohamad', 'nabaa', 'mohamad.nabaa01@lau.com', '71123805', 'MNabaa2001', 'Mn123654'),
-(4, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '96171123805', 'MNabaa', '578835a5afad634f5716badf3d801e8910dec33e73ec5c9e86b8d409f229263d'),
-(5, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '96171123805', 'MNabaa111', '578835a5afad634f5716badf3d801e8910dec33e73ec5c9e86b8d409f229263d'),
-(6, 'Jad', 'Hammoud', 'Jad_hammoud@gmail.com', '76939605', 'jad123', '94f855e068e112f940460fdce21adae8fb8adfd0773ce5f30828b72c2abe65b2');
+INSERT INTO `admins` (`admin_id`, `first_name`, `last_name`, `email_address`, `phone_number`, `username`, `password`, `image`) VALUES
+(5, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '96171123805', 'MNabaa111', '578835a5afad634f5716badf3d801e8910dec33e73ec5c9e86b8d409f229263d', ''),
+(6, 'Jad', 'Hammoud', 'Jad_hammoud@gmail.com', '76939605', 'jad123', '94f855e068e112f940460fdce21adae8fb8adfd0773ce5f30828b72c2abe65b2', ''),
+(7, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '96171123805', 'MNabaa20011807', '237b0efd7c241c2799c603ff0a1b0ad4187e48545dae28cbf1f2c750b23210aa', 'contact-us.jpg');
 
 -- --------------------------------------------------------
 
@@ -93,7 +93,8 @@ CREATE TABLE `baskets_customer_product` (
 --
 
 INSERT INTO `baskets_customer_product` (`customer_id`, `product_id`, `quantity`, `cost`, `price`) VALUES
-(22, 20, 1, 0, 25);
+(22, 20, 1, 0, 25),
+(4, 22, 2, 0, 1600);
 
 -- --------------------------------------------------------
 
@@ -226,7 +227,6 @@ INSERT INTO `customers` (`customer_id`, `first_name`, `last_name`, `email`, `dat
 (4, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '2022-08-01', '96171123805', 'Aramoun next to chamsine third floor', 'aaramun', 'Mohamad Nabaa', 'me.jpg', '578835a5afad634f5716badf3d801e8910dec33e73ec5c9e86b8d409f229263d', 47),
 (16, 'Mohamad', 'Nabaa', 'mohamad.nabaa01@lau.edu', '2001-07-18', '96171123805', 'Aramoun next to chamsine third floor', 'beirut', 'Mohamad Nabaa', '', '578835a5afad634f5716badf3d801e8910dec33e73ec5c9e86b8d409f229263d', 0),
 (17, 'Omar ', 'Atieh', 'omar4Atieh@hotmail.com', '2022-09-21', '878887878788', 'Bshamoun , al wadi street Al nader building block B second floor', 'bshamoun', 'omar1234567', '', '75523907535270f2f12668aea07b507433e81ed0e625b9455bdb8554855687e0', 0),
-(21, 'Ahmad', 'Serhan', 'ahmadserhan@gmail.com', '2022-08-30', '45657888878', 'Bshamoun , al wadi street Al nader building block B second floor', 'beirut', 'ahmad1231234', '', '68a8b4c8464fa9bc797ce97b47bff6807ba10d8ddb061fce39b28842389888fa', 0),
 (22, 'Mohamad', 'Nabaa', 'mnabaa53@gmail.com', '2001-07-18', '71123805', 'Aramoun, Lebanon', 'aramoun, lebanon', 'MNabaa53', 'addfav.png', '92f359bda0cfecfc2a5ff9f2da08d91d02a4366f33021df0477bfcee609be9b2', 0),
 (23, 'Omar', 'Nabaa', 'omarnabaa318@gmail.com', '2004-10-18', '76625990', 'Sanawbar Building, 5th floor', 'beirut', 'OmarNabaa', 'addfav.png', '372a3b6c6980c77daaac003c1e9daa454218aeb55d110cecc9b077a8acfda37d', 0),
 (24, 'Omar', 'Nabaa', 'omarnabaa318@gmail.com', '2004-10-18', '76625990', 'Sanawbar Building, 5th floor', 'beirut', 'OmarNabaa11', 'contact-us.jpg', '372a3b6c6980c77daaac003c1e9daa454218aeb55d110cecc9b077a8acfda37d', 0),
@@ -248,7 +248,9 @@ CREATE TABLE `favorites_customer_product` (
 --
 
 INSERT INTO `favorites_customer_product` (`customer_id`, `product_id`) VALUES
-(4, 21);
+(4, 21),
+(4, 5),
+(4, 22);
 
 -- --------------------------------------------------------
 
@@ -369,7 +371,8 @@ INSERT INTO `history_product_prices` (`product_id`, `price`, `price_change`, `mo
 (1, 300, '300', 'Mohamad Nabaa', '2022-12-12 12:35:09'),
 (23, 40, '40', 'Mohamad Nabaa', '2022-12-12 12:36:03'),
 (23, 40, '40', 'Mohamad Nabaa', '2022-12-12 01:20:18'),
-(24, 20, '0', 'Mohamad Nabaa', '2022-12-17 07:53:10');
+(24, 20, '0', 'Mohamad Nabaa', '2022-12-17 07:53:10'),
+(24, 20, '20', 'Mohamad Nabaa', '2022-12-22 03:03:56');
 
 -- --------------------------------------------------------
 
@@ -485,7 +488,7 @@ INSERT INTO `products` (`product_id`, `name`, `unit_cost`, `unit_price`, `type`,
 (21, 'Nintendo Switch', 0, 500, 'Consoles', 'Nintendo', 'The Nintendo Switch is a video game console developed by Nintendo and released worldwide in most regions on March 3, 2017. The console itself is a tablet that can either be docked for use as a h…', '12+ age', 'nintendoswitch.jpeg', 5, 0, 'NO', '0000-00-00', 'Mohamad Nabaa', '2022-10-29 01:10:31'),
 (22, 'IPhone 13 Pro', 0, 850, 'Phone', 'Action', 'iPhone 13 Pro was made for low light. The Wide camera adds a wider aperture and our largest sensor yet — and it leverages the LiDAR Scanner for Night mode portraits', '16+', 'iphone13pro.jpeg', 0, 40, 'YES', '0000-00-00', 'Mohamad Nabaa', '2022-11-12 01:57:28'),
 (23, 'GTA Trilogy PS4', 35, 40, 'Phone', 'Action', 'Grand Theft Auto: The Trilogy - The Definitive Edition - Rockstar Games GTAIII, Vice City, and San Andreas updated with enhanced visuals and gameplay.', '21+ age', 'gtatrilogy.jpeg', 91, 26, 'NO', '2022-12-08', 'Mohamad Nabaa', '2022-12-12 01:20:18'),
-(24, 'GTA 5', 10, 20, 'Phone', 'Action', 'Grand Theft Auto V is a 2013 action-adventure game developed by Rockstar North and published by Rockstar Games. It is the seventh main entry in the Grand Theft Auto series, following 2008\'s Grand Theft Auto IV, and the fifteenth instalment overall', '16+', 'controller_repair.jpg', 10, 1, 'NO', '2022-12-17', 'Mohamad Nabaa', '2022-12-17 07:53:10');
+(24, 'GTA 5', 10, 20, 'Phone', 'Action', 'Grand Theft Auto V is a 2013 action-adventure game developed by Rockstar North and published by Rockstar Games. It is the seventh main entry in the Grand Theft Auto series, following 2008\'s Grand Theft Auto IV, and the fifteenth instalment overall', '16+', 'GTA5.jpg', 10, 1, 'NO', '2022-12-17', 'Mohamad Nabaa', '2022-12-22 03:03:56');
 
 -- --------------------------------------------------------
 
@@ -579,8 +582,7 @@ INSERT INTO `product_types` (`type`, `added_by`, `modified_on`) VALUES
 ('Phone', 'Mohamad Nabaa', '2022-10-27 12:19:29'),
 ('CDs', 'Mohamad Nabaa', '2022-10-27 12:20:02'),
 ('Consoles', 'Mohamad Nabaa', '2022-10-27 12:20:16'),
-('Computers', 'Mohamad Nabaa', '2022-10-27 03:25:25'),
-('Phone Accessories', 'Mohamad Nabaa', '2022-10-27 03:25:42');
+('Computers', 'Mohamad Nabaa', '2022-10-27 03:25:25');
 
 -- --------------------------------------------------------
 
@@ -601,14 +603,12 @@ CREATE TABLE `repairs` (
 --
 
 INSERT INTO `repairs` (`repair_id`, `repair_type`, `price_per_hour`, `description`, `image`) VALUES
-(1, 'laptop cleaning', 25, 'dsdffdfddfsdfsfds', 'cpu_cleaning.jpg'),
-(2, 'Laptop Cleaning', 10, 'Schedule now and bring your laptop for a special spa day. We require a total of 10$ for a one\r\nhour work. Don\'t hesitate to contact us for any concerns or information.', NULL),
-(3, 'CPU Repair including gaming and normal ones', 25, 'Schedule now and bring your CPU for repair or maintanence for your CPU.This offer includes gaming CPU and normal ones. We require a total of 10$ for a one hour work. Don\'t hesitate to contact us for any concerns or information.', NULL),
-(4, 'CPU Cleaning including gaming and normal ones', 20, 'Schedule now and bring your CPU for a special spa day for your CPU.This offer includes gaming CPU\r\nand normal ones. We require a total of 10$ for a one hour work. Don\'t hesitate to contact us for any concerns or information.', NULL),
-(5, 'Phone Repair', 75, 'Schedule now and bring your Phones for repair or maintanence. We require a total of 10$ for a one hour work. Don\'t hesitate to contact us for any concerns or information.', NULL),
-(6, 'PS Repair', 30, 'Schedule now and bring your ps consoles for repair or maintanence. We require a total of 10$ for a one hour work. Don\'t hesitate to contact us for any concerns or information.', NULL),
-(7, 'Controller Repair', 15, 'Schedule now and bring your constrolers for repair or maintanence.Thos offer includes controllers for all type of consoles (ps2, ps3, ps4, ps5..). We require a total of 10$ for a one hour work. Don\'t hesitate to contact us for any concerns or information.', NULL),
-(9, 'Repair Laptop', 25, 'Repair all types of laptops including CPU and hard disk.', 'cpu_repair.jpg');
+(1, 'laptop cleaning', 25, 'Clean all forms of laptops, including hard disks, memory, CPU and more. All offered for 25$ per hour', 'laptop_cleaning.gif'),
+(4, 'CPU Cleaning including gaming and normal ones', 20, 'Schedule now and bring your CPU for a special spa day for your CPU.This offer includes gaming CPU\r\nand normal ones. We require a total of 10$ for a one hour work. Don\'t hesitate to contact us for any concerns or information.', 'cpu_cleaning.jpg'),
+(5, 'Phone Repair', 75, 'Schedule now and bring your Phones for repair or maintanence. We require a total of 10$ for a one hour work. Don\'t hesitate to contact us for any concerns or information.', 'phone_repair.jpg'),
+(6, 'PS Repair', 30, 'Schedule now and bring your ps consoles for repair or maintanence. We require a total of 30$ for a one hour work. Don\'t hesitate to contact us for any concerns or information.', 'ps_repair.jpg'),
+(7, 'Controller Repair', 20, 'Schedule now and bring your constrolers for repair or maintanence.Thos offer includes controllers for all type of consoles (ps2, ps3, ps4, ps5..). We require a total of 10$ for a one hour work. Don\'t hesitate to contact us for any concerns or information.', 'controller_repair.jpg'),
+(9, 'Repair Laptop', 25, 'Repair all types of laptops including CPU and hard disk.', 'laptop_repair.png');
 
 -- --------------------------------------------------------
 
@@ -825,6 +825,12 @@ ALTER TABLE `repairs`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `admin_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `appointments`
