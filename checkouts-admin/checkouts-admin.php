@@ -387,10 +387,15 @@ $row_condition_4 = $results_condition_4->fetch_assoc();
                         <span class="las la-shopping-bag"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total profits from done checkouts">
                     <div>
-                        <h1>$<?php echo $row_total_profit['total_profit'] ?></h1>
-                        <span>Total Checkouts Prices</span>
+                        <h1>$<?php
+                                $stmt_select_profit_checkouts = $connection->prepare("SELECT SUM(total_price_including_tax - total_cost) as total_profit FROM checkouts WHERE status = 'DONE WORK'");
+                                $stmt_select_profit_checkouts->execute();
+                                $result_profit_checkouts = $stmt_select_profit_checkouts->get_result();
+                                $row_profit_checkouts = $result_profit_checkouts->fetch_assoc();
+                                echo $row_profit_checkouts['total_profit']; ?></h1>
+                        <span>Total Checkouts Profits</span>
                     </div>
                     <div>
                         <span class="las la-wallet"></span>

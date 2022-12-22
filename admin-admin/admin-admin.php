@@ -18,11 +18,11 @@ $results = $stmt->get_result();
 $row = $results->fetch_assoc();
 
 //sum of all customers
-$query_total_customers = "SELECT COUNT(customer_id) as count FROM customers";
-$stmt_total_customers = $connection->prepare($query_total_customers);
-$stmt_total_customers->execute();
-$results_total_customers = $stmt_total_customers->get_result();
-$row_total_customers = $results_total_customers->fetch_assoc();
+$query_total_admins = "SELECT COUNT(*) as total_admins FROM admins";
+$stmt_total_admins = $connection->prepare($query_total_admins);
+$stmt_total_admins->execute();
+$results_total_admins = $stmt_total_admins->get_result();
+$row_total_admins = $results_total_admins->fetch_assoc();
 
 //count of all appointments
 $query_total_appointments = "SELECT COUNT(appointment_id) as total_appointments FROM appointments";
@@ -31,12 +31,32 @@ $stmt_total_appointments->execute();
 $results_total_appointments = $stmt_total_appointments->get_result();
 $row_total_appointments = $results_total_appointments->fetch_assoc();
 
-//sum of all appointments
-$query_total_profit = "SELECT SUM(total_price_including_tax) as total_profit FROM checkouts";
-$stmt_total_profit = $connection->prepare($query_total_profit);
-$stmt_total_profit->execute();
-$results_total_profit = $stmt_total_profit->get_result();
-$row_total_profit = $results_total_profit->fetch_assoc();
+//sum of all checkouts
+$query_total_price_checkouts = "SELECT SUM(total_price_including_tax) as total_price_checkouts FROM checkouts WHERE status = 'DONE WORK'";
+$stmt_total_price_checkouts = $connection->prepare($query_total_price_checkouts);
+$stmt_total_price_checkouts->execute();
+$results_total_price_checkouts = $stmt_total_price_checkouts->get_result();
+$row_total_price_checkouts = $results_total_price_checkouts->fetch_assoc();
+
+$query_total_cost_checkouts = "SELECT SUM(total_cost) as total_cost_checkouts FROM checkouts WHERE status = 'DONE WORK'";
+$stmt_total_cost_checkouts = $connection->prepare($query_total_cost_checkouts);
+$stmt_total_cost_checkouts->execute();
+$results_total_cost_checkouts = $stmt_total_cost_checkouts->get_result();
+$row_total_cost_checkouts = $results_total_cost_checkouts->fetch_assoc();
+
+$query_total_price_store_sales = "SELECT SUM(total_price_after_discount) as total_price_store_sales FROM store_sales";
+$stmt_total_price_store_sales = $connection->prepare($query_total_price_store_sales);
+$stmt_total_price_store_sales->execute();
+$results_total_price_store_sales = $stmt_total_price_store_sales->get_result();
+$row_total_price_store_sales = $results_total_price_store_sales->fetch_assoc();
+
+$query_total_cost_store_sales = "SELECT SUM(total_cost) as total_cost_store_sales FROM store_sales";
+$stmt_total_cost_store_sales = $connection->prepare($query_total_cost_store_sales);
+$stmt_total_cost_store_sales->execute();
+$results_total_cost_store_sales = $stmt_total_cost_store_sales->get_result();
+$row_total_cost_store_sales = $results_total_cost_store_sales->fetch_assoc();
+
+$total_profit = $row_total_price_checkouts['total_price_checkouts'] - $row_total_cost_checkouts['total_cost_checkouts'] + $row_total_price_store_sales['total_price_store_sales'] - $row_total_cost_store_sales['total_cost_store_sales'];
 
 //get total checkouts made
 $query_total_checkouts = "SELECT COUNT(checkout_id) as total_checkout FROM checkouts";
@@ -174,6 +194,7 @@ if (isset($_GET['getAdminIDtoRemove'])) {
     $remove_admin_id = $_GET['getAdminIDtoRemove'];
     $stmt_delete_admin = $connection->prepare("DELETE FROM admins WHERE admin_id='" . $remove_admin_id . "' ");
     $stmt_delete_admin->execute();
+    echo "<script>window.location='../admin-admin/admin-admin.php';</script>";
 }
 
 ?>
@@ -313,16 +334,16 @@ if (isset($_GET['getAdminIDtoRemove'])) {
 
         <main>
             <div class="cards">
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of admins">
                     <div>
-                        <h1><?php echo  $row_total_customers['count']; ?></h1>
-                        <span>Customers</span>
+                        <h1><?php echo  $row_total_admins['total_admins']; ?></h1>
+                        <span>Admins</span>
                     </div>
                     <div>
                         <span class="las la-users"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of appointments scheduled by customers">
                     <div>
                         <h1><?php echo $row_total_appointments['total_appointments'] ?></h1>
                         <span>Appointments</span>
@@ -331,7 +352,7 @@ if (isset($_GET['getAdminIDtoRemove'])) {
                         <span class="las la-clipboard"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of checkout orders sent by customers">
                     <div>
                         <h1><?php echo $row_total_checkouts['total_checkout'] ?></h1>
                         <span>Chekouts</span>
@@ -340,13 +361,13 @@ if (isset($_GET['getAdminIDtoRemove'])) {
                         <span class="las la-shopping-bag"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total profits of the shop">
                     <div>
-                        <h1>$<?php echo $row_total_profit['total_profit'] ?></h1>
+                        <h1>$<?php echo $total_profit; ?></h1>
                         <span>Profit</span>
                     </div>
                     <div>
-                        <span class="las la-google-wallet"></span>
+                        <span class="las la-wallet"></span>
                     </div>
                 </div>
             </div>

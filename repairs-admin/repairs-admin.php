@@ -54,6 +54,7 @@ if (isset($_GET['getRepairIDtoRemove'])) {
     $query_delete_repair = "DELETE FROM repairs WHERE repair_id = '" . $remove_repair_id . "' ";
     $stmt_delete_repair = $connection->prepare($query_delete_repair);
     $stmt_delete_repair->execute();
+    echo "<script>window.location = 'repairs-admin.php'; </script>";
 }
 
 $stmt_select_repairs = $connection->prepare("SELECT * FROM repairs");
@@ -104,7 +105,7 @@ if ($repair_type != "" && $price_per_hour != 0 && $description != "") {
 <html lang="en">
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -199,7 +200,7 @@ if ($repair_type != "" && $price_per_hour != 0 && $description != "") {
                         <span>Offers</span>
                     </a>
                 </li>
-             
+
                 <li>
                     <a href="../repairs-admin/repairs-admin.php" id="repairs-link">
                         <span class="las la-tools"></span>
@@ -245,7 +246,7 @@ if ($repair_type != "" && $price_per_hour != 0 && $description != "") {
 
         <main>
             <div class="cards">
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of repairs services offered by the shop">
                     <div>
                         <h1><?php echo  $row_total_repairs['total_repairs']; ?></h1>
                         <span>Total Repairs</span>
@@ -254,7 +255,7 @@ if ($repair_type != "" && $price_per_hour != 0 && $description != "") {
                         <span class="las la-users"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of booked appointments for these repairs">
                     <div>
                         <h1><?php echo $row_total_appointments['total_appointments'] ?></h1>
                         <span>Total Appointments Repairs</span>
@@ -263,7 +264,7 @@ if ($repair_type != "" && $price_per_hour != 0 && $description != "") {
                         <span class="las la-clipboard"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total price per hour for repairs">
                     <div>
                         <h1><?php echo $row_total_prices_per_hour['total_price_per_hour'] ?></h1>
                         <span>Total Price Per Hour</span>
@@ -272,7 +273,7 @@ if ($repair_type != "" && $price_per_hour != 0 && $description != "") {
                         <span class="las la-shopping-bag"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total profits gained from appointments of these repairs services">
                     <div>
                         <h1>$<?php echo $row_total_repairs_profits['total_repairs_profits'] ?></h1>
                         <span>Total Repairs Profits</span>

@@ -216,7 +216,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
 
         <main>
             <div class="cards">
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of customers that booked appointments">
                     <div>
                         <h1><?php echo $results_total_customers_in_appointments->num_rows; ?></h1>
                         <span>Customers</span>
@@ -225,7 +225,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                         <span class="las la-users"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of booked appointments by customers">
                     <div>
                         <h1><?php echo $row_total_appointments['total_appointments'] ?></h1>
                         <span>Appointments</span>
@@ -234,7 +234,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                         <span class="las la-clipboard"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of appointments scheduled today">
                     <div>
                         <h1><?php echo $row_total_appointments_today['total_appointments_today'] ?></h1>
                         <span>Appointments Today</span>
@@ -243,7 +243,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                         <span class="las la-calendar-day"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total price of booked appointments">
                     <div>
                         <h1>$<?php echo $row_total_appointments_prices['total_appointments_prices'] ?></h1>
                         <span>Total Appointments Prices</span>

@@ -389,7 +389,7 @@ $results_top_products = $stmt_top_products->get_result();
 
         <main>
             <div class="cards">
-                <div class="card-single">
+                <div class="card-single" title="This is the number of all products">
                     <div>
                         <h1><?php
                             $stmt_select_total_products = $connection->prepare("SELECT COUNT(*) as total_products FROM products");
@@ -404,7 +404,7 @@ $results_top_products = $stmt_top_products->get_result();
                         <span class="las la-boxes"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of products that are in offers">
                     <div>
                         <h1><?php
                             $stmt_select_total_products_offers = $connection->prepare("SELECT COUNT(*) as total_products_offers FROM products_offers");
@@ -419,7 +419,7 @@ $results_top_products = $stmt_top_products->get_result();
                         <span class="las la-tags"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total percentage of offers discounts">
                     <div>
                         <h1><?php
                             $stmt_select_total_offer_percentage = $connection->prepare("SELECT SUM(offer_percentage) as total_offer_percentage FROM products_offers");
@@ -434,7 +434,7 @@ $results_top_products = $stmt_top_products->get_result();
                         <span class="las la-percentage"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="These are total sales prices during total offers period">
                     <div>
                         <h1>$<?php
                                 $total_sales_during_offer = 0;
@@ -451,7 +451,7 @@ $results_top_products = $stmt_top_products->get_result();
                                 }
                                 echo $total_sales_during_offer;
                                 ?></h1>
-                        <span>Total Offers Profits</span>
+                        <span>Total Offers Sales Prices</span>
                     </div>
                     <div>
                         <span class="las la-wallet"></span>

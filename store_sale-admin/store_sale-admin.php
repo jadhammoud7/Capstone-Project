@@ -543,40 +543,61 @@ $row_count_store = $results_count_store->fetch_assoc();
 
         <main>
             <div class="cards">
-                <div class="card-single">
+                <div class="card-single" title="This is the total customers who have store sales">
                     <div>
-                        <h1><?php echo  $row_total_customers['count']; ?></h1>
+                        <h1><?php
+                            $stmt_select_customers_in_store_sales = $connection->prepare("SELECT DISTINCT username FROM store_sales");
+                            $stmt_select_customers_in_store_sales->execute();
+                            $result_customers_store_sales = $stmt_select_customers_in_store_sales->get_result();
+                            echo $result_customers_store_sales->num_rows;
+                            ?></h1>
                         <span>Customers</span>
                     </div>
                     <div>
                         <span class="las la-users"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of store sales">
                     <div>
-                        <h1><?php echo $row_total_appointments['total_appointments'] ?></h1>
-                        <span>Appointments</span>
+                        <h1><?php
+                            $stmt_select_all_store_sales = $connection->prepare("SELECT COUNT(*) as total_store_sales FROM store_sales");
+                            $stmt_select_all_store_sales->execute();
+                            $result_store_sales = $stmt_select_all_store_sales->get_result();
+                            $row_store_sales = $result_store_sales->fetch_assoc();
+                            echo $row_store_sales['total_store_sales']; ?></h1>
+                        <span>Store Sales</span>
                     </div>
                     <div>
-                        <span class="las la-clipboard"></span>
-                    </div>
-                </div>
-                <div class="card-single">
-                    <div>
-                        <h1><?php echo $row_total_checkouts['total_checkout'] ?></h1>
-                        <span>Chekouts</span>
-                    </div>
-                    <div>
-                        <span class="las la-shopping-bag"></span>
+                        <span class="las la-address-card"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of store sales added today">
                     <div>
-                        <h1>$<?php echo $row_total_profit['total_profit'] ?></h1>
-                        <span>Profit</span>
+                        <h1><?php
+                            $currentDate = (new DateTime())->format('Y-m-d');
+                            $stmt_select_today_store_sales = $connection->prepare("SELECT COUNT(*) as today_store_sales FROM store_sales WHERE date LIKE '" . $currentDate . "'");
+                            $stmt_select_today_store_sales->execute();
+                            $result_today_store_sales = $stmt_select_today_store_sales->get_result();
+                            $row_today_store_sales = $result_today_store_sales->fetch_assoc();
+                            echo $row_today_store_sales['today_store_sales']; ?></h1>
+                        <span>Store Sales Today</span>
                     </div>
                     <div>
-                        <span class="las la-google-wallet"></span>
+                        <span class="las la-business-time"></span>
+                    </div>
+                </div>
+                <div class="card-single" title="This is the total profits of all store sales">
+                    <div>
+                        <h1>$<?php
+                                $stmt_select_total_profit = $connection->prepare("SELECT SUM(total_price_after_discount - total_cost) as total_profit FROM store_sales");
+                                $stmt_select_total_profit->execute();
+                                $result_total_profit = $stmt_select_total_profit->get_result();
+                                $row_total_profit = $result_total_profit->fetch_assoc();
+                                echo $row_total_profit['total_profit']; ?></h1>
+                        <span>Total Store Sales Profit</span>
+                    </div>
+                    <div>
+                        <span class="las la-wallet"></span>
                     </div>
                 </div>
             </div>
