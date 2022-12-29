@@ -170,7 +170,7 @@ if ($loyalty_point_required != "" && $discount_percentage != "") {
         $modified_by = $row['first_name'] . ' ' . $row['last_name'];
 
         //update loyalty discount
-        $stmt_update_loyalty_discount = $connection->prepare("UPDATE loyalty_discounts SET loyalty_points_required = ?, discount_percentage = ?, benefitted_customers = ?, last_modified_by = ?, last_modified_on = ?");
+        $stmt_update_loyalty_discount = $connection->prepare("UPDATE loyalty_discounts SET loyalty_point_required = ?, discount_percentage = ?, benefitted_customers = ?, last_modified_by = ?, last_modified_on = ?");
         $stmt_update_loyalty_discount->bind_param("iiiss", $loyalty_point_required, $discount_percentage, $benefitted_customers, $modified_by, $modified_on);
         $stmt_update_loyalty_discount->execute();
 

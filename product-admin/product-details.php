@@ -134,11 +134,11 @@ if ($product_id != 0 && $product_name != "" && $product_cost != 0 && $product_pr
 
                 //insert into history prices of this product
                 $prices_change = 0;
-                if ($row_product_price['price'] < $product_price) {
-                    $price_change = $product_price - $row_product_price['price'];
+                if ($row_product_price['unit_price'] < $product_price) {
+                    $price_change = $product_price - $row_product_price['unit_price'];
                     $prices_change = $price_change;
-                } else if ($row_product_price['price'] > $product_price) {
-                    $price_change = $row_product_price['price'] - $product_price;
+                } else if ($row_product_price['unit_price'] > $product_price) {
+                    $price_change = $row_product_price['unit_price'] - $product_price;
                     $prices_change = -$price_change;
                 }
                 if ($prices_change != 0) {
@@ -204,11 +204,11 @@ if ($product_id != 0 && $product_name != "" && $product_cost != 0 && $product_pr
 
         //insert into history prices of this product
         $prices_change = 0;
-        if ($row_product_price['price'] < $product_price) {
-            $price_change = $product_price - $row_product_price['price'];
+        if ($row_product_price['unit_price'] < $product_price) {
+            $price_change = $product_price - $row_product_price['unit_price'];
             $prices_change = $price_change;
-        } else if ($row_product_price['price'] > $product_price) {
-            $price_change = $row_product_price['price'] - $product_price;
+        } else if ($row_product_price['unit_price'] > $product_price) {
+            $price_change = $row_product_price['unit_price'] - $product_price;
             $prices_change = -$price_change;
         }
         if ($prices_change != 0) {
