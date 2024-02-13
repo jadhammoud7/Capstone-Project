@@ -62,11 +62,11 @@ for (let i = 0; i < btn_checkout.length; i++) {
     btn_checkout[i].addEventListener('click', function handleClick() {
         if (btn_checkout[i].innerHTML.includes("Done Work")) {
             // SetButtonToPending(btn[i]);
-            window.location = '../home-admin/home-admin.php?getCheckoutID=' + CheckoutID + '&set_to_done=true';
+            window.location = '../home-admin/home-admin.php?checkout_id=' + CheckoutID + '&set_to_done=true';
             //yaane heye pending w bade hawela la done
         } else {
             // SetButtonToDone(btn[i]);
-            window.location = '../home-admin/home-admin.php?getCheckoutID=' + CheckoutID + '&set_to_done=false';
+            window.location = '../home-admin/home-admin.php?checkout_id=' + CheckoutID + '&set_to_done=false';
             //yane heye done w bade hawela la pending
         }
     });
@@ -87,4 +87,26 @@ function RemoveLogInPopUp() {
     window.location = '../home-admin/home-admin.php';
     let login_popup = document.getElementById('login-confirmation');
     login_popup.classList.remove('open-popup');
+}
+
+function OpenAddModifySlideshow() {
+    window.location = '?open_add_modify_slideshow=1';
+}
+
+if (window.location.href.includes('open_add_modify_slideshow=1')) {
+    const add_modify_slideshow_form = document.getElementById('add_modify_slideshow_form');
+    add_modify_slideshow_form.style.display = 'block';
+}
+
+function CloseAddModifySlideshow() {
+    window.location = 'home-admin.php';
+}
+
+if (window.location.href.includes('slideshow_modified=1')) {
+    const slideshow_confirmation = document.getElementById('slideshow-confirmation');
+    slideshow_confirmation.classList.add('open-popup');
+}
+
+function RemoveSlideshowAddedPopUp() {
+    window.location = 'home-admin.php';
 }

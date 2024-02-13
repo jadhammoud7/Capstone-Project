@@ -10,7 +10,7 @@ if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'admin') {
     header("Location: ../home-page/home-page.php");
 }
 $admin_id = $_SESSION['logged_id'];
-$query = "SELECT first_name, last_name FROM admins WHERE admin_id = $admin_id";
+$query = "SELECT first_name, last_name, username, image FROM admins WHERE admin_id = $admin_id";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
@@ -30,12 +30,6 @@ $stmt_total_product_quantities->execute();
 $results_total_product_quantities = $stmt_total_product_quantities->get_result();
 $row_total_product_quantities = $results_total_product_quantities->fetch_assoc();
 
-//sum of all profit
-$query_total_profit = "SELECT SUM(total_price_including_tax) as total_profit FROM checkouts";
-$stmt_total_profit = $connection->prepare($query_total_profit);
-$stmt_total_profit->execute();
-$results_total_profit = $stmt_total_profit->get_result();
-$row_total_profit = $results_total_profit->fetch_assoc();
 
 if (isset($_GET['checkout_id'])) {
     $stmt_get_checkout = $connection->prepare("SELECT * FROM checkouts WHERE checkout_id = '" . $_GET['checkout_id'] . "'");
@@ -64,9 +58,9 @@ function checkout_products_connection($name, $quantity, $inventory, $price)
 }
 
 //updating working status from buttons
-if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
+if (isset($_GET['set_to_done']) && isset($_GET['checkout_id'])) {
     $working_status = $_GET['set_to_done'];
-    $checkoutID = $_GET['getCheckoutID'];
+    $checkoutID = $_GET['checkout_id'];
     $status = "";
     if ($working_status == "true") {
         $status = "Done Work";
@@ -96,15 +90,23 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
         if ($products_found_in_stock == true) {
 
             //check all products in checkout to see if there is enough inventory
-            $stmt_check_checkout_products = $connection->prepare("SELECT product_id, quantity, customer_id FROM checkouts_customers_products WHERE checkout_id = '" . $checkoutID . "'");
+            $stmt_check_checkout_products = $connection->prepare("SELECT product_id, quantity FROM checkouts_customers_products WHERE checkout_id = '" . $checkoutID . "'");
             $stmt_check_checkout_products->execute();
             $results_check_checkout_products = $stmt_check_checkout_products->get_result();
+
+            //select customer id from checkout
+            $stmt_select_customer_of_checkout = $connection->prepare("SELECT customer_id FROM checkouts WHERE checkout_id = '" . $_GET['checkout_id'] . "'");
+            $stmt_select_customer_of_checkout->execute();
+            $result_customer_id = $stmt_select_customer_of_checkout->get_result();
+            $row_customer_id = $result_customer_id->fetch_assoc();
 
             $total_products_quantities = 0;
             //loop over all products in checkout
             while ($row_check_checkout_products = $results_check_checkout_products->fetch_assoc()) {
                 //quantity needed in checkout
                 $quantity = $row_check_checkout_products['quantity'];
+                $product_id = $row_check_checkout_products['product_id'];
+
                 //select product inventory
                 $stmt_select_product_inventory = $connection->prepare("SELECT inventory FROM products WHERE product_id = '" . $row_check_checkout_products['product_id'] . "'");
                 $stmt_select_product_inventory->execute();
@@ -117,6 +119,16 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
                 $stmt_update_product_inventory = $connection->prepare("UPDATE products SET inventory=? WHERE product_id = '" . $row_check_checkout_products['product_id'] . "'");
                 $stmt_update_product_inventory->bind_param("i", $new_inventory);
                 $stmt_update_product_inventory->execute();
+
+                //insert to product inventory history
+                $inventory_change = -$quantity;
+                date_default_timezone_set('Asia/Beirut');
+                $modified_on = date('Y-m-d h:i:s');
+                $modified_by = 'Checkout Order';
+                $stmt_add_product_inventory_history = $connection->prepare("INSERT INTO history_product_inventory(product_id, inventory, inventory_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
+                $stmt_add_product_inventory_history->bind_param("iiiss", $product_id, $new_inventory, $inventory_change, $modified_by, $modified_on);
+                $stmt_add_product_inventory_history->execute();
+                $stmt_add_product_inventory_history->close();
 
                 $stmt_select_product_sales = $connection->prepare("SELECT sales_number FROM products WHERE product_id = '" . $row_check_checkout_products['product_id'] . "'");
                 $stmt_select_product_sales->execute();
@@ -131,21 +143,32 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
                 $stmt_update_product_sales->bind_param("i", $new_sales);
                 $stmt_update_product_sales->execute();
 
+
+                //insert to product inventory sales
+                $sales_change = $quantity;
+                date_default_timezone_set('Asia/Beirut');
+                $modified_on = date('Y-m-d h:i:s');
+                $modified_by = 'Checkout Order';
+                $stmt_add_product_inventory_sales = $connection->prepare("INSERT INTO history_product_sales(product_id, sales_number, sales_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
+                $stmt_add_product_inventory_sales->bind_param("iiiss", $product_id, $new_sales, $sales_change, $modified_by, $modified_on);
+                $stmt_add_product_inventory_sales->execute();
+                $stmt_add_product_inventory_sales->close();
+
                 //update loyalty point for customer
-                $stmt_get_customer = $connection->prepare("SELECT loyalty_points FROM customers WHERE customer_id = '" . $row_check_checkout_products['customer_id'] . "'");
+                $stmt_get_customer = $connection->prepare("SELECT loyalty_points FROM customers WHERE customer_id = '" . $row_customer_id['customer_id'] . "'");
                 $stmt_get_customer->execute();
                 $results_get_customer = $stmt_get_customer->get_result();
                 $row_get_customer = $results_get_customer->fetch_assoc();
 
                 $new_loyalty = $row_get_customer['loyalty_points'] + $quantity;
-                $stmt_update_customer_loyalty_points = $connection->prepare("UPDATE products SET loyalty_points=? WHERE customer_id = '" . $row_check_checkout_products['customer_id'] . "'");
+                $stmt_update_customer_loyalty_points = $connection->prepare("UPDATE customers SET loyalty_points = ? WHERE customer_id = '" . $row_customer_id['customer_id'] . "'");
                 $stmt_update_customer_loyalty_points->bind_param("i", $new_loyalty);
                 $stmt_update_customer_loyalty_points->execute();
             }
             $query_settodone = $connection->prepare("UPDATE checkouts SET status=? WHERE checkout_id='" . $checkoutID . "'");
             $query_settodone->bind_param("s", $status);
             $query_settodone->execute();
-            header("Location: checkout-admin-details.php");
+            header("Location: checkout-admin.php");
         }
     }
 }
@@ -158,7 +181,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
 
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -182,6 +205,15 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
         <button type="button" onclick="<?php if (isset($_GET['checkout_id'])) { ?>
             SetCheckoutID(<?php echo $_GET['checkout_id']; ?>);" <?php } ?>>YES</button>
         <button type="button" onclick="CloseDoneCheckoutPopUp()">NO</button>
+    </div>
+
+    <!-- started popup message logout -->
+    <div class="popup" id="logout-confirmation">
+        <img src="../images/question-mark.png" alt="">
+        <h2>Log Out Confirmation</h2>
+        <p>Are you sure that you want to logout?</p>
+        <button type="button" onclick="GoToLogIn()">YES</button>
+        <button type="button" onclick="CloseLogOutPopUp()">NO</button>
     </div>
 
 
@@ -246,7 +278,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
                         <span>Offers</span>
                     </a>
                 </li>
-             
+
                 <li>
                     <a href="../repairs-admin/repairs-admin.php" id="repairs-link">
                         <span class="las la-tools"></span>
@@ -282,7 +314,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
             </h2>
 
             <div class="user-wrapper">
-                <img src="../images/info.png" width="40px" height="40px" alt="">
+                <img src="../images/Admins/<?php echo $row['username']; ?>/<?php echo $row['image']; ?>" width="40px" height="40px" alt="">
                 <div>
                     <h4> <?php echo $row["first_name"], " ", $row['last_name']; ?></h4>
                     <small>Admin</small>
@@ -321,8 +353,8 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>$<?php echo $row_total_profit['total_profit'] ?></h1>
-                        <span>Total Price</span>
+                        <h1>$<?php echo $row_checkout['total_price'] - $row_checkout['total_cost'] ?></h1>
+                        <span>Total Profit</span>
                     </div>
                     <div>
                         <span class="las la-wallet"></span>
@@ -453,7 +485,7 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
                     </tr>
                     <?php
                     while ($row_get_checkout_products = $results_get_checkout_products->fetch_assoc()) {
-                        $stmt_get_product = $connection->prepare("SELECT name, price, inventory FROM products WHERE product_id = '" . $row_get_checkout_products["product_id"] . "' ");
+                        $stmt_get_product = $connection->prepare("SELECT name, unit_price, inventory FROM products WHERE product_id = '" . $row_get_checkout_products["product_id"] . "' ");
                         $stmt_get_product->execute();
                         $results_get_product = $stmt_get_product->get_result();
                         $row_get_product = $results_get_product->fetch_assoc();
@@ -462,6 +494,10 @@ if (isset($_GET['set_to_done']) && isset($_GET['getCheckoutID'])) {
                     ?>
                 </table>
                 <table id="order-totals">
+                    <tr>
+                        <th>Total Cost</th>
+                        <td><?php echo $row_checkout['total_cost']; ?>$</td>
+                    </tr>
                     <tr>
                         <th>Subtotal</th>
                         <td><?php echo $row_checkout['total_price']; ?>$</td>

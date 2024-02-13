@@ -60,6 +60,7 @@ if (isset($_GET['product_id'])) {
 $product_id = 0;
 $product_name = "";
 $product_price = 0;
+$product_cost = 0;
 $product_type = "";
 $product_category = "";
 $product_description = "";
@@ -70,8 +71,13 @@ $product_sales = 0;
 if (isset($_POST['product_id'])) {
     $product_id = $_POST['product_id'];
 }
+
 if (isset($_POST['product_name'])) {
     $product_name = $_POST['product_name'];
+}
+
+if (isset($_POST['cost'])) {
+    $product_cost = $_POST['cost'];
 }
 
 if (isset($_POST['price'])) {
@@ -102,7 +108,7 @@ if (isset($_POST['sales_number'])) {
     $product_sales = $_POST['sales_number'];
 }
 
-if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_type != "" && $product_category != "" && $product_description != "" && $product_age != "") {
+if ($product_id != 0 && $product_name != "" && $product_cost != 0 && $product_price != 0 && $product_type != "" && $product_category != "" && $product_description != "" && $product_age != "") {
     if (!empty($_FILES['product_image']['name'])) {
         rmdir('../images/Products/' . $product_name . '/');
         mkdir('../images/Products/' . $product_name . '/');
@@ -121,18 +127,18 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
                 $modified_by = $row['first_name'] . ' ' . $row['last_name'];
 
                 //select the current price of the product before updating
-                $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE product_id = '" . $product_id . "'");
+                $stmt_select_product_price = $connection->prepare("SELECT unit_price FROM products WHERE product_id = '" . $product_id . "'");
                 $stmt_select_product_price->execute();
                 $result_product_price = $stmt_select_product_price->get_result();
                 $row_product_price = $result_product_price->fetch_assoc();
 
                 //insert into history prices of this product
                 $prices_change = 0;
-                if ($row_product_price['price'] < $product_price) {
-                    $price_change = $product_price - $row_product_price['price'];
+                if ($row_product_price['unit_price'] < $product_price) {
+                    $price_change = $product_price - $row_product_price['unit_price'];
                     $prices_change = $price_change;
-                } else if ($row_product_price['price'] > $product_price) {
-                    $price_change = $row_product_price['price'] - $product_price;
+                } else if ($row_product_price['unit_price'] > $product_price) {
+                    $price_change = $row_product_price['unit_price'] - $product_price;
                     $prices_change = -$price_change;
                 }
                 if ($prices_change != 0) {
@@ -157,13 +163,14 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
                     $inventory_change = $row_product_inventory['inventory'] - $product_inventory;
                     $inventories_change = -$inventory_change;
                 }
+                //if their is inventory change
                 if ($inventories_change != 0) {
                     $stmt_add_product_inventory_history = $connection->prepare("INSERT INTO history_product_inventory(product_id, inventory, inventory_change, modified_by, modified_on) VALUES (?,?,?,?,?)");
                     $stmt_add_product_inventory_history->bind_param("iiiss", $product_id, $product_inventory, $inventories_change, $modified_by, $modified_on);
                     $stmt_add_product_inventory_history->execute();
                     $stmt_add_product_inventory_history->close();
 
-                    //select inventory histor from product inventory sales
+                    //select inventory history from product inventory sales
                     $stmt_select_product_inventory_history = $connection->prepare("SELECT inventory_history FROM products_inventory_sales WHERE product_id = '" . $product_id . "'");
                     $stmt_select_product_inventory_history->execute();
                     $result_product_inventory_history = $stmt_select_product_inventory_history->get_result();
@@ -176,8 +183,8 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
                 }
 
                 //update products info
-                $stmt_update_product = $connection->prepare("UPDATE products SET name = ?, price = ?, type= ?, category = ?, description = ?, age = ?, image = ?, inventory = ?, sales_number = ?, last_modified_by = ?, last_modified_on = ? WHERE product_id = '" . $product_id . "'");
-                $stmt_update_product->bind_param("sisssssiiss", $product_name, $product_price, $product_type, $product_category, $product_description, $product_age, $product_image, $product_inventory, $product_sales, $modified_by, $modified_on);
+                $stmt_update_product = $connection->prepare("UPDATE products SET name = ?, unit_cost = ?, unit_price = ?, type= ?, category = ?, description = ?, age = ?, image = ?, inventory = ?, sales_number = ?, last_modified_by = ?, last_modified_on = ? WHERE product_id = '" . $product_id . "'");
+                $stmt_update_product->bind_param("siisssssiiss", $product_name, $product_cost, $product_price, $product_type, $product_category, $product_description, $product_age, $product_image, $product_inventory, $product_sales, $modified_by, $modified_on);
                 $stmt_update_product->execute();
                 $stmt_update_product->close();
                 header("Location: product-details.php?product-id=$product_id&product-updated=1");
@@ -190,18 +197,18 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
         $modified_by = $row['first_name'] . ' ' . $row['last_name'];
 
         //select the current price of the product before updating
-        $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE product_id = '" . $product_id . "'");
+        $stmt_select_product_price = $connection->prepare("SELECT unit_price FROM products WHERE product_id = '" . $product_id . "'");
         $stmt_select_product_price->execute();
         $result_product_price = $stmt_select_product_price->get_result();
         $row_product_price = $result_product_price->fetch_assoc();
 
         //insert into history prices of this product
         $prices_change = 0;
-        if ($row_product_price['price'] < $product_price) {
-            $price_change = $product_price - $row_product_price['price'];
+        if ($row_product_price['unit_price'] < $product_price) {
+            $price_change = $product_price - $row_product_price['unit_price'];
             $prices_change = $price_change;
-        } else if ($row_product_price['price'] > $product_price) {
-            $price_change = $row_product_price['price'] - $product_price;
+        } else if ($row_product_price['unit_price'] > $product_price) {
+            $price_change = $row_product_price['unit_price'] - $product_price;
             $prices_change = -$price_change;
         }
         if ($prices_change != 0) {
@@ -252,8 +259,8 @@ if ($product_id != 0 && $product_name != "" && $product_price != 0 && $product_t
 
         $product_image = $row_product_image['image'];
 
-        $stmt_update_product = $connection->prepare("UPDATE products SET name = ?, price = ?, type= ?, category = ?, description = ?, age = ?, image = ?, inventory = ?, sales_number = ?, last_modified_by = ?, last_modified_on = ? WHERE product_id = '" . $product_id . "'");
-        $stmt_update_product->bind_param("sisssssiiss", $product_name, $product_price, $product_type, $product_category, $product_description, $product_age, $product_image, $product_inventory, $product_sales, $modified_by, $modified_on);
+        $stmt_update_product = $connection->prepare("UPDATE products SET name = ?, unit_cost = ?, unit_price = ?, type= ?, category = ?, description = ?, age = ?, image = ?, inventory = ?, sales_number = ?, last_modified_by = ?, last_modified_on = ? WHERE product_id = '" . $product_id . "'");
+        $stmt_update_product->bind_param("siisssssiiss", $product_name, $product_cost, $product_price, $product_type, $product_category, $product_description, $product_age, $product_image, $product_inventory, $product_sales, $modified_by, $modified_on);
         $stmt_update_product->execute();
         $stmt_update_product->close();
 
@@ -491,11 +498,21 @@ if (isset($_GET['ProductIDToRemove'])) {
 
                                     <div class="form-container-part-inputs">
                                         <div class="input-container">
-                                            <input type="number" name="price" id="price" value="<?php if (isset($row_product)) {
-                                                                                                    echo $row_product['price'];
+                                            <input type="number" name="cost" id="cost" value="<?php if (isset($row_product)) {
+                                                                                                    echo $row_product['unit_cost'];
                                                                                                 } ?>" readonly class="is-valid">
-                                            <label for="price">Price</label>
+                                            <label for="cost">Unit Cost</label>
                                         </div>
+                                        <div class="input-container">
+                                            <input type="number" name="price" id="price" value="<?php if (isset($row_product)) {
+                                                                                                    echo $row_product['unit_price'];
+                                                                                                } ?>" readonly class="is-valid">
+                                            <label for="price">Unit Price</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-container-part-inputs">
                                         <div class="input-container" id="type_div">
 
                                             <input type="text" name="type" id="type" value="<?php if (isset($row_product)) {
@@ -503,9 +520,6 @@ if (isset($_GET['ProductIDToRemove'])) {
                                                                                             } ?>" readonly class="is-valid">
                                             <label for="type" id="label_type">Type</label>
                                         </div>
-                                    </div>
-
-                                    <div class="form-container-part-inputs">
                                         <div class="input-container" id="category_div">
                                             <input type="text" name="category" id="category" value="<?php if (isset($row_product)) {
                                                                                                         echo $row_product['category'];
@@ -620,6 +634,11 @@ if (isset($_GET['ProductIDToRemove'])) {
         const product_name = document.getElementById('product_name');
         product_name.removeAttribute('readonly');
         product_name.classList.remove('is-valid');
+
+        //for product cost
+        const product_cost = document.getElementById('cost');
+        product_cost.removeAttribute('readonly');
+        product_cost.classList.remove('is-valid');
 
         //for product price
         const product_price = document.getElementById('price');

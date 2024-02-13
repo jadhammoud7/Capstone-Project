@@ -170,7 +170,7 @@ if ($loyalty_point_required != "" && $discount_percentage != "") {
         $modified_by = $row['first_name'] . ' ' . $row['last_name'];
 
         //update loyalty discount
-        $stmt_update_loyalty_discount = $connection->prepare("UPDATE loyalty_discounts SET loyalty_points_required = ?, discount_percentage = ?, benefitted_customers = ?, last_modified_by = ?, last_modified_on = ?");
+        $stmt_update_loyalty_discount = $connection->prepare("UPDATE loyalty_discounts SET loyalty_point_required = ?, discount_percentage = ?, benefitted_customers = ?, last_modified_by = ?, last_modified_on = ?");
         $stmt_update_loyalty_discount->bind_param("iiiss", $loyalty_point_required, $discount_percentage, $benefitted_customers, $modified_by, $modified_on);
         $stmt_update_loyalty_discount->execute();
 
@@ -198,14 +198,14 @@ if (isset($_GET['RemoveLoyaltyDiscount'])) {
 }
 
 //get products in ascending 
-$query_nbofsales = "SELECT name,inventory,sales_number FROM products ORDER BY sales_number ASC;";
+$query_nbofsales = "SELECT name, inventory, sales_number FROM products ORDER BY sales_number ASC;";
 $stmt_nbofsales = $connection->prepare($query_nbofsales);
 $stmt_nbofsales->execute();
 $results_nbofsales = $stmt_nbofsales->get_result();
 
 
 //get top products 
-$query_top_products = "SELECT name,sales_number FROM products ORDER BY sales_number DESC LIMIT 5;";
+$query_top_products = "SELECT name, sales_number FROM products ORDER BY sales_number DESC LIMIT 5;";
 $stmt_top_products = $connection->prepare($query_top_products);
 $stmt_top_products->execute();
 $results_top_products = $stmt_top_products->get_result();
@@ -389,7 +389,7 @@ $results_top_products = $stmt_top_products->get_result();
 
         <main>
             <div class="cards">
-                <div class="card-single">
+                <div class="card-single" title="This is the number of all products">
                     <div>
                         <h1><?php
                             $stmt_select_total_products = $connection->prepare("SELECT COUNT(*) as total_products FROM products");
@@ -404,7 +404,7 @@ $results_top_products = $stmt_top_products->get_result();
                         <span class="las la-boxes"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of products that are in offers">
                     <div>
                         <h1><?php
                             $stmt_select_total_products_offers = $connection->prepare("SELECT COUNT(*) as total_products_offers FROM products_offers");
@@ -419,7 +419,7 @@ $results_top_products = $stmt_top_products->get_result();
                         <span class="las la-tags"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total percentage of offers discounts">
                     <div>
                         <h1><?php
                             $stmt_select_total_offer_percentage = $connection->prepare("SELECT SUM(offer_percentage) as total_offer_percentage FROM products_offers");
@@ -434,7 +434,7 @@ $results_top_products = $stmt_top_products->get_result();
                         <span class="las la-percentage"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="These are total sales prices during total offers period">
                     <div>
                         <h1>$<?php
                                 $total_sales_during_offer = 0;
@@ -451,7 +451,7 @@ $results_top_products = $stmt_top_products->get_result();
                                 }
                                 echo $total_sales_during_offer;
                                 ?></h1>
-                        <span>Total Offers Profits</span>
+                        <span>Total Offers Sales Prices</span>
                     </div>
                     <div>
                         <span class="las la-wallet"></span>
@@ -565,7 +565,7 @@ $results_top_products = $stmt_top_products->get_result();
                                         $result_product_inventory_sales = $stmt_select_products_inventory_sales->get_result();
 
                                         while ($row_product_inventory_sales = $result_product_inventory_sales->fetch_assoc()) {
-                                            $stmt_select_product = $connection->prepare("SELECT name, price FROM products WHERE product_id = '" . $row_product_inventory_sales['product_id'] . "'");
+                                            $stmt_select_product = $connection->prepare("SELECT name, unit_price FROM products WHERE product_id = '" . $row_product_inventory_sales['product_id'] . "'");
                                             $stmt_select_product->execute();
                                             $result_product = $stmt_select_product->get_result();
                                             $row_product = $result_product->fetch_assoc();
@@ -573,7 +573,7 @@ $results_top_products = $stmt_top_products->get_result();
                                             get_all_products_offers_recommendations(
                                                 $row_product_inventory_sales['product_id'],
                                                 $row_product['name'],
-                                                $row_product['price'],
+                                                $row_product['unit_price'],
                                                 $row_product_inventory_sales['inventory_history'],
                                                 $row_product_inventory_sales['sales_history'],
                                                 $row_product_inventory_sales['inventory_sales_ratio']
@@ -648,17 +648,20 @@ $results_top_products = $stmt_top_products->get_result();
                                             $result_product_name = $stmt_select_product_name->get_result();
                                             $row_product_name = $result_product_name->fetch_assoc();
 
-                                            get_all_products_offers(
-                                                $row_products_offers['product_id'],
-                                                $row_product_name['name'],
-                                                $row_products_offers['old_price'],
-                                                $row_products_offers['new_price'],
-                                                $row_products_offers['offer_percentage'],
-                                                $row_products_offers['offer_begin_date'],
-                                                $row_products_offers['offer_end_date'],
-                                                $row_products_offers['last_modified_by'],
-                                                $row_products_offers['last_modified_on']
-                                            );
+                                            if (!empty($row_product_name)) {
+
+                                                get_all_products_offers(
+                                                    $row_products_offers['product_id'],
+                                                    $row_product_name['name'],
+                                                    $row_products_offers['old_price'],
+                                                    $row_products_offers['new_price'],
+                                                    $row_products_offers['offer_percentage'],
+                                                    $row_products_offers['offer_begin_date'],
+                                                    $row_products_offers['offer_end_date'],
+                                                    $row_products_offers['last_modified_by'],
+                                                    $row_products_offers['last_modified_on']
+                                                );
+                                            }
                                         }
                                         ?>
                                     </tbody>
@@ -815,11 +818,11 @@ $results_top_products = $stmt_top_products->get_result();
         const array_product_prices = [];
 
         <?php
-        $stmt_get_product_price = $connection->prepare("SELECT price FROM products");
+        $stmt_get_product_price = $connection->prepare("SELECT unit_price FROM products");
         $stmt_get_product_price->execute();
         $result_product_price = $stmt_get_product_price->get_result();
         while ($row_product_price = $result_product_price->fetch_assoc()) { ?>
-            array_product_prices.push(<?php echo $row_product_price['price']; ?>);
+            array_product_prices.push(<?php echo $row_product_price['unit_price']; ?>);
         <?php }
         ?>
         var new_price = array_product_prices[document.getElementById('product_name').selectedIndex];
@@ -962,30 +965,32 @@ $results_top_products = $stmt_top_products->get_result();
     $stmt_select_all_products_offers->execute();
     $result_products_offers = $stmt_select_all_products_offers->get_result();
 
-    while ($row_products_offers = $result_products_offers->fetch_assoc()) {
-        //get product name
-        $stmt_select_product_name = $connection->prepare("SELECT name FROM products WHERE product_id = ?");
-        $stmt_select_product_name->bind_param("i", $row_products_offers['product_id']);
-        $stmt_select_product_name->execute();
-        $result_product_name = $stmt_select_product_name->get_result();
-        $row_product_name = $result_product_name->fetch_assoc();
+    if (!empty($result_product_offers)) {
+        while ($row_products_offers = $result_products_offers->fetch_assoc()) {
+            //get product name
+            $stmt_select_product_name = $connection->prepare("SELECT name FROM products WHERE product_id = ?");
+            $stmt_select_product_name->bind_param("i", $row_products_offers['product_id']);
+            $stmt_select_product_name->execute();
+            $result_product_name = $stmt_select_product_name->get_result();
+            $row_product_name = $result_product_name->fetch_assoc();
     ?>
-        array_products3.push("<?php
-                                echo $row_product_name['name'];
-                                ?>");
+            array_products3.push("<?php
+                                    echo $row_product_name['name'];
+                                    ?>");
 
-        <?php
-        $stmt_select_product_sales_during_offer = $connection->prepare("SELECT SUM(sales_change) as total_sales FROM history_product_sales WHERE product_id = ? AND modified_on BETWEEN ? AND ?");
-        $stmt_select_product_sales_during_offer->bind_param("idd", $row_products_offers['product_id'], $row_products_offers['offer_begin_date'], $row_products_offers['offer_end_date']);
-        $stmt_select_product_sales_during_offer->execute();
-        $result_product_sales = $stmt_select_product_sales_during_offer->get_result();
-        $row_product_sales = $result_product_sales->fetch_assoc();
-        ?>
+            <?php
+            $stmt_select_product_sales_during_offer = $connection->prepare("SELECT SUM(sales_change) as total_sales FROM history_product_sales WHERE product_id = ? AND modified_on BETWEEN ? AND ?");
+            $stmt_select_product_sales_during_offer->bind_param("idd", $row_products_offers['product_id'], $row_products_offers['offer_begin_date'], $row_products_offers['offer_end_date']);
+            $stmt_select_product_sales_during_offer->execute();
+            $result_product_sales = $stmt_select_product_sales_during_offer->get_result();
+            $row_product_sales = $result_product_sales->fetch_assoc();
+            ?>
 
-        array_products_sales_offers.push("<?php
-                                            echo $row_product_sales['total_sales'];
-                                            ?>");
+            array_products_sales_offers.push("<?php
+                                                echo $row_product_sales['total_sales'];
+                                                ?>");
     <?php
+        }
     }
     ?>;
 

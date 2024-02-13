@@ -34,22 +34,31 @@ if (isset($product_id)) {
         $row_select_product_offer = $result_select_product_offer->fetch_assoc();
 
         $price = 0;
+        $cost = 0;
 
         //if product not in offer, then select current price
         if (empty($row_select_product_offer)) {
-            $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE product_id = '" . $product_id . "' ");
+            $stmt_select_product_price = $connection->prepare("SELECT unit_cost, unit_price FROM products WHERE product_id = '" . $product_id . "' ");
             $stmt_select_product_price->execute();
             $result_select_product_price = $stmt_select_product_price->get_result();
             $row_select_product_price = $result_select_product_price->fetch_assoc();
-            $price = $row_select_product_price['price'] * $quantity;
+            $price = $row_select_product_price['unit_price'] * $quantity;
+            $cost = $row_select_product_price['unit_cost'] * $quantity;
         } else {
             //select new price in offer
             $price = $row_select_product_offer['new_price'] * $quantity;
+
+            $stmt_select_product_price = $connection->prepare("SELECT unit_cost, unit_price FROM products WHERE product_id = '" . $product_id . "' ");
+            $stmt_select_product_price->execute();
+            $result_select_product_price = $stmt_select_product_price->get_result();
+            $row_select_product_price = $result_select_product_price->fetch_assoc();
+            $cost = $row_select_product_price['unit_cost'] * $quantity;
         }
-        $stmt = $connection->prepare("INSERT INTO baskets_customer_product(customer_id, product_id, quantity, price) VALUES (?,?,?,?)");
-        $stmt->bind_param("iiii", $customer_id, $product_id, $quantity, $price);
-        $stmt->execute();
-        $stmt->close();
+
+        $stmt_insert_baskets_customer = $connection->prepare("INSERT INTO baskets_customer_product(customer_id, product_id, quantity, cost, price) VALUES (?,?,?,?,?)");
+        $stmt_insert_baskets_customer->bind_param("iiiii", $customer_id, $product_id, $quantity, $cost, $price);
+        $stmt_insert_baskets_customer->execute();
+        $stmt_insert_baskets_customer->close();
         echo "<script>window.location = '../shop/shop.php?add_to_basket=true';</script>";
     } else {
         $stmt_select_quantity = $connection->prepare("SELECT quantity FROM baskets_customer_product WHERE product_id = '" . $product_id . "' AND customer_id = '" . $customer_id . "' ");
@@ -64,13 +73,16 @@ if (isset($product_id)) {
         $stmt_update_quantity->bind_param("i", $quantity);
         $stmt_update_quantity->execute();
 
-        $stmt_select_price = $connection->prepare("SELECT price FROM baskets_customer_product WHERE product_id = '" . $product_id . "' AND customer_id = '" . $customer_id . "'");
+        $stmt_select_price = $connection->prepare("SELECT cost, price FROM baskets_customer_product WHERE product_id = '" . $product_id . "' AND customer_id = '" . $customer_id . "'");
         $stmt_select_price->execute();
         $select_price_results = $stmt_select_price->get_result();
         $row_select_price = $select_price_results->fetch_assoc();
+
         $price = $row_select_price['price'] * 2;
-        $stmt_update_price = $connection->prepare("UPDATE baskets_customer_product SET price = ? WHERE product_id = '" . $product_id . "' AND customer_id = '" . $customer_id . "'");
-        $stmt_update_price->bind_param("i", $price);
+        $cost = $row_select_price['cost'] * 2;
+
+        $stmt_update_price = $connection->prepare("UPDATE baskets_customer_product SET price = ?, cost = ? WHERE product_id = '" . $product_id . "' AND customer_id = '" . $customer_id . "'");
+        $stmt_update_price->bind_param("ii", $price, $cost);
         $stmt_update_price->execute();
 
         echo "<script>window.location = '../shop/shop.php?found_in_basket=true';</script>";

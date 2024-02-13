@@ -10,7 +10,7 @@ if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'admin') {
     header("Location: ../home-page/home-page.php");
 }
 $admin_id = $_SESSION['logged_id'];
-$query = "SELECT first_name, last_name FROM admins WHERE admin_id = $admin_id";
+$query = "SELECT first_name, last_name, username, image FROM admins WHERE admin_id = $admin_id";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
@@ -44,14 +44,6 @@ $stmt_total_appointments_today = $connection->prepare($query_total_appointments_
 $stmt_total_appointments_today->execute();
 $results_total_appointments_today = $stmt_total_appointments_today->get_result();
 $row_total_appointments_today = $results_total_appointments_today->fetch_assoc();
-
-
-//get all appointments
-require_once("../php/admin_page_php.php");
-$query_appointments = "SELECT appointment_id, customer_id, appointment_name, price_per_hour, date, hour, status FROM appointments";
-$stmt_appointments = $connection->prepare($query_appointments);
-$stmt_appointments->execute();
-$results_appointments = $stmt_appointments->get_result();
 
 //get count of appointments pending
 $status = "Pending";
@@ -102,7 +94,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
 <html lang="en">
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -178,7 +170,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                         <span>Offers</span>
                     </a>
                 </li>
-             
+
                 <li>
                     <a href="../repairs-admin/repairs-admin.php" id="repairs-link">
                         <span class="las la-tools"></span>
@@ -214,7 +206,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
             </h2>
 
             <div class="user-wrapper">
-                <img src="../images/info.png" width="40px" height="40px" alt="">
+                <img src="../images/Admins/<?php echo $row['username']; ?>/<?php echo $row['image']; ?>" width="40px" height="40px" alt="">
                 <div>
                     <h4> <?php echo $row["first_name"], " ", $row['last_name']; ?></h4>
                     <small>Admin</small>
@@ -224,7 +216,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
 
         <main>
             <div class="cards">
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of customers that booked appointments">
                     <div>
                         <h1><?php echo $results_total_customers_in_appointments->num_rows; ?></h1>
                         <span>Customers</span>
@@ -233,7 +225,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                         <span class="las la-users"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of booked appointments by customers">
                     <div>
                         <h1><?php echo $row_total_appointments['total_appointments'] ?></h1>
                         <span>Appointments</span>
@@ -242,7 +234,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                         <span class="las la-clipboard"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of appointments scheduled today">
                     <div>
                         <h1><?php echo $row_total_appointments_today['total_appointments_today'] ?></h1>
                         <span>Appointments Today</span>
@@ -251,7 +243,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                         <span class="las la-calendar-day"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total price of booked appointments">
                     <div>
                         <h1>$<?php echo $row_total_appointments_prices['total_appointments_prices'] ?></h1>
                         <span>Total Appointments Prices</span>
@@ -298,6 +290,13 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                                     </thead>
                                     <tbody>
                                         <?php
+                                        //get all appointments
+                                        require_once("../php/admin_page_php.php");
+                                        $query_appointments = "SELECT * FROM appointments";
+                                        $stmt_appointments = $connection->prepare($query_appointments);
+                                        $stmt_appointments->execute();
+                                        $results_appointments = $stmt_appointments->get_result();
+
                                         while ($row_appointments = $results_appointments->fetch_assoc()) {
                                             $query_get_user = "SELECT first_name, last_name FROM customers WHERE customer_id = '" . $row_appointments['customer_id'] . "' ";
                                             $stmt_get_user = $connection->prepare($query_get_user);
@@ -310,6 +309,7 @@ $results_type_of_repairs = $stmt_type_of_repairs->get_result();
                                                 $row_get_user['first_name'] . ' ' . $row_get_user['last_name'],
                                                 $row_appointments['customer_id'],
                                                 $row_appointments['appointment_name'],
+                                                $row_appointments['appointment_type'],
                                                 $row_appointments['price_per_hour'],
                                                 $row_appointments['date'],
                                                 $row_appointments['hour'],

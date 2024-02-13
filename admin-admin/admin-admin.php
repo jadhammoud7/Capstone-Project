@@ -11,18 +11,18 @@ if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'admin') {
     header("Location: ../home-page/home-page.php");
 }
 $admin_id = $_SESSION['logged_id'];
-$query = "SELECT first_name, last_name FROM admins WHERE admin_id = '" . $admin_id . "' ";
+$query = "SELECT first_name, last_name, username, image FROM admins WHERE admin_id = '" . $admin_id . "' ";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
 $row = $results->fetch_assoc();
 
 //sum of all customers
-$query_total_customers = "SELECT COUNT(customer_id) as count FROM customers";
-$stmt_total_customers = $connection->prepare($query_total_customers);
-$stmt_total_customers->execute();
-$results_total_customers = $stmt_total_customers->get_result();
-$row_total_customers = $results_total_customers->fetch_assoc();
+$query_total_admins = "SELECT COUNT(*) as total_admins FROM admins";
+$stmt_total_admins = $connection->prepare($query_total_admins);
+$stmt_total_admins->execute();
+$results_total_admins = $stmt_total_admins->get_result();
+$row_total_admins = $results_total_admins->fetch_assoc();
 
 //count of all appointments
 $query_total_appointments = "SELECT COUNT(appointment_id) as total_appointments FROM appointments";
@@ -31,12 +31,32 @@ $stmt_total_appointments->execute();
 $results_total_appointments = $stmt_total_appointments->get_result();
 $row_total_appointments = $results_total_appointments->fetch_assoc();
 
-//sum of all appointments
-$query_total_profit = "SELECT SUM(total_price_including_tax) as total_profit FROM checkouts";
-$stmt_total_profit = $connection->prepare($query_total_profit);
-$stmt_total_profit->execute();
-$results_total_profit = $stmt_total_profit->get_result();
-$row_total_profit = $results_total_profit->fetch_assoc();
+//sum of all checkouts
+$query_total_price_checkouts = "SELECT SUM(total_price_including_tax) as total_price_checkouts FROM checkouts WHERE status = 'DONE WORK'";
+$stmt_total_price_checkouts = $connection->prepare($query_total_price_checkouts);
+$stmt_total_price_checkouts->execute();
+$results_total_price_checkouts = $stmt_total_price_checkouts->get_result();
+$row_total_price_checkouts = $results_total_price_checkouts->fetch_assoc();
+
+$query_total_cost_checkouts = "SELECT SUM(total_cost) as total_cost_checkouts FROM checkouts WHERE status = 'DONE WORK'";
+$stmt_total_cost_checkouts = $connection->prepare($query_total_cost_checkouts);
+$stmt_total_cost_checkouts->execute();
+$results_total_cost_checkouts = $stmt_total_cost_checkouts->get_result();
+$row_total_cost_checkouts = $results_total_cost_checkouts->fetch_assoc();
+
+$query_total_price_store_sales = "SELECT SUM(total_price_after_discount) as total_price_store_sales FROM store_sales";
+$stmt_total_price_store_sales = $connection->prepare($query_total_price_store_sales);
+$stmt_total_price_store_sales->execute();
+$results_total_price_store_sales = $stmt_total_price_store_sales->get_result();
+$row_total_price_store_sales = $results_total_price_store_sales->fetch_assoc();
+
+$query_total_cost_store_sales = "SELECT SUM(total_cost) as total_cost_store_sales FROM store_sales";
+$stmt_total_cost_store_sales = $connection->prepare($query_total_cost_store_sales);
+$stmt_total_cost_store_sales->execute();
+$results_total_cost_store_sales = $stmt_total_cost_store_sales->get_result();
+$row_total_cost_store_sales = $results_total_cost_store_sales->fetch_assoc();
+
+$total_profit = $row_total_price_checkouts['total_price_checkouts'] - $row_total_cost_checkouts['total_cost_checkouts'] + $row_total_price_store_sales['total_price_store_sales'] - $row_total_cost_store_sales['total_cost_store_sales'];
 
 //get total checkouts made
 $query_total_checkouts = "SELECT COUNT(checkout_id) as total_checkout FROM checkouts";
@@ -139,23 +159,42 @@ if (isset($_POST["password"]) && $_POST["password"] != "") {
     //check if password has special characters
     if (!str_contains($password_text, '@') && !str_contains($password_text, '_') && !str_contains($password_text, "-") && !str_contains($password_text, ".")) {
         $_SESSION['password_error'] = 'Password should contain special characters such as "@", "_", "-", or "."';
-        header("Location: ../signup/signup.php");
+        header("Location: admin-admin.php?open_add_user=true");
         die("WRONG password");
     }
     $password = hash("sha256", $password_text);
 }
 
-//all inputs are valid and no errors, then insert new admin
-$stmt_add_new_admin = $connection->prepare("INSERT INTO admins(first_name, last_name, email_address, phone_number, username, password) VALUES (?,?,?,?,?,?)");
-$stmt_add_new_admin->bind_param("ssssss", $first_name, $last_name, $email, $phone_number, $username, $password);
-$stmt_add_new_admin->execute();
-$stmt_add_new_admin->close();
+if ($first_name != "" && $last_name != "" && $email != "" && $phone_number != "" && $username != "" && $password != "") {
+    mkdir('../images/Admins/' . $username);
+
+    $target_dir = '../images/Admins/' . $username . '/';
+    $filename = basename($_FILES['admin_image']['name']);
+    $target_file = $target_dir . $filename;
+    $fileType = pathinfo($target_file, PATHINFO_EXTENSION);
+    $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'pdf');
+    if (in_array($fileType, $allowTypes)) {
+
+        //uploaded file will have same name as customer username
+        if (move_uploaded_file($_FILES['admin_image']['tmp_name'], $target_file)) {
+            $admin_image = $filename;
+            //all inputs are valid and no errors, then insert new admin
+            $stmt_add_new_admin = $connection->prepare("INSERT INTO admins(first_name, last_name, email_address, phone_number, username, password, image) VALUES (?,?,?,?,?,?,?)");
+            $stmt_add_new_admin->bind_param("sssssss", $first_name, $last_name, $email, $phone_number, $username, $password, $admin_image);
+            $stmt_add_new_admin->execute();
+            $stmt_add_new_admin->close();
+
+            echo "<script>window.location='../admin-admin/admin-admin.php';</script>";
+        }
+    }
+}
 
 //delete customer
 if (isset($_GET['getAdminIDtoRemove'])) {
     $remove_admin_id = $_GET['getAdminIDtoRemove'];
     $stmt_delete_admin = $connection->prepare("DELETE FROM admins WHERE admin_id='" . $remove_admin_id . "' ");
     $stmt_delete_admin->execute();
+    echo "<script>window.location='../admin-admin/admin-admin.php';</script>";
 }
 
 ?>
@@ -164,7 +203,7 @@ if (isset($_GET['getAdminIDtoRemove'])) {
 <html lang="en">
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -249,7 +288,7 @@ if (isset($_GET['getAdminIDtoRemove'])) {
                         <span>Offers</span>
                     </a>
                 </li>
-             
+
                 <li>
                     <a href="../repairs-admin/repairs-admin.php" id="repairs-link">
                         <span class="las la-tools"></span>
@@ -285,7 +324,7 @@ if (isset($_GET['getAdminIDtoRemove'])) {
             </h2>
 
             <div class="user-wrapper">
-                <img src="../images/info.png" width="40px" height="40px" alt="">
+                <img src="../images/Admins/<?php echo $row['username']; ?>/<?php echo $row['image']; ?>" width="40px" height="40px" alt="">
                 <div>
                     <h4> <?php echo $row["first_name"], " ", $row['last_name']; ?></h4>
                     <small>Admin</small>
@@ -295,16 +334,16 @@ if (isset($_GET['getAdminIDtoRemove'])) {
 
         <main>
             <div class="cards">
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of admins">
                     <div>
-                        <h1><?php echo  $row_total_customers['count']; ?></h1>
-                        <span>Customers</span>
+                        <h1><?php echo  $row_total_admins['total_admins']; ?></h1>
+                        <span>Admins</span>
                     </div>
                     <div>
                         <span class="las la-users"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of appointments scheduled by customers">
                     <div>
                         <h1><?php echo $row_total_appointments['total_appointments'] ?></h1>
                         <span>Appointments</span>
@@ -313,7 +352,7 @@ if (isset($_GET['getAdminIDtoRemove'])) {
                         <span class="las la-clipboard"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of checkout orders sent by customers">
                     <div>
                         <h1><?php echo $row_total_checkouts['total_checkout'] ?></h1>
                         <span>Chekouts</span>
@@ -322,13 +361,13 @@ if (isset($_GET['getAdminIDtoRemove'])) {
                         <span class="las la-shopping-bag"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total profits of the shop">
                     <div>
-                        <h1>$<?php echo $row_total_profit['total_profit'] ?></h1>
+                        <h1>$<?php echo $total_profit; ?></h1>
                         <span>Profit</span>
                     </div>
                     <div>
-                        <span class="las la-google-wallet"></span>
+                        <span class="las la-wallet"></span>
                     </div>
                 </div>
             </div>
@@ -388,7 +427,7 @@ if (isset($_GET['getAdminIDtoRemove'])) {
 
             <div id="id01" class="modal">
                 <span onclick="CloseAddUser()" class="close" title="Close Modal">&times;</span>
-                <form class="modal-content" action="../admin-admin/admin-admin.php" method="POST">
+                <form class="modal-content" action="../admin-admin/admin-admin.php" method="POST" enctype="multipart/form-data">
                     <div class="container">
                         <h1 class="title">Create New Admin Account</h1>
                         <p class="title">Please fill in this form to create a new admin account.</p>
@@ -458,6 +497,11 @@ if (isset($_GET['getAdminIDtoRemove'])) {
                         <input type="text" placeholder="Enter username of your own" name="username" id="username" value="<?php if (isset($_SESSION['username'])) {
                                                                                                                                 echo $_SESSION['username'];
                                                                                                                             } ?>" required>
+
+                        <label><b>Upload Profile Image:</b></label>
+                        <br>
+                        <input type="file" title="Choose from your files an image for your profile" name="admin_image" id="admin_image" value="" required>
+                        <br>
 
                         <p class="error" id="password_error">
                             <?php

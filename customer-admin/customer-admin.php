@@ -10,7 +10,7 @@ if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'admin') {
     header("Location: ../home-page/home-page.php");
 }
 $admin_id = $_SESSION['logged_id'];
-$query = "SELECT first_name, last_name FROM admins WHERE admin_id = $admin_id";
+$query = "SELECT first_name, last_name, username, image FROM admins WHERE admin_id = $admin_id";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
@@ -18,7 +18,7 @@ $row = $results->fetch_assoc();
 
 
 //sum of all customers
-$query_total_customers = "SELECT COUNT(customer_id) as count FROM customers";
+$query_total_customers = "SELECT COUNT(customer_id) as total_customers FROM customers";
 $stmt_total_customers = $connection->prepare($query_total_customers);
 $stmt_total_customers->execute();
 $results_total_customers = $stmt_total_customers->get_result();
@@ -60,6 +60,7 @@ if (isset($_GET['getCustomerIDtoRemove'])) {
     $query_delete_customer = "DELETE FROM customers WHERE customer_id=$remove_customer";
     $stmt_delete_customer = $connection->prepare($query_delete_customer);
     $stmt_delete_customer->execute();
+    echo "<script>window.location = 'customer-admin.php';</script>";
 }
 //get id from repair
 $query_loyalty_customers = "SELECT username,loyalty_points FROM customers ORDER BY loyalty_points DESC LIMIT 5";
@@ -74,13 +75,41 @@ $stmt_location = $connection->prepare($query_location);
 $stmt_location->execute();
 $results_location = $stmt_location->get_result();
 
+//sum of all checkouts
+$query_total_price_checkouts = "SELECT SUM(total_price_including_tax) as total_price_checkouts FROM checkouts WHERE status = 'DONE WORK'";
+$stmt_total_price_checkouts = $connection->prepare($query_total_price_checkouts);
+$stmt_total_price_checkouts->execute();
+$results_total_price_checkouts = $stmt_total_price_checkouts->get_result();
+$row_total_price_checkouts = $results_total_price_checkouts->fetch_assoc();
+
+$query_total_cost_checkouts = "SELECT SUM(total_cost) as total_cost_checkouts FROM checkouts WHERE status = 'DONE WORK'";
+$stmt_total_cost_checkouts = $connection->prepare($query_total_cost_checkouts);
+$stmt_total_cost_checkouts->execute();
+$results_total_cost_checkouts = $stmt_total_cost_checkouts->get_result();
+$row_total_cost_checkouts = $results_total_cost_checkouts->fetch_assoc();
+
+$query_total_price_store_sales = "SELECT SUM(total_price_after_discount) as total_price_store_sales FROM store_sales";
+$stmt_total_price_store_sales = $connection->prepare($query_total_price_store_sales);
+$stmt_total_price_store_sales->execute();
+$results_total_price_store_sales = $stmt_total_price_store_sales->get_result();
+$row_total_price_store_sales = $results_total_price_store_sales->fetch_assoc();
+
+$query_total_cost_store_sales = "SELECT SUM(total_cost) as total_cost_store_sales FROM store_sales";
+$stmt_total_cost_store_sales = $connection->prepare($query_total_cost_store_sales);
+$stmt_total_cost_store_sales->execute();
+$results_total_cost_store_sales = $stmt_total_cost_store_sales->get_result();
+$row_total_cost_store_sales = $results_total_cost_store_sales->fetch_assoc();
+
+$total_profit = $row_total_price_checkouts['total_price_checkouts'] - $row_total_cost_checkouts['total_cost_checkouts'] + $row_total_price_store_sales['total_price_store_sales'] - $row_total_cost_store_sales['total_cost_store_sales'];
+
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
+    <link rel="icon" href="../images/Newbie Gamers-logos.jpeg">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -167,7 +196,7 @@ $results_location = $stmt_location->get_result();
                         <span>Offers</span>
                     </a>
                 </li>
-             
+
                 <li>
                     <a href="../repairs-admin/repairs-admin.php" id="repairs-link">
                         <span class="las la-tools"></span>
@@ -203,7 +232,7 @@ $results_location = $stmt_location->get_result();
             </h2>
 
             <div class="user-wrapper">
-                <img src="../images/info.png" width="40px" height="40px" alt="">
+                <img src="../images/Admins/<?php echo $row['username']; ?>/<?php echo $row['image']; ?>" width="40px" height="40px" alt="">
                 <div>
                     <h4> <?php echo $row["first_name"], " ", $row['last_name']; ?></h4>
                     <small>Admin</small>
@@ -213,16 +242,16 @@ $results_location = $stmt_location->get_result();
 
         <main>
             <div class="cards">
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of customers">
                     <div>
-                        <h1><?php echo  $row_total_customers['count']; ?></h1>
+                        <h1><?php echo  $row_total_customers['total_customers']; ?></h1>
                         <span>Customers</span>
                     </div>
                     <div>
                         <span class="las la-users"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of appointments scheduled by customers">
                     <div>
                         <h1><?php echo $row_total_appointments['total_appointments'] ?></h1>
                         <span>Appointments</span>
@@ -231,7 +260,7 @@ $results_location = $stmt_location->get_result();
                         <span class="las la-clipboard"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of checkout orders sent by customers">
                     <div>
                         <h1><?php echo $row_total_checkouts['total_checkout'] ?></h1>
                         <span>Chekouts</span>
@@ -240,13 +269,13 @@ $results_location = $stmt_location->get_result();
                         <span class="las la-shopping-bag"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total profits of the shop">
                     <div>
-                        <h1>$<?php echo $row_total_profit['total_profit'] ?></h1>
+                        <h1>$<?php echo $total_profit; ?></h1>
                         <span>Profit</span>
                     </div>
                     <div>
-                        <span class="las la-google-wallet"></span>
+                        <span class="las la-wallet"></span>
                     </div>
                 </div>
             </div>

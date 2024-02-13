@@ -151,8 +151,9 @@ $_SESSION['success'] = 'true';
 // }
 
 
-if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['email']) && isset($_POST['phone_number']) && isset($_POST['date']) && isset($_POST['shipping_country']) && isset($_POST['shipping_location']) && isset($_POST['postcode']) && isset($_SESSION['total_price']) && isset($_SESSION['tax_price']) && isset($_SESSION['total_price_including_tax'])) {
+if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['email']) && isset($_POST['phone_number']) && isset($_POST['date']) && isset($_POST['shipping_country']) && isset($_POST['shipping_location']) && isset($_POST['postcode']) && isset($_SESSION['total_cost']) && isset($_SESSION['total_price']) && isset($_SESSION['tax_price']) && isset($_SESSION['total_price_including_tax'])) {
     //add to table checkouts all checkout info
+    $total_cost = $_SESSION['total_cost'];
     $total_price = $_SESSION['total_price'];
     $tax_price = $_SESSION['tax_price'];
     $total_price_including_tax = $_SESSION['total_price_including_tax'];
@@ -167,20 +168,20 @@ if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['e
         $checkout_id = $row_get_checkout_id['checkout_id'] + 1;
 
         //get products in basket for current user
-        $stmt_select_basket = $connection->prepare("SELECT product_id, quantity, price FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ");
+        $stmt_select_basket = $connection->prepare("SELECT * FROM baskets_customer_product WHERE customer_id = '" . $customer_id . "' ");
         $stmt_select_basket->execute();
         $basket_result = $stmt_select_basket->get_result();
 
         while ($row_basket = $basket_result->fetch_assoc()) {
             //insert into table checkouts customers products
-            $query_checkout = $connection->prepare("INSERT INTO checkouts_customers_products(checkout_id, product_id, quantity, total_price) VALUES (?,?,?,?)");
-            $query_checkout->bind_param("iiii", $checkout_id, $row_basket['product_id'], $row_basket['quantity'], $row_basket['price']);
-            $query_checkout->execute();
-            $query_checkout->close();
+            $stmt_insert_checkout_customer_products = $connection->prepare("INSERT INTO checkouts_customers_products(checkout_id, product_id, quantity, total_price, total_cost) VALUES (?,?,?,?,?)");
+            $stmt_insert_checkout_customer_products->bind_param("iiiii", $checkout_id, $row_basket['product_id'], $row_basket['quantity'], $row_basket['price'], $row_basket['cost']);
+            $stmt_insert_checkout_customer_products->execute();
+            $stmt_insert_checkout_customer_products->close();
         }
 
-        $stmt_insert_checkout = $connection->prepare("INSERT INTO checkouts(checkout_id, customer_id, first_name, last_name, email, phone_number, shipping_country, shipping_location, shipping_company, postcode, order_notes, total_price, tax_price, total_price_including_tax, status, date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        $stmt_insert_checkout->bind_param("iisssssssssdddss", $checkout_id, $customer_id, $first_name, $last_name, $email, $phone_number, $shipping_country, $shipping_location, $shipping_company, $postcode, $order_notes, $total_price, $tax_price, $total_price_including_tax, $status, $date);
+        $stmt_insert_checkout = $connection->prepare("INSERT INTO checkouts(checkout_id, customer_id, first_name, last_name, email, phone_number, shipping_country, shipping_location, shipping_company, postcode, order_notes, total_cost, total_price, tax_price, total_price_including_tax, status, date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $stmt_insert_checkout->bind_param("iisssssssssddddss", $checkout_id, $customer_id, $first_name, $last_name, $email, $phone_number, $shipping_country, $shipping_location, $shipping_company, $postcode, $order_notes, $total_cost, $total_price, $tax_price, $total_price_including_tax, $status, $date);
         $stmt_insert_checkout->execute();
         $stmt_insert_checkout->close();
 

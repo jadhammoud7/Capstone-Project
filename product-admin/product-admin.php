@@ -10,7 +10,7 @@ if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'admin') {
     header("Location: ../home-page/home-page.php");
 }
 $admin_id = $_SESSION['logged_id'];
-$query = "SELECT first_name, last_name FROM admins WHERE admin_id = $admin_id";
+$query = "SELECT first_name, last_name, username, image FROM admins WHERE admin_id = $admin_id";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
@@ -18,7 +18,7 @@ $row = $results->fetch_assoc();
 
 
 //sum of all customers
-$query_total_customers = "SELECT COUNT(customer_id) as count FROM customers";
+$query_total_customers = "SELECT COUNT(customer_id) as total_customers FROM customers";
 $stmt_total_customers = $connection->prepare($query_total_customers);
 $stmt_total_customers->execute();
 $results_total_customers = $stmt_total_customers->get_result();
@@ -57,6 +57,7 @@ $results_products = $stmt_products->get_result();
 //form of adding new product
 $product_name = "";
 $product_price = 0;
+$product_cost = 0;
 $product_type = "";
 $product_category = "";
 $product_description = "";
@@ -65,28 +66,32 @@ $product_image = "";
 $product_inventory = 0;
 $product_sales_number = 0;
 
-if (isset($_POST["product_name"])) {
-    $product_name = $_POST["product_name"];
+if (isset($_POST['product_name'])) {
+    $product_name = $_POST['product_name'];
 }
 
-if (isset($_POST["product_price"])) {
-    $product_price = $_POST["product_price"];
+if (isset($_POST['product_price'])) {
+    $product_price = $_POST['product_price'];
 }
 
-if (isset($_POST["product_type"])) {
-    $product_type = $_POST["product_type"];
+if (isset($_POST['product_cost'])) {
+    $product_cost = $_POST['product_cost'];
 }
 
-if (isset($_POST["product_category"])) {
-    $product_category = $_POST["product_category"];
+if (isset($_POST['product_type'])) {
+    $product_type = $_POST['product_type'];
 }
 
-if (isset($_POST["product_desciption"])) {
-    $product_description = $_POST["product_desciption"];
+if (isset($_POST['product_category'])) {
+    $product_category = $_POST['product_category'];
 }
 
-if (isset($_POST["product_age"])) {
-    $product_age = $_POST["product_age"];
+if (isset($_POST['product_desciption'])) {
+    $product_description = $_POST['product_desciption'];
+}
+
+if (isset($_POST['product_age'])) {
+    $product_age = $_POST['product_age'];
 }
 
 if (isset($_POST['product_inventory'])) {
@@ -97,7 +102,7 @@ if (isset($_POST['product_sales'])) {
     $product_sales_number = $_POST['product_sales'];
 }
 
-if ($product_name != "" && $product_price != 0 && $product_type != "" && $product_category != "" && $product_description != "" && $product_age != "" && $product_inventory != 0) {
+if ($product_name != "" && $product_price != 0 && $product_cost != 0 && $product_type != "" && $product_category != "" && $product_description != "" && $product_age != "" && $product_inventory != 0) {
     //make directory in images/Products that have same name as product
     mkdir('../images/Products/' . $product_name);
     $target_dir = "../images/Products/$product_name/";
@@ -116,8 +121,8 @@ if ($product_name != "" && $product_price != 0 && $product_type != "" && $produc
 
             //insert into table products
             $has_offer = 'NO';
-            $stmt_add_new_product = $connection->prepare("INSERT INTO products(name, price, type, category, description, age, image, inventory, sales_number, has_offer, date_added, last_modified_by, last_modified_on) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
-            $stmt_add_new_product->bind_param("sisssssiissss", $product_name, $product_price, $product_type, $product_category, $product_description, $product_age, $product_image, $product_inventory, $product_sales_number, $has_offer, $date_added, $modified_by, $modified_on);
+            $stmt_add_new_product = $connection->prepare("INSERT INTO products(name, unit_cost, unit_price, type, category, description, age, image, inventory, sales_number, has_offer, date_added, last_modified_by, last_modified_on) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            $stmt_add_new_product->bind_param("siisssssiissss", $product_name, $product_cost, $product_price, $product_type, $product_category, $product_description, $product_age, $product_image, $product_inventory, $product_sales_number, $has_offer, $date_added, $modified_by, $modified_on);
             $stmt_add_new_product->execute();
             $stmt_add_new_product->close();
 
@@ -162,14 +167,14 @@ if ($product_name != "" && $product_price != 0 && $product_type != "" && $produc
 }
 
 //get products in ascending 
-$query_nbofsales = "SELECT name,inventory,sales_number FROM products ORDER BY sales_number ASC;";
+$query_nbofsales = "SELECT name, inventory, sales_number FROM products ORDER BY sales_number ASC;";
 $stmt_nbofsales = $connection->prepare($query_nbofsales);
 $stmt_nbofsales->execute();
 $results_nbofsales = $stmt_nbofsales->get_result();
 
 
 //get top products 
-$query_top_products = "SELECT name,sales_number FROM products ORDER BY sales_number DESC LIMIT 5;";
+$query_top_products = "SELECT name, sales_number FROM products ORDER BY sales_number DESC LIMIT 5;";
 $stmt_top_products = $connection->prepare($query_top_products);
 $stmt_top_products->execute();
 $results_top_products = $stmt_top_products->get_result();
@@ -265,6 +270,34 @@ if (isset($_POST['category'])) {
     }
 }
 
+//sum of all checkouts
+$query_total_price_checkouts = "SELECT SUM(total_price_including_tax) as total_price_checkouts FROM checkouts WHERE status = 'DONE WORK'";
+$stmt_total_price_checkouts = $connection->prepare($query_total_price_checkouts);
+$stmt_total_price_checkouts->execute();
+$results_total_price_checkouts = $stmt_total_price_checkouts->get_result();
+$row_total_price_checkouts = $results_total_price_checkouts->fetch_assoc();
+
+$query_total_cost_checkouts = "SELECT SUM(total_cost) as total_cost_checkouts FROM checkouts WHERE status = 'DONE WORK'";
+$stmt_total_cost_checkouts = $connection->prepare($query_total_cost_checkouts);
+$stmt_total_cost_checkouts->execute();
+$results_total_cost_checkouts = $stmt_total_cost_checkouts->get_result();
+$row_total_cost_checkouts = $results_total_cost_checkouts->fetch_assoc();
+
+$query_total_price_store_sales = "SELECT SUM(total_price_after_discount) as total_price_store_sales FROM store_sales";
+$stmt_total_price_store_sales = $connection->prepare($query_total_price_store_sales);
+$stmt_total_price_store_sales->execute();
+$results_total_price_store_sales = $stmt_total_price_store_sales->get_result();
+$row_total_price_store_sales = $results_total_price_store_sales->fetch_assoc();
+
+$query_total_cost_store_sales = "SELECT SUM(total_cost) as total_cost_store_sales FROM store_sales";
+$stmt_total_cost_store_sales = $connection->prepare($query_total_cost_store_sales);
+$stmt_total_cost_store_sales->execute();
+$results_total_cost_store_sales = $stmt_total_cost_store_sales->get_result();
+$row_total_cost_store_sales = $results_total_cost_store_sales->fetch_assoc();
+
+$total_profit = $row_total_price_checkouts['total_price_checkouts'] - $row_total_cost_checkouts['total_cost_checkouts'] + $row_total_price_store_sales['total_price_store_sales'] - $row_total_cost_store_sales['total_cost_store_sales'];
+
+
 //delete category 
 if (isset($_GET['getCategorytoRemove'])) {
     //remove category
@@ -295,6 +328,10 @@ if (isset($_GET['getProducttoRemove'])) {
     //remove product
     $stmt_delete_product = $connection->prepare("DELETE FROM products WHERE product_id = '" . $_GET['getProducttoRemove'] . "'");
     $stmt_delete_product->execute();
+
+    //remove products from offers
+    $stmt_delete_product_offer = $connection->prepare("DELETE FROM products_offers WHERE product_id = '" . $_GET['getProducttoRemove'] . "'");
+    $stmt_delete_product_offer->execute();
 
     //remove history inventory for product
     $stmt_delete_product_history_inventory = $connection->prepare("DELETE FROM history_product_inventory WHERE product_id = '" . $_GET['getProducttoRemove'] . "'");
@@ -499,7 +536,7 @@ if (isset($_GET['getProducttoRemove'])) {
             </h2>
 
             <div class="user-wrapper">
-                <img src="../images/info.png" width="40px" height="40px" alt="">
+                <img src="../images/Admins/<?php echo $row['username']; ?>/<?php echo $row['image']; ?>" width="40px" height="40px" alt="">
                 <div>
                     <h4> <?php echo $row["first_name"], " ", $row['last_name']; ?></h4>
                     <small>Admin</small>
@@ -509,16 +546,16 @@ if (isset($_GET['getProducttoRemove'])) {
 
         <main>
             <div class="cards">
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of customers">
                     <div>
-                        <h1><?php echo  $row_total_customers['count']; ?></h1>
+                        <h1><?php echo  $row_total_customers['total_customers']; ?></h1>
                         <span>Customers</span>
                     </div>
                     <div>
                         <span class="las la-users"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of appointments scheduled by customers">
                     <div>
                         <h1><?php echo $row_total_appointments['total_appointments'] ?></h1>
                         <span>Appointments</span>
@@ -527,7 +564,7 @@ if (isset($_GET['getProducttoRemove'])) {
                         <span class="las la-clipboard"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of checkout orders sent by customers">
                     <div>
                         <h1><?php echo $row_total_checkouts['total_checkout'] ?></h1>
                         <span>Chekouts</span>
@@ -536,13 +573,13 @@ if (isset($_GET['getProducttoRemove'])) {
                         <span class="las la-shopping-bag"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total profits of the shop">
                     <div>
-                        <h1>$<?php echo $row_total_profit['total_profit'] ?></h1>
+                        <h1>$<?php echo $total_profit; ?></h1>
                         <span>Profit</span>
                     </div>
                     <div>
-                        <span class="las la-google-wallet"></span>
+                        <span class="las la-wallet"></span>
                     </div>
                 </div>
             </div>
@@ -721,7 +758,7 @@ if (isset($_GET['getProducttoRemove'])) {
                                             get_all_products(
                                                 $row_products['product_id'],
                                                 $row_products['name'],
-                                                $row_products['price'],
+                                                $row_products['unit_price'],
                                                 $row_products['category'],
                                                 $row_products['type'],
                                                 $row_products['inventory'],
@@ -820,9 +857,15 @@ if (isset($_GET['getProducttoRemove'])) {
                         <label for="product_name"><b>Product Name</b></label>
                         <input type="text" placeholder="Enter product's name" name="product_name" id="product_name" value="" required />
 
+                        <label for="product_cost">
+                            <b>Product Unit Cost</b>
+                        </label>
+                        <br>
+                        <input style="height: 35px;" type="number" placeholder="Enter product's cost" name="product_cost" id="product_cost" value="" required>
+                        <br><br>
 
                         <label for="product_price">
-                            <b>Product Price</b>
+                            <b>Product Unit Price</b>
                         </label>
                         <br>
                         <input style="height: 35px;" type="number" placeholder="Enter product's price" name="product_price" id="product_price" value="" required>

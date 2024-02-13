@@ -11,7 +11,7 @@ if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'admin') {
     header("Location: ../home-page/home-page.php");
 }
 $admin_id = $_SESSION['logged_id'];
-$query = "SELECT first_name, last_name FROM admins WHERE admin_id = $admin_id";
+$query = "SELECT first_name, last_name, username, image FROM admins WHERE admin_id = $admin_id";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
@@ -48,8 +48,8 @@ if (isset($_POST['description'])) {
 if ($repair_id != 0 && $repair_type != "" && $price_per_hour != 0 && $description != "") {
     if (!empty($_FILES['repair_image']['name'])) {
         //update repair with image
-        rmdir('../images/Repairs/' . $repair_type . '/');
-        mkdir('../images/Repairs/' . $repair_type . '/');
+        // rmdir('../images/Repairs/' . $repair_type);
+        // mkdir('../images/Repairs/' . $repair_type);
         $target_dir = "../images/Repairs/$repair_type/";
         $filename = basename($_FILES['repair_image']['name']);
         $target_file = $target_dir . $filename;
@@ -58,7 +58,8 @@ if ($repair_id != 0 && $repair_type != "" && $price_per_hour != 0 && $descriptio
         if (in_array($fileType, $allowTypes)) {
             if (move_uploaded_file($_FILES['repair_image']['tmp_name'], $target_file)) {
                 $repair_image = $filename;
-                $stmt_update_repair = $connection->prepare("UPDATE repairs SET repair_type = '" . $repair_type . "', price_per_hour = '" . $price_per_hour . "', description = '" . $description . "', image = '" . $repair_image . "' WHERE repair_id = '" . $repair_id . "'");
+                $stmt_update_repair = $connection->prepare("UPDATE repairs SET repair_type = ?, price_per_hour = ?, description = ?, image = ? WHERE repair_id = ?");
+                $stmt_update_repair->bind_param("ssssi", $repair_type, $price_per_hour, $description, $repair_image, $repair_id);
                 $stmt_update_repair->execute();
                 $stmt_update_repair->close();
                 header("Location: repair-admin-details.php?repair-id=$repair_id&repair-updated=1");
@@ -66,7 +67,8 @@ if ($repair_id != 0 && $repair_type != "" && $price_per_hour != 0 && $descriptio
         }
     } else {
         //update repair without image
-        $stmt_update_repair = $connection->prepare("UPDATE repairs SET repair_type = '" . $repair_type . "', price_per_hour = '" . $price_per_hour . "', description = '" . $description . "' WHERE repair_id = '" . $repair_id . "'");
+        $stmt_update_repair = $connection->prepare("UPDATE repairs SET repair_type = ?, price_per_hour = ?, description = ? WHERE repair_id = ?");
+        $stmt_update_repair->bind_param("sssi", $repair_type, $price_per_hour, $description, $repair_id);
         $stmt_update_repair->execute();
         $stmt_update_repair->close();
         header("Location: repair-admin-details.php?repair-id=$repair_id&repair-updated=1");
@@ -204,7 +206,7 @@ if ($repair_id != 0 && $repair_type != "" && $price_per_hour != 0 && $descriptio
             </h2>
 
             <div class="user-wrapper">
-                <img src="../images/info.png" width="40px" height="40px" alt="">
+                <img src="../images/Admins/<?php echo $row['username']; ?>/<?php echo $row['image']; ?>" width="40px" height="40px" alt="">
                 <div>
                     <h4> <?php echo $row["first_name"], " ", $row['last_name']; ?></h4>
                     <small>Admin</small>

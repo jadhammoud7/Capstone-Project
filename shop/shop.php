@@ -70,11 +70,20 @@ if (isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) 
     $query_select_products = "SELECT * FROM products WHERE has_offer='NO'";
     $query_select_products_offers = "SELECT * FROM products_offers";
     if ($category == 'any') {
-        $query_select_products = $query_select_products . " AND type= '" . $type . "' ";
-        $query_select_products_offers = $query_select_products_offers . " WHERE type='" . $type . "'  AND '" . $currentDate . "' BETWEEN offer_begin_date AND offer_end_date"; //check all products to type equals to cds
+        if ($type != 'all') {
+            $query_select_products = $query_select_products . " AND type= '" . $type . "' ";
+            $query_select_products_offers = $query_select_products_offers . " WHERE type='" . $type . "' AND '" . $currentDate . "' BETWEEN offer_begin_date AND offer_end_date";
+        } else {
+            $query_select_products_offers = $query_select_products_offers . " WHERE '" . $currentDate . "' BETWEEN offer_begin_date AND offer_end_date";
+        }
     } else {
-        $query_select_products = $query_select_products . " AND type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
-        $query_select_products_offers = $query_select_products_offers . " AND type='" . $type . "' AND category = '" . $category . "'  AND '" . $currentDate . "' BETWEEN offer_begin_date AND offer_end_date"; //check all products to type equals to cds and category category
+        if ($type != 'all') {
+            $query_select_products = $query_select_products . " AND type='" . $type . "' AND category = '" . $category . "'"; //check all products to type equals to cds and category category
+            $query_select_products_offers = $query_select_products_offers . " WHERE type='" . $type . "' AND category = '" . $category . "'  AND '" . $currentDate . "' BETWEEN offer_begin_date AND offer_end_date"; //check all products to type equals to cds and category category
+        } else {
+            $query_select_products = $query_select_products . " AND category = '" . $category . "'";
+            $query_select_products_offers = $query_select_products_offers . " WHERE category = '" . $category . "'  AND '" . $currentDate . "' BETWEEN offer_begin_date AND offer_end_date"; //check all products to type equals to cds and category category
+        }
     }
     $stmt_select_products_offers = $connection->prepare($query_select_products_offers);
     $stmt_select_products_offers->execute();
@@ -85,10 +94,10 @@ if (isset($_GET['type']) && isset($_GET['category']) && isset($_GET['sortby'])) 
         $query_select_products = $query_select_products . " ORDER BY date_added DESC";
     }
     if ($sortby == 'highest-price') {
-        $query_select_products = $query_select_products . " ORDER BY price DESC";
+        $query_select_products = $query_select_products . " ORDER BY unit_price DESC";
     }
     if ($sortby == 'lowest-price') {
-        $query_select_products = $query_select_products . " ORDER BY price ASC";
+        $query_select_products = $query_select_products . " ORDER BY unit_price ASC";
     }
     if ($sortby == 'popularity') {
         $query_select_products = $query_select_products . " ORDER BY sales DESC";
@@ -467,7 +476,7 @@ while ($row_customers = $results_customers->fetch_assoc()) {
                         shop_connection(
                             $row['product_id'],
                             $row['name'],
-                            $row['price'],
+                            $row['unit_price'],
                             $row['image']
                         );
                     }

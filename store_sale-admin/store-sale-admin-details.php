@@ -11,7 +11,7 @@ if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'admin') {
     header("Location: ../home-page/home-page.php");
 }
 $admin_id = $_SESSION['logged_id'];
-$query = "SELECT first_name, last_name FROM admins WHERE admin_id = $admin_id";
+$query = "SELECT first_name, last_name, username, image FROM admins WHERE admin_id = $admin_id";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
@@ -31,11 +31,16 @@ if (isset($_GET['store_sale_id'])) {
     $row_total_quantity = $results_total_quantity->fetch_assoc();
 
     //select sales total price
-    $stmt_get_sales_total_price = $connection->prepare("SELECT total_price FROM store_sales WHERE store_sales_id = '" . $_GET['store_sale_id'] . "'");
+    $stmt_get_sales_total_price = $connection->prepare("SELECT total_price_after_discount FROM store_sales WHERE store_sales_id = '" . $_GET['store_sale_id'] . "'");
     $stmt_get_sales_total_price->execute();
     $results_total_price = $stmt_get_sales_total_price->get_result();
     $row_total_price = $results_total_price->fetch_assoc();
 
+    //select sales total cost
+    $stmt_get_sales_total_cost = $connection->prepare("SELECT total_cost FROM store_sales WHERE store_sales_id = '" . $_GET['store_sale_id'] . "'");
+    $stmt_get_sales_total_cost->execute();
+    $results_total_cost = $stmt_get_sales_total_cost->get_result();
+    $row_total_cost = $results_total_cost->fetch_assoc();
 
     $stmt_get_store_sale = $connection->prepare("SELECT * FROM store_sales WHERE store_sales_id = '" . $_GET['store_sale_id'] . "'");
     $stmt_get_store_sale->execute();
@@ -82,6 +87,14 @@ function store_sales_products_connection($product_name, $quantity, $price)
 </head>
 
 <body>
+    <!-- started popup message logout -->
+    <div class="popup" id="logout-confirmation">
+        <img src="../images/question-mark.png" alt="">
+        <h2>Log Out Confirmation</h2>
+        <p>Are you sure that you want to logout?</p>
+        <button type="button" onclick="GoToLogIn()">YES</button>
+        <button type="button" onclick="CloseLogOutPopUp()">NO</button>
+    </div>
 
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
@@ -135,7 +148,7 @@ function store_sales_products_connection($product_name, $quantity, $price)
                         <span>Offers</span>
                     </a>
                 </li>
-             
+
                 <li>
                     <a href="../repairs-admin/repairs-admin.php" id="repairs-link">
                         <span class="las la-tools"></span>
@@ -171,7 +184,7 @@ function store_sales_products_connection($product_name, $quantity, $price)
             </h2>
 
             <div class="user-wrapper">
-                <img src="../images/info.png" width="40px" height="40px" alt="">
+                <img src="../images/Admins/<?php echo $row['username']; ?>/<?php echo $row['image']; ?>" width="40px" height="40px" alt="">
                 <div>
                     <h4> <?php echo $row["first_name"], " ", $row['last_name']; ?></h4>
                     <small>Admin</small>
@@ -210,8 +223,8 @@ function store_sales_products_connection($product_name, $quantity, $price)
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>$<?php echo $row_total_price['total_price'] ?></h1>
-                        <span>Total Price</span>
+                        <h1>$<?php echo $row_total_price['total_price_after_discount'] - $row_total_cost['total_cost'] ?></h1>
+                        <span>Total Proft</span>
                     </div>
                     <div>
                         <span class="las la-wallet"></span>
@@ -316,8 +329,20 @@ function store_sales_products_connection($product_name, $quantity, $price)
                 </table>
                 <table id="order-totals">
                     <tr>
+                        <th>Total Cost</th>
+                        <td><?php echo $row_store_sale['total_cost']; ?>$</td>
+                    </tr>
+                    <tr>
                         <th>Total Price</th>
                         <td><?php echo $row_store_sale['total_price']; ?>$</td>
+                    </tr>
+                    <tr>
+                        <th>Loyalty Discount %</th>
+                        <td><?php echo $row_store_sale['loyalty_discount_percentage']; ?>%</td>
+                    </tr>
+                    <tr>
+                        <th>Total Price After Discount</th>
+                        <th><?php echo $row_store_sale['total_price_after_discount']; ?>$</th>
                     </tr>
                 </table>
             </div>

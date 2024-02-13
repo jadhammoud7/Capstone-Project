@@ -19,7 +19,7 @@ if (isset($_GET['repair_type'])) {
 }
 $cd_name = "";
 if (isset($_GET['cd_name'])) {
-    $cd_name = "Try a free game " . $_GET['cd_name'];
+    $cd_name = $_GET['cd_name'];
 }
 
 
@@ -35,9 +35,10 @@ if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
         $row_select_repair_price = $results_select_repair_price->fetch_assoc();
 
         $appointment_price_per_hour = $row_select_repair_price['price_per_hour'];
+        $appointment_type = "Repair Service";
         //inserting into table appointments
-        $appointments_insert = $connection->prepare("INSERT INTO appointments(customer_id, appointment_name, price_per_hour, date, hour, status) VALUES (?,?,?,?,?,?)");
-        $appointments_insert->bind_param("isisss", $customer_id, $type, $appointment_price_per_hour, $date, $appointment_time, $status);
+        $appointments_insert = $connection->prepare("INSERT INTO appointments(customer_id, appointment_name, appointment_type, price_per_hour, date, hour, status) VALUES (?,?,?,?,?,?,?)");
+        $appointments_insert->bind_param("ississs", $customer_id, $type, $appointment_type, $appointment_price_per_hour, $date, $appointment_time, $status);
         $appointments_insert->execute();
         $appointments_insert->close();
         echo "<script>window.location='../calendar/calendar.php?appointment_submitted=true';</script>";
@@ -45,8 +46,9 @@ if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
     if ($cd_name != "") {
         $appointment_price_per_hour = 0;
         //inserting into table appointments
-        $appointments_insert = $connection->prepare("INSERT INTO appointments(customer_id, appointment_name, price_per_hour, date, hour, status) VALUES (?,?,?,?,?,?)");
-        $appointments_insert->bind_param("isisss", $customer_id, $type, $appointment_price_per_hour, $date, $appointment_time, $status);
+        $appointment_type = "Free Game Trial";
+        $appointments_insert = $connection->prepare("INSERT INTO appointments(customer_id, appointment_name, appointment_type, price_per_hour, date, hour, status) VALUES (?,?,?,?,?,?,?)");
+        $appointments_insert->bind_param("ississs", $customer_id, $cd_name, $appointment_type, $appointment_price_per_hour, $date, $appointment_time, $status);
         $appointments_insert->execute();
         $appointments_insert->close();
         echo "<script>window.location='../calendar/calendar.php?appointment_submitted=true';</script>";
@@ -164,11 +166,11 @@ if (isset($_GET["appointments_time"]) && isset($_GET['date'])) {
                 book_now_for_each_repair_connection($_GET['repair_type'], $row_repair_image['image']);
             }
             if (isset($_GET['cd_name'])) {
-                $stmt_select_repair_image = $connection->prepare("SELECT image FROM repairs WHERE repair_type = '" . $_GET['repair_type'] . "'");
-                $stmt_select_repair_image->execute();
-                $result_repair_image = $stmt_select_repair_image->get_result();
-                $row_repair_image = $result_repair_image->fetch_assoc();
-                book_now_for_each_repair_connection($_GET['cd_name'], $row_repair_image['image']);
+                $stmt_select_product_image = $connection->prepare("SELECT image FROM products WHERE name = '" . $_GET['cd_name'] . "'");
+                $stmt_select_product_image->execute();
+                $result_product_image = $stmt_select_product_image->get_result();
+                $row_product_image = $result_product_image->fetch_assoc();
+                book_now_for_free_game_connection($_GET['cd_name'], $row_product_image['image']);
             }
             ?>
         </div>

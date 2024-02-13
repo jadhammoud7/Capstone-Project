@@ -13,7 +13,7 @@ var CheckoutID;
 
 function SetCheckoutID(checkout_id) {
     CheckoutID = checkout_id;
-    window.location.href = 'checkout-admin-details.php?getCheckoutID=' + checkout_id + '&set_to_done=true';
+    window.location.href = 'checkout-admin-details.php?checkout_id=' + checkout_id + '&set_to_done=true';
 }
 
 if (window.location.href.includes('change-status=1')) {

@@ -22,17 +22,23 @@ $results = $stmt->get_result();
 //get all products(some of them )
 require_once("../php/shop_product_connection.php");
 
-$query_allproducts = "SELECT product_id, name, price, image FROM products WHERE has_offer='No' ORDER BY RAND() LIMIT 8";
+$query_allproducts = "SELECT product_id, name, unit_price, image FROM products WHERE has_offer='No' ORDER BY RAND() LIMIT 8";
 $stmt_allproducts = $connection->prepare($query_allproducts);
 $stmt_allproducts->execute();
 $results_allproducts = $stmt_allproducts->get_result();
 
 //get all products
 require_once("../php/admin_page_php.php");
-$query_products = "SELECT product_id, name, price, type, category, description, age, inventory, sales_number,last_modified_by,last_modified_on FROM products";
+$query_products = "SELECT * FROM products";
 $stmt_products = $connection->prepare($query_products);
 $stmt_products->execute();
 $results_products = $stmt_products->get_result();
+
+//select slideshow values
+$stmt_select_slideshow_slides = $connection->prepare("SELECT * FROM slideshow_slides");
+$stmt_select_slideshow_slides->execute();
+$result_slideshow_slides = $stmt_select_slideshow_slides->get_result();
+$row_slideshow_slides = $result_slideshow_slides->fetch_assoc();
 
 ?>
 
@@ -63,18 +69,6 @@ $results_products = $stmt_products->get_result();
                 <!-- <h2>Newbie Gamers.</h2> -->
                 <h2>Newbie Gamers.</h2>
             </div>
-            <!-- <div class="waviy">
-                <span style="--i:1">N</span>
-                <span style="--i:2">E</span>
-                <span style="--i:3">W</span>
-                <span style="--i:4">B</span>
-                <span style="--i:5">I</span>
-                <span style="--i:6">E</span>
-                <span style="--i:7">G</span>
-                <span style="--i:8">A</span>
-                <span style="--i:9">M</span>
-                <span style="--i:10">E</span>
-                <span style="--i:11">R</span> -->
 
             </div>
             <ul class="nav-menu">
@@ -120,60 +114,15 @@ $results_products = $stmt_products->get_result();
         <button type="button" onclick="RemoveLogInPopUp()">OK</button>
     </div>
 
-    <!-- start slideshow -->
-    <!-- <div class="slideshow-container reveal-by-y">
-        <div class="mySlides fade" title="Welcome to Newbies Gamers. We sell manu consoles and electronics for your games and more">
-            <div class="numbertext">1 / 3</div>
-            <img src="../images/game-store.jpg" class="home-img" title="Game Store Image">
-            <div class="text">
-                 <h3><strong>To Newbies Gamers</strong> </h3> -->
-    <!-- <p><strong>We sell many consoles and electronics for your games and more</strong> </p>
-            </div>
-
-            <div class="dot-div">
-                <span class="dot-current"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>
-        </div>  -->
-
-    <!-- <div class="mySlides fade" title="We offer phones and many accessories related to them such as charges and more.">
-            <div class="numbertext">2 / 3</div>
-            <img src="../images/image2.jpg" class="home-img" title="Phone Accessories Image">
-            <div class="text">
-                <h3>What We Sell?</h3>
-                <p>We offer phones and many accessories related to them such as chargers and more</p>
-            </div>
-            <div class="dot-div">
-                <span class="dot"></span>
-                <span class="dot-current"></span>
-                <span class="dot"></span>
-            </div>
-        </div> -->
-
-    <!-- <div class="mySlides fade" title="Enjoy playing your games by buying all online playing requirements such as PS Plus">
-            <div class="numbertext">3 / 3</div>
-            <img src="../images/image3.jpg" class="home-img" title="Online playing cards image">
-            <div class="text">
-                <h3>What we offer?</h3>
-                <p>Enjoy playing your games by buying all online playing requirements such as PS Plus</p>
-            </div>
-            <div class="dot-div">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot-current"></span>
-            </div>
-        </div> -->
-    <!-- </div> -->
     <div class="container">
         <div class="swiper">
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
                 <!-- Slides -->
                 <div class="swiper-slide">
-                    <img src="../images/Newbie Gamers-logos.jpeg">
+                    <img src="../images/Slideshow/Slide1/<?php echo $row_slideshow_slides['slide1_image']; ?>" alt="Slideshow slide 1">
                     <div class="text1">
-                        <h3>Welcome to Newbie Gamers.</h3>
+                        <h3><?php echo $row_slideshow_slides['slide1_text']; ?></h3>
                         <!-- <button>Know More About Us</button> -->
                         <div class="button" id="button-6">
                             <div id="spin"></div>
@@ -185,9 +134,9 @@ $results_products = $stmt_products->get_result();
                     </div>
                 </div>
 
-                <div class="swiper-slide"><img src="../images/featured-image-types-of-paint.jpeg.jpg" alt="">
+                <div class="swiper-slide"><img src="../images/Slideshow/Slide2/<?php echo $row_slideshow_slides['slide2_image']; ?>" alt="Slideshow slide 2">
                     <div class="text2">
-                        <p>Get your best offers here in Newbie Gamers</p>
+                        <p><?php echo $row_slideshow_slides['slide2_text']; ?></p>
                         <div class="button" id="button-6">
                             <div id="spin"></div>
                             <a href="../shop/shop.php">
@@ -199,9 +148,9 @@ $results_products = $stmt_products->get_result();
 
                 </div>
 
-                <div class="swiper-slide"><img src="../images/morgan-stanley-on-asian-paints.jpg" alt="">
+                <div class="swiper-slide"><img src="../images/Slideshow/Slide3/<?php echo $row_slideshow_slides['slide3_image']; ?>" alt="Slideshow slide 3">
                     <div class="text3">
-                        <p>Repair your valuable items at our shop</p>
+                        <p><?php echo $row_slideshow_slides['slide3_text']; ?></p>
                         <div class="button" id="button-6">
                             <div id="spin"></div>
                             <a href="../appointments/appointments.php">
@@ -226,8 +175,6 @@ $results_products = $stmt_products->get_result();
     <br>
 
     <!-- end slideshow -->
-
-
 
     <!-- starting features here -->
     <div class="features-title" id="features">
@@ -364,7 +311,7 @@ $results_products = $stmt_products->get_result();
                     shop_connection(
                         $row['product_id'],
                         $row['name'],
-                        $row['price'],
+                        $row['unit_price'],
                         $row['image']
                     );
                 }

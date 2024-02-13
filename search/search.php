@@ -110,7 +110,11 @@ if (isset($_POST['search'])) {
         <?php
         if (isset($results_search)) {
             while ($row_search = $results_search->fetch_assoc()) {
-                shop_connection($row_search['product_id'], $row_search['name'], $row_search['price'], $row_search['image']);
+                shop_connection(
+                    $row_search['product_id'], 
+                    $row_search['name'], 
+                    $row_search['unit_price'], 
+                    $row_search['image']);
             }
         }
         if ($results_search->num_rows == 0) {

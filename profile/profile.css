@@ -456,8 +456,10 @@ input[type="date"]:hover {
 
 .profile-sidebar img {
     height: 150px;
-    width: 150px;
+    width: 200px;
     margin: 10px;
+    margin-left: 50px;
+    margin-top: 50px;
 }
 
 /* start of making profile container responsive */
@@ -480,8 +482,10 @@ input[type="date"]:hover {
     }
 
     .profile-sidebar img {
-        height: 150px;
-        width: 150px;
+        height: 300px;
+        width: 50%;
+        align-self: center;
+        margin: 20px;
     }
 
     .profile-sidebar {
@@ -649,6 +653,10 @@ input[type="date"]:hover {
     .appointments-img {
         width: 80%;
     }
+
+    .logout-btn {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width:926px) {
@@ -705,6 +713,11 @@ input[type="date"]:hover {
         width: 80%;
         text-align: center;
     }
+
+
+    .logout-btn {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width:843px) {
@@ -728,6 +741,10 @@ input[type="date"]:hover {
         position: absolute;
         right: 220px;
         top: 725px;
+    }
+
+    .logout-btn {
+        width: 100%;
     }
 }
 
@@ -753,6 +770,10 @@ input[type="date"]:hover {
         right: 160px;
         top: 725px;
     }
+
+    .logout-btn {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width:571px) {
@@ -760,6 +781,10 @@ input[type="date"]:hover {
         position: absolute;
         right: 140px;
         top: 725px;
+    }
+
+    .logout-btn {
+        width: 100%;
     }
 }
 
@@ -777,6 +802,10 @@ input[type="date"]:hover {
         right: 120px;
         top: 725px;
     }
+
+    .logout-btn {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width:477px) {
@@ -792,6 +821,10 @@ input[type="date"]:hover {
         position: absolute;
         right: 90px;
         top: 725px;
+    }
+
+    .logout-btn {
+        width: 100%;
     }
 }
 
@@ -819,6 +852,10 @@ input[type="date"]:hover {
         right: 80px;
         top: 725px;
     }
+
+    .logout-btn {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width:384px) {
@@ -827,6 +864,10 @@ input[type="date"]:hover {
         right: 60px;
         top: 725px;
     }
+
+    .logout-btn {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width:305px) {
@@ -834,6 +875,10 @@ input[type="date"]:hover {
         position: absolute;
         right: 30px;
         top: 725px;
+    }
+
+    .logout-btn {
+        width: 100%;
     }
 }
 
@@ -953,12 +998,34 @@ input[type="date"]:hover {
         width: 60%;
     }
 
+    .profile,
+    .checkouts {
+        margin: 10px;
+        width: 100%;
+    }
+
+    .favorites-product-img {
+        height: 100%;
+        width: 80%;
+    }
+
 }
 
 @media screen and (max-width: 909px) {
     .container {
         margin-left: 80px;
         width: 60%;
+    }
+
+    .profile,
+    .checkouts {
+        margin: 10px;
+        width: 100%;
+    }
+
+    .favorites-product-img {
+        height: 100%;
+        width: 80%;
     }
 }
 
@@ -967,11 +1034,33 @@ input[type="date"]:hover {
         margin-left: 60px;
         width: 60%;
     }
+
+    .profile,
+    .checkouts {
+        margin: 10px;
+        width: 100%;
+    }
+
+    .favorites-product-img {
+        height: 100%;
+        width: 80%;
+    }
 }
 
 @media screen and (max-width: 598px) {
     .container {
         margin-left: 60px;
+    }
+
+    .profile,
+    .checkouts {
+        margin: 10px;
+        width: 100%;
+    }
+
+    .favorites-product-img {
+        height: 100%;
+        width: 80%;
     }
 }
 
@@ -984,6 +1073,17 @@ input[type="date"]:hover {
 
     .cancelbtn {
         width: 100%;
+    }
+
+    .profile,
+    .checkouts {
+        margin: 10px;
+        width: 100%;
+    }
+
+    .favorites-product-img {
+        height: 100%;
+        width: 80%;
     }
 }
 
@@ -1003,15 +1103,19 @@ input[type="date"]:hover {
 }
 
 
-@media screen and (max-width:888px) {
-    .logout-btn {
-        width: 20%;
-    }
-}
-
-
 @media screen and (max-width:341px) {
     .remove_app {
         width: 25%;
+    }
+
+    .profile,
+    .checkouts {
+        margin: 10px;
+        width: 100%;
+    }
+
+    .favorites-product-img {
+        height: 100%;
+        width: 80%;
     }
 }

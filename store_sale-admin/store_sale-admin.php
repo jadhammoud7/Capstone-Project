@@ -10,7 +10,7 @@ if (isset($_SESSION['logged_type']) && $_SESSION['logged_type'] != 'admin') {
     header("Location: ../home-page/home-page.php");
 }
 $admin_id = $_SESSION['logged_id'];
-$query = "SELECT first_name, last_name FROM admins WHERE admin_id = $admin_id";
+$query = "SELECT first_name, last_name, username, image FROM admins WHERE admin_id = $admin_id";
 $stmt = $connection->prepare($query);
 $stmt->execute();
 $results = $stmt->get_result();
@@ -89,6 +89,7 @@ if (isset($_POST['save'])) {
 
     $total_sales_products = 0;
     $total_sales_price = 0;
+    $total_sales_cost = 0;
     $total_sales_quantity = 0;
     $loyalty_discount_percentage = 0;
     $total_price_after_discount = 0;
@@ -156,27 +157,29 @@ if (isset($_POST['save'])) {
                     $update_product_inventory_sales->execute();
 
                     //select price and add to sales products, same as above condition
-                    $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE name = ?");
+                    $stmt_select_product_price = $connection->prepare("SELECT unit_price, unit_cost FROM products WHERE name = ?");
                     $stmt_select_product_price->bind_param("s", $product_name[$x]);
                     $stmt_select_product_price->execute();
                     $result_product_price = $stmt_select_product_price->get_result();
                     $row_product_price = $result_product_price->fetch_assoc();
 
                     //let product price be unit price * quantity
-                    $total_product_price = $row_product_price['price'] * $quantity[$x];
+                    $total_product_price = $row_product_price['unit_price'] * $quantity[$x];
+                    $total_product_cost = $row_product_price['unit_cost'] * $quantity[$x];
 
                     //update product sales by quantity
                     $total_sales_products = $total_sales_products + $quantity[$x];
 
                     //update sales price by increasing total product price
                     $total_sales_price = $total_sales_price + $total_product_price;
+                    $total_sales_cost = $total_sales_cost + $total_product_cost;
 
                     //update sales quantity by increasing product quantity
                     $total_sales_quantity = $total_sales_quantity + $quantity[$x];
 
                     //insert into table sales products
-                    $stmt_insert_store_sales = $connection->prepare("INSERT INTO sales_products(sales_id, product_name, quantity, price) VALUES (?,?,?,?)");
-                    $stmt_insert_store_sales->bind_param("isii", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_price);
+                    $stmt_insert_store_sales = $connection->prepare("INSERT INTO sales_products(sales_id, product_name, quantity, cost, price) VALUES (?,?,?,?,?)");
+                    $stmt_insert_store_sales->bind_param("isiii", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_cost, $total_product_price);
                     $stmt_insert_store_sales->execute();
                     $stmt_insert_store_sales->close();
 
@@ -244,6 +247,7 @@ if (isset($_POST['save'])) {
                     $product_id = $row_product_id['product_id'];
 
                     date_default_timezone_set('Asia/Beirut');
+                    $currentDate = new DateTime();
                     $modified_on = date('Y-m-d h:i:s');
                     $modified_by = $row['first_name'] . ' ' . $row['last_name'];
 
@@ -253,28 +257,47 @@ if (isset($_POST['save'])) {
                     $stmt_insert_product_inventory_history->bind_param("iiiss", $product_id, $new_inventory, $inventory_change, $modified_by, $modified_on);
                     $stmt_insert_product_inventory_history->execute();
 
-                    //select price and add to sales products, same as above condition
-                    $stmt_select_product_price = $connection->prepare("SELECT price FROM products WHERE product_id = ?");
-                    $stmt_select_product_price->bind_param("i", $product_id);
-                    $stmt_select_product_price->execute();
-                    $result_product_price = $stmt_select_product_price->get_result();
-                    $row_product_price = $result_product_price->fetch_assoc();
+                    //check if product has an offer
+                    $stmt_select_product_offer = $connection->prepare("SELECT new_price FROM products_offers WHERE product_id = $product_id AND '" . $currentDate->format('Y-m-d') . "' BETWEEN offer_begin_date AND offer_end_date");
+                    $stmt_select_product_offer->execute();
+                    $result_product_offer = $stmt_select_product_offer->get_result();
+                    $row_product_offer = $result_product_offer->fetch_assoc();
+
+                    $price = 0;
+                    if (!empty($row_product_offer)) {
+                        $stmt_select_product_cost = $connection->prepare("SELECT unit_cost FROM products WHERE product_id = $product_id");
+                        $stmt_select_product_cost->execute();
+                        $result_product_cost = $stmt_select_product_cost->get_result();
+                        $row_product_cost = $result_product_cost->fetch_assoc();
+                        $cost = $row_product_cost['unit_cost'];
+                        $price = $row_product_offer['new_price'];
+                    } else {
+                        //select price and add to sales products, same as above condition
+                        $stmt_select_product_price = $connection->prepare("SELECT unit_cost, unit_price FROM products WHERE product_id = $product_id");
+                        $stmt_select_product_price->execute();
+                        $result_product_price = $stmt_select_product_price->get_result();
+                        $row_product_price = $result_product_price->fetch_assoc();
+                        $price = $row_product_price['unit_price'];
+                        $cost = $row_product_price['unit_cost'];
+                    }
 
                     //let product price be unit price * quantity
-                    $total_product_price = $row_product_price['price'] * $quantity[$x];
+                    $total_product_price = $price * $quantity[$x];
+                    $total_product_cost = $cost * $quantity[$x];
 
                     //update product sales by quantity
                     $total_sales_products = $total_sales_products + $quantity[$x];
 
                     //update sales price by increasing total product price
                     $total_sales_price = $total_sales_price + $total_product_price;
+                    $total_sales_cost = $total_sales_cost + $total_product_cost;
 
                     //update sales quantity by increasing product quantity
                     $total_sales_quantity = $total_sales_quantity + $quantity[$x];
 
                     //insert into table sales products
-                    $stmt_insert_store_sales = $connection->prepare("INSERT INTO sales_products(sales_id, product_name, quantity, price) VALUES (?,?,?,?)");
-                    $stmt_insert_store_sales->bind_param("isii", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_price);
+                    $stmt_insert_store_sales = $connection->prepare("INSERT INTO sales_products(sales_id, product_name, quantity, cost, price) VALUES (?,?,?,?,?)");
+                    $stmt_insert_store_sales->bind_param("isiii", $store_sales_id, $product_name[$x], $quantity[$x], $total_product_cost, $total_product_price);
                     $stmt_insert_store_sales->execute();
                     $stmt_insert_store_sales->close();
 
@@ -318,9 +341,10 @@ if (isset($_POST['save'])) {
                     $result_loyalty_discount = $stmt_select_loyalty_discount->get_result();
                     $row_loyalty_discount = $result_loyalty_discount->fetch_assoc();
 
+                    //if customer is loyal
                     if ($row_check_username['loyalty_points'] >= $row_loyalty_discount['loyalty_point_required']) {
                         $loyalty_discount_percentage = $row_loyalty_discount['discount_percentage'];
-                        $total_price_after_discount = $total_sales_price - ($total_sales_price * $loyalty_discount_percentage);
+                        $total_price_after_discount = $total_sales_price - ($total_sales_price * $loyalty_discount_percentage / 100);
                     } else {
                         $loyalty_discount_percentage = 0;
                         $total_price_after_discount = $total_sales_price;
@@ -338,15 +362,15 @@ if (isset($_POST['save'])) {
     }
     if ($apply_loyalty_discount == 'true') {
         $loyalty_discount_percentage = $row_loyalty_discount['discount_percentage'];
-        $total_price_after_discount = $total_sales_price - ($total_sales_price * $loyalty_discount_percentage);
+        $total_price_after_discount = $total_sales_price - ($total_sales_price * $loyalty_discount_percentage / 100);
     }
     date_default_timezone_set('Asia/Beirut');
     $date = date('Y-m-d h:i:s');
-    $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, total_products, total_quantity, total_price, loyalty_discount_percentage, total_price_after_discount,date) VALUES (?,?,?,?,?,?,?,?,?,?)");
-    $stmt_insert_store_sales->bind_param("isssiiiiis", $store_sales_id, $customer_name, $username, $email, $total_sales_products, $total_sales_quantity, $total_sales_price, $loyalty_discount_percentage, $total_price_after_discount, $date);
+    $stmt_insert_store_sales = $connection->prepare("INSERT INTO store_sales(store_sales_id, customer_name, username, email, total_products, total_quantity, total_cost, total_price, loyalty_discount_percentage, total_price_after_discount, date) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+    $stmt_insert_store_sales->bind_param("isssiiiiiis", $store_sales_id, $customer_name, $username, $email, $total_sales_products, $total_sales_quantity, $total_sales_cost, $total_sales_price, $loyalty_discount_percentage, $total_price_after_discount, $date);
     $stmt_insert_store_sales->execute();
     $stmt_insert_store_sales->close();
-    header("Location: store_sale-admin.php");
+    header("Location: store_sale-admin.php?store_sales_added=1&store_sales_id=$store_sales_id");
 }
 
 require_once("../php/checkout-store_sales.php");
@@ -401,12 +425,13 @@ $row_count_store = $results_count_store->fetch_assoc();
         <button type="button" onclick="CloseLogOutPopUp()">NO</button>
     </div>
 
-    <!-- started popup message logout -->
-    <div class="popup" id="checkout-added-confirmation">
+    <!-- started popup message store sales added-->
+    <div class="popup" id="store-sales-added-confirmation">
         <img src="../images/tick.png" alt="">
-        <h2>Product Added Confirmation</h2>
-        <p>A new product was added successfully</p>
-        <button type="button" onclick="CloseCheckoutAddedPopUp()">OK</button>
+        <h2>Store Sales Added Confirmation</h2>
+        <p>A new store sales was added successfully</p>
+        <button type="button" onclick="CloseStoreSalesAddedPopUp()">OK</button>
+        <button type="button" onclick="window.location.href = 'store-sale-admin-details.php?store_sale_id=<?php echo $_GET['store_sales_id']; ?>'">Go To Store Sales Order</button>
     </div>
 
     <!-- started popup message inventory not available -->
@@ -507,7 +532,7 @@ $row_count_store = $results_count_store->fetch_assoc();
             </h2>
 
             <div class="user-wrapper">
-                <img src="../images/info.png" width="40px" height="40px" alt="">
+                <img src="../images/Admins/<?php echo $row['username']; ?>/<?php echo $row['image']; ?>" width="40px" height="40px" alt="">
                 <div>
                     <h4> <?php echo $row["first_name"], " ", $row['last_name']; ?></h4>
                     <small>Admin</small>
@@ -518,40 +543,61 @@ $row_count_store = $results_count_store->fetch_assoc();
 
         <main>
             <div class="cards">
-                <div class="card-single">
+                <div class="card-single" title="This is the total customers who have store sales">
                     <div>
-                        <h1><?php echo  $row_total_customers['count']; ?></h1>
+                        <h1><?php
+                            $stmt_select_customers_in_store_sales = $connection->prepare("SELECT DISTINCT username FROM store_sales");
+                            $stmt_select_customers_in_store_sales->execute();
+                            $result_customers_store_sales = $stmt_select_customers_in_store_sales->get_result();
+                            echo $result_customers_store_sales->num_rows;
+                            ?></h1>
                         <span>Customers</span>
                     </div>
                     <div>
                         <span class="las la-users"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of store sales">
                     <div>
-                        <h1><?php echo $row_total_appointments['total_appointments'] ?></h1>
-                        <span>Appointments</span>
+                        <h1><?php
+                            $stmt_select_all_store_sales = $connection->prepare("SELECT COUNT(*) as total_store_sales FROM store_sales");
+                            $stmt_select_all_store_sales->execute();
+                            $result_store_sales = $stmt_select_all_store_sales->get_result();
+                            $row_store_sales = $result_store_sales->fetch_assoc();
+                            echo $row_store_sales['total_store_sales']; ?></h1>
+                        <span>Store Sales</span>
                     </div>
                     <div>
-                        <span class="las la-clipboard"></span>
-                    </div>
-                </div>
-                <div class="card-single">
-                    <div>
-                        <h1><?php echo $row_total_checkouts['total_checkout'] ?></h1>
-                        <span>Chekouts</span>
-                    </div>
-                    <div>
-                        <span class="las la-shopping-bag"></span>
+                        <span class="las la-address-card"></span>
                     </div>
                 </div>
-                <div class="card-single">
+                <div class="card-single" title="This is the total number of store sales added today">
                     <div>
-                        <h1>$<?php echo $row_total_profit['total_profit'] ?></h1>
-                        <span>Profit</span>
+                        <h1><?php
+                            $currentDate = (new DateTime())->format('Y-m-d');
+                            $stmt_select_today_store_sales = $connection->prepare("SELECT COUNT(*) as today_store_sales FROM store_sales WHERE date LIKE '" . $currentDate . "'");
+                            $stmt_select_today_store_sales->execute();
+                            $result_today_store_sales = $stmt_select_today_store_sales->get_result();
+                            $row_today_store_sales = $result_today_store_sales->fetch_assoc();
+                            echo $row_today_store_sales['today_store_sales']; ?></h1>
+                        <span>Store Sales Today</span>
                     </div>
                     <div>
-                        <span class="las la-google-wallet"></span>
+                        <span class="las la-business-time"></span>
+                    </div>
+                </div>
+                <div class="card-single" title="This is the total profits of all store sales">
+                    <div>
+                        <h1>$<?php
+                                $stmt_select_total_profit = $connection->prepare("SELECT SUM(total_price_after_discount - total_cost) as total_profit FROM store_sales");
+                                $stmt_select_total_profit->execute();
+                                $result_total_profit = $stmt_select_total_profit->get_result();
+                                $row_total_profit = $result_total_profit->fetch_assoc();
+                                echo $row_total_profit['total_profit']; ?></h1>
+                        <span>Total Store Sales Profit</span>
+                    </div>
+                    <div>
+                        <span class="las la-wallet"></span>
                     </div>
                 </div>
             </div>
